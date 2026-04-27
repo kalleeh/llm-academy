@@ -56,10 +56,11 @@ const LAYERS: Layer[] = [
   },
 ]
 
+const EN_P2 = `You rarely build from scratch. Most teams pick a foundation model, optionally fine-tune it, serve it with an existing framework, and wire it into their app with an orchestration layer. The ecosystem makes this possible without training a single weight.`
 const EN_INTRO = `LLMs don't exist in isolation. A full stack connects foundation models to end users.`
 
 export const EcosystemSection: React.FC = () => {
-  const c = useT({ title: '3. The Ecosystem', intro: EN_INTRO }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
+  const c = useT({ title: '3. The Ecosystem', intro: EN_INTRO , p2: EN_P2 }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 
   const toggle = useCallback((idx: number) => {
@@ -107,10 +108,7 @@ export const EcosystemSection: React.FC = () => {
 
       <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
         <p className="text-xs leading-relaxed text-zinc-400">
-          <strong className="text-zinc-300">Key insight:</strong> You rarely build from scratch.
-          Most teams pick a foundation model, optionally fine-tune it, serve it with an existing
-          framework, and wire it into their app with an orchestration layer. The ecosystem makes
-          this possible without training a single weight.
+          <strong className="text-zinc-300">Key insight:</strong> {c.p2}
         </p>
       </div>
     </section>

@@ -170,8 +170,9 @@ model.print_trainable_parameters()`,
   },
 ]
 
+const EN_P2 = `Training from scratch is just one option — and the most expensive. Most people start from an existing model and adapt it. Click each approach to compare, then run the terminal command to see the filesystem change.`
 export const TrainingSection4: React.FC = () => {
-  const c = useT({ title: '4. Training Variants' }, { sv: trainingSection4Sv, ko: trainingSection4Ko })
+  const c = useT({ title: '4. Training Variants' , p2: EN_P2 }, { sv: trainingSection4Sv, ko: trainingSection4Ko })
   const [selected, setSelected] = useState('scratch')
   const variant = VARIANTS.find(v => v.id === selected)!
 
@@ -183,9 +184,7 @@ export const TrainingSection4: React.FC = () => {
     <section className="space-y-6" aria-labelledby="section-4-heading">
       <h3 id="section-4-heading" className="font-mono text-xl font-bold text-zinc-100">{c.title}</h3>
       <p className="text-zinc-400 leading-relaxed">
-        Training from scratch is just one option — and the most expensive. Most people start from
-        an existing model and adapt it. Click each approach to compare, then run the terminal command
-        to see the filesystem change.
+        {c.p2}
       </p>
 
       <div className="flex flex-wrap gap-2" role="tablist" aria-label="Training variant selection">

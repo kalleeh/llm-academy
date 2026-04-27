@@ -58,8 +58,11 @@ const CLUSTER_COLORS: Record<string, { dot: string; text: string; label: string 
   vehicles: { dot: 'bg-blue-400', text: 'text-blue-400', label: 'Vehicles' },
 }
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `Words with similar meanings cluster together in embedding space. This is a 2D projection of high-dimensional vectors.`
+const EN_P4 = `Embeddings capture meaning as numbers. &quot;Cat&quot; and &quot;dog&quot; are close because they share semantic properties (animals, pets). &quot;Red&quot; and &quot;blue&quot; cluster together because they&apos;re both colors. This geometric structure enables similarity search, clustering, and retrieval.`
 export const WhatAreEmbeddingsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are Embeddings' }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
+  const c = useT({ title: '1. What Are Embeddings' , p2: EN_P2, p3: EN_P3, p4: EN_P4 }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
   const [selectedSentence, setSelectedSentence] = useState(SENTENCES[0])
   const [inputText, setInputText] = useState('')
 
@@ -189,8 +192,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
           2D Embedding Space (Projected)
         </h3>
         <p className="mb-4 text-xs text-zinc-400">
-          Words with similar meanings cluster together in embedding space. This is a 2D projection
-          of high-dimensional vectors.
+          {c.p3}
         </p>
 
         <div className="relative mb-4 h-72 w-full rounded-md border border-zinc-700 bg-zinc-950">
@@ -219,11 +221,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
 
         <div className="mt-4 rounded-md bg-zinc-800 p-3">
           <p className="text-xs leading-relaxed text-zinc-300">
-            <strong className="text-zinc-100">Key insight:</strong> Embeddings capture meaning as
-            numbers. &quot;Cat&quot; and &quot;dog&quot; are close because they share semantic
-            properties (animals, pets). &quot;Red&quot; and &quot;blue&quot; cluster together because
-            they&apos;re both colors. This geometric structure enables similarity search, clustering,
-            and retrieval.
+            <strong className="text-zinc-100">Key insight:</strong> {c.p4}
           </p>
         </div>
       </div>

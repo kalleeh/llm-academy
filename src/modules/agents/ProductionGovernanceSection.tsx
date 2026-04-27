@@ -21,11 +21,16 @@ const GOVERNANCE_CONTROLS = [
   { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
 ]
 
+const EN_P2 = `Deploying agents to production is fundamentally different from deploying APIs. An API does what you coded. An agent`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `{c.p4}`
+const EN_P5 = `{c.p5}`
+const EN_P6 = `{c.p6}`
 const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselves only with AI systems
         saying the wrong thing; they must contend with systems doing the wrong thing."`
 
 export const ProductionGovernanceSection: React.FC = () => {
-  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 
@@ -33,8 +38,7 @@ export const ProductionGovernanceSection: React.FC = () => {
     <section aria-labelledby="governance-tech">
       <h2 id="governance-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
-        Deploying agents to production is fundamentally different from deploying APIs. An API does
-        what you coded. An agent <em>decides</em> what to do. This shifts risk from implementation
+        {c.p2} <em>decides</em> what to do. This shifts risk from implementation
         bugs to <strong className="text-zinc-100">behavioral failures</strong> — the agent does
         something technically correct but contextually wrong.
       </p>

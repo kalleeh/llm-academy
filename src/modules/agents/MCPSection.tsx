@@ -61,8 +61,9 @@ const COMPARISON = [
   },
 ]
 
+const EN_P2 = `Instead of writing custom integrations for every model provider, you build one MCP server. Any MCP-compatible client — Claude, ChatGPT, Cursor, VS Code, your own app — can discover and use your tools automatically.`
 export const MCPSection: React.FC = () => {
-  const c = useT({ title: '3. MCP (Model Context Protocol)' }, { sv: mCPSectionSv, ko: mCPSectionKo })
+  const c = useT({ title: '3. MCP (Model Context Protocol)' , p2: EN_P2 }, { sv: mCPSectionSv, ko: mCPSectionKo })
   return (
   <section aria-labelledby="mcp">
     <h2 id="mcp" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -129,10 +130,7 @@ export const MCPSection: React.FC = () => {
 
     <div className="mt-4 rounded-md bg-zinc-800 p-4">
       <p className="text-sm leading-relaxed text-zinc-300">
-        <strong className="text-zinc-100">Why MCP matters:</strong> Instead of writing custom
-        integrations for every model provider, you build one MCP server. Any MCP-compatible client
-        — Claude, ChatGPT, Cursor, VS Code, your own app — can discover and use your tools
-        automatically.
+        <strong className="text-zinc-100">Why MCP matters:</strong> {c.p2}
       </p>
     </div>
   </section>

@@ -79,8 +79,9 @@ const CATEGORY_COLORS: Record<Scenario['category'], string> = {
   'llm': 'border-amber-500/50 bg-amber-500/10 text-amber-300',
 }
 
+const EN_P2 = `Not every problem needs an LLM. Click each card to reveal the best approach — and more importantly,`
 export const ClassificationSection: React.FC = () => {
-  const c = useT({ title: '2. Problem Classification' }, { sv: classificationSectionSv, ko: classificationSectionKo })
+  const c = useT({ title: '2. Problem Classification' , p2: EN_P2 }, { sv: classificationSectionSv, ko: classificationSectionKo })
   const [revealed, setRevealed] = useState<Set<number>>(new Set())
 
   const toggleCard = useCallback((index: number) => {
@@ -96,8 +97,7 @@ export const ClassificationSection: React.FC = () => {
     <section aria-labelledby="classification">
       <h2 id="classification" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Not every problem needs an LLM. Click each card to reveal the best approach — and
-        more importantly, <em>why</em>.
+        {c.p2} <em>why</em>.
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2">

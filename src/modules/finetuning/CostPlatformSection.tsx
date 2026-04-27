@@ -31,10 +31,11 @@ const COST_ESTIMATE = {
   vram: '~11 GB peak',
 }
 
+const EN_P2 = `A LoRA fine-tune of an 8B model on 5K examples costs about`
 const EN_INTRO = `Where to run your fine-tuning job, what it costs, and what hardware you need.`
 
 export const CostPlatformSection: React.FC = () => {
-  const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
+  const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO , p2: EN_P2 }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
   const [selectedPlatform, setSelectedPlatform] = useState<number | null>(null)
 
   const handleSelect = useCallback((i: number) => {
@@ -99,8 +100,7 @@ export const CostPlatformSection: React.FC = () => {
         </div>
         <div className="mt-4 border-t border-amber-500/20 pt-3">
           <p className="text-sm text-zinc-300">
-            <strong className="text-amber-400">Bottom line:</strong> A LoRA fine-tune of an 8B model
-            on 5K examples costs about <strong className="text-zinc-100">$0.50–$1.00</strong> on
+            <strong className="text-amber-400">Bottom line:</strong> {c.p2} <strong className="text-zinc-100">$0.50–$1.00</strong> on
             cloud GPUs, or free if you have a local RTX 3090/4090.
           </p>
         </div>

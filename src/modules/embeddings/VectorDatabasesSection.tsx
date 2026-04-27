@@ -69,8 +69,9 @@ const DATABASES: VectorDB[] = [
   },
 ]
 
+const EN_P2 = `{c.p2}`
 export const VectorDatabasesSection: React.FC = () => {
-  const c = useT({ title: '3. Vector Databases' }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
+  const c = useT({ title: '3. Vector Databases' , p2: EN_P2 }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => () => {

@@ -85,7 +85,7 @@ const FORMAT_COMPARISON = [
 ]
 
 export const TrainingSection5: React.FC = () => {
-  const c = useT({ title: '5. What\'s Inside the Weight Files' }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
+  const c = useT({ title: '5. What\'s Inside the Weight Files'  }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {

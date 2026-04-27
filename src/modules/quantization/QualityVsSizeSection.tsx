@@ -25,8 +25,9 @@ const CHART_W = 600
 const CHART_H = 300
 const PAD = { top: 20, right: 30, bottom: 40, left: 50 }
 
+const EN_P2 = `The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot is`
 export const QualityVsSizeSection: React.FC = () => {
-  const c = useT({ title: '4. Quality vs Size' }, { sv: qualityVsSizeSectionSv, ko: qualityVsSizeSectionKo })
+  const c = useT({ title: '4. Quality vs Size' , p2: EN_P2 }, { sv: qualityVsSizeSectionSv, ko: qualityVsSizeSectionKo })
   const [hovered, setHovered] = useState<number | null>(null)
 
   const handleHover = useCallback((i: number | null) => setHovered(i), [])
@@ -43,9 +44,7 @@ export const QualityVsSizeSection: React.FC = () => {
     <section aria-labelledby="quality-vs-size">
       <h2 id="quality-vs-size" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot
-        where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot
-        is <strong className="text-zinc-100">Q4_K_M</strong>.
+        {c.p2} <strong className="text-zinc-100">Q4_K_M</strong>.
       </p>
 
       {/* SVG Chart */}

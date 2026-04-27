@@ -95,10 +95,13 @@ const SOURCES = [
   { name: 'Other', tokens: '~1.8T', pct: 12, color: 'bg-zinc-500' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `You now understand where data comes from, how it flows, and what quality means. Next, we&apos;ll dive into how LLMs actually`
 const EN_INTRO = `Now that you understand data broadly, here's what LLMs specifically need.`
 
 export const LLMDataSection: React.FC = () => {
-  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
+  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
   const [showComparison, setShowComparison] = useState(true)
 
   const toggleView = useCallback(() => {
@@ -221,8 +224,7 @@ export const LLMDataSection: React.FC = () => {
       <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm font-medium text-zinc-200"><Icon name="arrow-right" /> Up Next</p>
         <p className="mt-1 text-xs leading-relaxed text-zinc-400">
-          You now understand where data comes from, how it flows, and what quality means.
-          Next, we&apos;ll dive into how LLMs actually <em>consume</em> this data — breaking text
+          {c.p4} <em>consume</em> this data — breaking text
           into <span className="text-amber-300">tokens</span>, the fundamental unit that
           transformers process.
         </p>

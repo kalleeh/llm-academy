@@ -74,10 +74,11 @@ const APPROACH_META: Record<ApproachId, { label: string; color: string; examples
   'fine-tuned': { label: 'Fine-Tuned Model', color: 'text-amber-400', examples: 'Fine-tuned Llama, domain-specific models' },
 }
 
+const EN_P2 = `{c.p2}`
 const EN_INTRO = `Three main deployment approaches, each with different tradeoffs.`
 
 export const BuildVsBuySection: React.FC = () => {
-  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
+  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
   const selectOption = useCallback((constraintIdx: number, optionIdx: number) => {

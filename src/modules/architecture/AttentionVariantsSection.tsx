@@ -62,10 +62,11 @@ const VARIANT_KEYS: Variant[] = ['mha', 'gqa', 'mqa', 'mla']
 
 const KV_BARS: Record<Variant, number> = { mha: 100, gqa: 25, mqa: 3, mla: 8 }
 
+const EN_P2 = `{c.p2}`
 const EN_INTRO = `The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.`
 
 export const AttentionVariantsSection: React.FC = () => {
-  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
+  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO , p2: EN_P2 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
   const [active, setActive] = useState<Variant>('mha')
 
   const selectVariant = useCallback((v: Variant) => setActive(v), [])

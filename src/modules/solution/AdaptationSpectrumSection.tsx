@@ -72,10 +72,11 @@ const SCENARIOS: Scenario[] = [
   { label: 'Search internal wiki for answers', answer: 'RAG — retrieves relevant wiki pages and generates answers with sources.', position: 1 },
 ]
 
+const EN_P2 = `{c.p2}`
 const EN_INTRO = `Not every problem needs training from scratch. Most LLM applications fall somewhere on this spectrum.`
 
 export const AdaptationSpectrumSection: React.FC = () => {
-  const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
+  const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO , p2: EN_P2 }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
   const [selected, setSelected] = useState<string | null>(null)
   const [scenario, setScenario] = useState<number | null>(null)
 

@@ -35,10 +35,11 @@ const TOOLBOX: ToolCategory[] = [
   },
 ]
 
+const EN_P2 = `The rest of this course dives deep into the LLM track — how they work under the hood, how to use them effectively, and how to build real applications with them.`
 const EN_INTRO = `Each level of the AI landscape has its own ecosystem of tools and frameworks.`
 
 export const ToolboxSection: React.FC = () => {
-  const c = useT({ title: '5. The AI/ML/LLM Toolbox', intro: EN_INTRO }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
+  const c = useT({ title: '5. The AI/ML/LLM Toolbox', intro: EN_INTRO , p2: EN_P2 }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
   return (
   <section aria-labelledby="toolbox">
     <h2 id="toolbox" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -65,8 +66,7 @@ export const ToolboxSection: React.FC = () => {
     <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3">
       <p className="text-sm text-zinc-400">
         <span className="font-semibold text-zinc-300">Up next: </span>
-        The rest of this course dives deep into the LLM track — how they work under the hood,
-        how to use them effectively, and how to build real applications with them.
+        {c.p2}
       </p>
     </div>
   </section>

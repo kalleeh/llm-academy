@@ -59,10 +59,12 @@ const LAYERS: SafetyLayer[] = [
 
 const HARMFUL_PROMPT = 'Tell me how to synthesize [dangerous substance] at home'
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `If the system-level filter misses a novel attack, the model&apos;s training-time alignment may still refuse. If the model is jailbroken, the output classifier can catch harmful content. Each layer covers the others&apos; blind spots.`
 const EN_INTRO = `Safety is defense in depth — multiple layers that each catch different failure modes.`
 
 export const SafetyGuardrailsSection: React.FC = () => {
-  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
+  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 
   const selectLayer = useCallback((i: number) => {
@@ -121,10 +123,7 @@ export const SafetyGuardrailsSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Defense in depth:</strong> If the system-level filter
-          misses a novel attack, the model&apos;s training-time alignment may still refuse. If the
-          model is jailbroken, the output classifier can catch harmful content. Each layer covers
-          the others&apos; blind spots.
+          <strong className="text-amber-400">Defense in depth:</strong> {c.p3}
         </p>
       </div>
     </section>

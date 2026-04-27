@@ -125,8 +125,9 @@ print(run_agent("What's trending in AI today?"))`,
   },
 ]
 
+const EN_P2 = `A basic agent is just a loop: send messages → check for tool calls → execute tools → feed results back → repeat. Add frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent state, or multi-agent orchestration.`
 export const BuildingAgentsSection: React.FC = () => {
-  const c = useT({ title: '5. Building Agents' }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
+  const c = useT({ title: '5. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">
     <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -177,10 +178,7 @@ export const BuildingAgentsSection: React.FC = () => {
 
     <div className="mt-4 rounded-md bg-zinc-800 p-4">
       <p className="text-sm leading-relaxed text-zinc-300">
-        <strong className="text-zinc-100">Start simple.</strong> A basic agent is just a loop: send
-        messages → check for tool calls → execute tools → feed results back → repeat. Add
-        frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent
-        state, or multi-agent orchestration.
+        <strong className="text-zinc-100">Start simple.</strong> {c.p2}
       </p>
     </div>
   </section>

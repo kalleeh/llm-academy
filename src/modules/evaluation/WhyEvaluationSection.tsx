@@ -59,8 +59,13 @@ const EVAL_TYPES: { name: string; icon: IconName; description: string; examples:
   },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `Model A has lower perplexity because it produces &ldquo;safe&rdquo; generic sentences that are easy to predict. Model B takes more risks with specific facts and structure — harder to predict, but far more useful.`
+const EN_P5 = `{c.p5}`
+const EN_P6 = `{c.p6}`
 export const WhyEvaluationSection: React.FC = () => {
-  const c = useT({ title: '1. Why Evaluation Matters' }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
+  const c = useT({ title: '1. Why Evaluation Matters' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
   const [selectedModel, setSelectedModel] = useState(0)
   const [activeType, setActiveType] = useState(0)
 
@@ -122,9 +127,7 @@ export const WhyEvaluationSection: React.FC = () => {
 
       <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Key insight:</strong> Model A has lower perplexity
-          because it produces &ldquo;safe&rdquo; generic sentences that are easy to predict. Model B
-          takes more risks with specific facts and structure — harder to predict, but far more useful.
+          <strong className="text-amber-400">Key insight:</strong> {c.p4}
           <strong className="text-zinc-100"> Loss is a training signal, not a quality metric.</strong>
         </p>
       </div>

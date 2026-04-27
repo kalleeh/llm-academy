@@ -36,16 +36,17 @@ similarity = np.dot(vec_1, vec_2) / (
 )
 print(f"Similarity: {similarity:.3f}")  # ~0.92`
 
+const EN_P2 = `Embedding models and LLMs are both transformers, but they serve different purposes. LLMs`
+const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
-  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
+  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
     <h2 id="embedding-models" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
     <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-      Embedding models and LLMs are both transformers, but they serve different purposes.
-      LLMs <strong className="text-zinc-100">generate text</strong> token by token; embedding
+      {c.p2} <strong className="text-zinc-100">generate text</strong> token by token; embedding
       models produce a <strong className="text-zinc-100">fixed-size vector</strong> that represents
       the entire input&apos;s meaning.
     </p>

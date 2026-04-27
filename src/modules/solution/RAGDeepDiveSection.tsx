@@ -31,8 +31,9 @@ const TERMINAL_STEPS: TerminalStep[] = [
   { command: 'python query.py "What is our refund policy?"', output: 'Searching vector store...\nRetrieved 3 relevant chunks (similarity: 0.92, 0.87, 0.84)\n\nContext injected into prompt:\n---\n[chunk 1] "Refunds are available within 30 days of purchase..."\n[chunk 2] "Digital products are non-refundable after download..."\n[chunk 3] "Contact support@company.com for refund requests..."\n---\n\nLLM Response:\nOur refund policy allows returns within 30 days of purchase.\nDigital products are non-refundable once downloaded.\nTo request a refund, email support@company.com.\n\nSources: refund-policy.pdf (p.2), terms-of-service.md (§4.1)', delay: 1500 },
 ]
 
+const EN_P2 = `RAG is the most common production pattern because it requires no training, supports citations, and lets you update knowledge by simply re-indexing documents. Combine with fine-tuning when you also need specific reasoning or output style.`
 export const RAGDeepDiveSection: React.FC = () => {
-  const c = useT({ title: '2. RAG Deep Dive' }, { sv: rAGDeepDiveSectionSv, ko: rAGDeepDiveSectionKo })
+  const c = useT({ title: '2. RAG Deep Dive' , p2: EN_P2 }, { sv: rAGDeepDiveSectionSv, ko: rAGDeepDiveSectionKo })
   const [activeStep, setActiveStep] = useState<number | null>(null)
 
   const selectStep = useCallback((i: number) => {
@@ -112,10 +113,7 @@ export const RAGDeepDiveSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Key insight:</strong> RAG is the most common
-          production pattern because it requires no training, supports citations, and lets you
-          update knowledge by simply re-indexing documents. Combine with fine-tuning when you
-          also need specific reasoning or output style.
+          <strong className="text-amber-400">Key insight:</strong> {c.p2}
         </p>
       </div>
     </section>

@@ -30,10 +30,12 @@ const OPEN_MODELS = [
   { name: 'Gemma 3 27B', org: 'Google', params: '27B', note: 'Best-in-class at size, open weights' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `Open models now match or exceed closed models on most standard benchmarks. The remaining gap is in agentic capabilities, long-context reliability, and safety tooling — and it&apos;s shrinking fast.`
 const EN_INTRO = `The gap between open-weight and closed-source models has narrowed dramatically.`
 
 export const OpenVsClosedSection: React.FC = () => {
-  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
+  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
   const [tab, setTab] = useState<Tab>('table')
 
   const switchTab = useCallback((t: Tab) => setTab(t), [])
@@ -98,9 +100,7 @@ export const OpenVsClosedSection: React.FC = () => {
           ))}
           <div className="mt-4 rounded-lg border border-green-900/50 bg-green-950/20 p-4">
             <p className="text-sm text-green-300">
-              <strong>The trend:</strong> Open models now match or exceed closed models on most
-              standard benchmarks. The remaining gap is in agentic capabilities, long-context
-              reliability, and safety tooling — and it&apos;s shrinking fast.
+              <strong>The trend:</strong> {c.p3}
             </p>
           </div>
         </div>

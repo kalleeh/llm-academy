@@ -19,10 +19,12 @@ const LAYERS: LayerDef[] = [
   { id: 'output', label: 'Output', color: 'bg-amber-900 border-amber-600', desc: 'Probability distribution over the vocabulary for the next token.' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
 const EN_INTRO = `A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.`
 
 export const BigPictureSection: React.FC = () => {
-  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
+  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {

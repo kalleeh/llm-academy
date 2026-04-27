@@ -164,10 +164,11 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
+const EN_P2 = `SafeTensors (14 GB, 3 shards) → GGUF FP16 (14.5 GB, single file) → GGUF Q4_K_M (4 GB, quantized) → Ollama model. The final model runs on a laptop with 8 GB RAM.`
 const EN_INTRO = `Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.`
 
 export const ConversionPipelineSection: React.FC = () => {
-  const c = useT({ title: '3. The Conversion Pipeline', intro: EN_INTRO }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
+  const c = useT({ title: '3. The Conversion Pipeline', intro: EN_INTRO , p2: EN_P2 }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
@@ -184,9 +185,7 @@ export const ConversionPipelineSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Pipeline summary:</strong> SafeTensors (14 GB, 3 shards)
-          → GGUF FP16 (14.5 GB, single file) → GGUF Q4_K_M (4 GB, quantized) → Ollama model.
-          The final model runs on a laptop with 8 GB RAM.
+          <strong className="text-amber-400">Pipeline summary:</strong> {c.p2}
         </p>
       </div>
     </section>

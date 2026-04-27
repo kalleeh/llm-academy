@@ -68,10 +68,12 @@ const PATTERNS: ArchPattern[] = [
   },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
 const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
 
 export const ArchitectureSection: React.FC = () => {
-  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO }, { sv: architectureSectionSv, ko: architectureSectionKo })
+  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: architectureSectionSv, ko: architectureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {

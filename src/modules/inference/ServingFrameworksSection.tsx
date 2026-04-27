@@ -69,10 +69,11 @@ const FRAMEWORKS: Framework[] = [
 
 const TABLE_HEADERS = ['Framework', 'Throughput', 'Latency', 'Ease of Use', 'GPU Support'] as const
 
+const EN_P2 = `{c.p2}`
 const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
 
 export const ServingFrameworksSection: React.FC = () => {
-  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
+  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {

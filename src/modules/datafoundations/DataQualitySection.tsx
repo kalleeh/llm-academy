@@ -84,10 +84,11 @@ const ISSUE_TEXT_COLORS: Record<DataIssue['type'], string> = {
   bias: 'text-cyan-300',
 }
 
+const EN_P2 = `For classical ML, bad data means bad predictions. For LLMs, it&apos;s even worse — biased or noisy training data gets baked into the model&apos;s weights and surfaces as hallucinations, stereotypes, or factual errors across millions of interactions.`
 const EN_INTRO = `Spot the problems in this dataset. Click each issue type below to highlight it in the data.`
 
 export const DataQualitySection: React.FC = () => {
-  const c = useT({ title: '3. Data Quality', intro: EN_INTRO }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
+  const c = useT({ title: '3. Data Quality', intro: EN_INTRO , p2: EN_P2 }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
   const [found, setFound] = useState<Set<string>>(new Set())
   const [activeIssue, setActiveIssue] = useState<string | null>(null)
 
@@ -200,9 +201,7 @@ export const DataQualitySection: React.FC = () => {
       <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm font-medium text-zinc-200">Garbage In, Garbage Out</p>
         <p className="mt-1 text-xs leading-relaxed text-zinc-400">
-          For classical ML, bad data means bad predictions. For LLMs, it&apos;s even worse — biased
-          or noisy training data gets baked into the model&apos;s weights and surfaces as
-          hallucinations, stereotypes, or factual errors across millions of interactions.
+          {c.p2}
         </p>
       </div>
     </section>

@@ -92,8 +92,14 @@ const PIPELINE_STAGES: { label: string; icon: IconName; desc: string }[] = [
   { label: 'Generate', icon: 'robot', desc: 'LLM response' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `Pure vector search misses exact keyword matches. Pure keyword search misses semantic similarity. The best systems combine both.`
+const EN_P5 = `{c.p5}`
+const EN_P6 = `{c.p6}`
+const EN_P7 = `{c.p7}`
 export const RAGPipelineSection: React.FC = () => {
-  const c = useT({ title: '5. The RAG Pipeline' }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
+  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">
     <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -133,8 +139,7 @@ export const RAGPipelineSection: React.FC = () => {
         Hybrid Search: Vector + Keyword
       </h3>
       <p className="mb-4 text-sm leading-relaxed text-zinc-300">
-        Pure vector search misses exact keyword matches. Pure keyword search misses semantic
-        similarity. The best systems combine both.
+        {c.p4}
       </p>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-3">

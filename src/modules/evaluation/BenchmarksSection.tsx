@@ -21,10 +21,11 @@ const BENCHMARKS: Benchmark[] = [
   { name: 'LMArena / Chatbot Arena', category: 'Human Pref', color: 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300', what: 'Blind side-by-side comparisons. Real users chat with two anonymous models and pick the better one. ELO rating system.', example: 'User sends same prompt to Model A and Model B, picks preferred response without knowing which is which.', scoring: 'ELO rating from pairwise human preferences.', topScores: 'GPT-5: ~1380 ELO · Claude Opus 4.6: ~1370 · Gemini 3.1: ~1360' },
 ]
 
+const EN_P2 = `Top models now score 85-95% on many benchmarks, making it hard to differentiate. The industry is shifting toward harder benchmarks (GPQA, ARC-AGI, SWE-bench) and human preference ratings (LMArena).`
 const EN_INTRO = `The industry uses standardized benchmarks to compare models. No single benchmark tells the whole story.`
 
 export const BenchmarksSection: React.FC = () => {
-  const c = useT({ title: '2. Key Benchmarks (2025–2026)', intro: EN_INTRO }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
+  const c = useT({ title: '2. Key Benchmarks (2025–2026)', intro: EN_INTRO , p2: EN_P2 }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
   const [selected, setSelected] = useState(0)
   const bench = BENCHMARKS[selected]
 
@@ -73,9 +74,7 @@ export const BenchmarksSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
         <p className="text-sm text-amber-200/90">
-          <strong>Benchmark saturation:</strong> Top models now score 85-95% on many benchmarks,
-          making it hard to differentiate. The industry is shifting toward harder benchmarks
-          (GPQA, ARC-AGI, SWE-bench) and human preference ratings (LMArena).
+          <strong>Benchmark saturation:</strong> {c.p2}
         </p>
       </div>
     </section>

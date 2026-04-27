@@ -9,8 +9,9 @@ const PRECISIONS = [
   { label: 'INT4', bits: 4, size: 3.5, quality: 93, color: 'bg-red-500' },
 ] as const
 
+const EN_P2 = `{c.p2}`
 export const WhatIsQuantizationSection: React.FC = () => {
-  const c = useT({ title: '1. What is Quantization?' }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
+  const c = useT({ title: '1. What is Quantization?' , p2: EN_P2 }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
   const [level, setLevel] = useState(0)
   const precision = PRECISIONS[level]
 

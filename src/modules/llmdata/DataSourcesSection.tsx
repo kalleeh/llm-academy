@@ -37,8 +37,9 @@ const SOURCES: DataSource[] = [
   },
 ]
 
+const EN_P2 = `Modern LLMs train on trillions of tokens from diverse sources. Key open datasets include`
 export const DataSourcesSection: React.FC = () => {
-  const c = useT({ title: '1. Data Sources' }, { sv: dataSourcesSectionSv, ko: dataSourcesSectionKo })
+  const c = useT({ title: '1. Data Sources' , p2: EN_P2 }, { sv: dataSourcesSectionSv, ko: dataSourcesSectionKo })
   const [selected, setSelected] = useState<number | null>(null)
   const toggle = useCallback((i: number) => setSelected(p => p === i ? null : i), [])
 
@@ -46,8 +47,7 @@ export const DataSourcesSection: React.FC = () => {
     <section aria-labelledby="data-sources">
       <h2 id="data-sources" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
-        Modern LLMs train on trillions of tokens from diverse sources. Key open datasets
-        include <strong className="text-zinc-100">FineWeb</strong> (15T tokens),{' '}
+        {c.p2} <strong className="text-zinc-100">FineWeb</strong> (15T tokens),{' '}
         <strong className="text-zinc-100">DCLM</strong>, and <strong className="text-zinc-100">RedPajama</strong>.
       </p>
       <div className="mb-4 flex h-10 overflow-hidden rounded-lg border border-zinc-700" role="img" aria-label="Data source distribution">

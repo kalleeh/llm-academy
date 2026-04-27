@@ -20,10 +20,12 @@ def attention(Q, K, V):
     weights = F.softmax(scores, dim=-1)
     return torch.matmul(weights, V)`
 
+const EN_P2 = `Each row shows how much one word attends to every other word. Brighter = stronger attention. Notice how`
+const EN_P3 = `{c.p3}`
 const EN_INTRO = `Attention lets each word look at every other word in the sentence and decide how much to focus on each one.`
 
 export const AttentionSection: React.FC = () => {
-  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO }, { sv: attentionSectionSv, ko: attentionSectionKo })
+  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: attentionSectionSv, ko: attentionSectionKo })
   return (
   <section aria-labelledby="attention-heading">
     <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -35,8 +37,7 @@ export const AttentionSection: React.FC = () => {
       </p>
       <AttentionHeatmap weights={DEFAULT_WEIGHTS} />
       <p className="mt-3 text-xs text-zinc-500">
-        Each row shows how much one word attends to every other word. Brighter = stronger attention.
-        Notice how <span className="text-amber-300">&quot;it&quot;</span> strongly attends to{' '}
+        {c.p2} <span className="text-amber-300">&quot;it&quot;</span> strongly attends to{' '}
         <span className="text-amber-300">&quot;cat&quot;</span> — the model learns coreference.
       </p>
     </div>

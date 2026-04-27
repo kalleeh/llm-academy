@@ -54,10 +54,14 @@ function getRecommendation(state: DecisionState): Recommendation {
   }
 }
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `{c.p4}`
+const EN_P5 = `{c.p5}`
 const EN_INTRO = `Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.`
 
 export const DecisionTreeSection: React.FC = () => {
-  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
+  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
   const [state, setState] = useState<DecisionState>({ budget: null, finetune: null })
 
   const currentStep: Step = state.budget === null ? 'budget' : state.finetune === null ? 'finetune' : 'result'

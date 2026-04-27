@@ -104,7 +104,7 @@ const EN_INTRO = `Every token activates all parameters. Simple but expensive at 
             uses all 70B parameters for every single token.`
 
 export const FFNSection: React.FC = () => {
-  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO }, { sv: fFNSectionSv, ko: fFNSectionKo })
+  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  }, { sv: fFNSectionSv, ko: fFNSectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggleMode = useCallback((m: Mode) => {
@@ -153,8 +153,7 @@ export const FFNSection: React.FC = () => {
         <div className={`rounded-lg border p-3 ${mode === 'moe' ? 'border-emerald-700 bg-emerald-950/50' : 'border-zinc-700 bg-zinc-900'}`}>
           <h4 className="text-xs font-semibold text-emerald-300">Mixture of Experts</h4>
           <p className="mt-1 text-xs text-zinc-400">
-            Only 2 of N experts activate per token. A model can have 400B+ total parameters but
-            only use ~50B per token — more knowledge, same compute cost.
+            Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.
           </p>
         </div>
       </div>

@@ -37,8 +37,10 @@ const PROTOCOLS = [
   { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (150+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
-  const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' }, { sv: a2ASectionSv, ko: a2ASectionKo })
+  const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 }, { sv: a2ASectionSv, ko: a2ASectionKo })
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])
 
@@ -122,8 +124,7 @@ export const A2ASection: React.FC = () => {
           ))}
         </div>
         <p className="mt-3 text-xs text-zinc-500">
-          MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable
-          cross-team workflows where each team owns and operates their own agent.
+          {c.p3}
         </p>
       </div>
     </section>

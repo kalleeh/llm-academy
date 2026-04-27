@@ -48,8 +48,9 @@ const STEP_STYLES: Record<string, { border: string; bg: string; text: string; ba
   response: { border: 'border-cyan-500/40', bg: 'bg-cyan-500/10', text: 'text-cyan-300', badge: 'bg-cyan-500/20' },
 }
 
+const EN_P2 = `{c.p2}`
 export const WhatAreAgentsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are AI Agents?' }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
+  const c = useT({ title: '1. What Are AI Agents?' , p2: EN_P2 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
   const [visibleSteps, setVisibleSteps] = useState(1)
 
   const showNext = useCallback(() => {

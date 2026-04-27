@@ -17,8 +17,10 @@ const KV_EXAMPLES = [
   { tokens: 131072, label: '128K', cacheGB: 16 },
 ] as const
 
+const EN_P2 = `Inference is the process of generating text from a trained model. It happens in two distinct phases —`
+const EN_P3 = `{c.p3}`
 export const HowInferenceWorksSection: React.FC = () => {
-  const c = useT({ title: '1. How Inference Works' }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
+  const c = useT({ title: '1. How Inference Works' , p2: EN_P2, p3: EN_P3 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
   const [activePhase, setActivePhase] = useState(0)
   const [ctxSlider, setCtxSlider] = useState(0)
 
@@ -34,8 +36,7 @@ export const HowInferenceWorksSection: React.FC = () => {
     <section aria-labelledby="how-inference-works">
       <h2 id="how-inference-works" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Inference is the process of generating text from a trained model. It happens in two
-        distinct phases — <strong className="text-zinc-100">prefill</strong> and{' '}
+        {c.p2} <strong className="text-zinc-100">prefill</strong> and{' '}
         <strong className="text-zinc-100">decode</strong> — and the KV cache is what makes it
         efficient (and what eats your GPU memory).
       </p>

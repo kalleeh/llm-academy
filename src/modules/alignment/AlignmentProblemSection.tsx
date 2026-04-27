@@ -32,8 +32,9 @@ const EXAMPLES: PromptExample[] = [
   },
 ]
 
+const EN_P2 = `The base model isn&apos;t &ldquo;evil&rdquo; — it simply has no concept of helpfulness or safety. It learned to predict text, and harmful text exists in its training data. Alignment is the process of teaching the model`
 export const AlignmentProblemSection: React.FC = () => {
-  const c = useT({ title: '1. The Alignment Problem' }, { sv: alignmentProblemSectionSv, ko: alignmentProblemSectionKo })
+  const c = useT({ title: '1. The Alignment Problem' , p2: EN_P2 }, { sv: alignmentProblemSectionSv, ko: alignmentProblemSectionKo })
   const [selected, setSelected] = useState(0)
   const [showAligned, setShowAligned] = useState(false)
 
@@ -100,10 +101,7 @@ export const AlignmentProblemSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Key insight:</strong> The base model isn&apos;t
-          &ldquo;evil&rdquo; — it simply has no concept of helpfulness or safety. It learned to
-          predict text, and harmful text exists in its training data. Alignment is the process of
-          teaching the model <em>which</em> behaviors we want.
+          <strong className="text-amber-400">Key insight:</strong> {c.p2} <em>which</em> behaviors we want.
         </p>
       </div>
     </section>

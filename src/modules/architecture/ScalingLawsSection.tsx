@@ -14,11 +14,14 @@ const BUDGET_STEPS = [
   { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'Frontier dense models' },
 ]
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
+const EN_P4 = `{c.p4}`
 const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens) were undertrained.
         Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
 
 export const ScalingLawsSection: React.FC = () => {
-  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
+  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 
   const handleSlider = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

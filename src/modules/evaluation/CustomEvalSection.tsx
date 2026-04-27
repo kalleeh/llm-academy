@@ -41,8 +41,9 @@ def evaluate_model(eval_set_path: str, model: str):
     print(f"Accuracy: {accuracy:.1%} ({correct}/{len(examples)})")
     return results`
 
+const EN_P2 = `{c.p2}`
 export const CustomEvalSection: React.FC = () => {
-  const c = useT({ title: '3. Custom Evaluation' }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
+  const c = useT({ title: '3. Custom Evaluation' , p2: EN_P2 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
   const [selectedTask, setSelectedTask] = useState(0)
   const task = TASK_TYPES[selectedTask]
 

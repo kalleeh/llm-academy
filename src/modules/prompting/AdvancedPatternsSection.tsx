@@ -133,10 +133,11 @@ Step 3 → "Prioritize implementing claims 1 & 3 (strong evidence).
   },
 ]
 
+const EN_P2 = `Modern models (GPT-4o, Claude 4, Gemini 2) are good enough that simple, clear prompts often beat complex techniques. Use these patterns when simple prompts fail — not as a default.`
 const EN_INTRO = `Sophisticated techniques for complex tasks. Each pattern includes a visual diagram and a practical example.`
 
 export const AdvancedPatternsSection: React.FC = () => {
-  const c = useT({ title: '5. Advanced Patterns', intro: EN_INTRO }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
+  const c = useT({ title: '5. Advanced Patterns', intro: EN_INTRO , p2: EN_P2 }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(PATTERNS[0].id)
 
   const handlePatternClick = useCallback((id: string) => {
@@ -153,9 +154,7 @@ export const AdvancedPatternsSection: React.FC = () => {
       {/* Pattern note */}
       <div className="mb-6 rounded-md border border-amber-500/30 bg-amber-500/10 px-4 py-3">
         <p className="text-sm text-amber-200">
-          <strong>2026 reality check:</strong> Modern models (GPT-4o, Claude 4, Gemini 2) are good
-          enough that simple, clear prompts often beat complex techniques. Use these patterns when
-          simple prompts fail — not as a default.
+          <strong>2026 reality check:</strong> {c.p2}
         </p>
       </div>
 

@@ -265,10 +265,21 @@ trainer.train()
 # 5. Save adapter
 model.save_pretrained("./output/lora-adapter")`
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `LoRA is the most popular way to fine-tune efficiently, but it&apos;s not the only one. The key question is always the same:`
+const EN_P4 = `{c.p4}`
+const EN_P5 = `Here&apos;s the idea: every number in a model&apos;s weights is normally stored with high precision — 16 bits per number (FP16), like measuring with a ruler that has millimeter marks. QLoRA says:`
+const EN_P6 = `The LoRA adapter matrices (the small part we&apos;re actually training) still use full precision — they need the fine-grained detail to learn properly. So you get the best of both worlds: a compressed base model that takes up little memory, plus precise adapter training on top.`
+const EN_P7 = `You can — but there&apos;s a cliff. At 4 bits, the quality loss from rounding is barely measurable. At 2 bits, the model starts forgetting things — like photocopying a photocopy, each round of compression loses detail. At 1 bit, you&apos;ve essentially reduced every weight to &quot;positive or negative&quot; — the model loses most of its nuance. 4-bit is the sweet spot where you save ~75% memory with &lt;1% quality loss.`
+const EN_P8 = `A 70B parameter model normally needs ~140 GB of memory (FP16). With QLoRA, the base model fits in ~35 GB, and you only need a few extra GB for the LoRA adapters. That&apos;s the difference between needing a cluster of GPUs and needing a single high-end GPU.`
+const EN_P9 = `{c.p9}`
+const EN_P10 = `{c.p10}`
+const EN_P11 = `Think of it like this: instead of retraining an employee (LoRA), you give them a detailed briefing note at the start of every task (prefix tuning). The employee&apos;s skills don&apos;t change, but the briefing steers their work in the right direction.`
+const EN_P12 = `In practice, prefix tuning is simpler but generally less effective than LoRA for most tasks. It was an important early PEFT method (2021), but LoRA has largely superseded it. You&apos;ll still see it in research and in some specialized use cases where you need to switch between many tasks quickly — swapping a prefix is cheaper than swapping an adapter.`
 const EN_INTRO = `A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.`
 
 export const FineTuningRunSection: React.FC = () => {
-  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
+  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
@@ -301,8 +312,7 @@ export const FineTuningRunSection: React.FC = () => {
           The PEFT family: LoRA, QLoRA, and Prefix Tuning
         </h3>
         <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          LoRA is the most popular way to fine-tune efficiently, but it&apos;s not the only one.
-          The key question is always the same: <strong className="text-zinc-100">how do you teach a
+          {c.p3} <strong className="text-zinc-100">how do you teach a
           model new tricks without rewriting its entire brain?</strong>
         </p>
 
@@ -315,32 +325,19 @@ export const FineTuningRunSection: React.FC = () => {
               4.65 GB VRAM (was 14.96 GB at FP16)&quot;</em>. That&apos;s QLoRA in action.
             </p>
             <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              Here&apos;s the idea: every number in a model&apos;s weights is normally stored with high
-              precision — 16 bits per number (FP16), like measuring with a ruler that has millimeter
-              marks. QLoRA says: <strong className="text-zinc-100">during training, we don&apos;t need
+              {c.p5} <strong className="text-zinc-100">during training, we don&apos;t need
               that precision for the frozen base weights</strong>. We can round them to 4 bits — like
               using a ruler with only centimeter marks. The base model becomes ~4× smaller in memory.
             </p>
             <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              The LoRA adapter matrices (the small part we&apos;re actually training) still use full
-              precision — they need the fine-grained detail to learn properly. So you get the best of
-              both worlds: a compressed base model that takes up little memory, plus precise adapter
-              training on top.
+              {c.p6}
             </p>
             <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              <strong className="text-zinc-100">Why not 2-bit or 1-bit?</strong> You can — but there&apos;s
-              a cliff. At 4 bits, the quality loss from rounding is barely measurable. At 2 bits, the
-              model starts forgetting things — like photocopying a photocopy, each round of compression
-              loses detail. At 1 bit, you&apos;ve essentially reduced every weight to &quot;positive or
-              negative&quot; — the model loses most of its nuance. 4-bit is the sweet spot where you
-              save ~75% memory with &lt;1% quality loss.
+              <strong className="text-zinc-100">Why not 2-bit or 1-bit?</strong> {c.p7}
             </p>
             <div className="rounded bg-zinc-800/50 px-4 py-3">
               <p className="text-xs text-zinc-400">
-                <strong className="text-zinc-300">Practical impact:</strong> A 70B parameter model
-                normally needs ~140 GB of memory (FP16). With QLoRA, the base model fits in ~35 GB,
-                and you only need a few extra GB for the LoRA adapters. That&apos;s the difference
-                between needing a cluster of GPUs and needing a single high-end GPU.
+                <strong className="text-zinc-300">Practical impact:</strong> {c.p8}
               </p>
             </div>
           </div>
@@ -355,15 +352,10 @@ export const FineTuningRunSection: React.FC = () => {
               &quot;virtual tokens&quot; to the input at every layer.
             </p>
             <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              Think of it like this: instead of retraining an employee (LoRA), you give them a
-              detailed briefing note at the start of every task (prefix tuning). The employee&apos;s
-              skills don&apos;t change, but the briefing steers their work in the right direction.
+              {c.p11}
             </p>
             <p className="text-sm leading-relaxed text-zinc-300">
-              In practice, prefix tuning is simpler but generally less effective than LoRA for most
-              tasks. It was an important early PEFT method (2021), but LoRA has largely superseded it.
-              You&apos;ll still see it in research and in some specialized use cases where you need
-              to switch between many tasks quickly — swapping a prefix is cheaper than swapping an adapter.
+              {c.p12}
             </p>
           </div>
         </div>

@@ -4,8 +4,10 @@ import { AttentionHeatmap } from './AttentionHeatmap'
 import { useT } from '../../useT'
 import { multiHeadSectionSv, multiHeadSectionKo } from './tech-translations'
 
+const EN_P2 = `{c.p2}`
+const EN_P3 = `{c.p3}`
 export const MultiHeadSection: React.FC = () => {
-  const c = useT({ title: '3 · Multi-Head Attention' }, { sv: multiHeadSectionSv, ko: multiHeadSectionKo })
+  const c = useT({ title: '3 · Multi-Head Attention' , p2: EN_P2, p3: EN_P3 }, { sv: multiHeadSectionSv, ko: multiHeadSectionKo })
   const [activeHead, setActiveHead] = useState(0)
 
   const selectHead = useCallback((i: number) => {

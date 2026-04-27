@@ -42,10 +42,11 @@ function formatCost(n: number): string {
   return `$${n.toFixed(2)}`
 }
 
+const EN_P2 = `These are estimates assuming ~500 input + ~300 output tokens per request. Self-hosted costs assume 24/7 GPU availability. Real costs vary with caching, batching, spot instances, and negotiated pricing.`
 const EN_INTRO = `Compare estimated monthly costs across approaches. Adjust volume and model size to see how costs change.`
 
 export const CostCalculatorSection: React.FC = () => {
-  const c = useT({ title: '4. Cost Calculator', intro: EN_INTRO }, { sv: costCalculatorSectionSv, ko: costCalculatorSectionKo })
+  const c = useT({ title: '4. Cost Calculator', intro: EN_INTRO , p2: EN_P2 }, { sv: costCalculatorSectionSv, ko: costCalculatorSectionKo })
   const [approaches, setApproaches] = useState<Approach[]>(['api'])
   const [volume, setVolume] = useState(1000)
   const [modelSize, setModelSize] = useState<ModelSize>('medium')
@@ -222,9 +223,7 @@ export const CostCalculatorSection: React.FC = () => {
 
       <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Note:</strong> These are estimates assuming ~500 input
-          + ~300 output tokens per request. Self-hosted costs assume 24/7 GPU availability.
-          Real costs vary with caching, batching, spot instances, and negotiated pricing.
+          <strong className="text-amber-400">Note:</strong> {c.p2}
         </p>
       </div>
     </section>
