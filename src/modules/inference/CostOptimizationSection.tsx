@@ -2,8 +2,6 @@ import { useState, useMemo, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { costOptimizationSectionSv, costOptimizationSectionKo } from './tech-translations'
 
 type ModelTier = '7b' | '70b' | '405b'
@@ -56,8 +54,6 @@ function formatCost(n: number): string {
 const EN_INTRO = `Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.`
 
 export const CostOptimizationSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const aPI_PRICINGT = tArray(lang, API_PRICING)
   const c = useT({ title: '4. Cost Optimization', intro: EN_INTRO }, { sv: costOptimizationSectionSv, ko: costOptimizationSectionKo })
   const [modelTier, setModelTier] = useState<ModelTier>('70b')
   const [reqPerDay, setReqPerDay] = useState(10000)

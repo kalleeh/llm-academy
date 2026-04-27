@@ -23,7 +23,6 @@ const COMPARISON = [
 
 export const DenseMoESection: React.FC = () => {
   const { lang } = useLanguage()
-  const mODELST = tArray(lang, MODELS)
   const cOMPARISONT = tArray(lang, COMPARISON)
   const c = useT({ title: '1. Dense vs Mixture-of-Experts' }, { sv: denseMoESectionSv, ko: denseMoESectionKo })
   const [mode, setMode] = useState<Mode>('dense')
@@ -136,7 +135,7 @@ export const DenseMoESection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {mODELST.map(m => (
+            {MODELS.map(m => (
               <tr key={m.name} className="border-b border-zinc-800">
                 <td className="py-2 pr-4 font-medium text-zinc-200">{m.name}</td>
                 <td className="py-2 pr-4">

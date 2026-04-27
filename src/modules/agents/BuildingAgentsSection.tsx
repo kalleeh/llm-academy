@@ -131,7 +131,6 @@ const EN_P2 = `A basic agent is just a loop: send messages → check for tool ca
 export const BuildingAgentsSection: React.FC = () => {
   const { lang } = useLanguage()
   const fRAMEWORKST = tArray(lang, FRAMEWORKS)
-  const tERMINAL_STEPST = tArray(lang, TERMINAL_STEPS)
   const c = useT({ title: '5. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">

@@ -40,7 +40,6 @@ const EN_INTRO = `Fine-tuning is powerful but expensive. Walk through this decis
 
 export const WhenToFineTuneSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tREET = tArray(lang, TREE)
   const wIN_CASEST = tArray(lang, WIN_CASES)
   const c = useT({ title: '1. When to Fine-Tune', intro: EN_INTRO }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
   const [path, setPath] = useState<NodeId[]>(['start'])

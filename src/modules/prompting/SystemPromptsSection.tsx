@@ -3,7 +3,6 @@ import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { systemPromptsSectionSv, systemPromptsSectionKo } from './tech-translations'
 
 const FRAMEWORK_FIELDS = [
@@ -28,7 +27,6 @@ const EN_INTRO = `Edit each component to build your system prompt. The preview u
 
 export const SystemPromptsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const fRAMEWORK_FIELDST = tArray(lang, FRAMEWORK_FIELDS)
   const c = useT({ title: '3. System Prompts', intro: EN_INTRO }, { sv: systemPromptsSectionSv, ko: systemPromptsSectionKo })
   const [values, setValues] = useState<Record<FieldKey, string>>(DEFAULT_VALUES)
 
@@ -100,7 +98,7 @@ print(response.choices[0].message.content)
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Inputs */}
           <div className="space-y-3">
-            {fRAMEWORK_FIELDST.map(field => (
+            {FRAMEWORK_FIELDS.map(field => (
               <div key={field.key}>
                 <label htmlFor={`sp-${field.key}`} className={`mb-1 block text-xs font-medium ${field.color}`}>
                   {field.label}

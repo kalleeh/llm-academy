@@ -37,7 +37,6 @@ const EN_P2 = `RAG is the most common production pattern because it requires no 
 export const RAGDeepDiveSection: React.FC = () => {
   const { lang } = useLanguage()
   const rAG_VS_FINETUNET = tArray(lang, RAG_VS_FINETUNE)
-  const tERMINAL_STEPST = tArray(lang, TERMINAL_STEPS)
   const c = useT({ title: '2. RAG Deep Dive' , p2: EN_P2 }, { sv: rAGDeepDiveSectionSv, ko: rAGDeepDiveSectionKo })
   const [activeStep, setActiveStep] = useState<number | null>(null)
 

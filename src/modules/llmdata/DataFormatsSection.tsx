@@ -3,7 +3,6 @@ import type { FileNode } from '../../components/FileExplorer'
 import { CodeBlock } from '../../components/CodeBlock'
 import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { dataFormatsSectionSv, dataFormatsSectionKo } from './tech-translations'
 
 const PRETRAIN_CONTENT = '{"text": "The transformer architecture was introduced in 2017...", "source": "wikipedia", "language": "en"}\n{"text": "def quicksort(arr):\\n    if len(arr) <= 1:\\n        return arr...", "source": "github", "language": "python"}\n{"text": "In quantum mechanics, the wave function describes...", "source": "arxiv", "language": "en"}'
@@ -54,7 +53,6 @@ const EN_INTRO = `Each training stage uses a different format.`
 
 export const DataFormatsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tREET = tArray(lang, TREE)
   const c = useT({ title: '5. Data Formats', intro: EN_INTRO }, { sv: dataFormatsSectionSv, ko: dataFormatsSectionKo })
   return (
   <section aria-labelledby="data-formats">

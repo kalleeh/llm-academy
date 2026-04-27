@@ -3,8 +3,6 @@ import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { conversionPipelineSectionSv, conversionPipelineSectionKo } from './tech-translations'
 
 const STEPS: TerminalStep[] = [
@@ -170,8 +168,6 @@ const EN_P2 = `SafeTensors (14 GB, 3 shards) → GGUF FP16 (14.5 GB, single file
 const EN_INTRO = `Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.`
 
 export const ConversionPipelineSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const sTEPST = tArray(lang, STEPS)
   const c = useT({ title: '3. The Conversion Pipeline', intro: EN_INTRO , p2: EN_P2 }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
   const steps = useMemo(() => STEPS, [])
 

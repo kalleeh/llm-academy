@@ -90,7 +90,6 @@ const FORMAT_COMPARISON = [
 const EN_P2 = `Format comparison — when to use each:`
 export const TrainingSection5: React.FC = () => {
   const { lang } = useLanguage()
-  const inspectStepsT = tArray(lang, inspectSteps)
   const fORMAT_COMPARISONT = tArray(lang, FORMAT_COMPARISON)
   const c = useT({ title: '5. What\'s Inside the Weight Files'  , p2: EN_P2 }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
   const [executedStep, setExecutedStep] = useState(-1)

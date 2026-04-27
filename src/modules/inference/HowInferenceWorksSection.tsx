@@ -1,7 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { howInferenceWorksSectionSv, howInferenceWorksSectionKo } from './tech-translations'
 
 const PHASES = [
@@ -24,9 +22,6 @@ const EN_P4 = `KV Cache Size vs Context Length`
 const EN_P2 = `Inference is the process of generating text from a trained model. It happens in two distinct phases —`
 const EN_P3 = `{c.p3}`
 export const HowInferenceWorksSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const pHASEST = tArray(lang, PHASES)
-  const kV_EXAMPLEST = tArray(lang, KV_EXAMPLES)
   const c = useT({ title: '1. How Inference Works' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
   const [activePhase, setActivePhase] = useState(0)
   const [ctxSlider, setCtxSlider] = useState(0)
@@ -52,7 +47,7 @@ export const HowInferenceWorksSection: React.FC = () => {
       <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
         <p className="mb-4 text-sm font-medium text-zinc-400">Inference Pipeline</p>
         <div className="flex items-center gap-2">
-          {pHASEST.map((phase, i) => (
+          {PHASES.map((phase, i) => (
             <button
               key={phase.label}
               onClick={handlePhaseClick(i)}
@@ -71,7 +66,7 @@ export const HowInferenceWorksSection: React.FC = () => {
           ))}
         </div>
         <div className="mt-4 rounded-md bg-zinc-800 p-4">
-          <p className="text-sm text-zinc-300">{pHASEST[activePhase].desc}</p>
+          <p className="text-sm text-zinc-300">{PHASES[activePhase].desc}</p>
           {activePhase === 0 && (
             <div className="mt-3 flex gap-1.5">
               {['The', 'cat', 'sat', 'on', 'the', 'mat'].map(t => (
@@ -177,7 +172,7 @@ export const HowInferenceWorksSection: React.FC = () => {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {kV_EXAMPLEST.map((ex, i) => (
+          {KV_EXAMPLES.map((ex, i) => (
             <span
               key={ex.label}
               className={`rounded-full px-2.5 py-0.5 text-xs ${

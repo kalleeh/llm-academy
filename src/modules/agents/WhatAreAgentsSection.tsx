@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
 import { whatAreAgentsSectionSv, whatAreAgentsSectionKo } from './tech-translations'
 
 const TRACE_STEPS = [
@@ -54,8 +52,6 @@ const EN_P4 = `A regular LLM generates text. An`
 const EN_P3 = `A regular LLM generates text. An`
 const EN_P2 = `{c.p2}`
 export const WhatAreAgentsSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const tRACE_STEPST = tArray(lang, TRACE_STEPS)
   const c = useT({ title: '1. What Are AI Agents?' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
   const [visibleSteps, setVisibleSteps] = useState(1)
 
