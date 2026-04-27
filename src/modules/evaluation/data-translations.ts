@@ -21,18 +21,18 @@ export const benchmarksTranslations = {
 
 export const taskTypesTranslations = {
   sv: [
-    { label: 'Klassificering', metrics: 'Noggrannhet, F1, precision, recall', tip: 'Stratifiera testdata efter klass' },
-    { label: 'Generering', metrics: 'BLEU, ROUGE, BERTScore, mänsklig bedömning', tip: 'Automatiska mätvärden korrelerar dåligt med kvalitet' },
-    { label: 'Extraktion', metrics: 'Exakt matchning, F1 på tokennivå', tip: 'Testa med variationer i format' },
-    { label: 'Sammanfattning', metrics: 'ROUGE-L, faktakonsistens, mänsklig bedömning', tip: 'Kontrollera att sammanfattningen inte hallucinerar fakta' },
-    { label: 'Konversation', metrics: 'Mänsklig preferens, LLM-som-domare, uppgiftslösning', tip: 'Flerturns-utvärdering fångar saker som enstaka svar missar' },
+    { label: 'Klassificering', metrics: ['Noggrannhet, F1, precision, recall'], tip: 'Stratifiera testdata efter klass' },
+    { label: 'Generering', metrics: ['BLEU, ROUGE, BERTScore, mänsklig bedömning'], tip: 'Automatiska mätvärden korrelerar dåligt med kvalitet' },
+    { label: 'Extraktion', metrics: ['Exakt matchning, F1 på tokennivå'], tip: 'Testa med variationer i format' },
+    { label: 'Sammanfattning', metrics: ['ROUGE-L, faktakonsistens, mänsklig bedömning'], tip: 'Kontrollera att sammanfattningen inte hallucinerar fakta' },
+    { label: 'Konversation', metrics: ['Mänsklig preferens, LLM-som-domare, uppgiftslösning'], tip: 'Flerturns-utvärdering fångar saker som enstaka svar missar' },
   ],
   ko: [
-    { label: '분류', metrics: '정확도, F1, 정밀도, 재현율', tip: '클래스별로 테스트 데이터를 층화' },
-    { label: '생성', metrics: 'BLEU, ROUGE, BERTScore, 인간 평가', tip: '자동 지표는 품질과 상관관계가 낮음' },
-    { label: '추출', metrics: '정확 일치, 토큰 수준 F1', tip: '형식 변형으로 테스트' },
-    { label: '요약', metrics: 'ROUGE-L, 사실 일관성, 인간 평가', tip: '요약이 사실을 환각하지 않는지 확인' },
-    { label: '대화', metrics: '인간 선호도, LLM 판정, 작업 완료', tip: '다중 턴 평가가 단일 응답이 놓치는 것을 포착' },
+    { label: '분류', metrics: ['정확도, F1, 정밀도, 재현율'], tip: '클래스별로 테스트 데이터를 층화' },
+    { label: '생성', metrics: ['BLEU, ROUGE, BERTScore, 인간 평가'], tip: '자동 지표는 품질과 상관관계가 낮음' },
+    { label: '추출', metrics: ['정확 일치, 토큰 수준 F1'], tip: '형식 변형으로 테스트' },
+    { label: '요약', metrics: ['ROUGE-L, 사실 일관성, 인간 평가'], tip: '요약이 사실을 환각하지 않는지 확인' },
+    { label: '대화', metrics: ['인간 선호도, LLM 판정, 작업 완료'], tip: '다중 턴 평가가 단일 응답이 놓치는 것을 포착' },
   ],
 }
 
