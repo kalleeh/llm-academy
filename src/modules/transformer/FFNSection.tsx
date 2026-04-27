@@ -1,3 +1,4 @@
+import { useLanguage } from '../../LanguageContext'
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
@@ -6,6 +7,7 @@ import { fFNSectionSv, fFNSectionKo } from './tech-translations'
 type Mode = 'dense' | 'moe'
 
 function DenseView() {
+  const { lang } = useLanguage()
   return (
     <div className="flex flex-col items-center gap-1">
       <div className="rounded border border-zinc-600 bg-zinc-800 px-6 py-2 text-xs text-zinc-300">

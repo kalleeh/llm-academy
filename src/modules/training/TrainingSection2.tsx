@@ -1,3 +1,4 @@
+import { useLanguage } from '../../LanguageContext'
 import { useT } from '../../useT'
 import { trainingSection2Sv, trainingSection2Ko } from './tech-translations'
 import { useState, useCallback, useEffect, useRef } from 'react'
@@ -48,6 +49,7 @@ const LOOP_STAGES: { label: string; icon: IconName; active: string; desc: string
 ]
 
 function TrainingLoopViz() {
+  const { lang } = useLanguage()
   const [activeStage, setActiveStage] = useState(-1)
   const [isRunning, setIsRunning] = useState(false)
   const [iteration, setIteration] = useState(0)
@@ -90,7 +92,7 @@ function TrainingLoopViz() {
       <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-5 py-3">
         <div>
           <h4 className="font-mono text-sm font-semibold text-zinc-100">The Training Loop</h4>
-          <p className="text-xs text-zinc-500">Click a stage or animate the full cycle</p>
+          <p className="text-xs text-zinc-500">{{ sv: `Klicka på ett steg eller animera hela cykeln`, ko: `단계를 클릭하거나 전체 사이클을 애니메이션` }[lang] ?? `Click a stage or animate the full cycle`}</p>
         </div>
         <div className="flex items-center gap-3">
           {iteration > 0 && (
@@ -181,7 +183,7 @@ function TrainingLoopViz() {
             {LOOP_STAGES[activeStage].desc}
           </p>
         ) : (
-          <p className="text-sm text-zinc-500">Click a stage above or press Animate to see how each step works.</p>
+          <p className="text-sm text-zinc-500">{{ sv: `Klicka på ett steg ovan eller tryck Animera för att se hur varje steg fungerar.`, ko: `위의 단계를 클릭하거나 애니메이션을 눌러 각 단계가 어떻게 작동하는지 확인하세요.` }[lang] ?? `Click a stage above or press Animate to see how each step works.`}</p>
         )}
       </div>
     </div>

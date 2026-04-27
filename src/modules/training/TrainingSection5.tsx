@@ -1,3 +1,4 @@
+import { useLanguage } from '../../LanguageContext'
 import { useT } from '../../useT'
 import { trainingSection5Sv, trainingSection5Ko } from './tech-translations'
 import { useState, useMemo, useCallback } from 'react'
@@ -7,7 +8,9 @@ import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
 import { SelfExplain } from '../../components/SelfExplain'
 
-function WeightMatrix({ trained, highlight }: { trained: boolean; highlight: boolean }) {
+function WeightMatrix({
+  trained, highlight }: { trained: boolean; highlight: boolean }) {
+  const { lang } = useLanguage()
   const values = useMemo(() => {
     const rng = (seed: number) => {
       let s = seed
