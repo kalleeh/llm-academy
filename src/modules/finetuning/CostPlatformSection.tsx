@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { costPlatformSectionSv, costPlatformSectionKo } from './tech-translations'
 
 interface Platform {
@@ -35,6 +37,8 @@ const EN_P2 = `A LoRA fine-tune of an 8B model on 5K examples costs about`
 const EN_INTRO = `Where to run your fine-tuning job, what it costs, and what hardware you need.`
 
 export const CostPlatformSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pLATFORMST = tArray(lang, PLATFORMS)
   const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO , p2: EN_P2 }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
   const [selectedPlatform, setSelectedPlatform] = useState<number | null>(null)
 
@@ -59,7 +63,7 @@ export const CostPlatformSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {PLATFORMS.map((p, i) => (
+            {pLATFORMST.map((p, i) => (
               <tr
                 key={p.name}
                 onClick={() => handleSelect(i)}
@@ -79,8 +83,8 @@ export const CostPlatformSection: React.FC = () => {
         {selectedPlatform !== null && (
           <div className="mt-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3">
             <p className="text-xs leading-relaxed text-zinc-300">
-              <strong className="text-zinc-100">{PLATFORMS[selectedPlatform].name}:</strong>{' '}
-              {PLATFORMS[selectedPlatform].notes}
+              <strong className="text-zinc-100">{pLATFORMST[selectedPlatform].name}:</strong>{' '}
+              {pLATFORMST[selectedPlatform].notes}
             </p>
           </div>
         )}

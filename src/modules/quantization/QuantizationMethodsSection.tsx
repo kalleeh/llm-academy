@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { quantizationMethodsSectionSv, quantizationMethodsSectionKo } from './tech-translations'
 
 interface Method {
@@ -94,6 +96,8 @@ const METHODS: Method[] = [
 const EN_INTRO = `Four main approaches dominate the ecosystem. Each targets a different use case.`
 
 export const QuantizationMethodsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const mETHODST = tArray(lang, METHODS)
   const c = useT({ title: '2. Quantization Methods', intro: EN_INTRO }, { sv: quantizationMethodsSectionSv, ko: quantizationMethodsSectionKo })
   const [activeTab, setActiveTab] = useState(0)
   const method = METHODS[activeTab]
@@ -107,7 +111,7 @@ export const QuantizationMethodsSection: React.FC = () => {
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {METHODS.map((m, i) => (
+        {mETHODST.map((m, i) => (
           <button
             key={m.id}
             onClick={() => selectTab(i)}

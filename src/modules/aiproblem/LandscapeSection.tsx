@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { landscapeSectionSv, landscapeSectionKo } from './tech-translations'
 
 interface AILevel {
@@ -95,6 +97,9 @@ const OVERLAYS: OverlayBadge[] = [
 const EN_INTRO = `AI is a broad field. Machine Learning is a subset, Deep Learning is a subset of that, and LLMs are a specific kind of deep learning. Click each layer to explore.`
 
 export const LandscapeSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const lEVELST = tArray(lang, LEVELS)
+  const oVERLAYST = tArray(lang, OVERLAYS)
   const c = useT({ title: '1. The Landscape', intro: EN_INTRO }, { sv: landscapeSectionSv, ko: landscapeSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
@@ -114,7 +119,7 @@ export const LandscapeSection: React.FC = () => {
 
       {/* Nested diagram */}
       <div className="relative mb-6">
-        {LEVELS.map((level, i) => (
+        {lEVELST.map((level, i) => (
           <div
             key={level.id}
             style={{ marginLeft: `${i * 24}px`, marginRight: `${i * 24}px` }}
@@ -155,7 +160,7 @@ export const LandscapeSection: React.FC = () => {
 
       {/* GenAI / Agentic badges */}
       <div className="flex flex-wrap gap-3">
-        {OVERLAYS.map(o => (
+        {oVERLAYST.map(o => (
           <div key={o.label}>
             <button
               onClick={() => toggleOverlay(o.label)}

@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { adaptationSpectrumSectionSv, adaptationSpectrumSectionKo } from './tech-translations'
 
 interface Approach {
@@ -78,6 +80,9 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `Not every problem needs training from scratch. Most LLM applications fall somewhere on this spectrum.`
 
 export const AdaptationSpectrumSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const aPPROACHEST = tArray(lang, APPROACHES)
+  const sCENARIOST = tArray(lang, SCENARIOS)
   const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
   const [selected, setSelected] = useState<string | null>(null)
   const [scenario, setScenario] = useState<number | null>(null)
@@ -99,7 +104,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
 
       {/* Spectrum bar */}
       <div className="mb-2 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-3">
-        {APPROACHES.map(a => (
+        {aPPROACHEST.map(a => (
           <button
             key={a.id}
             onClick={() => selectApproach(a.id)}
@@ -144,7 +149,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
       <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
         <Icon name="target" />{c.p4}</h3>
       <div className="mb-4 flex flex-wrap gap-2">
-        {SCENARIOS.map((s, i) => (
+        {sCENARIOST.map((s, i) => (
           <button
             key={i}
             onClick={() => selectScenario(i)}
@@ -163,22 +168,22 @@ export const AdaptationSpectrumSection: React.FC = () => {
         <div className="space-y-3">
           {/* Mini spectrum showing position */}
           <div className="flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-3">
-            {APPROACHES.map((a, i) => (
+            {aPPROACHEST.map((a, i) => (
               <div
                 key={a.id}
                 className={`flex-1 rounded-md py-2 text-center text-xs font-medium transition-all ${
-                  i === SCENARIOS[scenario].position
+                  i === sCENARIOST[scenario].position
                     ? `${a.color} text-white`
                     : 'bg-zinc-800 text-zinc-600'
                 }`}
               >
                 {a.label}
-                {i === SCENARIOS[scenario].position && <span className="block text-[10px]">▲</span>}
+                {i === sCENARIOST[scenario].position && <span className="block text-[10px]">▲</span>}
               </div>
             ))}
           </div>
           <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-            <p className="text-sm text-zinc-300">{SCENARIOS[scenario].answer}</p>
+            <p className="text-sm text-zinc-300">{sCENARIOST[scenario].answer}</p>
           </div>
         </div>
       )}

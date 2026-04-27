@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { trainingSection5Sv, trainingSection5Ko } from './tech-translations'
 import { useState, useMemo, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
@@ -87,6 +89,9 @@ const FORMAT_COMPARISON = [
 
 const EN_P2 = `Format comparison — when to use each:`
 export const TrainingSection5: React.FC = () => {
+  const { lang } = useLanguage()
+  const inspectStepsT = tArray(lang, inspectSteps)
+  const fORMAT_COMPARISONT = tArray(lang, FORMAT_COMPARISON)
   const c = useT({ title: '5. What\'s Inside the Weight Files'  , p2: EN_P2 }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
@@ -149,7 +154,7 @@ export const TrainingSection5: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {FORMAT_COMPARISON.map(f => (
+              {fORMAT_COMPARISONT.map(f => (
                 <tr key={f.name} className="border-b border-zinc-800 text-zinc-300">
                   <td className="px-3 py-2 font-mono font-medium text-zinc-100">{f.name}</td>
                   <td className="px-3 py-2 font-mono text-amber-300">{f.ext}</td>

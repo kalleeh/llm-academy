@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { lLMDifferenceSectionSv, lLMDifferenceSectionKo } from './tech-translations'
 
 interface ComparisonRow {
@@ -59,6 +61,10 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamentally different paradigm.`
 
 export const LLMDifferenceSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cOMPARISONT = tArray(lang, COMPARISON)
+  const oVERKILL_CASEST = tArray(lang, OVERKILL_CASES)
+  const mL_BETTER_CASEST = tArray(lang, ML_BETTER_CASES)
   const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
   const [showLLM, setShowLLM] = useState(false)
 
@@ -84,7 +90,7 @@ export const LLMDifferenceSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {COMPARISON.map(row => (
+            {cOMPARISONT.map(row => (
               <tr key={row.dimension} className="border-b border-zinc-800 hover:bg-zinc-800/50">
                 <td className="px-4 py-3 font-medium text-zinc-200">{row.dimension}</td>
                 <td className="px-4 py-3 text-zinc-400">{row.ml}</td>
@@ -146,7 +152,7 @@ export const LLMDifferenceSection: React.FC = () => {
         <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
           <h3 className="mb-3 font-mono text-sm font-semibold text-amber-300">When LLMs Are Overkill</h3>
           <ul className="space-y-2">
-            {OVERKILL_CASES.map(c => (
+            {oVERKILL_CASEST.map(c => (
               <li key={c.label}>
                 <p className="text-sm font-medium text-zinc-200">{c.label}</p>
                 <p className="text-xs text-zinc-500">{c.detail}</p>
@@ -157,7 +163,7 @@ export const LLMDifferenceSection: React.FC = () => {
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
           <h3 className="mb-3 font-mono text-sm font-semibold text-emerald-300">When Classical ML Wins</h3>
           <ul className="space-y-2">
-            {ML_BETTER_CASES.map(c => (
+            {mL_BETTER_CASEST.map(c => (
               <li key={c.label}>
                 <p className="text-sm font-medium text-zinc-200">{c.label}</p>
                 <p className="text-xs text-zinc-500">{c.detail}</p>

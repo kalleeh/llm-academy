@@ -1,5 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { modelConfigSectionSv, modelConfigSectionKo } from './tech-translations'
 
 interface Config {
@@ -71,6 +73,8 @@ const SLIDERS: { key: keyof Config; label: string; min: number; max: number; ste
 const EN_INTRO = `Configure your own model architecture and see how parameter choices affect total size.`
 
 export const ModelConfigSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pRESETST = tArray(lang, PRESETS)
   const c = useT({ title: '4. Model Configuration', intro: EN_INTRO }, { sv: modelConfigSectionSv, ko: modelConfigSectionKo })
   const [config, setConfig] = useState<Config>(PRESETS[1].config)
 
@@ -91,7 +95,7 @@ export const ModelConfigSection: React.FC = () => {
 
       {/* Presets */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {PRESETS.map(p => (
+        {pRESETST.map(p => (
           <button
             key={p.label}
             onClick={() => applyPreset(p)}

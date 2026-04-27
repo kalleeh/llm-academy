@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { caseStudiesSectionSv, caseStudiesSectionKo } from './tech-translations'
 
 interface DecisionStep {
@@ -91,6 +93,8 @@ const CASES: CaseStudy[] = [
 const EN_INTRO = `Walk through real-world decision processes. Each case shows how constraints lead to different solutions.`
 
 export const CaseStudiesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cASEST = tArray(lang, CASES)
   const c = useT({ title: '5. Case Studies', intro: EN_INTRO }, { sv: caseStudiesSectionSv, ko: caseStudiesSectionKo })
   const [activeCase, setActiveCase] = useState(0)
   const [revealedSteps, setRevealedSteps] = useState(0)
@@ -114,7 +118,7 @@ export const CaseStudiesSection: React.FC = () => {
 
       {/* Case selector */}
       <div className="mb-6 grid gap-2 sm:grid-cols-4">
-        {CASES.map((c, i) => (
+        {cASEST.map((c, i) => (
           <button
             key={c.id}
             onClick={() => selectCase(i)}

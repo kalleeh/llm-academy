@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { denseMoESectionSv, denseMoESectionKo } from './tech-translations'
 
 type Mode = 'dense' | 'moe'
@@ -20,6 +22,9 @@ const COMPARISON = [
 ]
 
 export const DenseMoESection: React.FC = () => {
+  const { lang } = useLanguage()
+  const mODELST = tArray(lang, MODELS)
+  const cOMPARISONT = tArray(lang, COMPARISON)
   const c = useT({ title: '1. Dense vs Mixture-of-Experts' }, { sv: denseMoESectionSv, ko: denseMoESectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 
@@ -131,7 +136,7 @@ export const DenseMoESection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {MODELS.map(m => (
+            {mODELST.map(m => (
               <tr key={m.name} className="border-b border-zinc-800">
                 <td className="py-2 pr-4 font-medium text-zinc-200">{m.name}</td>
                 <td className="py-2 pr-4">
@@ -163,7 +168,7 @@ export const DenseMoESection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {COMPARISON.map(row => (
+            {cOMPARISONT.map(row => (
               <tr key={row.aspect} className="border-b border-zinc-800">
                 <td className="px-4 py-2 font-medium text-zinc-300">{row.aspect}</td>
                 <td className="px-4 py-2 text-zinc-400">{row.dense}</td>

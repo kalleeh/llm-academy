@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { ecosystemSectionSv, ecosystemSectionKo } from './tech-translations'
 
 interface Layer {
@@ -60,6 +62,8 @@ const EN_P2 = `You rarely build from scratch. Most teams pick a foundation model
 const EN_INTRO = `LLMs don't exist in isolation. A full stack connects foundation models to end users.`
 
 export const EcosystemSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const lAYERST = tArray(lang, LAYERS)
   const c = useT({ title: '3. The Ecosystem', intro: EN_INTRO , p2: EN_P2 }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 
@@ -73,7 +77,7 @@ export const EcosystemSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="space-y-2">
-        {LAYERS.map((layer, idx) => (
+        {lAYERST.map((layer, idx) => (
           <div key={layer.name}>
             <button
               onClick={() => toggle(idx)}

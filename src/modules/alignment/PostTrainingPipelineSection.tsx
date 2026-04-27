@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { postTrainingPipelineSectionSv, postTrainingPipelineSectionKo } from './tech-translations'
 
 interface PipelineStage {
@@ -80,6 +82,9 @@ const TRENDS: Trend[] = [
 const EN_INTRO = `The modern post-training pipeline combines multiple techniques. Click each stage to explore.`
 
 export const PostTrainingPipelineSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pIPELINET = tArray(lang, PIPELINE)
+  const tRENDST = tArray(lang, TRENDS)
   const c = useT({ title: '5. Full Post-Training Pipeline (2025–2026)', intro: EN_INTRO }, { sv: postTrainingPipelineSectionSv, ko: postTrainingPipelineSectionKo })
   const [activeStage, setActiveStage] = useState<number | null>(null)
 
@@ -94,7 +99,7 @@ export const PostTrainingPipelineSection: React.FC = () => {
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Post-training pipeline">
-        {PIPELINE.map((stage, i) => (
+        {pIPELINET.map((stage, i) => (
           <div key={stage.label} className="flex items-center gap-2" role="listitem">
             <button
               onClick={() => selectStage(i)}
@@ -115,11 +120,11 @@ export const PostTrainingPipelineSection: React.FC = () => {
 
       {activeStage !== null && (
         <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-          <h3 className={`mb-1 text-sm font-semibold ${PIPELINE[activeStage].color}`}>
-            {PIPELINE[activeStage].label}
+          <h3 className={`mb-1 text-sm font-semibold ${pIPELINET[activeStage].color}`}>
+            {pIPELINET[activeStage].label}
           </h3>
           <p className="text-sm leading-relaxed text-zinc-300">
-            {PIPELINE[activeStage].description}
+            {pIPELINET[activeStage].description}
           </p>
         </div>
       )}
@@ -127,7 +132,7 @@ export const PostTrainingPipelineSection: React.FC = () => {
       {/* Trends */}
       <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Key Trends</h3>
       <div className="grid gap-3 sm:grid-cols-2">
-        {TRENDS.map(trend => (
+        {tRENDST.map(trend => (
           <div key={trend.label} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
             <h4 className={`mb-1 text-sm font-medium ${trend.color}`}>{trend.label}</h4>
             <p className="text-xs leading-relaxed text-zinc-400">{trend.description}</p>

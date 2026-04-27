@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { advancedPatternsSectionSv, advancedPatternsSectionKo } from './tech-translations'
 
 interface Pattern {
@@ -137,6 +139,8 @@ const EN_P2 = `Modern models (GPT-4o, Claude 4, Gemini 2) are good enough that s
 const EN_INTRO = `Sophisticated techniques for complex tasks. Each pattern includes a visual diagram and a practical example.`
 
 export const AdvancedPatternsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pATTERNST = tArray(lang, PATTERNS)
   const c = useT({ title: '5. Advanced Patterns', intro: EN_INTRO , p2: EN_P2 }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(PATTERNS[0].id)
 
@@ -160,7 +164,7 @@ export const AdvancedPatternsSection: React.FC = () => {
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-1" role="tablist" aria-label="Advanced patterns">
-        {PATTERNS.map(p => (
+        {pATTERNST.map(p => (
           <button
             key={p.id}
             role="tab"

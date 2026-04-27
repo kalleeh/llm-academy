@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { evolutionLadderSectionSv, evolutionLadderSectionKo } from './tech-translations'
 
 const TASK = 'Classify customer sentiment'
@@ -83,6 +85,8 @@ Severity: shipping=4, support=5
 ]
 
 export const EvolutionLadderSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const rUNGST = tArray(lang, RUNGS)
   const c = useT({ title: '1. The Evolution Ladder' }, { sv: evolutionLadderSectionSv, ko: evolutionLadderSectionKo })
   const [activeRung, setActiveRung] = useState(0)
 
@@ -104,7 +108,7 @@ export const EvolutionLadderSection: React.FC = () => {
       <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
         {/* Ladder */}
         <div className="flex flex-col-reverse gap-1" role="tablist" aria-label="Prompt evolution ladder">
-          {RUNGS.map((r, i) => (
+          {rUNGST.map((r, i) => (
             <button
               key={r.name}
               role="tab"

@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { functionCallingSectionSv, functionCallingSectionKo } from './tech-translations'
 
 const TOOL_SCHEMA = `{
@@ -106,6 +108,8 @@ const DEMO_STEPS = [
 ]
 
 export const FunctionCallingSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const dEMO_STEPST = tArray(lang, DEMO_STEPS)
   const c = useT({ title: '2. Function Calling' }, { sv: functionCallingSectionSv, ko: functionCallingSectionKo })
   const [activeStep, setActiveStep] = useState(0)
 
@@ -132,7 +136,7 @@ export const FunctionCallingSection: React.FC = () => {
         </div>
         <div className="grid gap-4 p-5 lg:grid-cols-[200px_1fr]">
           <div className="flex flex-col gap-1" role="tablist" aria-label="Function calling steps">
-            {DEMO_STEPS.map((s, i) => (
+            {dEMO_STEPST.map((s, i) => (
               <button
                 key={s.label}
                 role="tab"
@@ -154,9 +158,9 @@ export const FunctionCallingSection: React.FC = () => {
             ))}
           </div>
           <div>
-            <p className="mb-2 text-sm text-zinc-300">{DEMO_STEPS[activeStep].description}</p>
+            <p className="mb-2 text-sm text-zinc-300">{dEMO_STEPST[activeStep].description}</p>
             <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-green-300">
-              {DEMO_STEPS[activeStep].content}
+              {dEMO_STEPST[activeStep].content}
             </pre>
           </div>
         </div>

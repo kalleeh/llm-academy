@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { safetyGuardrailsSectionSv, safetyGuardrailsSectionKo } from './tech-translations'
 
 interface SafetyLayer {
@@ -65,6 +67,8 @@ const EN_P3 = `If the system-level filter misses a novel attack, the model&apos;
 const EN_INTRO = `Safety is defense in depth — multiple layers that each catch different failure modes.`
 
 export const SafetyGuardrailsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const lAYERST = tArray(lang, LAYERS)
   const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 
@@ -85,7 +89,7 @@ export const SafetyGuardrailsSection: React.FC = () => {
 
       {/* Safety layers */}
       <div className="space-y-3">
-        {LAYERS.map((layer, i) => (
+        {lAYERST.map((layer, i) => (
           <div key={layer.id} className="rounded-lg border border-zinc-700 overflow-hidden">
             <button
               onClick={() => selectLayer(i)}

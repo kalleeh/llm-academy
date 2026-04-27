@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { coreTechniquesSectionSv, coreTechniquesSectionKo } from './tech-translations'
 
 interface Technique {
@@ -117,6 +119,8 @@ If you experience locking, giving way, or significant swelling, we should rule o
 const EN_INTRO = `Five fundamental prompting techniques. Each tab shows a before/after comparison.`
 
 export const CoreTechniquesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tECHNIQUEST = tArray(lang, TECHNIQUES)
   const c = useT({ title: '2. Core Techniques', intro: EN_INTRO }, { sv: coreTechniquesSectionSv, ko: coreTechniquesSectionKo })
   const [activeTab, setActiveTab] = useState(TECHNIQUES[0].id)
 
@@ -133,7 +137,7 @@ export const CoreTechniquesSection: React.FC = () => {
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-1" role="tablist" aria-label="Prompting techniques">
-        {TECHNIQUES.map(t => (
+        {tECHNIQUEST.map(t => (
           <button
             key={t.id}
             role="tab"

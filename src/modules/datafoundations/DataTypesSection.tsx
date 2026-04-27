@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { dataTypesSectionSv, dataTypesSectionKo } from './tech-translations'
 
 interface DataExample {
@@ -117,6 +119,8 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `All data falls into three categories. Click any example to see what it actually looks like.`
 
 export const DataTypesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cATEGORIEST = tArray(lang, CATEGORIES)
   const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -130,7 +134,7 @@ export const DataTypesSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        {CATEGORIES.map(cat => (
+        {cATEGORIEST.map(cat => (
           <div key={cat.title} className={`rounded-lg border ${cat.borderColor} ${cat.color} p-4`}>
             <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">{cat.title}</h3>
             <p className="mb-4 text-xs text-zinc-400">{cat.description}</p>

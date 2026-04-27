@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { whoBuiltWhatSectionSv, whoBuiltWhatSectionKo } from './tech-translations'
 
 interface Player {
@@ -108,6 +110,8 @@ const PLAYERS: Player[] = [
 const EN_INTRO = `The LLM landscape is dominated by a handful of well-funded labs, each with a distinct philosophy. Click any card to see details.`
 
 export const WhoBuiltWhatSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pLAYERST = tArray(lang, PLAYERS)
   const c = useT({ title: '1. Who Built What', intro: EN_INTRO }, { sv: whoBuiltWhatSectionSv, ko: whoBuiltWhatSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -121,7 +125,7 @@ export const WhoBuiltWhatSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {PLAYERS.map(p => (
+        {pLAYERST.map(p => (
           <button
             key={p.name}
             onClick={() => toggle(p.name)}

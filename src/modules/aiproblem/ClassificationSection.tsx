@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { classificationSectionSv, classificationSectionKo } from './tech-translations'
 
 interface Scenario {
@@ -81,6 +83,8 @@ const CATEGORY_COLORS: Record<Scenario['category'], string> = {
 
 const EN_P2 = `Not every problem needs an LLM. Click each card to reveal the best approach — and more importantly,`
 export const ClassificationSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const sCENARIOST = tArray(lang, SCENARIOS)
   const c = useT({ title: '2. Problem Classification' , p2: EN_P2 }, { sv: classificationSectionSv, ko: classificationSectionKo })
   const [revealed, setRevealed] = useState<Set<number>>(new Set())
 
@@ -101,7 +105,7 @@ export const ClassificationSection: React.FC = () => {
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {SCENARIOS.map((s, i) => {
+        {sCENARIOST.map((s, i) => {
           const isRevealed = revealed.has(i)
           return (
             <button

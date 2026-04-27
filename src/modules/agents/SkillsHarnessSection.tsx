@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { skillsHarnessSectionSv, skillsHarnessSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
@@ -66,6 +68,8 @@ const CAPABILITIES = [
 const EN_INTRO = `MCP gives agents tools. But tools alone aren't enough — you need workflow logic, runtime management, and reusable behavioral packages. The ecosystem has converged on distinct layers.`
 
 export const SkillsHarnessSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cAPABILITIEST = tArray(lang, CAPABILITIES)
   const c = useT({ title: '7. Skills, Powers, and the AgentCore Harness', intro: EN_INTRO }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
   return (
   <section aria-labelledby="skills-tech">
@@ -83,7 +87,7 @@ export const SkillsHarnessSection: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {CAPABILITIES.map((c) => (
+          {cAPABILITIEST.map((c) => (
             <tr key={c.name} className="border-b border-zinc-800 last:border-0">
               <td className="px-3 py-2 font-medium text-amber-300">{c.name}</td>
               <td className="px-3 py-2 text-zinc-400">{c.layer}</td>

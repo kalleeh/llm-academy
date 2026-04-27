@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { buildVsBuySectionSv, buildVsBuySectionKo } from './tech-translations'
 
 type ApproachId = 'api' | 'open-source' | 'fine-tuned'
@@ -80,6 +82,9 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `Three main deployment approaches, each with different tradeoffs.`
 
 export const BuildVsBuySection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cOMPARISONT = tArray(lang, COMPARISON)
+  const cONSTRAINTST = tArray(lang, CONSTRAINTS)
   const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
@@ -118,7 +123,7 @@ export const BuildVsBuySection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {COMPARISON.map(row => (
+            {cOMPARISONT.map(row => (
               <tr key={row.aspect} className="border-b border-zinc-800">
                 <td className="px-4 py-2 font-medium text-zinc-300">{row.aspect}</td>
                 <td className="px-4 py-2 text-zinc-400">{row.api}</td>
@@ -134,7 +139,7 @@ export const BuildVsBuySection: React.FC = () => {
       <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
         <Icon name="compass" />{c.p4}</h3>
       <div className="mb-6 space-y-4">
-        {CONSTRAINTS.map((c, ci) => (
+        {cONSTRAINTST.map((c, ci) => (
           <div key={ci} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
             <p className="mb-2 text-sm font-medium text-zinc-200">{c.question}</p>
             <div className="flex flex-wrap gap-2">

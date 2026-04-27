@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { modernAlternativesSectionSv, modernAlternativesSectionKo } from './tech-translations'
 
 interface Method {
@@ -75,6 +77,8 @@ const COMPARISON_FIELDS: { key: keyof Pick<Method, 'complexity' | 'cost' | 'qual
 const EN_INTRO = `RLHF with PPO was the breakthrough that turned base models into helpful assistants — but it requires four models in memory simultaneously and is notoriously finicky to train. The field has since developed simpler alternatives that match or exceed PPO's quality while being dramatically easier to implement. Each makes a different trade-off.`
 
 export const ModernAlternativesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const mETHODST = tArray(lang, METHODS)
   const c = useT({ title: '3. Modern Alternatives', intro: EN_INTRO }, { sv: modernAlternativesSectionSv, ko: modernAlternativesSectionKo })
   const [activeTab, setActiveTab] = useState(0)
 
@@ -89,7 +93,7 @@ export const ModernAlternativesSection: React.FC = () => {
 
       {/* Tabs */}
       <div className="mb-4 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-800 p-1" role="tablist">
-        {METHODS.map((m, i) => (
+        {mETHODST.map((m, i) => (
           <button
             key={m.id}
             role="tab"
@@ -147,7 +151,7 @@ export const ModernAlternativesSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {METHODS.map(m => (
+            {mETHODST.map(m => (
               <tr key={m.id} className="border-b border-zinc-800 last:border-0">
                 <td className={`px-4 py-2 font-medium ${m.color}`}>{m.label}</td>
                 {COMPARISON_FIELDS.map(f => (

@@ -1,6 +1,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { scalingLawsSectionSv, scalingLawsSectionKo } from './tech-translations'
 
 const BUDGET_STEPS = [
@@ -26,6 +28,8 @@ const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens
         Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
 
 export const ScalingLawsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const bUDGET_STEPST = tArray(lang, BUDGET_STEPS)
   const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 

@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { dataQualitySectionSv, dataQualitySectionKo } from './tech-translations'
 
 interface DataRow {
@@ -88,6 +90,9 @@ const EN_P2 = `For classical ML, bad data means bad predictions. For LLMs, it&ap
 const EN_INTRO = `Spot the problems in this dataset. Click each issue type below to highlight it in the data.`
 
 export const DataQualitySection: React.FC = () => {
+  const { lang } = useLanguage()
+  const dATASETT = tArray(lang, DATASET)
+  const iSSUEST = tArray(lang, ISSUES)
   const c = useT({ title: '3. Data Quality', intro: EN_INTRO , p2: EN_P2 }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
   const [found, setFound] = useState<Set<string>>(new Set())
   const [activeIssue, setActiveIssue] = useState<string | null>(null)
@@ -127,7 +132,7 @@ export const DataQualitySection: React.FC = () => {
 
       {/* Issue buttons */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {ISSUES.map(issue => (
+        {iSSUEST.map(issue => (
           <button
             key={issue.type}
             onClick={() => handleIssueClick(issue.type)}
@@ -169,7 +174,7 @@ export const DataQualitySection: React.FC = () => {
             </tr>
           </thead>
           <tbody className="font-mono text-xs">
-            {DATASET.map(row => (
+            {dATASETT.map(row => (
               <tr key={row.id} className="border-b border-zinc-800">
                 {columns.map(col => {
                   const cellKey = `${row.id}-${col}`

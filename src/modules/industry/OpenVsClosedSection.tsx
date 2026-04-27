@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { openVsClosedSectionSv, openVsClosedSectionKo } from './tech-translations'
 
 type Tab = 'table' | 'trend'
@@ -37,6 +39,9 @@ const EN_P3 = `Open models now match or exceed closed models on most standard be
 const EN_INTRO = `The gap between open-weight and closed-source models has narrowed dramatically.`
 
 export const OpenVsClosedSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cOMPARISONT = tArray(lang, COMPARISON)
+  const oPEN_MODELST = tArray(lang, OPEN_MODELS)
   const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
   const [tab, setTab] = useState<Tab>('table')
 
@@ -75,7 +80,7 @@ export const OpenVsClosedSection: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {COMPARISON.map(row => (
+              {cOMPARISONT.map(row => (
                 <tr key={row.dimension} className="border-b border-zinc-800 last:border-0 hover:bg-zinc-900/50">
                   <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-100">{row.dimension}</td>
                   <td className="px-4 py-3 text-xs text-zinc-300">{row.open}</td>
@@ -88,7 +93,7 @@ export const OpenVsClosedSection: React.FC = () => {
       ) : (
         <div className="space-y-3">
           <p className="mb-4 text-sm text-zinc-400">{c.p5}</p>
-          {OPEN_MODELS.map(m => (
+          {oPEN_MODELST.map(m => (
             <div key={m.name} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
               <div className="flex items-baseline justify-between">
                 <h3 className="font-mono text-sm font-bold text-zinc-100">{m.name}</h3>

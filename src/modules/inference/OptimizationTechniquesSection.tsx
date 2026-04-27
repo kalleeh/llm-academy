@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { optimizationTechniquesSectionSv, optimizationTechniquesSectionKo } from './tech-translations'
 
 interface Technique {
@@ -63,6 +65,8 @@ const TECHNIQUES: Technique[] = [
 const EN_INTRO = `Raw model inference is slow. These techniques can improve throughput 2-10x without changing the model.`
 
 export const OptimizationTechniquesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tECHNIQUEST = tArray(lang, TECHNIQUES)
   const c = useT({ title: '3. Optimization Techniques', intro: EN_INTRO }, { sv: optimizationTechniquesSectionSv, ko: optimizationTechniquesSectionKo })
   const [activeTech, setActiveTech] = useState(TECHNIQUES[0].id)
   const tech = TECHNIQUES.find(t => t.id === activeTech) ?? TECHNIQUES[0]
@@ -80,7 +84,7 @@ export const OptimizationTechniquesSection: React.FC = () => {
 
       {/* Technique selector */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {TECHNIQUES.map(t => (
+        {tECHNIQUEST.map(t => (
           <button
             key={t.id}
             onClick={handleSelect(t.id)}

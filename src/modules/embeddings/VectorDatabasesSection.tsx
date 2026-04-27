@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { vectorDatabasesSectionSv, vectorDatabasesSectionKo } from './tech-translations'
 
 interface VectorDB {
@@ -73,6 +75,8 @@ const EN_P4 = `Why ANN Search? (Approximate Nearest Neighbor)`
 const EN_P3 = `Why ANN Search? (Approximate Nearest Neighbor)`
 const EN_P2 = `{c.p2}`
 export const VectorDatabasesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const dATABASEST = tArray(lang, DATABASES)
   const c = useT({ title: '3. Vector Databases' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -92,7 +96,7 @@ export const VectorDatabasesSection: React.FC = () => {
 
       {/* Database cards */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2">
-        {DATABASES.map(db => (
+        {dATABASEST.map(db => (
           <button
             key={db.name}
             onClick={toggle(db.name)}

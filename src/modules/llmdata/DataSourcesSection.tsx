@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { dataSourcesSectionSv, dataSourcesSectionKo } from './tech-translations'
 
 interface DataSource {
@@ -39,6 +41,8 @@ const SOURCES: DataSource[] = [
 
 const EN_P2 = `Modern LLMs train on trillions of tokens from diverse sources. Key open datasets include`
 export const DataSourcesSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const sOURCEST = tArray(lang, SOURCES)
   const c = useT({ title: '1. Data Sources' , p2: EN_P2 }, { sv: dataSourcesSectionSv, ko: dataSourcesSectionKo })
   const [selected, setSelected] = useState<number | null>(null)
   const toggle = useCallback((i: number) => setSelected(p => p === i ? null : i), [])
@@ -51,7 +55,7 @@ export const DataSourcesSection: React.FC = () => {
         <strong className="text-zinc-100">DCLM</strong>, and <strong className="text-zinc-100">RedPajama</strong>.
       </p>
       <div className="mb-4 flex h-10 overflow-hidden rounded-lg border border-zinc-700" role="img" aria-label="Data source distribution">
-        {SOURCES.map((s, i) => (
+        {sOURCEST.map((s, i) => (
           <button key={s.name} onClick={() => toggle(i)}
             className={`${s.barColor} relative flex items-center justify-center transition-opacity hover:opacity-80 ${selected !== null && selected !== i ? 'opacity-50' : ''}`}
             style={{ width: `${s.percent}%` }} aria-label={`${s.name}: ${s.percent}%`}>
@@ -60,7 +64,7 @@ export const DataSourcesSection: React.FC = () => {
         ))}
       </div>
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {SOURCES.map((s, i) => (
+        {sOURCEST.map((s, i) => (
           <button key={s.name} onClick={() => toggle(i)}
             className={`rounded-lg border p-3 text-left transition-colors ${selected === i ? 'border-zinc-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900/50 hover:border-zinc-600'}`}>
             <div className="flex items-center gap-2">

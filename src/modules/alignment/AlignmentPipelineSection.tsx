@@ -2,6 +2,9 @@ import { useState, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
+import { alignmentPipelineStages } from './data-translations'
 import { alignmentPipelineSectionSv, alignmentPipelineSectionKo } from './tech-translations'
 
 interface Stage {
@@ -104,6 +107,8 @@ const TERMINAL_STEPS: TerminalStep[] = [
 const EN_INTRO = `The classic alignment pipeline (InstructGPT, 2022) has three stages after pre-training.`
 
 export const AlignmentPipelineSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const stages = tArray(lang, STAGES, alignmentPipelineStages)
   const c = useT({ title: '2. The Alignment Pipeline', intro: EN_INTRO }, { sv: alignmentPipelineSectionSv, ko: alignmentPipelineSectionKo })
   const [activeStage, setActiveStage] = useState<number | null>(null)
 
@@ -118,7 +123,7 @@ export const AlignmentPipelineSection: React.FC = () => {
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Alignment pipeline stages">
-        {STAGES.map((stage, i) => (
+        {stages.map((stage, i) => (
           <div key={stage.id} className="flex items-center gap-2" role="listitem">
             <button
               onClick={() => selectStage(i)}

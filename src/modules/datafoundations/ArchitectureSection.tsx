@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { architectureSectionSv, architectureSectionKo } from './tech-translations'
 
 interface ArchPattern {
@@ -76,6 +78,8 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
 
 export const ArchitectureSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pATTERNST = tArray(lang, PATTERNS)
   const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: architectureSectionSv, ko: architectureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -89,7 +93,7 @@ export const ArchitectureSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        {PATTERNS.map(p => {
+        {pATTERNST.map(p => {
           const isOpen = expanded === p.id
           return (
             <button

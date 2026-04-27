@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { whereItsHeadingSectionSv, whereItsHeadingSectionKo } from './tech-translations'
 
 interface Trend {
@@ -80,6 +82,8 @@ const TRENDS: Trend[] = [
 const EN_INTRO = `Six trends shaping the LLM landscape in 2026 and beyond. Click any card to dive deeper.`
 
 export const WhereItsHeadingSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tRENDST = tArray(lang, TRENDS)
   const c = useT({ title: '4. Where It Is Heading', intro: EN_INTRO }, { sv: whereItsHeadingSectionSv, ko: whereItsHeadingSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -93,7 +97,7 @@ export const WhereItsHeadingSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {TRENDS.map(t => (
+        {tRENDST.map(t => (
           <button
             key={t.id}
             onClick={() => toggle(t.id)}

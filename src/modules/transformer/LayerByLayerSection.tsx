@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { layerByLayerSectionSv, layerByLayerSectionKo } from './tech-translations'
 
 const TOKEN = 'it'
@@ -83,6 +85,8 @@ const EN_P4 = `Watch how the representation of the token`
 const EN_P3 = `Watch how the representation of the token`
 const EN_P2 = `{c.p2}`
 export const LayerByLayerSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const lAYER_DATAT = tArray(lang, LAYER_DATA)
   const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
   const [step, setStep] = useState(0)
 
@@ -110,14 +114,14 @@ export const LayerByLayerSection: React.FC = () => {
 
       {/* Layer progress indicator */}
       <div className="mb-4 flex items-center gap-1">
-        {LAYER_DATA.map((_, i) => (
+        {lAYER_DATAT.map((_, i) => (
           <button
             key={i}
             onClick={() => handleStep(i)}
             className={`h-2 flex-1 rounded-full transition-all ${
               i <= step ? 'bg-amber-500' : 'bg-zinc-700'
             }`}
-            aria-label={`Go to ${LAYER_DATA[i].name}`}
+            aria-label={`Go to ${lAYER_DATAT[i].name}`}
           />
         ))}
       </div>

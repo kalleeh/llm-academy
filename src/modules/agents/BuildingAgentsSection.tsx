@@ -1,5 +1,7 @@
 import { SimulatedTerminal, type TerminalStep } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { buildingAgentsSectionSv, buildingAgentsSectionKo } from './tech-translations'
 
 interface Framework {
@@ -127,6 +129,9 @@ print(run_agent("What's trending in AI today?"))`,
 
 const EN_P2 = `A basic agent is just a loop: send messages → check for tool calls → execute tools → feed results back → repeat. Add frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent state, or multi-agent orchestration.`
 export const BuildingAgentsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const fRAMEWORKST = tArray(lang, FRAMEWORKS)
+  const tERMINAL_STEPST = tArray(lang, TERMINAL_STEPS)
   const c = useT({ title: '5. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">
@@ -151,7 +156,7 @@ export const BuildingAgentsSection: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {FRAMEWORKS.map(fw => (
+          {fRAMEWORKST.map(fw => (
             <tr key={fw.name} className="border-b border-zinc-800 last:border-0">
               <td className="px-4 py-2.5">
                 <span className="font-medium text-zinc-200">{fw.name}</span>

@@ -4,6 +4,8 @@ import { CodeBlock } from '../../components/CodeBlock'
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { preparingDataSectionSv, preparingDataSectionKo } from './tech-translations'
 
 type Format = 'instruction' | 'chat' | 'preference'
@@ -68,6 +70,8 @@ const CHECKLIST = [
 const EN_INTRO = `Data quality determines fine-tuning success. Pick a format, structure your examples, and validate before training.`
 
 export const PreparingDataSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cHECKLISTT = tArray(lang, CHECKLIST)
   const c = useT({ title: '2. Preparing Your Data', intro: EN_INTRO }, { sv: preparingDataSectionSv, ko: preparingDataSectionKo })
   const [activeFormat, setActiveFormat] = useState<Format>('instruction')
   const [checked, setChecked] = useState<Set<number>>(new Set())
@@ -122,7 +126,7 @@ export const PreparingDataSection: React.FC = () => {
         Quality checklist
       </h3>
       <div className="grid gap-2 sm:grid-cols-2">
-        {CHECKLIST.map((item, i) => (
+        {cHECKLISTT.map((item, i) => (
           <button
             key={i}
             onClick={() => toggleCheck(i)}

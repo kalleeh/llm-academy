@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { productionGovernanceSectionSv, productionGovernanceSectionKo } from './tech-translations'
 
 const AUTONOMY_TIERS = [
@@ -36,6 +38,9 @@ const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselv
         saying the wrong thing; they must contend with systems doing the wrong thing."`
 
 export const ProductionGovernanceSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const aUTONOMY_TIERST = tArray(lang, AUTONOMY_TIERS)
+  const gOVERNANCE_CONTROLST = tArray(lang, GOVERNANCE_CONTROLS)
   const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
@@ -64,7 +69,7 @@ export const ProductionGovernanceSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {AUTONOMY_TIERS.map((t) => (
+            {aUTONOMY_TIERST.map((t) => (
               <tr key={t.tier} className="border-b border-zinc-800/50 last:border-0">
                 <td className={`px-3 py-2 font-medium ${t.color} rounded`}>{t.tier}</td>
                 <td className="px-3 py-2 text-zinc-300">{t.loop}</td>
@@ -85,7 +90,7 @@ export const ProductionGovernanceSection: React.FC = () => {
         </button>
         {showControls && (
           <div className="space-y-2">
-            {GOVERNANCE_CONTROLS.map((g) => (
+            {gOVERNANCE_CONTROLST.map((g) => (
               <div key={g.control} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
                 <p className="text-sm font-medium text-zinc-100">{g.control}</p>
                 <p className="mt-1 text-sm text-zinc-300">{g.what}</p>

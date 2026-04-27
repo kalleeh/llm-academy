@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { a2ASectionSv, a2ASectionKo } from './tech-translations'
 
 const A2A_AGENT_CARD = `{
@@ -41,6 +43,8 @@ const EN_P4 = `Example: cross-team agent collaboration`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pROTOCOLST = tArray(lang, PROTOCOLS)
   const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])
@@ -66,7 +70,7 @@ export const A2ASection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {PROTOCOLS.map((p) => (
+            {pROTOCOLST.map((p) => (
               <tr key={p.name} className="border-b border-zinc-800 last:border-0">
                 <td className="px-3 py-2 font-mono font-medium text-amber-300">{p.name}</td>
                 <td className="px-3 py-2 text-zinc-300">{p.direction}</td>

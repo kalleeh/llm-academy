@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { toolboxSectionSv, toolboxSectionKo } from './tech-translations'
 
 interface ToolCategory {
@@ -39,6 +41,8 @@ const EN_P2 = `The rest of this course dives deep into the LLM track — how the
 const EN_INTRO = `Each level of the AI landscape has its own ecosystem of tools and frameworks.`
 
 export const ToolboxSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tOOLBOXT = tArray(lang, TOOLBOX)
   const c = useT({ title: '5. The AI/ML/LLM Toolbox', intro: EN_INTRO , p2: EN_P2 }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
   return (
   <section aria-labelledby="toolbox">
@@ -46,7 +50,7 @@ export const ToolboxSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {TOOLBOX.map(cat => (
+      {tOOLBOXT.map(cat => (
         <div key={cat.level} className={`rounded-lg border p-4 ${cat.color}`}>
           <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-200">{cat.level}</h3>
           <div className="flex flex-wrap gap-1.5">

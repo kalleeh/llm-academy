@@ -5,6 +5,8 @@ import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { pipelineSectionSv, pipelineSectionKo } from './tech-translations'
 
 interface PipelineStage {
@@ -122,6 +124,8 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.`
 
 export const PipelineSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const sTAGEST = tArray(lang, STAGES)
   const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
@@ -136,7 +140,7 @@ export const PipelineSection: React.FC = () => {
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
-        {STAGES.map((stage, i) => (
+        {sTAGEST.map((stage, i) => (
           <div key={stage.id} className="flex items-center gap-2">
             <button
               onClick={() => toggleStage(stage.id)}

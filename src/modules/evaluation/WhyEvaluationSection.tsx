@@ -3,6 +3,8 @@ import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { whyEvaluationSectionSv, whyEvaluationSectionKo } from './tech-translations'
 
 interface ModelExample {
@@ -72,6 +74,8 @@ const EN_P4 = `Model A has lower perplexity because it produces &ldquo;safe&rdqu
 const EN_P5 = `{c.p5}`
 const EN_P6 = `{c.p6}`
 export const WhyEvaluationSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const mODEL_EXAMPLEST = tArray(lang, MODEL_EXAMPLES)
   const c = useT({ title: '1. Why Evaluation Matters' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
   const [selectedModel, setSelectedModel] = useState(0)
   const [activeType, setActiveType] = useState(0)
@@ -93,7 +97,7 @@ export const WhyEvaluationSection: React.FC = () => {
       </p>
 
       <div className="mb-4 flex gap-2">
-        {MODEL_EXAMPLES.map((m, i) => (
+        {mODEL_EXAMPLEST.map((m, i) => (
           <button
             key={i}
             onClick={() => selectModel(i)}

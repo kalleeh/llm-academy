@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { structuredOutputSectionSv, structuredOutputSectionKo } from './tech-translations'
 
 interface StructureTechnique {
@@ -143,6 +145,9 @@ const PROMPT_LEVELS = [
 const EN_INTRO = `Click each level to see how adding structure constraints improves output consistency.`
 
 export const StructuredOutputSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tECHNIQUEST = tArray(lang, TECHNIQUES)
+  const pROMPT_LEVELST = tArray(lang, PROMPT_LEVELS)
   const c = useT({ title: '4. Structured Output', intro: EN_INTRO }, { sv: structuredOutputSectionSv, ko: structuredOutputSectionKo })
   const [activeTechnique, setActiveTechnique] = useState(TECHNIQUES[0].id)
   const [activeLevel, setActiveLevel] = useState(0)
@@ -175,7 +180,7 @@ export const StructuredOutputSection: React.FC = () => {
         <p className="mb-4 text-xs text-zinc-400">{c.intro}</p>
 
         <div className="mb-4 flex flex-wrap gap-1">
-          {PROMPT_LEVELS.map((l, i) => (
+          {pROMPT_LEVELST.map((l, i) => (
             <button
               key={l.label}
               onClick={() => handleLevelClick(i)}
@@ -221,7 +226,7 @@ export const StructuredOutputSection: React.FC = () => {
 
       {/* Technique tabs */}
       <div className="mb-4 flex flex-wrap gap-1" role="tablist" aria-label="Structured output techniques">
-        {TECHNIQUES.map(t => (
+        {tECHNIQUEST.map(t => (
           <button
             key={t.id}
             role="tab"

@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { designPatternsSectionSv, designPatternsSectionKo } from './tech-translations'
 
 interface Pattern {
@@ -64,6 +66,8 @@ const PATTERNS: Pattern[] = [
 const EN_INTRO = `Not all agents work the same way. These are the core architectural patterns — each suited to different types of tasks.`
 
 export const DesignPatternsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pATTERNST = tArray(lang, PATTERNS)
   const c = useT({ title: '4. Agent Design Patterns', intro: EN_INTRO }, { sv: designPatternsSectionSv, ko: designPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(0)
 
@@ -81,7 +85,7 @@ export const DesignPatternsSection: React.FC = () => {
       <div className="grid gap-4 lg:grid-cols-[240px_1fr]">
         {/* Pattern selector */}
         <div className="flex flex-col gap-1.5" role="tablist" aria-label="Agent design patterns">
-          {PATTERNS.map((p, i) => (
+          {pATTERNST.map((p, i) => (
             <button
               key={p.name}
               role="tab"

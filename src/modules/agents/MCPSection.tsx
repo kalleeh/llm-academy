@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { mCPSectionSv, mCPSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
@@ -63,6 +65,8 @@ const COMPARISON = [
 
 const EN_P2 = `Instead of writing custom integrations for every model provider, you build one MCP server. Any MCP-compatible client — Claude, ChatGPT, Cursor, VS Code, your own app — can discover and use your tools automatically.`
 export const MCPSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const cOMPARISONT = tArray(lang, COMPARISON)
   const c = useT({ title: '3. MCP (Model Context Protocol)' , p2: EN_P2 }, { sv: mCPSectionSv, ko: mCPSectionKo })
   return (
   <section aria-labelledby="mcp">
@@ -115,7 +119,7 @@ export const MCPSection: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {COMPARISON.map(row => (
+          {cOMPARISONT.map(row => (
             <tr key={row.aspect} className="border-b border-zinc-800 last:border-0">
               <td className="px-4 py-2.5 font-medium text-zinc-200">{row.aspect}</td>
               <td className="px-4 py-2.5 text-zinc-400">{row.functionCalling}</td>

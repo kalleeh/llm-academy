@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { embeddingModelsSectionSv, embeddingModelsSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 
@@ -43,6 +45,8 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const mODELST = tArray(lang, MODELS)
   const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
@@ -92,7 +96,7 @@ export const EmbeddingModelsSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {MODELS.map((m, i) => (
+            {mODELST.map((m, i) => (
               <tr key={m.name} className={`border-b border-zinc-800 ${i === 0 ? 'bg-violet-500/5' : ''}`}>
                 <td className="px-4 py-2 font-mono text-xs text-zinc-200">{m.name}</td>
                 <td className="px-4 py-2 text-xs text-zinc-400">{m.provider}</td>

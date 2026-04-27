@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { alignmentProblemSectionSv, alignmentProblemSectionKo } from './tech-translations'
 
 interface PromptExample {
@@ -34,6 +36,8 @@ const EXAMPLES: PromptExample[] = [
 
 const EN_P2 = `The base model isn&apos;t &ldquo;evil&rdquo; — it simply has no concept of helpfulness or safety. It learned to predict text, and harmful text exists in its training data. Alignment is the process of teaching the model`
 export const AlignmentProblemSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const eXAMPLEST = tArray(lang, EXAMPLES)
   const c = useT({ title: '1. The Alignment Problem' , p2: EN_P2 }, { sv: alignmentProblemSectionSv, ko: alignmentProblemSectionKo })
   const [selected, setSelected] = useState(0)
   const [showAligned, setShowAligned] = useState(false)
@@ -63,7 +67,7 @@ export const AlignmentProblemSection: React.FC = () => {
       </p>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        {EXAMPLES.map((ex, i) => (
+        {eXAMPLEST.map((ex, i) => (
           <button
             key={i}
             onClick={() => selectPrompt(i)}

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { benchmarksSectionSv, benchmarksSectionKo } from './tech-translations'
 
 interface Benchmark {
@@ -25,6 +27,8 @@ const EN_P2 = `Top models now score 85-95% on many benchmarks, making it hard to
 const EN_INTRO = `The industry uses standardized benchmarks to compare models. No single benchmark tells the whole story.`
 
 export const BenchmarksSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const bENCHMARKST = tArray(lang, BENCHMARKS)
   const c = useT({ title: '2. Key Benchmarks (2025–2026)', intro: EN_INTRO , p2: EN_P2 }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
   const [selected, setSelected] = useState(0)
   const bench = BENCHMARKS[selected]
@@ -35,7 +39,7 @@ export const BenchmarksSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        {BENCHMARKS.map((b, i) => (
+        {bENCHMARKST.map((b, i) => (
           <button
             key={b.name}
             onClick={() => setSelected(i)}

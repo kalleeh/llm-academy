@@ -4,6 +4,8 @@ import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { cleaningPipelineSectionSv, cleaningPipelineSectionKo } from './tech-translations'
 
 interface PipelineStep extends TerminalStep {
@@ -25,6 +27,8 @@ const MAX_TB = 100
 const EN_INTRO = `Raw web data is mostly garbage. A typical pipeline discards 85%+ through extraction, filtering, and deduplication.`
 
 export const CleaningPipelineSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const sTEPST = tArray(lang, STEPS)
   const c = useT({ title: '2. Cleaning Pipeline', intro: EN_INTRO }, { sv: cleaningPipelineSectionSv, ko: cleaningPipelineSectionKo })
   const [executedStep, setExecutedStep] = useState(-1)
   const onStep = useCallback((i: number) => setExecutedStep(i), [])
@@ -51,7 +55,7 @@ export const CleaningPipelineSection: React.FC = () => {
           </div>
         </div>
         <div className="mt-2 flex justify-between text-xs text-zinc-500">
-          {STEPS.map((s, i) => (
+          {sTEPST.map((s, i) => (
             <span key={s.sizeLabel} className={i <= executedStep ? 'text-emerald-400' : ''}>{s.sizeLabel}</span>
           ))}
         </div>

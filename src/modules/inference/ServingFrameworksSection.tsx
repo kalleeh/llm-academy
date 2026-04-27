@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { servingFrameworksSectionSv, servingFrameworksSectionKo } from './tech-translations'
 
 interface Framework {
@@ -74,6 +76,8 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
 
 export const ServingFrameworksSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const fRAMEWORKST = tArray(lang, FRAMEWORKS)
   const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -88,7 +92,7 @@ export const ServingFrameworksSection: React.FC = () => {
 
       {/* Cards */}
       <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {FRAMEWORKS.map(fw => (
+        {fRAMEWORKST.map(fw => (
           <button
             key={fw.name}
             onClick={() => toggle(fw.name)}
@@ -121,7 +125,7 @@ export const ServingFrameworksSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {FRAMEWORKS.map(fw => (
+            {fRAMEWORKST.map(fw => (
               <tr key={fw.name} className="border-b border-zinc-800 last:border-0 hover:bg-zinc-900/50">
                 <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-100">{fw.name}</td>
                 <td className="px-4 py-3 text-xs text-zinc-300">{fw.throughput}</td>

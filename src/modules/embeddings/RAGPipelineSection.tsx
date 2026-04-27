@@ -3,6 +3,8 @@ import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { rAGPipelineSectionSv, rAGPipelineSectionKo } from './tech-translations'
 
 const RAG_STEPS: TerminalStep[] = [
@@ -108,6 +110,8 @@ const EN_P5 = `{c.p5}`
 const EN_P6 = `{c.p6}`
 const EN_P7 = `{c.p7}`
 export const RAGPipelineSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const rAG_STEPST = tArray(lang, RAG_STEPS)
   const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">

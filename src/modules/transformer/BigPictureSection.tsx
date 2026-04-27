@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { bigPictureSectionSv, bigPictureSectionKo } from './tech-translations'
 
 interface LayerDef {
@@ -28,6 +30,8 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.`
 
 export const BigPictureSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const lAYERST = tArray(lang, LAYERS)
   const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -41,7 +45,7 @@ export const BigPictureSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="flex flex-col items-center gap-1">
-        {LAYERS.map((layer, i) => (
+        {lAYERST.map((layer, i) => (
           <div key={layer.id} className="flex w-full max-w-md flex-col items-center">
             {/* Arrow between blocks */}
             {i > 0 && <div className="h-4 w-px bg-zinc-600" />}

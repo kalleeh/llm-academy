@@ -1,4 +1,5 @@
 import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { useT } from '../../useT'
 import { trainingSection2Sv, trainingSection2Ko } from './tech-translations'
 import { useState, useCallback, useEffect, useRef } from 'react'
@@ -325,6 +326,7 @@ const PROGRESS_MAP: Record<number, number> = { [-1]: 0, 0: 0.02, 1: 0.15, 2: 0.5
 const EN_P3 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 const EN_P2 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 export const TrainingSection2: React.FC = () => {
+  const trainStepsT = tArray(lang, trainSteps)
   const c = useT({ title: '2. The Training Loop'   , p2: EN_P2 , p3: EN_P3 }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 

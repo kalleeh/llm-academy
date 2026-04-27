@@ -3,6 +3,8 @@ import { Icon } from '../../components/Icon'
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { lLMDataSectionSv, lLMDataSectionKo } from './tech-translations'
 
 const COMPARISON: { aspect: string; ml: string; llm: string }[] = [
@@ -104,6 +106,8 @@ const EN_P4 = `You now understand where data comes from, how it flows, and what 
 const EN_INTRO = `Now that you understand data broadly, here's what LLMs specifically need.`
 
 export const LLMDataSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const dATASET_TREET = tArray(lang, DATASET_TREE)
   const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
   const [showComparison, setShowComparison] = useState(true)
 

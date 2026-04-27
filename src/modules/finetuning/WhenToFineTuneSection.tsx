@@ -3,6 +3,8 @@ import { Icon } from '../../components/Icon'
 
 import type { IconName } from '../../components/Icon'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { whenToFineTuneSectionSv, whenToFineTuneSectionKo } from './tech-translations'
 
 type NodeId = 'start' | 'few-shot' | 'rag' | 'finetune' | 'done-prompt' | 'done-fewshot' | 'done-rag'
@@ -37,6 +39,9 @@ const WIN_CASES = [
 const EN_INTRO = `Fine-tuning is powerful but expensive. Walk through this decision tree to see if you actually need it.`
 
 export const WhenToFineTuneSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const tREET = tArray(lang, TREE)
+  const wIN_CASEST = tArray(lang, WIN_CASES)
   const c = useT({ title: '1. When to Fine-Tune', intro: EN_INTRO }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
   const [path, setPath] = useState<NodeId[]>(['start'])
 
@@ -103,7 +108,7 @@ export const WhenToFineTuneSection: React.FC = () => {
         Where fine-tuning wins
       </h3>
       <div className="grid gap-3 sm:grid-cols-2">
-        {WIN_CASES.map(c => (
+        {wIN_CASEST.map(c => (
           <div key={c.title} className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
             <p className="mb-1 text-sm font-semibold text-amber-400">{c.title}</p>
             <p className="text-xs leading-relaxed text-zinc-400">{c.desc}</p>

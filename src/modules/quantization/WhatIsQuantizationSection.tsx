@@ -1,5 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { whatIsQuantizationSectionSv, whatIsQuantizationSectionKo } from './tech-translations'
 
 const PRECISIONS = [
@@ -13,6 +15,8 @@ const EN_P4 = `The key insight: going from FP32 to INT4 cuts memory by`
 const EN_P3 = `The key insight: going from FP32 to INT4 cuts memory by`
 const EN_P2 = `{c.p2}`
 export const WhatIsQuantizationSection: React.FC = () => {
+  const { lang } = useLanguage()
+  const pRECISIONST = tArray(lang, PRECISIONS)
   const c = useT({ title: '1. What is Quantization?' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
   const [level, setLevel] = useState(0)
   const precision = PRECISIONS[level]
@@ -68,7 +72,7 @@ export const WhatIsQuantizationSection: React.FC = () => {
           aria-valuetext={precision.label}
         />
         <div className="mt-1 flex justify-between text-xs text-zinc-500">
-          {PRECISIONS.map((p) => (
+          {pRECISIONST.map((p) => (
             <span key={p.label}>{p.label}</span>
           ))}
         </div>
@@ -90,7 +94,7 @@ export const WhatIsQuantizationSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {PRECISIONS.map((p) => (
+            {pRECISIONST.map((p) => (
               <tr
                 key={p.label}
                 className={`border-b border-zinc-800 transition-colors ${

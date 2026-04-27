@@ -1,4 +1,6 @@
 import { useT } from '../../useT'
+import { useLanguage } from '../../LanguageContext'
+import { tArray } from '../../tArray'
 import { trainingSection4Sv, trainingSection4Ko } from './tech-translations'
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
@@ -172,6 +174,8 @@ model.print_trainable_parameters()`,
 
 const EN_P2 = `Training from scratch is just one option — and the most expensive. Most people start from an existing model and adapt it. Click each approach to compare, then run the terminal command to see the filesystem change.`
 export const TrainingSection4: React.FC = () => {
+  const { lang } = useLanguage()
+  const vARIANTST = tArray(lang, VARIANTS)
   const c = useT({ title: '4. Training Variants' , p2: EN_P2 }, { sv: trainingSection4Sv, ko: trainingSection4Ko })
   const [selected, setSelected] = useState('scratch')
   const variant = VARIANTS.find(v => v.id === selected)!
@@ -188,7 +192,7 @@ export const TrainingSection4: React.FC = () => {
       </p>
 
       <div className="flex flex-wrap gap-2" role="tablist" aria-label="Training variant selection">
-        {VARIANTS.map(v => (
+        {vARIANTST.map(v => (
           <button
             key={v.id}
             role="tab"
