@@ -184,7 +184,6 @@ function App() {
         mainRef.current?.scrollTo({ top: 0 })
         requestAnimationFrame(() => setFadeIn(true))
       }, 150)
-      }, 150)
     },
     [activeModule, showReview],
   )
