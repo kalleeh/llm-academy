@@ -369,13 +369,13 @@ function App() {
         {/* Top progress indicator */}
         <div className="sticky top-0 z-10 h-0.5 bg-zinc-900">
           <div
-            className="h-full bg-emerald-500/50 transition-all duration-300"
+            className="h-full bg-emerald-500/50 transition-all duration-700 ease-out"
             style={{ width: showReview ? '100%' : `${((activeIndex + 1) / visibleModules.length) * 100}%` }}
           />
         </div>
 
         <div
-          className={`p-8 transition-opacity duration-150 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
+          className={`p-8 transition-opacity duration-200 ease-out ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
         >
           {showReview ? (
             <SpacedReview
