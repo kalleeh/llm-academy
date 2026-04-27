@@ -4,12 +4,14 @@ import { AttentionHeatmap } from './AttentionHeatmap'
 import { useT } from '../../useT'
 import { multiHeadSectionSv, multiHeadSectionKo } from './tech-translations'
 
+const EN_P7 = `After all heads compute their patterns, the results are`
+const EN_P6 = `One attention pattern isn't enough. The model runs`
 const EN_P5 = `After all heads compute their patterns, the results are`
 const EN_P4 = `One attention pattern isn't enough. The model runs`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 export const MultiHeadSection: React.FC = () => {
-  const c = useT({ title: '3 · Multi-Head Attention' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: multiHeadSectionSv, ko: multiHeadSectionKo })
+  const c = useT({ title: '3 · Multi-Head Attention' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: multiHeadSectionSv, ko: multiHeadSectionKo })
   const [activeHead, setActiveHead] = useState(0)
 
   const selectHead = useCallback((i: number) => {
@@ -19,8 +21,7 @@ export const MultiHeadSection: React.FC = () => {
   return (
     <section aria-labelledby="multihead-heading">
       <h2 id="multihead-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 text-sm text-zinc-400">
-        One attention pattern isn't enough. The model runs <strong>multiple attention heads in
+      <p className="mb-4 text-sm text-zinc-400">{c.p6}<strong>multiple attention heads in
         parallel</strong>, each learning to focus on different relationships. Toggle between heads
         to see how each one captures a different linguistic pattern.
       </p>
@@ -74,8 +75,7 @@ export const MultiHeadSection: React.FC = () => {
         ))}
       </div>
 
-      <p className="mt-4 text-xs text-zinc-500">
-        After all heads compute their patterns, the results are <strong className="text-zinc-300">
+      <p className="mt-4 text-xs text-zinc-500">{c.p7}<strong className="text-zinc-300">
         concatenated and projected</strong> back to the model dimension. This lets the model
         simultaneously track grammar, proximity, meaning, and references — far richer than any
         single attention pattern could capture.

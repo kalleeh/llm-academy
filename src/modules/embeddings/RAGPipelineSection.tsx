@@ -92,6 +92,10 @@ const PIPELINE_STAGES: { label: string; icon: IconName; desc: string }[] = [
   { label: 'Generate', icon: 'robot', desc: 'LLM response' },
 ]
 
+const EN_P16 = `Merges both ranked lists into a single result set`
+const EN_P15 = `Catches exact terms, acronyms, and proper nouns that vectors miss`
+const EN_P14 = `Finds semantically similar content even with different wording`
+const EN_P13 = `Hybrid Search: Vector + Keyword`
 const EN_P12 = `Merges both ranked lists into a single result set`
 const EN_P11 = `Catches exact terms, acronyms, and proper nouns that vectors miss`
 const EN_P10 = `Finds semantically similar content even with different wording`
@@ -104,7 +108,7 @@ const EN_P5 = `{c.p5}`
 const EN_P6 = `{c.p6}`
 const EN_P7 = `{c.p7}`
 export const RAGPipelineSection: React.FC = () => {
-  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
+  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">
     <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -140,9 +144,7 @@ export const RAGPipelineSection: React.FC = () => {
 
     {/* Hybrid search explanation */}
     <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">
-        Hybrid Search: Vector + Keyword
-      </h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.p13}</h3>
       <p className="mb-4 text-sm leading-relaxed text-zinc-300">
         {c.p4}
       </p>
@@ -150,21 +152,15 @@ export const RAGPipelineSection: React.FC = () => {
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
         <div className="rounded-md bg-zinc-800 p-3">
           <p className="mb-1 text-xs font-bold text-blue-400">Vector Search (70%)</p>
-          <p className="text-xs text-zinc-300">
-            Finds semantically similar content even with different wording
-          </p>
+          <p className="text-xs text-zinc-300">{c.p14}</p>
         </div>
         <div className="rounded-md bg-zinc-800 p-3">
           <p className="mb-1 text-xs font-bold text-amber-400">BM25 Keyword (30%)</p>
-          <p className="text-xs text-zinc-300">
-            Catches exact terms, acronyms, and proper nouns that vectors miss
-          </p>
+          <p className="text-xs text-zinc-300">{c.p15}</p>
         </div>
         <div className="rounded-md bg-zinc-800 p-3">
           <p className="mb-1 text-xs font-bold text-green-400">Reciprocal Rank Fusion</p>
-          <p className="text-xs text-zinc-300">
-            Merges both ranked lists into a single result set
-          </p>
+          <p className="text-xs text-zinc-300">{c.p16}</p>
         </div>
       </div>
 

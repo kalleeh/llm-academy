@@ -30,13 +30,14 @@ const OPEN_MODELS = [
   { name: 'Gemma 3 27B', org: 'Google', params: '27B', note: 'Best-in-class at size, open weights' },
 ]
 
+const EN_P5 = `Open models that compete with frontier closed models (as of mid-2026):`
 const EN_P4 = `Open models that compete with frontier closed models (as of mid-2026):`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `Open models now match or exceed closed models on most standard benchmarks. The remaining gap is in agentic capabilities, long-context reliability, and safety tooling — and it&apos;s shrinking fast.`
 const EN_INTRO = `The gap between open-weight and closed-source models has narrowed dramatically.`
 
 export const OpenVsClosedSection: React.FC = () => {
-  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
+  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
   const [tab, setTab] = useState<Tab>('table')
 
   const switchTab = useCallback((t: Tab) => setTab(t), [])
@@ -86,9 +87,7 @@ export const OpenVsClosedSection: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="mb-4 text-sm text-zinc-400">
-            Open models that compete with frontier closed models (as of mid-2026):
-          </p>
+          <p className="mb-4 text-sm text-zinc-400">{c.p5}</p>
           {OPEN_MODELS.map(m => (
             <div key={m.name} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
               <div className="flex items-baseline justify-between">

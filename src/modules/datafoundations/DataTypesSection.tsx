@@ -111,12 +111,13 @@ const CATEGORIES: DataCategory[] = [
   },
 ]
 
+const EN_P4 = `LLMs work with unstructured text. This changes everything.`
 const EN_P3 = `LLMs work with unstructured text. This changes everything.`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `All data falls into three categories. Click any example to see what it actually looks like.`
 
 export const DataTypesSection: React.FC = () => {
-  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
+  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((key: string) => {
@@ -197,9 +198,7 @@ export const DataTypesSection: React.FC = () => {
         <p className="text-sm font-medium text-amber-300"><Icon name="lightbulb" /> Key Insight</p>
         <p className="mt-1 text-sm leading-relaxed text-zinc-300">
           ML traditionally needs structured data — clean rows and columns with labeled features.{' '}
-          <span className="text-amber-200">
-            LLMs work with unstructured text. This changes everything.
-          </span>{' '}
+          <span className="text-amber-200">{c.p4}</span>{' '}
           Instead of engineering features from structured tables, you can feed raw documents,
           conversations, and code directly into a model.
         </p>

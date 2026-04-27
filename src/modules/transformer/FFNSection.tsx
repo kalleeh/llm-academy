@@ -100,13 +100,15 @@ function MoEView() {
   )
 }
 
+const EN_P5 = `Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.`
+const EN_P4 = `After attention gathers context, each token passes through a`
 const EN_P3 = `Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.`
 const EN_P2 = `After attention gathers context, each token passes through a`
 const EN_INTRO = `Every token activates all parameters. Simple but expensive at scale — a 70B model
             uses all 70B parameters for every single token.`
 
 export const FFNSection: React.FC = () => {
-  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  , p2: EN_P2 , p3: EN_P3 }, { sv: fFNSectionSv, ko: fFNSectionKo })
+  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: fFNSectionSv, ko: fFNSectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggleMode = useCallback((m: Mode) => {
@@ -116,8 +118,7 @@ export const FFNSection: React.FC = () => {
   return (
     <section aria-labelledby="ffn-heading">
       <h2 id="ffn-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 text-sm text-zinc-400">
-        After attention gathers context, each token passes through a <strong>feed-forward
+      <p className="mb-4 text-sm text-zinc-400">{c.p4}<strong>feed-forward
         network (FFN)</strong>. This is where the model stores factual knowledge — it's the
         &quot;memory&quot; of the transformer. In <strong>Mixture of Experts (MoE)</strong> models,
         the single FFN is replaced by multiple specialized expert networks, with a router choosing
@@ -154,9 +155,7 @@ export const FFNSection: React.FC = () => {
         </div>
         <div className={`rounded-lg border p-3 ${mode === 'moe' ? 'border-emerald-700 bg-emerald-950/50' : 'border-zinc-700 bg-zinc-900'}`}>
           <h4 className="text-xs font-semibold text-emerald-300">Mixture of Experts</h4>
-          <p className="mt-1 text-xs text-zinc-400">
-            Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.
-          </p>
+          <p className="mt-1 text-xs text-zinc-400">{c.p5}</p>
         </div>
       </div>
     </section>

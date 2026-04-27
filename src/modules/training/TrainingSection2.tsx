@@ -320,9 +320,10 @@ const filesystemByStep: Record<number, FileNode[]> = {
 // Map step index to loss curve progress (0-1)
 const PROGRESS_MAP: Record<number, number> = { [-1]: 0, 0: 0.02, 1: 0.15, 2: 0.5, 3: 1 }
 
+const EN_P3 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 const EN_P2 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 export const TrainingSection2: React.FC = () => {
-  const c = useT({ title: '2. The Training Loop'   , p2: EN_P2 }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
+  const c = useT({ title: '2. The Training Loop'   , p2: EN_P2 , p3: EN_P3 }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {
@@ -342,8 +343,7 @@ export const TrainingSection2: React.FC = () => {
   return (
     <section className="space-y-6" aria-labelledby="section-2-heading">
       <h3 id="section-2-heading" className="font-mono text-xl font-bold text-zinc-100">{c.title}</h3>
-      <p className="text-zinc-400 leading-relaxed">
-        Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run — <code className="text-amber-300">--depth</code> is
+      <p className="text-zinc-400 leading-relaxed">{c.p3}<code className="text-amber-300">--depth</code> is
         the only dial you set.
       </p>
 

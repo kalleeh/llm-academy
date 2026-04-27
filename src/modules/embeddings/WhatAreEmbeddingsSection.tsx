@@ -58,12 +58,13 @@ const CLUSTER_COLORS: Record<string, { dot: string; text: string; label: string 
   vehicles: { dot: 'bg-blue-400', text: 'text-blue-400', label: 'Vehicles' },
 }
 
+const EN_P6 = `Type a sentence to compare (or pick from the list below)`
 const EN_P5 = `Type a sentence to compare (or pick from the list below)`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `Words with similar meanings cluster together in embedding space. This is a 2D projection of high-dimensional vectors.`
 const EN_P4 = `Embeddings capture meaning as numbers. &quot;Cat&quot; and &quot;dog&quot; are close because they share semantic properties (animals, pets). &quot;Red&quot; and &quot;blue&quot; cluster together because they&apos;re both colors. This geometric structure enables similarity search, clustering, and retrieval.`
 export const WhatAreEmbeddingsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are Embeddings' , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
+  const c = useT({ title: '1. What Are Embeddings' , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
   const [selectedSentence, setSelectedSentence] = useState(SENTENCES[0])
   const [inputText, setInputText] = useState('')
 
@@ -142,9 +143,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="compare-input" className="mb-1 block text-xs text-zinc-500">
-            Type a sentence to compare (or pick from the list below)
-          </label>
+          <label htmlFor="compare-input" className="mb-1 block text-xs text-zinc-500">{c.p6}</label>
           <input
             id="compare-input"
             type="text"

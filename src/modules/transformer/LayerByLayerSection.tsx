@@ -79,10 +79,11 @@ function BarChart({ features }: { features: LayerInfo['features'] }) {
   )
 }
 
+const EN_P4 = `Watch how the representation of the token`
 const EN_P3 = `Watch how the representation of the token`
 const EN_P2 = `{c.p2}`
 export const LayerByLayerSection: React.FC = () => {
-  const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 , p3: EN_P3 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
+  const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
   const [step, setStep] = useState(0)
 
   const handleStep = useCallback((s: number) => {
@@ -102,8 +103,7 @@ export const LayerByLayerSection: React.FC = () => {
   return (
     <section aria-labelledby="layers-heading">
       <h2 id="layers-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 text-sm text-zinc-400">
-        Watch how the representation of the token <strong className="text-amber-300">
+      <p className="mb-4 text-sm text-zinc-400">{c.p4}<strong className="text-amber-300">
         &quot;{TOKEN}&quot;</strong> evolves as it passes through the transformer's layers.
         Early layers capture surface features; deeper layers build rich semantic understanding.
       </p>

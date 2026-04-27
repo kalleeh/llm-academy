@@ -74,12 +74,13 @@ const APPROACH_META: Record<ApproachId, { label: string; color: string; examples
   'fine-tuned': { label: 'Fine-Tuned Model', color: 'text-amber-400', examples: 'Fine-tuned Llama, domain-specific models' },
 }
 
+const EN_P4 = `Decision Framework — Answer to Get a Recommendation`
 const EN_P3 = `Decision Framework — Answer to Get a Recommendation`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `Three main deployment approaches, each with different tradeoffs.`
 
 export const BuildVsBuySection: React.FC = () => {
-  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
+  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
   const selectOption = useCallback((constraintIdx: number, optionIdx: number) => {
@@ -131,8 +132,7 @@ export const BuildVsBuySection: React.FC = () => {
 
       {/* Decision framework */}
       <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
-        <Icon name="compass" /> Decision Framework — Answer to Get a Recommendation
-      </h3>
+        <Icon name="compass" />{c.p4}</h3>
       <div className="mb-6 space-y-4">
         {CONSTRAINTS.map((c, ci) => (
           <div key={ci} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">

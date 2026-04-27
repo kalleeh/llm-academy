@@ -265,6 +265,9 @@ trainer.train()
 # 5. Save adapter
 model.save_pretrained("./output/lora-adapter")`
 
+const EN_P19 = `LoRA and QLoRA modify the model's weight matrices — they change`
+const EN_P18 = `In the training run above, notice step 3:`
+const EN_P17 = `The PEFT family: LoRA, QLoRA, and Prefix Tuning`
 const EN_P16 = `LoRA and QLoRA modify the model's weight matrices — they change`
 const EN_P15 = `In the training run above, notice step 3:`
 const EN_P14 = `The PEFT family: LoRA, QLoRA, and Prefix Tuning`
@@ -283,7 +286,7 @@ const EN_P12 = `In practice, prefix tuning is simpler but generally less effecti
 const EN_INTRO = `A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.`
 
 export const FineTuningRunSection: React.FC = () => {
-  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
+  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 , p17: EN_P17 , p18: EN_P18 , p19: EN_P19 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
@@ -312,9 +315,7 @@ export const FineTuningRunSection: React.FC = () => {
 
       {/* PEFT Landscape */}
       <div className="mt-10">
-        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-100">
-          The PEFT family: LoRA, QLoRA, and Prefix Tuning
-        </h3>
+        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-100">{c.p17}</h3>
         <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-300">
           {c.p3} <strong className="text-zinc-100">how do you teach a
           model new tricks without rewriting its entire brain?</strong>
@@ -324,8 +325,7 @@ export const FineTuningRunSection: React.FC = () => {
           {/* QLoRA explanation */}
           <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-5">
             <h4 className="mb-2 font-mono text-sm font-semibold text-amber-300">QLoRA — LoRA on a budget</h4>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              In the training run above, notice step 3: <em className="text-zinc-200">&quot;Loading in 4-bit...
+            <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.p18}<em className="text-zinc-200">&quot;Loading in 4-bit...
               4.65 GB VRAM (was 14.96 GB at FP16)&quot;</em>. That&apos;s QLoRA in action.
             </p>
             <p className="mb-3 text-sm leading-relaxed text-zinc-300">
@@ -349,8 +349,7 @@ export const FineTuningRunSection: React.FC = () => {
           {/* Prefix Tuning explanation */}
           <div className="rounded-lg border border-purple-500/30 bg-purple-500/5 p-5">
             <h4 className="mb-2 font-mono text-sm font-semibold text-purple-300">{c.p13}</h4>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              LoRA and QLoRA modify the model&apos;s weight matrices — they change <em>how</em> the
+            <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.p19}<em>how</em> the
               model processes information. Prefix tuning takes a completely different approach: it
               doesn&apos;t touch the weights at all. Instead, it prepends a set of learnable
               &quot;virtual tokens&quot; to the input at every layer.

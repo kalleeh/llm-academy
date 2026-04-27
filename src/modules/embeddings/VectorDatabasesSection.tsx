@@ -69,10 +69,11 @@ const DATABASES: VectorDB[] = [
   },
 ]
 
+const EN_P4 = `Why ANN Search? (Approximate Nearest Neighbor)`
 const EN_P3 = `Why ANN Search? (Approximate Nearest Neighbor)`
 const EN_P2 = `{c.p2}`
 export const VectorDatabasesSection: React.FC = () => {
-  const c = useT({ title: '3. Vector Databases' , p2: EN_P2 , p3: EN_P3 }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
+  const c = useT({ title: '3. Vector Databases' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => () => {
@@ -134,9 +135,7 @@ export const VectorDatabasesSection: React.FC = () => {
 
       {/* ANN explanation */}
       <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">
-          Why ANN Search? (Approximate Nearest Neighbor)
-        </h3>
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.p4}</h3>
         <p className="mb-4 text-sm leading-relaxed text-zinc-300">
           Exact nearest neighbor search compares your query vector against{' '}
           <strong className="text-zinc-100">every single vector</strong> in the database.

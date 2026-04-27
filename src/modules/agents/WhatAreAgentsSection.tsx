@@ -48,10 +48,11 @@ const STEP_STYLES: Record<string, { border: string; bg: string; text: string; ba
   response: { border: 'border-cyan-500/40', bg: 'bg-cyan-500/10', text: 'text-cyan-300', badge: 'bg-cyan-500/20' },
 }
 
+const EN_P4 = `A regular LLM generates text. An`
 const EN_P3 = `A regular LLM generates text. An`
 const EN_P2 = `{c.p2}`
 export const WhatAreAgentsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are AI Agents?' , p2: EN_P2 , p3: EN_P3 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
+  const c = useT({ title: '1. What Are AI Agents?' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
   const [visibleSteps, setVisibleSteps] = useState(1)
 
   const showNext = useCallback(() => {
@@ -65,8 +66,7 @@ export const WhatAreAgentsSection: React.FC = () => {
   return (
     <section aria-labelledby="what-are-agents">
       <h2 id="what-are-agents" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        A regular LLM generates text. An <strong className="text-zinc-100">agent</strong> is an LLM
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.p4}<strong className="text-zinc-100">agent</strong> is an LLM
         that can <em>take actions</em> — call APIs, query databases, run code — then use the results
         to keep reasoning. It closes the loop between thinking and doing.
       </p>

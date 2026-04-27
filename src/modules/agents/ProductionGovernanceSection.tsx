@@ -21,6 +21,8 @@ const GOVERNANCE_CONTROLS = [
   { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
 ]
 
+const EN_P12 = `The EU AI Act (phasing in 2025-2027) imposes fines up to`
+const EN_P11 = `Organizations without proactive governance could see a`
 const EN_P10 = `The EU AI Act (phasing in 2025-2027) imposes fines up to`
 const EN_P9 = `Organizations without proactive governance could see a`
 const EN_P8 = `Agent-specific failure modes (beyond hallucination)`
@@ -34,7 +36,7 @@ const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselv
         saying the wrong thing; they must contend with systems doing the wrong thing."`
 
 export const ProductionGovernanceSection: React.FC = () => {
-  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 
@@ -117,8 +119,8 @@ export const ProductionGovernanceSection: React.FC = () => {
         <p className="mb-2 text-sm font-medium text-amber-300">Industry reality check</p>
         <div className="space-y-1 text-sm text-zinc-300">
           <p>Up to <strong className="text-zinc-100">40% of agentic AI initiatives</strong> may face cancellation by 2027 — not due to model quality but governance, integration, and organizational readiness failures.</p>
-          <p>Organizations without proactive governance could see a <strong className="text-zinc-100">50% decline in model adoption</strong> and user acceptance by 2026 (Gartner).</p>
-          <p>The EU AI Act (phasing in 2025-2027) imposes fines up to <strong className="text-zinc-100">7% of global turnover</strong> for prohibited AI practices.</p>
+          <p>{c.p11}<strong className="text-zinc-100">50% decline in model adoption</strong> and user acceptance by 2026 (Gartner).</p>
+          <p>{c.p12}<strong className="text-zinc-100">7% of global turnover</strong> for prohibited AI practices.</p>
         </div>
       </div>
 

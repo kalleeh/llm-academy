@@ -14,6 +14,8 @@ const BUDGET_STEPS = [
   { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'Frontier dense models' },
 ]
 
+const EN_P9 = `DeepSeek V3 (671B total, 37B active) trained on`
+const EN_P8 = `DeepSeek's Challenge to Chinchilla`
 const EN_P7 = `Chinchilla-optimal for 37B active`
 const EN_P6 = `DeepSeek V3 (671B total, 37B active) trained on`
 const EN_P5 = `DeepSeek's Challenge to Chinchilla`
@@ -24,7 +26,7 @@ const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens
         Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
 
 export const ScalingLawsSection: React.FC = () => {
-  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
+  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 
   const handleSlider = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,10 +93,8 @@ export const ScalingLawsSection: React.FC = () => {
       {/* DeepSeek challenge */}
       <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
         <p className="mb-2 text-sm font-semibold text-zinc-200">
-          <Icon name="microscope" /> DeepSeek&apos;s Challenge to Chinchilla
-        </p>
-        <p className="text-sm leading-relaxed text-zinc-400">
-          DeepSeek V3 (671B total, 37B active) trained on <strong className="text-zinc-300">14.8T tokens</strong> —
+          <Icon name="microscope" />{c.p8}</p>
+        <p className="text-sm leading-relaxed text-zinc-400">{c.p9}<strong className="text-zinc-300">14.8T tokens</strong> —
           far beyond the Chinchilla-optimal ratio for its active parameter count. MoE architectures
           break the scaling law assumptions because the &ldquo;effective model size&rdquo; is ambiguous:
           total params store knowledge, but active params determine compute cost. DeepSeek showed you

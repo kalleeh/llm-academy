@@ -36,13 +36,14 @@ similarity = np.dot(vec_1, vec_2) / (
 )
 print(f"Similarity: {similarity:.3f}")  # ~0.92`
 
+const EN_P5 = `Embedding Model Comparison (2025-2026)`
 const EN_P4 = `Embedding Model Comparison (2025-2026)`
 const EN_P2 = `Embedding models and LLMs are both transformers, but they serve different purposes. LLMs`
 const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
-  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
+  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
     <h2 id="embedding-models" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -79,9 +80,7 @@ export const EmbeddingModelsSection: React.FC = () => {
     {/* Model comparison table */}
     <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">
       <div className="border-b border-zinc-700 bg-zinc-800 px-4 py-3">
-        <h3 className="font-mono text-sm font-semibold text-zinc-100">
-          Embedding Model Comparison (2025-2026)
-        </h3>
+        <h3 className="font-mono text-sm font-semibold text-zinc-100">{c.p5}</h3>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">

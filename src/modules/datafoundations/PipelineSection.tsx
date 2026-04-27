@@ -116,12 +116,13 @@ const TERMINAL_STEPS: TerminalStep[] = [
   },
 ]
 
+const EN_P4 = `A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search`
 const EN_P3 = `A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.`
 
 export const PipelineSection: React.FC = () => {
-  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
+  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
   const toggleStage = useCallback((id: string) => {
@@ -177,9 +178,7 @@ export const PipelineSection: React.FC = () => {
 
       {/* Terminal demo */}
       <div>
-        <p className="mb-3 text-sm text-zinc-400">
-          A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search
-        </p>
+        <p className="mb-3 text-sm text-zinc-400">{c.p4}</p>
         <SimulatedTerminal steps={TERMINAL_STEPS} title="data-pipeline-demo" />
       </div>
 

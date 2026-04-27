@@ -68,6 +68,7 @@ const PATTERNS: ArchPattern[] = [
   },
 ]
 
+const EN_P6 = `Vector Stores → LLMs (RAG Preview)`
 const EN_P5 = `Vector Stores → LLMs (RAG Preview)`
 const EN_P4 = `Retrieval-Augmented Generation (RAG)`
 const EN_P2 = `{c.p2}`
@@ -75,7 +76,7 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
 
 export const ArchitectureSection: React.FC = () => {
-  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: architectureSectionSv, ko: architectureSectionKo })
+  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: architectureSectionSv, ko: architectureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -150,7 +151,7 @@ export const ArchitectureSection: React.FC = () => {
 
       {/* RAG connection callout */}
       <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
-        <p className="text-sm font-medium text-amber-300"><Icon name="link" /> Vector Stores → LLMs (RAG Preview)</p>
+        <p className="text-sm font-medium text-amber-300"><Icon name="link" />{c.p6}</p>
         <p className="mt-1 text-xs leading-relaxed text-zinc-300">
           Vector stores are the bridge between your data and LLMs. In{' '}
           <span className="text-amber-200">{c.p4}</span>, you embed

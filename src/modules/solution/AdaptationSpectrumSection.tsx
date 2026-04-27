@@ -72,12 +72,13 @@ const SCENARIOS: Scenario[] = [
   { label: 'Search internal wiki for answers', answer: 'RAG — retrieves relevant wiki pages and generates answers with sources.', position: 1 },
 ]
 
+const EN_P4 = `Pick a Scenario — Where Does It Land?`
 const EN_P3 = `Pick a Scenario — Where Does It Land?`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `Not every problem needs training from scratch. Most LLM applications fall somewhere on this spectrum.`
 
 export const AdaptationSpectrumSection: React.FC = () => {
-  const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
+  const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
   const [selected, setSelected] = useState<string | null>(null)
   const [scenario, setScenario] = useState<number | null>(null)
 
@@ -141,8 +142,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
 
       {/* Scenario picker */}
       <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
-        <Icon name="target" /> Pick a Scenario — Where Does It Land?
-      </h3>
+        <Icon name="target" />{c.p4}</h3>
       <div className="mb-4 flex flex-wrap gap-2">
         {SCENARIOS.map((s, i) => (
           <button

@@ -19,6 +19,8 @@ const LAYERS: LayerDef[] = [
   { id: 'output', label: 'Output', color: 'bg-amber-900 border-amber-600', desc: 'Probability distribution over the vocabulary for the next token.' },
 ]
 
+const EN_P7 = `Processes each token independently — where knowledge is stored`
+const EN_P6 = `Each token looks at every other token to gather context`
 const EN_P5 = `Processes each token independently — where knowledge is stored`
 const EN_P4 = `Each token looks at every other token to gather context`
 const EN_P2 = `{c.p2}`
@@ -26,7 +28,7 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.`
 
 export const BigPictureSection: React.FC = () => {
-  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
+  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -71,18 +73,14 @@ export const BigPictureSection: React.FC = () => {
                 </span>
                 <div className="w-full rounded border border-blue-700 bg-blue-950 px-3 py-2 text-center text-xs text-blue-300">
                   Multi-Head Attention
-                  <p className="mt-0.5 text-[10px] text-blue-400/70">
-                    Each token looks at every other token to gather context
-                  </p>
+                  <p className="mt-0.5 text-[10px] text-blue-400/70">{c.p6}</p>
                 </div>
                 <div className="h-3 w-px bg-zinc-600" />
                 <div className="text-[10px] text-zinc-500">+ Add &amp; Normalize</div>
                 <div className="h-3 w-px bg-zinc-600" />
                 <div className="w-full rounded border border-orange-700 bg-orange-950 px-3 py-2 text-center text-xs text-orange-300">
                   Feed-Forward Network
-                  <p className="mt-0.5 text-[10px] text-orange-400/70">
-                    Processes each token independently — where knowledge is stored
-                  </p>
+                  <p className="mt-0.5 text-[10px] text-orange-400/70">{c.p7}</p>
                 </div>
                 <div className="h-3 w-px bg-zinc-600" />
                 <div className="text-[10px] text-zinc-500">+ Add &amp; Normalize</div>

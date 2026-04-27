@@ -41,18 +41,18 @@ def evaluate_model(eval_set_path: str, model: str):
     print(f"Accuracy: {accuracy:.1%} ({correct}/{len(examples)})")
     return results`
 
+const EN_P4 = `Public benchmarks test general capabilities. For`
 const EN_P3 = `Public benchmarks test general capabilities. For`
 const EN_P2 = `{c.p2}`
 export const CustomEvalSection: React.FC = () => {
-  const c = useT({ title: '3. Custom Evaluation' , p2: EN_P2 , p3: EN_P3 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
+  const c = useT({ title: '3. Custom Evaluation' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
   const [selectedTask, setSelectedTask] = useState(0)
   const task = TASK_TYPES[selectedTask]
 
   return (
     <section aria-labelledby="custom-eval">
       <h2 id="custom-eval" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Public benchmarks test general capabilities. For <em>your</em> fine-tuned model, you need
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.p4}<em>your</em> fine-tuned model, you need
         evaluation sets from your domain. Pick your task type to see recommended metrics:
       </p>
 
