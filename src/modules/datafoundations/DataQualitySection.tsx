@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { dataQualitySectionSv, dataQualitySectionKo } from './tech-translations'
+import { datasetTranslations, issuesTranslations } from './data-translations'
 
 interface DataRow {
   id: number
@@ -91,8 +92,8 @@ const EN_INTRO = `Spot the problems in this dataset. Click each issue type below
 
 export const DataQualitySection: React.FC = () => {
   const { lang } = useLanguage()
-  const dATASETT = tArray(lang, DATASET)
-  const iSSUEST = tArray(lang, ISSUES)
+  const dATASETT = tArray(lang, DATASET, datasetTranslations)
+  const iSSUEST = tArray(lang, ISSUES, issuesTranslations)
   const c = useT({ title: '3. Data Quality', intro: EN_INTRO , p2: EN_P2 }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
   const [found, setFound] = useState<Set<string>>(new Set())
   const [activeIssue, setActiveIssue] = useState<string | null>(null)

@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { optimizationTechniquesSectionSv, optimizationTechniquesSectionKo } from './tech-translations'
+import { techniquesTranslations } from './data-translations'
 
 interface Technique {
   id: string
@@ -66,7 +67,7 @@ const EN_INTRO = `Raw model inference is slow. These techniques can improve thro
 
 export const OptimizationTechniquesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tECHNIQUEST = tArray(lang, TECHNIQUES)
+  const tECHNIQUEST = tArray(lang, TECHNIQUES, techniquesTranslations)
   const c = useT({ title: '3. Optimization Techniques', intro: EN_INTRO }, { sv: optimizationTechniquesSectionSv, ko: optimizationTechniquesSectionKo })
   const [activeTech, setActiveTech] = useState(TECHNIQUES[0].id)
   const tech = TECHNIQUES.find(t => t.id === activeTech) ?? TECHNIQUES[0]

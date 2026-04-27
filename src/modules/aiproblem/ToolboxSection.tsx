@@ -2,6 +2,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { toolboxSectionSv, toolboxSectionKo } from './tech-translations'
+import { toolboxTranslations } from './data-translations'
 
 interface ToolCategory {
   level: string
@@ -42,7 +43,7 @@ const EN_INTRO = `Each level of the AI landscape has its own ecosystem of tools 
 
 export const ToolboxSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tOOLBOXT = tArray(lang, TOOLBOX)
+  const tOOLBOXT = tArray(lang, TOOLBOX, toolboxTranslations)
   const c = useT({ title: '5. The AI/ML/LLM Toolbox', intro: EN_INTRO , p2: EN_P2 }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
   return (
   <section aria-labelledby="toolbox">

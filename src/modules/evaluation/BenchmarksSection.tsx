@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { benchmarksSectionSv, benchmarksSectionKo } from './tech-translations'
+import { benchmarksTranslations } from './data-translations'
 
 interface Benchmark {
   name: string
@@ -28,7 +29,7 @@ const EN_INTRO = `The industry uses standardized benchmarks to compare models. N
 
 export const BenchmarksSection: React.FC = () => {
   const { lang } = useLanguage()
-  const bENCHMARKST = tArray(lang, BENCHMARKS)
+  const bENCHMARKST = tArray(lang, BENCHMARKS, benchmarksTranslations)
   const c = useT({ title: '2. Key Benchmarks (2025–2026)', intro: EN_INTRO , p2: EN_P2 }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
   const [selected, setSelected] = useState(0)
   const bench = BENCHMARKS[selected]

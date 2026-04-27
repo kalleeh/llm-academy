@@ -6,6 +6,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { whenToFineTuneSectionSv, whenToFineTuneSectionKo } from './tech-translations'
+import { winCasesTranslations } from './data-translations'
 
 type NodeId = 'start' | 'few-shot' | 'rag' | 'finetune' | 'done-prompt' | 'done-fewshot' | 'done-rag'
 
@@ -40,7 +41,7 @@ const EN_INTRO = `Fine-tuning is powerful but expensive. Walk through this decis
 
 export const WhenToFineTuneSection: React.FC = () => {
   const { lang } = useLanguage()
-  const wIN_CASEST = tArray(lang, WIN_CASES)
+  const wIN_CASEST = tArray(lang, WIN_CASES, winCasesTranslations)
   const c = useT({ title: '1. When to Fine-Tune', intro: EN_INTRO }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
   const [path, setPath] = useState<NodeId[]>(['start'])
 

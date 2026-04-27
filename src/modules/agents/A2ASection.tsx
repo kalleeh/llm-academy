@@ -5,6 +5,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { a2ASectionSv, a2ASectionKo } from './tech-translations'
+import { protocolsTranslations } from './data-translations'
 
 const A2A_AGENT_CARD = `{
   "name": "billing-agent",
@@ -44,7 +45,7 @@ const EN_P2 = `{c.p2}`
 const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
   const { lang } = useLanguage()
-  const pROTOCOLST = tArray(lang, PROTOCOLS)
+  const pROTOCOLST = tArray(lang, PROTOCOLS, protocolsTranslations)
   const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])

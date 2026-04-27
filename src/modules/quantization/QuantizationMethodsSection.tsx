@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { quantizationMethodsSectionSv, quantizationMethodsSectionKo } from './tech-translations'
+import { methodsTranslations } from './data-translations'
 
 interface Method {
   id: string
@@ -97,7 +98,7 @@ const EN_INTRO = `Four main approaches dominate the ecosystem. Each targets a di
 
 export const QuantizationMethodsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const mETHODST = tArray(lang, METHODS)
+  const mETHODST = tArray(lang, METHODS, methodsTranslations)
   const c = useT({ title: '2. Quantization Methods', intro: EN_INTRO }, { sv: quantizationMethodsSectionSv, ko: quantizationMethodsSectionKo })
   const [activeTab, setActiveTab] = useState(0)
   const method = METHODS[activeTab]

@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { evolutionLadderSectionSv, evolutionLadderSectionKo } from './tech-translations'
+import { rungsTranslations } from './data-translations'
 
 const TASK = 'Classify customer sentiment'
 
@@ -86,7 +87,7 @@ Severity: shipping=4, support=5
 
 export const EvolutionLadderSection: React.FC = () => {
   const { lang } = useLanguage()
-  const rUNGST = tArray(lang, RUNGS)
+  const rUNGST = tArray(lang, RUNGS, rungsTranslations)
   const c = useT({ title: '1. The Evolution Ladder' }, { sv: evolutionLadderSectionSv, ko: evolutionLadderSectionKo })
   const [activeRung, setActiveRung] = useState(0)
 

@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { vectorDatabasesSectionSv, vectorDatabasesSectionKo } from './tech-translations'
+import { databasesTranslations } from './data-translations'
 
 interface VectorDB {
   name: string
@@ -76,7 +77,7 @@ const EN_P3 = `Why ANN Search? (Approximate Nearest Neighbor)`
 const EN_P2 = `{c.p2}`
 export const VectorDatabasesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const dATABASEST = tArray(lang, DATABASES)
+  const dATABASEST = tArray(lang, DATABASES, databasesTranslations)
   const c = useT({ title: '3. Vector Databases' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: vectorDatabasesSectionSv, ko: vectorDatabasesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

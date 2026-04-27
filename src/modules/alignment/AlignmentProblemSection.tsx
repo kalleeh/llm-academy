@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { alignmentProblemSectionSv, alignmentProblemSectionKo } from './tech-translations'
+import { examplesTranslations } from './data-translations'
 
 interface PromptExample {
   prompt: string
@@ -37,7 +38,7 @@ const EXAMPLES: PromptExample[] = [
 const EN_P2 = `The base model isn&apos;t &ldquo;evil&rdquo; — it simply has no concept of helpfulness or safety. It learned to predict text, and harmful text exists in its training data. Alignment is the process of teaching the model`
 export const AlignmentProblemSection: React.FC = () => {
   const { lang } = useLanguage()
-  const eXAMPLEST = tArray(lang, EXAMPLES)
+  const eXAMPLEST = tArray(lang, EXAMPLES, examplesTranslations)
   const c = useT({ title: '1. The Alignment Problem' , p2: EN_P2 }, { sv: alignmentProblemSectionSv, ko: alignmentProblemSectionKo })
   const [selected, setSelected] = useState(0)
   const [showAligned, setShowAligned] = useState(false)

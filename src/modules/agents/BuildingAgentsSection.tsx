@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { buildingAgentsSectionSv, buildingAgentsSectionKo } from './tech-translations'
+import { frameworksTranslations } from './data-translations'
 
 interface Framework {
   name: string
@@ -130,7 +131,7 @@ print(run_agent("What's trending in AI today?"))`,
 const EN_P2 = `A basic agent is just a loop: send messages → check for tool calls → execute tools → feed results back → repeat. Add frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent state, or multi-agent orchestration.`
 export const BuildingAgentsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const fRAMEWORKST = tArray(lang, FRAMEWORKS)
+  const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
   const c = useT({ title: '5. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">

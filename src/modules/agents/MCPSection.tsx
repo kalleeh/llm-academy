@@ -4,6 +4,7 @@ import { tArray } from '../../tArray'
 import { mCPSectionSv, mCPSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
+import { comparisonTranslations } from './data-translations'
 
 const MCP_SERVER_EXAMPLE = `import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -66,7 +67,7 @@ const COMPARISON = [
 const EN_P2 = `Instead of writing custom integrations for every model provider, you build one MCP server. Any MCP-compatible client — Claude, ChatGPT, Cursor, VS Code, your own app — can discover and use your tools automatically.`
 export const MCPSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON)
+  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
   const c = useT({ title: '3. MCP (Model Context Protocol)' , p2: EN_P2 }, { sv: mCPSectionSv, ko: mCPSectionKo })
   return (
   <section aria-labelledby="mcp">

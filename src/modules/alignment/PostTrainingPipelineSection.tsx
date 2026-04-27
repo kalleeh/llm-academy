@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { postTrainingPipelineSectionSv, postTrainingPipelineSectionKo } from './tech-translations'
+import { pipelineTranslations, trendsTranslations } from './data-translations'
 
 interface PipelineStage {
   label: string
@@ -83,8 +84,8 @@ const EN_INTRO = `The modern post-training pipeline combines multiple techniques
 
 export const PostTrainingPipelineSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pIPELINET = tArray(lang, PIPELINE)
-  const tRENDST = tArray(lang, TRENDS)
+  const pIPELINET = tArray(lang, PIPELINE, pipelineTranslations)
+  const tRENDST = tArray(lang, TRENDS, trendsTranslations)
   const c = useT({ title: '5. Full Post-Training Pipeline (2025–2026)', intro: EN_INTRO }, { sv: postTrainingPipelineSectionSv, ko: postTrainingPipelineSectionKo })
   const [activeStage, setActiveStage] = useState<number | null>(null)
 

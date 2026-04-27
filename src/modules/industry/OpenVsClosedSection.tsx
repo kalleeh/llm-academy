@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { openVsClosedSectionSv, openVsClosedSectionKo } from './tech-translations'
+import { comparisonTranslations, openModelsTranslations } from './data-translations'
 
 type Tab = 'table' | 'trend'
 
@@ -40,8 +41,8 @@ const EN_INTRO = `The gap between open-weight and closed-source models has narro
 
 export const OpenVsClosedSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON)
-  const oPEN_MODELST = tArray(lang, OPEN_MODELS)
+  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
+  const oPEN_MODELST = tArray(lang, OPEN_MODELS, openModelsTranslations)
   const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
   const [tab, setTab] = useState<Tab>('table')
 

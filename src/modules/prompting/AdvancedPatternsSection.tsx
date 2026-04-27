@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { advancedPatternsSectionSv, advancedPatternsSectionKo } from './tech-translations'
+import { patternsTranslations } from './data-translations'
 
 interface Pattern {
   id: string
@@ -140,7 +141,7 @@ const EN_INTRO = `Sophisticated techniques for complex tasks. Each pattern inclu
 
 export const AdvancedPatternsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pATTERNST = tArray(lang, PATTERNS)
+  const pATTERNST = tArray(lang, PATTERNS, patternsTranslations)
   const c = useT({ title: '5. Advanced Patterns', intro: EN_INTRO , p2: EN_P2 }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(PATTERNS[0].id)
 

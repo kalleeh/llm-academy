@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { functionCallingSectionSv, functionCallingSectionKo } from './tech-translations'
+import { demoStepsTranslations } from './data-translations'
 
 const TOOL_SCHEMA = `{
   "type": "function",
@@ -109,7 +110,7 @@ const DEMO_STEPS = [
 
 export const FunctionCallingSection: React.FC = () => {
   const { lang } = useLanguage()
-  const dEMO_STEPST = tArray(lang, DEMO_STEPS)
+  const dEMO_STEPST = tArray(lang, DEMO_STEPS, demoStepsTranslations)
   const c = useT({ title: '2. Function Calling' }, { sv: functionCallingSectionSv, ko: functionCallingSectionKo })
   const [activeStep, setActiveStep] = useState(0)
 

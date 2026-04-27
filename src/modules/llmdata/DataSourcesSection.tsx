@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { dataSourcesSectionSv, dataSourcesSectionKo } from './tech-translations'
+import { sourcesTranslations } from './data-translations'
 
 interface DataSource {
   name: string
@@ -42,7 +43,7 @@ const SOURCES: DataSource[] = [
 const EN_P2 = `Modern LLMs train on trillions of tokens from diverse sources. Key open datasets include`
 export const DataSourcesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const sOURCEST = tArray(lang, SOURCES)
+  const sOURCEST = tArray(lang, SOURCES, sourcesTranslations)
   const c = useT({ title: '1. Data Sources' , p2: EN_P2 }, { sv: dataSourcesSectionSv, ko: dataSourcesSectionKo })
   const [selected, setSelected] = useState<number | null>(null)
   const toggle = useCallback((i: number) => setSelected(p => p === i ? null : i), [])

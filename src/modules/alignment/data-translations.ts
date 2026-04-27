@@ -16,3 +16,13 @@ export const alignmentPipelineStages = {
     { label: '정렬됨', description: '모델이 이제 도움이 되고, 무해하고, 정직한 응답을 선호합니다.', details: '정렬된 모델은 도움이 됨과 안전의 균형을 맞춥니다. 해로운 요청을 거부하고, 불확실성을 인정하고, 지시를 따를 수 있습니다.' },
   ],
 }
+
+export const examplesTranslations = { sv: [], ko: [] }
+
+export const methodsTranslations = { sv: [], ko: [] }
+
+export const pipelineTranslations = { sv: [], ko: [] }
+
+export const trendsTranslations = { sv: [], ko: [] }
+
+export const layersTranslations = { sv: [], ko: [] }

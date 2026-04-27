@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { servingFrameworksSectionSv, servingFrameworksSectionKo } from './tech-translations'
+import { frameworksTranslations } from './data-translations'
 
 interface Framework {
   name: string
@@ -77,7 +78,7 @@ const EN_INTRO = `A trained model is just weights on disk. To serve it at scale 
 
 export const ServingFrameworksSection: React.FC = () => {
   const { lang } = useLanguage()
-  const fRAMEWORKST = tArray(lang, FRAMEWORKS)
+  const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
   const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

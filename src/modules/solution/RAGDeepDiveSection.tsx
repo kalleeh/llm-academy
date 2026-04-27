@@ -7,6 +7,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { rAGDeepDiveSectionSv, rAGDeepDiveSectionKo } from './tech-translations'
+import { ragVsFinetuneTranslations } from './data-translations'
 
 const PIPELINE_STEPS: { id: string; label: string; icon: IconName; desc: string }[] = [
   { id: 'query', label: 'User Query', icon: 'chat', desc: 'User asks a natural language question' },
@@ -36,7 +37,7 @@ const TERMINAL_STEPS: TerminalStep[] = [
 const EN_P2 = `RAG is the most common production pattern because it requires no training, supports citations, and lets you update knowledge by simply re-indexing documents. Combine with fine-tuning when you also need specific reasoning or output style.`
 export const RAGDeepDiveSection: React.FC = () => {
   const { lang } = useLanguage()
-  const rAG_VS_FINETUNET = tArray(lang, RAG_VS_FINETUNE)
+  const rAG_VS_FINETUNET = tArray(lang, RAG_VS_FINETUNE, ragVsFinetuneTranslations)
   const c = useT({ title: '2. RAG Deep Dive' , p2: EN_P2 }, { sv: rAGDeepDiveSectionSv, ko: rAGDeepDiveSectionKo })
   const [activeStep, setActiveStep] = useState<number | null>(null)
 

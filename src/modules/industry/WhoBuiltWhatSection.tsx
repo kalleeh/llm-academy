@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { whoBuiltWhatSectionSv, whoBuiltWhatSectionKo } from './tech-translations'
+import { playersTranslations } from './data-translations'
 
 interface Player {
   name: string
@@ -111,7 +112,7 @@ const EN_INTRO = `The LLM landscape is dominated by a handful of well-funded lab
 
 export const WhoBuiltWhatSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pLAYERST = tArray(lang, PLAYERS)
+  const pLAYERST = tArray(lang, PLAYERS, playersTranslations)
   const c = useT({ title: '1. Who Built What', intro: EN_INTRO }, { sv: whoBuiltWhatSectionSv, ko: whoBuiltWhatSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

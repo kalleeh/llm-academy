@@ -5,6 +5,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { dataTypesSectionSv, dataTypesSectionKo } from './tech-translations'
+import { categoriesTranslations } from './data-translations'
 
 interface DataExample {
   label: string
@@ -120,7 +121,7 @@ const EN_INTRO = `All data falls into three categories. Click any example to see
 
 export const DataTypesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cATEGORIEST = tArray(lang, CATEGORIES)
+  const cATEGORIEST = tArray(lang, CATEGORIES, categoriesTranslations)
   const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

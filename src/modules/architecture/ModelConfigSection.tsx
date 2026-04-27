@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { modelConfigSectionSv, modelConfigSectionKo } from './tech-translations'
+import { presetsTranslations } from './data-translations'
 
 interface Config {
   layers: number
@@ -74,7 +75,7 @@ const EN_INTRO = `Configure your own model architecture and see how parameter ch
 
 export const ModelConfigSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pRESETST = tArray(lang, PRESETS)
+  const pRESETST = tArray(lang, PRESETS, presetsTranslations)
   const c = useT({ title: '4. Model Configuration', intro: EN_INTRO }, { sv: modelConfigSectionSv, ko: modelConfigSectionKo })
   const [config, setConfig] = useState<Config>(PRESETS[1].config)
 

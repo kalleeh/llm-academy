@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { lLMDifferenceSectionSv, lLMDifferenceSectionKo } from './tech-translations'
+import { comparisonTranslations, overkillCasesTranslations, mlBetterCasesTranslations } from './data-translations'
 
 interface ComparisonRow {
   dimension: string
@@ -62,9 +63,9 @@ const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamen
 
 export const LLMDifferenceSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON)
-  const oVERKILL_CASEST = tArray(lang, OVERKILL_CASES)
-  const mL_BETTER_CASEST = tArray(lang, ML_BETTER_CASES)
+  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
+  const oVERKILL_CASEST = tArray(lang, OVERKILL_CASES, overkillCasesTranslations)
+  const mL_BETTER_CASEST = tArray(lang, ML_BETTER_CASES, mlBetterCasesTranslations)
   const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
   const [showLLM, setShowLLM] = useState(false)
 

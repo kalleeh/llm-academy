@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
+import { levelsTranslations, overlaysTranslations } from './data-translations'
 import { landscapeSectionSv, landscapeSectionKo } from './tech-translations'
 
 interface AILevel {
@@ -98,8 +99,8 @@ const EN_INTRO = `AI is a broad field. Machine Learning is a subset, Deep Learni
 
 export const LandscapeSection: React.FC = () => {
   const { lang } = useLanguage()
-  const lEVELST = tArray(lang, LEVELS)
-  const oVERLAYST = tArray(lang, OVERLAYS)
+  const lEVELST = tArray(lang, LEVELS, levelsTranslations)
+  const oVERLAYST = tArray(lang, OVERLAYS, overlaysTranslations)
   const c = useT({ title: '1. The Landscape', intro: EN_INTRO }, { sv: landscapeSectionSv, ko: landscapeSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)

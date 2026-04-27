@@ -5,6 +5,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { productionGovernanceSectionSv, productionGovernanceSectionKo } from './tech-translations'
+import { autonomyTiersTranslations, governanceControlsTranslations } from './data-translations'
 
 const AUTONOMY_TIERS = [
   { tier: 'L0 — Copilot', loop: 'Human acts, AI suggests', oversight: 'Every action', examples: 'Code completion, email drafts, search suggestions', risk: 'Minimal — human executes', color: 'bg-emerald-500/20 text-emerald-300' },
@@ -39,8 +40,8 @@ const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselv
 
 export const ProductionGovernanceSection: React.FC = () => {
   const { lang } = useLanguage()
-  const aUTONOMY_TIERST = tArray(lang, AUTONOMY_TIERS)
-  const gOVERNANCE_CONTROLST = tArray(lang, GOVERNANCE_CONTROLS)
+  const aUTONOMY_TIERST = tArray(lang, AUTONOMY_TIERS, autonomyTiersTranslations)
+  const gOVERNANCE_CONTROLST = tArray(lang, GOVERNANCE_CONTROLS, governanceControlsTranslations)
   const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])

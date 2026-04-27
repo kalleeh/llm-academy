@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { qualityVsSizeSectionSv, qualityVsSizeSectionKo } from './tech-translations'
+import { quantLevelsTranslations } from './data-translations'
 
 interface QuantLevel {
   label: string
@@ -30,7 +31,7 @@ const PAD = { top: 20, right: 30, bottom: 40, left: 50 }
 const EN_P2 = `The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot is`
 export const QualityVsSizeSection: React.FC = () => {
   const { lang } = useLanguage()
-  const qUANT_LEVELST = tArray(lang, QUANT_LEVELS)
+  const qUANT_LEVELST = tArray(lang, QUANT_LEVELS, quantLevelsTranslations)
   const c = useT({ title: '4. Quality vs Size' , p2: EN_P2 }, { sv: qualityVsSizeSectionSv, ko: qualityVsSizeSectionKo })
   const [hovered, setHovered] = useState<number | null>(null)
 

@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { buildVsBuySectionSv, buildVsBuySectionKo } from './tech-translations'
+import { comparisonTranslations, constraintsTranslations } from './data-translations'
 
 type ApproachId = 'api' | 'open-source' | 'fine-tuned'
 
@@ -83,8 +84,8 @@ const EN_INTRO = `Three main deployment approaches, each with different tradeoff
 
 export const BuildVsBuySection: React.FC = () => {
   const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON)
-  const cONSTRAINTST = tArray(lang, CONSTRAINTS)
+  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
+  const cONSTRAINTST = tArray(lang, CONSTRAINTS, constraintsTranslations)
   const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 

@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { coreTechniquesSectionSv, coreTechniquesSectionKo } from './tech-translations'
+import { techniquesTranslations } from './data-translations'
 
 interface Technique {
   id: string
@@ -120,7 +121,7 @@ const EN_INTRO = `Five fundamental prompting techniques. Each tab shows a before
 
 export const CoreTechniquesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tECHNIQUEST = tArray(lang, TECHNIQUES)
+  const tECHNIQUEST = tArray(lang, TECHNIQUES, techniquesTranslations)
   const c = useT({ title: '2. Core Techniques', intro: EN_INTRO }, { sv: coreTechniquesSectionSv, ko: coreTechniquesSectionKo })
   const [activeTab, setActiveTab] = useState(TECHNIQUES[0].id)
 

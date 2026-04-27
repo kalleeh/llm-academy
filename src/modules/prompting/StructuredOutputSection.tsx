@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { structuredOutputSectionSv, structuredOutputSectionKo } from './tech-translations'
+import { techniquesTranslations, promptLevelsTranslations } from './data-translations'
 
 interface StructureTechnique {
   id: string
@@ -146,8 +147,8 @@ const EN_INTRO = `Click each level to see how adding structure constraints impro
 
 export const StructuredOutputSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tECHNIQUEST = tArray(lang, TECHNIQUES)
-  const pROMPT_LEVELST = tArray(lang, PROMPT_LEVELS)
+  const tECHNIQUEST = tArray(lang, TECHNIQUES, techniquesTranslations)
+  const pROMPT_LEVELST = tArray(lang, PROMPT_LEVELS, promptLevelsTranslations)
   const c = useT({ title: '4. Structured Output', intro: EN_INTRO }, { sv: structuredOutputSectionSv, ko: structuredOutputSectionKo })
   const [activeTechnique, setActiveTechnique] = useState(TECHNIQUES[0].id)
   const [activeLevel, setActiveLevel] = useState(0)

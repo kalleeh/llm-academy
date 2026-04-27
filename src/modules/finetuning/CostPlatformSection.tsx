@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { costPlatformSectionSv, costPlatformSectionKo } from './tech-translations'
+import { platformsTranslations } from './data-translations'
 
 interface Platform {
   name: string
@@ -38,7 +39,7 @@ const EN_INTRO = `Where to run your fine-tuning job, what it costs, and what har
 
 export const CostPlatformSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pLATFORMST = tArray(lang, PLATFORMS)
+  const pLATFORMST = tArray(lang, PLATFORMS, platformsTranslations)
   const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO , p2: EN_P2 }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
   const [selectedPlatform, setSelectedPlatform] = useState<number | null>(null)
 

@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { ecosystemSectionSv, ecosystemSectionKo } from './tech-translations'
+import { layersTranslations } from './data-translations'
 
 interface Layer {
   name: string
@@ -63,7 +64,7 @@ const EN_INTRO = `LLMs don't exist in isolation. A full stack connects foundatio
 
 export const EcosystemSection: React.FC = () => {
   const { lang } = useLanguage()
-  const lAYERST = tArray(lang, LAYERS)
+  const lAYERST = tArray(lang, LAYERS, layersTranslations)
   const c = useT({ title: '3. The Ecosystem', intro: EN_INTRO , p2: EN_P2 }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 

@@ -5,6 +5,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { designPatternsSectionSv, designPatternsSectionKo } from './tech-translations'
+import { patternsTranslations } from './data-translations'
 
 interface Pattern {
   name: string
@@ -67,7 +68,7 @@ const EN_INTRO = `Not all agents work the same way. These are the core architect
 
 export const DesignPatternsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const pATTERNST = tArray(lang, PATTERNS)
+  const pATTERNST = tArray(lang, PATTERNS, patternsTranslations)
   const c = useT({ title: '4. Agent Design Patterns', intro: EN_INTRO }, { sv: designPatternsSectionSv, ko: designPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(0)
 

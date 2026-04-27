@@ -7,6 +7,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { preparingDataSectionSv, preparingDataSectionKo } from './tech-translations'
+import { checklistTranslations } from './data-translations'
 
 type Format = 'instruction' | 'chat' | 'preference'
 
@@ -71,7 +72,7 @@ const EN_INTRO = `Data quality determines fine-tuning success. Pick a format, st
 
 export const PreparingDataSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cHECKLISTT = tArray(lang, CHECKLIST)
+  const cHECKLISTT = tArray(lang, CHECKLIST, checklistTranslations)
   const c = useT({ title: '2. Preparing Your Data', intro: EN_INTRO }, { sv: preparingDataSectionSv, ko: preparingDataSectionKo })
   const [activeFormat, setActiveFormat] = useState<Format>('instruction')
   const [checked, setChecked] = useState<Set<number>>(new Set())

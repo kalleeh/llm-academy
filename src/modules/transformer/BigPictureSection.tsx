@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { bigPictureSectionSv, bigPictureSectionKo } from './tech-translations'
+import { layersTranslations } from './data-translations'
 
 interface LayerDef {
   id: string
@@ -31,7 +32,7 @@ const EN_INTRO = `A transformer is a stack of identical layers. Data flows from 
 
 export const BigPictureSection: React.FC = () => {
   const { lang } = useLanguage()
-  const lAYERST = tArray(lang, LAYERS)
+  const lAYERST = tArray(lang, LAYERS, layersTranslations)
   const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

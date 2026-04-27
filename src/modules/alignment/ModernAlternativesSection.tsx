@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { modernAlternativesSectionSv, modernAlternativesSectionKo } from './tech-translations'
+import { methodsTranslations } from './data-translations'
 
 interface Method {
   id: string
@@ -78,7 +79,7 @@ const EN_INTRO = `RLHF with PPO was the breakthrough that turned base models int
 
 export const ModernAlternativesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const mETHODST = tArray(lang, METHODS)
+  const mETHODST = tArray(lang, METHODS, methodsTranslations)
   const c = useT({ title: '3. Modern Alternatives', intro: EN_INTRO }, { sv: modernAlternativesSectionSv, ko: modernAlternativesSectionKo })
   const [activeTab, setActiveTab] = useState(0)
 

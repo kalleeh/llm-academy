@@ -7,6 +7,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { cleaningPipelineSectionSv, cleaningPipelineSectionKo } from './tech-translations'
+import { stepsTranslations } from './data-translations'
 
 interface PipelineStep extends TerminalStep {
   sizeLabel: string
@@ -28,7 +29,7 @@ const EN_INTRO = `Raw web data is mostly garbage. A typical pipeline discards 85
 
 export const CleaningPipelineSection: React.FC = () => {
   const { lang } = useLanguage()
-  const sTEPST = tArray(lang, STEPS)
+  const sTEPST = tArray(lang, STEPS, stepsTranslations)
   const c = useT({ title: '2. Cleaning Pipeline', intro: EN_INTRO }, { sv: cleaningPipelineSectionSv, ko: cleaningPipelineSectionKo })
   const [executedStep, setExecutedStep] = useState(-1)
   const onStep = useCallback((i: number) => setExecutedStep(i), [])

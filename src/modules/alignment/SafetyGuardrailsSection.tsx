@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { safetyGuardrailsSectionSv, safetyGuardrailsSectionKo } from './tech-translations'
+import { layersTranslations } from './data-translations'
 
 interface SafetyLayer {
   id: string
@@ -68,7 +69,7 @@ const EN_INTRO = `Safety is defense in depth — multiple layers that each catch
 
 export const SafetyGuardrailsSection: React.FC = () => {
   const { lang } = useLanguage()
-  const lAYERST = tArray(lang, LAYERS)
+  const lAYERST = tArray(lang, LAYERS, layersTranslations)
   const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 

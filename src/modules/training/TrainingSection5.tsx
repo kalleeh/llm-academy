@@ -8,6 +8,7 @@ import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
 import { SelfExplain } from '../../components/SelfExplain'
+import { formatComparisonTranslations } from './data-translations'
 
 function WeightMatrix({
   trained, highlight }: { trained: boolean; highlight: boolean }) {
@@ -90,7 +91,7 @@ const FORMAT_COMPARISON = [
 const EN_P2 = `Format comparison — when to use each:`
 export const TrainingSection5: React.FC = () => {
   const { lang } = useLanguage()
-  const fORMAT_COMPARISONT = tArray(lang, FORMAT_COMPARISON)
+  const fORMAT_COMPARISONT = tArray(lang, FORMAT_COMPARISON, formatComparisonTranslations)
   const c = useT({ title: '5. What\'s Inside the Weight Files'  , p2: EN_P2 }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 

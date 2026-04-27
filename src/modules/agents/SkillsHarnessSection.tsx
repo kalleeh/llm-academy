@@ -4,6 +4,7 @@ import { tArray } from '../../tArray'
 import { skillsHarnessSectionSv, skillsHarnessSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
+import { capabilitiesTranslations } from './data-translations'
 
 const HARNESS_CONFIG = `# AgentCore managed harness — 3 API calls to a production agent
 import boto3
@@ -69,7 +70,7 @@ const EN_INTRO = `MCP gives agents tools. But tools alone aren't enough — you 
 
 export const SkillsHarnessSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cAPABILITIEST = tArray(lang, CAPABILITIES)
+  const cAPABILITIEST = tArray(lang, CAPABILITIES, capabilitiesTranslations)
   const c = useT({ title: '7. Skills, Powers, and the AgentCore Harness', intro: EN_INTRO }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
   return (
   <section aria-labelledby="skills-tech">

@@ -5,6 +5,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { whereItsHeadingSectionSv, whereItsHeadingSectionKo } from './tech-translations'
+import { trendsTranslations } from './data-translations'
 
 interface Trend {
   id: string
@@ -83,7 +84,7 @@ const EN_INTRO = `Six trends shaping the LLM landscape in 2026 and beyond. Click
 
 export const WhereItsHeadingSection: React.FC = () => {
   const { lang } = useLanguage()
-  const tRENDST = tArray(lang, TRENDS)
+  const tRENDST = tArray(lang, TRENDS, trendsTranslations)
   const c = useT({ title: '4. Where It Is Heading', intro: EN_INTRO }, { sv: whereItsHeadingSectionSv, ko: whereItsHeadingSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 

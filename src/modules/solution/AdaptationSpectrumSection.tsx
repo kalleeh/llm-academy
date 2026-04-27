@@ -4,6 +4,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { adaptationSpectrumSectionSv, adaptationSpectrumSectionKo } from './tech-translations'
+import { approachesTranslations, scenariosTranslations } from './data-translations'
 
 interface Approach {
   id: string
@@ -81,8 +82,8 @@ const EN_INTRO = `Not every problem needs training from scratch. Most LLM applic
 
 export const AdaptationSpectrumSection: React.FC = () => {
   const { lang } = useLanguage()
-  const aPPROACHEST = tArray(lang, APPROACHES)
-  const sCENARIOST = tArray(lang, SCENARIOS)
+  const aPPROACHEST = tArray(lang, APPROACHES, approachesTranslations)
+  const sCENARIOST = tArray(lang, SCENARIOS, scenariosTranslations)
   const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
   const [selected, setSelected] = useState<string | null>(null)
   const [scenario, setScenario] = useState<number | null>(null)

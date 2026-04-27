@@ -3,6 +3,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { denseMoESectionSv, denseMoESectionKo } from './tech-translations'
+import { comparisonTranslations } from './data-translations'
 
 type Mode = 'dense' | 'moe'
 
@@ -23,7 +24,7 @@ const COMPARISON = [
 
 export const DenseMoESection: React.FC = () => {
   const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON)
+  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
   const c = useT({ title: '1. Dense vs Mixture-of-Experts' }, { sv: denseMoESectionSv, ko: denseMoESectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 

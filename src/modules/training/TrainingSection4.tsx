@@ -10,6 +10,7 @@ import type { FileNode } from '../../components/FileExplorer'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
+import { variantsTranslations } from './data-translations'
 
 interface Variant {
   id: string
@@ -175,7 +176,7 @@ model.print_trainable_parameters()`,
 const EN_P2 = `Training from scratch is just one option — and the most expensive. Most people start from an existing model and adapt it. Click each approach to compare, then run the terminal command to see the filesystem change.`
 export const TrainingSection4: React.FC = () => {
   const { lang } = useLanguage()
-  const vARIANTST = tArray(lang, VARIANTS)
+  const vARIANTST = tArray(lang, VARIANTS, variantsTranslations)
   const c = useT({ title: '4. Training Variants' , p2: EN_P2 }, { sv: trainingSection4Sv, ko: trainingSection4Ko })
   const [selected, setSelected] = useState('scratch')
   const variant = VARIANTS.find(v => v.id === selected)!

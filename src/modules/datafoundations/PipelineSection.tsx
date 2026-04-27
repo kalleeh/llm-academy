@@ -8,6 +8,7 @@ import { useT } from '../../useT'
 import { useLanguage } from '../../LanguageContext'
 import { tArray } from '../../tArray'
 import { pipelineSectionSv, pipelineSectionKo } from './tech-translations'
+import { stagesTranslations } from './data-translations'
 
 interface PipelineStage {
   id: string
@@ -125,7 +126,7 @@ const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from sou
 
 export const PipelineSection: React.FC = () => {
   const { lang } = useLanguage()
-  const sTAGEST = tArray(lang, STAGES)
+  const sTAGEST = tArray(lang, STAGES, stagesTranslations)
   const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
