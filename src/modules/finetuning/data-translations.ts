@@ -36,17 +36,17 @@ export const checklistTranslations = {
 
 export const platformsTranslations = {
   sv: [
-    { name: 'Unsloth (lokal)', ease: 'Medium', notes: 'Snabbast för LoRA/QLoRA. Gratis, öppen källkod.' },
-    { name: 'Amazon SageMaker', ease: 'Medium', notes: 'Hanterad träning på AWS. Bra integration med Bedrock.' },
-    { name: 'Google Vertex AI', ease: 'Easy', notes: 'Hanterad finjustering med ett klick för Gemma/PaLM.' },
-    { name: 'Together AI', ease: 'Easy', notes: 'API-baserad finjustering. Betala per jobb.' },
-    { name: 'Modal / RunPod', ease: 'Medium', notes: 'GPU-hyra per timme. Full kontroll, lägre kostnad.' },
+    { name: 'Unsloth (lokal)', notes: 'Snabbast för LoRA/QLoRA. Gratis, öppen källkod.' },
+    { name: 'Amazon SageMaker', notes: 'Hanterad träning på AWS. Bra integration med Bedrock.' },
+    { name: 'Google Vertex AI', notes: 'Hanterad finjustering med ett klick för Gemma/PaLM.' },
+    { name: 'Together AI', notes: 'API-baserad finjustering. Betala per jobb.' },
+    { name: 'Modal / RunPod', notes: 'GPU-hyra per timme. Full kontroll, lägre kostnad.' },
   ],
   ko: [
-    { name: 'Unsloth (로컬)', ease: 'Medium', notes: 'LoRA/QLoRA에 가장 빠름. 무료, 오픈소스.' },
-    { name: 'Amazon SageMaker', ease: 'Medium', notes: 'AWS에서 관리형 학습. Bedrock과 좋은 통합.' },
-    { name: 'Google Vertex AI', ease: 'Easy', notes: 'Gemma/PaLM을 위한 원클릭 관리형 파인튜닝.' },
-    { name: 'Together AI', ease: 'Easy', notes: 'API 기반 파인튜닝. 작업당 지불.' },
-    { name: 'Modal / RunPod', ease: 'Medium', notes: '시간당 GPU 임대. 완전한 통제, 낮은 비용.' },
+    { name: 'Unsloth (로컬)', notes: 'LoRA/QLoRA에 가장 빠름. 무료, 오픈소스.' },
+    { name: 'Amazon SageMaker', notes: 'AWS에서 관리형 학습. Bedrock과 좋은 통합.' },
+    { name: 'Google Vertex AI', notes: 'Gemma/PaLM을 위한 원클릭 관리형 파인튜닝.' },
+    { name: 'Together AI', notes: 'API 기반 파인튜닝. 작업당 지불.' },
+    { name: 'Modal / RunPod', notes: '시간당 GPU 임대. 완전한 통제, 낮은 비용.' },
   ],
 }
