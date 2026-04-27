@@ -69,19 +69,19 @@ export const layersTranslations = {
 
 export const trendsTranslations = {
   sv: [
-    { title: 'Resonemangsmodeller', tagline: 'Modeller som tänker innan de svarar', detail: 'o3, DeepSeek-R1 och liknande modeller använder RL för att lära sig chain-of-thought-resonemang.', examples: 'o3 (OpenAI), DeepSeek-R1, Gemini 2 Flash Thinking' },
-    { title: 'Multimodala modeller', tagline: 'Text, bild, ljud, video i en modell', detail: 'Modeller som nativt förstår och genererar flera modaliteter.', examples: 'GPT-4o, Gemini, Claude (vision), Amazon Nova' },
-    { title: 'Öppen konvergens', tagline: 'Öppna modeller närmar sig stängda', detail: 'Gapet minskar snabbt tack vare MoE, distillation och community-innovation.', examples: 'Llama 4, DeepSeek V3, Mistral Large 2' },
-    { title: 'Agentiska system', tagline: 'Från text till handling', detail: 'LLM:er som kan planera, använda verktyg och utföra flerstegsuppgifter autonomt.', examples: 'Amazon Bedrock AgentCore, OpenAI Assistants, LangGraph' },
-    { title: 'Effektivitet', tagline: 'Mer med mindre', detail: 'Kvantisering, MoE, distillation och bättre data gör modeller billigare att köra.', examples: 'GGUF, AWQ, Llama 4 Scout (17B aktiva av 109B)' },
-    { title: 'Reglering', tagline: 'EU AI Act och globala ramverk', detail: 'Regulatoriska krav formar hur modeller utvecklas och driftsätts.', examples: 'EU AI Act (2025-2027), Bidens Executive Order, Kinas AI-regler' },
+    { title: 'Resonemangsmodeller', tagline: 'Modeller som tänker innan de svarar', detail: 'o3, DeepSeek-R1 och liknande modeller använder RL för att lära sig chain-of-thought-resonemang.', examples: ['o3 (OpenAI), DeepSeek-R1, Gemini 2 Flash Thinking'] },
+    { title: 'Multimodala modeller', tagline: 'Text, bild, ljud, video i en modell', detail: 'Modeller som nativt förstår och genererar flera modaliteter.', examples: ['GPT-4o, Gemini, Claude (vision), Amazon Nova'] },
+    { title: 'Öppen konvergens', tagline: 'Öppna modeller närmar sig stängda', detail: 'Gapet minskar snabbt tack vare MoE, distillation och community-innovation.', examples: ['Llama 4, DeepSeek V3, Mistral Large 2'] },
+    { title: 'Agentiska system', tagline: 'Från text till handling', detail: 'LLM:er som kan planera, använda verktyg och utföra flerstegsuppgifter autonomt.', examples: ['Amazon Bedrock AgentCore, OpenAI Assistants, LangGraph'] },
+    { title: 'Effektivitet', tagline: 'Mer med mindre', detail: 'Kvantisering, MoE, distillation och bättre data gör modeller billigare att köra.', examples: ['GGUF, AWQ, Llama 4 Scout (17B aktiva av 109B)'] },
+    { title: 'Reglering', tagline: 'EU AI Act och globala ramverk', detail: 'Regulatoriska krav formar hur modeller utvecklas och driftsätts.', examples: ['EU AI Act (2025-2027), Bidens Executive Order, Kinas AI-regler'] },
   ],
   ko: [
-    { title: '추론 모델', tagline: '답하기 전에 생각하는 모델', detail: 'o3, DeepSeek-R1 등이 RL을 사용하여 chain-of-thought 추론을 학습.', examples: 'o3 (OpenAI), DeepSeek-R1, Gemini 2 Flash Thinking' },
-    { title: '멀티모달 모델', tagline: '텍스트, 이미지, 오디오, 비디오를 하나의 모델에서', detail: '여러 모달리티를 네이티브로 이해하고 생성하는 모델.', examples: 'GPT-4o, Gemini, Claude (비전), Amazon Nova' },
-    { title: '오픈 수렴', tagline: '오픈 모델이 클로즈드에 근접', detail: 'MoE, 증류, 커뮤니티 혁신 덕분에 격차가 빠르게 줄어듦.', examples: 'Llama 4, DeepSeek V3, Mistral Large 2' },
-    { title: '에이전틱 시스템', tagline: '텍스트에서 행동으로', detail: '계획하고, 도구를 사용하고, 다단계 작업을 자율적으로 수행하는 LLM.', examples: 'Amazon Bedrock AgentCore, OpenAI Assistants, LangGraph' },
-    { title: '효율성', tagline: '더 적은 것으로 더 많이', detail: '양자화, MoE, 증류, 더 나은 데이터가 모델 실행 비용을 줄임.', examples: 'GGUF, AWQ, Llama 4 Scout (109B 중 17B 활성)' },
-    { title: '규제', tagline: 'EU AI Act와 글로벌 프레임워크', detail: '규제 요구사항이 모델 개발과 배포 방식을 형성.', examples: 'EU AI Act (2025-2027), Biden Executive Order, 중국 AI 규칙' },
+    { title: '추론 모델', tagline: '답하기 전에 생각하는 모델', detail: 'o3, DeepSeek-R1 등이 RL을 사용하여 chain-of-thought 추론을 학습.', examples: ['o3 (OpenAI), DeepSeek-R1, Gemini 2 Flash Thinking'] },
+    { title: '멀티모달 모델', tagline: '텍스트, 이미지, 오디오, 비디오를 하나의 모델에서', detail: '여러 모달리티를 네이티브로 이해하고 생성하는 모델.', examples: ['GPT-4o, Gemini, Claude (비전), Amazon Nova'] },
+    { title: '오픈 수렴', tagline: '오픈 모델이 클로즈드에 근접', detail: 'MoE, 증류, 커뮤니티 혁신 덕분에 격차가 빠르게 줄어듦.', examples: ['Llama 4, DeepSeek V3, Mistral Large 2'] },
+    { title: '에이전틱 시스템', tagline: '텍스트에서 행동으로', detail: '계획하고, 도구를 사용하고, 다단계 작업을 자율적으로 수행하는 LLM.', examples: ['Amazon Bedrock AgentCore, OpenAI Assistants, LangGraph'] },
+    { title: '효율성', tagline: '더 적은 것으로 더 많이', detail: '양자화, MoE, 증류, 더 나은 데이터가 모델 실행 비용을 줄임.', examples: ['GGUF, AWQ, Llama 4 Scout (109B 중 17B 활성)'] },
+    { title: '규제', tagline: 'EU AI Act와 글로벌 프레임워크', detail: '규제 요구사항이 모델 개발과 배포 방식을 형성.', examples: ['EU AI Act (2025-2027), Biden Executive Order, 중국 AI 규칙'] },
   ],
 }
