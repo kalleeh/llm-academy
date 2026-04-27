@@ -178,10 +178,12 @@ function App() {
       setTimeout(() => {
         setActiveModule(id)
         setVisited((prev) => new Set(prev).add(id))
-        setFadeIn(true)
         setDueCount(getDueReviewCount())
         setSidebarOpen(false)
-        mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+        // Scroll to top immediately, then fade in after scroll completes
+        mainRef.current?.scrollTo({ top: 0 })
+        requestAnimationFrame(() => setFadeIn(true))
+      }, 150)
       }, 150)
     },
     [activeModule, showReview],
@@ -196,9 +198,9 @@ function App() {
     setFadeIn(false)
     setTimeout(() => {
       setShowReview(true)
-      setFadeIn(true)
       setSidebarOpen(false)
-      mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+      mainRef.current?.scrollTo({ top: 0 })
+      requestAnimationFrame(() => setFadeIn(true))
     }, 150)
   }, [showReview])
 

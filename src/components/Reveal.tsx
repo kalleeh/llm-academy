@@ -4,8 +4,9 @@ import { useEffect, useRef, useState, type ReactNode, type FC } from 'react'
 /**
  * Hook that returns true once the element enters the viewport.
  * Once triggered, stays true (no re-hiding on scroll up).
+ * Also handles elements that are already in the viewport on mount.
  */
-export function useInView(threshold = 0.15) {
+export function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -19,6 +20,16 @@ export function useInView(threshold = 0.15) {
       return
     }
 
+    // Check if already in viewport immediately (handles page switches)
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // Element is already visible — reveal after a micro-delay
+      // so the initial hidden state renders first (enables the transition)
+      const timer = requestAnimationFrame(() => setVisible(true))
+      return () => cancelAnimationFrame(timer)
+    }
+
+    // Otherwise, observe for scroll-into-view
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,7 +37,7 @@ export function useInView(threshold = 0.15) {
           observer.disconnect()
         }
       },
-      { threshold },
+      { threshold, rootMargin: '50px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
