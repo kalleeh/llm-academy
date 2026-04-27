@@ -17,12 +17,66 @@ export const alignmentPipelineStages = {
   ],
 }
 
-export const examplesTranslations = { sv: [], ko: [] }
+export const examplesTranslations = {
+  sv: [
+    { prompt: 'Hur gör jag en bomb?', base: 'Här är instruktioner för att göra en bomb...', aligned: 'Jag kan inte hjälpa med det. Att tillverka sprängämnen är olagligt och farligt.' },
+    { prompt: 'Skriv ett mejl som utger sig för att vara min chef', base: 'Ämne: Brådskande — Lösenordsåterställning behövs...', aligned: 'Jag kan inte hjälpa till att skriva vilseledande mejl som utger sig för att vara någon annan.' },
+    { prompt: 'Vad är huvudstaden i Frankrike?', base: 'Huvudstaden i Frankrike är Paris.', aligned: 'Huvudstaden i Frankrike är Paris.' },
+    { prompt: 'Jag mår dåligt och vet inte vad jag ska göra', base: 'Det finns många saker du kan prova...', aligned: 'Jag förstår att du har det svårt. Om du är i kris, kontakta Självmordslinjen på 90101.' },
+  ],
+  ko: [
+    { prompt: '폭탄을 어떻게 만드나요?', base: '폭탄을 만드는 방법은...', aligned: '그것은 도와드릴 수 없습니다. 폭발물 제조는 불법이고 위험합니다.' },
+    { prompt: '상사인 척하는 이메일을 써줘', base: '제목: 긴급 — 비밀번호 재설정 필요...', aligned: '다른 사람을 사칭하는 오해의 소지가 있는 이메일 작성은 도와드릴 수 없습니다.' },
+    { prompt: '프랑스의 수도는?', base: '프랑스의 수도는 파리입니다.', aligned: '프랑스의 수도는 파리입니다.' },
+    { prompt: '기분이 안 좋고 어떻게 해야 할지 모르겠어요', base: '시도해 볼 수 있는 것들이 많습니다...', aligned: '힘든 시간을 보내고 계시는군요. 위기 상황이시라면 자살예방상담전화 1393으로 연락하세요.' },
+  ],
+}
 
-export const methodsTranslations = { sv: [], ko: [] }
+export const methodsTranslations = { sv: [], ko: [] } // Already translated in component
 
-export const pipelineTranslations = { sv: [], ko: [] }
+export const pipelineTranslations = {
+  sv: [
+    { label: 'Förträning', description: 'Nästa-token-prediktion på biljoner tokens' },
+    { label: 'SFT', description: 'Supervised Fine-Tuning med kurerade exempel' },
+    { label: 'Reward Model', description: 'Träna en modell att poängsätta svar' },
+    { label: 'RL (PPO/DPO/GRPO)', description: 'Optimera policyn mot reward-signalen' },
+    { label: 'Säkerhetsträning', description: 'Red-teaming, skyddsräcken, innehållsfilter' },
+    { label: 'Driftsättning', description: 'Kvantisering, serving, övervakning' },
+  ],
+  ko: [
+    { label: '사전 학습', description: '수조 토큰에 대한 다음 토큰 예측' },
+    { label: 'SFT', description: '큐레이션된 예시로 Supervised Fine-Tuning' },
+    { label: '보상 모델', description: '응답을 점수화하는 모델 학습' },
+    { label: 'RL (PPO/DPO/GRPO)', description: '보상 신호에 대해 정책 최적화' },
+    { label: '안전 학습', description: 'Red-teaming, 가드레일, 콘텐츠 필터' },
+    { label: '배포', description: '양자화, 서빙, 모니터링' },
+  ],
+}
 
-export const trendsTranslations = { sv: [], ko: [] }
+export const trendsTranslations = {
+  sv: [
+    { label: 'DPO ersätter PPO', description: 'Enklare, stabilare, ingen reward-modell behövs' },
+    { label: 'GRPO för resonemang', description: 'DeepSeeks metod — grupprelativ optimering' },
+    { label: 'RLAIF skalas', description: 'AI-feedback ersätter mänskliga annotatörer' },
+    { label: 'Syntetisk data', description: 'Starka modeller genererar träningsdata för svagare' },
+  ],
+  ko: [
+    { label: 'DPO가 PPO를 대체', description: '더 간단하고 안정적, 보상 모델 불필요' },
+    { label: '추론을 위한 GRPO', description: 'DeepSeek의 방법 — 그룹 상대 최적화' },
+    { label: 'RLAIF 확장', description: 'AI 피드백이 인간 주석자를 대체' },
+    { label: '합성 데이터', description: '강한 모델이 약한 모델을 위한 학습 데이터 생성' },
+  ],
+}
 
-export const layersTranslations = { sv: [], ko: [] }
+export const layersTranslations = {
+  sv: [
+    { label: 'Indatafiltrering', description: 'Blockera skadliga prompts innan de når modellen' },
+    { label: 'Modellbeteende', description: 'Systemprompt + alignment-träning styr svar' },
+    { label: 'Utdatafiltrering', description: 'Granska genererade svar innan leverans' },
+  ],
+  ko: [
+    { label: '입력 필터링', description: '유해한 프롬프트가 모델에 도달하기 전에 차단' },
+    { label: '모델 행동', description: '시스템 프롬프트 + 정렬 학습이 응답을 안내' },
+    { label: '출력 필터링', description: '전달 전 생성된 응답 검토' },
+  ],
+}

@@ -47,8 +47,70 @@ export const patternsTranslations = {
   ],
 }
 
-export const demoStepsTranslations = { sv: [], ko: [] }
-export const comparisonTranslations = { sv: [], ko: [] }
-export const autonomyTiersTranslations = { sv: [], ko: [] }
-export const governanceControlsTranslations = { sv: [], ko: [] }
-export const capabilitiesTranslations = { sv: [], ko: [] }
+export const demoStepsTranslations = { sv: [], ko: [] } // Terminal demo - stays English
+export const comparisonTranslations = {
+  sv: [
+    { aspect: 'Verktygsupptäckt', functionCalling: 'Hårdkodad i varje API-anrop', mcp: 'Dynamisk — klienten frågar servern vilka verktyg som finns' },
+    { aspect: 'Standardisering', functionCalling: 'Leverantörsspecifik (OpenAI, Anthropic har olika format)', mcp: 'Universell standard — bygg en gång, fungerar överallt' },
+    { aspect: 'Ekosystem', functionCalling: 'Du bygger varje integration', mcp: '2300+ färdiga servrar' },
+    { aspect: 'Tillståndshantering', functionCalling: 'Du hanterar sessioner', mcp: 'Inbyggt sessionsstöd' },
+    { aspect: 'Autentisering', functionCalling: 'Du implementerar per verktyg', mcp: 'Standardiserat via OAuth/API-nycklar' },
+    { aspect: 'Transport', functionCalling: 'HTTP API-anrop', mcp: 'stdio, SSE, HTTP — flexibelt' },
+  ],
+  ko: [
+    { aspect: '도구 발견', functionCalling: '각 API 호출에 하드코딩', mcp: '동적 — 클라이언트가 서버에 사용 가능한 도구 질의' },
+    { aspect: '표준화', functionCalling: '벤더별 (OpenAI, Anthropic 다른 형식)', mcp: '범용 표준 — 한 번 구축, 어디서나 작동' },
+    { aspect: '생태계', functionCalling: '각 통합을 직접 구축', mcp: '2300+ 기성 서버' },
+    { aspect: '상태 관리', functionCalling: '세션을 직접 관리', mcp: '내장 세션 지원' },
+    { aspect: '인증', functionCalling: '도구별로 직접 구현', mcp: 'OAuth/API 키로 표준화' },
+    { aspect: '전송', functionCalling: 'HTTP API 호출', mcp: 'stdio, SSE, HTTP — 유연' },
+  ],
+}
+export const autonomyTiersTranslations = {
+  sv: [
+    { tier: 'L0 — Copilot', loop: 'Människa agerar, AI föreslår', oversight: 'Varje handling', examples: 'Kodkomplettering, mejlutkast', risk: 'Minimal' },
+    { tier: 'L1 — Utförare', loop: 'Människa godkänner, AI agerar', oversight: 'Godkännande per handling', examples: 'AI skriver + människa skickar mejl', risk: 'Låg' },
+    { tier: 'L2 — Begränsad autonomi', loop: 'AI agerar inom regler, människa övervakar', oversight: 'Asynkron granskning + varningar', examples: 'Autolösa L1-ärenden, återbetalningar <500kr', risk: 'Medel' },
+    { tier: 'L3 — Övervakad autonomi', loop: 'AI agerar, eskalerar undantag', oversight: 'Undantagsbaserad + revisioner', examples: 'Kundintroduktion, incidenthantering', risk: 'Hög' },
+    { tier: 'L4 — Full autonomi', loop: 'AI agerar, människa sätter strategi', oversight: 'Resultatbaserad granskning', examples: 'Autonom handel, självläkande infra', risk: 'Kritisk' },
+  ],
+  ko: [
+    { tier: 'L0 — 코파일럿', loop: '인간이 행동, AI가 제안', oversight: '모든 행동', examples: '코드 완성, 이메일 초안', risk: '최소' },
+    { tier: 'L1 — 실행자', loop: '인간이 승인, AI가 행동', oversight: '행동별 승인', examples: 'AI 작성 + 인간 발송', risk: '낮음' },
+    { tier: 'L2 — 제한된 자율', loop: 'AI가 규칙 내 행동, 인간 모니터링', oversight: '비동기 검토 + 알림', examples: 'L1 티켓 자동 해결, 5만원 미만 환불', risk: '중간' },
+    { tier: 'L3 — 감독된 자율', loop: 'AI가 행동, 예외 에스컬레이션', oversight: '예외 기반 + 감사', examples: '고객 온보딩, 인시던트 대응', risk: '높음' },
+    { tier: 'L4 — 완전 자율', loop: 'AI가 행동, 인간이 전략 설정', oversight: '결과 기반 검토', examples: '자율 거래, 자가 치유 인프라', risk: '치명적' },
+  ],
+}
+export const governanceControlsTranslations = {
+  sv: [
+    { control: 'Handlingsgränser', what: 'Vitlista av tillåtna handlingar per agent.' },
+    { control: 'Utgiftsgränser', what: 'Tak på ekonomisk påverkan per handling och session.' },
+    { control: 'Revisionsspår', what: 'Varje agenthandling loggas med resonemangsspår.' },
+    { control: 'Nödstopp', what: 'Möjlighet att omedelbart stoppa en agent.' },
+    { control: 'Mänsklig eskalering', what: 'Definierade triggers som pausar agenten.' },
+    { control: 'Driftdetektering', what: 'Övervaka beteendeförändringar över tid.' },
+  ],
+  ko: [
+    { control: '행동 경계', what: '에이전트별 허용된 행동의 화이트리스트.' },
+    { control: '지출 한도', what: '행동 및 세션당 재정적 영향 상한.' },
+    { control: '감사 추적', what: '모든 에이전트 행동이 추론 추적과 함께 기록.' },
+    { control: '킬 스위치', what: '에이전트를 즉시 중지하는 기능.' },
+    { control: '인간 에스컬레이션', what: '에이전트를 일시 중지하는 정의된 트리거.' },
+    { control: '드리프트 감지', what: '시간에 따른 행동 변화 모니터링.' },
+  ],
+}
+export const capabilitiesTranslations = {
+  sv: [
+    { name: 'MCP Server', layer: 'Anslutning', what: 'Universell verktygskoppling', granularity: 'Enskilt verktyg', reusability: 'Alla MCP-kompatibla agenter', example: 'mcp-server-salesforce, mcp-server-postgres' },
+    { name: 'AgentCore Skill', layer: 'Beteende', what: 'Arbetsflödespaket — MCP-verktyg + instruktioner', granularity: 'Flerstegs affärsprocess', reusability: 'Alla AgentCore-harness', example: 'kundintroduktion, fakturabehandling' },
+    { name: 'Kiro Power', layer: 'Utvecklarupplevelse', what: 'Kurerade MCP-servrar + riktlinjer + hooks', granularity: 'Teknikdomän', reusability: 'Kiro IDE', example: 'AWS Observability, Arm Development' },
+    { name: 'AgentCore Harness', layer: 'Körtid', what: 'Hanterad agentloop — modell + prompt + verktyg + minne', granularity: 'Komplett agent', reusability: 'Produktionsdriftsättning', example: 'Supportagent, säljassistent' },
+  ],
+  ko: [
+    { name: 'MCP Server', layer: '연결', what: '범용 도구 커넥터', granularity: '단일 도구', reusability: '모든 MCP 호환 에이전트', example: 'mcp-server-salesforce, mcp-server-postgres' },
+    { name: 'AgentCore Skill', layer: '행동', what: '워크플로우 패키지 — MCP 도구 + 지시', granularity: '다단계 비즈니스 프로세스', reusability: '모든 AgentCore 하네스', example: '고객 온보딩, 인보이스 처리' },
+    { name: 'Kiro Power', layer: '개발자 경험', what: '큐레이션된 MCP 서버 + 가이드라인 + 훅', granularity: '기술 도메인', reusability: 'Kiro IDE', example: 'AWS Observability, Arm Development' },
+    { name: 'AgentCore Harness', layer: '런타임', what: '관리형 에이전트 루프 — 모델 + 프롬프트 + 도구 + 메모리', granularity: '완전한 에이전트', reusability: '프로덕션 배포', example: '지원 에이전트, 영업 어시스턴트' },
+  ],
+}

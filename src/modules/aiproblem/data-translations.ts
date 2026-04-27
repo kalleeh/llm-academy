@@ -26,12 +26,91 @@ export const overlaysTranslations = {
   ],
 }
 
-export const scenariosTranslations = { sv: [], ko: [] }
+export const scenariosTranslations = {
+  sv: [
+    { problem: 'Förutsäga kundavhopp', approach: 'Klassisk ML', category: 'Tabelldata → ML', why: 'Strukturerad data med tydligt prediktionsmål' },
+    { problem: 'Sammanfatta juridiska kontrakt', approach: 'LLM', category: 'Textförståelse → LLM', why: 'Kräver läsning och bedömning av lång text' },
+    { problem: 'Beräkna skatt', approach: 'Regelbaserat', category: 'Deterministisk logik', why: 'Exakta regler definierade i lag' },
+    { problem: 'Klassificera röntgenbilder', approach: 'Deep Learning (CNN)', category: 'Bilddata → DL', why: 'Visuell mönsterigenkänning' },
+    { problem: 'Svara på kundfrågor', approach: 'LLM + RAG', category: 'Textgenerering + kunskap', why: 'Naturligt språk + företagsspecifik kunskap' },
+    { problem: 'Upptäcka bedrägeri', approach: 'ML (anomalidetektion)', category: 'Tabelldata → ML', why: 'Hitta ovanliga mönster i transaktionsdata' },
+    { problem: 'Generera produktbeskrivningar', approach: 'LLM', category: 'Textgenerering → LLM', why: 'Kreativt skrivande med varumärkesröst' },
+    { problem: 'Sortera e-post', approach: 'ML (klassificering)', category: 'Textklassificering → ML', why: 'Kategorisera i fördefinierade klasser' },
+    { problem: 'Rekommendera produkter', approach: 'ML (collaborative filtering)', category: 'Tabelldata → ML', why: 'Mönster i användarbeteende' },
+    { problem: 'Översätta dokument', approach: 'LLM', category: 'Textgenerering → LLM', why: 'Kräver djup språkförståelse' },
+  ],
+  ko: [
+    { problem: '고객 이탈 예측', approach: '클래식 ML', category: '테이블 데이터 → ML', why: '명확한 예측 목표가 있는 정형 데이터' },
+    { problem: '법률 계약서 요약', approach: 'LLM', category: '텍스트 이해 → LLM', why: '긴 텍스트의 읽기와 판단 필요' },
+    { problem: '세금 계산', approach: '규칙 기반', category: '결정론적 로직', why: '법으로 정의된 정확한 규칙' },
+    { problem: 'X선 이미지 분류', approach: '딥러닝 (CNN)', category: '이미지 데이터 → DL', why: '시각적 패턴 인식' },
+    { problem: '고객 질문 답변', approach: 'LLM + RAG', category: '텍스트 생성 + 지식', why: '자연어 + 회사별 지식' },
+    { problem: '사기 탐지', approach: 'ML (이상 탐지)', category: '테이블 데이터 → ML', why: '거래 데이터에서 비정상 패턴 찾기' },
+    { problem: '제품 설명 생성', approach: 'LLM', category: '텍스트 생성 → LLM', why: '브랜드 보이스로 창의적 작성' },
+    { problem: '이메일 분류', approach: 'ML (분류)', category: '텍스트 분류 → ML', why: '사전 정의된 클래스로 분류' },
+    { problem: '제품 추천', approach: 'ML (협업 필터링)', category: '테이블 데이터 → ML', why: '사용자 행동 패턴' },
+    { problem: '문서 번역', approach: 'LLM', category: '텍스트 생성 → LLM', why: '깊은 언어 이해 필요' },
+  ],
+}
 
-export const comparisonTranslations = { sv: [], ko: [] }
+export const comparisonTranslations = {
+  sv: [
+    { dimension: 'Indata', ml: 'Strukturerade features (siffror i kolumner)', llm: 'Rå text (naturligt språk)' },
+    { dimension: 'Träning', ml: 'Uppgiftsspecifik (en modell per uppgift)', llm: 'Generell (en modell, många uppgifter)' },
+    { dimension: 'Datamängd', ml: '1K-1M märkta exempel', llm: 'Biljoner tokens oövervakad text' },
+    { dimension: 'Utdata', ml: 'Siffra eller kategori', llm: 'Fri text, kod, resonemang' },
+    { dimension: 'Generaliserbarhet', ml: 'Bara den tränade uppgiften', llm: 'Zero-shot till nya uppgifter' },
+    { dimension: 'Tolkbarhet', ml: 'Ofta tolkbar (beslutsträd, SHAP)', llm: 'Svårtolkad (svart låda)' },
+  ],
+  ko: [
+    { dimension: '입력', ml: '구조화된 피처 (열의 숫자)', llm: '원시 텍스트 (자연어)' },
+    { dimension: '학습', ml: '작업별 (작업당 하나의 모델)', llm: '범용 (하나의 모델, 많은 작업)' },
+    { dimension: '데이터 양', ml: '1K-1M 레이블된 예시', llm: '수조 토큰의 비지도 텍스트' },
+    { dimension: '출력', ml: '숫자 또는 카테고리', llm: '자유 텍스트, 코드, 추론' },
+    { dimension: '일반화', ml: '학습된 작업만', llm: '새 작업에 제로샷' },
+    { dimension: '해석 가능성', ml: '종종 해석 가능 (결정 트리, SHAP)', llm: '해석 어려움 (블랙 박스)' },
+  ],
+}
 
-export const overkillCasesTranslations = { sv: [], ko: [] }
+export const overkillCasesTranslations = {
+  sv: [
+    { label: 'Tabelldata med tydligt mål', detail: 'Huspriser, kundavhopp, kreditrisk — gradient boosting slår LLM:er' },
+    { label: 'Deterministisk logik', detail: 'Skatteberäkning, regelvalidering — traditionell kod är 100% korrekt' },
+    { label: 'Realtidssignalbehandling', detail: 'Sensordata, anomalidetektion — specialiserade ML-modeller är snabbare' },
+  ],
+  ko: [
+    { label: '명확한 목표가 있는 테이블 데이터', detail: '주택 가격, 고객 이탈, 신용 위험 — gradient boosting이 LLM을 이김' },
+    { label: '결정론적 로직', detail: '세금 계산, 규칙 검증 — 전통적 코드가 100% 정확' },
+    { label: '실시간 신호 처리', detail: '센서 데이터, 이상 탐지 — 전문 ML 모델이 더 빠름' },
+  ],
+}
 
-export const mlBetterCasesTranslations = { sv: [], ko: [] }
+export const mlBetterCasesTranslations = {
+  sv: [
+    { label: 'Strukturerad data', detail: 'Rader och kolumner med numeriska features' },
+    { label: 'Latenskritiskt', detail: 'Behöver svar på <10ms (LLM:er tar 100ms+)' },
+    { label: 'Tolkbarhet krävs', detail: 'Regulatoriska krav på att förklara beslut' },
+  ],
+  ko: [
+    { label: '정형 데이터', detail: '수치 피처가 있는 행과 열' },
+    { label: '지연시간 중요', detail: '<10ms 응답 필요 (LLM은 100ms+)' },
+    { label: '해석 가능성 필요', detail: '결정을 설명해야 하는 규제 요구' },
+  ],
+}
 
-export const toolboxTranslations = { sv: [], ko: [] }
+export const toolboxTranslations = {
+  sv: [
+    { level: 'Klassisk ML', tools: 'scikit-learn, XGBoost, LightGBM, pandas' },
+    { level: 'Deep Learning', tools: 'PyTorch, TensorFlow, JAX, Keras' },
+    { level: 'LLM-träning', tools: 'HuggingFace Transformers, DeepSpeed, Megatron-LM' },
+    { level: 'LLM-inferens', tools: 'vLLM, llama.cpp, Ollama, Amazon Bedrock' },
+    { level: 'LLM-applikationer', tools: 'LangChain, LlamaIndex, Vercel AI SDK, Amazon Bedrock Agents' },
+  ],
+  ko: [
+    { level: '클래식 ML', tools: 'scikit-learn, XGBoost, LightGBM, pandas' },
+    { level: '딥러닝', tools: 'PyTorch, TensorFlow, JAX, Keras' },
+    { level: 'LLM 학습', tools: 'HuggingFace Transformers, DeepSpeed, Megatron-LM' },
+    { level: 'LLM 추론', tools: 'vLLM, llama.cpp, Ollama, Amazon Bedrock' },
+    { level: 'LLM 애플리케이션', tools: 'LangChain, LlamaIndex, Vercel AI SDK, Amazon Bedrock Agents' },
+  ],
+}
