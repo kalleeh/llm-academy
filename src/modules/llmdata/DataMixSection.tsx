@@ -1,6 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
 import { dataMixSectionSv, dataMixSectionKo } from './tech-translations'
 
 const SLIDERS = [
@@ -22,7 +21,6 @@ const EN_P2 = `{c.p2}`
 const EN_INTRO = `The ratio of data types directly shapes what the model is good at.`
 
 export const DataMixSection: React.FC = () => {
-  const { lang } = useLanguage()
   const c = useT({ title: '3. Data Mix', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
   const [mix, setMix] = useState<Record<string, number>>({ text: 60, code: 25, math: 15 })
 

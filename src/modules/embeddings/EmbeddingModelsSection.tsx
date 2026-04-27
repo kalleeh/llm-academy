@@ -1,5 +1,4 @@
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
 import { embeddingModelsSectionSv, embeddingModelsSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 
@@ -44,7 +43,6 @@ const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
-  const { lang } = useLanguage()
   const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">

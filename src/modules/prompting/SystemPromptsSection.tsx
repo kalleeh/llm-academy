@@ -2,7 +2,6 @@ import { useState, useCallback, useMemo } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
 import { systemPromptsSectionSv, systemPromptsSectionKo } from './tech-translations'
 
 const FRAMEWORK_FIELDS = [
@@ -26,7 +25,6 @@ const DEFAULT_VALUES: Record<FieldKey, string> = {
 const EN_INTRO = `Edit each component to build your system prompt. The preview updates live.`
 
 export const SystemPromptsSection: React.FC = () => {
-  const { lang } = useLanguage()
   const c = useT({ title: '3. System Prompts', intro: EN_INTRO }, { sv: systemPromptsSectionSv, ko: systemPromptsSectionKo })
   const [values, setValues] = useState<Record<FieldKey, string>>(DEFAULT_VALUES)
 
