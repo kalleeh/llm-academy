@@ -15,18 +15,18 @@ export const categoriesTranslations = {
 
 export const stagesTranslations = {
   sv: [
-    { label: 'Extrahera', description: 'Hämta rå data från källsystem', details: 'API:er, databaser, filer, webbskrapning' },
-    { label: 'Transformera', description: 'Rensa, normalisera, berika', details: 'Ta bort dubbletter, fixa format, lägg till beräknade fält' },
-    { label: 'Ladda', description: 'Skriv till destinationssystem', details: 'Data warehouse, vektordatabas, sökindex' },
-    { label: 'Validera', description: 'Kontrollera kvalitet och fullständighet', details: 'Schemavalidering, nullkontroller, distributionskontroller' },
-    { label: 'Övervaka', description: 'Spåra pipeline-hälsa över tid', details: 'Datadrift, volymavvikelser, fördröjningsvarningar' },
+    { label: 'Extrahera', description: 'Hämta rå data från källsystem', details: ['API:er, databaser, filer, webbskrapning'] },
+    { label: 'Transformera', description: 'Rensa, normalisera, berika', details: ['Ta bort dubbletter, fixa format, lägg till beräknade fält'] },
+    { label: 'Ladda', description: 'Skriv till destinationssystem', details: ['Data warehouse, vektordatabas, sökindex'] },
+    { label: 'Validera', description: 'Kontrollera kvalitet och fullständighet', details: ['Schemavalidering, nullkontroller, distributionskontroller'] },
+    { label: 'Övervaka', description: 'Spåra pipeline-hälsa över tid', details: ['Datadrift, volymavvikelser, fördröjningsvarningar'] },
   ],
   ko: [
-    { label: '추출', description: '소스 시스템에서 원시 데이터 가져오기', details: 'API, 데이터베이스, 파일, 웹 스크래핑' },
-    { label: '변환', description: '정제, 정규화, 보강', details: '중복 제거, 형식 수정, 계산된 필드 추가' },
-    { label: '로드', description: '대상 시스템에 쓰기', details: '데이터 웨어하우스, 벡터 데이터베이스, 검색 인덱스' },
-    { label: '검증', description: '품질과 완전성 확인', details: '스키마 검증, null 체크, 분포 체크' },
-    { label: '모니터링', description: '시간에 따른 파이프라인 건강 추적', details: '데이터 드리프트, 볼륨 이상, 지연 경고' },
+    { label: '추출', description: '소스 시스템에서 원시 데이터 가져오기', details: ['API, 데이터베이스, 파일, 웹 스크래핑'] },
+    { label: '변환', description: '정제, 정규화, 보강', details: ['중복 제거, 형식 수정, 계산된 필드 추가'] },
+    { label: '로드', description: '대상 시스템에 쓰기', details: ['데이터 웨어하우스, 벡터 데이터베이스, 검색 인덱스'] },
+    { label: '검증', description: '품질과 완전성 확인', details: ['스키마 검증, null 체크, 분포 체크'] },
+    { label: '모니터링', description: '시간에 따른 파이프라인 건강 추적', details: ['데이터 드리프트, 볼륨 이상, 지연 경고'] },
   ],
 }
 

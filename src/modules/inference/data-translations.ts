@@ -25,17 +25,17 @@ export const techniquesTranslations = {
 
 export const frameworksTranslations = {
   sv: [
-    { name: 'vLLM', tagline: 'Snabbast för de flesta användningsfall', features: 'PagedAttention, continuous batching, tensor parallelism' },
-    { name: 'TGI (HuggingFace)', tagline: 'Enkel integration med HuggingFace-ekosystemet', features: 'Flash attention, kvantisering, streaming' },
-    { name: 'llama.cpp', tagline: 'CPU-inferens, GGUF-format', features: 'Körs överallt — laptop, telefon, Raspberry Pi' },
-    { name: 'Ollama', tagline: 'Enklaste sättet att köra lokalt', features: 'En-kommando-installation, modellbibliotek, API' },
-    { name: 'Amazon Bedrock', tagline: 'Hanterad inferens, 100+ modeller', features: 'Inget att hantera — API-anrop, autoskalning, företagssäkerhet' },
+    { name: 'vLLM', tagline: 'Snabbast för de flesta användningsfall', features: ['PagedAttention, continuous batching, tensor parallelism'] },
+    { name: 'TGI (HuggingFace)', tagline: 'Enkel integration med HuggingFace-ekosystemet', features: ['Flash attention, kvantisering, streaming'] },
+    { name: 'llama.cpp', tagline: 'CPU-inferens, GGUF-format', features: ['Körs överallt — laptop, telefon, Raspberry Pi'] },
+    { name: 'Ollama', tagline: 'Enklaste sättet att köra lokalt', features: ['En-kommando-installation, modellbibliotek, API'] },
+    { name: 'Amazon Bedrock', tagline: 'Hanterad inferens, 100+ modeller', features: ['Inget att hantera — API-anrop, autoskalning, företagssäkerhet'] },
   ],
   ko: [
-    { name: 'vLLM', tagline: '대부분의 사용 사례에서 가장 빠름', features: 'PagedAttention, continuous batching, tensor parallelism' },
-    { name: 'TGI (HuggingFace)', tagline: 'HuggingFace 생태계와 쉬운 통합', features: 'Flash attention, 양자화, 스트리밍' },
-    { name: 'llama.cpp', tagline: 'CPU 추론, GGUF 포맷', features: '어디서나 실행 — 노트북, 폰, Raspberry Pi' },
-    { name: 'Ollama', tagline: '로컬 실행의 가장 쉬운 방법', features: '원커맨드 설치, 모델 라이브러리, API' },
-    { name: 'Amazon Bedrock', tagline: '관리형 추론, 100+ 모델', features: '관리할 것 없음 — API 호출, 자동 스케일링, 엔터프라이즈 보안' },
+    { name: 'vLLM', tagline: '대부분의 사용 사례에서 가장 빠름', features: ['PagedAttention, continuous batching, tensor parallelism'] },
+    { name: 'TGI (HuggingFace)', tagline: 'HuggingFace 생태계와 쉬운 통합', features: ['Flash attention, 양자화, 스트리밍'] },
+    { name: 'llama.cpp', tagline: 'CPU 추론, GGUF 포맷', features: ['어디서나 실행 — 노트북, 폰, Raspberry Pi'] },
+    { name: 'Ollama', tagline: '로컬 실행의 가장 쉬운 방법', features: ['원커맨드 설치, 모델 라이브러리, API'] },
+    { name: 'Amazon Bedrock', tagline: '관리형 추론, 100+ 모델', features: ['관리할 것 없음 — API 호출, 자동 스케일링, 엔터프라이즈 보안'] },
   ],
 }
