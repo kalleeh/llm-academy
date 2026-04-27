@@ -100,17 +100,17 @@ export const mlBetterCasesTranslations = {
 
 export const toolboxTranslations = {
   sv: [
-    { level: 'Klassisk ML', tools: [''scikit-learn'', ''XGBoost'', ''LightGBM'', ''pandas''] },
-    { level: 'Deep Learning', tools: [''PyTorch'', ''TensorFlow'', ''JAX'', ''Keras''] },
-    { level: 'LLM-träning', tools: [''HuggingFace Transformers'', ''DeepSpeed'', ''Megatron-LM''] },
-    { level: 'LLM-inferens', tools: [''vLLM'', ''llama.cpp'', ''Ollama'', ''Amazon Bedrock''] },
-    { level: 'LLM-applikationer', tools: [''LangChain'', ''LlamaIndex'', ''Vercel AI SDK'', ''Amazon Bedrock Agents''] },
+    { level: 'Klassisk ML', tools: ['scikit-learn', 'XGBoost', 'LightGBM', 'pandas'] },
+    { level: 'Deep Learning', tools: ['PyTorch', 'TensorFlow', 'JAX', 'Keras'] },
+    { level: 'LLM-träning', tools: ['HuggingFace Transformers', 'DeepSpeed', 'Megatron-LM'] },
+    { level: 'LLM-inferens', tools: ['vLLM', 'llama.cpp', 'Ollama', 'Amazon Bedrock'] },
+    { level: 'LLM-applikationer', tools: ['LangChain', 'LlamaIndex', 'Vercel AI SDK', 'Amazon Bedrock Agents'] },
   ],
   ko: [
-    { level: '클래식 ML', tools: [''scikit-learn'', ''XGBoost'', ''LightGBM'', ''pandas''] },
-    { level: '딥러닝', tools: [''PyTorch'', ''TensorFlow'', ''JAX'', ''Keras''] },
-    { level: 'LLM 학습', tools: [''HuggingFace Transformers'', ''DeepSpeed'', ''Megatron-LM''] },
-    { level: 'LLM 추론', tools: [''vLLM'', ''llama.cpp'', ''Ollama'', ''Amazon Bedrock''] },
-    { level: 'LLM 애플리케이션', tools: [''LangChain'', ''LlamaIndex'', ''Vercel AI SDK'', ''Amazon Bedrock Agents''] },
+    { level: '클래식 ML', tools: ['scikit-learn', 'XGBoost', 'LightGBM', 'pandas'] },
+    { level: '딥러닝', tools: ['PyTorch', 'TensorFlow', 'JAX', 'Keras'] },
+    { level: 'LLM 학습', tools: ['HuggingFace Transformers', 'DeepSpeed', 'Megatron-LM'] },
+    { level: 'LLM 추론', tools: ['vLLM', 'llama.cpp', 'Ollama', 'Amazon Bedrock'] },
+    { level: 'LLM 애플리케이션', tools: ['LangChain', 'LlamaIndex', 'Vercel AI SDK', 'Amazon Bedrock Agents'] },
   ],
 }
