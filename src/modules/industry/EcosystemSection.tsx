@@ -56,8 +56,10 @@ const LAYERS: Layer[] = [
   },
 ]
 
+const EN_INTRO = `LLMs don't exist in isolation. A full stack connects foundation models to end users.`
+
 export const EcosystemSection: React.FC = () => {
-  const c = useT({ title: '3. The Ecosystem' }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
+  const c = useT({ title: '3. The Ecosystem', intro: EN_INTRO }, { sv: ecosystemSectionSv, ko: ecosystemSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 
   const toggle = useCallback((idx: number) => {
@@ -67,9 +69,7 @@ export const EcosystemSection: React.FC = () => {
   return (
     <section aria-labelledby="ecosystem">
       <h2 id="ecosystem" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        LLMs don't exist in isolation. A full stack connects foundation models to end users.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="space-y-2">
         {LAYERS.map((layer, idx) => (

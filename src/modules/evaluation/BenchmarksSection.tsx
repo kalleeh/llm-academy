@@ -21,17 +21,17 @@ const BENCHMARKS: Benchmark[] = [
   { name: 'LMArena / Chatbot Arena', category: 'Human Pref', color: 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300', what: 'Blind side-by-side comparisons. Real users chat with two anonymous models and pick the better one. ELO rating system.', example: 'User sends same prompt to Model A and Model B, picks preferred response without knowing which is which.', scoring: 'ELO rating from pairwise human preferences.', topScores: 'GPT-5: ~1380 ELO · Claude Opus 4.6: ~1370 · Gemini 3.1: ~1360' },
 ]
 
+const EN_INTRO = `The industry uses standardized benchmarks to compare models. No single benchmark tells the whole story.`
+
 export const BenchmarksSection: React.FC = () => {
-  const c = useT({ title: '2. Key Benchmarks (2025–2026)' }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
+  const c = useT({ title: '2. Key Benchmarks (2025–2026)', intro: EN_INTRO }, { sv: benchmarksSectionSv, ko: benchmarksSectionKo })
   const [selected, setSelected] = useState(0)
   const bench = BENCHMARKS[selected]
 
   return (
     <section aria-labelledby="benchmarks">
       <h2 id="benchmarks" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The industry uses standardized benchmarks to compare models. No single benchmark tells the whole story.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-4 flex flex-wrap gap-2">
         {BENCHMARKS.map((b, i) => (

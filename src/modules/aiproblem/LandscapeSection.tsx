@@ -92,8 +92,10 @@ const OVERLAYS: OverlayBadge[] = [
   },
 ]
 
+const EN_INTRO = `AI is a broad field. Machine Learning is a subset, Deep Learning is a subset of that, and LLMs are a specific kind of deep learning. Click each layer to explore.`
+
 export const LandscapeSection: React.FC = () => {
-  const c = useT({ title: '1. The Landscape' }, { sv: landscapeSectionSv, ko: landscapeSectionKo })
+  const c = useT({ title: '1. The Landscape', intro: EN_INTRO }, { sv: landscapeSectionSv, ko: landscapeSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
   const [activeOverlay, setActiveOverlay] = useState<string | null>(null)
 
@@ -108,9 +110,7 @@ export const LandscapeSection: React.FC = () => {
   return (
     <section aria-labelledby="landscape">
       <h2 id="landscape" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        AI is a broad field. Machine Learning is a subset, Deep Learning is a subset of that, and LLMs are a specific kind of deep learning. Click each layer to explore.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Nested diagram */}
       <div className="relative mb-6">

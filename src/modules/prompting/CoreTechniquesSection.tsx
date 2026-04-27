@@ -114,8 +114,10 @@ If you experience locking, giving way, or significant swelling, we should rule o
   },
 ]
 
+const EN_INTRO = `Five fundamental prompting techniques. Each tab shows a before/after comparison.`
+
 export const CoreTechniquesSection: React.FC = () => {
-  const c = useT({ title: '2. Core Techniques' }, { sv: coreTechniquesSectionSv, ko: coreTechniquesSectionKo })
+  const c = useT({ title: '2. Core Techniques', intro: EN_INTRO }, { sv: coreTechniquesSectionSv, ko: coreTechniquesSectionKo })
   const [activeTab, setActiveTab] = useState(TECHNIQUES[0].id)
 
   const handleTabClick = useCallback((id: string) => {
@@ -127,9 +129,7 @@ export const CoreTechniquesSection: React.FC = () => {
   return (
     <section aria-labelledby="core-techniques">
       <h2 id="core-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Five fundamental prompting techniques. Each tab shows a before/after comparison.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-1" role="tablist" aria-label="Prompting techniques">

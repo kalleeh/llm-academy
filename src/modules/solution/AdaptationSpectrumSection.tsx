@@ -72,8 +72,10 @@ const SCENARIOS: Scenario[] = [
   { label: 'Search internal wiki for answers', answer: 'RAG — retrieves relevant wiki pages and generates answers with sources.', position: 1 },
 ]
 
+const EN_INTRO = `Not every problem needs training from scratch. Most LLM applications fall somewhere on this spectrum.`
+
 export const AdaptationSpectrumSection: React.FC = () => {
-  const c = useT({ title: '1. The Adaptation Spectrum' }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
+  const c = useT({ title: '1. The Adaptation Spectrum', intro: EN_INTRO }, { sv: adaptationSpectrumSectionSv, ko: adaptationSpectrumSectionKo })
   const [selected, setSelected] = useState<string | null>(null)
   const [scenario, setScenario] = useState<number | null>(null)
 
@@ -90,9 +92,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
   return (
     <section aria-labelledby="adaptation-spectrum">
       <h2 id="adaptation-spectrum" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Not every problem needs training from scratch. Most LLM applications fall somewhere on this spectrum.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Spectrum bar */}
       <div className="mb-2 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-3">

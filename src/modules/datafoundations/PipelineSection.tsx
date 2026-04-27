@@ -116,8 +116,10 @@ const TERMINAL_STEPS: TerminalStep[] = [
   },
 ]
 
+const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.`
+
 export const PipelineSection: React.FC = () => {
-  const c = useT({ title: '2. Data Pipelines' }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
+  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
   const toggleStage = useCallback((id: string) => {
@@ -127,9 +129,7 @@ export const PipelineSection: React.FC = () => {
   return (
     <section aria-labelledby="pipelines">
       <h2 id="pipelines" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2">

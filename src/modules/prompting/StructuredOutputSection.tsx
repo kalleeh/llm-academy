@@ -140,8 +140,10 @@ const PROMPT_LEVELS = [
   },
 ]
 
+const EN_INTRO = `Click each level to see how adding structure constraints improves output consistency.`
+
 export const StructuredOutputSection: React.FC = () => {
-  const c = useT({ title: '4. Structured Output' }, { sv: structuredOutputSectionSv, ko: structuredOutputSectionKo })
+  const c = useT({ title: '4. Structured Output', intro: EN_INTRO }, { sv: structuredOutputSectionSv, ko: structuredOutputSectionKo })
   const [activeTechnique, setActiveTechnique] = useState(TECHNIQUES[0].id)
   const [activeLevel, setActiveLevel] = useState(0)
 
@@ -170,9 +172,7 @@ export const StructuredOutputSection: React.FC = () => {
         <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">
           Structure Improves Reliability
         </h3>
-        <p className="mb-4 text-xs text-zinc-400">
-          Click each level to see how adding structure constraints improves output consistency.
-        </p>
+        <p className="mb-4 text-xs text-zinc-400">{c.intro}</p>
 
         <div className="mb-4 flex flex-wrap gap-1">
           {PROMPT_LEVELS.map((l, i) => (

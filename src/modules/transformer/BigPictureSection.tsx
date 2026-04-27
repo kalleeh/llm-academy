@@ -19,8 +19,10 @@ const LAYERS: LayerDef[] = [
   { id: 'output', label: 'Output', color: 'bg-amber-900 border-amber-600', desc: 'Probability distribution over the vocabulary for the next token.' },
 ]
 
+const EN_INTRO = `A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.`
+
 export const BigPictureSection: React.FC = () => {
-  const c = useT({ title: '1 · The Big Picture' }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
+  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -30,9 +32,7 @@ export const BigPictureSection: React.FC = () => {
   return (
     <section aria-labelledby="big-picture-heading">
       <h2 id="big-picture-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="flex flex-col items-center gap-1">
         {LAYERS.map((layer, i) => (

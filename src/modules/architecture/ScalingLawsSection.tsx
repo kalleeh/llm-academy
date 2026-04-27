@@ -14,8 +14,11 @@ const BUDGET_STEPS = [
   { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'Frontier dense models' },
 ]
 
+const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens) were undertrained.
+        Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
+
 export const ScalingLawsSection: React.FC = () => {
-  const c = useT({ title: '2. Scaling Laws' }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
+  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 
   const handleSlider = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,10 +38,7 @@ export const ScalingLawsSection: React.FC = () => {
         and training data. The rule of thumb: train on{' '}
         <strong className="text-zinc-100">~20 tokens per parameter</strong>.
       </p>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Before Chinchilla, models like GPT-3 (175B params, 300B tokens) were undertrained.
-        Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Interactive slider */}
       <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-6">

@@ -60,8 +60,10 @@ const TECHNIQUES: Technique[] = [
   },
 ]
 
+const EN_INTRO = `Raw model inference is slow. These techniques can improve throughput 2-10x without changing the model.`
+
 export const OptimizationTechniquesSection: React.FC = () => {
-  const c = useT({ title: '3. Optimization Techniques' }, { sv: optimizationTechniquesSectionSv, ko: optimizationTechniquesSectionKo })
+  const c = useT({ title: '3. Optimization Techniques', intro: EN_INTRO }, { sv: optimizationTechniquesSectionSv, ko: optimizationTechniquesSectionKo })
   const [activeTech, setActiveTech] = useState(TECHNIQUES[0].id)
   const tech = TECHNIQUES.find(t => t.id === activeTech) ?? TECHNIQUES[0]
 
@@ -74,9 +76,7 @@ export const OptimizationTechniquesSection: React.FC = () => {
   return (
     <section aria-labelledby="optimization-techniques">
       <h2 id="optimization-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Raw model inference is slow. These techniques can improve throughput 2-10x without changing the model.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Technique selector */}
       <div className="mb-4 flex flex-wrap gap-2">

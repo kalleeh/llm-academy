@@ -100,8 +100,11 @@ function MoEView() {
   )
 }
 
+const EN_INTRO = `Every token activates all parameters. Simple but expensive at scale — a 70B model
+            uses all 70B parameters for every single token.`
+
 export const FFNSection: React.FC = () => {
-  const c = useT({ title: '5 · The Feed-Forward Network' }, { sv: fFNSectionSv, ko: fFNSectionKo })
+  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO }, { sv: fFNSectionSv, ko: fFNSectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggleMode = useCallback((m: Mode) => {
@@ -145,10 +148,7 @@ export const FFNSection: React.FC = () => {
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className={`rounded-lg border p-3 ${mode === 'dense' ? 'border-orange-700 bg-orange-950/50' : 'border-zinc-700 bg-zinc-900'}`}>
           <h4 className="text-xs font-semibold text-orange-300">Dense FFN</h4>
-          <p className="mt-1 text-xs text-zinc-400">
-            Every token activates all parameters. Simple but expensive at scale — a 70B model
-            uses all 70B parameters for every single token.
-          </p>
+          <p className="mt-1 text-xs text-zinc-400">{c.intro}</p>
         </div>
         <div className={`rounded-lg border p-3 ${mode === 'moe' ? 'border-emerald-700 bg-emerald-950/50' : 'border-zinc-700 bg-zinc-900'}`}>
           <h4 className="text-xs font-semibold text-emerald-300">Mixture of Experts</h4>

@@ -68,8 +68,10 @@ const SLIDERS: { key: keyof Config; label: string; min: number; max: number; ste
   { key: 'experts', label: 'Experts (1 = dense)', min: 1, max: 256, step: 1 },
 ]
 
+const EN_INTRO = `Configure your own model architecture and see how parameter choices affect total size.`
+
 export const ModelConfigSection: React.FC = () => {
-  const c = useT({ title: '4. Model Configuration' }, { sv: modelConfigSectionSv, ko: modelConfigSectionKo })
+  const c = useT({ title: '4. Model Configuration', intro: EN_INTRO }, { sv: modelConfigSectionSv, ko: modelConfigSectionKo })
   const [config, setConfig] = useState<Config>(PRESETS[1].config)
 
   const updateField = useCallback((key: keyof Config, value: number) => {
@@ -85,9 +87,7 @@ export const ModelConfigSection: React.FC = () => {
   return (
     <section aria-labelledby="model-config">
       <h2 id="model-config" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Configure your own model architecture and see how parameter choices affect total size.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Presets */}
       <div className="mb-4 flex flex-wrap gap-2">

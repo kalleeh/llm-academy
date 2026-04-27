@@ -22,8 +22,10 @@ const DEFAULT_VALUES: Record<FieldKey, string> = {
   constraints: 'Never make up information. If unsure, classify as medium.',
 }
 
+const EN_INTRO = `Edit each component to build your system prompt. The preview updates live.`
+
 export const SystemPromptsSection: React.FC = () => {
-  const c = useT({ title: '3. System Prompts' }, { sv: systemPromptsSectionSv, ko: systemPromptsSectionKo })
+  const c = useT({ title: '3. System Prompts', intro: EN_INTRO }, { sv: systemPromptsSectionSv, ko: systemPromptsSectionKo })
   const [values, setValues] = useState<Record<FieldKey, string>>(DEFAULT_VALUES)
 
   const handleChange = useCallback((key: FieldKey, value: string) => {
@@ -89,9 +91,7 @@ print(response.choices[0].message.content)
         <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">
           The 5-Component Framework
         </h3>
-        <p className="mb-4 text-xs text-zinc-400">
-          Edit each component to build your system prompt. The preview updates live.
-        </p>
+        <p className="mb-4 text-xs text-zinc-400">{c.intro}</p>
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Inputs */}

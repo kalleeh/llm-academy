@@ -22,8 +22,10 @@ const STEPS: PipelineStep[] = [
 
 const MAX_TB = 100
 
+const EN_INTRO = `Raw web data is mostly garbage. A typical pipeline discards 85%+ through extraction, filtering, and deduplication.`
+
 export const CleaningPipelineSection: React.FC = () => {
-  const c = useT({ title: '2. Cleaning Pipeline' }, { sv: cleaningPipelineSectionSv, ko: cleaningPipelineSectionKo })
+  const c = useT({ title: '2. Cleaning Pipeline', intro: EN_INTRO }, { sv: cleaningPipelineSectionSv, ko: cleaningPipelineSectionKo })
   const [executedStep, setExecutedStep] = useState(-1)
   const onStep = useCallback((i: number) => setExecutedStep(i), [])
 
@@ -33,9 +35,7 @@ export const CleaningPipelineSection: React.FC = () => {
   return (
     <section aria-labelledby="cleaning-pipeline">
       <h2 id="cleaning-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Raw web data is mostly garbage. A typical pipeline discards 85%+ through extraction, filtering, and deduplication.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
       <div className="mb-4 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
         <div className="mb-2 flex items-center justify-between text-xs text-zinc-400">
           <span>Data remaining</span>

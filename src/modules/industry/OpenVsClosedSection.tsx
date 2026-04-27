@@ -30,8 +30,10 @@ const OPEN_MODELS = [
   { name: 'Gemma 3 27B', org: 'Google', params: '27B', note: 'Best-in-class at size, open weights' },
 ]
 
+const EN_INTRO = `The gap between open-weight and closed-source models has narrowed dramatically.`
+
 export const OpenVsClosedSection: React.FC = () => {
-  const c = useT({ title: '2. Open vs Closed' }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
+  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
   const [tab, setTab] = useState<Tab>('table')
 
   const switchTab = useCallback((t: Tab) => setTab(t), [])
@@ -39,9 +41,7 @@ export const OpenVsClosedSection: React.FC = () => {
   return (
     <section aria-labelledby="open-vs-closed">
       <h2 id="open-vs-closed" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The gap between open-weight and closed-source models has narrowed dramatically.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Tab switcher */}
       <div className="mb-6 flex gap-2" role="tablist">

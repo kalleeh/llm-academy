@@ -20,14 +20,14 @@ def attention(Q, K, V):
     weights = F.softmax(scores, dim=-1)
     return torch.matmul(weights, V)`
 
+const EN_INTRO = `Attention lets each word look at every other word in the sentence and decide how much to focus on each one.`
+
 export const AttentionSection: React.FC = () => {
-  const c = useT({ title: '2 · Attention Mechanism' }, { sv: attentionSectionSv, ko: attentionSectionKo })
+  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO }, { sv: attentionSectionSv, ko: attentionSectionKo })
   return (
   <section aria-labelledby="attention-heading">
     <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Attention lets each word look at every other word in the sentence and decide how much to focus on each one.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
     <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
       <p className="mb-3 text-xs font-semibold text-zinc-300 uppercase tracking-wider">

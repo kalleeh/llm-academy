@@ -35,14 +35,14 @@ const TOOLBOX: ToolCategory[] = [
   },
 ]
 
+const EN_INTRO = `Each level of the AI landscape has its own ecosystem of tools and frameworks.`
+
 export const ToolboxSection: React.FC = () => {
-  const c = useT({ title: '5. The AI/ML/LLM Toolbox' }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
+  const c = useT({ title: '5. The AI/ML/LLM Toolbox', intro: EN_INTRO }, { sv: toolboxSectionSv, ko: toolboxSectionKo })
   return (
   <section aria-labelledby="toolbox">
     <h2 id="toolbox" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Each level of the AI landscape has its own ecosystem of tools and frameworks.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {TOOLBOX.map(cat => (

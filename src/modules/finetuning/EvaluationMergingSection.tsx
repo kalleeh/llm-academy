@@ -169,16 +169,16 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
+const EN_INTRO = `Test the fine-tuned model, compare before vs after, merge the LoRA adapter into the base model.`
+
 export const EvaluationMergingSection: React.FC = () => {
-  const c = useT({ title: '4. Evaluation & Merging' }, { sv: evaluationMergingSectionSv, ko: evaluationMergingSectionKo })
+  const c = useT({ title: '4. Evaluation & Merging', intro: EN_INTRO }, { sv: evaluationMergingSectionSv, ko: evaluationMergingSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
     <section aria-labelledby="eval-merging">
       <h2 id="eval-merging" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Test the fine-tuned model, compare before vs after, merge the LoRA adapter into the base model.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <Workspace
         title="Evaluate → Merge → Deploy"

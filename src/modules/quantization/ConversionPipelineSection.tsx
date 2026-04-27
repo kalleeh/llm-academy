@@ -164,16 +164,16 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
+const EN_INTRO = `Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.`
+
 export const ConversionPipelineSection: React.FC = () => {
-  const c = useT({ title: '3. The Conversion Pipeline' }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
+  const c = useT({ title: '3. The Conversion Pipeline', intro: EN_INTRO }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
     <section aria-labelledby="conversion-pipeline">
       <h2 id="conversion-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <Workspace
         title="SafeTensors → GGUF → Ollama"

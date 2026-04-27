@@ -42,8 +42,10 @@ function formatCost(n: number): string {
   return `$${n.toFixed(2)}`
 }
 
+const EN_INTRO = `Compare estimated monthly costs across approaches. Adjust volume and model size to see how costs change.`
+
 export const CostCalculatorSection: React.FC = () => {
-  const c = useT({ title: '4. Cost Calculator' }, { sv: costCalculatorSectionSv, ko: costCalculatorSectionKo })
+  const c = useT({ title: '4. Cost Calculator', intro: EN_INTRO }, { sv: costCalculatorSectionSv, ko: costCalculatorSectionKo })
   const [approaches, setApproaches] = useState<Approach[]>(['api'])
   const [volume, setVolume] = useState(1000)
   const [modelSize, setModelSize] = useState<ModelSize>('medium')
@@ -112,9 +114,7 @@ export const CostCalculatorSection: React.FC = () => {
   return (
     <section aria-labelledby="cost-calculator">
       <h2 id="cost-calculator" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Compare estimated monthly costs across approaches. Adjust volume and model size to see how costs change.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Controls */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">

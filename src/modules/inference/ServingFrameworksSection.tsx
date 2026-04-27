@@ -69,8 +69,10 @@ const FRAMEWORKS: Framework[] = [
 
 const TABLE_HEADERS = ['Framework', 'Throughput', 'Latency', 'Ease of Use', 'GPU Support'] as const
 
+const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
+
 export const ServingFrameworksSection: React.FC = () => {
-  const c = useT({ title: '2. Serving Frameworks' }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
+  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {
@@ -80,9 +82,7 @@ export const ServingFrameworksSection: React.FC = () => {
   return (
     <section aria-labelledby="serving-frameworks">
       <h2 id="serving-frameworks" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Cards */}
       <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

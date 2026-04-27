@@ -97,8 +97,10 @@ const NODE_COLORS: Record<string, string> = {
   reassess: 'border-cyan-500/50 bg-cyan-500/10',
 }
 
+const EN_INTRO = `Walk through this decision tree to find the right approach for your problem.`
+
 export const DecisionFrameworkSection: React.FC = () => {
-  const c = useT({ title: '3. The Decision Framework' }, { sv: decisionFrameworkSectionSv, ko: decisionFrameworkSectionKo })
+  const c = useT({ title: '3. The Decision Framework', intro: EN_INTRO }, { sv: decisionFrameworkSectionSv, ko: decisionFrameworkSectionKo })
   const [path, setPath] = useState<string[]>(['start'])
 
   const currentId = path[path.length - 1]
@@ -122,9 +124,7 @@ export const DecisionFrameworkSection: React.FC = () => {
   return (
     <section aria-labelledby="decision-framework">
       <h2 id="decision-framework" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Walk through this decision tree to find the right approach for your problem.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="rounded-lg border border-zinc-700 bg-zinc-900">
         {/* Path breadcrumb */}

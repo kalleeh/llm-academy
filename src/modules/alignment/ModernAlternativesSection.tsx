@@ -72,8 +72,10 @@ const COMPARISON_FIELDS: { key: keyof Pick<Method, 'complexity' | 'cost' | 'qual
   { key: 'quality', label: 'Quality' },
 ]
 
+const EN_INTRO = `RLHF with PPO was the breakthrough that turned base models into helpful assistants — but it requires four models in memory simultaneously and is notoriously finicky to train. The field has since developed simpler alternatives that match or exceed PPO's quality while being dramatically easier to implement. Each makes a different trade-off.`
+
 export const ModernAlternativesSection: React.FC = () => {
-  const c = useT({ title: '3. Modern Alternatives' }, { sv: modernAlternativesSectionSv, ko: modernAlternativesSectionKo })
+  const c = useT({ title: '3. Modern Alternatives', intro: EN_INTRO }, { sv: modernAlternativesSectionSv, ko: modernAlternativesSectionKo })
   const [activeTab, setActiveTab] = useState(0)
 
   const selectTab = useCallback((i: number) => setActiveTab(i), [])
@@ -83,9 +85,7 @@ export const ModernAlternativesSection: React.FC = () => {
   return (
     <section aria-labelledby="modern-alternatives">
       <h2 id="modern-alternatives" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        RLHF with PPO was the breakthrough that turned base models into helpful assistants — but it requires four models in memory simultaneously and is notoriously finicky to train. The field has since developed simpler alternatives that match or exceed PPO&apos;s quality while being dramatically easier to implement. Each makes a different trade-off.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Tabs */}
       <div className="mb-4 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-800 p-1" role="tablist">

@@ -68,8 +68,10 @@ const PATTERNS: ArchPattern[] = [
   },
 ]
 
+const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
+
 export const ArchitectureSection: React.FC = () => {
-  const c = useT({ title: '4. Data Architecture Patterns' }, { sv: architectureSectionSv, ko: architectureSectionKo })
+  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO }, { sv: architectureSectionSv, ko: architectureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -79,9 +81,7 @@ export const ArchitectureSection: React.FC = () => {
   return (
     <section aria-labelledby="architecture">
       <h2 id="architecture" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Where does data live? Four dominant patterns, each with different tradeoffs.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 sm:grid-cols-2">
         {PATTERNS.map(p => {

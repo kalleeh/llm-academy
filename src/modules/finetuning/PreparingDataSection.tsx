@@ -65,8 +65,10 @@ const CHECKLIST = [
   { label: 'Human-verified', detail: 'Spot-check at least 100 examples manually' },
 ]
 
+const EN_INTRO = `Data quality determines fine-tuning success. Pick a format, structure your examples, and validate before training.`
+
 export const PreparingDataSection: React.FC = () => {
-  const c = useT({ title: '2. Preparing Your Data' }, { sv: preparingDataSectionSv, ko: preparingDataSectionKo })
+  const c = useT({ title: '2. Preparing Your Data', intro: EN_INTRO }, { sv: preparingDataSectionSv, ko: preparingDataSectionKo })
   const [activeFormat, setActiveFormat] = useState<Format>('instruction')
   const [checked, setChecked] = useState<Set<number>>(new Set())
 
@@ -84,9 +86,7 @@ export const PreparingDataSection: React.FC = () => {
   return (
     <section aria-labelledby="preparing-data">
       <h2 id="preparing-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Data quality determines fine-tuning success. Pick a format, structure your examples, and validate before training.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 flex gap-2" role="tablist" aria-label="Data format selector">
         {FORMATS.map(f => (

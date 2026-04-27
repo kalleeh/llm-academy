@@ -74,8 +74,10 @@ const APPROACH_META: Record<ApproachId, { label: string; color: string; examples
   'fine-tuned': { label: 'Fine-Tuned Model', color: 'text-amber-400', examples: 'Fine-tuned Llama, domain-specific models' },
 }
 
+const EN_INTRO = `Three main deployment approaches, each with different tradeoffs.`
+
 export const BuildVsBuySection: React.FC = () => {
-  const c = useT({ title: '3. Build vs Buy' }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
+  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
   const selectOption = useCallback((constraintIdx: number, optionIdx: number) => {
@@ -99,9 +101,7 @@ export const BuildVsBuySection: React.FC = () => {
   return (
     <section aria-labelledby="build-vs-buy">
       <h2 id="build-vs-buy" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Three main deployment approaches, each with different tradeoffs.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Comparison table */}
       <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700">

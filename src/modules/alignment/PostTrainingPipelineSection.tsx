@@ -77,8 +77,10 @@ const TRENDS: Trend[] = [
   },
 ]
 
+const EN_INTRO = `The modern post-training pipeline combines multiple techniques. Click each stage to explore.`
+
 export const PostTrainingPipelineSection: React.FC = () => {
-  const c = useT({ title: '5. Full Post-Training Pipeline (2025–2026)' }, { sv: postTrainingPipelineSectionSv, ko: postTrainingPipelineSectionKo })
+  const c = useT({ title: '5. Full Post-Training Pipeline (2025–2026)', intro: EN_INTRO }, { sv: postTrainingPipelineSectionSv, ko: postTrainingPipelineSectionKo })
   const [activeStage, setActiveStage] = useState<number | null>(null)
 
   const selectStage = useCallback((i: number) => {
@@ -88,9 +90,7 @@ export const PostTrainingPipelineSection: React.FC = () => {
   return (
     <section aria-labelledby="post-training-pipeline">
       <h2 id="post-training-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The modern post-training pipeline combines multiple techniques. Click each stage to explore.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Post-training pipeline">

@@ -101,8 +101,10 @@ const TERMINAL_STEPS: TerminalStep[] = [
   },
 ]
 
+const EN_INTRO = `The classic alignment pipeline (InstructGPT, 2022) has three stages after pre-training.`
+
 export const AlignmentPipelineSection: React.FC = () => {
-  const c = useT({ title: '2. The Alignment Pipeline' }, { sv: alignmentPipelineSectionSv, ko: alignmentPipelineSectionKo })
+  const c = useT({ title: '2. The Alignment Pipeline', intro: EN_INTRO }, { sv: alignmentPipelineSectionSv, ko: alignmentPipelineSectionKo })
   const [activeStage, setActiveStage] = useState<number | null>(null)
 
   const selectStage = useCallback((i: number) => {
@@ -112,9 +114,7 @@ export const AlignmentPipelineSection: React.FC = () => {
   return (
     <section aria-labelledby="alignment-pipeline">
       <h2 id="alignment-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The classic alignment pipeline (InstructGPT, 2022) has three stages after pre-training.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Alignment pipeline stages">

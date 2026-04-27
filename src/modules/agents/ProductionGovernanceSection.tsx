@@ -21,8 +21,11 @@ const GOVERNANCE_CONTROLS = [
   { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
 ]
 
+const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselves only with AI systems
+        saying the wrong thing; they must contend with systems doing the wrong thing."`
+
 export const ProductionGovernanceSection: React.FC = () => {
-  const c = useT({ title: '8. Production Governance — Trust at Scale' }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 
@@ -35,10 +38,7 @@ export const ProductionGovernanceSection: React.FC = () => {
         bugs to <strong className="text-zinc-100">behavioral failures</strong> — the agent does
         something technically correct but contextually wrong.
       </p>
-      <p className="mb-6 max-w-2xl text-sm text-zinc-400">
-        McKinsey (2026): &quot;Organizations can no longer concern themselves only with AI systems
-        saying the wrong thing; they must contend with systems doing the wrong thing.&quot;
-      </p>
+      <p className="mb-6 max-w-2xl text-sm text-zinc-400">{c.intro}</p>
 
       {/* Autonomy tiers */}
       <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">

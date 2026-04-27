@@ -95,8 +95,10 @@ const SOURCES = [
   { name: 'Other', tokens: '~1.8T', pct: 12, color: 'bg-zinc-500' },
 ]
 
+const EN_INTRO = `Now that you understand data broadly, here's what LLMs specifically need.`
+
 export const LLMDataSection: React.FC = () => {
-  const c = useT({ title: '5. What LLMs Need' }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
+  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
   const [showComparison, setShowComparison] = useState(true)
 
   const toggleView = useCallback(() => {
@@ -106,9 +108,7 @@ export const LLMDataSection: React.FC = () => {
   return (
     <section aria-labelledby="llm-data">
       <h2 id="llm-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Now that you understand data broadly, here's what LLMs specifically need.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Toggle */}
       <div className="mb-4 flex gap-2">

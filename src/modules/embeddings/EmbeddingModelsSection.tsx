@@ -36,8 +36,10 @@ similarity = np.dot(vec_1, vec_2) / (
 )
 print(f"Similarity: {similarity:.3f}")  # ~0.92`
 
+const EN_INTRO = `Input → Variable-length text output`
+
 export const EmbeddingModelsSection: React.FC = () => {
-  const c = useT({ title: '2. How Embedding Models Work' }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
+  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
     <h2 id="embedding-models" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -52,7 +54,7 @@ export const EmbeddingModelsSection: React.FC = () => {
     <div className="mb-8 grid gap-4 sm:grid-cols-2">
       <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
         <h3 className="mb-2 font-mono text-sm font-semibold text-blue-400">LLM (Generative)</h3>
-        <p className="mb-3 text-xs text-zinc-400">Input → Variable-length text output</p>
+        <p className="mb-3 text-xs text-zinc-400">{c.intro}</p>
         <div className="space-y-1.5 text-xs text-zinc-300">
           <p>• Autoregressive: generates one token at a time</p>
           <p>• Output size varies with generation length</p>

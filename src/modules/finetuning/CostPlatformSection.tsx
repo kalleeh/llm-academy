@@ -31,8 +31,10 @@ const COST_ESTIMATE = {
   vram: '~11 GB peak',
 }
 
+const EN_INTRO = `Where to run your fine-tuning job, what it costs, and what hardware you need.`
+
 export const CostPlatformSection: React.FC = () => {
-  const c = useT({ title: '5. Cost & Platform Guide' }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
+  const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
   const [selectedPlatform, setSelectedPlatform] = useState<number | null>(null)
 
   const handleSelect = useCallback((i: number) => {
@@ -42,9 +44,7 @@ export const CostPlatformSection: React.FC = () => {
   return (
     <section aria-labelledby="cost-platform">
       <h2 id="cost-platform" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Where to run your fine-tuning job, what it costs, and what hardware you need.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-8 overflow-x-auto">
         <table className="w-full text-sm" role="table">

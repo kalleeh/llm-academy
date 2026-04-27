@@ -105,8 +105,10 @@ const PLAYERS: Player[] = [
   },
 ]
 
+const EN_INTRO = `The LLM landscape is dominated by a handful of well-funded labs, each with a distinct philosophy. Click any card to see details.`
+
 export const WhoBuiltWhatSection: React.FC = () => {
-  const c = useT({ title: '1. Who Built What' }, { sv: whoBuiltWhatSectionSv, ko: whoBuiltWhatSectionKo })
+  const c = useT({ title: '1. Who Built What', intro: EN_INTRO }, { sv: whoBuiltWhatSectionSv, ko: whoBuiltWhatSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {
@@ -116,9 +118,7 @@ export const WhoBuiltWhatSection: React.FC = () => {
   return (
     <section aria-labelledby="who-built-what">
       <h2 id="who-built-what" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The LLM landscape is dominated by a handful of well-funded labs, each with a distinct philosophy. Click any card to see details.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {PLAYERS.map(p => (

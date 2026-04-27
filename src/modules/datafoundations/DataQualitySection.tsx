@@ -84,8 +84,10 @@ const ISSUE_TEXT_COLORS: Record<DataIssue['type'], string> = {
   bias: 'text-cyan-300',
 }
 
+const EN_INTRO = `Spot the problems in this dataset. Click each issue type below to highlight it in the data.`
+
 export const DataQualitySection: React.FC = () => {
-  const c = useT({ title: '3. Data Quality' }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
+  const c = useT({ title: '3. Data Quality', intro: EN_INTRO }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
   const [found, setFound] = useState<Set<string>>(new Set())
   const [activeIssue, setActiveIssue] = useState<string | null>(null)
 
@@ -120,9 +122,7 @@ export const DataQualitySection: React.FC = () => {
   return (
     <section aria-labelledby="quality">
       <h2 id="quality" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Spot the problems in this dataset. Click each issue type below to highlight it in the data.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Issue buttons */}
       <div className="mb-4 flex flex-wrap gap-2">

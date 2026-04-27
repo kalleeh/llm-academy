@@ -77,8 +77,10 @@ const TRENDS: Trend[] = [
   },
 ]
 
+const EN_INTRO = `Six trends shaping the LLM landscape in 2026 and beyond. Click any card to dive deeper.`
+
 export const WhereItsHeadingSection: React.FC = () => {
-  const c = useT({ title: '4. Where It Is Heading' }, { sv: whereItsHeadingSectionSv, ko: whereItsHeadingSectionKo })
+  const c = useT({ title: '4. Where It Is Heading', intro: EN_INTRO }, { sv: whereItsHeadingSectionSv, ko: whereItsHeadingSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -88,9 +90,7 @@ export const WhereItsHeadingSection: React.FC = () => {
   return (
     <section aria-labelledby="where-heading">
       <h2 id="where-heading" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Six trends shaping the LLM landscape in 2026 and beyond. Click any card to dive deeper.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {TRENDS.map(t => (

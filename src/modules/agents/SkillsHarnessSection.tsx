@@ -63,14 +63,14 @@ const CAPABILITIES = [
   { name: 'AgentCore Harness', layer: 'Runtime', what: 'Managed agent loop — model + system prompt + tools + memory + limits', granularity: 'Complete agent', reusability: 'Production deployment', example: 'Support agent, sales assistant, IT helpdesk' },
 ]
 
+const EN_INTRO = `MCP gives agents tools. But tools alone aren't enough — you need workflow logic, runtime management, and reusable behavioral packages. The ecosystem has converged on distinct layers.`
+
 export const SkillsHarnessSection: React.FC = () => {
-  const c = useT({ title: '7. Skills, Powers, and the AgentCore Harness' }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
+  const c = useT({ title: '7. Skills, Powers, and the AgentCore Harness', intro: EN_INTRO }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
   return (
   <section aria-labelledby="skills-tech">
     <h2 id="skills-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        MCP gives agents tools. But tools alone aren&apos;t enough — you need workflow logic, runtime management, and reusable behavioral packages. The ecosystem has converged on distinct layers.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
     {/* Capability comparison */}
     <div className="mb-6 overflow-hidden rounded-lg border border-zinc-700">

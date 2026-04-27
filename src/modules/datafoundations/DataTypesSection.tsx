@@ -111,8 +111,10 @@ const CATEGORIES: DataCategory[] = [
   },
 ]
 
+const EN_INTRO = `All data falls into three categories. Click any example to see what it actually looks like.`
+
 export const DataTypesSection: React.FC = () => {
-  const c = useT({ title: '1. Structured vs Unstructured Data' }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
+  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((key: string) => {
@@ -122,9 +124,7 @@ export const DataTypesSection: React.FC = () => {
   return (
     <section aria-labelledby="data-types">
       <h2 id="data-types" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        All data falls into three categories. Click any example to see what it actually looks like.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 lg:grid-cols-3">
         {CATEGORIES.map(cat => (

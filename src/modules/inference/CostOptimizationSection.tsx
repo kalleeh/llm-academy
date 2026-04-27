@@ -51,8 +51,10 @@ function formatCost(n: number): string {
   return `$${n.toFixed(2)}`
 }
 
+const EN_INTRO = `Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.`
+
 export const CostOptimizationSection: React.FC = () => {
-  const c = useT({ title: '4. Cost Optimization' }, { sv: costOptimizationSectionSv, ko: costOptimizationSectionKo })
+  const c = useT({ title: '4. Cost Optimization', intro: EN_INTRO }, { sv: costOptimizationSectionSv, ko: costOptimizationSectionKo })
   const [modelTier, setModelTier] = useState<ModelTier>('70b')
   const [reqPerDay, setReqPerDay] = useState(10000)
   const [avgTokens, setAvgTokens] = useState(500)
@@ -97,9 +99,7 @@ export const CostOptimizationSection: React.FC = () => {
   return (
     <section aria-labelledby="cost-optimization">
       <h2 id="cost-optimization" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Calculator inputs */}
       <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">

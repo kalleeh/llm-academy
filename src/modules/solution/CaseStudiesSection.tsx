@@ -88,8 +88,10 @@ const CASES: CaseStudy[] = [
   },
 ]
 
+const EN_INTRO = `Walk through real-world decision processes. Each case shows how constraints lead to different solutions.`
+
 export const CaseStudiesSection: React.FC = () => {
-  const c = useT({ title: '5. Case Studies' }, { sv: caseStudiesSectionSv, ko: caseStudiesSectionKo })
+  const c = useT({ title: '5. Case Studies', intro: EN_INTRO }, { sv: caseStudiesSectionSv, ko: caseStudiesSectionKo })
   const [activeCase, setActiveCase] = useState(0)
   const [revealedSteps, setRevealedSteps] = useState(0)
 
@@ -108,9 +110,7 @@ export const CaseStudiesSection: React.FC = () => {
   return (
     <section aria-labelledby="case-studies">
       <h2 id="case-studies" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Walk through real-world decision processes. Each case shows how constraints lead to different solutions.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Case selector */}
       <div className="mb-6 grid gap-2 sm:grid-cols-4">

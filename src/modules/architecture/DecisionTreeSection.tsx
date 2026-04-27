@@ -54,8 +54,10 @@ function getRecommendation(state: DecisionState): Recommendation {
   }
 }
 
+const EN_INTRO = `Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.`
+
 export const DecisionTreeSection: React.FC = () => {
-  const c = useT({ title: '5. The Decision Tree' }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
+  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
   const [state, setState] = useState<DecisionState>({ budget: null, finetune: null })
 
   const currentStep: Step = state.budget === null ? 'budget' : state.finetune === null ? 'finetune' : 'result'
@@ -79,9 +81,7 @@ export const DecisionTreeSection: React.FC = () => {
   return (
     <section aria-labelledby="decision-tree">
       <h2 id="decision-tree" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
         {/* Progress */}

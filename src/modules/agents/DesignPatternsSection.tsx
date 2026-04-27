@@ -61,8 +61,10 @@ const PATTERNS: Pattern[] = [
   },
 ]
 
+const EN_INTRO = `Not all agents work the same way. These are the core architectural patterns — each suited to different types of tasks.`
+
 export const DesignPatternsSection: React.FC = () => {
-  const c = useT({ title: '4. Agent Design Patterns' }, { sv: designPatternsSectionSv, ko: designPatternsSectionKo })
+  const c = useT({ title: '4. Agent Design Patterns', intro: EN_INTRO }, { sv: designPatternsSectionSv, ko: designPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(0)
 
   const handlePatternClick = useCallback((index: number) => {
@@ -74,9 +76,7 @@ export const DesignPatternsSection: React.FC = () => {
   return (
     <section aria-labelledby="design-patterns">
       <h2 id="design-patterns" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Not all agents work the same way. These are the core architectural patterns — each suited to different types of tasks.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 lg:grid-cols-[240px_1fr]">
         {/* Pattern selector */}

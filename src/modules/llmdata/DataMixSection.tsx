@@ -16,8 +16,10 @@ const CAPS = [
   { name: 'Multilingual', fn: (m: Record<string, number>) => m.text * 1.0 + m.code * 0.1 },
 ]
 
+const EN_INTRO = `The ratio of data types directly shapes what the model is good at.`
+
 export const DataMixSection: React.FC = () => {
-  const c = useT({ title: '3. Data Mix' }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
+  const c = useT({ title: '3. Data Mix', intro: EN_INTRO }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
   const [mix, setMix] = useState<Record<string, number>>({ text: 60, code: 25, math: 15 })
 
   const handleChange = useCallback((key: string, value: number) => {
@@ -43,9 +45,7 @@ export const DataMixSection: React.FC = () => {
   return (
     <section aria-labelledby="data-mix">
       <h2 id="data-mix" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The ratio of data types directly shapes what the model is good at.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
           <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-300">Training Data Ratio</h3>

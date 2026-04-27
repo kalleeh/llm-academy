@@ -62,8 +62,10 @@ const VARIANT_KEYS: Variant[] = ['mha', 'gqa', 'mqa', 'mla']
 
 const KV_BARS: Record<Variant, number> = { mha: 100, gqa: 25, mqa: 3, mla: 8 }
 
+const EN_INTRO = `The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.`
+
 export const AttentionVariantsSection: React.FC = () => {
-  const c = useT({ title: '3. Attention Variants' }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
+  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
   const [active, setActive] = useState<Variant>('mha')
 
   const selectVariant = useCallback((v: Variant) => setActive(v), [])
@@ -90,9 +92,7 @@ export const AttentionVariantsSection: React.FC = () => {
   return (
     <section aria-labelledby="attention-variants">
       <h2 id="attention-variants" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Variant selector */}
       <div className="mb-6 flex flex-wrap gap-2">

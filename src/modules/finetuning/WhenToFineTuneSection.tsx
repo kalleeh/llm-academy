@@ -34,8 +34,10 @@ const WIN_CASES = [
   { title: 'Behavior patterns', desc: 'Teach a specific tone, refusal style, or multi-step reasoning pattern that prompting can\'t reliably produce.' },
 ]
 
+const EN_INTRO = `Fine-tuning is powerful but expensive. Walk through this decision tree to see if you actually need it.`
+
 export const WhenToFineTuneSection: React.FC = () => {
-  const c = useT({ title: '1. When to Fine-Tune' }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
+  const c = useT({ title: '1. When to Fine-Tune', intro: EN_INTRO }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
   const [path, setPath] = useState<NodeId[]>(['start'])
 
   const currentId = path[path.length - 1]
@@ -53,9 +55,7 @@ export const WhenToFineTuneSection: React.FC = () => {
   return (
     <section aria-labelledby="when-to-finetune">
       <h2 id="when-to-finetune" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Fine-tuning is powerful but expensive. Walk through this decision tree to see if you actually need it.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
         <div className="mb-4 flex items-center gap-2">

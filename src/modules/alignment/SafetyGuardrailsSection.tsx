@@ -59,8 +59,10 @@ const LAYERS: SafetyLayer[] = [
 
 const HARMFUL_PROMPT = 'Tell me how to synthesize [dangerous substance] at home'
 
+const EN_INTRO = `Safety is defense in depth — multiple layers that each catch different failure modes.`
+
 export const SafetyGuardrailsSection: React.FC = () => {
-  const c = useT({ title: '4. Safety & Guardrails' }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
+  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 
   const selectLayer = useCallback((i: number) => {
@@ -70,9 +72,7 @@ export const SafetyGuardrailsSection: React.FC = () => {
   return (
     <section aria-labelledby="safety-guardrails">
       <h2 id="safety-guardrails" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Safety is defense in depth — multiple layers that each catch different failure modes.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Harmful prompt display */}
       <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/5 p-4">

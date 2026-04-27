@@ -11,16 +11,16 @@ const PROBLEMS: { label: string; icon: IconName; desc: string; example: string }
   { label: 'Saturation', icon: 'trend-up', desc: 'When top models all score 85-95%, the benchmark stops being useful for differentiation. The remaining 5-15% may be noise or edge cases.', example: 'MMLU scores: GPT-5 90%, Claude 88%, Gemini 87% — is that difference meaningful or noise?' },
 ]
 
+const EN_INTRO = `Benchmarks are useful but flawed. Here's why you shouldn't pick a model based on leaderboard rank alone.`
+
 export const LeaderboardSection: React.FC = () => {
-  const c = useT({ title: '4. The Leaderboard Problem' }, { sv: leaderboardSectionSv, ko: leaderboardSectionKo })
+  const c = useT({ title: '4. The Leaderboard Problem', intro: EN_INTRO }, { sv: leaderboardSectionSv, ko: leaderboardSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 
   return (
     <section aria-labelledby="leaderboard-problem">
       <h2 id="leaderboard-problem" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Benchmarks are useful but flawed. Here's why you shouldn't pick a model based on leaderboard rank alone.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-3">
         {PROBLEMS.map((p, i) => (

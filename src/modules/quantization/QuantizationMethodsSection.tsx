@@ -91,8 +91,10 @@ const METHODS: Method[] = [
   },
 ]
 
+const EN_INTRO = `Four main approaches dominate the ecosystem. Each targets a different use case.`
+
 export const QuantizationMethodsSection: React.FC = () => {
-  const c = useT({ title: '2. Quantization Methods' }, { sv: quantizationMethodsSectionSv, ko: quantizationMethodsSectionKo })
+  const c = useT({ title: '2. Quantization Methods', intro: EN_INTRO }, { sv: quantizationMethodsSectionSv, ko: quantizationMethodsSectionKo })
   const [activeTab, setActiveTab] = useState(0)
   const method = METHODS[activeTab]
 
@@ -101,9 +103,7 @@ export const QuantizationMethodsSection: React.FC = () => {
   return (
     <section aria-labelledby="quant-methods">
       <h2 id="quant-methods" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Four main approaches dominate the ecosystem. Each targets a different use case.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-2">

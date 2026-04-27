@@ -265,16 +265,16 @@ trainer.train()
 # 5. Save adapter
 model.save_pretrained("./output/lora-adapter")`
 
+const EN_INTRO = `A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.`
+
 export const FineTuningRunSection: React.FC = () => {
-  const c = useT({ title: '3. The Fine-Tuning Run' }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
+  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (
     <section aria-labelledby="finetuning-run">
       <h2 id="finetuning-run" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       <Workspace
         title="LoRA Fine-Tune — Llama 3.1 8B"

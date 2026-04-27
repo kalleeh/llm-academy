@@ -53,8 +53,10 @@ const ML_BETTER_CASES = [
   { label: 'Interpretability required', detail: 'Regulated industries need to explain every decision (credit, healthcare).' },
 ]
 
+const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamentally different paradigm.`
+
 export const LLMDifferenceSection: React.FC = () => {
-  const c = useT({ title: '4. What Makes LLMs Different' }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
+  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
   const [showLLM, setShowLLM] = useState(false)
 
   const toggle = useCallback(() => {
@@ -66,9 +68,7 @@ export const LLMDifferenceSection: React.FC = () => {
   return (
     <section aria-labelledby="llm-difference">
       <h2 id="llm-difference" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        LLMs aren&apos;t just &quot;bigger ML models.&quot; They represent a fundamentally different paradigm.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Comparison table */}
       <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">

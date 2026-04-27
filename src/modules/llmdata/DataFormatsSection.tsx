@@ -48,14 +48,14 @@ const RLHF_EX = `// RLHF: preference pairs (chosen > rejected)
   "rejected": "The ocean is big and has water..."
 }`
 
+const EN_INTRO = `Each training stage uses a different format.`
+
 export const DataFormatsSection: React.FC = () => {
-  const c = useT({ title: '5. Data Formats' }, { sv: dataFormatsSectionSv, ko: dataFormatsSectionKo })
+  const c = useT({ title: '5. Data Formats', intro: EN_INTRO }, { sv: dataFormatsSectionSv, ko: dataFormatsSectionKo })
   return (
   <section aria-labelledby="data-formats">
     <h2 id="data-formats" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Each training stage uses a different format.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
     <div className="mb-6">
       <FileExplorer tree={TREE} title="~/datasets" />
     </div>

@@ -133,8 +133,10 @@ Step 3 → "Prioritize implementing claims 1 & 3 (strong evidence).
   },
 ]
 
+const EN_INTRO = `Sophisticated techniques for complex tasks. Each pattern includes a visual diagram and a practical example.`
+
 export const AdvancedPatternsSection: React.FC = () => {
-  const c = useT({ title: '5. Advanced Patterns' }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
+  const c = useT({ title: '5. Advanced Patterns', intro: EN_INTRO }, { sv: advancedPatternsSectionSv, ko: advancedPatternsSectionKo })
   const [activePattern, setActivePattern] = useState(PATTERNS[0].id)
 
   const handlePatternClick = useCallback((id: string) => {
@@ -146,9 +148,7 @@ export const AdvancedPatternsSection: React.FC = () => {
   return (
     <section aria-labelledby="advanced-patterns">
       <h2 id="advanced-patterns" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Sophisticated techniques for complex tasks. Each pattern includes a visual diagram and a practical example.
-      </p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
 
       {/* Pattern note */}
       <div className="mb-6 rounded-md border border-amber-500/30 bg-amber-500/10 px-4 py-3">
