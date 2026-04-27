@@ -321,7 +321,7 @@ const filesystemByStep: Record<number, FileNode[]> = {
 const PROGRESS_MAP: Record<number, number> = { [-1]: 0, 0: 0.02, 1: 0.15, 2: 0.5, 3: 1 }
 
 export const TrainingSection2: React.FC = () => {
-  const c = useT({ title: '2. The Training Loop'  }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
+  const c = useT({ title: '2. The Training Loop'   }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {

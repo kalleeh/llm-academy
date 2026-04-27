@@ -59,13 +59,14 @@ const EVAL_TYPES: { name: string; icon: IconName; description: string; examples:
   },
 ]
 
+const EN_P7 = `Evaluation in Practice — nanochat`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 const EN_P4 = `Model A has lower perplexity because it produces &ldquo;safe&rdquo; generic sentences that are easy to predict. Model B takes more risks with specific facts and structure — harder to predict, but far more useful.`
 const EN_P5 = `{c.p5}`
 const EN_P6 = `{c.p6}`
 export const WhyEvaluationSection: React.FC = () => {
-  const c = useT({ title: '1. Why Evaluation Matters' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
+  const c = useT({ title: '1. Why Evaluation Matters' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
   const [selectedModel, setSelectedModel] = useState(0)
   const [activeType, setActiveType] = useState(0)
 
@@ -177,7 +178,7 @@ export const WhyEvaluationSection: React.FC = () => {
       </div>
 
       <div className="mt-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Evaluation in Practice — nanochat</h3>
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">{c.p7}</h3>
         <p className="mb-3 text-sm text-zinc-400">
           nanochat includes two eval scripts that cover both base model quality and chat capabilities.
           The CORE metric (from the DCLM paper) is the primary benchmark for the GPT-2 speedrun leaderboard.

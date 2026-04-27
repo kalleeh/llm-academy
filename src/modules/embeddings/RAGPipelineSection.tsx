@@ -92,6 +92,7 @@ const PIPELINE_STAGES: { label: string; icon: IconName; desc: string }[] = [
   { label: 'Generate', icon: 'robot', desc: 'LLM response' },
 ]
 
+const EN_P8 = `Retrieval-Augmented Generation (RAG)`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 const EN_P4 = `Pure vector search misses exact keyword matches. Pure keyword search misses semantic similarity. The best systems combine both.`
@@ -99,12 +100,12 @@ const EN_P5 = `{c.p5}`
 const EN_P6 = `{c.p6}`
 const EN_P7 = `{c.p7}`
 export const RAGPipelineSection: React.FC = () => {
-  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
+  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 , p8: EN_P8 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">
     <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
     <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-      <strong className="text-zinc-100">Retrieval-Augmented Generation (RAG)</strong> combines
+      <strong className="text-zinc-100">{c.p8}</strong> combines
       everything: chunk documents, embed them, store in a vector DB, then retrieve relevant
       context to ground LLM responses in your actual data.
     </p>

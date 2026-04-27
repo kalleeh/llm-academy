@@ -20,12 +20,13 @@ def attention(Q, K, V):
     weights = F.softmax(scores, dim=-1)
     return torch.matmul(weights, V)`
 
+const EN_P4 = `Query, Key, Value — A Library Analogy`
 const EN_P2 = `Each row shows how much one word attends to every other word. Brighter = stronger attention. Notice how`
 const EN_P3 = `{c.p3}`
 const EN_INTRO = `Attention lets each word look at every other word in the sentence and decide how much to focus on each one.`
 
 export const AttentionSection: React.FC = () => {
-  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: attentionSectionSv, ko: attentionSectionKo })
+  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: attentionSectionSv, ko: attentionSectionKo })
   return (
   <section aria-labelledby="attention-heading">
     <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -49,7 +50,7 @@ export const AttentionSection: React.FC = () => {
 
     {/* Q, K, V analogy */}
     <div className="mb-6">
-      <h3 className="mb-2 text-sm font-semibold text-zinc-200">Query, Key, Value — A Library Analogy</h3>
+      <h3 className="mb-2 text-sm font-semibold text-zinc-200">{c.p4}</h3>
       <div className="grid gap-3 sm:grid-cols-3">
         {[
           { letter: 'Q', name: 'Query', color: 'border-blue-600 bg-blue-950', text: 'text-blue-300', analogy: 'Your question: "I need books about cats"' },

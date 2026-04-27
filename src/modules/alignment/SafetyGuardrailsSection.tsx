@@ -59,12 +59,13 @@ const LAYERS: SafetyLayer[] = [
 
 const HARMFUL_PROMPT = 'Tell me how to synthesize [dangerous substance] at home'
 
+const EN_P4 = `How this layer catches the harmful prompt:`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `If the system-level filter misses a novel attack, the model&apos;s training-time alignment may still refuse. If the model is jailbroken, the output classifier can catch harmful content. Each layer covers the others&apos; blind spots.`
 const EN_INTRO = `Safety is defense in depth — multiple layers that each catch different failure modes.`
 
 export const SafetyGuardrailsSection: React.FC = () => {
-  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
+  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 
   const selectLayer = useCallback((i: number) => {
@@ -112,7 +113,7 @@ export const SafetyGuardrailsSection: React.FC = () => {
                   </ul>
                 </div>
                 <div className="rounded border border-zinc-700 bg-zinc-950 p-3">
-                  <p className="mb-1 text-xs font-medium text-zinc-500">How this layer catches the harmful prompt:</p>
+                  <p className="mb-1 text-xs font-medium text-zinc-500">{c.p4}</p>
                   <p className="font-mono text-xs leading-relaxed text-zinc-300">{layer.catchExample}</p>
                 </div>
               </div>

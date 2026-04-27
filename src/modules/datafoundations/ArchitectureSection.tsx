@@ -68,12 +68,13 @@ const PATTERNS: ArchPattern[] = [
   },
 ]
 
+const EN_P4 = `Retrieval-Augmented Generation (RAG)`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
 
 export const ArchitectureSection: React.FC = () => {
-  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: architectureSectionSv, ko: architectureSectionKo })
+  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: architectureSectionSv, ko: architectureSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -151,7 +152,7 @@ export const ArchitectureSection: React.FC = () => {
         <p className="text-sm font-medium text-amber-300"><Icon name="link" /> Vector Stores → LLMs (RAG Preview)</p>
         <p className="mt-1 text-xs leading-relaxed text-zinc-300">
           Vector stores are the bridge between your data and LLMs. In{' '}
-          <span className="text-amber-200">Retrieval-Augmented Generation (RAG)</span>, you embed
+          <span className="text-amber-200">{c.p4}</span>, you embed
           your documents into vectors, store them, then at query time retrieve the most relevant
           chunks and feed them to the LLM as context. This lets the model answer questions about
           <em> your</em> data without retraining.

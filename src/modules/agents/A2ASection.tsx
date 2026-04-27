@@ -37,10 +37,11 @@ const PROTOCOLS = [
   { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (150+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
 ]
 
+const EN_P4 = `Example: cross-team agent collaboration`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
-  const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 }, { sv: a2ASectionSv, ko: a2ASectionKo })
+  const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])
 
@@ -107,7 +108,7 @@ export const A2ASection: React.FC = () => {
 
       {/* Multi-agent flow */}
       <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-xs font-medium text-zinc-500">Example: cross-team agent collaboration</p>
+        <p className="mb-3 text-xs font-medium text-zinc-500">{c.p4}</p>
         <div className="space-y-2 font-mono text-xs">
           {[
             { agent: 'support-agent', action: 'Receives: "Customer #1234 was double-charged"', color: 'text-blue-400' },

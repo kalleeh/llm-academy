@@ -84,8 +84,9 @@ const FORMAT_COMPARISON = [
   { name: 'PyTorch', ext: '.bin / .pt', useCase: 'Legacy format. Uses Python pickle under the hood.', pros: 'Universal PyTorch support', cons: 'Security risk (arbitrary code execution)' },
 ]
 
+const EN_P2 = `Format comparison — when to use each:`
 export const TrainingSection5: React.FC = () => {
-  const c = useT({ title: '5. What\'s Inside the Weight Files'  }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
+  const c = useT({ title: '5. What\'s Inside the Weight Files'  , p2: EN_P2 }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {
@@ -134,7 +135,7 @@ export const TrainingSection5: React.FC = () => {
       />
 
       <div>
-        <p className="mb-3 text-sm font-medium text-zinc-300">Format comparison — when to use each:</p>
+        <p className="mb-3 text-sm font-medium text-zinc-300">{c.p2}</p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm" role="table">
             <thead>

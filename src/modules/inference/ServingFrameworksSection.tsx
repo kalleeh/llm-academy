@@ -69,11 +69,12 @@ const FRAMEWORKS: Framework[] = [
 
 const TABLE_HEADERS = ['Framework', 'Throughput', 'Latency', 'Ease of Use', 'GPU Support'] as const
 
+const EN_P3 = `Inference in Practice — nanochat`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
 
 export const ServingFrameworksSection: React.FC = () => {
-  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
+  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {
@@ -134,7 +135,7 @@ export const ServingFrameworksSection: React.FC = () => {
       </div>
 
       <div className="mt-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Inference in Practice — nanochat</h3>
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">{c.p3}</h3>
         <p className="mb-3 text-sm text-zinc-400">
           nanochat includes its own inference engine (<code className="text-amber-300">engine.py</code>)
           with KV cache, plus two ways to talk to your model: a CLI and a ChatGPT-like web UI.
