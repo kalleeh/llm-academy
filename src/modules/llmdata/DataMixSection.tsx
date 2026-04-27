@@ -16,11 +16,12 @@ const CAPS = [
   { name: 'Multilingual', fn: (m: Record<string, number>) => m.text * 1.0 + m.code * 0.1 },
 ]
 
+const EN_P3 = `Illustrative — real capability depends on model size, training duration, and data quality.`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `The ratio of data types directly shapes what the model is good at.`
 
 export const DataMixSection: React.FC = () => {
-  const c = useT({ title: '3. Data Mix', intro: EN_INTRO , p2: EN_P2 }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
+  const c = useT({ title: '3. Data Mix', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
   const [mix, setMix] = useState<Record<string, number>>({ text: 60, code: 25, math: 15 })
 
   const handleChange = useCallback((key: string, value: number) => {
@@ -84,7 +85,7 @@ export const DataMixSection: React.FC = () => {
               </div>
             ))}
           </div>
-          <p className="mt-3 text-xs text-zinc-500">Illustrative — real capability depends on model size, training duration, and data quality.</p>
+          <p className="mt-3 text-xs text-zinc-500">{c.p3}</p>
         </div>
       </div>
     </section>

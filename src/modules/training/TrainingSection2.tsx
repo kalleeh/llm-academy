@@ -320,8 +320,9 @@ const filesystemByStep: Record<number, FileNode[]> = {
 // Map step index to loss curve progress (0-1)
 const PROGRESS_MAP: Record<number, number> = { [-1]: 0, 0: 0.02, 1: 0.15, 2: 0.5, 3: 1 }
 
+const EN_P2 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 export const TrainingSection2: React.FC = () => {
-  const c = useT({ title: '2. The Training Loop'   }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
+  const c = useT({ title: '2. The Training Loop'   , p2: EN_P2 }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {

@@ -100,11 +100,13 @@ function MoEView() {
   )
 }
 
+const EN_P3 = `Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.`
+const EN_P2 = `After attention gathers context, each token passes through a`
 const EN_INTRO = `Every token activates all parameters. Simple but expensive at scale — a 70B model
             uses all 70B parameters for every single token.`
 
 export const FFNSection: React.FC = () => {
-  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  }, { sv: fFNSectionSv, ko: fFNSectionKo })
+  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  , p2: EN_P2 , p3: EN_P3 }, { sv: fFNSectionSv, ko: fFNSectionKo })
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggleMode = useCallback((m: Mode) => {

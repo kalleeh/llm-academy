@@ -17,10 +17,11 @@ const KV_EXAMPLES = [
   { tokens: 131072, label: '128K', cacheGB: 16 },
 ] as const
 
+const EN_P4 = `KV Cache Size vs Context Length`
 const EN_P2 = `Inference is the process of generating text from a trained model. It happens in two distinct phases —`
 const EN_P3 = `{c.p3}`
 export const HowInferenceWorksSection: React.FC = () => {
-  const c = useT({ title: '1. How Inference Works' , p2: EN_P2, p3: EN_P3 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
+  const c = useT({ title: '1. How Inference Works' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
   const [activePhase, setActivePhase] = useState(0)
   const [ctxSlider, setCtxSlider] = useState(0)
 

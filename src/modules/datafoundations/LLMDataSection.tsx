@@ -95,6 +95,7 @@ const SOURCES = [
   { name: 'Other', tokens: '~1.8T', pct: 12, color: 'bg-zinc-500' },
 ]
 
+const EN_P6 = `What a pre-training dataset directory looks like — click files to see contents:`
 const EN_P5 = `Typical pre-training data mix (~15T tokens)`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
@@ -102,7 +103,7 @@ const EN_P4 = `You now understand where data comes from, how it flows, and what 
 const EN_INTRO = `Now that you understand data broadly, here's what LLMs specifically need.`
 
 export const LLMDataSection: React.FC = () => {
-  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
+  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
   const [showComparison, setShowComparison] = useState(true)
 
   const toggleView = useCallback(() => {

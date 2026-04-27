@@ -36,12 +36,13 @@ similarity = np.dot(vec_1, vec_2) / (
 )
 print(f"Similarity: {similarity:.3f}")  # ~0.92`
 
+const EN_P4 = `Embedding Model Comparison (2025-2026)`
 const EN_P2 = `Embedding models and LLMs are both transformers, but they serve different purposes. LLMs`
 const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
-  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
+  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
     <h2 id="embedding-models" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>

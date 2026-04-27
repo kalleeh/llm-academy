@@ -21,6 +21,8 @@ const GOVERNANCE_CONTROLS = [
   { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
 ]
 
+const EN_P10 = `The EU AI Act (phasing in 2025-2027) imposes fines up to`
+const EN_P9 = `Organizations without proactive governance could see a`
 const EN_P8 = `Agent-specific failure modes (beyond hallucination)`
 const EN_P7 = `Autonomy tiers — match oversight to risk`
 const EN_P2 = `Deploying agents to production is fundamentally different from deploying APIs. An API does what you coded. An agent`
@@ -32,7 +34,7 @@ const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselv
         saying the wrong thing; they must contend with systems doing the wrong thing."`
 
 export const ProductionGovernanceSection: React.FC = () => {
-  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 

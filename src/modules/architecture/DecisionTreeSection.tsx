@@ -54,6 +54,10 @@ function getRecommendation(state: DecisionState): Recommendation {
   }
 }
 
+const EN_P9 = `Prompting, RAG, or API use only`
+const EN_P8 = `Custom data, domain-specific tasks`
+const EN_P7 = `Do you need to fine-tune the model?`
+const EN_P6 = `What's your compute budget?`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 const EN_P4 = `{c.p4}`
@@ -61,7 +65,7 @@ const EN_P5 = `{c.p5}`
 const EN_INTRO = `Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.`
 
 export const DecisionTreeSection: React.FC = () => {
-  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
+  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
   const [state, setState] = useState<DecisionState>({ budget: null, finetune: null })
 
   const currentStep: Step = state.budget === null ? 'budget' : state.finetune === null ? 'finetune' : 'result'
@@ -107,7 +111,7 @@ export const DecisionTreeSection: React.FC = () => {
         {/* Budget step */}
         {currentStep === 'budget' && (
           <div>
-            <p className="mb-4 text-sm font-semibold text-zinc-200">What&apos;s your compute budget?</p>
+            <p className="mb-4 text-sm font-semibold text-zinc-200">{c.p6}</p>
             <div className="grid grid-cols-3 gap-3">
               {([
                 { value: 'low' as const, label: 'Low', desc: '1-2 consumer GPUs, <$1K' },
@@ -131,21 +135,21 @@ export const DecisionTreeSection: React.FC = () => {
         {currentStep === 'finetune' && (
           <div>
             <p className="mb-1 text-xs text-zinc-500">Budget: <span className="text-zinc-300 capitalize">{state.budget}</span></p>
-            <p className="mb-4 text-sm font-semibold text-zinc-200">Do you need to fine-tune the model?</p>
+            <p className="mb-4 text-sm font-semibold text-zinc-200">{c.p7}</p>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setFinetune(true)}
                 className="rounded-lg border border-zinc-700 p-4 text-left transition-colors hover:border-zinc-500 hover:bg-zinc-800"
               >
                 <p className="font-mono text-sm font-semibold text-zinc-200">Yes</p>
-                <p className="mt-1 text-xs text-zinc-500">Custom data, domain-specific tasks</p>
+                <p className="mt-1 text-xs text-zinc-500">{c.p8}</p>
               </button>
               <button
                 onClick={() => setFinetune(false)}
                 className="rounded-lg border border-zinc-700 p-4 text-left transition-colors hover:border-zinc-500 hover:bg-zinc-800"
               >
                 <p className="font-mono text-sm font-semibold text-zinc-200">No</p>
-                <p className="mt-1 text-xs text-zinc-500">Prompting, RAG, or API use only</p>
+                <p className="mt-1 text-xs text-zinc-500">{c.p9}</p>
               </button>
             </div>
           </div>

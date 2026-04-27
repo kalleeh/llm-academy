@@ -265,6 +265,9 @@ trainer.train()
 # 5. Save adapter
 model.save_pretrained("./output/lora-adapter")`
 
+const EN_P16 = `LoRA and QLoRA modify the model's weight matrices — they change`
+const EN_P15 = `In the training run above, notice step 3:`
+const EN_P14 = `The PEFT family: LoRA, QLoRA, and Prefix Tuning`
 const EN_P13 = `Prefix Tuning — a different approach`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `LoRA is the most popular way to fine-tune efficiently, but it&apos;s not the only one. The key question is always the same:`
@@ -280,7 +283,7 @@ const EN_P12 = `In practice, prefix tuning is simpler but generally less effecti
 const EN_INTRO = `A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.`
 
 export const FineTuningRunSection: React.FC = () => {
-  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 , p13: EN_P13 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
+  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (

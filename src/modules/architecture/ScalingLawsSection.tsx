@@ -14,6 +14,9 @@ const BUDGET_STEPS = [
   { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'Frontier dense models' },
 ]
 
+const EN_P7 = `Chinchilla-optimal for 37B active`
+const EN_P6 = `DeepSeek V3 (671B total, 37B active) trained on`
+const EN_P5 = `DeepSeek's Challenge to Chinchilla`
 const EN_P2 = `{c.p2}`
 const EN_P3 = `{c.p3}`
 const EN_P4 = `{c.p4}`
@@ -21,7 +24,7 @@ const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens
         Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
 
 export const ScalingLawsSection: React.FC = () => {
-  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
+  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 
   const handleSlider = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +103,7 @@ export const ScalingLawsSection: React.FC = () => {
         </p>
         <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
           <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
-            <p className="text-zinc-500">Chinchilla-optimal for 37B active</p>
+            <p className="text-zinc-500">{c.p7}</p>
             <p className="font-mono text-zinc-300">~740B tokens</p>
           </div>
           <div className="rounded border border-zinc-700 bg-zinc-900 p-3">

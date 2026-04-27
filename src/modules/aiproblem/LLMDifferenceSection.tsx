@@ -53,11 +53,12 @@ const ML_BETTER_CASES = [
   { label: 'Interpretability required', detail: 'Regulated industries need to explain every decision (credit, healthcare).' },
 ]
 
+const EN_P3 = `Same Problem, Two Approaches: Sentiment Analysis`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamentally different paradigm.`
 
 export const LLMDifferenceSection: React.FC = () => {
-  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO , p2: EN_P2 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
+  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
   const [showLLM, setShowLLM] = useState(false)
 
   const toggle = useCallback(() => {

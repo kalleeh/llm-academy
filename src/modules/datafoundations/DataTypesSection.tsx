@@ -111,11 +111,12 @@ const CATEGORIES: DataCategory[] = [
   },
 ]
 
+const EN_P3 = `LLMs work with unstructured text. This changes everything.`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `All data falls into three categories. Click any example to see what it actually looks like.`
 
 export const DataTypesSection: React.FC = () => {
-  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
+  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((key: string) => {

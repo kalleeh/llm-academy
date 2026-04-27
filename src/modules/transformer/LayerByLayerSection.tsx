@@ -79,9 +79,10 @@ function BarChart({ features }: { features: LayerInfo['features'] }) {
   )
 }
 
+const EN_P3 = `Watch how the representation of the token`
 const EN_P2 = `{c.p2}`
 export const LayerByLayerSection: React.FC = () => {
-  const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
+  const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 , p3: EN_P3 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
   const [step, setStep] = useState(0)
 
   const handleStep = useCallback((s: number) => {

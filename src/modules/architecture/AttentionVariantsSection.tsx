@@ -62,11 +62,12 @@ const VARIANT_KEYS: Variant[] = ['mha', 'gqa', 'mqa', 'mla']
 
 const KV_BARS: Record<Variant, number> = { mha: 100, gqa: 25, mqa: 3, mla: 8 }
 
+const EN_P3 = `Query Heads → KV Heads (8 query heads shown)`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.`
 
 export const AttentionVariantsSection: React.FC = () => {
-  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO , p2: EN_P2 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
+  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
   const [active, setActive] = useState<Variant>('mha')
 
   const selectVariant = useCallback((v: Variant) => setActive(v), [])
@@ -120,7 +121,7 @@ export const AttentionVariantsSection: React.FC = () => {
 
         {/* Head diagram */}
         <div className="mb-4">
-          <p className="mb-2 text-xs text-zinc-500 uppercase">Query Heads → KV Heads (8 query heads shown)</p>
+          <p className="mb-2 text-xs text-zinc-500 uppercase">{c.p3}</p>
           <div className="flex gap-2">
             {headVisual.map((h, i) => (
               <div key={i} className={`flex-1 rounded border p-2 text-center text-xs ${h.color}`}>

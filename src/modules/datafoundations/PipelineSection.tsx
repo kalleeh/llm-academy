@@ -116,11 +116,12 @@ const TERMINAL_STEPS: TerminalStep[] = [
   },
 ]
 
+const EN_P3 = `A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search`
 const EN_P2 = `{c.p2}`
 const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.`
 
 export const PipelineSection: React.FC = () => {
-  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
+  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
   const toggleStage = useCallback((id: string) => {
