@@ -55,7 +55,7 @@ function tokenizeLine(line: string, language: string): Token[] {
       continue
     }
     // Number
-    if (/\d/.test(line[i]) && (i === 0 || /[\s,(\[{=:+\-*/]/.test(line[i - 1]))) {
+    if (/\d/.test(line[i]) && (i === 0 || /[\s,(\\[{=:+\-*/]/.test(line[i - 1]))) {
       let j = i
       while (j < line.length && /[\d.e_]/.test(line[j])) j++
       tokens.push({ text: line.slice(i, j), type: 'number' })

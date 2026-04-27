@@ -83,7 +83,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
         return { text, score }
       }
     }
-    return { text: inputText, score: Math.random() * 0.3 + 0.1 }
+    return { text: inputText, score: 0.15 }
   }, [inputText, comparisonEntries])
 
   return (

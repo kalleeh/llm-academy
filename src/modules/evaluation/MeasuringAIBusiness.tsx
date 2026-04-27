@@ -18,7 +18,7 @@ const RATINGS = [
 ]
 
 export const MeasuringAIBusiness: React.FC = () => {
-  const c = useT({ title: '1. How to Tell If Your AI Is Working' , intro: '\"It seems pretty good\" isn\'t good enough.', introSub: 'Think of it like quality assurance before launching a product — test it systematically, not just casually.', goodAnswerLabel: 'Good answer', badAnswerLabel: 'Bad answer'}, { sv: measuringSv, ko: measuringKo })
+  const c = useT({ title: '1. How to Tell If Your AI Is Working' , intro: '"It seems pretty good" isn\'t good enough.', introSub: 'Think of it like quality assurance before launching a product — test it systematically, not just casually.', goodAnswerLabel: 'Good answer', badAnswerLabel: 'Bad answer'}, { sv: measuringSv, ko: measuringKo })
   return (
   <section aria-labelledby="measuring-biz">
     <h2 id="measuring-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
