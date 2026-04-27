@@ -48,7 +48,22 @@ export const comparisonTranslations = {
   ],
 }
 
-export const openModelsTranslations = { sv: [], ko: [] }
+export const openModelsTranslations = {
+  sv: [
+    { name: 'Llama 4 Maverick', note: '400B totalt, 17B aktiva via 128 experter' },
+    { name: 'DeepSeek V3', note: '671B totalt, 37B aktiva. Tränad för ~.5M' },
+    { name: 'Mistral Large 2', note: 'Europeiskt, stark flerspråkig prestanda' },
+    { name: 'Qwen 2.5', note: 'Alibabas flaggskepp, stark på kinesiska + engelska' },
+    { name: 'Gemma 3', note: 'Googles öppna modell, optimerad för effektivitet' },
+  ],
+  ko: [
+    { name: 'Llama 4 Maverick', note: '총 400B, 128 전문가를 통해 17B 활성' },
+    { name: 'DeepSeek V3', note: '총 671B, 37B 활성. ~50만으로 학습' },
+    { name: 'Mistral Large 2', note: '유럽, 강력한 다국어 성능' },
+    { name: 'Qwen 2.5', note: 'Alibaba 플래그십, 중국어 + 영어에 강함' },
+    { name: 'Gemma 3', note: 'Google의 오픈 모델, 효율성 최적화' },
+  ],
+}
 
 export const layersTranslations = {
   sv: [

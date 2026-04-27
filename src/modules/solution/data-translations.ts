@@ -57,8 +57,34 @@ export const comparisonTranslations = {
   ],
 }
 
-export const constraintsTranslations = { sv: [], ko: [] }
-export const casesTranslations = { sv: [], ko: [] }
+export const constraintsTranslations = {
+  sv: [
+    { label: 'Datakänslighet', question: 'Hur känslig är er data?' },
+    { label: 'Budget', question: 'Vilken budgetmodell?' },
+    { label: 'Teamexpertis', question: 'ML-ingenjörskapacitet?' },
+    { label: 'Latensbehov', question: 'Latenskrav?' },
+  ],
+  ko: [
+    { label: '데이터 민감도', question: '데이터가 얼마나 민감한가요?' },
+    { label: '예산', question: '예산 모델은?' },
+    { label: '팀 전문성', question: 'ML 엔지니어링 역량?' },
+    { label: '지연시간 요구', question: '지연시간 요구사항?' },
+  ],
+}
+export const casesTranslations = {
+  sv: [
+    { title: 'Kundsupport-bot', problem: 'Svara på 10K+ supportärenden/månad med konsekvent kvalitet' },
+    { title: 'Juridisk dokumentgranskning', problem: 'Granska kontrakt för risker och efterlevnadsproblem' },
+    { title: 'Intern kunskapsbas', problem: 'Anställda kan inte hitta svar i 50K+ policydokument' },
+    { title: 'Kodassistent', problem: 'Snabba upp utveckling med AI-kodförslag' },
+  ],
+  ko: [
+    { title: '고객 지원 봇', problem: '월 10K+ 지원 티켓에 일관된 품질로 답변' },
+    { title: '법률 문서 검토', problem: '계약서에서 위험과 컴플라이언스 문제 검토' },
+    { title: '내부 지식 베이스', problem: '직원들이 50K+ 정책 문서에서 답을 찾지 못함' },
+    { title: '코드 어시스턴트', problem: 'AI 코드 제안으로 개발 속도 향상' },
+  ],
+}
 export const ragVsFinetuneTranslations = {
   sv: [
     { aspect: 'Kunskapskälla', rag: 'Externa dokument (hämtas vid frågetid)', finetune: 'Inbakad i modellvikterna' },
