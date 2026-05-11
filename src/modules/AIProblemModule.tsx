@@ -6,6 +6,7 @@ import { DecisionFrameworkSection } from './aiproblem/DecisionFrameworkSection'
 import { LLMDifferenceSection } from './aiproblem/LLMDifferenceSection'
 import { ToolboxSection } from './aiproblem/ToolboxSection'
 import { LandscapeBusiness } from './aiproblem/LandscapeBusiness'
+import { LLMvsMLBusiness } from './aiproblem/LLMvsMLBusiness'
 import { DecisionBusiness } from './aiproblem/DecisionBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
@@ -98,6 +99,7 @@ export const AIProblemModule: React.FC = () => {
       <ModuleLayout moduleId="ai-problem" title="What&apos;s an AI Problem?" subtitle="Not everything needs AI. Learn when it helps, when it doesn&apos;t, and how to tell the difference.">
         <LandscapeBusiness />
         <DecisionBusiness />
+        <LLMvsMLBusiness />
         <KnowledgeCheck moduleId="aiproblem-business" questions={translateQuestions(businessQuestions, lang)} />
       </ModuleLayout>
     )

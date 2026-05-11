@@ -11,6 +11,7 @@ import { PostTrainingPipelineSection } from './alignment/PostTrainingPipelineSec
 import { ProductionGovernanceSection } from './agents/ProductionGovernanceSection'
 import { WhyAIGoesWrongBusiness } from './alignment/WhyAIGoesWrongBusiness'
 import { GuardrailsBusiness } from './alignment/GuardrailsBusiness'
+import { ComplianceBusiness } from './alignment/ComplianceBusiness'
 import { ModuleLayout } from '../components/ModuleLayout'
 
 const questions: Question[] = [
@@ -88,6 +89,7 @@ export const AlignmentModule: React.FC = () => {
       <ModuleLayout moduleId="alignment" title="Trust &amp; Safety" subtitle="Why AI sometimes goes wrong, and how to put guardrails in place to use it safely.">
         <WhyAIGoesWrongBusiness />
         <GuardrailsBusiness />
+        <ComplianceBusiness />
         <KnowledgeCheck moduleId="alignment-business" questions={translateQuestions(businessQuestions, lang)} />
       </ModuleLayout>
     )

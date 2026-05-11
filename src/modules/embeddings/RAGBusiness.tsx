@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../i18n'
-import { ragSv, ragKo } from './translations'
 
 const RAG_STEPS = [
   { type: 'user', label: 'You ask', content: 'What\'s our return policy for enterprise customers?', color: 'border-blue-500/30 bg-blue-500/5', badge: 'bg-blue-500/20 text-blue-300' },
@@ -18,12 +17,20 @@ const EN = {
   withoutRagLabel: 'Without RAG (answering from memory)',
   withRagLabel: 'With RAG (open-book exam)',
   whenTitle: 'When to use this approach',
+  ragMeansTitle: 'RAG, in plain language',
+  ragMeansText: 'RAG stands for "Retrieval-Augmented Generation" — that just means: before answering, the AI retrieves relevant documents and reads them. The acronym is intimidating; the idea is "open-book exam."',
+  whereSeenTitle: 'Where you\'ve already seen RAG',
+  whereSeenText: 'Anytime you uploaded a PDF to ChatGPT or Claude and asked questions, that was RAG. ChatGPT Projects, Claude Projects, Notion AI, Amazon Quick, Microsoft Copilot — all of these wrap RAG inside a friendly UI. You don\'t have to call it RAG; you just upload docs and ask questions.',
+  doIneedTitle: 'Do you need to set anything up?',
+  doIneedText: 'For small piles of documents (under ~100), no — just drop them into ChatGPT Projects, Claude Projects, or an Amazon Quick Space. For larger document sets (thousands of pages, millions of records), or for AI that connects to your live database, you need a custom RAG system that your engineering team builds. Cost runs from $0 (paste-and-ask) to $50K-$200K (custom build) depending on scale.',
+  whyCareTitle: 'Why care?',
+  whyCareText: 'Without RAG, AI answers from its training data — which is months or years out of date and knows nothing about your company. With RAG, AI answers from YOUR documents, with citations. That\'s the difference between "smart-sounding intern guessing" and "research analyst with the right files in front of them."',
   selfExplainPrompt: 'Your team has 10,000 support articles. A customer asks a question. Walk through how RAG would help the AI find and use the right article.',
   selfExplainAnswer: 'Step 1: Customer types their question. Step 2: AI converts it into a meaning fingerprint and searches all 10,000 articles. Step 3: AI reads the most relevant sections. Step 4: AI generates a clear answer with source citation.',
 }
 
 export const RAGBusiness: React.FC = () => {
-  const c = useT(EN, { sv: ragSv, ko: ragKo })
+  const c = useT(EN, {})
   const [visibleSteps, setVisibleSteps] = useState(1)
   const showNext = useCallback(() => setVisibleSteps((p) => Math.min(p + 1, RAG_STEPS.length)), [])
   const reset = useCallback(() => setVisibleSteps(1), [])
@@ -32,6 +39,25 @@ export const RAGBusiness: React.FC = () => {
     <section aria-labelledby="rag-biz">
       <h2 id="rag-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+
+      <div className="mb-6 grid gap-3 sm:grid-cols-2">
+        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <p className="mb-1 text-xs font-medium text-zinc-100">{c.ragMeansTitle}</p>
+          <p className="text-xs text-zinc-400">{c.ragMeansText}</p>
+        </div>
+        <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-blue-300">{c.whereSeenTitle}</p>
+          <p className="text-xs text-zinc-300">{c.whereSeenText}</p>
+        </div>
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-amber-300">{c.doIneedTitle}</p>
+          <p className="text-xs text-zinc-300">{c.doIneedText}</p>
+        </div>
+        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-emerald-400">{c.whyCareTitle}</p>
+          <p className="text-xs text-zinc-300">{c.whyCareText}</p>
+        </div>
+      </div>
 
       <div className="mb-4 rounded-lg border border-zinc-700 bg-zinc-900 overflow-hidden">
         <div className="border-b border-zinc-700 bg-zinc-800 px-4 py-2 flex items-center justify-between">

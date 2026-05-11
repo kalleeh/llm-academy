@@ -6,6 +6,7 @@ import { EcosystemSection } from './industry/EcosystemSection'
 import { WhereItsHeadingSection } from './industry/WhereItsHeadingSection'
 import { KeyPlayersBusiness } from './industry/KeyPlayersBusiness'
 import { OpenVsClosedBusiness } from './industry/OpenVsClosedBusiness'
+import { WhereItsHeadingBusiness } from './industry/WhereItsHeadingBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
@@ -60,6 +61,7 @@ export const IndustryModule: React.FC = () => {
       <ModuleLayout moduleId="industry" title="Who Makes What" subtitle="The key AI companies, what they offer, and the open vs closed debate — and what it means for your business.">
         <KeyPlayersBusiness />
         <OpenVsClosedBusiness />
+        <WhereItsHeadingBusiness />
         <KnowledgeCheck moduleId="industry-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )

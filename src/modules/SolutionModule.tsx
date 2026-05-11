@@ -10,6 +10,7 @@ import { CostCalculatorSection } from './solution/CostCalculatorSection'
 import { CaseStudiesSection } from './solution/CaseStudiesSection'
 import { ApproachesBusiness } from './solution/ApproachesBusiness'
 import { BuildVsBuyBusiness } from './solution/BuildVsBuyBusiness'
+import { CostRealityBusiness } from './solution/CostRealityBusiness'
 import { ModuleLayout } from '../components/ModuleLayout'
 
 const questions: Question[] = [
@@ -79,6 +80,7 @@ export const SolutionModule: React.FC = () => {
       <ModuleLayout moduleId="solution" title="From Problem to Solution" subtitle="Four ways to use AI, from simple to complex — and how to decide between renting and buying.">
         <ApproachesBusiness />
         <BuildVsBuyBusiness />
+        <CostRealityBusiness />
         <KnowledgeCheck moduleId="solution-business" questions={translateQuestions(businessQuestions, lang)} />
       </ModuleLayout>
     )
