@@ -54,8 +54,8 @@ export const DataFormatsSection: React.FC = () => {
   const c = useT({ title: '5. Data Formats', intro: EN_INTRO }, { sv: dataFormatsSectionSv, ko: dataFormatsSectionKo })
   return (
   <section aria-labelledby="data-formats">
-    <h2 id="data-formats" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+    <h2 id="data-formats" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
     <div className="mb-6">
       <FileExplorer tree={TREE} title="~/datasets" />
     </div>

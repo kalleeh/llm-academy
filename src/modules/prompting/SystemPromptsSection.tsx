@@ -5,11 +5,11 @@ import { tLabel, useLanguage, useT } from '../../i18n'
 import { systemPromptsSectionSv, systemPromptsSectionKo } from './tech-translations'
 
 const FRAMEWORK_FIELDS = [
-  { key: 'goal', label: 'spGoal', placeholder: 'Classify customer support tickets by urgency', color: 'text-violet-400' },
-  { key: 'context', label: 'spContext', placeholder: 'You work for an e-commerce company with 3 urgency levels: low, medium, high', color: 'text-blue-400' },
-  { key: 'format', label: 'spFormat', placeholder: 'Respond with JSON: {"urgency": "...", "reason": "..."}', color: 'text-green-400' },
-  { key: 'tone', label: 'spTone', placeholder: 'Be concise and professional', color: 'text-amber-400' },
-  { key: 'constraints', label: 'spConstraints', placeholder: 'Never make up information. If unsure, classify as medium.', color: 'text-red-400' },
+  { key: 'goal', label: 'spGoal', placeholder: 'Classify customer support tickets by urgency', color: 'text-violet-700 dark:text-violet-400' },
+  { key: 'context', label: 'spContext', placeholder: 'You work for an e-commerce company with 3 urgency levels: low, medium, high', color: 'text-blue-700 dark:text-blue-400' },
+  { key: 'format', label: 'spFormat', placeholder: 'Respond with JSON: {"urgency": "...", "reason": "..."}', color: 'text-green-700 dark:text-green-400' },
+  { key: 'tone', label: 'spTone', placeholder: 'Be concise and professional', color: 'text-amber-700 dark:text-amber-400' },
+  { key: 'constraints', label: 'spConstraints', placeholder: 'Never make up information. If unsure, classify as medium.', color: 'text-red-700 dark:text-red-400' },
 ] as const
 
 type FieldKey = (typeof FRAMEWORK_FIELDS)[number]['key']
@@ -66,9 +66,9 @@ print(response.choices[0].message.content)
 
   return (
     <section aria-labelledby="system-prompts">
-      <h2 id="system-prompts" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        System prompts set the <strong className="text-zinc-100">persistent behavior</strong> of the
+      <h2 id="system-prompts" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        System prompts set the <strong className="text-zinc-900 dark:text-zinc-100">persistent behavior</strong> of the
         model across an entire conversation. They define who the model is, what it should do, and how
         it should respond — before the user says anything.
       </p>
@@ -80,19 +80,19 @@ print(response.choices[0].message.content)
           { title: 'Safety', desc: 'Enforce guardrails, content policies, and output constraints' },
           { title: 'Persona', desc: 'Define expertise level, tone, and domain knowledge' },
         ].map(item => (
-          <div key={item.title} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-            <p className="font-mono text-sm font-semibold text-zinc-100">{item.title}</p>
-            <p className="mt-1 text-xs text-zinc-400">{item.desc}</p>
+          <div key={item.title} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+            <p className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{item.title}</p>
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{item.desc}</p>
           </div>
         ))}
       </div>
 
       {/* 5-component framework */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           The 5-Component Framework
         </h3>
-        <p className="mb-4 text-xs text-zinc-400">{c.intro}</p>
+        <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">{c.intro}</p>
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Inputs */}
@@ -108,7 +108,7 @@ print(response.choices[0].message.content)
                   value={values[field.key]}
                   onChange={e => handleChange(field.key, e.target.value)}
                   placeholder={field.placeholder}
-                  className="w-full rounded-md border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-600"
+                  className="w-full rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
                 />
               </div>
             ))}
@@ -117,7 +117,7 @@ print(response.choices[0].message.content)
           {/* Preview */}
           <div>
             <p className="mb-1 text-xs font-medium text-zinc-500">Generated System Prompt</p>
-            <pre className="h-full overflow-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-zinc-200">
+            <pre className="h-full overflow-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-zinc-800 dark:text-zinc-200">
               {systemPrompt}
             </pre>
           </div>
@@ -126,7 +126,7 @@ print(response.choices[0].message.content)
 
       {/* API call example */}
       <div>
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           API Call with System Prompt
         </h3>
         <CodeBlock code={apiCode} language="python" title="system_prompt_example.py" />

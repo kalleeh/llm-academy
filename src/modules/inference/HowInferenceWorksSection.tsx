@@ -36,16 +36,16 @@ export const HowInferenceWorksSection: React.FC = () => {
 
   return (
     <section aria-labelledby="how-inference-works">
-      <h2 id="how-inference-works" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        {c.p2} <strong className="text-zinc-100">prefill</strong> and{' '}
-        <strong className="text-zinc-100">decode</strong> — and the KV cache is what makes it
+      <h2 id="how-inference-works" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        {c.p2} <strong className="text-zinc-900 dark:text-zinc-100">prefill</strong> and{' '}
+        <strong className="text-zinc-900 dark:text-zinc-100">decode</strong> — and the KV cache is what makes it
         efficient (and what eats your GPU memory).
       </p>
 
       {/* Pipeline visualization */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-4 text-sm font-medium text-zinc-400">Inference Pipeline</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">Inference Pipeline</p>
         <div className="flex items-center gap-2">
           {PHASES.map((phase, i) => (
             <button
@@ -54,7 +54,7 @@ export const HowInferenceWorksSection: React.FC = () => {
               className={`flex-1 rounded-md border px-4 py-3 text-left transition-all ${
                 activePhase === i
                   ? `${phase.color} border-transparent text-white`
-                  : 'border-zinc-700 bg-zinc-800 text-zinc-400 hover:border-zinc-600'
+                  : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600'
               }`}
               aria-pressed={activePhase === i}
             >
@@ -65,12 +65,12 @@ export const HowInferenceWorksSection: React.FC = () => {
             </button>
           ))}
         </div>
-        <div className="mt-4 rounded-md bg-zinc-800 p-4">
-          <p className="text-sm text-zinc-300">{PHASES[activePhase].desc}</p>
+        <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">{PHASES[activePhase].desc}</p>
           {activePhase === 0 && (
             <div className="mt-3 flex gap-1.5">
               {['The', 'cat', 'sat', 'on', 'the', 'mat'].map(t => (
-                <span key={t} className="rounded bg-blue-500/20 px-2 py-1 font-mono text-xs text-blue-300">
+                <span key={t} className="rounded bg-blue-100 dark:bg-blue-500/20 px-2 py-1 font-mono text-xs text-blue-700 dark:text-blue-300">
                   {t}
                 </span>
               ))}
@@ -78,26 +78,26 @@ export const HowInferenceWorksSection: React.FC = () => {
           )}
           {activePhase === 1 && (
             <div className="mt-3 space-y-1">
-              <p className="text-xs text-zinc-400">
-                All prompt tokens processed <strong className="text-amber-400">in parallel</strong>.
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                All prompt tokens processed <strong className="text-amber-700 dark:text-amber-400">in parallel</strong>.
                 Attention computed for every token pair → KV cache populated.
               </p>
               <div className="flex gap-1">
                 {Array.from({ length: 6 }, (_, i) => (
-                  <div key={i} className="h-8 flex-1 animate-pulse rounded bg-amber-500/30" style={{ animationDelay: `${i * 80}ms` }} />
+                  <div key={i} className="h-8 flex-1 animate-pulse rounded bg-amber-200 dark:bg-amber-500/30" style={{ animationDelay: `${i * 80}ms` }} />
                 ))}
               </div>
             </div>
           )}
           {activePhase === 2 && (
             <div className="mt-3 space-y-1">
-              <p className="text-xs text-zinc-400">
-                Each new token attends to <strong className="text-green-400">all previous tokens</strong>{' '}
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                Each new token attends to <strong className="text-green-700 dark:text-green-400">all previous tokens</strong>{' '}
                 via the KV cache. One token per forward pass — this is the bottleneck.
               </p>
               <div className="flex gap-1">
                 {['▸', '▸', '▸', '…'].map((c, i) => (
-                  <span key={i} className="rounded bg-green-500/20 px-2 py-1 font-mono text-xs text-green-300">
+                  <span key={i} className="rounded bg-green-100 dark:bg-green-500/20 px-2 py-1 font-mono text-xs text-green-700 dark:text-green-300">
                     {c}
                   </span>
                 ))}
@@ -108,12 +108,12 @@ export const HowInferenceWorksSection: React.FC = () => {
       </div>
 
       {/* KV Cache explanation */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">The KV Cache</h3>
-        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-300">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The KV Cache</h3>
+        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           During decode, each new token needs to attend to every previous token. Without caching,
           you&apos;d recompute all key/value projections every step. The{' '}
-          <strong className="text-zinc-100">KV cache</strong> stores these projections so each step
+          <strong className="text-zinc-900 dark:text-zinc-100">KV cache</strong> stores these projections so each step
           only computes the new token&apos;s K and V. The tradeoff: cache size grows with sequence
           length, and for long contexts it dominates GPU memory.
         </p>
@@ -124,21 +124,21 @@ export const HowInferenceWorksSection: React.FC = () => {
             { label: 'How it grows', text: 'Proportional to sequence_length × num_layers × num_heads × head_dim × 2 (K+V)' },
             { label: 'Why it\'s the bottleneck', text: 'At 128K context on a 70B model, KV cache alone needs ~40 GB — often more than the model weights (quantized)' },
           ].map(item => (
-            <div key={item.label} className="rounded-md bg-zinc-800 p-3">
-              <p className="mb-1 text-xs font-bold uppercase tracking-wider text-zinc-400">{item.label}</p>
-              <p className="text-xs leading-relaxed text-zinc-300">{item.text}</p>
+            <div key={item.label} className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+              <p className="mb-1 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{item.label}</p>
+              <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{item.text}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Interactive KV cache slider */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.p5}</h3>
-        <p className="mb-4 text-xs text-zinc-400">70B model, FP16 KV cache</p>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.p5}</h3>
+        <p className="mb-4 text-xs text-zinc-500 dark:text-zinc-400">70B model, FP16 KV cache</p>
 
         <label className="mb-1 block text-xs text-zinc-500" htmlFor="kv-slider">
-          Context length: <strong className="text-zinc-200">{kvEntry.label} tokens</strong>
+          Context length: <strong className="text-zinc-800 dark:text-zinc-200">{kvEntry.label} tokens</strong>
         </label>
         <input
           id="kv-slider"
@@ -157,7 +157,7 @@ export const HowInferenceWorksSection: React.FC = () => {
               <span>KV Cache</span>
               <span>{kvEntry.cacheGB >= 1 ? `${kvEntry.cacheGB} GB` : `${(kvEntry.cacheGB * 1024).toFixed(0)} MB`}</span>
             </div>
-            <div className="h-8 w-full overflow-hidden rounded bg-zinc-800">
+            <div className="h-8 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
               <div
                 className="h-full rounded bg-violet-500 transition-all duration-500"
                 style={{ width: `${barPct}%` }}
@@ -176,7 +176,7 @@ export const HowInferenceWorksSection: React.FC = () => {
             <span
               key={ex.label}
               className={`rounded-full px-2.5 py-0.5 text-xs ${
-                i === ctxSlider ? 'bg-violet-500/20 text-violet-300' : 'bg-zinc-800 text-zinc-500'
+                i === ctxSlider ? 'bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
               }`}
             >
               {ex.label} = {ex.cacheGB >= 1 ? `${ex.cacheGB} GB` : `${(ex.cacheGB * 1024).toFixed(0)} MB`}

@@ -3,9 +3,9 @@ import { useT } from '../../i18n'
 import { dataMixSectionSv, dataMixSectionKo } from './tech-translations'
 
 const SLIDERS = [
-  { label: 'Text (web, books)', key: 'text', color: 'text-blue-400', bar: 'bg-blue-500' },
-  { label: 'Code', key: 'code', color: 'text-green-400', bar: 'bg-green-500' },
-  { label: 'Math', key: 'math', color: 'text-amber-400', bar: 'bg-amber-500' },
+  { label: 'Text (web, books)', key: 'text', color: 'text-blue-700 dark:text-blue-400', bar: 'bg-blue-500' },
+  { label: 'Code', key: 'code', color: 'text-green-700 dark:text-green-400', bar: 'bg-green-500' },
+  { label: 'Math', key: 'math', color: 'text-amber-700 dark:text-amber-400', bar: 'bg-amber-500' },
 ] as const
 
 const CAPS = [
@@ -45,17 +45,17 @@ export const DataMixSection: React.FC = () => {
 
   return (
     <section aria-labelledby="data-mix">
-      <h2 id="data-mix" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="data-mix" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-          <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-300">Training Data Ratio</h3>
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+          <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Training Data Ratio</h3>
           <div className="space-y-4">
             {SLIDERS.map(s => (
               <div key={s.key}>
                 <div className="mb-1 flex items-center justify-between">
                   <label htmlFor={`mix-${s.key}`} className={`text-sm font-medium ${s.color}`}>{s.label}</label>
-                  <span className="font-mono text-sm text-zinc-300">{mix[s.key]}%</span>
+                  <span className="font-mono text-sm text-zinc-700 dark:text-zinc-300">{mix[s.key]}%</span>
                 </div>
                 <input id={`mix-${s.key}`} type="range" min={0} max={100} value={mix[s.key]}
                   onChange={e => handleChange(s.key, Number(e.target.value))} className="w-full accent-zinc-400" />
@@ -68,16 +68,16 @@ export const DataMixSection: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-          <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-300">Estimated Capabilities</h3>
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+          <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Estimated Capabilities</h3>
           <div className="space-y-3">
             {caps.map(c => (
               <div key={c.name}>
                 <div className="mb-1 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400">{c.name}</span>
-                  <span className="font-mono text-zinc-300">{c.score}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{c.name}</span>
+                  <span className="font-mono text-zinc-700 dark:text-zinc-300">{c.score}</span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded bg-zinc-800">
+                <div className="h-2 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                   <div className="h-full rounded bg-gradient-to-r from-zinc-500 to-zinc-300 transition-all duration-300"
                     style={{ width: `${c.score}%` }} />
                 </div>

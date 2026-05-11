@@ -38,8 +38,8 @@ export const BigPictureSection: React.FC = () => {
 
   return (
     <section aria-labelledby="big-picture-heading">
-      <h2 id="big-picture-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="big-picture-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="flex flex-col items-center gap-1">
         {lAYERST.map((layer, i) => (
@@ -52,12 +52,12 @@ export const BigPictureSection: React.FC = () => {
               onClick={() => layer.expandable ? toggle(layer.id) : undefined}
               className={`w-full rounded-lg border px-4 py-3 text-center text-sm font-medium transition-all ${layer.color} ${
                 layer.expandable ? 'cursor-pointer hover:brightness-125' : 'cursor-default'
-              } ${expanded === layer.id ? 'ring-2 ring-zinc-400' : ''}`}
+              } ${expanded === layer.id ? 'ring-2 ring-zinc-300 dark:ring-zinc-400' : ''}`}
               aria-expanded={layer.expandable ? expanded === layer.id : undefined}
             >
               {layer.label}
               {layer.expandable && (
-                <span className="ml-2 text-xs text-zinc-400">
+                <span className="ml-2 text-xs text-zinc-500 dark:text-zinc-400">
                   {expanded === layer.id ? '▾' : '▸'}
                 </span>
               )}
@@ -68,24 +68,24 @@ export const BigPictureSection: React.FC = () => {
 
             {/* Expanded inner view */}
             {expanded === layer.id && (
-              <div className="mt-2 flex w-full max-w-sm flex-col items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+              <div className="mt-2 flex w-full max-w-sm flex-col items-center gap-1 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
                 <span className="mb-1 text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
                   Inside {layer.label}
                 </span>
-                <div className="w-full rounded border border-blue-700 bg-blue-950 px-3 py-2 text-center text-xs text-blue-300">
+                <div className="w-full rounded border border-blue-700 bg-blue-950 px-3 py-2 text-center text-xs text-blue-700 dark:text-blue-300">
                   Multi-Head Attention
-                  <p className="mt-0.5 text-[10px] text-blue-400/70">{c.p6}</p>
+                  <p className="mt-0.5 text-[10px] text-blue-700 dark:text-blue-400/70">{c.p6}</p>
                 </div>
                 <div className="h-3 w-px bg-zinc-600" />
                 <div className="text-[10px] text-zinc-500">+ Add &amp; Normalize</div>
                 <div className="h-3 w-px bg-zinc-600" />
-                <div className="w-full rounded border border-orange-700 bg-orange-950 px-3 py-2 text-center text-xs text-orange-300">
+                <div className="w-full rounded border border-orange-700 bg-orange-950 px-3 py-2 text-center text-xs text-orange-700 dark:text-orange-300">
                   Feed-Forward Network
-                  <p className="mt-0.5 text-[10px] text-orange-400/70">{c.p7}</p>
+                  <p className="mt-0.5 text-[10px] text-orange-700 dark:text-orange-400/70">{c.p7}</p>
                 </div>
                 <div className="h-3 w-px bg-zinc-600" />
                 <div className="text-[10px] text-zinc-500">+ Add &amp; Normalize</div>
-                <p className="mt-2 text-[9px] text-zinc-600 italic">Note: modern LLMs (GPT-2+, LLaMA, etc.) use pre-norm — normalizing before each sub-layer for better training stability.</p>
+                <p className="mt-2 text-[9px] text-zinc-500 dark:text-zinc-600 italic">Note: modern LLMs (GPT-2+, LLaMA, etc.) use pre-norm — normalizing before each sub-layer for better training stability.</p>
               </div>
             )}
           </div>

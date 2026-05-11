@@ -64,8 +64,8 @@ function BarChart({ features }: { features: LayerInfo['features'] }) {
     <div className="space-y-2">
       {features.map(f => (
         <div key={f.label} className="flex items-center gap-2">
-          <span className="w-32 shrink-0 text-right text-xs text-zinc-400">{f.label}</span>
-          <div className="h-4 flex-1 overflow-hidden rounded-full bg-zinc-800">
+          <span className="w-32 shrink-0 text-right text-xs text-zinc-500 dark:text-zinc-400">{f.label}</span>
+          <div className="h-4 flex-1 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
             <div
               className={`h-full rounded-full transition-all duration-500 ${f.color}`}
               style={{ width: `${f.value * 100}%` }}
@@ -95,17 +95,17 @@ export const LayerByLayerSection: React.FC = () => {
   const steps = LAYER_DATA.map((layer, i) => (
     <div key={i}>
       <div className="mb-3 flex items-baseline gap-2">
-        <span className="font-mono text-sm font-bold text-zinc-200">{layer.name}</span>
+        <span className="font-mono text-sm font-bold text-zinc-800 dark:text-zinc-200">{layer.name}</span>
       </div>
-      <p className="mb-4 text-xs text-zinc-400">{layer.description}</p>
+      <p className="mb-4 text-xs text-zinc-500 dark:text-zinc-400">{layer.description}</p>
       <BarChart features={layer.features} />
     </div>
   ))
 
   return (
     <section aria-labelledby="layers-heading">
-      <h2 id="layers-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 text-sm text-zinc-400">{c.p4}<strong className="text-amber-300">
+      <h2 id="layers-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{c.p4}<strong className="text-amber-700 dark:text-amber-300">
         &quot;{TOKEN}&quot;</strong> evolves as it passes through the transformer's layers.
         Early layers capture surface features; deeper layers build rich semantic understanding.
       </p>
@@ -117,7 +117,7 @@ export const LayerByLayerSection: React.FC = () => {
             key={i}
             onClick={() => handleStep(i)}
             className={`h-2 flex-1 rounded-full transition-all ${
-              i <= step ? 'bg-amber-500' : 'bg-zinc-700'
+              i <= step ? 'bg-amber-500' : 'bg-zinc-200 dark:bg-zinc-700'
             }`}
             aria-label={`Go to ${lAYER_DATAT[i].name}`}
           />
@@ -136,14 +136,14 @@ export const LayerByLayerSection: React.FC = () => {
         <button
           onClick={() => setStep(s => Math.max(0, s - 1))}
           disabled={step === 0}
-          className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 hover:bg-zinc-600 disabled:opacity-40"
+          className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-600 disabled:opacity-40"
         >
           ← Previous Layer
         </button>
         <button
           onClick={() => setStep(s => Math.min(LAYER_DATA.length - 1, s + 1))}
           disabled={step === LAYER_DATA.length - 1}
-          className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 hover:bg-zinc-600 disabled:opacity-40"
+          className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-600 disabled:opacity-40"
         >
           Next Layer →
         </button>

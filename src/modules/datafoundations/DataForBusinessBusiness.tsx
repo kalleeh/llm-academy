@@ -44,54 +44,54 @@ export const DataForBusinessBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="data-biz">
-      <h2 id="data-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="data-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-4 flex gap-2">
         {([{ id: 'structured' as Tab, label: c.structuredLabel }, { id: 'unstructured' as Tab, label: c.unstructuredLabel }, { id: 'semi' as Tab, label: c.whyItMattersLabel }]).map((t) => (
-          <button key={t.id} onClick={() => setTab(t.id)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${tab === t.id ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-400 hover:bg-zinc-800'}`}>{t.label}</button>
+          <button key={t.id} onClick={() => setTab(t.id)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${tab === t.id ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>{t.label}</button>
         ))}
       </div>
 
       {tab === 'structured' && (
-        <div className="mb-8 rounded-lg border border-emerald-500/30 bg-zinc-900 overflow-hidden">
+        <div className="mb-8 rounded-lg border border-emerald-400 dark:border-emerald-500/30 bg-white dark:bg-zinc-900 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
-              <thead><tr className="border-b border-zinc-800 bg-zinc-800/50">{['ID', 'Company', 'Email', 'Plan', 'ARR', 'Start Date', 'Status'].map((h) => (<th key={h} className="px-3 py-2 text-left font-medium text-emerald-400">{h}</th>))}</tr></thead>
-              <tbody>{STRUCTURED_ROWS.map((row, i) => (<tr key={i} className="border-b border-zinc-800/50 last:border-0">{row.map((cell, j) => (<td key={j} className="px-3 py-2 text-zinc-300 whitespace-nowrap">{cell}</td>))}</tr>))}</tbody>
+              <thead><tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/50">{['ID', 'Company', 'Email', 'Plan', 'ARR', 'Start Date', 'Status'].map((h) => (<th key={h} className="px-3 py-2 text-left font-medium text-emerald-700 dark:text-emerald-400">{h}</th>))}</tr></thead>
+              <tbody>{STRUCTURED_ROWS.map((row, i) => (<tr key={i} className="border-b border-zinc-200/50 dark:border-zinc-800/50 last:border-0">{row.map((cell, j) => (<td key={j} className="px-3 py-2 text-zinc-700 dark:text-zinc-300 whitespace-nowrap">{cell}</td>))}</tr>))}</tbody>
             </table>
           </div>
-          <div className="border-t border-zinc-700 bg-zinc-800/50 px-4 py-3"><p className="text-xs text-zinc-400">{c.structuredNote}</p></div>
+          <div className="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3"><p className="text-xs text-zinc-600 dark:text-zinc-400">{c.structuredNote}</p></div>
         </div>
       )}
 
       {tab === 'unstructured' && (
-        <div className="mb-8 rounded-lg border border-amber-500/30 bg-zinc-900 overflow-hidden">
-          <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-4 py-2">
-            <span className="text-xs text-zinc-400">{UNSTRUCTURED_EXAMPLES[exampleIdx].label}</span>
-            <button onClick={nextExample} className="rounded bg-zinc-700 px-2 py-0.5 text-xs text-zinc-300 hover:bg-zinc-600">Next →</button>
+        <div className="mb-8 rounded-lg border border-amber-400 dark:border-amber-500/30 bg-white dark:bg-zinc-900 overflow-hidden">
+          <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+            <span className="text-xs text-zinc-600 dark:text-zinc-400">{UNSTRUCTURED_EXAMPLES[exampleIdx].label}</span>
+            <button onClick={nextExample} className="rounded bg-zinc-200 dark:bg-zinc-700 px-2 py-0.5 text-xs text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-600">Next →</button>
           </div>
-          <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-zinc-300 whitespace-pre-wrap">{UNSTRUCTURED_EXAMPLES[exampleIdx].content}</pre>
-          <div className="border-t border-zinc-700 bg-zinc-800/50 px-4 py-3"><p className="text-xs text-zinc-400">{c.unstructuredNote}</p></div>
+          <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap">{UNSTRUCTURED_EXAMPLES[exampleIdx].content}</pre>
+          <div className="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3"><p className="text-xs text-zinc-600 dark:text-zinc-400">{c.unstructuredNote}</p></div>
         </div>
       )}
 
       {tab === 'semi' && (
-        <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5 space-y-4">
-          <p className="text-sm text-zinc-300">{c.whyItMattersLabel}</p>
+        <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5 space-y-4">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">{c.whyItMattersLabel}</p>
         </div>
       )}
 
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.howMuchTitle}</p>
-        <p className="mb-4 text-sm text-zinc-300">{c.howMuchIntro}</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.howMuchTitle}</p>
+        <p className="mb-4 text-sm text-zinc-700 dark:text-zinc-300">{c.howMuchIntro}</p>
         <div className="space-y-2">
           {(c.amounts ?? EN.amounts).map((row) => (
-            <div key={row.task} className="flex items-start gap-3 rounded bg-zinc-800/50 px-4 py-3">
+            <div key={row.task} className="flex items-start gap-3 rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
               <div className="min-w-0 flex-1">
-                <span className="text-sm text-zinc-200">{row.task}</span>
-                <span className="mx-2 text-zinc-600">→</span>
-                <span className="text-sm text-amber-300">{row.amount}</span>
+                <span className="text-sm text-zinc-800 dark:text-zinc-200">{row.task}</span>
+                <span className="mx-2 text-zinc-500 dark:text-zinc-600">→</span>
+                <span className="text-sm text-amber-700 dark:text-amber-300">{row.amount}</span>
                 <p className="mt-1 text-xs text-zinc-500">{row.analogy}</p>
               </div>
             </div>

@@ -77,31 +77,31 @@ const afterTraining: FileNode[] = [
 
 export const TrainingSection3: React.FC = () => (
   <section className="space-y-6" aria-labelledby="section-3-heading">
-    <h3 id="section-3-heading" className="font-mono text-xl font-bold text-zinc-100">
+    <h3 id="section-3-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
       3. The Filesystem After Training
     </h3>
-    <p className="text-zinc-400 leading-relaxed">
-      After training, the nanochat project directory gains a <code className="text-amber-300">logs/d26/</code> folder
+    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+      After training, the nanochat project directory gains a <code className="text-amber-700 dark:text-amber-300">logs/d26/</code> folder
       with the trained model and checkpoints. The code and data are unchanged — all the "learning"
       lives in the weight files.
     </p>
 
     <div className="grid gap-6 lg:grid-cols-2">
       <div>
-        <p className="mb-2 text-sm font-medium text-red-400"><Icon name="cross" className="text-red-400" /> Before training:</p>
+        <p className="mb-2 text-sm font-medium text-red-700 dark:text-red-400"><Icon name="cross" className="text-red-700 dark:text-red-400" /> Before training:</p>
         <FileExplorer tree={beforeTraining} title="~/nanochat — before" />
       </div>
       <div>
-        <p className="mb-2 text-sm font-medium text-green-400"><Icon name="check" className="text-green-400" /> After training:</p>
+        <p className="mb-2 text-sm font-medium text-green-700 dark:text-green-400"><Icon name="check" className="text-green-700 dark:text-green-400" /> After training:</p>
         <FileExplorer tree={afterTraining} title="~/nanochat — after" />
       </div>
     </div>
 
-    <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-      <p className="text-sm text-zinc-300">
-        <strong className="text-zinc-100">model.pt vs state checkpoints:</strong> The{' '}
-        <code className="text-amber-300">model.pt</code> (3.2 GB) contains just the trained weights —
-        this is what you load for inference. The <code className="text-amber-300">state_*.pt</code> files
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+      <p className="text-sm text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">model.pt vs state checkpoints:</strong> The{' '}
+        <code className="text-amber-700 dark:text-amber-300">model.pt</code> (3.2 GB) contains just the trained weights —
+        this is what you load for inference. The <code className="text-amber-700 dark:text-amber-300">state_*.pt</code> files
         (9.6 GB each) include the optimizer state too, so you can resume training. The optimizer
         state is ~2-3× the model size because Adam tracks momentum and variance for every parameter.
       </p>

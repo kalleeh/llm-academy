@@ -35,8 +35,8 @@ const SURFACES: Surface[] = [
     whoBuilds: 'You. Takes 5 minutes once.',
     bestFor: 'Your personal preferences applied to every chat — your role, your industry, your formatting and tone preferences.',
     example: '"I&apos;m a marketing manager at a B2B SaaS company. Always respond in plain language without jargon. Keep emails under 150 words. Lead with the conclusion."',
-    color: 'border-blue-500/30 bg-blue-500/5',
-    badge: 'bg-blue-500/20 text-blue-300',
+    color: 'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5',
+    badge: 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300',
   },
   {
     product: 'Custom GPTs / Claude Projects / Gemini Gems',
@@ -46,8 +46,8 @@ const SURFACES: Surface[] = [
     whoBuilds: 'A team lead or power user. ~10 minutes to build, lifetime use.',
     bestFor: 'A purpose-built assistant your team can share — with persistent instructions, attached knowledge files, and (for Custom GPTs) connected actions.',
     example: '"Brand Voice Editor" — knows your brand guide, your forbidden words, your preferred tone. Anyone in marketing pastes copy in and gets consistent feedback.',
-    color: 'border-purple-500/30 bg-purple-500/5',
-    badge: 'bg-purple-500/20 text-purple-300',
+    color: 'border-purple-400 dark:border-purple-500/30 bg-purple-50 dark:bg-purple-500/5',
+    badge: 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300',
   },
   {
     product: 'Amazon Quick (formerly Amazon Q Business)',
@@ -57,8 +57,8 @@ const SURFACES: Surface[] = [
     whoBuilds: 'IT admins, ops, dept managers. Plugs into Slack, Teams, Outlook, CRMs, databases, and your internal docs.',
     bestFor: 'Company-wide AI assistants that connect to your real systems — CRM, ticketing, knowledge bases, internal apps. Free + Plus tiers; desktop, mobile, browser apps.',
     example: 'A "New Hire Onboarding" agent that answers questions from the employee handbook, files IT requests, schedules meetings with the buddy, and clears HR tickets — all from one Slack conversation.',
-    color: 'border-amber-500/30 bg-amber-500/5',
-    badge: 'bg-amber-500/20 text-amber-300',
+    color: 'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5',
+    badge: 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300',
   },
   {
     product: 'Microsoft Copilot Studio',
@@ -68,8 +68,8 @@ const SURFACES: Surface[] = [
     whoBuilds: 'Power Platform admins, citizen developers in M365 environments.',
     bestFor: 'Department-level agents inside Microsoft Teams / Outlook / SharePoint that work with your existing M365 data and permissions.',
     example: 'A "Procurement Helper" agent in Teams that pulls vendor data from SharePoint, drafts purchase requests in the right format, and routes them through your approval workflow.',
-    color: 'border-cyan-500/30 bg-cyan-500/5',
-    badge: 'bg-cyan-500/20 text-cyan-300',
+    color: 'border-cyan-400 dark:border-cyan-500/30 bg-cyan-50 dark:bg-cyan-500/5',
+    badge: 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300',
   },
   {
     product: 'Salesforce Agentforce',
@@ -79,8 +79,8 @@ const SURFACES: Surface[] = [
     whoBuilds: 'Salesforce admins, RevOps.',
     bestFor: 'Agents that live inside your Salesforce data and processes — sales, service, marketing.',
     example: 'A service agent that summarises a case, suggests the next best action, and drafts a customer reply — all using Salesforce-native data and permissions.',
-    color: 'border-emerald-500/30 bg-emerald-500/5',
-    badge: 'bg-emerald-500/20 text-emerald-300',
+    color: 'border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5',
+    badge: 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300',
   },
 ]
 
@@ -97,21 +97,21 @@ const EXAMPLES: PromptExample[] = [
     prompt:
       'You are a support agent for Acme Corp. Be helpful, empathetic, and professional. Answer questions about our products and policies using the provided knowledge base. If you don\'t know the answer, say "Let me connect you with a team member" — never guess. Never discuss competitor products. Never share internal pricing or system IDs.',
     why: 'Defines the role, tone, data source, boundaries, and fallback behavior.',
-    color: 'border-blue-500/30 bg-blue-500/5',
+    color: 'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5',
   },
   {
     role: 'Internal HR assistant',
     prompt:
       'You are an HR assistant for employees of Acme Corp. Answer questions about PTO, benefits, and company policies using the employee handbook (2025 edition). Be friendly but precise — employees make decisions based on your answers. If a question involves individual circumstances (accommodations, disputes, termination), say "Please contact your HR business partner directly" and provide the contact link.',
     why: 'Specifies the data source version, sets accuracy expectations, and defines clear escalation for sensitive topics.',
-    color: 'border-emerald-500/30 bg-emerald-500/5',
+    color: 'border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5',
   },
   {
     role: 'Sales email drafter',
     prompt:
       'You help sales reps draft follow-up emails. Match the tone of our brand: professional but warm, never pushy. Keep emails under 150 words. Always include a specific next step (meeting link, question, or deadline). Never make claims about features we don\'t have — if unsure, flag it for the rep to verify.',
     why: 'Controls tone, length, structure, and prevents the AI from making promises the company can\'t keep.',
-    color: 'border-amber-500/30 bg-amber-500/5',
+    color: 'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5',
   },
 ]
 
@@ -141,9 +141,9 @@ export const SystemPromptsBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="sysprompt-biz">
-      <h2 id="sysprompt-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300" dangerouslySetInnerHTML={{ __html: c.intro }} />
-      <p className="mb-6 max-w-2xl text-sm text-zinc-400">{c.introSub}</p>
+      <h2 id="sysprompt-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: c.intro }} />
+      <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.introSub}</p>
 
       {/* Surfaces */}
       <div className="mb-8 space-y-2">
@@ -152,33 +152,33 @@ export const SystemPromptsBusiness: React.FC = () => {
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-medium text-zinc-100">{s.product}</span>
+                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{s.product}</span>
                   <span className={`rounded px-2 py-0.5 text-xs ${s.badge}`}>{s.tier}</span>
                 </div>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-sm">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-sm">
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Field name</p>
-                  <p className="font-mono text-xs text-zinc-300" dangerouslySetInnerHTML={{ __html: s.fieldName }} />
+                  <p className="font-mono text-xs text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: s.fieldName }} />
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Where to find it</p>
-                  <p className="text-xs text-zinc-300">{s.whereToFind}</p>
+                  <p className="text-xs text-zinc-700 dark:text-zinc-300">{s.whereToFind}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Who actually builds these</p>
-                  <p className="text-xs text-zinc-300">{s.whoBuilds}</p>
+                  <p className="text-xs text-zinc-700 dark:text-zinc-300">{s.whoBuilds}</p>
                 </div>
                 <div>
-                  <p className="mb-1 text-xs font-medium text-emerald-400">Best for</p>
-                  <p className="text-xs text-zinc-300">{s.bestFor}</p>
+                  <p className="mb-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">Best for</p>
+                  <p className="text-xs text-zinc-700 dark:text-zinc-300">{s.bestFor}</p>
                 </div>
-                <div className="rounded bg-zinc-800/50 px-3 py-2">
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
                   <p className="mb-1 text-xs font-medium text-zinc-500">Concrete example</p>
-                  <p className="text-xs text-zinc-300" dangerouslySetInnerHTML={{ __html: s.example }} />
+                  <p className="text-xs text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: s.example }} />
                 </div>
               </div>
             )}
@@ -187,32 +187,32 @@ export const SystemPromptsBusiness: React.FC = () => {
       </div>
 
       {/* Rebrand callout */}
-      <div className="mb-6 rounded-md border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-zinc-300">
-        <strong className="text-amber-300">Heads up — naming changes:</strong> {REBRAND_NOTE}
+      <div className="mb-6 rounded-md border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-3 text-xs text-zinc-700 dark:text-zinc-300">
+        <strong className="text-amber-700 dark:text-amber-300">Heads up — naming changes:</strong> {REBRAND_NOTE}
       </div>
 
       {/* Worked examples */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">Three worked examples — drop these into any of the surfaces above</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Three worked examples — drop these into any of the surfaces above</h3>
       <div className="mb-8 space-y-3">
         {EXAMPLES.map((ex) => (
           <div key={ex.role} className={`rounded-lg border p-5 ${ex.color}`}>
-            <p className="mb-2 text-sm font-medium text-zinc-100">{ex.role}</p>
-            <div className="mb-3 rounded bg-zinc-800 p-3">
-              <p className="font-mono text-xs leading-relaxed text-zinc-300">{ex.prompt}</p>
+            <p className="mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">{ex.role}</p>
+            <div className="mb-3 rounded bg-zinc-100 dark:bg-zinc-800 p-3">
+              <p className="font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{ex.prompt}</p>
             </div>
-            <p className="text-xs text-zinc-400">{ex.why}</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{ex.why}</p>
           </div>
         ))}
       </div>
 
       {/* Anatomy of a good instruction */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.goodPromptTitle}</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.goodPromptTitle}</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {KEYS.map((k) => (
-            <div key={k.key} className="rounded bg-zinc-800/50 px-3 py-2">
-              <p className="text-xs font-medium text-amber-300">{k.key}</p>
-              <p className="mt-1 text-xs text-zinc-400">{k.example}</p>
+            <div key={k.key} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
+              <p className="text-xs font-medium text-amber-700 dark:text-amber-300">{k.key}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{k.example}</p>
             </div>
           ))}
         </div>

@@ -98,20 +98,20 @@ export const CostOptimizationSection: React.FC = () => {
 
   return (
     <section aria-labelledby="cost-optimization">
-      <h2 id="cost-optimization" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="cost-optimization" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Calculator inputs */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-100">Cost Calculator</h3>
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Cost Calculator</h3>
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor="model-tier" className="mb-1 block text-xs text-zinc-400">Model Size</label>
+            <label htmlFor="model-tier" className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">Model Size</label>
             <select
               id="model-tier"
               value={modelTier}
               onChange={handleModelChange}
-              className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-zinc-100"
+              className="w-full rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100"
             >
               {(Object.entries(GPU_CONFIGS) as [ModelTier, typeof GPU_CONFIGS[ModelTier]][]).map(([k, v]) => (
                 <option key={k} value={k}>{v.label}</option>
@@ -119,8 +119,8 @@ export const CostOptimizationSection: React.FC = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="req-per-day" className="mb-1 block text-xs text-zinc-400">
-              Requests/day: <strong className="text-zinc-200">{reqPerDay.toLocaleString()}</strong>
+            <label htmlFor="req-per-day" className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">
+              Requests/day: <strong className="text-zinc-800 dark:text-zinc-200">{reqPerDay.toLocaleString()}</strong>
             </label>
             <input
               id="req-per-day"
@@ -134,8 +134,8 @@ export const CostOptimizationSection: React.FC = () => {
             />
           </div>
           <div>
-            <label htmlFor="avg-tokens" className="mb-1 block text-xs text-zinc-400">
-              Avg tokens/request: <strong className="text-zinc-200">{avgTokens}</strong>
+            <label htmlFor="avg-tokens" className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">
+              Avg tokens/request: <strong className="text-zinc-800 dark:text-zinc-200">{avgTokens}</strong>
             </label>
             <input
               id="avg-tokens"
@@ -152,8 +152,8 @@ export const CostOptimizationSection: React.FC = () => {
       </div>
 
       {/* Results */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-100">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Estimated Monthly Cost
         </h3>
         <div className="space-y-3">
@@ -163,10 +163,10 @@ export const CostOptimizationSection: React.FC = () => {
             {[costs.single, costs.multi].map(c => (
               <div key={c.label} className="mb-2">
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-zinc-400">{c.label}</span>
-                  <span className="font-mono text-zinc-200">{formatCost(c.monthly)}/mo</span>
+                  <span className="text-zinc-500 dark:text-zinc-400">{c.label}</span>
+                  <span className="font-mono text-zinc-800 dark:text-zinc-200">{formatCost(c.monthly)}/mo</span>
                 </div>
-                <div className="h-4 w-full overflow-hidden rounded bg-zinc-800">
+                <div className="h-4 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                   <div
                     className="h-full rounded bg-violet-500 transition-all duration-500"
                     style={{ width: `${Math.max(2, (c.monthly / maxCost) * 100)}%` }}
@@ -181,10 +181,10 @@ export const CostOptimizationSection: React.FC = () => {
             {costs.api.map(a => (
               <div key={a.name} className="mb-2">
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-zinc-400">{a.name}</span>
-                  <span className="font-mono text-zinc-200">{formatCost(a.monthly)}/mo</span>
+                  <span className="text-zinc-500 dark:text-zinc-400">{a.name}</span>
+                  <span className="font-mono text-zinc-800 dark:text-zinc-200">{formatCost(a.monthly)}/mo</span>
                 </div>
-                <div className="h-4 w-full overflow-hidden rounded bg-zinc-800">
+                <div className="h-4 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                   <div
                     className="h-full rounded bg-amber-500 transition-all duration-500"
                     style={{ width: `${Math.max(2, (a.monthly / maxCost) * 100)}%` }}
@@ -197,18 +197,18 @@ export const CostOptimizationSection: React.FC = () => {
       </div>
 
       {/* GPU pricing reference */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">GPU Pricing Reference</h3>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">GPU Pricing Reference</h3>
         <div className="grid gap-3 sm:grid-cols-3">
           {[
             { gpu: 'A10G (24 GB)', cost: '~$1.00/hr', use: 'Small models, dev' },
             { gpu: 'A100 80GB', cost: '~$2.00/hr', use: 'Production standard' },
             { gpu: 'H100 80GB', cost: '~$3.50/hr', use: 'Max throughput' },
           ].map(g => (
-            <div key={g.gpu} className="rounded-md bg-zinc-800 p-3">
-              <p className="font-mono text-xs font-bold text-zinc-100">{g.gpu}</p>
-              <p className="text-lg font-bold text-violet-400">{g.cost}</p>
-              <p className="text-xs text-zinc-400">{g.use}</p>
+            <div key={g.gpu} className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+              <p className="font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{g.gpu}</p>
+              <p className="text-lg font-bold text-violet-700 dark:text-violet-400">{g.cost}</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">{g.use}</p>
             </div>
           ))}
         </div>
@@ -217,10 +217,10 @@ export const CostOptimizationSection: React.FC = () => {
       {/* Tips */}
       <div className="grid gap-3 sm:grid-cols-2">
         {TIPS.map(tip => (
-          <div key={tip.title} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div key={tip.title} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="mb-1 text-lg"><Icon name={tip.icon} /></p>
-            <h4 className="font-mono text-sm font-bold text-zinc-100">{tip.title}</h4>
-            <p className="mt-1 text-xs leading-relaxed text-zinc-400">{tip.desc}</p>
+            <h4 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{tip.title}</h4>
+            <p className="mt-1 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">{tip.desc}</p>
           </div>
         ))}
       </div>

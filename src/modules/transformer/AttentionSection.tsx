@@ -28,17 +28,17 @@ export const AttentionSection: React.FC = () => {
   const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO , p2: EN_P2 , p4: EN_P4 }, { sv: attentionSectionSv, ko: attentionSectionKo })
   return (
   <section aria-labelledby="attention-heading">
-    <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+    <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
-    <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-      <p className="mb-3 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
+    <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+      <p className="mb-3 text-xs font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
         &quot;The cat sat on the mat because it was tired&quot;
       </p>
       <AttentionHeatmap weights={DEFAULT_WEIGHTS} />
       <p className="mt-3 text-xs text-zinc-500">
-        {c.p2} <span className="text-amber-300">&quot;it&quot;</span> strongly attends to{' '}
-        <span className="text-amber-300">&quot;cat&quot;</span> — the model learns coreference.
+        {c.p2} <span className="text-amber-700 dark:text-amber-300">&quot;it&quot;</span> strongly attends to{' '}
+        <span className="text-amber-700 dark:text-amber-300">&quot;cat&quot;</span> — the model learns coreference.
       </p>
     </div>
 
@@ -49,25 +49,25 @@ export const AttentionSection: React.FC = () => {
 
     {/* Q, K, V analogy */}
     <div className="mb-6">
-      <h3 className="mb-2 text-sm font-semibold text-zinc-200">{c.p4}</h3>
+      <h3 className="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200">{c.p4}</h3>
       <div className="grid gap-3 sm:grid-cols-3">
         {[
-          { letter: 'Q', name: 'Query', color: 'border-blue-600 bg-blue-950', text: 'text-blue-300', analogy: 'Your question: "I need books about cats"' },
-          { letter: 'K', name: 'Key', color: 'border-emerald-600 bg-emerald-950', text: 'text-emerald-300', analogy: 'The label on each book spine — what it\'s about' },
-          { letter: 'V', name: 'Value', color: 'border-amber-600 bg-amber-950', text: 'text-amber-300', analogy: 'The actual content inside the book you pull off the shelf' },
+          { letter: 'Q', name: 'Query', color: 'border-blue-600 bg-blue-950', text: 'text-blue-700 dark:text-blue-300', analogy: 'Your question: "I need books about cats"' },
+          { letter: 'K', name: 'Key', color: 'border-emerald-600 bg-emerald-950', text: 'text-emerald-700 dark:text-emerald-300', analogy: 'The label on each book spine — what it\'s about' },
+          { letter: 'V', name: 'Value', color: 'border-amber-600 bg-amber-950', text: 'text-amber-700 dark:text-amber-300', analogy: 'The actual content inside the book you pull off the shelf' },
         ].map(item => (
           <div key={item.letter} className={`rounded-lg border p-3 ${item.color}`}>
             <div className={`mb-1 font-mono text-lg font-bold ${item.text}`}>
-              {item.letter} <span className="text-xs font-normal text-zinc-400">({item.name})</span>
+              {item.letter} <span className="text-xs font-normal text-zinc-500 dark:text-zinc-400">({item.name})</span>
             </div>
-            <p className="text-xs text-zinc-400">{item.analogy}</p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{item.analogy}</p>
           </div>
         ))}
       </div>
       <p className="mt-2 text-xs text-zinc-500">
-        You match your <strong className="text-blue-300">Query</strong> against every{' '}
-        <strong className="text-emerald-300">Key</strong> to find the best matches, then read the{' '}
-        <strong className="text-amber-300">Values</strong> of those matches.
+        You match your <strong className="text-blue-700 dark:text-blue-300">Query</strong> against every{' '}
+        <strong className="text-emerald-700 dark:text-emerald-300">Key</strong> to find the best matches, then read the{' '}
+        <strong className="text-amber-700 dark:text-amber-300">Values</strong> of those matches.
       </p>
     </div>
 

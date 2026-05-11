@@ -151,12 +151,12 @@ export const AdvancedPatternsSection: React.FC = () => {
 
   return (
     <section aria-labelledby="advanced-patterns">
-      <h2 id="advanced-patterns" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="advanced-patterns" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Pattern note */}
-      <div className="mb-6 rounded-md border border-amber-500/30 bg-amber-500/10 px-4 py-3">
-        <p className="text-sm text-amber-200">
+      <div className="mb-6 rounded-md border border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 px-4 py-3">
+        <p className="text-sm text-amber-800 dark:text-amber-200">
           <strong>2026 reality check:</strong> {c.p2}
         </p>
       </div>
@@ -171,8 +171,8 @@ export const AdvancedPatternsSection: React.FC = () => {
             onClick={() => handlePatternClick(p.id)}
             className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
               p.id === activePattern
-                ? 'bg-zinc-700 text-zinc-100'
-                : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
             }`}
           >
             {p.label}
@@ -180,17 +180,17 @@ export const AdvancedPatternsSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900" role="tabpanel">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-5 py-3">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">{pattern.label}</h3>
-          <p className="mt-1 text-sm text-zinc-400">{pattern.description}</p>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900" role="tabpanel">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{pattern.label}</h3>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{pattern.description}</p>
         </div>
 
         <div className="space-y-4 p-5">
           {/* Diagram */}
           <div>
             <p className="mb-2 text-xs font-medium text-zinc-500">Visual Flow</p>
-            <div className="relative h-40 rounded-md border border-zinc-700 bg-zinc-950">
+            <div className="relative h-40 rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-950">
               <svg className="absolute inset-0 h-full w-full" aria-hidden="true">
                 {pattern.diagram.map((node, i) =>
                   (node.connections ?? []).map(target => {
@@ -227,13 +227,13 @@ export const AdvancedPatternsSection: React.FC = () => {
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <p className="mb-1 text-xs text-zinc-500">Implementation</p>
-              <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-300">
+              <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-700 dark:text-green-300">
                 {pattern.example.prompt}
               </pre>
             </div>
             <div>
               <p className="mb-1 text-xs text-zinc-500">Result</p>
-              <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-300">
+              <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-700 dark:text-amber-300">
                 {pattern.example.output}
               </pre>
             </div>

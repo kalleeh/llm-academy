@@ -4,10 +4,10 @@ import { useT } from '../../i18n'
 import { waysToFeedSv, waysToFeedKo } from './translations'
 
 const METHODS = [
-  { name: 'Paste into chat', youKnowItAs: 'Copy-pasting text into ChatGPT or Claude', howItWorks: 'The text goes directly into the conversation as context.', whatItHandles: ['Short text (emails, paragraphs)', 'Quick one-off questions'], limits: 'Limited by context window. Nothing saved between conversations.', isRag: 'Not RAG — just giving the AI more context.', color: 'border-blue-500/30 bg-blue-500/5' },
-  { name: 'Upload a file in chat', youKnowItAs: 'Dragging a PDF or Word doc into ChatGPT, Claude, or Gemini', howItWorks: 'The tool extracts text and puts it into conversation context.', whatItHandles: ['PDFs, Word docs, spreadsheets, images', 'Asking about a specific document'], limits: 'Still limited by context window. Gone when you start a new conversation.', isRag: 'Usually not RAG — the file is stuffed into context, not indexed.', color: 'border-emerald-500/30 bg-emerald-500/5' },
-  { name: 'Knowledge base / Project files', youKnowItAs: 'ChatGPT Projects, Claude Projects, Amazon Quick', howItWorks: 'You upload many documents to a persistent collection. The tool searches across all of them per question.', whatItHandles: ['Dozens to thousands of documents', 'Ongoing Q&A about a body of knowledge'], limits: 'You trust the platform\'s chunking and search quality.', isRag: 'Yes — this IS RAG. The platform indexes, searches, and feeds relevant chunks to the AI.', color: 'border-amber-500/30 bg-amber-500/5' },
-  { name: 'Custom RAG system', youKnowItAs: 'What your engineering team builds using Amazon Bedrock Knowledge Bases or similar', howItWorks: 'Your team controls every step: chunking, embedding, vector database, retrieval, generation.', whatItHandles: ['Thousands to millions of documents', 'Customer-facing chatbots that need accuracy'], limits: 'Requires engineering effort. But you get full control.', isRag: 'Yes — RAG with full control. The enterprise-grade version.', color: 'border-purple-500/30 bg-purple-500/5' },
+  { name: 'Paste into chat', youKnowItAs: 'Copy-pasting text into ChatGPT or Claude', howItWorks: 'The text goes directly into the conversation as context.', whatItHandles: ['Short text (emails, paragraphs)', 'Quick one-off questions'], limits: 'Limited by context window. Nothing saved between conversations.', isRag: 'Not RAG — just giving the AI more context.', color: 'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5' },
+  { name: 'Upload a file in chat', youKnowItAs: 'Dragging a PDF or Word doc into ChatGPT, Claude, or Gemini', howItWorks: 'The tool extracts text and puts it into conversation context.', whatItHandles: ['PDFs, Word docs, spreadsheets, images', 'Asking about a specific document'], limits: 'Still limited by context window. Gone when you start a new conversation.', isRag: 'Usually not RAG — the file is stuffed into context, not indexed.', color: 'border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5' },
+  { name: 'Knowledge base / Project files', youKnowItAs: 'ChatGPT Projects, Claude Projects, Amazon Quick', howItWorks: 'You upload many documents to a persistent collection. The tool searches across all of them per question.', whatItHandles: ['Dozens to thousands of documents', 'Ongoing Q&A about a body of knowledge'], limits: 'You trust the platform\'s chunking and search quality.', isRag: 'Yes — this IS RAG. The platform indexes, searches, and feeds relevant chunks to the AI.', color: 'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5' },
+  { name: 'Custom RAG system', youKnowItAs: 'What your engineering team builds using Amazon Bedrock Knowledge Bases or similar', howItWorks: 'Your team controls every step: chunking, embedding, vector database, retrieval, generation.', whatItHandles: ['Thousands to millions of documents', 'Customer-facing chatbots that need accuracy'], limits: 'Requires engineering effort. But you get full control.', isRag: 'Yes — RAG with full control. The enterprise-grade version.', color: 'border-purple-400 dark:border-purple-500/30 bg-purple-50 dark:bg-purple-500/5' },
 ]
 
 const EN = {
@@ -24,23 +24,23 @@ export const WaysToFeedAIBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="feed-biz">
-      <h2 id="feed-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="feed-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-8 space-y-2">
         {METHODS.map((m, i) => (
           <div key={i} className={`rounded-lg border ${m.color}`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
-              <div className="min-w-0"><span className="text-sm font-medium text-zinc-100">{m.name}</span><span className="ml-2 text-xs text-zinc-500">— {m.youKnowItAs}</span></div>
+              <div className="min-w-0"><span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{m.name}</span><span className="ml-2 text-xs text-zinc-500">— {m.youKnowItAs}</span></div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4">
-                <p className="text-sm text-zinc-300">{m.howItWorks}</p>
-                <div className="space-y-1">{m.whatItHandles.map((h: string) => <p key={h} className="text-xs text-zinc-400">• {h}</p>)}</div>
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4">
+                <p className="text-sm text-zinc-700 dark:text-zinc-300">{m.howItWorks}</p>
+                <div className="space-y-1">{m.whatItHandles.map((h: string) => <p key={h} className="text-xs text-zinc-600 dark:text-zinc-400">• {h}</p>)}</div>
                 <p className="text-xs text-zinc-500">{m.limits}</p>
-                <div className={`rounded px-3 py-2 ${m.isRag.startsWith('Yes') ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-zinc-800/50'}`}>
-                  <p className="text-sm text-zinc-300">{m.isRag}</p>
+                <div className={`rounded px-3 py-2 ${m.isRag.startsWith('Yes') ? 'bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/20' : 'bg-zinc-100 dark:bg-zinc-800/50'}`}>
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300">{m.isRag}</p>
                 </div>
               </div>
             )}

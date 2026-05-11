@@ -52,10 +52,10 @@ const SCATTER_POINTS: { word: string; x: number; y: number; cluster: string }[] 
 ]
 
 const CLUSTER_COLORS: Record<string, { dot: string; text: string; label: string }> = {
-  animals: { dot: 'bg-green-400', text: 'text-green-400', label: 'catAnimals' },
-  colors: { dot: 'bg-purple-400', text: 'text-purple-400', label: 'catColors' },
-  emotions: { dot: 'bg-amber-400', text: 'text-amber-400', label: 'catEmotions' },
-  vehicles: { dot: 'bg-blue-400', text: 'text-blue-400', label: 'catVehicles' },
+  animals: { dot: 'bg-green-400', text: 'text-green-700 dark:text-green-400', label: 'catAnimals' },
+  colors: { dot: 'bg-purple-400', text: 'text-purple-700 dark:text-purple-400', label: 'catColors' },
+  emotions: { dot: 'bg-amber-400', text: 'text-amber-700 dark:text-amber-400', label: 'catEmotions' },
+  vehicles: { dot: 'bg-blue-400', text: 'text-blue-700 dark:text-blue-400', label: 'catVehicles' },
 }
 
 const EN_P6 = `Type a sentence to compare (or pick from the list below)`
@@ -93,37 +93,37 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
 
   return (
     <section aria-labelledby="what-are-embeddings">
-      <h2 id="what-are-embeddings" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        Embeddings convert text into <strong className="text-zinc-100">dense numerical vectors</strong>{' '}
+      <h2 id="what-are-embeddings" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        Embeddings convert text into <strong className="text-zinc-900 dark:text-zinc-100">dense numerical vectors</strong>{' '}
         that capture semantic meaning. Similar texts produce similar vectors, enabling machines to
         understand that &quot;king&quot; is closer to &quot;queen&quot; than to &quot;bicycle&quot;.
       </p>
 
       {/* Pipeline visualization */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-4 text-sm font-medium text-zinc-400">Embedding Pipeline</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">Embedding Pipeline</p>
         <div className="flex flex-wrap items-center gap-3">
-          <div className="rounded-md border border-zinc-600 bg-zinc-800 px-4 py-3">
+          <div className="rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-4 py-3">
             <p className="text-xs text-zinc-500">Input Text</p>
-            <p className="font-mono text-sm text-zinc-200">&quot;The cat sat&quot;</p>
+            <p className="font-mono text-sm text-zinc-800 dark:text-zinc-200">&quot;The cat sat&quot;</p>
           </div>
           <span className="text-zinc-500">→</span>
-          <div className="rounded-md border border-violet-500/30 bg-violet-500/10 px-4 py-3">
-            <p className="text-xs text-violet-400">Embedding Model</p>
-            <p className="font-mono text-xs text-violet-300">text-embedding-3-large</p>
+          <div className="rounded-md border border-violet-400 dark:border-violet-500/30 bg-violet-50 dark:bg-violet-500/10 px-4 py-3">
+            <p className="text-xs text-violet-700 dark:text-violet-400">Embedding Model</p>
+            <p className="font-mono text-xs text-violet-700 dark:text-violet-300">text-embedding-3-large</p>
           </div>
           <span className="text-zinc-500">→</span>
-          <div className="rounded-md border border-zinc-600 bg-zinc-800 px-4 py-3">
+          <div className="rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-4 py-3">
             <p className="text-xs text-zinc-500">Vector (3072 dims)</p>
-            <p className="font-mono text-xs text-amber-300">[0.12, -0.34, 0.56, 0.01, ...]</p>
+            <p className="font-mono text-xs text-amber-700 dark:text-amber-300">[0.12, -0.34, 0.56, 0.01, ...]</p>
           </div>
         </div>
       </div>
 
       {/* Similarity demo */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Similarity Score Explorer
         </h3>
         <div className="mb-4">
@@ -134,7 +134,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
             id="sentence-select"
             value={selectedSentence}
             onChange={handleSentenceChange}
-            className="w-full rounded-md border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm text-zinc-200"
+            className="w-full rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-800 dark:text-zinc-200"
           >
             {SENTENCES.map(s => (
               <option key={s} value={s}>{s}</option>
@@ -150,13 +150,13 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
             value={inputText}
             onChange={handleInputChange}
             placeholder="Try typing a sentence..."
-            className="w-full rounded-md border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm text-zinc-200 placeholder:text-zinc-600"
+            className="w-full rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
           />
           {matchedScore && (
             <div className="mt-2 flex items-center gap-2">
-              <span className="text-xs text-zinc-400">Cosine similarity:</span>
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">Cosine similarity:</span>
               <span className={`font-mono text-sm font-bold ${
-                matchedScore.score > 0.7 ? 'text-green-400' : matchedScore.score > 0.4 ? 'text-amber-400' : 'text-red-400'
+                matchedScore.score > 0.7 ? 'text-green-700 dark:text-green-400' : matchedScore.score > 0.4 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'
               }`}>
                 {matchedScore.score.toFixed(2)}
               </span>
@@ -166,9 +166,9 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
 
         <div className="space-y-2">
           {comparisonEntries.map(([text, score]) => (
-            <div key={text} className="flex items-center gap-3 rounded-md bg-zinc-800 px-3 py-2">
+            <div key={text} className="flex items-center gap-3 rounded-md bg-zinc-100 dark:bg-zinc-800 px-3 py-2">
               <div className="w-16 shrink-0">
-                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-700">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                   <div
                     className={`h-full rounded-full transition-all ${
                       score > 0.7 ? 'bg-green-500' : score > 0.4 ? 'bg-amber-500' : 'bg-red-500'
@@ -177,25 +177,25 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
                   />
                 </div>
               </div>
-              <span className="w-12 shrink-0 font-mono text-xs font-bold text-zinc-300">
+              <span className="w-12 shrink-0 font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300">
                 {score.toFixed(2)}
               </span>
-              <span className="text-sm text-zinc-300">{text}</span>
+              <span className="text-sm text-zinc-700 dark:text-zinc-300">{text}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* 2D Scatter plot */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           2D Embedding Space (Projected)
         </h3>
-        <p className="mb-4 text-xs text-zinc-400">
+        <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">
           {c.p3}
         </p>
 
-        <div className="relative mb-4 h-72 w-full rounded-md border border-zinc-700 bg-zinc-950">
+        <div className="relative mb-4 h-72 w-full rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-950">
           {SCATTER_POINTS.map(pt => (
             <div
               key={pt.word}
@@ -214,14 +214,14 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
           {Object.entries(CLUSTER_COLORS).map(([key, val]) => (
             <div key={key} className="flex items-center gap-1.5">
               <span className={`size-2.5 rounded-full ${val.dot}`} />
-              <span className="text-xs text-zinc-400">{tLabel(lang, val.label)}</span>
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">{tLabel(lang, val.label)}</span>
             </div>
           ))}
         </div>
 
-        <div className="mt-4 rounded-md bg-zinc-800 p-3">
-          <p className="text-xs leading-relaxed text-zinc-300">
-            <strong className="text-zinc-100">Key insight:</strong> {c.p4}
+        <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+          <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <strong className="text-zinc-900 dark:text-zinc-100">Key insight:</strong> {c.p4}
           </p>
         </div>
       </div>

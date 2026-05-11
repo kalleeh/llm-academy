@@ -22,8 +22,8 @@ interface DataCategory {
 const CATEGORIES: DataCategory[] = [
   {
     title: '1. Structured vs Unstructured Data',
-    color: 'bg-emerald-500/10',
-    borderColor: 'border-emerald-500/30',
+    color: 'bg-emerald-50 dark:bg-emerald-500/10',
+    borderColor: 'border-emerald-400 dark:border-emerald-500/30',
     description: 'Fixed schema, rows & columns. Every record follows the same format.',
     examples: [
       {
@@ -54,8 +54,8 @@ const CATEGORIES: DataCategory[] = [
   },
   {
     title: 'Unstructured',
-    color: 'bg-amber-500/10',
-    borderColor: 'border-amber-500/30',
+    color: 'bg-amber-50 dark:bg-amber-500/10',
+    borderColor: 'border-amber-400 dark:border-amber-500/30',
     description: 'No predefined schema. Meaning is embedded in the content itself.',
     examples: [
       {
@@ -86,8 +86,8 @@ const CATEGORIES: DataCategory[] = [
   },
   {
     title: 'Semi-Structured',
-    color: 'bg-purple-500/10',
-    borderColor: 'border-purple-500/30',
+    color: 'bg-purple-50 dark:bg-purple-500/10',
+    borderColor: 'border-purple-400 dark:border-purple-500/30',
     description: 'Has some organization (tags, keys) but schema varies between records.',
     examples: [
       {
@@ -128,14 +128,14 @@ export const DataTypesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="data-types">
-      <h2 id="data-types" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="data-types" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 lg:grid-cols-3">
         {cATEGORIEST.map(cat => (
           <div key={cat.title} className={`rounded-lg border ${cat.borderColor} ${cat.color} p-4`}>
-            <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">{cat.title}</h3>
-            <p className="mb-4 text-xs text-zinc-400">{cat.description}</p>
+            <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{cat.title}</h3>
+            <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">{cat.description}</p>
             <div className="space-y-2">
               {cat.examples.map(ex => {
                 const key = `${cat.title}-${ex.label}`
@@ -144,15 +144,15 @@ export const DataTypesSection: React.FC = () => {
                   <div key={ex.label}>
                     <button
                       onClick={() => toggle(key)}
-                      className="flex w-full items-center gap-2 rounded-md border border-zinc-700/50 bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-800/50"
+                      className="flex w-full items-center gap-2 rounded-md border border-zinc-200/50 dark:border-zinc-700/50 bg-white/50 dark:bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/50"
                       aria-expanded={isOpen}
                     >
                       <Icon name={ex.icon} />
-                      <span className="text-zinc-200">{ex.label}</span>
+                      <span className="text-zinc-800 dark:text-zinc-200">{ex.label}</span>
                       <span className="ml-auto text-xs text-zinc-500">{isOpen ? '▲' : '▼'}</span>
                     </button>
                     {isOpen && (
-                      <pre className="mt-1 overflow-x-auto rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-300">
+                      <pre className="mt-1 overflow-x-auto rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
                         {ex.preview}
                       </pre>
                     )}
@@ -165,19 +165,19 @@ export const DataTypesSection: React.FC = () => {
       </div>
 
       {/* Mini table visualization */}
-      <div className="mt-6 overflow-x-auto rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-4 py-2">
-          <span className="font-mono text-xs text-zinc-400">structured_data.csv — 5 rows × 4 columns</span>
+      <div className="mt-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+          <span className="font-mono text-xs text-zinc-600 dark:text-zinc-400">structured_data.csv — 5 rows × 4 columns</span>
         </div>
         <table className="w-full text-left text-sm" role="table">
           <thead>
-            <tr className="border-b border-zinc-700 text-xs text-zinc-400">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 text-xs text-zinc-600 dark:text-zinc-400">
               {['id', 'customer', 'amount', 'date'].map(h => (
                 <th key={h} className="px-4 py-2 font-medium">{h}</th>
               ))}
             </tr>
           </thead>
-          <tbody className="font-mono text-xs text-zinc-300">
+          <tbody className="font-mono text-xs text-zinc-700 dark:text-zinc-300">
             {[
               ['1', 'Alice', '$120.00', '2024-01-15'],
               ['2', 'Bob', '$85.50', '2024-01-16'],
@@ -185,7 +185,7 @@ export const DataTypesSection: React.FC = () => {
               ['4', 'Dave', '$45.99', '2024-01-17'],
               ['5', 'Eve', '$310.25', '2024-01-18'],
             ].map(row => (
-              <tr key={row[0]} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+              <tr key={row[0]} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/50">
                 {row.map((cell, j) => (
                   <td key={j} className="px-4 py-1.5">{cell}</td>
                 ))}
@@ -196,11 +196,11 @@ export const DataTypesSection: React.FC = () => {
       </div>
 
       {/* Key insight */}
-      <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
-        <p className="text-sm font-medium text-amber-300"><Icon name="lightbulb" /> Key Insight</p>
-        <p className="mt-1 text-sm leading-relaxed text-zinc-300">
+      <div className="mt-6 rounded-lg border border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 p-4">
+        <p className="text-sm font-medium text-amber-700 dark:text-amber-300"><Icon name="lightbulb" /> Key Insight</p>
+        <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           ML traditionally needs structured data — clean rows and columns with labeled features.{' '}
-          <span className="text-amber-200">{c.p4}</span>{' '}
+          <span className="text-amber-800 dark:text-amber-200">{c.p4}</span>{' '}
           Instead of engineering features from structured tables, you can feed raw documents,
           conversations, and code directly into a model.
         </p>

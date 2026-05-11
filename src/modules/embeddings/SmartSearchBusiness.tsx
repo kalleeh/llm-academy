@@ -50,35 +50,35 @@ export const SmartSearchBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="search-biz">
-      <h2 id="search-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="search-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex flex-1 items-center gap-2 rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-2.5">
+        <div className="flex flex-1 items-center gap-2 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-4 py-2.5">
           <Icon name="search" size={14} className="text-zinc-500" />
-          <span className="text-sm text-zinc-200">{demo.query}</span>
+          <span className="text-sm text-zinc-800 dark:text-zinc-200">{demo.query}</span>
         </div>
-        <button onClick={switchDemo} className="rounded-lg bg-zinc-700 px-3 py-2.5 text-xs text-zinc-300 hover:bg-zinc-600">{c.tryAnother}</button>
+        <button onClick={switchDemo} className="rounded-lg bg-zinc-200 dark:bg-zinc-700 px-3 py-2.5 text-xs text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-600">{c.tryAnother}</button>
       </div>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-red-500/20 bg-zinc-900 overflow-hidden">
-          <div className="border-b border-zinc-800 bg-zinc-800 px-4 py-2"><span className="text-xs font-medium text-red-400">{c.keywordLabel}</span></div>
-          <div className="divide-y divide-zinc-800/50">
-            {demo.keywordResults.map((r, i) => (<div key={i} className="px-4 py-3"><p className="text-sm text-zinc-400">{r.title}</p><p className="mt-1 text-xs text-zinc-500">{r.snippet}</p></div>))}
+        <div className="rounded-lg border border-red-300 dark:border-red-500/20 bg-white dark:bg-zinc-900 overflow-hidden">
+          <div className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800 px-4 py-2"><span className="text-xs font-medium text-red-700 dark:text-red-400">{c.keywordLabel}</span></div>
+          <div className="divide-y divide-zinc-200 dark:divide-zinc-800/50">
+            {demo.keywordResults.map((r, i) => (<div key={i} className="px-4 py-3"><p className="text-sm text-zinc-600 dark:text-zinc-400">{r.title}</p><p className="mt-1 text-xs text-zinc-500">{r.snippet}</p></div>))}
           </div>
         </div>
-        <div className="rounded-lg border border-emerald-500/20 bg-zinc-900 overflow-hidden">
-          <div className="border-b border-zinc-800 bg-zinc-800 px-4 py-2"><span className="text-xs font-medium text-emerald-400">{c.smartLabel}</span></div>
-          <div className="divide-y divide-zinc-800/50">
-            {demo.smartResults.map((r, i) => (<div key={i} className="px-4 py-3"><div className="flex items-center justify-between"><p className="text-sm font-medium text-zinc-200">{r.title}</p><span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-xs text-emerald-400">{r.score}</span></div><p className="mt-1 text-xs text-zinc-400">{r.snippet}</p></div>))}
+        <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/20 bg-white dark:bg-zinc-900 overflow-hidden">
+          <div className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800 px-4 py-2"><span className="text-xs font-medium text-emerald-700 dark:text-emerald-400">{c.smartLabel}</span></div>
+          <div className="divide-y divide-zinc-200 dark:divide-zinc-800/50">
+            {demo.smartResults.map((r, i) => (<div key={i} className="px-4 py-3"><div className="flex items-center justify-between"><p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{r.title}</p><span className="rounded bg-emerald-100 dark:bg-emerald-500/20 px-1.5 py-0.5 text-xs text-emerald-700 dark:text-emerald-400">{r.score}</span></div><p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{r.snippet}</p></div>))}
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-2 text-sm font-medium text-zinc-100">{c.howTitle}</p>
-        <p className="text-sm text-zinc-300">{c.howText}</p>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.howTitle}</p>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300">{c.howText}</p>
       </div>
     </section>
   )

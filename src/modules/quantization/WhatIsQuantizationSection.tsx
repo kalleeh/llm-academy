@@ -28,25 +28,25 @@ export const WhatIsQuantizationSection: React.FC = () => {
 
   return (
     <section aria-labelledby="what-is-quantization">
-      <h2 id="what-is-quantization" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="what-is-quantization" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Every weight in a neural network is a number stored with a certain{' '}
-        <strong className="text-zinc-100">precision</strong>. Full precision (FP32) uses 32 bits per
+        <strong className="text-zinc-900 dark:text-zinc-100">precision</strong>. Full precision (FP32) uses 32 bits per
         weight. Quantization reduces this — fewer bits means a smaller model that runs faster, with
         a slight quality tradeoff.
       </p>
 
       {/* Bit visualization */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm text-zinc-400">
-          One weight at <strong className="text-zinc-100">{precision.label}</strong> — {precision.bits} bits:
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm text-zinc-500 dark:text-zinc-400">
+          One weight at <strong className="text-zinc-900 dark:text-zinc-100">{precision.label}</strong> — {precision.bits} bits:
         </p>
         <div className="mb-4 flex flex-wrap gap-1" role="img" aria-label={`${precision.bits} active bits out of 32`}>
           {bitBoxes.map((active, i) => (
             <div
               key={i}
               className={`h-6 w-4 rounded-sm transition-all duration-300 ${
-                active ? precision.color : 'bg-zinc-800'
+                active ? precision.color : 'bg-zinc-100 dark:bg-zinc-800'
               }`}
             />
           ))}
@@ -74,41 +74,41 @@ export const WhatIsQuantizationSection: React.FC = () => {
       </div>
 
       {/* Memory savings table */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-200">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">
         7B Parameter Model — Memory at Each Precision
       </h3>
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-700">
+      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Precision</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Bits/Weight</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Model Size</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Quality</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Savings</th>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Precision</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Bits/Weight</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Model Size</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Quality</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Savings</th>
             </tr>
           </thead>
           <tbody>
             {PRECISIONS.map((p) => (
               <tr
                 key={p.label}
-                className={`border-b border-zinc-800 transition-colors ${
-                  p.label === precision.label ? 'bg-zinc-800' : ''
+                className={`border-b border-zinc-200 dark:border-zinc-800 transition-colors ${
+                  p.label === precision.label ? 'bg-zinc-100 dark:bg-zinc-800' : ''
                 }`}
               >
-                <td className="px-4 py-2 font-mono text-zinc-100">{p.label}</td>
-                <td className="px-4 py-2 text-zinc-300">{p.bits}</td>
+                <td className="px-4 py-2 font-mono text-zinc-900 dark:text-zinc-100">{p.label}</td>
+                <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{p.bits}</td>
                 <td className="px-4 py-2">
                   <div className="flex items-center gap-2">
                     <div
                       className={`h-3 rounded-sm ${p.color} transition-all duration-300`}
                       style={{ width: `${(p.size / 28) * 100}%`, minWidth: '12px', maxWidth: '120px' }}
                     />
-                    <span className="text-zinc-100">{p.size} GB</span>
+                    <span className="text-zinc-900 dark:text-zinc-100">{p.size} GB</span>
                   </div>
                 </td>
-                <td className="px-4 py-2 text-zinc-300">{p.quality}%</td>
-                <td className="px-4 py-2 text-zinc-400">
+                <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{p.quality}%</td>
+                <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">
                   {p.bits === 32 ? '—' : `${Math.round((1 - p.size / 28) * 100)}% smaller`}
                 </td>
               </tr>
@@ -118,14 +118,14 @@ export const WhatIsQuantizationSection: React.FC = () => {
       </div>
 
       {/* Current selection summary */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">At {precision.label}:</strong> Each weight uses{' '}
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          <strong className="text-amber-700 dark:text-amber-400">At {precision.label}:</strong> Each weight uses{' '}
           {precision.bits} bits. A 7B model needs{' '}
-          <strong className="text-zinc-100">{precision.size} GB</strong> of memory, retaining{' '}
-          <strong className="text-zinc-100">{precision.quality}%</strong> of original quality.
+          <strong className="text-zinc-900 dark:text-zinc-100">{precision.size} GB</strong> of memory, retaining{' '}
+          <strong className="text-zinc-900 dark:text-zinc-100">{precision.quality}%</strong> of original quality.
           {precision.bits <= 8 && (
-            <>{c.p4}<strong className="text-zinc-100">87.5%</strong> while
+            <>{c.p4}<strong className="text-zinc-900 dark:text-zinc-100">87.5%</strong> while
               keeping ~93% quality — that&apos;s why quantization is essential for running LLMs locally.</>
           )}
         </p>

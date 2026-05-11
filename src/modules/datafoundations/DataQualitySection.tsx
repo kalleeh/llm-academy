@@ -70,19 +70,19 @@ const ISSUES: DataIssue[] = [
 ]
 
 const ISSUE_COLORS: Record<DataIssue['type'], string> = {
-  missing: 'bg-red-500/20 border-red-500/40',
+  missing: 'bg-red-100 dark:bg-red-500/20 border-red-400 dark:border-red-500/40',
   duplicate: 'bg-yellow-500/20 border-yellow-500/40',
-  inconsistent: 'bg-orange-500/20 border-orange-500/40',
-  outlier: 'bg-purple-500/20 border-purple-500/40',
-  bias: 'bg-cyan-500/20 border-cyan-500/40',
+  inconsistent: 'bg-orange-100 dark:bg-orange-500/20 border-orange-400 dark:border-orange-500/40',
+  outlier: 'bg-purple-100 dark:bg-purple-500/20 border-purple-400 dark:border-purple-500/40',
+  bias: 'bg-cyan-100 dark:bg-cyan-500/20 border-cyan-400 dark:border-cyan-500/40',
 }
 
 const ISSUE_TEXT_COLORS: Record<DataIssue['type'], string> = {
-  missing: 'text-red-300',
+  missing: 'text-red-700 dark:text-red-300',
   duplicate: 'text-yellow-300',
-  inconsistent: 'text-orange-300',
-  outlier: 'text-purple-300',
-  bias: 'text-cyan-300',
+  inconsistent: 'text-orange-700 dark:text-orange-300',
+  outlier: 'text-purple-700 dark:text-purple-300',
+  bias: 'text-cyan-700 dark:text-cyan-300',
 }
 
 const EN_P2 = `For classical ML, bad data means bad predictions. For LLMs, it&apos;s even worse — biased or noisy training data gets baked into the model&apos;s weights and surfaces as hallucinations, stereotypes, or factual errors across millions of interactions.`
@@ -126,8 +126,8 @@ export const DataQualitySection: React.FC = () => {
 
   return (
     <section aria-labelledby="quality">
-      <h2 id="quality" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="quality" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Issue buttons */}
       <div className="mb-4 flex flex-wrap gap-2">
@@ -157,16 +157,16 @@ export const DataQualitySection: React.FC = () => {
         return (
           <div className={`mb-4 rounded-lg border p-3 ${ISSUE_COLORS[issue.type]}`}>
             <p className={`text-sm font-medium ${ISSUE_TEXT_COLORS[issue.type]}`}>{issue.label}</p>
-            <p className="mt-1 text-xs leading-relaxed text-zinc-300">{issue.explanation}</p>
+            <p className="mt-1 text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{issue.explanation}</p>
           </div>
         )
       })()}
 
       {/* Dataset table */}
-      <div className="overflow-x-auto rounded-lg border border-zinc-700">
+      <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-left text-sm" role="table">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800 text-xs text-zinc-400">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
               {columns.map(h => (
                 <th key={h} className="px-3 py-2 font-medium">{h}</th>
               ))}
@@ -174,7 +174,7 @@ export const DataQualitySection: React.FC = () => {
           </thead>
           <tbody className="font-mono text-xs">
             {dATASETT.map(row => (
-              <tr key={row.id} className="border-b border-zinc-800">
+              <tr key={row.id} className="border-b border-zinc-200 dark:border-zinc-800">
                 {columns.map(col => {
                   const cellKey = `${row.id}-${col}`
                   const issueType = highlightedCells.get(cellKey)
@@ -187,8 +187,8 @@ export const DataQualitySection: React.FC = () => {
                         issueType
                           ? `${ISSUE_COLORS[issueType]} font-semibold`
                           : isEmpty
-                            ? 'bg-red-500/10 text-red-400 italic'
-                            : 'text-zinc-300'
+                            ? 'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 italic'
+                            : 'text-zinc-700 dark:text-zinc-300'
                       }`}
                     >
                       {isEmpty ? '(null)' : String(value)}
@@ -202,9 +202,9 @@ export const DataQualitySection: React.FC = () => {
       </div>
 
       {/* GIGO callout */}
-      <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm font-medium text-zinc-200">Garbage In, Garbage Out</p>
-        <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+      <div className="mt-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Garbage In, Garbage Out</p>
+        <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
           {c.p2}
         </p>
       </div>

@@ -12,18 +12,18 @@ import { ModuleLayout } from '../components/ModuleLayout'
 
 // ── Token colors for visualization ──────────────────────────────────────────
 const TOKEN_COLORS = [
-  'bg-purple-500/30 border-purple-400/50',
-  'bg-blue-500/30 border-blue-400/50',
-  'bg-green-500/30 border-green-400/50',
-  'bg-amber-500/30 border-amber-400/50',
-  'bg-pink-500/30 border-pink-400/50',
-  'bg-cyan-500/30 border-cyan-400/50',
-  'bg-red-500/30 border-red-400/50',
-  'bg-indigo-500/30 border-indigo-400/50',
-  'bg-teal-500/30 border-teal-400/50',
-  'bg-orange-500/30 border-orange-400/50',
-  'bg-lime-500/30 border-lime-400/50',
-  'bg-rose-500/30 border-rose-400/50',
+  'bg-purple-200 dark:bg-purple-500/30 border-purple-400 dark:border-purple-400/50',
+  'bg-blue-200 dark:bg-blue-500/30 border-blue-400 dark:border-blue-400/50',
+  'bg-green-200 dark:bg-green-500/30 border-green-400 dark:border-green-400/50',
+  'bg-amber-200 dark:bg-amber-500/30 border-amber-400 dark:border-amber-400/50',
+  'bg-pink-200 dark:bg-pink-500/30 border-pink-400 dark:border-pink-400/50',
+  'bg-cyan-200 dark:bg-cyan-500/30 border-cyan-400 dark:border-cyan-400/50',
+  'bg-red-200 dark:bg-red-500/30 border-red-400 dark:border-red-400/50',
+  'bg-indigo-200 dark:bg-indigo-500/30 border-indigo-400 dark:border-indigo-400/50',
+  'bg-teal-200 dark:bg-teal-500/30 border-teal-400 dark:border-teal-400/50',
+  'bg-orange-200 dark:bg-orange-500/30 border-orange-400 dark:border-orange-400/50',
+  'bg-lime-200 dark:bg-lime-500/30 border-lime-400 dark:border-lime-400/50',
+  'bg-rose-200 dark:bg-rose-500/30 border-rose-400 dark:border-rose-400/50',
 ]
 
 function colorFor(i: number): string {
@@ -93,13 +93,13 @@ function bpeTokenize(text: string): string[] {
 function TokenList({ tokens, label }: { tokens: string[]; label: string }) {
   return (
     <div>
-      <div className="mb-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide">{label}</div>
+      <div className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">{label}</div>
       <div className="flex flex-wrap gap-1">
         {tokens.map((t, i) => (
           <span
             key={`${i}-${t}`}
-            className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-100 ${
-              /^\s+$/.test(t) ? 'bg-zinc-800 border-zinc-700 text-zinc-500' : colorFor(i)
+            className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${
+              /^\s+$/.test(t) ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-500' : colorFor(i)
             }`}
           >
             {/^\s+$/.test(t) ? '␣' : t}
@@ -121,18 +121,18 @@ function WhyTokenizeSection() {
 
   return (
     <section aria-labelledby="why-tokenize">
-      <h2 id="why-tokenize" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="why-tokenize" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         1. Why Tokenize?
       </h2>
-      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Neural networks do math — they multiply matrices, add vectors, compute gradients.
         They can't read the letter "A" any more than your calculator can. So before any text
-        reaches a model, it gets chopped into <strong className="text-zinc-100">tokens</strong> — small
+        reaches a model, it gets chopped into <strong className="text-zinc-900 dark:text-zinc-100">tokens</strong> — small
         pieces that each map to a number. The question is: <em>how</em> do you chop?
       </p>
 
-      <div className="mb-4 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-        <label htmlFor="tokenize-input" className="mb-2 block text-sm font-medium text-zinc-300">
+      <div className="mb-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+        <label htmlFor="tokenize-input" className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
           Type something and see three tokenization strategies side by side:
         </label>
         <input
@@ -140,25 +140,25 @@ function WhyTokenizeSection() {
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
-          className="w-full rounded border border-zinc-600 bg-zinc-800 px-3 py-2 font-mono text-sm text-zinc-100 outline-none focus:border-purple-500"
+          className="w-full rounded border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 font-mono text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:border-purple-500"
           placeholder="Type text here..."
         />
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4">
           <TokenList tokens={chars} label="Character-level" />
           <p className="mt-2 text-xs text-zinc-500">
             Tiny vocabulary (~256), but sequences get very long.
           </p>
         </div>
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4">
           <TokenList tokens={words} label="Word-level" />
           <p className="mt-2 text-xs text-zinc-500">
             Intuitive, but vocabulary explodes and rare words break.
           </p>
         </div>
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4">
           <TokenList tokens={bpe} label="BPE (subword)" />
           <p className="mt-2 text-xs text-zinc-500">
             The sweet spot — common words stay whole, rare ones split into known pieces.
@@ -274,40 +274,40 @@ function BPESection() {
 
   return (
     <section aria-labelledby="bpe-algo">
-      <h2 id="bpe-algo" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="bpe-algo" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         2. BPE Algorithm Visualization
       </h2>
-      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Byte Pair Encoding starts with individual characters and repeatedly merges the most
         frequent adjacent pair. After enough merges, common words become single tokens while
         rare words stay split into recognizable pieces.
       </p>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-6 py-4">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-mono text-sm font-semibold text-zinc-100">BPE Step-by-Step</h3>
-            <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-300">
+            <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">BPE Step-by-Step</h3>
+            <span className="rounded-full bg-zinc-200 dark:bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-700 dark:text-zinc-300">
               Step {step + 1} of {bpeSteps.length}
             </span>
           </div>
-          <p className="mt-1 text-sm text-zinc-400">{current.description}</p>
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{current.description}</p>
         </div>
 
         <div className="space-y-4 p-6">
           {/* Current tokens */}
           <div>
-            <div className="mb-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide">Current Tokens</div>
+            <div className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">Current Tokens</div>
             <div className="flex flex-wrap gap-1">
               {current.tokens.map((t, i) => {
                 if (t === '  |  ' || t === ' , ') {
-                  return <span key={i} className="px-1 text-xs text-zinc-600">{t.trim() || '·'}</span>
+                  return <span key={i} className="px-1 text-xs text-zinc-500 dark:text-zinc-600">{t.trim() || '·'}</span>
                 }
                 const parts = t.split(' ')
                 return parts.map((p, j) => (
                   <span
                     key={`${i}-${j}`}
-                    className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-100 ${colorFor(
+                    className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${colorFor(
                       current.vocab.indexOf(p) >= 0 ? current.vocab.indexOf(p) : i + j
                     )}`}
                   >
@@ -321,7 +321,7 @@ function BPESection() {
           {/* Pair frequencies */}
           {current.pairs.length > 0 && (
             <div>
-              <div className="mb-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide">Pair Frequencies</div>
+              <div className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">Pair Frequencies</div>
               <div className="flex flex-wrap gap-2">
                 {current.pairs.map(([pair, count], i) => {
                   const [left, right] = pair.split('+')
@@ -331,10 +331,10 @@ function BPESection() {
                       key={pair}
                       className={`rounded border px-2 py-1 font-mono text-xs ${
                         isBest
-                          ? 'border-amber-400 bg-amber-500/20 text-amber-200'
+                          ? 'border-amber-400 bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200'
                           : i === 0
-                            ? 'border-zinc-600 bg-zinc-800 text-zinc-300'
-                            : 'border-zinc-700 bg-zinc-800/50 text-zinc-400'
+                            ? 'border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                            : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400'
                       }`}
                     >
                       {left}+{right}: {count}
@@ -347,14 +347,14 @@ function BPESection() {
 
           {/* Vocabulary */}
           <div>
-            <div className="mb-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide">
+            <div className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">
               Vocabulary ({current.vocab.length})
             </div>
             <div className="flex flex-wrap gap-1">
               {current.vocab.map((v, i) => (
                 <span
                   key={v}
-                  className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-200 ${colorFor(i)}`}
+                  className={`inline-block rounded border px-1.5 py-0.5 font-mono text-xs text-zinc-800 dark:text-zinc-200 ${colorFor(i)}`}
                 >
                   {v}
                 </span>
@@ -364,11 +364,11 @@ function BPESection() {
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center justify-between border-t border-zinc-700 bg-zinc-800 px-6 py-3">
+        <div className="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-3">
           <button
             onClick={goPrev}
             disabled={step === 0}
-            className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-zinc-600 disabled:opacity-40"
+            className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-600 disabled:opacity-40"
           >
             ← Previous
           </button>
@@ -383,7 +383,7 @@ function BPESection() {
           <button
             onClick={goNext}
             disabled={step === bpeSteps.length - 1}
-            className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-zinc-600 disabled:opacity-40"
+            className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-600 disabled:opacity-40"
           >
             Next Merge →
           </button>
@@ -418,10 +418,10 @@ function TokenEconomicsSection() {
 
   return (
     <section aria-labelledby="token-economics">
-      <h2 id="token-economics" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="token-economics" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         3. Token Economics
       </h2>
-      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         When you call an LLM API, you pay per token — both for input and output. Different
         kinds of text tokenize very differently, so the same "amount" of content can cost
         wildly different amounts.
@@ -435,23 +435,23 @@ function TokenEconomicsSection() {
             <textarea
               value={customText}
               onChange={e => setCustomText(e.target.value)}
-              className="mb-3 w-full rounded border border-zinc-600 bg-zinc-800 px-3 py-2 font-mono text-sm text-zinc-100 outline-none focus:border-purple-500"
+              className="mb-3 w-full rounded border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 font-mono text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:border-purple-500"
               rows={3}
               placeholder="Type or paste text here..."
               aria-label="Text to estimate tokens"
             />
             <div className="flex flex-wrap gap-4 text-sm">
-              <div className="rounded border border-zinc-700 bg-zinc-800 px-4 py-2">
-                <span className="text-zinc-400">Characters: </span>
-                <span className="font-mono text-zinc-100">{customText.length}</span>
+              <div className="rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+                <span className="text-zinc-500 dark:text-zinc-400">Characters: </span>
+                <span className="font-mono text-zinc-900 dark:text-zinc-100">{customText.length}</span>
               </div>
-              <div className="rounded border border-zinc-700 bg-zinc-800 px-4 py-2">
-                <span className="text-zinc-400">≈ Tokens: </span>
-                <span className="font-mono text-amber-300">{estimateTokens(customText)}</span>
+              <div className="rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+                <span className="text-zinc-500 dark:text-zinc-400">≈ Tokens: </span>
+                <span className="font-mono text-amber-700 dark:text-amber-300">{estimateTokens(customText)}</span>
               </div>
-              <div className="rounded border border-zinc-700 bg-zinc-800 px-4 py-2">
-                <span className="text-zinc-400">≈ Cost (GPT-4o input): </span>
-                <span className="font-mono text-green-400">
+              <div className="rounded border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+                <span className="text-zinc-500 dark:text-zinc-400">≈ Cost (GPT-4o input): </span>
+                <span className="font-mono text-green-700 dark:text-green-400">
                   ${(estimateTokens(customText) * 0.0000025).toFixed(6)}
                 </span>
               </div>
@@ -461,16 +461,16 @@ function TokenEconomicsSection() {
       />
 
       <div className="mt-6">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Token Efficiency by Content Type</h3>
-        <div className="overflow-hidden rounded-lg border border-zinc-700">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Token Efficiency by Content Type</h3>
+        <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
           <table className="w-full text-sm" role="table">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800">
-                <th className="px-4 py-2 text-left text-xs font-semibold text-zinc-400">Type</th>
-                <th className="px-4 py-2 text-left text-xs font-semibold text-zinc-400">Example</th>
-                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-400">Chars</th>
-                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-400">≈ Tokens</th>
-                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-400">Chars/Token</th>
+              <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+                <th className="px-4 py-2 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400">Type</th>
+                <th className="px-4 py-2 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400">Example</th>
+                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-500 dark:text-zinc-400">Chars</th>
+                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-500 dark:text-zinc-400">≈ Tokens</th>
+                <th className="px-4 py-2 text-right text-xs font-semibold text-zinc-500 dark:text-zinc-400">Chars/Token</th>
               </tr>
             </thead>
             <tbody>
@@ -478,12 +478,12 @@ function TokenEconomicsSection() {
                 const tokens = estimateTokens(ex.text)
                 const ratio = (ex.text.length / tokens).toFixed(1)
                 return (
-                  <tr key={tLabel(lang, ex.label)} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                    <td className="px-4 py-2 font-medium text-zinc-200">{tLabel(lang, ex.label)}</td>
-                    <td className="max-w-xs truncate px-4 py-2 font-mono text-xs text-zinc-400">{ex.text}</td>
-                    <td className="px-4 py-2 text-right font-mono text-zinc-300">{ex.text.length}</td>
-                    <td className="px-4 py-2 text-right font-mono text-amber-300">{tokens}</td>
-                    <td className="px-4 py-2 text-right font-mono text-zinc-300">{ratio}</td>
+                  <tr key={tLabel(lang, ex.label)} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-800/50">
+                    <td className="px-4 py-2 font-medium text-zinc-800 dark:text-zinc-200">{tLabel(lang, ex.label)}</td>
+                    <td className="max-w-xs truncate px-4 py-2 font-mono text-xs text-zinc-500 dark:text-zinc-400">{ex.text}</td>
+                    <td className="px-4 py-2 text-right font-mono text-zinc-700 dark:text-zinc-300">{ex.text.length}</td>
+                    <td className="px-4 py-2 text-right font-mono text-amber-700 dark:text-amber-300">{tokens}</td>
+                    <td className="px-4 py-2 text-right font-mono text-zinc-700 dark:text-zinc-300">{ratio}</td>
                   </tr>
                 )
               })}
@@ -582,10 +582,10 @@ const SPECIAL_TOKENS: { token: string; name: string; purpose: string }[] = [
 function VocabularySection() {
   return (
     <section aria-labelledby="vocab-special">
-      <h2 id="vocab-special" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="vocab-special" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         4. Vocabulary &amp; Special Tokens
       </h2>
-      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         A tokenizer's vocabulary is just a big lookup table: token string → integer ID.
         Modern LLMs typically have 32K–128K tokens. The vocabulary lives in a JSON file
         alongside the model weights. Click around to explore:
@@ -595,8 +595,8 @@ function VocabularySection() {
         <FileExplorer tree={TOKENIZER_TREE} title="model-weights/" />
       </div>
 
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Special Tokens</h3>
-      <p className="mb-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Special Tokens</h3>
+      <p className="mb-3 max-w-2xl text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
         Beyond regular text tokens, every tokenizer defines a handful of special tokens
         that control the model's behavior. These never appear in normal text — they're
         injected by the tokenizer automatically.
@@ -604,12 +604,12 @@ function VocabularySection() {
 
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
         {SPECIAL_TOKENS.map(st => (
-          <div key={st.name} className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+          <div key={st.name} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4">
             <div className="mb-1 flex items-center gap-2">
-              <code className="rounded bg-purple-500/20 px-2 py-0.5 text-xs text-purple-300">{st.token}</code>
-              <span className="text-xs font-semibold text-zinc-400">{st.name}</span>
+              <code className="rounded bg-purple-100 dark:bg-purple-500/20 px-2 py-0.5 text-xs text-purple-700 dark:text-purple-300">{st.token}</code>
+              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">{st.name}</span>
             </div>
-            <p className="text-sm text-zinc-400">{st.purpose}</p>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">{st.purpose}</p>
           </div>
         ))}
       </div>
@@ -634,20 +634,20 @@ function VocabularySection() {
 function TrainTokenizerSection() {
   return (
     <section aria-labelledby="train-tokenizer">
-      <h2 id="train-tokenizer" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="train-tokenizer" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         5. Training a Tokenizer in Practice
       </h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         In Karpathy's{' '}
-        <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
+        <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-700 dark:text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
           nanochat
         </a>{' '}
         — a minimal end-to-end LLM training harness — the tokenizer is the very first thing you build.
         Two scripts handle the entire lifecycle:
       </p>
-      <ul className="mb-4 list-inside list-disc space-y-1 text-sm text-zinc-400">
-        <li><code className="text-amber-300">tok_train.py</code> — trains a BPE tokenizer on your data</li>
-        <li><code className="text-amber-300">tok_eval.py</code> — measures compression rate (bytes per token)</li>
+      <ul className="mb-4 list-inside list-disc space-y-1 text-sm text-zinc-500 dark:text-zinc-400">
+        <li><code className="text-amber-700 dark:text-amber-300">tok_train.py</code> — trains a BPE tokenizer on your data</li>
+        <li><code className="text-amber-700 dark:text-amber-300">tok_eval.py</code> — measures compression rate (bytes per token)</li>
       </ul>
 
       <SimulatedTerminal
@@ -687,8 +687,8 @@ function TrainTokenizerSection() {
         ]}
       />
 
-      <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
-        <p className="text-sm text-amber-200/90">
+      <div className="mt-4 rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-4">
+        <p className="text-sm text-amber-800 dark:text-amber-200/90">
           <strong>Why this matters:</strong> The tokenizer determines how efficiently your model
           "sees" text. A compression rate of 3.72 bytes/token means every token carries ~4 characters
           of information. Better compression = shorter sequences = faster training = lower cost.

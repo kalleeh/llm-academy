@@ -28,13 +28,13 @@ function WeightMatrix({
   }, [trained])
 
   return (
-    <div className={`overflow-x-auto rounded border bg-zinc-950 p-3 transition-all ${highlight ? 'border-amber-500/50 ring-1 ring-amber-500/20' : 'border-zinc-700'}`}>
-      <div className="mb-2 text-xs font-medium text-zinc-400">
-        {trained ? <><Icon name="check" className="text-green-400" /> After training — structured patterns</> : <><Icon name="cross" className="text-red-400" /> Before training — random noise</>}
+    <div className={`overflow-x-auto rounded border bg-zinc-50 dark:bg-zinc-950 p-3 transition-all ${highlight ? 'border-amber-400 dark:border-amber-500/50 ring-1 ring-amber-500/20' : 'border-zinc-200 dark:border-zinc-700'}`}>
+      <div className="mb-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+        {trained ? <><Icon name="check" className="text-green-700 dark:text-green-400" /> After training — structured patterns</> : <><Icon name="cross" className="text-red-700 dark:text-red-400" /> Before training — random noise</>}
       </div>
       <div className="grid grid-cols-6 gap-1 font-mono text-xs">
         {values.map((v, i) => {
-          const color = v > 0.3 ? 'text-green-400' : v < -0.3 ? 'text-red-400' : 'text-zinc-500'
+          const color = v > 0.3 ? 'text-green-700 dark:text-green-400' : v < -0.3 ? 'text-red-700 dark:text-red-400' : 'text-zinc-500'
           const abs = Math.abs(v)
           const bg = `rgba(${v > 0 ? '74,222,128' : '248,113,113'}, ${Math.min(abs * 0.4, 0.3)})`
           return (
@@ -99,9 +99,9 @@ export const TrainingSection5: React.FC = () => {
 
   return (
     <section className="space-y-6" aria-labelledby="section-5-heading">
-      <h3 id="section-5-heading" className="font-mono text-xl font-bold text-zinc-100">{c.title}</h3>
-      <p className="text-zinc-400 leading-relaxed">
-        nanochat saves its trained model as a single <code className="text-amber-300">model.pt</code> file —
+      <h3 id="section-5-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h3>
+      <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        nanochat saves its trained model as a single <code className="text-amber-700 dark:text-amber-300">model.pt</code> file —
         a PyTorch checkpoint containing all the named tensors (multi-dimensional arrays of numbers).
         Run the inspect command to see the structure, then look at the actual numbers below.
       </p>
@@ -109,8 +109,8 @@ export const TrainingSection5: React.FC = () => {
       {/* Connected: terminal + weight matrices */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-zinc-400"><Icon name="terminal" /> Weight Inspection</span>
-          <span className="h-px flex-1 bg-zinc-800" />
+          <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400"><Icon name="terminal" /> Weight Inspection</span>
+          <span className="h-px flex-1 bg-zinc-100 dark:bg-zinc-800" />
         </div>
         <div className="grid gap-3 lg:grid-cols-2">
           <SimulatedTerminal
@@ -122,8 +122,8 @@ export const TrainingSection5: React.FC = () => {
             <WeightMatrix trained={false} highlight={executedStep >= 1} />
             <WeightMatrix trained={true} highlight={executedStep >= 1} />
             {executedStep >= 1 && (
-              <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3">
-                <p className="text-xs text-amber-200/90">
+              <div className="rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 px-4 py-3">
+                <p className="text-xs text-amber-800 dark:text-amber-200/90">
                   ↑ The numbers you see in the terminal come from matrices like these.
                   Before training: random noise. After training: structured patterns that encode language knowledge.
                 </p>
@@ -139,11 +139,11 @@ export const TrainingSection5: React.FC = () => {
       />
 
       <div>
-        <p className="mb-3 text-sm font-medium text-zinc-300">{c.p2}</p>
+        <p className="mb-3 text-sm font-medium text-zinc-700 dark:text-zinc-300">{c.p2}</p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm" role="table">
             <thead>
-              <tr className="border-b border-zinc-700 text-left text-xs text-zinc-400">
+              <tr className="border-b border-zinc-200 dark:border-zinc-700 text-left text-xs text-zinc-500 dark:text-zinc-400">
                 <th className="px-3 py-2">Format</th>
                 <th className="px-3 py-2">Extension</th>
                 <th className="px-3 py-2">Use case</th>
@@ -153,12 +153,12 @@ export const TrainingSection5: React.FC = () => {
             </thead>
             <tbody>
               {fORMAT_COMPARISONT.map(f => (
-                <tr key={f.name} className="border-b border-zinc-800 text-zinc-300">
-                  <td className="px-3 py-2 font-mono font-medium text-zinc-100">{f.name}</td>
-                  <td className="px-3 py-2 font-mono text-amber-300">{f.ext}</td>
+                <tr key={f.name} className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
+                  <td className="px-3 py-2 font-mono font-medium text-zinc-900 dark:text-zinc-100">{f.name}</td>
+                  <td className="px-3 py-2 font-mono text-amber-700 dark:text-amber-300">{f.ext}</td>
                   <td className="px-3 py-2">{f.useCase}</td>
-                  <td className="px-3 py-2 text-green-400">{f.pros}</td>
-                  <td className="px-3 py-2 text-red-400">{f.cons}</td>
+                  <td className="px-3 py-2 text-green-700 dark:text-green-400">{f.pros}</td>
+                  <td className="px-3 py-2 text-red-700 dark:text-red-400">{f.cons}</td>
                 </tr>
               ))}
             </tbody>

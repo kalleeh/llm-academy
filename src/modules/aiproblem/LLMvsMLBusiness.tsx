@@ -62,7 +62,7 @@ const APPROACHES: Approach[] = [
       'Tasks that change often (each change = retrain)',
     ],
     example: 'Your bank&apos;s fraud detection model that flags suspicious transactions in real time. Trained on millions of past transactions labeled "fraud" or "not fraud."',
-    color: 'border-blue-500/30 bg-blue-500/5',
+    color: 'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5',
   },
   {
     name: 'LLMs (Large Language Models)',
@@ -84,7 +84,7 @@ const APPROACHES: Approach[] = [
       'Decisions that need to be auditable and reproducible',
     ],
     example: '"Summarize this 30-page contract and flag any unusual clauses." A rule can&apos;t do this. Classical ML can&apos;t do this. An LLM can.',
-    color: 'border-amber-500/30 bg-amber-500/5',
+    color: 'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5',
   },
 ]
 
@@ -125,56 +125,56 @@ export const LLMvsMLBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="llmvsml-biz">
-      <h2 id="llmvsml-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="llmvsml-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-2">
         {APPROACHES.map((a, i) => (
           <div key={a.name} className={`rounded-lg border ${a.color}`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
-                <span className="text-sm font-medium text-zinc-100">{a.name}</span>
+                <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{a.name}</span>
                 <span className="ml-2 text-xs text-zinc-500">— {a.shortDef}</span>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4">
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">What you&apos;d see in real life</p>
-                  <p className="text-sm text-zinc-300" dangerouslySetInnerHTML={{ __html: a.whatYoudSee }} />
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: a.whatYoudSee }} />
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="rounded bg-zinc-800/50 px-3 py-2">
+                  <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
                     <p className="text-xs text-zinc-500">Cost / call</p>
-                    <p className="text-xs text-amber-300">{a.costPerCall}</p>
+                    <p className="text-xs text-amber-700 dark:text-amber-300">{a.costPerCall}</p>
                   </div>
-                  <div className="rounded bg-zinc-800/50 px-3 py-2">
+                  <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
                     <p className="text-xs text-zinc-500">Speed</p>
-                    <p className="text-xs text-amber-300">{a.speed}</p>
+                    <p className="text-xs text-amber-700 dark:text-amber-300">{a.speed}</p>
                   </div>
-                  <div className="rounded bg-zinc-800/50 px-3 py-2">
+                  <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
                     <p className="text-xs text-zinc-500">Who builds it</p>
-                    <p className="text-xs text-amber-300">{a.whoBuildsIt}</p>
+                    <p className="text-xs text-amber-700 dark:text-amber-300">{a.whoBuildsIt}</p>
                   </div>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
-                    <p className="mb-1 text-xs font-medium text-emerald-400">✓ Good for</p>
-                    <ul className="space-y-1 text-xs text-zinc-300">
+                    <p className="mb-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">✓ Good for</p>
+                    <ul className="space-y-1 text-xs text-zinc-700 dark:text-zinc-300">
                       {a.goodFor.map((x) => <li key={x}>• <span dangerouslySetInnerHTML={{ __html: x }} /></li>)}
                     </ul>
                   </div>
                   <div>
-                    <p className="mb-1 text-xs font-medium text-red-400">✗ Bad for</p>
-                    <ul className="space-y-1 text-xs text-zinc-300">
+                    <p className="mb-1 text-xs font-medium text-red-700 dark:text-red-400">✗ Bad for</p>
+                    <ul className="space-y-1 text-xs text-zinc-700 dark:text-zinc-300">
                       {a.badFor.map((x) => <li key={x}>• <span dangerouslySetInnerHTML={{ __html: x }} /></li>)}
                     </ul>
                   </div>
                 </div>
-                <div className="rounded-md border border-zinc-700 bg-zinc-900 p-3">
+                <div className="rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3">
                   <p className="mb-1 text-xs font-medium text-zinc-500">Concrete example</p>
-                  <p className="text-xs text-zinc-300" dangerouslySetInnerHTML={{ __html: a.example }} />
+                  <p className="text-xs text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: a.example }} />
                 </div>
               </div>
             )}
@@ -182,14 +182,14 @@ export const LLMvsMLBusiness: React.FC = () => {
         ))}
       </div>
 
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.decisionTitle}</p>
-        <ul className="space-y-2 text-xs text-zinc-300">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.decisionTitle}</p>
+        <ul className="space-y-2 text-xs text-zinc-700 dark:text-zinc-300">
           {DECISION_RULES.map((r) => (
-            <li key={r.if} className="rounded bg-zinc-800/50 px-3 py-2">
+            <li key={r.if} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
               <span className="text-zinc-500">If: </span><span dangerouslySetInnerHTML={{ __html: r.if }} />
               <br />
-              <span className="text-emerald-400">→ </span><span className="text-zinc-200" dangerouslySetInnerHTML={{ __html: r.then }} />
+              <span className="text-emerald-700 dark:text-emerald-400">→ </span><span className="text-zinc-800 dark:text-zinc-200" dangerouslySetInnerHTML={{ __html: r.then }} />
             </li>
           ))}
         </ul>

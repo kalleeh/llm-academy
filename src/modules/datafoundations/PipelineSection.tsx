@@ -22,7 +22,7 @@ const STAGES: PipelineStage[] = [
     id: 'source',
     label: 'Source',
     icon: 'ingest',
-    color: 'border-blue-500/40 bg-blue-500/10 text-blue-300',
+    color: 'border-blue-400 dark:border-blue-500/40 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300',
     description: 'Where data originates',
     details: [
       'Databases — PostgreSQL, MySQL, MongoDB',
@@ -36,7 +36,7 @@ const STAGES: PipelineStage[] = [
     id: 'ingest',
     label: 'Ingest',
     icon: 'cycle',
-    color: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300',
+    color: 'border-emerald-400 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
     description: 'How data enters the pipeline',
     details: [
       'Batch — scheduled jobs (hourly, daily)',
@@ -50,7 +50,7 @@ const STAGES: PipelineStage[] = [
     id: 'transform',
     label: 'Transform',
     icon: 'gear',
-    color: 'border-purple-500/40 bg-purple-500/10 text-purple-300',
+    color: 'border-purple-400 dark:border-purple-500/40 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300',
     description: 'Clean and reshape data',
     details: [
       'Cleaning — handle nulls, fix types, trim whitespace',
@@ -64,7 +64,7 @@ const STAGES: PipelineStage[] = [
     id: 'store',
     label: 'Store',
     icon: 'save',
-    color: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+    color: 'border-amber-400 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300',
     description: 'Where processed data lives',
     details: [
       'Data warehouse — Snowflake, BigQuery, Redshift',
@@ -78,7 +78,7 @@ const STAGES: PipelineStage[] = [
     id: 'serve',
     label: 'Serve',
     icon: 'rocket',
-    color: 'border-pink-500/40 bg-pink-500/10 text-pink-300',
+    color: 'border-pink-400 dark:border-pink-500/40 bg-pink-50 dark:bg-pink-500/10 text-pink-700 dark:text-pink-300',
     description: 'How data reaches consumers',
     details: [
       'APIs — REST/GraphQL endpoints for apps',
@@ -133,8 +133,8 @@ export const PipelineSection: React.FC = () => {
 
   return (
     <section aria-labelledby="pipelines">
-      <h2 id="pipelines" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="pipelines" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
@@ -151,7 +151,7 @@ export const PipelineSection: React.FC = () => {
               <div className="mt-1 text-xs font-medium">{stage.label}</div>
             </button>
             {i < STAGES.length - 1 && (
-              <span className="text-zinc-600">→</span>
+              <span className="text-zinc-500 dark:text-zinc-600">→</span>
             )}
           </div>
         ))}
@@ -162,14 +162,14 @@ export const PipelineSection: React.FC = () => {
         const stage = STAGES.find(s => s.id === activeStage)
         if (!stage) return null
         return (
-          <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900/80 p-4">
-            <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">
+          <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 p-4">
+            <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
               <Icon name={stage.icon} /> {stage.label}: {stage.description}
             </h3>
             <ul className="mt-3 space-y-1">
               {stage.details.map(d => (
-                <li key={d} className="flex items-start gap-2 text-sm text-zinc-400">
-                  <span className="mt-1 text-zinc-600">•</span>
+                <li key={d} className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  <span className="mt-1 text-zinc-500 dark:text-zinc-600">•</span>
                   {d}
                 </li>
               ))}
@@ -180,7 +180,7 @@ export const PipelineSection: React.FC = () => {
 
       {/* Terminal demo */}
       <div>
-        <p className="mb-3 text-sm text-zinc-400">{c.p4}</p>
+        <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">{c.p4}</p>
         <SimulatedTerminal steps={TERMINAL_STEPS} title="data-pipeline-demo" />
       </div>
 

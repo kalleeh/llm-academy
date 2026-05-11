@@ -18,8 +18,8 @@ export const MultiHeadSection: React.FC = () => {
 
   return (
     <section aria-labelledby="multihead-heading">
-      <h2 id="multihead-heading" className="mb-2 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 text-sm text-zinc-400">{c.p6}<strong>multiple attention heads in
+      <h2 id="multihead-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{c.p6}<strong>multiple attention heads in
         parallel</strong>, each learning to focus on different relationships. Toggle between heads
         to see how each one captures a different linguistic pattern.
       </p>
@@ -34,8 +34,8 @@ export const MultiHeadSection: React.FC = () => {
             onClick={() => selectHead(i)}
             className={`rounded-lg border px-3 py-2 text-xs transition-all ${
               activeHead === i
-                ? 'border-amber-600 bg-amber-950 text-amber-300'
-                : 'border-zinc-700 bg-zinc-900 text-zinc-400 hover:border-zinc-500'
+                ? 'border-amber-600 bg-amber-950 text-amber-700 dark:text-amber-300'
+                : 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500'
             }`}
           >
             <span className="font-semibold">Head {i + 1}</span>
@@ -45,9 +45,9 @@ export const MultiHeadSection: React.FC = () => {
       </div>
 
       {/* Active head display */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4" role="tabpanel">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4" role="tabpanel">
         <div className="mb-3 flex items-baseline gap-2">
-          <span className="font-mono text-sm font-bold text-amber-300">
+          <span className="font-mono text-sm font-bold text-amber-700 dark:text-amber-300">
             Head {activeHead + 1}: {HEADS[activeHead].label}
           </span>
           <span className="text-xs text-zinc-500">{HEADS[activeHead].description}</span>
@@ -62,10 +62,10 @@ export const MultiHeadSection: React.FC = () => {
             key={i}
             onClick={() => selectHead(i)}
             className={`rounded-lg border p-2 text-left transition-all ${
-              activeHead === i ? 'border-amber-600 ring-1 ring-amber-600' : 'border-zinc-700 hover:border-zinc-500'
+              activeHead === i ? 'border-amber-600 ring-1 ring-amber-600' : 'border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500'
             }`}
           >
-            <div className="mb-1 text-[10px] font-semibold text-zinc-300">
+            <div className="mb-1 text-[10px] font-semibold text-zinc-700 dark:text-zinc-300">
               Head {i + 1}: {head.label}
             </div>
             <AttentionHeatmap weights={head.weights} compact />
@@ -73,7 +73,7 @@ export const MultiHeadSection: React.FC = () => {
         ))}
       </div>
 
-      <p className="mt-4 text-xs text-zinc-500">{c.p7}<strong className="text-zinc-300">
+      <p className="mt-4 text-xs text-zinc-500">{c.p7}<strong className="text-zinc-700 dark:text-zinc-300">
         concatenated and projected</strong> back to the model dimension. This lets the model
         simultaneously track grammar, proximity, meaning, and references — far richer than any
         single attention pattern could capture.

@@ -185,8 +185,8 @@ export const TrainingSection4: React.FC = () => {
 
   return (
     <section className="space-y-6" aria-labelledby="section-4-heading">
-      <h3 id="section-4-heading" className="font-mono text-xl font-bold text-zinc-100">{c.title}</h3>
-      <p className="text-zinc-400 leading-relaxed">
+      <h3 id="section-4-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h3>
+      <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
         {c.p2}
       </p>
 
@@ -199,8 +199,8 @@ export const TrainingSection4: React.FC = () => {
             onClick={() => handleSelect(v.id)}
             className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
               selected === v.id
-                ? 'border-amber-500/50 bg-amber-500/10 text-amber-300'
-                : 'border-zinc-700 bg-zinc-800/50 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300'
+                ? 'border-amber-400 dark:border-amber-500/50 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300'
+                : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             <Icon name={v.emoji} /> {v.label}
@@ -208,22 +208,22 @@ export const TrainingSection4: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid gap-4 rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:grid-cols-3" role="tabpanel">
-        <div className="rounded bg-zinc-800/50 p-3 text-center">
+      <div className="grid gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4 sm:grid-cols-3" role="tabpanel">
+        <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Cost</div>
-          <div className="mt-1 font-mono text-sm font-bold text-green-400">{variant.cost}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-green-700 dark:text-green-400">{variant.cost}</div>
         </div>
-        <div className="rounded bg-zinc-800/50 p-3 text-center">
+        <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Time</div>
-          <div className="mt-1 font-mono text-sm font-bold text-blue-400">{variant.time}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-blue-700 dark:text-blue-400">{variant.time}</div>
         </div>
-        <div className="rounded bg-zinc-800/50 p-3 text-center">
+        <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Data needed</div>
-          <div className="mt-1 font-mono text-sm font-bold text-purple-400">{variant.data}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-purple-700 dark:text-purple-400">{variant.data}</div>
         </div>
       </div>
 
-      <p className="text-sm text-zinc-400">{variant.desc}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{variant.desc}</p>
 
       <Workspace
         key={variant.id}

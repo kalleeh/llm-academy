@@ -45,13 +45,13 @@ export const QualityVsSizeSection: React.FC = () => {
 
   return (
     <section aria-labelledby="quality-vs-size">
-      <h2 id="quality-vs-size" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        {c.p2} <strong className="text-zinc-100">Q4_K_M</strong>.
+      <h2 id="quality-vs-size" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        {c.p2} <strong className="text-zinc-900 dark:text-zinc-100">Q4_K_M</strong>.
       </p>
 
       {/* SVG Chart */}
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
         <svg
           viewBox={`0 0 ${CHART_W} ${CHART_H}`}
           className="w-full"
@@ -165,51 +165,51 @@ export const QualityVsSizeSection: React.FC = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-lg border border-zinc-700">
+      <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Quant Level</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Size (7B)</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">BPW</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Quality</th>
-              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-400">Use Case</th>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Quant Level</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Size (7B)</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">BPW</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Quality</th>
+              <th className="px-4 py-2 text-left font-mono text-xs text-zinc-500 dark:text-zinc-400">Use Case</th>
             </tr>
           </thead>
           <tbody>
             {qUANT_LEVELST.map((q) => (
               <tr
                 key={q.label}
-                className={`border-b border-zinc-800 ${q.sweet ? 'bg-amber-500/5' : ''}`}
+                className={`border-b border-zinc-200 dark:border-zinc-800 ${q.sweet ? 'bg-amber-50 dark:bg-amber-500/5' : ''}`}
               >
-                <td className="px-4 py-2 font-mono text-zinc-100">
+                <td className="px-4 py-2 font-mono text-zinc-900 dark:text-zinc-100">
                   {q.label}
-                  {q.sweet && <span className="ml-2 text-xs text-amber-400">⭐</span>}
+                  {q.sweet && <span className="ml-2 text-xs text-amber-700 dark:text-amber-400">⭐</span>}
                 </td>
-                <td className="px-4 py-2 text-zinc-300">{q.size} GB</td>
-                <td className="px-4 py-2 text-zinc-300">{q.bpw}</td>
+                <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{q.size} GB</td>
+                <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{q.bpw}</td>
                 <td className="px-4 py-2">
                   <div className="flex items-center gap-2">
-                    <div className="h-2 w-16 overflow-hidden rounded-full bg-zinc-800">
+                    <div className="h-2 w-16 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                       <div
                         className={`h-full rounded-full ${q.sweet ? 'bg-amber-500' : 'bg-zinc-500'}`}
                         style={{ width: `${q.quality}%` }}
                       />
                     </div>
-                    <span className="text-zinc-300">{q.quality}%</span>
+                    <span className="text-zinc-700 dark:text-zinc-300">{q.quality}%</span>
                   </div>
                 </td>
-                <td className="px-4 py-2 text-zinc-400">{q.useCase}</td>
+                <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">{q.useCase}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm leading-relaxed text-zinc-400">
-          <strong className="text-amber-400">Recommendation:</strong> For most local use cases,{' '}
-          <strong className="text-zinc-100">Q4_K_M</strong> is the sweet spot — 93% quality at 29%
+      <div className="mt-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          <strong className="text-amber-700 dark:text-amber-400">Recommendation:</strong> For most local use cases,{' '}
+          <strong className="text-zinc-900 dark:text-zinc-100">Q4_K_M</strong> is the sweet spot — 93% quality at 29%
           of the original size. Go Q5_K_M if you have extra RAM, or Q6_K/Q8_0 for tasks where
           accuracy is critical (coding, math, medical).
         </p>

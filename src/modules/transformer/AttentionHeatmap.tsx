@@ -37,7 +37,7 @@ export const AttentionHeatmap: React.FC<AttentionHeatmapProps> = ({ weights, com
           {WORDS.map((w, i) => (
             <div
               key={i}
-              className={`${fontSize} text-center transition-colors ${hoveredCol === i ? 'text-amber-300 font-bold' : 'text-zinc-400'}`}
+              className={`${fontSize} text-center transition-colors ${hoveredCol === i ? 'text-amber-700 dark:text-amber-300 font-bold' : 'text-zinc-500 dark:text-zinc-400'}`}
               style={{ width: `${cellSize}px` }}
             >
               <span className="-rotate-45 inline-block origin-center">{w}</span>
@@ -48,7 +48,7 @@ export const AttentionHeatmap: React.FC<AttentionHeatmapProps> = ({ weights, com
         {WORDS.map((word, r) => (
           <div key={r} className="flex items-center">
             <div
-              className={`${fontSize} shrink-0 text-right pr-2 transition-colors ${hoveredRow === r ? 'text-amber-300 font-bold' : 'text-zinc-400'}`}
+              className={`${fontSize} shrink-0 text-right pr-2 transition-colors ${hoveredRow === r ? 'text-amber-700 dark:text-amber-300 font-bold' : 'text-zinc-500 dark:text-zinc-400'}`}
               style={{ width: `${labelW}px` }}
             >
               {word}
@@ -56,7 +56,7 @@ export const AttentionHeatmap: React.FC<AttentionHeatmapProps> = ({ weights, com
             {weights[r].map((w, c) => (
               <div
                 key={c}
-                className="border border-zinc-800 transition-all cursor-crosshair"
+                className="border border-zinc-200 dark:border-zinc-800 transition-all cursor-crosshair"
                 style={{
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
@@ -78,12 +78,12 @@ export const AttentionHeatmap: React.FC<AttentionHeatmapProps> = ({ weights, com
         ))}
       </div>
       {hoveredRow !== null && hoveredCol !== null && (
-        <p className="mt-2 text-xs text-zinc-400">
-          <span className="text-amber-300">{WORDS[hoveredRow]}</span>
+        <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+          <span className="text-amber-700 dark:text-amber-300">{WORDS[hoveredRow]}</span>
           {' → '}
-          <span className="text-amber-300">{WORDS[hoveredCol]}</span>
+          <span className="text-amber-700 dark:text-amber-300">{WORDS[hoveredCol]}</span>
           {': '}
-          <span className="font-mono text-zinc-200">
+          <span className="font-mono text-zinc-800 dark:text-zinc-200">
             {(weights[hoveredRow][hoveredCol] * 100).toFixed(1)}%
           </span>
           {' attention'}

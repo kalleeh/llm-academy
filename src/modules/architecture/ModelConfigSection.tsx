@@ -89,8 +89,8 @@ export const ModelConfigSection: React.FC = () => {
 
   return (
     <section aria-labelledby="model-config">
-      <h2 id="model-config" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="model-config" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Presets */}
       <div className="mb-4 flex flex-wrap gap-2">
@@ -98,7 +98,7 @@ export const ModelConfigSection: React.FC = () => {
           <button
             key={p.label}
             onClick={() => applyPreset(p)}
-            className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:border-zinc-500 hover:text-zinc-200"
+            className="rounded-lg border border-zinc-200 dark:border-zinc-700 px-3 py-1.5 text-xs text-zinc-500 dark:text-zinc-400 transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
           >
             {p.label}
           </button>
@@ -107,12 +107,12 @@ export const ModelConfigSection: React.FC = () => {
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Sliders */}
-        <div className="space-y-4 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+        <div className="space-y-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
           {SLIDERS.map(s => (
             <div key={s.key}>
               <div className="mb-1 flex items-center justify-between">
-                <label htmlFor={`slider-${s.key}`} className="text-sm text-zinc-400">{s.label}</label>
-                <span className="font-mono text-sm text-zinc-100">{config[s.key]}</span>
+                <label htmlFor={`slider-${s.key}`} className="text-sm text-zinc-500 dark:text-zinc-400">{s.label}</label>
+                <span className="font-mono text-sm text-zinc-900 dark:text-zinc-100">{config[s.key]}</span>
               </div>
               <input
                 id={`slider-${s.key}`}
@@ -124,7 +124,7 @@ export const ModelConfigSection: React.FC = () => {
                 onChange={e => updateField(s.key, Number(e.target.value))}
                 className="w-full accent-zinc-400"
               />
-              <div className="flex justify-between text-[10px] text-zinc-600">
+              <div className="flex justify-between text-[10px] text-zinc-500 dark:text-zinc-600">
                 <span>{s.min}</span>
                 <span>{s.max}</span>
               </div>
@@ -134,29 +134,29 @@ export const ModelConfigSection: React.FC = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="text-xs text-zinc-500 uppercase">Total Parameters</p>
-            <p className="mt-1 font-mono text-xl font-bold text-zinc-100">{formatNum(stats.totalParams)}</p>
+            <p className="mt-1 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{formatNum(stats.totalParams)}</p>
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="text-xs text-zinc-500 uppercase">Active Parameters</p>
-            <p className="mt-1 font-mono text-xl font-bold text-zinc-100">{formatNum(stats.activeParams)}</p>
+            <p className="mt-1 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{formatNum(stats.activeParams)}</p>
             {config.experts > 1 && (
               <p className="mt-1 text-xs text-zinc-500">
                 {((stats.activeParams / stats.totalParams) * 100).toFixed(1)}% of total
               </p>
             )}
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="text-xs text-zinc-500 uppercase">Est. VRAM (FP16)</p>
-            <p className="mt-1 font-mono text-xl font-bold text-zinc-100">{stats.vramGB.toFixed(1)} GB</p>
+            <p className="mt-1 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{stats.vramGB.toFixed(1)} GB</p>
             <p className="mt-1 text-xs text-zinc-500">
               {stats.vramGB <= 24 ? '1× consumer GPU' : stats.vramGB <= 80 ? '1× A100/H100' : `${Math.ceil(stats.vramGB / 80)}× H100s`}
             </p>
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="text-xs text-zinc-500 uppercase">Est. Training Cost</p>
-            <p className="mt-1 font-mono text-xl font-bold text-zinc-100">
+            <p className="mt-1 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
               ${stats.costUSD >= 1e6 ? `${(stats.costUSD / 1e6).toFixed(1)}M` : stats.costUSD >= 1e3 ? `${(stats.costUSD / 1e3).toFixed(0)}K` : stats.costUSD.toFixed(0)}
             </p>
             <p className="mt-1 text-xs text-zinc-500">Very rough H100 estimate</p>

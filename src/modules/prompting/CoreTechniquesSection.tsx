@@ -131,8 +131,8 @@ export const CoreTechniquesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="core-techniques">
-      <h2 id="core-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="core-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Tabs */}
       <div className="mb-4 flex flex-wrap gap-1" role="tablist" aria-label="Prompting techniques">
@@ -144,8 +144,8 @@ export const CoreTechniquesSection: React.FC = () => {
             onClick={() => handleTabClick(t.id)}
             className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
               t.id === activeTab
-                ? 'bg-zinc-700 text-zinc-100'
-                : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
             }`}
           >
             {t.label}
@@ -154,26 +154,26 @@ export const CoreTechniquesSection: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900" role="tabpanel">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-5 py-3">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">{technique.label}</h3>
-          <p className="mt-1 text-sm text-zinc-400">{technique.description}</p>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900" role="tabpanel">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{technique.label}</h3>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{technique.description}</p>
         </div>
 
         <div className="grid gap-4 p-5 md:grid-cols-2">
           {/* Before */}
           <div>
-            <p className="mb-2 text-xs font-medium text-red-400"><Icon name="cross" className="text-red-400" /> Without technique</p>
+            <p className="mb-2 text-xs font-medium text-red-700 dark:text-red-400"><Icon name="cross" className="text-red-700 dark:text-red-400" /> Without technique</p>
             <div className="space-y-2">
               <div>
                 <p className="mb-1 text-xs text-zinc-500">Prompt</p>
-                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-300">
+                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
                   {technique.before.prompt}
                 </pre>
               </div>
               <div>
                 <p className="mb-1 text-xs text-zinc-500">Output</p>
-                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-400">
+                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
                   {technique.before.output}
                 </pre>
               </div>
@@ -182,17 +182,17 @@ export const CoreTechniquesSection: React.FC = () => {
 
           {/* After */}
           <div>
-            <p className="mb-2 text-xs font-medium text-green-400">✓ With technique</p>
+            <p className="mb-2 text-xs font-medium text-green-700 dark:text-green-400">✓ With technique</p>
             <div className="space-y-2">
               <div>
                 <p className="mb-1 text-xs text-zinc-500">Prompt</p>
-                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-300">
+                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-700 dark:text-green-300">
                   {technique.after.prompt}
                 </pre>
               </div>
               <div>
                 <p className="mb-1 text-xs text-zinc-500">Output</p>
-                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-300">
+                <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-700 dark:text-amber-300">
                   {technique.after.output}
                 </pre>
               </div>
@@ -200,9 +200,9 @@ export const CoreTechniquesSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-zinc-700 bg-zinc-800 px-5 py-3">
-          <p className="text-xs text-zinc-300">
-            <strong className="text-zinc-100">Best for:</strong> {technique.when}
+        <div className="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">
+            <strong className="text-zinc-900 dark:text-zinc-100">Best for:</strong> {technique.when}
           </p>
         </div>
       </div>

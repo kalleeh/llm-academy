@@ -85,8 +85,8 @@ export const ServingFrameworksSection: React.FC = () => {
 
   return (
     <section aria-labelledby="serving-frameworks">
-      <h2 id="serving-frameworks" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="serving-frameworks" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Cards */}
       <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,15 +94,15 @@ export const ServingFrameworksSection: React.FC = () => {
           <button
             key={fw.name}
             onClick={() => toggle(fw.name)}
-            className={`rounded-lg border-l-4 ${fw.color} bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-800`}
+            className={`rounded-lg border-l-4 ${fw.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800`}
             aria-expanded={expanded === fw.name}
           >
-            <h3 className="font-mono text-sm font-bold text-zinc-100">{fw.name}</h3>
-            <p className="mt-1 text-xs text-zinc-400">{fw.tagline}</p>
+            <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</h3>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{fw.tagline}</p>
             {expanded === fw.name && (
               <ul className="mt-3 space-y-1">
                 {fw.features.map(f => (
-                  <li key={f} className="text-xs text-zinc-300">• {f}</li>
+                  <li key={f} className="text-xs text-zinc-700 dark:text-zinc-300">• {f}</li>
                 ))}
               </ul>
             )}
@@ -111,12 +111,12 @@ export const ServingFrameworksSection: React.FC = () => {
       </div>
 
       {/* Comparison table */}
-      <div className="overflow-x-auto rounded-lg border border-zinc-700">
+      <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
               {TABLE_HEADERS.map(h => (
-                <th key={h} className="px-4 py-3 font-mono text-xs font-semibold text-zinc-400">
+                <th key={h} className="px-4 py-3 font-mono text-xs font-semibold text-zinc-500 dark:text-zinc-400">
                   {h}
                 </th>
               ))}
@@ -124,12 +124,12 @@ export const ServingFrameworksSection: React.FC = () => {
           </thead>
           <tbody>
             {fRAMEWORKST.map(fw => (
-              <tr key={fw.name} className="border-b border-zinc-800 last:border-0 hover:bg-zinc-900/50">
-                <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-100">{fw.name}</td>
-                <td className="px-4 py-3 text-xs text-zinc-300">{fw.throughput}</td>
-                <td className="px-4 py-3 text-xs text-zinc-300">{fw.latency}</td>
-                <td className="px-4 py-3 text-xs text-zinc-300">{fw.ease}</td>
-                <td className="px-4 py-3 text-xs text-zinc-300">{fw.gpu}</td>
+              <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-zinc-900/50">
+                <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</td>
+                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.throughput}</td>
+                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.latency}</td>
+                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.ease}</td>
+                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.gpu}</td>
               </tr>
             ))}
           </tbody>
@@ -137,9 +137,9 @@ export const ServingFrameworksSection: React.FC = () => {
       </div>
 
       <div className="mt-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">{c.p3}</h3>
-        <p className="mb-3 text-sm text-zinc-400">
-          nanochat includes its own inference engine (<code className="text-amber-300">engine.py</code>)
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">{c.p3}</h3>
+        <p className="mb-3 text-sm text-zinc-500 dark:text-zinc-400">
+          nanochat includes its own inference engine (<code className="text-amber-700 dark:text-amber-300">engine.py</code>)
           with KV cache, plus two ways to talk to your model: a CLI and a ChatGPT-like web UI.
         </p>
         <SimulatedTerminal

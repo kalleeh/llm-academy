@@ -111,15 +111,15 @@ export const LLMDataSection: React.FC = () => {
 
   return (
     <section aria-labelledby="llm-data">
-      <h2 id="llm-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="llm-data" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Toggle */}
       <div className="mb-4 flex gap-2">
         <button
           onClick={toggleView}
           className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            showComparison ? 'bg-zinc-700 text-zinc-100' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+            showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
           }`}
         >
           ML vs LLM Comparison
@@ -127,7 +127,7 @@ export const LLMDataSection: React.FC = () => {
         <button
           onClick={toggleView}
           className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            !showComparison ? 'bg-zinc-700 text-zinc-100' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800'
+            !showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
           }`}
         >
           Data Sources & Scale
@@ -136,21 +136,21 @@ export const LLMDataSection: React.FC = () => {
 
       {showComparison ? (
         /* Comparison table */
-        <div className="overflow-x-auto rounded-lg border border-zinc-700">
+        <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
           <table className="w-full text-left text-sm" role="table">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800">
-                <th className="px-4 py-2 text-xs font-medium text-zinc-400">Aspect</th>
-                <th className="px-4 py-2 text-xs font-medium text-emerald-400">Classical ML</th>
-                <th className="px-4 py-2 text-xs font-medium text-amber-400">LLM Pre-training</th>
+              <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+                <th className="px-4 py-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">Aspect</th>
+                <th className="px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-400">Classical ML</th>
+                <th className="px-4 py-2 text-xs font-medium text-amber-700 dark:text-amber-400">LLM Pre-training</th>
               </tr>
             </thead>
             <tbody className="text-xs">
               {COMPARISON.map(row => (
-                <tr key={row.aspect} className="border-b border-zinc-800">
-                  <td className="px-4 py-2 font-medium text-zinc-200">{row.aspect}</td>
-                  <td className="px-4 py-2 text-zinc-400">{row.ml}</td>
-                  <td className="px-4 py-2 text-zinc-300">{row.llm}</td>
+                <tr key={row.aspect} className="border-b border-zinc-200 dark:border-zinc-800">
+                  <td className="px-4 py-2 font-medium text-zinc-800 dark:text-zinc-200">{row.aspect}</td>
+                  <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.ml}</td>
+                  <td className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{row.llm}</td>
                 </tr>
               ))}
             </tbody>
@@ -160,36 +160,36 @@ export const LLMDataSection: React.FC = () => {
         /* Scale visualization */
         <div className="space-y-4">
           {/* Scale comparison */}
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-            <p className="mb-3 text-xs font-medium text-zinc-300">Scale comparison</p>
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+            <p className="mb-3 text-xs font-medium text-zinc-700 dark:text-zinc-300">Scale comparison</p>
             <div className="space-y-3">
               <div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-emerald-400">Good ML dataset</span>
-                  <span className="text-zinc-400">10K – 1M rows</span>
+                  <span className="text-emerald-700 dark:text-emerald-400">Good ML dataset</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">10K – 1M rows</span>
                 </div>
-                <div className="mt-1 h-3 overflow-hidden rounded-full bg-zinc-800">
+                <div className="mt-1 h-3 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <div className="h-full rounded-full bg-emerald-500/60" style={{ width: '1%' }} />
                 </div>
               </div>
               <div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-amber-400">LLM pre-training dataset</span>
-                  <span className="text-zinc-400">10 – 15 TRILLION tokens</span>
+                  <span className="text-amber-700 dark:text-amber-400">LLM pre-training dataset</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">10 – 15 TRILLION tokens</span>
                 </div>
-                <div className="mt-1 h-3 overflow-hidden rounded-full bg-zinc-800">
+                <div className="mt-1 h-3 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <div className="h-full rounded-full bg-amber-500/60" style={{ width: '100%' }} />
                 </div>
               </div>
               <p className="text-center text-xs text-zinc-500">
-                That&apos;s roughly <span className="text-amber-300 font-medium">10,000,000×</span> more data
+                That&apos;s roughly <span className="text-amber-700 dark:text-amber-300 font-medium">10,000,000×</span> more data
               </p>
             </div>
           </div>
 
           {/* Source breakdown */}
-          <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-            <p className="mb-3 text-xs font-medium text-zinc-300">{c.p5}</p>
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+            <p className="mb-3 text-xs font-medium text-zinc-700 dark:text-zinc-300">{c.p5}</p>
             {/* Stacked bar */}
             <div className="mb-3 flex h-6 overflow-hidden rounded-full">
               {SOURCES.map(s => (
@@ -203,7 +203,7 @@ export const LLMDataSection: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-x-4 gap-y-1">
               {SOURCES.map(s => (
-                <div key={s.name} className="flex items-center gap-1.5 text-xs text-zinc-400">
+                <div key={s.name} className="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400">
                   <span className={`inline-block size-2 rounded-full ${s.color} opacity-70`} />
                   {s.name} <span className="text-zinc-500">({s.tokens})</span>
                 </div>
@@ -215,16 +215,16 @@ export const LLMDataSection: React.FC = () => {
 
       {/* File explorer */}
       <div className="mt-6">
-        <p className="mb-3 text-sm text-zinc-400">{c.p7}</p>
+        <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">{c.p7}</p>
         <FileExplorer tree={DATASET_TREE} title="~/pretraining-corpus" />
       </div>
 
       {/* Bridge to next module */}
-      <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm font-medium text-zinc-200"><Icon name="arrow-right" /> Up Next</p>
-        <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+      <div className="mt-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200"><Icon name="arrow-right" /> Up Next</p>
+        <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
           {c.p4} <em>consume</em> this data — breaking text
-          into <span className="text-amber-300">tokens</span>, the fundamental unit that
+          into <span className="text-amber-700 dark:text-amber-300">tokens</span>, the fundamental unit that
           transformers process.
         </p>
       </div>

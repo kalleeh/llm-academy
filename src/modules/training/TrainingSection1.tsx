@@ -114,12 +114,12 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
 
 export const TrainingSection1: React.FC = () => (
   <section className="space-y-6" aria-labelledby="section-1-heading">
-    <h3 id="section-1-heading" className="font-mono text-xl font-bold text-zinc-100">
+    <h3 id="section-1-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
       1. Starting From Nothing
     </h3>
-    <p className="text-zinc-400 leading-relaxed">
+    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
       Every LLM starts as an empty shell — billions of numbers, all random. Let's set up{' '}
-      <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
+      <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-700 dark:text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
         nanochat
       </a>
       , Karpathy's minimal LLM training harness, and see what an untrained model looks like.
@@ -133,10 +133,10 @@ export const TrainingSection1: React.FC = () => (
       snapshots={SNAPSHOTS}
     />
 
-    <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
-      <p className="text-sm text-amber-200/90">
+    <div className="rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-4">
+      <p className="text-sm text-amber-800 dark:text-amber-200/90">
         <strong>Key insight:</strong> Random weights = the model knows nothing. Ask it anything
-        and you get gibberish. In nanochat, the <code className="text-amber-300">--depth</code> flag
+        and you get gibberish. In nanochat, the <code className="text-amber-700 dark:text-amber-300">--depth</code> flag
         is the single dial that controls model size — all other hyperparameters (width, heads,
         learning rate, training horizon) are calculated automatically to be compute-optimal.
       </p>

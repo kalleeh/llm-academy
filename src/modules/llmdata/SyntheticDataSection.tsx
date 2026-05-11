@@ -64,34 +64,34 @@ export const SyntheticDataSection: React.FC = () => {
 
   return (
     <section aria-labelledby="synthetic-data">
-      <h2 id="synthetic-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
-        Human data is expensive. <strong className="text-zinc-100">Alpaca</strong> showed 52K synthetic
-        instructions from text-davinci-003 could fine-tune a competitive model. <strong className="text-zinc-100">Phi</strong> (Microsoft)
+      <h2 id="synthetic-data" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-4 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        Human data is expensive. <strong className="text-zinc-900 dark:text-zinc-100">Alpaca</strong> showed 52K synthetic
+        instructions from text-davinci-003 could fine-tune a competitive model. <strong className="text-zinc-900 dark:text-zinc-100">Phi</strong> (Microsoft)
         trained primarily on synthetic textbook-quality data for outsized performance at small scale.
       </p>
       <div className="mb-4 flex items-center gap-3">
-        <span className={`text-sm ${!isSynthetic ? 'text-zinc-100' : 'text-zinc-500'}`}>Human</span>
+        <span className={`text-sm ${!isSynthetic ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'}`}>Human</span>
         <button onClick={toggle} role="switch" aria-checked={isSynthetic}
           aria-label="Toggle human vs synthetic examples"
           className={`relative h-6 w-11 rounded-full transition-colors ${isSynthetic ? 'bg-purple-600' : 'bg-zinc-600'}`}>
           <span className={`absolute top-0.5 left-0.5 size-5 rounded-full bg-white transition-transform ${isSynthetic ? 'translate-x-5' : ''}`} />
         </button>
-        <span className={`text-sm ${isSynthetic ? 'text-zinc-100' : 'text-zinc-500'}`}>Synthetic</span>
+        <span className={`text-sm ${isSynthetic ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'}`}>Synthetic</span>
       </div>
       <div className="mb-6 space-y-3">
-        <div className="text-xs font-semibold uppercase tracking-wide text-zinc-400">
+        <div className="text-xs font-semibold uppercase tracking-wide text-zinc-600 dark:text-zinc-400">
           {isSynthetic ? 'Synthetic (LLM-generated)' : 'Human-written'}
         </div>
         {examples.map((ex, i) => (
-          <div key={`${isSynthetic}-${i}`} className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+          <div key={`${isSynthetic}-${i}`} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-900/50 p-4">
             <div className="mb-2">
-              <span className="text-xs font-semibold text-amber-400">Instruction: </span>
-              <span className="text-sm text-zinc-200">{ex.instruction}</span>
+              <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">Instruction: </span>
+              <span className="text-sm text-zinc-800 dark:text-zinc-200">{ex.instruction}</span>
             </div>
             <div>
-              <span className="text-xs font-semibold text-green-400">Response: </span>
-              <span className="text-sm text-zinc-400">{ex.response}</span>
+              <span className="text-xs font-semibold text-green-700 dark:text-green-400">Response: </span>
+              <span className="text-sm text-zinc-600 dark:text-zinc-400">{ex.response}</span>
             </div>
           </div>
         ))}

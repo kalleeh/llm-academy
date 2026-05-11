@@ -164,19 +164,19 @@ export const StructuredOutputSection: React.FC = () => {
 
   return (
     <section aria-labelledby="structured-output">
-      <h2 id="structured-output" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="structured-output" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Getting reliable JSON, tables, and specific formats from LLMs. The key insight:{' '}
-        <strong className="text-zinc-100">constrain the output at the API level</strong>, not just in
+        <strong className="text-zinc-900 dark:text-zinc-100">constrain the output at the API level</strong>, not just in
         the prompt text.
       </p>
 
       {/* Reliability progression */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-100">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Structure Improves Reliability
         </h3>
-        <p className="mb-4 text-xs text-zinc-400">{c.intro}</p>
+        <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">{c.intro}</p>
 
         <div className="mb-4 flex flex-wrap gap-1">
           {pROMPT_LEVELST.map((l, i) => (
@@ -185,8 +185,8 @@ export const StructuredOutputSection: React.FC = () => {
               onClick={() => handleLevelClick(i)}
               className={`rounded-md px-3 py-1.5 text-xs transition-colors ${
                 i === activeLevel
-                  ? 'bg-zinc-700 text-zinc-100'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                  ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
               }`}
             >
               {l.label}
@@ -197,13 +197,13 @@ export const StructuredOutputSection: React.FC = () => {
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <p className="mb-1 text-xs text-zinc-500">Prompt</p>
-            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-300">
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-green-700 dark:text-green-300">
               {level.prompt}
             </pre>
           </div>
           <div>
             <p className="mb-1 text-xs text-zinc-500">Output</p>
-            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-300">
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-amber-700 dark:text-amber-300">
               {level.output}
             </pre>
           </div>
@@ -211,7 +211,7 @@ export const StructuredOutputSection: React.FC = () => {
 
         <div className="mt-4 flex items-center gap-3">
           <span className="text-xs text-zinc-500">Reliability:</span>
-          <div className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-700">
+          <div className="h-2 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
             <div
               className={`h-full rounded-full transition-all duration-500 ${
                 level.reliability > 80 ? 'bg-green-500' : level.reliability > 50 ? 'bg-amber-500' : 'bg-red-500'
@@ -219,7 +219,7 @@ export const StructuredOutputSection: React.FC = () => {
               style={{ width: `${level.reliability}%` }}
             />
           </div>
-          <span className="font-mono text-xs font-bold text-zinc-300">{level.reliability}%</span>
+          <span className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300">{level.reliability}%</span>
         </div>
       </div>
 
@@ -233,8 +233,8 @@ export const StructuredOutputSection: React.FC = () => {
             onClick={() => handleTechClick(t.id)}
             className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
               t.id === activeTechnique
-                ? 'bg-zinc-700 text-zinc-100'
-                : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
             }`}
           >
             {t.label}
@@ -243,8 +243,8 @@ export const StructuredOutputSection: React.FC = () => {
       </div>
 
       <div className="space-y-3">
-        <div className="rounded-md bg-zinc-800 p-3">
-          <p className="text-sm text-zinc-300">{tech.description}</p>
+        <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">{tech.description}</p>
         </div>
         <CodeBlock code={tech.code} language={tech.language} title={tech.filename} />
       </div>

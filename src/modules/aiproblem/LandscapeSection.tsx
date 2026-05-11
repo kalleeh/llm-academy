@@ -16,7 +16,7 @@ const LEVELS: AILevel[] = [
   {
     id: 'ai',
     label: 'Artificial Intelligence',
-    color: 'bg-blue-500/10 border-blue-500/30',
+    color: 'bg-blue-50 dark:bg-blue-500/10 border-blue-400 dark:border-blue-500/30',
     ringColor: 'ring-blue-500/50',
     definition:
       'Any system that performs tasks normally requiring human intelligence — reasoning, planning, perception, or decision-making.',
@@ -30,7 +30,7 @@ const LEVELS: AILevel[] = [
   {
     id: 'ml',
     label: 'Machine Learning',
-    color: 'bg-emerald-500/10 border-emerald-500/30',
+    color: 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-400 dark:border-emerald-500/30',
     ringColor: 'ring-emerald-500/50',
     definition:
       'Systems that learn patterns from data instead of being explicitly programmed. They improve with more data.',
@@ -44,7 +44,7 @@ const LEVELS: AILevel[] = [
   {
     id: 'dl',
     label: 'Deep Learning',
-    color: 'bg-purple-500/10 border-purple-500/30',
+    color: 'bg-purple-50 dark:bg-purple-500/10 border-purple-400 dark:border-purple-500/30',
     ringColor: 'ring-purple-500/50',
     definition:
       'ML using neural networks with many layers. Excels at learning from raw, unstructured data like images, audio, and text.',
@@ -58,7 +58,7 @@ const LEVELS: AILevel[] = [
   {
     id: 'llm',
     label: 'Large Language Models',
-    color: 'bg-amber-500/10 border-amber-500/30',
+    color: 'bg-amber-50 dark:bg-amber-500/10 border-amber-400 dark:border-amber-500/30',
     ringColor: 'ring-amber-500/50',
     definition:
       'Massive transformer models trained on internet-scale text. They predict the next token and emerge with reasoning, coding, and conversation abilities.',
@@ -82,13 +82,13 @@ const OVERLAYS: OverlayBadge[] = [
   {
     label: 'Generative AI',
     description: 'Models that create new content (text, images, audio, code). Spans Deep Learning and LLMs.',
-    color: 'bg-pink-500/20 border-pink-500/40 text-pink-300',
+    color: 'bg-pink-100 dark:bg-pink-500/20 border-pink-400 dark:border-pink-500/40 text-pink-700 dark:text-pink-300',
     position: 'top-2 right-2',
   },
   {
     label: 'Agentic AI',
     description: 'LLMs augmented with tools, memory, and planning — they take actions, not just generate text.',
-    color: 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300',
+    color: 'bg-cyan-100 dark:bg-cyan-500/20 border-cyan-400 dark:border-cyan-500/40 text-cyan-700 dark:text-cyan-300',
     position: 'top-2 left-2',
   },
 ]
@@ -113,8 +113,8 @@ export const LandscapeSection: React.FC = () => {
 
   return (
     <section aria-labelledby="landscape">
-      <h2 id="landscape" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="landscape" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Nested diagram */}
       <div className="relative mb-6">
@@ -133,20 +133,20 @@ export const LandscapeSection: React.FC = () => {
               aria-controls={`${level.id}-details`}
             >
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-semibold text-zinc-100">{level.label}</span>
+                <span className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{level.label}</span>
                 <span className="text-xs text-zinc-500">{expanded === level.id ? '▲' : '▼'}</span>
               </div>
             </button>
             {expanded === level.id && (
               <div
                 id={`${level.id}-details`}
-                className="mt-1 rounded-b-lg border border-t-0 border-zinc-700 bg-zinc-900/80 p-4"
+                className="mt-1 rounded-b-lg border border-t-0 border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 p-4"
               >
-                <p className="mb-3 text-sm leading-relaxed text-zinc-300">{level.definition}</p>
+                <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{level.definition}</p>
                 <ul className="space-y-1">
                   {level.examples.map(ex => (
-                    <li key={ex} className="flex items-start gap-2 text-sm text-zinc-400">
-                      <span className="mt-1 text-zinc-600">•</span>
+                    <li key={ex} className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+                      <span className="mt-1 text-zinc-500 dark:text-zinc-600">•</span>
                       {ex}
                     </li>
                   ))}
@@ -169,7 +169,7 @@ export const LandscapeSection: React.FC = () => {
               {o.label}
             </button>
             {activeOverlay === o.label && (
-              <p className="mt-2 max-w-md text-sm text-zinc-400">{o.description}</p>
+              <p className="mt-2 max-w-md text-sm text-zinc-600 dark:text-zinc-400">{o.description}</p>
             )}
           </div>
         ))}

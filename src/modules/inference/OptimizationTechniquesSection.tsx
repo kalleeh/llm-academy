@@ -78,8 +78,8 @@ export const OptimizationTechniquesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="optimization-techniques">
-      <h2 id="optimization-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="optimization-techniques" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Technique selector */}
       <div className="mb-4 flex flex-wrap gap-2">
@@ -90,7 +90,7 @@ export const OptimizationTechniquesSection: React.FC = () => {
             className={`rounded-md px-3 py-2 text-xs font-medium transition-colors ${
               activeTech === t.id
                 ? 'bg-zinc-100 text-zinc-900'
-                : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700'
             }`}
             aria-pressed={activeTech === t.id}
           >
@@ -100,13 +100,13 @@ export const OptimizationTechniquesSection: React.FC = () => {
       </div>
 
       {/* Detail card */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="font-mono text-sm font-bold text-zinc-100">{tech.name}</h3>
-        <p className="mt-1 text-xs text-zinc-400">{tech.short}</p>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-300">{tech.description}</p>
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{tech.name}</h3>
+        <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{tech.short}</p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{tech.description}</p>
 
         {/* ASCII visual */}
-        <div className="mt-4 rounded-md bg-zinc-950 p-3 font-mono text-xs text-zinc-400">
+        <div className="mt-4 rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs text-zinc-500 dark:text-zinc-400">
           {tech.visual.map((line, i) => (
             <div key={i}>{line}</div>
           ))}
@@ -120,26 +120,26 @@ export const OptimizationTechniquesSection: React.FC = () => {
           <div className="space-y-2">
             <div>
               <div className="mb-1 flex justify-between text-xs">
-                <span className="text-zinc-400">{tech.before.label}</span>
-                <span className={isLowerBetter ? 'text-red-400' : 'text-zinc-300'}>
+                <span className="text-zinc-500 dark:text-zinc-400">{tech.before.label}</span>
+                <span className={isLowerBetter ? 'text-red-700 dark:text-red-400' : 'text-zinc-700 dark:text-zinc-300'}>
                   {tech.before.value} {tech.unit}
                 </span>
               </div>
-              <div className="h-5 w-full overflow-hidden rounded bg-zinc-800">
+              <div className="h-5 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                 <div
-                  className={`h-full rounded transition-all duration-500 ${isLowerBetter ? 'bg-red-500/60' : 'bg-zinc-600'}`}
+                  className={`h-full rounded transition-all duration-500 ${isLowerBetter ? 'bg-red-200 dark:bg-red-500/60' : 'bg-zinc-600'}`}
                   style={{ width: `${beforePct}%` }}
                 />
               </div>
             </div>
             <div>
               <div className="mb-1 flex justify-between text-xs">
-                <span className="text-zinc-400">{tech.after.label}</span>
-                <span className={isLowerBetter ? 'text-green-400' : 'text-green-400'}>
+                <span className="text-zinc-500 dark:text-zinc-400">{tech.after.label}</span>
+                <span className={isLowerBetter ? 'text-green-700 dark:text-green-400' : 'text-green-700 dark:text-green-400'}>
                   {tech.after.value} {tech.unit}
                 </span>
               </div>
-              <div className="h-5 w-full overflow-hidden rounded bg-zinc-800">
+              <div className="h-5 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                 <div
                   className="h-full rounded bg-green-500 transition-all duration-500"
                   style={{ width: `${afterPct}%` }}

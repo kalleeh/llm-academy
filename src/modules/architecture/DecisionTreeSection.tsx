@@ -84,19 +84,19 @@ export const DecisionTreeSection: React.FC = () => {
 
   return (
     <section aria-labelledby="decision-tree">
-      <h2 id="decision-tree" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="decision-tree" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         {/* Progress */}
         <div className="mb-6 flex items-center gap-2">
           {(['budget', 'finetune', 'result'] as const).map((s, i) => (
             <div key={s} className="flex items-center gap-2">
-              {i > 0 && <div className={`h-px w-8 ${currentStep === s || currentStep === 'result' ? 'bg-zinc-400' : 'bg-zinc-700'}`} />}
+              {i > 0 && <div className={`h-px w-8 ${currentStep === s || currentStep === 'result' ? 'bg-zinc-400' : 'bg-zinc-200 dark:bg-zinc-700'}`} />}
               <div className={`flex size-7 items-center justify-center rounded-full text-xs font-mono ${
                 currentStep === s ? 'bg-zinc-100 text-zinc-900' :
                 (s === 'budget' && state.budget) || (s === 'finetune' && state.finetune !== null) || s === 'result'
-                  ? 'bg-zinc-600 text-zinc-200' : 'bg-zinc-800 text-zinc-500'
+                  ? 'bg-zinc-600 text-zinc-800 dark:text-zinc-200' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
               }`}>
                 {i + 1}
               </div>
@@ -107,7 +107,7 @@ export const DecisionTreeSection: React.FC = () => {
         {/* Budget step */}
         {currentStep === 'budget' && (
           <div>
-            <p className="mb-4 text-sm font-semibold text-zinc-200">{c.p6}</p>
+            <p className="mb-4 text-sm font-semibold text-zinc-800 dark:text-zinc-200">{c.p6}</p>
             <div className="grid grid-cols-3 gap-3">
               {([
                 { value: 'low' as const, label: 'Low', desc: '1-2 consumer GPUs, <$1K' },
@@ -117,9 +117,9 @@ export const DecisionTreeSection: React.FC = () => {
                 <button
                   key={opt.value}
                   onClick={() => setBudget(opt.value)}
-                  className="rounded-lg border border-zinc-700 p-4 text-left transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                  className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                 >
-                  <p className="font-mono text-sm font-semibold text-zinc-200">{opt.label}</p>
+                  <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">{opt.label}</p>
                   <p className="mt-1 text-xs text-zinc-500">{opt.desc}</p>
                 </button>
               ))}
@@ -130,21 +130,21 @@ export const DecisionTreeSection: React.FC = () => {
         {/* Fine-tune step */}
         {currentStep === 'finetune' && (
           <div>
-            <p className="mb-1 text-xs text-zinc-500">Budget: <span className="text-zinc-300 capitalize">{state.budget}</span></p>
-            <p className="mb-4 text-sm font-semibold text-zinc-200">{c.p7}</p>
+            <p className="mb-1 text-xs text-zinc-500">Budget: <span className="text-zinc-700 dark:text-zinc-300 capitalize">{state.budget}</span></p>
+            <p className="mb-4 text-sm font-semibold text-zinc-800 dark:text-zinc-200">{c.p7}</p>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setFinetune(true)}
-                className="rounded-lg border border-zinc-700 p-4 text-left transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
               >
-                <p className="font-mono text-sm font-semibold text-zinc-200">Yes</p>
+                <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">Yes</p>
                 <p className="mt-1 text-xs text-zinc-500">{c.p8}</p>
               </button>
               <button
                 onClick={() => setFinetune(false)}
-                className="rounded-lg border border-zinc-700 p-4 text-left transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
               >
-                <p className="font-mono text-sm font-semibold text-zinc-200">No</p>
+                <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">No</p>
                 <p className="mt-1 text-xs text-zinc-500">{c.p9}</p>
               </button>
             </div>
@@ -155,22 +155,22 @@ export const DecisionTreeSection: React.FC = () => {
         {currentStep === 'result' && rec && (
           <div>
             <div className="mb-4 flex gap-4 text-xs text-zinc-500">
-              <span>Budget: <span className="text-zinc-300 capitalize">{state.budget}</span></span>
-              <span>Fine-tune: <span className="text-zinc-300">{state.finetune ? 'Yes' : 'No'}</span></span>
+              <span>Budget: <span className="text-zinc-700 dark:text-zinc-300 capitalize">{state.budget}</span></span>
+              <span>Fine-tune: <span className="text-zinc-700 dark:text-zinc-300">{state.finetune ? 'Yes' : 'No'}</span></span>
             </div>
 
-            <div className="mb-4 rounded-lg border border-green-500/30 bg-green-500/5 p-4">
-              <p className="text-xs text-green-400/70 uppercase">Recommendation</p>
-              <p className="mt-1 font-mono text-lg font-bold text-green-400">{rec.arch}</p>
-              <p className="mt-2 text-sm text-zinc-300">{rec.reasoning}</p>
+            <div className="mb-4 rounded-lg border border-green-400 dark:border-green-500/30 bg-green-50 dark:bg-green-500/5 p-4">
+              <p className="text-xs text-green-700 dark:text-green-400/70 uppercase">Recommendation</p>
+              <p className="mt-1 font-mono text-lg font-bold text-green-700 dark:text-green-400">{rec.arch}</p>
+              <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{rec.reasoning}</p>
               <p className="mt-2 text-xs text-zinc-500">
-                Examples: <span className="text-zinc-400">{rec.examples}</span>
+                Examples: <span className="text-zinc-500 dark:text-zinc-400">{rec.examples}</span>
               </p>
             </div>
 
             <button
               onClick={reset}
-              className="rounded-lg border border-zinc-700 px-4 py-2 text-sm text-zinc-400 transition-colors hover:border-zinc-500 hover:text-zinc-200"
+              className="rounded-lg border border-zinc-200 dark:border-zinc-700 px-4 py-2 text-sm text-zinc-500 dark:text-zinc-400 transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
             >
               ← Start Over
             </button>

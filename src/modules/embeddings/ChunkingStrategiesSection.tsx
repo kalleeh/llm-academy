@@ -22,12 +22,12 @@ Unsupervised learning finds hidden patterns in unlabeled data. Clustering groups
 Popular methods include K-means clustering, DBSCAN, PCA, and autoencoders. These are often used for customer segmentation, anomaly detection, and feature engineering.`
 
 const CHUNK_COLORS = [
-  'border-blue-500/40 bg-blue-500/10',
-  'border-green-500/40 bg-green-500/10',
-  'border-amber-500/40 bg-amber-500/10',
-  'border-purple-500/40 bg-purple-500/10',
-  'border-rose-500/40 bg-rose-500/10',
-  'border-cyan-500/40 bg-cyan-500/10',
+  'border-blue-400 dark:border-blue-500/40 bg-blue-50 dark:bg-blue-500/10',
+  'border-green-400 dark:border-green-500/40 bg-green-50 dark:bg-green-500/10',
+  'border-amber-400 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10',
+  'border-purple-400 dark:border-purple-500/40 bg-purple-50 dark:bg-purple-500/10',
+  'border-rose-400 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-500/10',
+  'border-cyan-400 dark:border-cyan-500/40 bg-cyan-50 dark:bg-cyan-500/10',
 ]
 
 function chunkFixed(text: string): string[] {
@@ -84,10 +84,10 @@ export const ChunkingStrategiesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="chunking-strategies">
-      <h2 id="chunking-strategies" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="chunking-strategies" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Documents are too long to embed as a single vector. You need to split them into{' '}
-        <strong className="text-zinc-100">chunks</strong> — but how you chunk dramatically affects
+        <strong className="text-zinc-900 dark:text-zinc-100">chunks</strong> — but how you chunk dramatically affects
         retrieval quality.
       </p>
 
@@ -99,8 +99,8 @@ export const ChunkingStrategiesSection: React.FC = () => {
             onClick={handleStrategy(s.id)}
             className={`rounded-md border px-4 py-2 text-left transition-all ${
               strategy === s.id
-                ? 'border-violet-500 bg-violet-500/10 text-violet-300'
-                : 'border-zinc-700 bg-zinc-900 text-zinc-400 hover:border-zinc-600'
+                ? 'border-violet-500 bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300'
+                : 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600'
             }`}
             aria-pressed={strategy === s.id}
           >
@@ -111,12 +111,12 @@ export const ChunkingStrategiesSection: React.FC = () => {
       </div>
 
       {/* Chunked document */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
             Document → {chunks.length} chunks
           </h3>
-          <span className="rounded-full bg-zinc-800 px-2.5 py-0.5 text-xs text-zinc-400">
+          <span className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2.5 py-0.5 text-xs text-zinc-600 dark:text-zinc-400">
             {strategy === 'fixed' ? 'Splits mid-sentence' : strategy === 'semantic' ? 'Respects paragraphs' : 'Respects structure'}
           </span>
         </div>
@@ -127,14 +127,14 @@ export const ChunkingStrategiesSection: React.FC = () => {
               className={`rounded-md border p-3 ${CHUNK_COLORS[i % CHUNK_COLORS.length]}`}
             >
               <div className="mb-1 flex items-center gap-2">
-                <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-xs font-bold text-zinc-400">
+                <span className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-xs font-bold text-zinc-600 dark:text-zinc-400">
                   Chunk {i + 1}
                 </span>
                 <span className="text-xs text-zinc-500">
                   ~{Math.round(chunk.split(/\s+/).length * 1.3)} tokens
                 </span>
               </div>
-              <p className="text-xs leading-relaxed text-zinc-300 whitespace-pre-line">
+              <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 whitespace-pre-line">
                 {chunk.length > 300 ? chunk.slice(0, 300) + '...' : chunk}
               </p>
             </div>
@@ -144,8 +144,8 @@ export const ChunkingStrategiesSection: React.FC = () => {
 
       {/* Best practices */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">Chunk Size Impact</h3>
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Chunk Size Impact</h3>
           <div className="space-y-2">
             {[
               { size: '128 tokens', retrieval: 'High precision, low context', bar: 40, color: 'bg-amber-500' },
@@ -155,10 +155,10 @@ export const ChunkingStrategiesSection: React.FC = () => {
             ].map(row => (
               <div key={row.size}>
                 <div className="mb-0.5 flex justify-between text-xs">
-                  <span className="text-zinc-400">{row.size}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{row.size}</span>
                   <span className="text-zinc-500">{row.retrieval}</span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                   <div className={`h-full rounded-full ${row.color}`} style={{ width: `${row.bar}%` }} />
                 </div>
               </div>
@@ -166,27 +166,27 @@ export const ChunkingStrategiesSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">Best Practices</h3>
-          <div className="space-y-2 text-xs text-zinc-300">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Best Practices</h3>
+          <div className="space-y-2 text-xs text-zinc-700 dark:text-zinc-300">
             <p>
-              <strong className="text-green-400">✓ 256-512 tokens</strong> — sweet spot for most
+              <strong className="text-green-700 dark:text-green-400">✓ 256-512 tokens</strong> — sweet spot for most
               retrieval tasks
             </p>
             <p>
-              <strong className="text-green-400">✓ 10-15% overlap</strong> — prevents losing context
+              <strong className="text-green-700 dark:text-green-400">✓ 10-15% overlap</strong> — prevents losing context
               at chunk boundaries
             </p>
             <p>
-              <strong className="text-green-400">✓ Semantic chunking</strong> — produces{' '}
-              <strong className="text-zinc-100">20-40% better retrieval precision</strong> than fixed-size
+              <strong className="text-green-700 dark:text-green-400">✓ Semantic chunking</strong> — produces{' '}
+              <strong className="text-zinc-900 dark:text-zinc-100">20-40% better retrieval precision</strong> than fixed-size
             </p>
             <p>
-              <strong className="text-green-400">✓ Recursive splitting</strong> — best for
+              <strong className="text-green-700 dark:text-green-400">✓ Recursive splitting</strong> — best for
               structured documents (docs, code, markdown)
             </p>
             <p>
-              <strong className="text-amber-400"><Icon name="warning" /> Include metadata</strong> — attach source, page
+              <strong className="text-amber-700 dark:text-amber-400"><Icon name="warning" /> Include metadata</strong> — attach source, page
               number, section title to each chunk
             </p>
           </div>

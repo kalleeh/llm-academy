@@ -13,35 +13,35 @@ const LOOP_STAGES: { label: string; icon: IconName; active: string; desc: string
   {
     label: 'trainLoadBatch',
     icon: 'box',
-    active: 'bg-blue-500/20 border-blue-500/50 text-blue-300 ring-2 ring-blue-500/30',
+    active: 'bg-blue-100 dark:bg-blue-500/20 border-blue-400 dark:border-blue-500/50 text-blue-700 dark:text-blue-300 ring-2 ring-blue-500/30',
     desc: 'Grab a chunk of text (e.g. 4096 tokens) from the training data. This is one "batch" the model will learn from.',
     detail: 'batch_size=4096 tokens from OpenWebText',
   },
   {
     label: 'trainForwardPass',
     icon: 'arrow-right',
-    active: 'bg-purple-500/20 border-purple-500/50 text-purple-300 ring-2 ring-purple-500/30',
+    active: 'bg-purple-100 dark:bg-purple-500/20 border-purple-400 dark:border-purple-500/50 text-purple-700 dark:text-purple-300 ring-2 ring-purple-500/30',
     desc: 'Feed the tokens through all 32 layers. Each layer transforms the data — attention, feed-forward, normalize. The model predicts the next token at each position.',
     detail: '32 layers × (attention → FFN → norm)',
   },
   {
     label: 'trainComputeLoss',
     icon: 'chart-down',
-    active: 'bg-red-500/20 border-red-500/50 text-red-300 ring-2 ring-red-500/30',
+    active: 'bg-red-100 dark:bg-red-500/20 border-red-400 dark:border-red-500/50 text-red-700 dark:text-red-300 ring-2 ring-red-500/30',
     desc: 'Compare predictions to the actual next tokens. The "loss" measures how wrong the model was. High loss = bad predictions.',
     detail: 'cross_entropy(predicted, actual) → 3.42',
   },
   {
     label: 'trainBackwardPass',
     icon: 'arrow-left',
-    active: 'bg-amber-500/20 border-amber-500/50 text-amber-300 ring-2 ring-amber-500/30',
+    active: 'bg-amber-100 dark:bg-amber-500/20 border-amber-400 dark:border-amber-500/50 text-amber-700 dark:text-amber-300 ring-2 ring-amber-500/30',
     desc: 'Calculate gradients — for each of the billions of weights, figure out which direction to nudge it to reduce the loss. This is backpropagation.',
     detail: '∂loss/∂weight for all parameters',
   },
   {
     label: 'trainUpdateWeights',
     icon: 'wrench',
-    active: 'bg-green-500/20 border-green-500/50 text-green-300 ring-2 ring-green-500/30',
+    active: 'bg-green-100 dark:bg-green-500/20 border-green-400 dark:border-green-500/50 text-green-700 dark:text-green-300 ring-2 ring-green-500/30',
     desc: 'Nudge every weight slightly in the direction that reduces loss. The learning rate controls how big each nudge is.',
     detail: 'w = w - lr × gradient (lr=1e-4)',
   },
@@ -86,11 +86,11 @@ function TrainingLoopViz() {
   }
 
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-900 overflow-hidden">
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-5 py-3">
+      <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
         <div>
-          <h4 className="font-mono text-sm font-semibold text-zinc-100">The Training Loop</h4>
+          <h4 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The Training Loop</h4>
           <p className="text-xs text-zinc-500">{{ en: `Click a stage or animate the full cycle`, sv: `Klicka på ett steg eller animera hela cykeln`, ko: `단계를 클릭하거나 전체 사이클을 애니메이션` }[lang] ?? `Click a stage or animate the full cycle`}</p>
         </div>
         <div className="flex items-center gap-3">
@@ -104,7 +104,7 @@ function TrainingLoopViz() {
             className={`rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
               isRunning
                 ? 'bg-amber-600 text-white hover:bg-amber-500'
-                : 'bg-zinc-700 text-zinc-200 hover:bg-zinc-600'
+                : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-600'
             }`}
           >
             {isRunning ? '⏸ Pause' : '▶ Animate'}
@@ -126,8 +126,8 @@ function TrainingLoopViz() {
                   isActive
                     ? stage.active
                     : isPast
-                      ? 'border-zinc-700 bg-zinc-800/80 text-zinc-400'
-                      : 'border-zinc-800 bg-zinc-900 text-zinc-600 hover:border-zinc-700 hover:text-zinc-400'
+                      ? 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400'
+                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-600 hover:border-zinc-700 hover:text-zinc-400'
                 }`}
               >
                 <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-125' : ''}`}>
@@ -140,7 +140,7 @@ function TrainingLoopViz() {
                 {/* Arrow connector */}
                 {i < LOOP_STAGES.length - 1 && (
                   <span className={`absolute -right-2 top-1/2 z-10 -translate-y-1/2 text-xs transition-colors ${
-                    isActive ? 'text-zinc-300' : 'text-zinc-700'
+                    isActive ? 'text-zinc-700 dark:text-zinc-300' : 'text-zinc-700'
                   }`}>›</span>
                 )}
               </button>
@@ -165,8 +165,8 @@ function TrainingLoopViz() {
               className="transition-colors duration-300"
             />
           </svg>
-          <span className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded bg-zinc-900 px-2 font-mono text-[9px] transition-colors duration-300 ${
-            activeStage === LOOP_STAGES.length - 1 ? 'text-amber-400' : 'text-zinc-600'
+          <span className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded bg-white dark:bg-zinc-900 px-2 font-mono text-[9px] transition-colors duration-300 ${
+            activeStage === LOOP_STAGES.length - 1 ? 'text-amber-700 dark:text-amber-400' : 'text-zinc-500 dark:text-zinc-600'
           }`}>
             repeat ×1,000,000
           </span>
@@ -174,11 +174,11 @@ function TrainingLoopViz() {
       </div>
 
       {/* Description panel — fixed height to prevent jumps */}
-      <div className="border-t border-zinc-700 bg-zinc-800/50 px-5 py-3 min-h-[4.5rem]">
+      <div className="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-5 py-3 min-h-[4.5rem]">
         {activeStage >= 0 ? (
-          <p className="text-sm leading-relaxed text-zinc-300">
+          <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             <span className="mr-1.5"><Icon name={LOOP_STAGES[activeStage].icon} /></span>
-            <strong className="text-zinc-100">{LOOP_STAGES[activeStage].label}:</strong>{' '}
+            <strong className="text-zinc-900 dark:text-zinc-100">{LOOP_STAGES[activeStage].label}:</strong>{' '}
             {LOOP_STAGES[activeStage].desc}
           </p>
         ) : (
@@ -205,10 +205,10 @@ function LossCurve({ progress }: { progress: number }) {
   const lastLoss = (10.5 * Math.exp(-3 * ((numPoints - 1) / 49)) + 1.8).toFixed(2)
 
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-medium text-zinc-400">Training Loss</span>
-        <span className="font-mono text-xs text-amber-400">Loss: {lastLoss}</span>
+        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">Training Loss</span>
+        <span className="font-mono text-xs text-amber-700 dark:text-amber-400">Loss: {lastLoss}</span>
       </div>
       <svg viewBox="0 0 400 220" className="w-full" role="img" aria-label="Training loss curve">
         <line x1="20" y1="10" x2="20" y2="200" stroke="#52525b" strokeWidth="1" />
@@ -343,8 +343,8 @@ export const TrainingSection2: React.FC = () => {
 
   return (
     <section className="space-y-6" aria-labelledby="section-2-heading">
-      <h3 id="section-2-heading" className="font-mono text-xl font-bold text-zinc-100">{c.title}</h3>
-      <p className="text-zinc-400 leading-relaxed">{c.p3}<code className="text-amber-300">--depth</code> is
+      <h3 id="section-2-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h3>
+      <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">{c.p3}<code className="text-amber-700 dark:text-amber-300">--depth</code> is
         the only dial you set.
       </p>
 
@@ -358,8 +358,8 @@ export const TrainingSection2: React.FC = () => {
       {/* Connected workspace: terminal + filesystem + loss curve */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-zinc-400"><Icon name="terminal" /> nanochat Speedrun — GPT-2 for ~$73</span>
-          <span className="h-px flex-1 bg-zinc-800" />
+          <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400"><Icon name="terminal" /> nanochat Speedrun — GPT-2 for ~$73</span>
+          <span className="h-px flex-1 bg-zinc-100 dark:bg-zinc-800" />
         </div>
         <div className="grid gap-3 lg:grid-cols-2">
           {/* Left: terminal */}
@@ -370,7 +370,7 @@ export const TrainingSection2: React.FC = () => {
           />
 
           {/* Right: loss curve + filesystem — fixed height matching terminal */}
-          <div className="flex h-80 flex-col gap-2 overflow-y-auto rounded-lg border border-zinc-700 p-2">
+          <div className="flex h-80 flex-col gap-2 overflow-y-auto rounded-lg border border-zinc-200 dark:border-zinc-700 p-2">
             <LossCurve progress={progress} />
             <FileExplorer tree={currentTree} title="~/project — filesystem" />
           </div>

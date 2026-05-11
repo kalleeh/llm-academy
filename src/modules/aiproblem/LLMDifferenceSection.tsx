@@ -74,25 +74,25 @@ export const LLMDifferenceSection: React.FC = () => {
 
   return (
     <section aria-labelledby="llm-difference">
-      <h2 id="llm-difference" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="llm-difference" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Comparison table */}
-      <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">
+      <div className="mb-8 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-sm" role="table">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-400">Dimension</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-emerald-400">Traditional ML</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-amber-400">LLMs</th>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Dimension</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-emerald-700 dark:text-emerald-400">Traditional ML</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-amber-700 dark:text-amber-400">LLMs</th>
             </tr>
           </thead>
           <tbody>
             {cOMPARISONT.map(row => (
-              <tr key={row.dimension} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                <td className="px-4 py-3 font-medium text-zinc-200">{row.dimension}</td>
-                <td className="px-4 py-3 text-zinc-400">{row.ml}</td>
-                <td className="px-4 py-3 text-zinc-400">{row.llm}</td>
+              <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/50">
+                <td className="px-4 py-3 font-medium text-zinc-800 dark:text-zinc-200">{row.dimension}</td>
+                <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{row.ml}</td>
+                <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{row.llm}</td>
               </tr>
             ))}
           </tbody>
@@ -100,43 +100,43 @@ export const LLMDifferenceSection: React.FC = () => {
       </div>
 
       {/* Interactive toggle: same problem, two approaches */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-6 py-4">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">{c.p4}</h3>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.p4}</h3>
           <button
             onClick={toggle}
-            className="flex items-center gap-2 rounded-full border border-zinc-600 bg-zinc-700 px-3 py-1 text-xs text-zinc-200 transition-colors hover:bg-zinc-600"
+            className="flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-600 bg-zinc-200 dark:bg-zinc-700 px-3 py-1 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-600"
             aria-label={`Switch to ${showLLM ? 'ML' : 'LLM'} approach`}
           >
-            <span className={showLLM ? 'text-zinc-500' : 'text-emerald-400'}>ML</span>
-            <span className="text-zinc-600">/</span>
-            <span className={showLLM ? 'text-amber-400' : 'text-zinc-500'}>LLM</span>
+            <span className={showLLM ? 'text-zinc-500' : 'text-emerald-700 dark:text-emerald-400'}>ML</span>
+            <span className="text-zinc-500 dark:text-zinc-600">/</span>
+            <span className={showLLM ? 'text-amber-700 dark:text-amber-400' : 'text-zinc-500'}>LLM</span>
           </button>
         </div>
         <div className="p-6">
-          <h4 className="mb-3 font-mono text-sm font-semibold text-zinc-200">{active.title}</h4>
+          <h4 className="mb-3 font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">{active.title}</h4>
           <div className="mb-4 space-y-1">
             {active.steps.map(step => (
-              <p key={step} className="text-sm text-zinc-400">{step}</p>
+              <p key={step} className="text-sm text-zinc-600 dark:text-zinc-400">{step}</p>
             ))}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="mb-2 text-xs font-semibold text-emerald-400 uppercase">Pros</p>
+              <p className="mb-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400 uppercase">Pros</p>
               <ul className="space-y-1">
                 {active.pros.map(p => (
-                  <li key={p} className="flex items-start gap-2 text-xs text-zinc-400">
-                    <span className="text-emerald-500">✓</span> {p}
+                  <li key={p} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                    <span className="text-emerald-700 dark:text-emerald-500">✓</span> {p}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="mb-2 text-xs font-semibold text-red-400 uppercase">Cons</p>
+              <p className="mb-2 text-xs font-semibold text-red-700 dark:text-red-400 uppercase">Cons</p>
               <ul className="space-y-1">
                 {active.cons.map(c => (
-                  <li key={c} className="flex items-start gap-2 text-xs text-zinc-400">
-                    <span className="text-red-500">✗</span> {c}
+                  <li key={c} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                    <span className="text-red-700 dark:text-red-500">✗</span> {c}
                   </li>
                 ))}
               </ul>
@@ -147,23 +147,23 @@ export const LLMDifferenceSection: React.FC = () => {
 
       {/* When LLMs are overkill / when ML is better */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
-          <h3 className="mb-3 font-mono text-sm font-semibold text-amber-300">When LLMs Are Overkill</h3>
+        <div className="rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-4">
+          <h3 className="mb-3 font-mono text-sm font-semibold text-amber-700 dark:text-amber-300">When LLMs Are Overkill</h3>
           <ul className="space-y-2">
             {oVERKILL_CASEST.map(c => (
               <li key={c.label}>
-                <p className="text-sm font-medium text-zinc-200">{c.label}</p>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{c.label}</p>
                 <p className="text-xs text-zinc-500">{c.detail}</p>
               </li>
             ))}
           </ul>
         </div>
-        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <h3 className="mb-3 font-mono text-sm font-semibold text-emerald-300">When Classical ML Wins</h3>
+        <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 p-4">
+          <h3 className="mb-3 font-mono text-sm font-semibold text-emerald-700 dark:text-emerald-300">When Classical ML Wins</h3>
           <ul className="space-y-2">
             {mL_BETTER_CASEST.map(c => (
               <li key={c.label}>
-                <p className="text-sm font-medium text-zinc-200">{c.label}</p>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{c.label}</p>
                 <p className="text-xs text-zinc-500">{c.detail}</p>
               </li>
             ))}

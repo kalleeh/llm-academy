@@ -77,24 +77,24 @@ export const AttentionVariantsSection: React.FC = () => {
   const headVisual = useMemo(() => {
     const totalHeads = 8
     if (active === 'mha') {
-      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: i, color: 'bg-blue-500/30 border-blue-500/40' }))
+      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: i, color: 'bg-blue-200 dark:bg-blue-500/30 border-blue-400 dark:border-blue-500/40' }))
     }
     if (active === 'gqa') {
-      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: Math.floor(i / 2), color: 'bg-green-500/30 border-green-500/40' }))
+      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: Math.floor(i / 2), color: 'bg-green-200 dark:bg-green-500/30 border-green-400 dark:border-green-500/40' }))
     }
     if (active === 'mqa') {
-      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: 0, color: 'bg-amber-500/30 border-amber-500/40' }))
+      return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: 0, color: 'bg-amber-200 dark:bg-amber-500/30 border-amber-400 dark:border-amber-500/40' }))
     }
     // mla
-    return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: -1, color: 'bg-purple-500/30 border-purple-500/40' }))
+    return Array.from({ length: totalHeads }).map((_, i) => ({ q: i, kv: -1, color: 'bg-purple-200 dark:bg-purple-500/30 border-purple-400 dark:border-purple-500/40' }))
   }, [active])
 
   const kvCount = active === 'mla' ? 1 : new Set(headVisual.map(h => h.kv)).size
 
   return (
     <section aria-labelledby="attention-variants">
-      <h2 id="attention-variants" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="attention-variants" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Variant selector */}
       <div className="mb-6 flex flex-wrap gap-2">
@@ -104,8 +104,8 @@ export const AttentionVariantsSection: React.FC = () => {
             onClick={() => selectVariant(v)}
             className={`rounded-lg border px-4 py-2 text-sm transition-colors ${
               active === v
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600'
             }`}
           >
             {VARIANTS[v].label}
@@ -115,9 +115,9 @@ export const AttentionVariantsSection: React.FC = () => {
       </div>
 
       {/* Visual */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
-        <p className="mb-1 font-mono text-sm font-semibold text-zinc-200">{info.full}</p>
-        <p className="mb-4 text-sm text-zinc-400">{tLabel(lang, info.description)}</p>
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
+        <p className="mb-1 font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">{info.full}</p>
+        <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{tLabel(lang, info.description)}</p>
 
         {/* Head diagram */}
         <div className="mb-4">
@@ -125,9 +125,9 @@ export const AttentionVariantsSection: React.FC = () => {
           <div className="flex gap-2">
             {headVisual.map((h, i) => (
               <div key={i} className={`flex-1 rounded border p-2 text-center text-xs ${h.color}`}>
-                <div className="text-zinc-300">Q{h.q}</div>
-                <div className="my-1 text-zinc-600">↓</div>
-                <div className="text-zinc-400">
+                <div className="text-zinc-700 dark:text-zinc-300">Q{h.q}</div>
+                <div className="my-1 text-zinc-500 dark:text-zinc-600">↓</div>
+                <div className="text-zinc-500 dark:text-zinc-400">
                   {active === 'mla' ? 'Latent' : `KV${h.kv}`}
                 </div>
               </div>
@@ -145,10 +145,10 @@ export const AttentionVariantsSection: React.FC = () => {
         <div className="space-y-2">
           {VARIANT_KEYS.map(v => (
             <div key={v} className="flex items-center gap-3">
-              <span className={`w-10 text-right font-mono text-xs ${v === active ? 'text-zinc-100' : 'text-zinc-500'}`}>
+              <span className={`w-10 text-right font-mono text-xs ${v === active ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'}`}>
                 {VARIANTS[v].label}
               </span>
-              <div className="h-4 flex-1 overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-4 flex-1 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${
                     v === active ? 'bg-zinc-300' : 'bg-zinc-600'
@@ -163,10 +163,10 @@ export const AttentionVariantsSection: React.FC = () => {
       </div>
 
       {/* Tradeoff table */}
-      <div className="overflow-x-auto rounded-lg border border-zinc-700">
+      <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800 text-xs text-zinc-500 uppercase">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-500 uppercase">
               <th className="px-4 py-2">Variant</th>
               <th className="px-4 py-2">KV Heads</th>
               <th className="px-4 py-2">Cache Size</th>
@@ -177,12 +177,12 @@ export const AttentionVariantsSection: React.FC = () => {
           </thead>
           <tbody>
             {VARIANT_KEYS.map(v => (
-              <tr key={v} className={`border-b border-zinc-800 ${v === active ? 'bg-zinc-800/50' : ''}`}>
-                <td className="px-4 py-2 font-mono font-medium text-zinc-200">{VARIANTS[v].label}</td>
-                <td className="px-4 py-2 text-zinc-400">{VARIANTS[v].kvHeads}</td>
-                <td className="px-4 py-2 font-mono text-zinc-300">{VARIANTS[v].kvCache}</td>
-                <td className="px-4 py-2 text-zinc-400">{VARIANTS[v].speed}</td>
-                <td className="px-4 py-2 text-zinc-400">{VARIANTS[v].quality}</td>
+              <tr key={v} className={`border-b border-zinc-200 dark:border-zinc-800 ${v === active ? 'bg-zinc-100 dark:bg-zinc-800/50' : ''}`}>
+                <td className="px-4 py-2 font-mono font-medium text-zinc-800 dark:text-zinc-200">{VARIANTS[v].label}</td>
+                <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">{VARIANTS[v].kvHeads}</td>
+                <td className="px-4 py-2 font-mono text-zinc-700 dark:text-zinc-300">{VARIANTS[v].kvCache}</td>
+                <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">{VARIANTS[v].speed}</td>
+                <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">{VARIANTS[v].quality}</td>
                 <td className="px-4 py-2 text-zinc-500">{VARIANTS[v].usedBy}</td>
               </tr>
             ))}

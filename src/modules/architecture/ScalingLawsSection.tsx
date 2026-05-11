@@ -37,21 +37,21 @@ export const ScalingLawsSection: React.FC = () => {
 
   return (
     <section aria-labelledby="scaling-laws">
-      <h2 id="scaling-laws" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
-        The <strong className="text-zinc-100">Chinchilla scaling law</strong> (Hoffmann et al., 2022)
+      <h2 id="scaling-laws" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        The <strong className="text-zinc-900 dark:text-zinc-100">Chinchilla scaling law</strong> (Hoffmann et al., 2022)
         showed that for a given compute budget, there&apos;s an optimal balance between model size
         and training data. The rule of thumb: train on{' '}
-        <strong className="text-zinc-100">~20 tokens per parameter</strong>.
+        <strong className="text-zinc-900 dark:text-zinc-100">~20 tokens per parameter</strong>.
       </p>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Interactive slider */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         <p className="mb-4 font-mono text-xs text-zinc-500 uppercase">Compute Budget Explorer</p>
 
-        <label htmlFor="budget-slider" className="mb-2 block text-sm text-zinc-400">
-          Compute budget: <span className="font-mono text-zinc-100">{step.label} FLOPs</span>
+        <label htmlFor="budget-slider" className="mb-2 block text-sm text-zinc-500 dark:text-zinc-400">
+          Compute budget: <span className="font-mono text-zinc-900 dark:text-zinc-100">{step.label} FLOPs</span>
         </label>
         <input
           id="budget-slider"
@@ -65,7 +65,7 @@ export const ScalingLawsSection: React.FC = () => {
         />
 
         {/* Visual bar */}
-        <div className="mb-4 h-3 w-full overflow-hidden rounded-full bg-zinc-800">
+        <div className="mb-4 h-3 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
           <div
             className="h-full rounded-full bg-gradient-to-r from-zinc-600 to-zinc-400 transition-all duration-300"
             style={{ width: `${barWidth}%` }}
@@ -73,26 +73,26 @@ export const ScalingLawsSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-4">
-          <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-4 text-center">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 p-4 text-center">
             <p className="text-xs text-zinc-500 uppercase">Optimal Model Size</p>
-            <p className="mt-1 font-mono text-lg font-bold text-zinc-100">{step.params}</p>
+            <p className="mt-1 font-mono text-lg font-bold text-zinc-900 dark:text-zinc-100">{step.params}</p>
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-4 text-center">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 p-4 text-center">
             <p className="text-xs text-zinc-500 uppercase">Optimal Tokens</p>
-            <p className="mt-1 font-mono text-lg font-bold text-zinc-100">{step.tokens}</p>
+            <p className="mt-1 font-mono text-lg font-bold text-zinc-900 dark:text-zinc-100">{step.tokens}</p>
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-4 text-center">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 p-4 text-center">
             <p className="text-xs text-zinc-500 uppercase">Scale</p>
-            <p className="mt-1 text-sm text-zinc-300">{tLabel(lang, step.note)}</p>
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{tLabel(lang, step.note)}</p>
           </div>
         </div>
       </div>
 
       {/* DeepSeek challenge */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="mb-2 text-sm font-semibold text-zinc-200">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="mb-2 text-sm font-semibold text-zinc-800 dark:text-zinc-200">
           <Icon name="microscope" />{c.p8}</p>
-        <p className="text-sm leading-relaxed text-zinc-400">{c.p9}<strong className="text-zinc-300">14.8T tokens</strong> —
+        <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{c.p9}<strong className="text-zinc-700 dark:text-zinc-300">14.8T tokens</strong> —
           far beyond the Chinchilla-optimal ratio for its active parameter count. MoE architectures
           break the scaling law assumptions because the &ldquo;effective model size&rdquo; is ambiguous:
           total params store knowledge, but active params determine compute cost. DeepSeek showed you
@@ -100,13 +100,13 @@ export const ScalingLawsSection: React.FC = () => {
           full parameter space efficiently.
         </p>
         <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-          <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+          <div className="rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3">
             <p className="text-zinc-500">{c.p7}</p>
-            <p className="font-mono text-zinc-300">~740B tokens</p>
+            <p className="font-mono text-zinc-700 dark:text-zinc-300">~740B tokens</p>
           </div>
-          <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+          <div className="rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3">
             <p className="text-zinc-500">DeepSeek V3 actual training</p>
-            <p className="font-mono text-zinc-300">14.8T tokens (20× more)</p>
+            <p className="font-mono text-zinc-700 dark:text-zinc-300">14.8T tokens (20× more)</p>
           </div>
         </div>
       </div>

@@ -37,14 +37,14 @@ export const CleaningPipelineSection: React.FC = () => {
 
   return (
     <section aria-labelledby="cleaning-pipeline">
-      <h2 id="cleaning-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
-      <div className="mb-4 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-        <div className="mb-2 flex items-center justify-between text-xs text-zinc-400">
+      <h2 id="cleaning-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <div className="mb-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+        <div className="mb-2 flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
           <span>Data remaining</span>
-          <span className="font-mono text-zinc-200">{currentSize} TB / {MAX_TB} TB</span>
+          <span className="font-mono text-zinc-800 dark:text-zinc-200">{currentSize} TB / {MAX_TB} TB</span>
         </div>
-        <div className="h-6 w-full overflow-hidden rounded bg-zinc-800">
+        <div className="h-6 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
           <div
             className="flex h-full items-center justify-end rounded bg-gradient-to-r from-emerald-600 to-emerald-400 pr-2 transition-all duration-700"
             style={{ width: `${(currentSize / MAX_TB) * 100}%` }}
@@ -55,7 +55,7 @@ export const CleaningPipelineSection: React.FC = () => {
         </div>
         <div className="mt-2 flex justify-between text-xs text-zinc-500">
           {sTEPST.map((s, i) => (
-            <span key={s.sizeLabel} className={i <= executedStep ? 'text-emerald-400' : ''}>{s.sizeLabel}</span>
+            <span key={s.sizeLabel} className={i <= executedStep ? 'text-emerald-700 dark:text-emerald-400' : ''}>{s.sizeLabel}</span>
           ))}
         </div>
       </div>
@@ -66,19 +66,19 @@ export const CleaningPipelineSection: React.FC = () => {
         modelAnswer="Quality for LLM training data isn't about whether the content is 'good writing' in a literary sense. It's about whether the text teaches the model useful language patterns. High-quality pages have coherent, informative prose — articles, documentation, educational content, well-written discussions. Low-quality pages include SEO-stuffed keyword spam, auto-generated product listings, cookie-cutter boilerplate, pages that are mostly navigation menus or ads, and text that's garbled or machine-translated poorly. The quality filter (often using a KenLM perplexity score) essentially asks: 'Does this text look like it was written by a competent human for other humans to read?' Pages with very high perplexity (surprising/random word patterns) get filtered out."
       />
 
-      <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="mb-2 text-sm font-medium text-zinc-200">
+      <div className="mt-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="mb-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">
           <Icon name="box" /> How nanochat handles this
         </p>
-        <p className="text-sm leading-relaxed text-zinc-400">
+        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           In{' '}
-          <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
+          <a href="https://github.com/karpathy/nanochat" target="_blank" rel="noopener noreferrer" className="text-amber-700 dark:text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
             nanochat
           </a>
-          , the data pipeline is split into two files: <code className="text-amber-300">dataset.py</code>{' '}
-          downloads and tokenizes data into binary shards, and <code className="text-amber-300">dataloader.py</code>{' '}
+          , the data pipeline is split into two files: <code className="text-amber-700 dark:text-amber-300">dataset.py</code>{' '}
+          downloads and tokenizes data into binary shards, and <code className="text-amber-700 dark:text-amber-300">dataloader.py</code>{' '}
           streams those shards during training with distributed shuffling. The default dataset is{' '}
-          <strong className="text-zinc-200">NVIDIA ClimbMix</strong> — a curated, pre-cleaned web corpus
+          <strong className="text-zinc-800 dark:text-zinc-200">NVIDIA ClimbMix</strong> — a curated, pre-cleaned web corpus
           that already went through quality filtering and deduplication similar to the pipeline above.
           This is why nanochat can skip straight to training: the hard data work is already done.
         </p>

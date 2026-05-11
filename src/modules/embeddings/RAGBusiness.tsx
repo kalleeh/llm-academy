@@ -3,10 +3,10 @@ import { SelfExplain } from '../../components/SelfExplain'
 import { useT } from '../../i18n'
 
 const RAG_STEPS = [
-  { type: 'user', label: 'You ask', content: 'What\'s our return policy for enterprise customers?', color: 'border-blue-500/30 bg-blue-500/5', badge: 'bg-blue-500/20 text-blue-300' },
-  { type: 'search', label: 'AI searches your docs', content: null, docs: [{ name: 'Enterprise Terms of Service v4.2', match: '96%', section: 'Section 7: Returns & Refunds' }, { name: 'Customer FAQ - Returns', match: '82%', section: 'Enterprise tier exceptions' }], color: 'border-purple-500/30 bg-purple-500/5', badge: 'bg-purple-500/20 text-purple-300' },
-  { type: 'read', label: 'AI reads the relevant sections', content: '"Enterprise customers may request a full refund within 60 calendar days..." — Enterprise ToS v4.2, Section 7.1', color: 'border-amber-500/30 bg-amber-500/5', badge: 'bg-amber-500/20 text-amber-300' },
-  { type: 'answer', label: 'AI answers with sources', content: 'Enterprise customers have a 60-day full refund window. Contact your account manager — refunds are processed within 10 business days.\n\nSource: Enterprise Terms of Service v4.2, Section 7.1', color: 'border-emerald-500/30 bg-emerald-500/5', badge: 'bg-emerald-500/20 text-emerald-300' },
+  { type: 'user', label: 'You ask', content: 'What\'s our return policy for enterprise customers?', color: 'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5', badge: 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300' },
+  { type: 'search', label: 'AI searches your docs', content: null, docs: [{ name: 'Enterprise Terms of Service v4.2', match: '96%', section: 'Section 7: Returns & Refunds' }, { name: 'Customer FAQ - Returns', match: '82%', section: 'Enterprise tier exceptions' }], color: 'border-purple-400 dark:border-purple-500/30 bg-purple-50 dark:bg-purple-500/5', badge: 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300' },
+  { type: 'read', label: 'AI reads the relevant sections', content: '"Enterprise customers may request a full refund within 60 calendar days..." — Enterprise ToS v4.2, Section 7.1', color: 'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5', badge: 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300' },
+  { type: 'answer', label: 'AI answers with sources', content: 'Enterprise customers have a 60-day full refund window. Contact your account manager — refunds are processed within 10 business days.\n\nSource: Enterprise Terms of Service v4.2, Section 7.1', color: 'border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5', badge: 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300' },
 ]
 
 const EN = {
@@ -37,64 +37,64 @@ export const RAGBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="rag-biz">
-      <h2 id="rag-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="rag-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-          <p className="mb-1 text-xs font-medium text-zinc-100">{c.ragMeansTitle}</p>
-          <p className="text-xs text-zinc-400">{c.ragMeansText}</p>
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+          <p className="mb-1 text-xs font-medium text-zinc-900 dark:text-zinc-100">{c.ragMeansTitle}</p>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">{c.ragMeansText}</p>
         </div>
-        <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
-          <p className="mb-1 text-xs font-medium text-blue-300">{c.whereSeenTitle}</p>
-          <p className="text-xs text-zinc-300">{c.whereSeenText}</p>
+        <div className="rounded-lg border border-blue-300 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-blue-700 dark:text-blue-300">{c.whereSeenTitle}</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.whereSeenText}</p>
         </div>
-        <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
-          <p className="mb-1 text-xs font-medium text-amber-300">{c.doIneedTitle}</p>
-          <p className="text-xs text-zinc-300">{c.doIneedText}</p>
+        <div className="rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-amber-700 dark:text-amber-300">{c.doIneedTitle}</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.doIneedText}</p>
         </div>
-        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <p className="mb-1 text-xs font-medium text-emerald-400">{c.whyCareTitle}</p>
-          <p className="text-xs text-zinc-300">{c.whyCareText}</p>
+        <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 p-4">
+          <p className="mb-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">{c.whyCareTitle}</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.whyCareText}</p>
         </div>
       </div>
 
-      <div className="mb-4 rounded-lg border border-zinc-700 bg-zinc-900 overflow-hidden">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-4 py-2 flex items-center justify-between">
-          <span className="text-xs text-zinc-400">RAG in action</span>
+      <div className="mb-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2 flex items-center justify-between">
+          <span className="text-xs text-zinc-600 dark:text-zinc-400">RAG in action</span>
           <span className="text-xs text-zinc-500">{visibleSteps} / {RAG_STEPS.length}</span>
         </div>
         <div className="p-4 space-y-3">
           {RAG_STEPS.slice(0, visibleSteps).map((step, i) => (
             <div key={i} className={`rounded-lg border p-4 ${step.color}`}>
               <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${step.badge}`}>{step.label}</span>
-              {step.content && <p className="mt-2 text-sm leading-relaxed text-zinc-300 whitespace-pre-wrap">{step.content}</p>}
-              {step.docs && (<div className="mt-2 space-y-1.5">{step.docs.map((doc, j) => (<div key={j} className="flex items-center justify-between rounded bg-zinc-800/50 px-3 py-2"><div><p className="text-xs font-medium text-zinc-200">{doc.name}</p><p className="text-xs text-zinc-500">{doc.section}</p></div><span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-xs text-purple-300">{doc.match}</span></div>))}</div>)}
+              {step.content && <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap">{step.content}</p>}
+              {step.docs && (<div className="mt-2 space-y-1.5">{step.docs.map((doc, j) => (<div key={j} className="flex items-center justify-between rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><div><p className="text-xs font-medium text-zinc-800 dark:text-zinc-200">{doc.name}</p><p className="text-xs text-zinc-500">{doc.section}</p></div><span className="rounded bg-purple-100 dark:bg-purple-500/20 px-1.5 py-0.5 text-xs text-purple-700 dark:text-purple-300">{doc.match}</span></div>))}</div>)}
             </div>
           ))}
         </div>
-        <div className="border-t border-zinc-700 bg-zinc-800 px-4 py-2">
+        <div className="border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
           {visibleSteps < RAG_STEPS.length ? (
-            <button onClick={showNext} className="rounded bg-zinc-600 px-3 py-1 text-xs text-zinc-100 hover:bg-zinc-500">{c.nextStep}</button>
+            <button onClick={showNext} className="rounded bg-zinc-200 dark:bg-zinc-600 px-3 py-1 text-xs text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-500">{c.nextStep}</button>
           ) : (
-            <button onClick={reset} className="rounded bg-zinc-600 px-3 py-1 text-xs text-zinc-100 hover:bg-zinc-500">{c.startOver}</button>
+            <button onClick={reset} className="rounded bg-zinc-200 dark:bg-zinc-600 px-3 py-1 text-xs text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-500">{c.startOver}</button>
           )}
         </div>
       </div>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
-          <p className="mb-2 text-xs font-medium text-red-400">{c.withoutRagLabel}</p>
-          <p className="text-sm text-zinc-400 italic">Most enterprise software companies offer a 30-day return policy, though this can vary. I&apos;d recommend checking your specific contract terms.</p>
+        <div className="rounded-lg border border-red-300 dark:border-red-500/20 bg-red-50 dark:bg-red-500/5 p-4">
+          <p className="mb-2 text-xs font-medium text-red-700 dark:text-red-400">{c.withoutRagLabel}</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 italic">Most enterprise software companies offer a 30-day return policy, though this can vary. I&apos;d recommend checking your specific contract terms.</p>
         </div>
-        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
-          <p className="mb-2 text-xs font-medium text-emerald-400">{c.withRagLabel}</p>
-          <p className="text-sm text-zinc-300 italic">Enterprise customers have a 60-day full refund window. Contact your account manager. (Source: Enterprise ToS v4.2, Section 7.1)</p>
+        <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 p-4">
+          <p className="mb-2 text-xs font-medium text-emerald-700 dark:text-emerald-400">{c.withRagLabel}</p>
+          <p className="text-sm text-zinc-700 dark:text-zinc-300 italic">Enterprise customers have a 60-day full refund window. Contact your account manager. (Source: Enterprise ToS v4.2, Section 7.1)</p>
         </div>
       </div>
 
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.whenTitle}</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.whenTitle}</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {[
             { yes: true, text: 'Your information changes frequently' },
@@ -104,9 +104,9 @@ export const RAGBusiness: React.FC = () => {
             { yes: false, text: 'You need a specific brand voice (use fine-tuning)' },
             { yes: false, text: 'Creative writing with no reference material' },
           ].map((item) => (
-            <div key={item.text} className="rounded bg-zinc-800/50 px-3 py-2">
-              <span className={`text-xs ${item.yes ? 'text-emerald-400' : 'text-zinc-500'}`}>{item.yes ? '✓' : '✗'} </span>
-              <span className="text-xs text-zinc-400">{item.text}</span>
+            <div key={item.text} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
+              <span className={`text-xs ${item.yes ? 'text-emerald-700 dark:text-emerald-400' : 'text-zinc-500'}`}>{item.yes ? '✓' : '✗'} </span>
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">{item.text}</span>
             </div>
           ))}
         </div>

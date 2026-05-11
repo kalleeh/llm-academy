@@ -107,26 +107,26 @@ export const RAGPipelineSection: React.FC = () => {
   const c = useT({ title: '5. The RAG Pipeline' , p4: EN_P4 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">
-    <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-      <strong className="text-zinc-100">{c.p8}</strong> combines
+    <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+      <strong className="text-zinc-900 dark:text-zinc-100">{c.p8}</strong> combines
       everything: chunk documents, embed them, store in a vector DB, then retrieve relevant
       context to ground LLM responses in your actual data.
     </p>
 
     {/* Pipeline visualization */}
-    <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-      <p className="mb-4 text-sm font-medium text-zinc-400">Full RAG Pipeline</p>
+    <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+      <p className="mb-4 text-sm font-medium text-zinc-600 dark:text-zinc-400">Full RAG Pipeline</p>
       <div className="flex flex-wrap items-center gap-1">
         {PIPELINE_STAGES.map((stage, i) => (
           <div key={stage.label} className="flex items-center gap-1">
-            <div className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-center">
+            <div className="rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-center">
               <span className="block text-lg"><Icon name={stage.icon} /></span>
-              <span className="block text-xs font-bold text-zinc-200">{stage.label}</span>
+              <span className="block text-xs font-bold text-zinc-800 dark:text-zinc-200">{stage.label}</span>
               <span className="block text-xs text-zinc-500">{tLabel(lang, stage.desc)}</span>
             </div>
             {i < PIPELINE_STAGES.length - 1 && (
-              <span className="text-xs text-zinc-600">→</span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-600">→</span>
             )}
           </div>
         ))}
@@ -139,34 +139,34 @@ export const RAGPipelineSection: React.FC = () => {
     </div>
 
     {/* Hybrid search explanation */}
-    <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.p13}</h3>
-      <p className="mb-4 text-sm leading-relaxed text-zinc-300">
+    <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.p13}</h3>
+      <p className="mb-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         {c.p4}
       </p>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-md bg-zinc-800 p-3">
-          <p className="mb-1 text-xs font-bold text-blue-400">Vector Search (70%)</p>
-          <p className="text-xs text-zinc-300">{c.p14}</p>
+        <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+          <p className="mb-1 text-xs font-bold text-blue-700 dark:text-blue-400">Vector Search (70%)</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.p14}</p>
         </div>
-        <div className="rounded-md bg-zinc-800 p-3">
-          <p className="mb-1 text-xs font-bold text-amber-400">BM25 Keyword (30%)</p>
-          <p className="text-xs text-zinc-300">{c.p15}</p>
+        <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+          <p className="mb-1 text-xs font-bold text-amber-700 dark:text-amber-400">BM25 Keyword (30%)</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.p15}</p>
         </div>
-        <div className="rounded-md bg-zinc-800 p-3">
-          <p className="mb-1 text-xs font-bold text-green-400">Reciprocal Rank Fusion</p>
-          <p className="text-xs text-zinc-300">{c.p16}</p>
+        <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 p-3">
+          <p className="mb-1 text-xs font-bold text-green-700 dark:text-green-400">Reciprocal Rank Fusion</p>
+          <p className="text-xs text-zinc-700 dark:text-zinc-300">{c.p16}</p>
         </div>
       </div>
 
-      <div className="h-6 w-full overflow-hidden rounded-full bg-zinc-800">
+      <div className="h-6 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
         <div className="flex h-full">
-          <div className="flex h-full w-[70%] items-center justify-center bg-blue-500/30">
-            <span className="text-xs font-bold text-blue-300">Vector 70%</span>
+          <div className="flex h-full w-[70%] items-center justify-center bg-blue-200 dark:bg-blue-500/30">
+            <span className="text-xs font-bold text-blue-700 dark:text-blue-300">Vector 70%</span>
           </div>
-          <div className="flex h-full w-[30%] items-center justify-center bg-amber-500/30">
-            <span className="text-xs font-bold text-amber-300">BM25 30%</span>
+          <div className="flex h-full w-[30%] items-center justify-center bg-amber-200 dark:bg-amber-500/30">
+            <span className="text-xs font-bold text-amber-700 dark:text-amber-300">BM25 30%</span>
           </div>
         </div>
       </div>
@@ -174,19 +174,19 @@ export const RAGPipelineSection: React.FC = () => {
 
     {/* Emerging patterns */}
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-2 font-mono text-sm font-semibold text-violet-400">GraphRAG</h3>
-        <p className="text-xs leading-relaxed text-zinc-300">
-          Builds a <strong className="text-zinc-100">knowledge graph</strong> from documents before
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-violet-700 dark:text-violet-400">GraphRAG</h3>
+        <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
+          Builds a <strong className="text-zinc-900 dark:text-zinc-100">knowledge graph</strong> from documents before
           retrieval. Entities and relationships are extracted, enabling multi-hop reasoning.
           Particularly effective for questions that span multiple documents or require connecting
           disparate facts. Microsoft Research showed substantial improvements in comprehensiveness and diversity on global sensemaking questions.
         </p>
       </div>
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-2 font-mono text-sm font-semibold text-amber-400">Agentic RAG</h3>
-        <p className="text-xs leading-relaxed text-zinc-300">
-          An <strong className="text-zinc-100">AI agent</strong> decides how to retrieve: which
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-amber-700 dark:text-amber-400">Agentic RAG</h3>
+        <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
+          An <strong className="text-zinc-900 dark:text-zinc-100">AI agent</strong> decides how to retrieve: which
           collections to search, whether to reformulate the query, when to do multi-step retrieval,
           and whether the retrieved context is sufficient. Combines tool use with retrieval for
           dynamic, adaptive pipelines that handle complex queries autonomously.
