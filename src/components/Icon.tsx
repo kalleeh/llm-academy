@@ -148,6 +148,10 @@ const PATHS: Record<string, [number, ...string[]]> = {
   plug: [16, 'M6 2v4 M10 2v4 M4 6h8v3a4 4 0 01-8 0V6z M8 13v2'],
   // 🧱 block / dense
   block: [16, 'M2 4h5v4H2V4z M9 4h5v4H9V4z M2 10h5v4H2v-4z M9 10h5v4H9v-4z'],
+  // ☀️ sun (theme toggle — light mode)
+  sun: [16, 'M8 3V1 M8 15v-2 M3 8H1 M15 8h-2 M4 4l-1.4-1.4 M13.4 13.4L12 12 M4 12l-1.4 1.4 M13.4 2.6L12 4 M8 11a3 3 0 100-6 3 3 0 000 6z'],
+  // 🌙 moon (theme toggle — dark mode)
+  moon: [16, 'M13 9.4A5 5 0 016.6 3a5.5 5.5 0 105.5 5.5 5.5 5.5 0 01.9 0.9z'],
 }
 
 // ── Component ───────────────────────────────────────────────────────────────

@@ -37,17 +37,17 @@ export const InteractiveDemo: React.FC<InteractiveDemoProps> = ({
   }, [])
 
   return (
-    <section className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900" aria-label={title}>
-      <div className="border-b border-zinc-700 bg-zinc-800 px-6 py-4">
+    <section className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900" aria-label={title}>
+      <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">{title}</h3>
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</h3>
           {total > 1 && (
-            <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-300">
+            <span className="rounded-full bg-zinc-200 dark:bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-700 dark:text-zinc-300">
               Step {step + 1} of {total}
             </span>
           )}
         </div>
-        {description && <p className="mt-1 text-sm text-zinc-400">{description}</p>}
+        {description && <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>}
       </div>
 
       <div
@@ -59,11 +59,11 @@ export const InteractiveDemo: React.FC<InteractiveDemoProps> = ({
       </div>
 
       {total > 1 && controlledStep === undefined && (
-        <div className="flex items-center justify-between border-t border-zinc-700 bg-zinc-800 px-6 py-3">
+        <div className="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-3">
           <button
             onClick={goPrev}
             disabled={step === 0}
-            className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-zinc-600 disabled:opacity-40"
+            className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-600 disabled:opacity-40"
           >
             ← Previous
           </button>
@@ -71,14 +71,14 @@ export const InteractiveDemo: React.FC<InteractiveDemoProps> = ({
             {steps.map((_, i) => (
               <span
                 key={i}
-                className={`size-1.5 rounded-full ${i === step ? 'bg-zinc-300' : 'bg-zinc-600'}`}
+                className={`size-1.5 rounded-full ${i === step ? 'bg-zinc-700 dark:bg-zinc-300' : 'bg-zinc-300 dark:bg-zinc-600'}`}
               />
             ))}
           </div>
           <button
             onClick={goNext}
             disabled={step === total - 1}
-            className="rounded bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-zinc-600 disabled:opacity-40"
+            className="rounded bg-zinc-200 dark:bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-600 disabled:opacity-40"
           >
             Next →
           </button>

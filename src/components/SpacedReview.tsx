@@ -136,28 +136,28 @@ function ReviewQuestion({
   if (!question) {
     return (
       <div className="space-y-4">
-        <p className="text-sm text-zinc-300">
-          Review question <span className="font-mono text-amber-400">{questionId}</span> from module{' '}
+        <p className="text-sm text-zinc-700 dark:text-zinc-300">
+          Review question <span className="font-mono text-amber-700 dark:text-amber-400">{questionId}</span> from module{' '}
           <button
             onClick={() => onNavigate(moduleId)}
-            className="text-amber-400 underline underline-offset-2 hover:text-amber-300"
+            className="text-amber-700 dark:text-amber-400 underline underline-offset-2 hover:text-amber-600 dark:hover:text-amber-300"
           >
             {moduleId}
           </button>
         </p>
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-zinc-600 dark:text-zinc-400">
           Try to recall the answer, then mark how you did:
         </p>
         <div className="flex gap-3">
           <button
             onClick={() => onAnswer(true)}
-            className="flex items-center gap-2 rounded-lg bg-emerald-600/20 px-4 py-2 text-sm text-emerald-300 transition-colors hover:bg-emerald-600/30"
+            className="flex items-center gap-2 rounded-lg bg-emerald-100 dark:bg-emerald-600/20 px-4 py-2 text-sm text-emerald-700 dark:text-emerald-300 transition-colors hover:bg-emerald-200 dark:hover:bg-emerald-600/30"
           >
             <Icon name="check" /> I remembered
           </button>
           <button
             onClick={() => onAnswer(false)}
-            className="flex items-center gap-2 rounded-lg bg-amber-600/20 px-4 py-2 text-sm text-amber-300 transition-colors hover:bg-amber-600/30"
+            className="flex items-center gap-2 rounded-lg bg-amber-100 dark:bg-amber-600/20 px-4 py-2 text-sm text-amber-700 dark:text-amber-300 transition-colors hover:bg-amber-200 dark:hover:bg-amber-600/30"
           >
             <Icon name="cycle" /> Need to review
           </button>
@@ -206,10 +206,10 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
   // No checks completed yet
   if (totalScheduled === 0) {
     return (
-      <section className="rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+      <section className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         <div className="text-center">
           <Icon name="book" size={24} className="mx-auto mb-3 text-zinc-500" />
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {t(lang, 'review.empty')}
           </p>
         </div>
@@ -221,11 +221,11 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
   if (reviewing && dueQuestions.length > 0) {
     const current = dueQuestions[reviewIdx]
     return (
-      <section className="rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-6 py-4">
+      <section className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-mono text-sm font-semibold text-zinc-100">{t(lang, 'review.title')}</h3>
-            <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-300">
+            <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t(lang, 'review.title')}</h3>
+            <span className="rounded-full bg-zinc-200 dark:bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-700 dark:text-zinc-300">
               {reviewIdx + 1} of {dueQuestions.length}
             </span>
           </div>
@@ -246,9 +246,9 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
   if (reviewResults.length > 0 && !reviewing) {
     const remembered = reviewResults.filter((r) => r.correct).length
     return (
-      <section className="rounded-lg border border-zinc-700 bg-zinc-900 p-6 space-y-4">
-        <h3 className="font-mono text-sm font-semibold text-zinc-100">{t(lang, 'review.complete')}</h3>
-        <p className="text-sm text-zinc-300">
+      <section className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 space-y-4">
+        <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t(lang, 'review.complete')}</h3>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300">
           You remembered {remembered} of {reviewResults.length} questions.
         </p>
         <div className="space-y-2">
@@ -257,8 +257,8 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
               key={r.questionId}
               className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-sm ${
                 r.correct
-                  ? 'border-emerald-500/30 bg-emerald-500/5 text-emerald-300'
-                  : 'border-amber-500/30 bg-amber-500/5 text-amber-300'
+                  ? 'border-emerald-300 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5 text-emerald-700 dark:text-emerald-300'
+                  : 'border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 text-amber-700 dark:text-amber-300'
               }`}
             >
               <Icon name={r.correct ? 'check' : 'cycle'} />
@@ -267,7 +267,7 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
           ))}
         </div>
         {nextReview && (
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">
             Next review in {formatTimeUntil(nextReview)}.
           </p>
         )}
@@ -277,12 +277,12 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
 
   // Dashboard — show due count
   return (
-    <section className="rounded-lg border border-zinc-700 bg-zinc-900 p-6 space-y-4">
-      <h3 className="font-mono text-sm font-semibold text-zinc-100">{t(lang, 'review.title')}</h3>
+    <section className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 space-y-4">
+      <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t(lang, 'review.title')}</h3>
       {dueQuestions.length > 0 ? (
         <>
-          <p className="text-sm text-zinc-300">
-            <span className="font-semibold text-amber-400">{dueQuestions.length}</span> question
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">
+            <span className="font-semibold text-amber-700 dark:text-amber-400">{dueQuestions.length}</span> question
             {dueQuestions.length !== 1 ? 's' : ''} due for review.
           </p>
           <button
@@ -298,12 +298,12 @@ export const SpacedReview: React.FC<SpacedReviewProps> = ({ onNavigateToModule }
         </>
       ) : (
         <div className="space-y-2">
-          <p className="text-sm text-emerald-400">
+          <p className="text-sm text-emerald-700 dark:text-emerald-400">
             <Icon name="check" className="mr-1 inline" />
             {t(lang, 'review.allCaughtUp')}
           </p>
           {nextReview && (
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
               Next review in {formatTimeUntil(nextReview)}.
             </p>
           )}

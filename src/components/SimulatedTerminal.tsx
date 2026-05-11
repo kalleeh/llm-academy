@@ -82,13 +82,13 @@ export const SimulatedTerminal: React.FC<SimulatedTerminalProps> = ({ steps, tit
   const hasMore = currentIndex < steps.length
 
   return (
-    <div className="flex h-80 flex-col overflow-hidden rounded-lg border border-zinc-700">
+    <div className="flex h-80 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
       {title && (
-        <div className="flex shrink-0 items-center gap-2 border-b border-zinc-700 bg-zinc-800 px-4 py-2">
+        <div className="flex shrink-0 items-center gap-2 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
           <span className="size-3 rounded-full bg-red-500" />
           <span className="size-3 rounded-full bg-yellow-500" />
           <span className="size-3 rounded-full bg-green-500" />
-          <span className="ml-2 font-mono text-xs text-zinc-400">{title}</span>
+          <span className="ml-2 font-mono text-xs text-zinc-600 dark:text-zinc-400">{title}</span>
         </div>
       )}
       <div
@@ -126,15 +126,15 @@ export const SimulatedTerminal: React.FC<SimulatedTerminalProps> = ({ steps, tit
       </div>
 
       {/* Always-visible bottom bar — prevents layout shift */}
-      <div className="flex shrink-0 items-center gap-2 border-t border-zinc-700 bg-zinc-800 px-4 py-2">
+      <div className="flex shrink-0 items-center gap-2 border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
         {hasMore ? (
           <>
             <button
               onClick={() => runStep(currentIndex)}
               disabled={isAnimating}
-              className="rounded bg-zinc-600 px-3 py-1 text-xs text-zinc-100 transition-colors hover:bg-zinc-500 disabled:opacity-50"
+              className="rounded bg-zinc-200 dark:bg-zinc-600 px-3 py-1 text-xs text-zinc-900 dark:text-zinc-100 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-500 disabled:opacity-50"
             >
-              {currentIndex === 0 ? 'Run' : 'Next'}: <code className="text-amber-300">{steps[currentIndex].command.length > 60 ? steps[currentIndex].command.slice(0, 57) + '...' : steps[currentIndex].command}</code>
+              {currentIndex === 0 ? 'Run' : 'Next'}: <code className="text-amber-700 dark:text-amber-300">{steps[currentIndex].command.length > 60 ? steps[currentIndex].command.slice(0, 57) + '...' : steps[currentIndex].command}</code>
             </button>
             <span className="text-xs text-zinc-500">
               Step {currentIndex + 1} of {steps.length}

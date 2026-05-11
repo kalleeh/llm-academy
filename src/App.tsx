@@ -3,6 +3,7 @@ import { useDifficulty } from './DifficultyContext'
 import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i18n'
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
+import { ThemeToggle } from './components/ThemeToggle'
 
 const AIProblemModule = lazy(() => import('./modules/AIProblemModule').then(m => ({ default: m.AIProblemModule })))
 const DataFoundationsModule = lazy(() => import('./modules/DataFoundationsModule').then(m => ({ default: m.DataFoundationsModule })))
@@ -81,11 +82,11 @@ function ModuleNavigation({
   const next = activeIndex < navModules.length - 1 ? navModules[activeIndex + 1] : null
 
   return (
-    <div className="mt-16 flex items-center justify-between border-t border-zinc-800 pt-8">
+    <div className="mt-16 flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 pt-8">
       {prev ? (
         <button
           onClick={() => onNavigate(prev.id)}
-          className="group flex items-center gap-2 rounded-lg border border-zinc-800 px-4 py-3 text-sm text-zinc-400 transition-all hover:border-zinc-700 hover:bg-zinc-900 hover:text-zinc-200"
+          className="group flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800 px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400 transition-all hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-200"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>
           <div className="text-left">
@@ -99,7 +100,7 @@ function ModuleNavigation({
       {next ? (
         <button
           onClick={() => onNavigate(next.id)}
-          className="group flex items-center gap-2 rounded-lg border border-zinc-800 px-4 py-3 text-sm text-zinc-400 transition-all hover:border-zinc-700 hover:bg-zinc-900 hover:text-zinc-200"
+          className="group flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800 px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400 transition-all hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-200"
         >
           <div className="text-right">
             <div className="text-xs text-zinc-500">Next</div>
@@ -217,17 +218,17 @@ function App() {
   const progressPercent = Math.round((visitedVisible / visibleModules.length) * 100)
 
   return (
-    <div className="flex h-screen bg-zinc-950 text-zinc-100">
+    <div className="flex h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
       {/* Mobile header */}
-      <div className="fixed top-0 right-0 left-0 z-30 flex items-center gap-3 border-b border-zinc-800 bg-zinc-950 px-4 py-3 md:hidden">
+      <div className="fixed top-0 right-0 left-0 z-30 flex items-center gap-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 px-4 py-3 md:hidden">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+          className="rounded-lg p-1.5 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-200"
           aria-label="Open navigation"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 5h14M3 10h14M3 15h14" /></svg>
         </button>
-        <span className="font-mono text-xs font-semibold tracking-widest text-zinc-400 uppercase">{t(lang, 'app.title')}</span>
+        <span className="font-mono text-xs font-semibold tracking-widest text-zinc-600 dark:text-zinc-400 uppercase">{t(lang, 'app.title')}</span>
       </div>
 
       {/* Sidebar overlay (mobile) */}
@@ -237,37 +238,37 @@ function App() {
 
       {/* Sidebar */}
       <nav
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-zinc-800 bg-zinc-950 transition-transform duration-200 md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 transition-transform duration-200 md:static md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Module navigation"
       >
         {/* Sticky header */}
-        <div className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950 px-5 pt-5 pb-4">
-          <h1 className="font-mono text-sm font-semibold tracking-widest text-zinc-400 uppercase">
+        <div className="sticky top-0 z-10 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 px-5 pt-5 pb-4">
+          <h1 className="font-mono text-sm font-semibold tracking-widest text-zinc-600 dark:text-zinc-400 uppercase">
             {t(lang, 'app.title')}
           </h1>
           {/* Mode toggle */}
           <button
             onClick={toggleMode}
-            className="mt-2 flex w-full items-center gap-2 rounded-lg border border-zinc-800 px-3 py-2 text-left text-xs transition-colors hover:border-zinc-700 hover:bg-zinc-900"
+            className="mt-2 flex w-full items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-left text-xs transition-colors hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-900"
             aria-label={`Switch to ${mode === 'technical' ? 'business' : 'technical'} mode`}
           >
             <span
               className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] ${
                 mode === 'business'
-                  ? 'bg-amber-500/20 text-amber-400'
-                  : 'bg-emerald-500/20 text-emerald-400'
+                  ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                  : 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400'
               }`}
             >
               {mode === 'business' ? <Icon name="lightbulb" size={12} /> : <Icon name="gear" size={12} />}
             </span>
-            <span className="text-zinc-300">
+            <span className="text-zinc-700 dark:text-zinc-300">
               {t(lang, mode === 'business' ? 'track.business' : 'track.technical')}
             </span>
-            <span className="ml-auto text-zinc-600">↔</span>
+            <span className="ml-auto text-zinc-400 dark:text-zinc-600">↔</span>
           </button>
-          {/* Language selector */}
+          {/* Language selector + theme toggle */}
           <div className="mt-2 flex gap-1">
             {(Object.keys(LANGUAGE_META) as Language[]).map((l) => (
               <button
@@ -275,16 +276,17 @@ function App() {
                 onClick={() => setLang(l)}
                 className={`flex-1 rounded-lg px-2 py-1.5 text-center font-mono text-xs transition-colors ${
                   lang === l
-                    ? 'bg-zinc-700 text-zinc-100'
-                    : 'text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300'
+                    ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                    : 'text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300'
                 }`}
               >
                 {LANGUAGE_META[l].flag}
               </button>
             ))}
+            <ThemeToggle className="ml-1" />
           </div>
           <div className="mt-3 flex items-center gap-3">
-            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-800">
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
               <div
                 className="h-full rounded-full bg-emerald-500 transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
@@ -304,28 +306,28 @@ function App() {
               onClick={enterReview}
               className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-all ${
                 showReview
-                  ? 'bg-amber-500/10 text-amber-300 shadow-sm'
-                  : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
+                  ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 shadow-sm'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-200'
               }`}
               aria-current={showReview ? 'page' : undefined}
             >
               <span
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs ${
-                  showReview ? 'bg-amber-500/20 text-amber-400' : 'bg-zinc-900 text-zinc-500'
+                  showReview ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400' : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500'
                 }`}
               >
                 ↻
               </span>
               <span className="truncate">Spaced Review</span>
               {dueCount > 0 && (
-                <span className="ml-auto rounded-full bg-amber-500/20 px-2 py-0.5 font-mono text-xs text-amber-400">
+                <span className="ml-auto rounded-full bg-amber-100 dark:bg-amber-500/20 px-2 py-0.5 font-mono text-xs text-amber-700 dark:text-amber-400">
                   {dueCount}
                 </span>
               )}
             </button>
           </li>
           <li className="py-1">
-            <div className="border-t border-zinc-800/50" />
+            <div className="border-t border-zinc-200 dark:border-zinc-800/50" />
           </li>
           {visibleModules.map((mod, index) => {
             const isActive = activeModule === mod.id && !showReview
@@ -342,18 +344,18 @@ function App() {
                   onClick={() => navigateTo(mod.id)}
                   className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-all ${
                     isActive
-                      ? 'bg-zinc-800 text-zinc-100 shadow-sm'
-                      : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
+                      ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-200'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-mono text-xs font-medium transition-colors ${
                       isActive
-                        ? 'bg-emerald-500/20 text-emerald-400'
+                        ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400'
                         : isVisited
-                          ? 'bg-zinc-800 text-zinc-500'
-                          : 'bg-zinc-900 text-zinc-600'
+                          ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-500'
+                          : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-600'
                     }`}
                   >
                     {isVisited && !isActive ? '✓' : index + 1}
@@ -369,7 +371,7 @@ function App() {
       {/* Main content */}
       <main ref={mainRef} className="flex-1 overflow-y-auto pt-12 md:pt-0">
         {/* Top progress indicator */}
-        <div className="sticky top-0 z-10 h-0.5 bg-zinc-900">
+        <div className="sticky top-0 z-10 h-0.5 bg-zinc-100 dark:bg-zinc-900">
           <div
             className="h-full bg-emerald-500/50 transition-all duration-700 ease-out"
             style={{ width: showReview ? '100%' : `${((activeIndex + 1) / visibleModules.length) * 100}%` }}
@@ -388,7 +390,7 @@ function App() {
             />
           ) : (
             <>
-              <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-600 border-t-amber-400" /></div>}>
+              <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-300 dark:border-zinc-600 border-t-amber-400" /></div>}>
                 <ActiveComponent />
               </Suspense>
               <ModuleNavigation activeModule={activeModule} onNavigate={navigateTo} visibleModules={visibleModules} />

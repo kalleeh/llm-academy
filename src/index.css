@@ -1,7 +1,24 @@
 @import 'tailwindcss';
 
+/* Tailwind v4: declare the dark-mode variant against a class on <html>.
+   We toggle the `dark` class via the ThemeProvider in src/ThemeContext.tsx. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Default page background. Tailwind classes will override on the body too. */
 html, body {
-  background-color: #09090b;
+  background-color: #fafafa; /* zinc-50 — light default */
+}
+html.dark, html.dark body {
+  background-color: #09090b; /* zinc-950 — dark mode */
+}
+
+/* Smooth theme transitions for color/bg/border properties only.
+   Avoid transitioning everything to keep animations snappy. */
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
 }
 
 @supports (padding-bottom: env(safe-area-inset-bottom)) {

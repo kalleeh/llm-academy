@@ -49,8 +49,8 @@ export const Workspace: React.FC<WorkspaceProps> = ({ title, terminalTitle, step
     <div className="space-y-2">
       {title && (
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-zinc-400"><Icon name="terminal" /> {title}</span>
-          <span className="h-px flex-1 bg-zinc-800" />
+          <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400"><Icon name="terminal" /> {title}</span>
+          <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
         </div>
       )}
       <div className="grid gap-3 lg:grid-cols-2">
@@ -64,23 +64,23 @@ export const Workspace: React.FC<WorkspaceProps> = ({ title, terminalTitle, step
         </div>
 
         {/* Filesystem + info panel — fixed height matching terminal */}
-        <div className="flex h-80 min-w-0 flex-col gap-2 overflow-hidden rounded-lg border border-zinc-700">
+        <div className="flex h-80 min-w-0 flex-col gap-2 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
           {snapshot ? (
             <>
               {snapshot.label && (
-                <p className="shrink-0 px-4 pt-3 text-xs font-medium text-zinc-400">{tLabel(lang, snapshot.label)}</p>
+                <p className="shrink-0 px-4 pt-3 text-xs font-medium text-zinc-600 dark:text-zinc-400">{tLabel(lang, snapshot.label)}</p>
               )}
               <div className="flex-1 overflow-y-auto px-1">
                 <FileExplorer tree={snapshot.tree} title="~/project" />
               </div>
               {snapshot.info && (
-                <div className="shrink-0 border-t border-zinc-700 bg-zinc-800/50 px-4 py-2">
-                  <p className="text-xs leading-relaxed text-zinc-300">{snapshot.info}</p>
+                <div className="shrink-0 border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-4 py-2">
+                  <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{snapshot.info}</p>
                 </div>
               )}
             </>
           ) : (
-            <div className="flex flex-1 items-center justify-center text-xs text-zinc-600">
+            <div className="flex flex-1 items-center justify-center text-xs text-zinc-500 dark:text-zinc-600">
               Run commands to see filesystem changes
             </div>
           )}

@@ -103,13 +103,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = 'python',
   )
 
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-700">
+    <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
       {title && (
-        <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-4 py-2">
-          <span className="font-mono text-xs text-zinc-400">{title}</span>
+        <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+          <span className="font-mono text-xs text-zinc-600 dark:text-zinc-400">{title}</span>
           <button
             onClick={handleCopy}
-            className="rounded px-2 py-0.5 text-xs text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-200"
+            className="rounded px-2 py-0.5 text-xs text-zinc-600 dark:text-zinc-400 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-200"
             aria-label="Copy code"
           >
             {copied ? '✓ Copied' : 'Copy'}

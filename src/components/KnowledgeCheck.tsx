@@ -53,18 +53,18 @@ function MCQuestion({
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-zinc-100">{question.question}</p>
+      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{question.question}</p>
       <div className="space-y-2">
         {question.options?.map((opt, i) => {
           const answered = selected !== null
           const isCorrect = i === question.correctIndex
           const isSelected = i === selected
 
-          let borderClass = 'border-zinc-700 hover:border-zinc-500'
+          let borderClass = 'border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500'
           if (answered) {
-            if (isCorrect) borderClass = 'border-emerald-500/60 bg-emerald-500/10'
-            else if (isSelected) borderClass = 'border-amber-500/60 bg-amber-500/10'
-            else borderClass = 'border-zinc-700 opacity-60'
+            if (isCorrect) borderClass = 'border-emerald-400 dark:border-emerald-500/60 bg-emerald-50 dark:bg-emerald-500/10'
+            else if (isSelected) borderClass = 'border-amber-400 dark:border-amber-500/60 bg-amber-50 dark:bg-amber-500/10'
+            else borderClass = 'border-zinc-200 dark:border-zinc-700 opacity-60'
           }
 
           return (
@@ -72,17 +72,17 @@ function MCQuestion({
               key={i}
               onClick={() => handleSelect(i)}
               disabled={answered}
-              className={`flex w-full items-start gap-3 rounded-lg border px-4 py-3 text-left text-sm text-zinc-200 transition-colors ${borderClass} disabled:cursor-default`}
+              className={`flex w-full items-start gap-3 rounded-lg border px-4 py-3 text-left text-sm text-zinc-800 dark:text-zinc-200 transition-colors ${borderClass} disabled:cursor-default`}
             >
               <span className="mt-0.5 shrink-0">
                 {answered && isCorrect && (
-                  <Icon name="check" className="text-emerald-400" />
+                  <Icon name="check" className="text-emerald-700 dark:text-emerald-400" />
                 )}
                 {answered && isSelected && !isCorrect && (
-                  <Icon name="cross" className="text-amber-400" />
+                  <Icon name="cross" className="text-amber-700 dark:text-amber-400" />
                 )}
                 {(!answered || (!isCorrect && !isSelected)) && (
-                  <span className="inline-block size-4 rounded-full border border-zinc-600" />
+                  <span className="inline-block size-4 rounded-full border border-zinc-300 dark:border-zinc-600" />
                 )}
               </span>
               {opt}
@@ -91,7 +91,7 @@ function MCQuestion({
         })}
       </div>
       {selected !== null && (
-        <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4 text-sm text-zinc-300">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4 text-sm text-zinc-700 dark:text-zinc-300">
           {question.explanation}
         </div>
       )}
@@ -117,37 +117,37 @@ function FreeRecallQuestion({
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-zinc-100">{question.question}</p>
+      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{question.question}</p>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         disabled={revealed}
         placeholder="Type your answer…"
         rows={4}
-        className="w-full resize-none rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-amber-500/50 focus:outline-none disabled:opacity-70"
+        className="w-full resize-none rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-amber-500/50 focus:outline-none disabled:opacity-70"
       />
       {!revealed && text.length >= 10 && (
         <button
           onClick={handleReveal}
-          className="rounded-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-200 transition-colors hover:bg-zinc-600"
+          className="rounded-lg bg-zinc-200 dark:bg-zinc-700 px-4 py-2 text-sm text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-600"
         >
           Show model answer
         </button>
       )}
       {revealed && (
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-            <p className="mb-2 text-xs font-medium text-zinc-400">{t(fLang, 'check.yourAnswer')}</p>
-            <p className="text-sm text-zinc-300">{text}</p>
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+            <p className="mb-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">{t(fLang, 'check.yourAnswer')}</p>
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">{text}</p>
           </div>
-          <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
-            <p className="mb-2 text-xs font-medium text-emerald-400">{t(fLang, 'check.modelAnswer')}</p>
-            <p className="text-sm text-zinc-300">{question.modelAnswer}</p>
+          <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5 p-4">
+            <p className="mb-2 text-xs font-medium text-emerald-700 dark:text-emerald-400">{t(fLang, 'check.modelAnswer')}</p>
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">{question.modelAnswer}</p>
           </div>
         </div>
       )}
       {revealed && (
-        <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4 text-sm text-zinc-300">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4 text-sm text-zinc-700 dark:text-zinc-300">
           {question.explanation}
         </div>
       )}
@@ -188,14 +188,14 @@ export const KnowledgeCheck: React.FC<KnowledgeCheckProps> = ({ moduleId, questi
   }, [])
 
   return (
-    <section className="rounded-lg border border-zinc-700 bg-zinc-900">
-      <div className="border-b border-zinc-700 bg-zinc-800 px-6 py-4">
+    <section className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+      <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
             Check Your Understanding
           </h3>
           {!isComplete && (
-            <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-300">
+            <span className="rounded-full bg-zinc-200 dark:bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-700 dark:text-zinc-300">
               {currentIdx + 1} of {questions.length}
             </span>
           )}
@@ -221,7 +221,7 @@ export const KnowledgeCheck: React.FC<KnowledgeCheckProps> = ({ moduleId, questi
             {answered && currentIdx < questions.length - 1 && (
               <button
                 onClick={handleNext}
-                className="rounded-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-200 transition-colors hover:bg-zinc-600"
+                className="rounded-lg bg-zinc-200 dark:bg-zinc-700 px-4 py-2 text-sm text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-600"
               >
                 Next →
               </button>
@@ -237,7 +237,7 @@ export const KnowledgeCheck: React.FC<KnowledgeCheckProps> = ({ moduleId, questi
           </div>
         ) : (
           <div className="space-y-4">
-            <p className="text-sm font-medium text-zinc-100">{t(lang, 'check.reviewSummary')}</p>
+            <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t(lang, 'check.reviewSummary')}</p>
             <div className="space-y-2">
               {results.map((r, i) => {
                 const q = questions.find((q) => q.id === r.questionId)
@@ -246,18 +246,18 @@ export const KnowledgeCheck: React.FC<KnowledgeCheckProps> = ({ moduleId, questi
                     key={r.questionId}
                     className={`flex items-start gap-3 rounded-lg border px-4 py-3 text-sm ${
                       r.correct
-                        ? 'border-emerald-500/30 bg-emerald-500/5 text-zinc-200'
-                        : 'border-amber-500/30 bg-amber-500/5 text-zinc-200'
+                        ? 'border-emerald-300 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5 text-zinc-800 dark:text-zinc-200'
+                        : 'border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 text-zinc-800 dark:text-zinc-200'
                     }`}
                   >
                     <Icon
                       name={r.correct ? 'check' : 'lightbulb'}
-                      className={`mt-0.5 shrink-0 ${r.correct ? 'text-emerald-400' : 'text-amber-400'}`}
+                      className={`mt-0.5 shrink-0 ${r.correct ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}
                     />
                     <span>
-                      <span className="text-zinc-400">Q{i + 1}:</span> {q?.question}
+                      <span className="text-zinc-600 dark:text-zinc-400">Q{i + 1}:</span> {q?.question}
                       {!r.correct && (
-                        <span className="ml-2 text-xs text-amber-400">— review the explanation above</span>
+                        <span className="ml-2 text-xs text-amber-700 dark:text-amber-400">— review the explanation above</span>
                       )}
                     </span>
                   </div>

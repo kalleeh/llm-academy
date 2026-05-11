@@ -26,8 +26,8 @@ export const ModuleLayout: FC<ModuleLayoutProps> = ({ moduleId, title, subtitle,
     <div className="mx-auto max-w-4xl space-y-16 pb-16">
       <Reveal animation="fade" delay={0}>
         <header>
-          <h1 className="font-mono text-2xl font-bold text-zinc-100 sm:text-3xl">{displayTitle}</h1>
-          <p className="mt-2 max-w-2xl text-zinc-400">{displaySubtitle}</p>
+          <h1 className="font-mono text-2xl font-bold text-zinc-900 dark:text-zinc-100 sm:text-3xl">{displayTitle}</h1>
+          <p className="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">{displaySubtitle}</p>
         </header>
       </Reveal>
       {Children.map(children, (child, i) => (
