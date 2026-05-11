@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useEffect, useRef, useState, type ReactNode, type FC } from 'react'
+import { useEffect, useRef, useState, startTransition, type ReactNode, type FC } from 'react'
 
 export function useInView(threshold = 0.08) {
   const ref = useRef<HTMLDivElement>(null)
@@ -9,21 +9,23 @@ export function useInView(threshold = 0.08) {
     const el = ref.current
     if (!el) return
 
+    const show = () => startTransition(() => setVisible(true))
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setVisible(true)
+      show()
       return
     }
 
     const rect = el.getBoundingClientRect()
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const timer = requestAnimationFrame(() => setVisible(true))
+      const timer = requestAnimationFrame(show)
       return () => cancelAnimationFrame(timer)
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true)
+          show()
           observer.disconnect()
         }
       },

@@ -1,4 +1,4 @@
-import type { Language } from '../../../LanguageContext'
+import type { Language } from '../../../i18n'
 import type { WhatAreAgentsContent } from './whatAreAgents.en'
 import { content as en } from './whatAreAgents.en'
 import { content as sv } from './whatAreAgents.sv'

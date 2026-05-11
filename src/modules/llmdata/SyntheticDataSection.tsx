@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { syntheticDataSectionSv, syntheticDataSectionKo } from './tech-translations'
 
 interface Example { instruction: string; response: string }
@@ -67,7 +67,7 @@ export const SyntheticDataSection: React.FC = () => {
       <h2 id="synthetic-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-4 max-w-2xl leading-relaxed text-zinc-300">
         Human data is expensive. <strong className="text-zinc-100">Alpaca</strong> showed 52K synthetic
-        instructions from GPT-3.5 could fine-tune a competitive model. <strong className="text-zinc-100">Phi</strong> (Microsoft)
+        instructions from text-davinci-003 could fine-tune a competitive model. <strong className="text-zinc-100">Phi</strong> (Microsoft)
         trained primarily on synthetic textbook-quality data for outsized performance at small scale.
       </p>
       <div className="mb-4 flex items-center gap-3">

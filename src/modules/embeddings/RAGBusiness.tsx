@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { ragSv, ragKo } from './translations'
 
 const RAG_STEPS = [

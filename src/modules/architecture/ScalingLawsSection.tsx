@@ -1,17 +1,17 @@
 import { useState, useMemo, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { scalingLawsSectionSv, scalingLawsSectionKo } from './tech-translations'
 
 const BUDGET_STEPS = [
-  { label: '1e18', flops: 1e18, params: '40M', tokens: '800M', note: 'Small research experiment' },
-  { label: '1e19', flops: 1e19, params: '130M', tokens: '2.6B', note: 'GPT-2 Small scale' },
-  { label: '1e20', flops: 1e20, params: '400M', tokens: '8B', note: 'Mid-size research' },
-  { label: '1e21', flops: 1e21, params: '1.3B', tokens: '26B', note: 'GPT-2 XL scale' },
-  { label: '1e22', flops: 1e22, params: '4B', tokens: '80B', note: 'Chinchilla-optimal 4B' },
-  { label: '1e23', flops: 1e23, params: '13B', tokens: '260B', note: 'Llama 2 13B scale' },
-  { label: '1e24', flops: 1e24, params: '40B', tokens: '800B', note: 'Chinchilla 70B territory' },
-  { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'Frontier dense models' },
+  { label: '1e18', flops: 1e18, params: '40M', tokens: '800M', note: 'noteSmallResearch' },
+  { label: '1e19', flops: 1e19, params: '130M', tokens: '2.6B', note: 'noteGpt2Small' },
+  { label: '1e20', flops: 1e20, params: '400M', tokens: '8B', note: 'noteMidResearch' },
+  { label: '1e21', flops: 1e21, params: '1.3B', tokens: '26B', note: 'noteGpt2Xl' },
+  { label: '1e22', flops: 1e22, params: '4B', tokens: '80B', note: 'noteChinchilla4b' },
+  { label: '1e23', flops: 1e23, params: '13B', tokens: '260B', note: 'noteLlama13b' },
+  { label: '1e24', flops: 1e24, params: '40B', tokens: '800B', note: 'noteChinchilla70b' },
+  { label: '1e25', flops: 1e25, params: '130B', tokens: '2.6T', note: 'noteFrontier' },
 ]
 
 const EN_P9 = `DeepSeek V3 (671B total, 37B active) trained on`
@@ -19,14 +19,12 @@ const EN_P8 = `DeepSeek's Challenge to Chinchilla`
 const EN_P7 = `Chinchilla-optimal for 37B active`
 const EN_P6 = `DeepSeek V3 (671B total, 37B active) trained on`
 const EN_P5 = `DeepSeek's Challenge to Chinchilla`
-const EN_P2 = `{c.p2}`
-const EN_P3 = `{c.p3}`
-const EN_P4 = `{c.p4}`
 const EN_INTRO = `Before Chinchilla, models like GPT-3 (175B params, 300B tokens) were undertrained.
-        Chinchilla (70B params, 1.4T tokens) matched GPT-3 performance with less compute.`
+        Chinchilla (70B params, 1.4T tokens) significantly outperformed GPT-3 with less compute.`
 
 export const ScalingLawsSection: React.FC = () => {
-  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '2. Scaling Laws', intro: EN_INTRO  , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: scalingLawsSectionSv, ko: scalingLawsSectionKo })
   const [budgetIdx, setBudgetIdx] = useState(4)
 
   const handleSlider = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +83,7 @@ export const ScalingLawsSection: React.FC = () => {
           </div>
           <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-4 text-center">
             <p className="text-xs text-zinc-500 uppercase">Scale</p>
-            <p className="mt-1 text-sm text-zinc-300">{step.note}</p>
+            <p className="mt-1 text-sm text-zinc-300">{tLabel(lang, step.note)}</p>
           </div>
         </div>
       </div>

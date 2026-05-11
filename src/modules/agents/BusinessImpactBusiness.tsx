@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { businessImpactSv, businessImpactKo } from './translations'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { SelfExplain } from '../../components/SelfExplain'

@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { qualityVsSizeSectionSv, qualityVsSizeSectionKo } from './tech-translations'
 import { quantLevelsTranslations } from './data-translations'
 
@@ -15,11 +13,11 @@ interface QuantLevel {
 }
 
 const QUANT_LEVELS: QuantLevel[] = [
-  { label: 'Q2_K', size: 2.7, quality: 72, bpw: 3.12, useCase: 'Extreme compression — testing only' },
-  { label: 'Q3_K_M', size: 3.3, quality: 82, bpw: 3.74, useCase: 'Very constrained memory, acceptable quality loss' },
-  { label: 'Q4_K_M', size: 4.0, quality: 93, bpw: 4.89, useCase: 'Best balance — recommended for most local use', sweet: true },
+  { label: 'Q2_K', size: 2.7, quality: 72, bpw: 2.50, useCase: 'Extreme compression — testing only' },
+  { label: 'Q3_K_M', size: 3.3, quality: 82, bpw: 3.30, useCase: 'Very constrained memory, acceptable quality loss' },
+  { label: 'Q4_K_M', size: 4.0, quality: 93, bpw: 4.83, useCase: 'Best balance — recommended for most local use', sweet: true },
   { label: 'Q5_K_M', size: 4.7, quality: 96, bpw: 5.69, useCase: 'Higher quality when you have the RAM' },
-  { label: 'Q6_K', size: 5.5, quality: 98, bpw: 6.57, useCase: 'Near-lossless, good for important tasks' },
+  { label: 'Q6_K', size: 5.5, quality: 98, bpw: 6.00, useCase: 'Near-lossless, good for important tasks' },
   { label: 'Q8_0', size: 7.0, quality: 99.5, bpw: 8.50, useCase: 'Virtually lossless, 2x FP16 compression' },
   { label: 'FP16', size: 14.0, quality: 100, bpw: 16.0, useCase: 'Full precision baseline — no quantization' },
 ]

@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { attentionVariantsSectionSv, attentionVariantsSectionKo } from './tech-translations'
 
 type Variant = 'mha' | 'gqa' | 'mqa' | 'mla'
@@ -24,7 +24,7 @@ const VARIANTS: Record<Variant, VariantInfo> = {
     speed: 'Baseline',
     quality: 'Best',
     usedBy: 'GPT-2, GPT-3, Original Transformer',
-    description: 'Each attention head has its own K and V projections. Maximum expressiveness but largest KV cache.',
+    description: 'mhaDesc',
   },
   gqa: {
     label: 'GQA',
@@ -34,7 +34,7 @@ const VARIANTS: Record<Variant, VariantInfo> = {
     speed: '~2× faster',
     quality: 'Near-MHA',
     usedBy: 'Llama 2 70B, Llama 3, Gemma',
-    description: 'Query heads are grouped, sharing K/V projections within each group. Best quality-speed tradeoff.',
+    description: 'gqaDesc',
   },
   mqa: {
     label: 'MQA',
@@ -43,8 +43,8 @@ const VARIANTS: Record<Variant, VariantInfo> = {
     kvCache: '~3%',
     speed: '~4× faster',
     quality: 'Slightly lower',
-    usedBy: 'PaLM, Falcon, StarCoder',
-    description: 'All query heads share a single K and V head. Fastest inference but some quality loss.',
+    usedBy: 'PaLM, Falcon 40B, StarCoder',
+    description: 'mqaDesc',
   },
   mla: {
     label: 'MLA',
@@ -54,7 +54,7 @@ const VARIANTS: Record<Variant, VariantInfo> = {
     speed: '~3× faster',
     quality: 'Near-MHA',
     usedBy: 'DeepSeek V2, DeepSeek V3',
-    description: 'Compresses KV into a low-rank latent space. Tiny cache with quality close to full MHA.',
+    description: 'mlaDesc',
   },
 }
 
@@ -63,11 +63,11 @@ const VARIANT_KEYS: Variant[] = ['mha', 'gqa', 'mqa', 'mla']
 const KV_BARS: Record<Variant, number> = { mha: 100, gqa: 25, mqa: 3, mla: 8 }
 
 const EN_P3 = `Query Heads → KV Heads (8 query heads shown)`
-const EN_P2 = `{c.p2}`
 const EN_INTRO = `The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.`
 
 export const AttentionVariantsSection: React.FC = () => {
-  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO  , p3: EN_P3 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
   const [active, setActive] = useState<Variant>('mha')
 
   const selectVariant = useCallback((v: Variant) => setActive(v), [])
@@ -117,7 +117,7 @@ export const AttentionVariantsSection: React.FC = () => {
       {/* Visual */}
       <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
         <p className="mb-1 font-mono text-sm font-semibold text-zinc-200">{info.full}</p>
-        <p className="mb-4 text-sm text-zinc-400">{info.description}</p>
+        <p className="mb-4 text-sm text-zinc-400">{tLabel(lang, info.description)}</p>
 
         {/* Head diagram */}
         <div className="mb-4">

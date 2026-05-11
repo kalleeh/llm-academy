@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { modernAlternativesSectionSv, modernAlternativesSectionKo } from './tech-translations'
 import { methodsTranslations } from './data-translations'
 
@@ -59,7 +57,7 @@ const METHODS: Method[] = [
     id: 'rlaif',
     label: 'RLAIF',
     color: 'text-purple-400',
-    tagline: 'RL from AI Feedback — Anthropic, 2023',
+    tagline: 'RL from AI Feedback — Anthropic, 2022',
     description: 'RLHF\'s bottleneck is human labelers — they\'re slow, expensive, and inconsistent. RLAIF replaces them with AI. A strong model reads two candidate responses and picks the better one, guided by a set of principles (a "constitution"): "Choose the response that is more helpful, less harmful, and more honest." This is Anthropic\'s Constitutional AI approach. The AI generates millions of preference labels at a fraction of the cost. The catch: the AI judge can only be as good as its own training — it can\'t catch blind spots it shares with the model being trained. That\'s why some human oversight is still needed for the principles themselves.',
     pros: ['Scales to millions of comparisons (vs thousands for human RLHF)', 'Consistent — no annotator disagreement or fatigue', 'Principles are explicit and auditable (the "constitution")'],
     cons: ['Bounded by the judge model\'s own quality and biases', 'Can amplify systematic blind spots', 'Still needs humans to define and validate the principles'],

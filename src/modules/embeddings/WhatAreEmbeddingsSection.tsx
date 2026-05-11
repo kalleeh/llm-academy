@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useLanguage, tLabel, useT } from '../../i18n'
 import { whatAreEmbeddingsSectionSv, whatAreEmbeddingsSectionKo } from './tech-translations'
 
 const SIMILARITY_EXAMPLES: Record<string, Record<string, number>> = {
@@ -52,19 +52,19 @@ const SCATTER_POINTS: { word: string; x: number; y: number; cluster: string }[] 
 ]
 
 const CLUSTER_COLORS: Record<string, { dot: string; text: string; label: string }> = {
-  animals: { dot: 'bg-green-400', text: 'text-green-400', label: 'Animals' },
-  colors: { dot: 'bg-purple-400', text: 'text-purple-400', label: 'Colors' },
-  emotions: { dot: 'bg-amber-400', text: 'text-amber-400', label: 'Emotions' },
-  vehicles: { dot: 'bg-blue-400', text: 'text-blue-400', label: 'Vehicles' },
+  animals: { dot: 'bg-green-400', text: 'text-green-400', label: 'catAnimals' },
+  colors: { dot: 'bg-purple-400', text: 'text-purple-400', label: 'catColors' },
+  emotions: { dot: 'bg-amber-400', text: 'text-amber-400', label: 'catEmotions' },
+  vehicles: { dot: 'bg-blue-400', text: 'text-blue-400', label: 'catVehicles' },
 }
 
 const EN_P6 = `Type a sentence to compare (or pick from the list below)`
 const EN_P5 = `Type a sentence to compare (or pick from the list below)`
-const EN_P2 = `{c.p2}`
 const EN_P3 = `Words with similar meanings cluster together in embedding space. This is a 2D projection of high-dimensional vectors.`
 const EN_P4 = `Embeddings capture meaning as numbers. &quot;Cat&quot; and &quot;dog&quot; are close because they share semantic properties (animals, pets). &quot;Red&quot; and &quot;blue&quot; cluster together because they&apos;re both colors. This geometric structure enables similarity search, clustering, and retrieval.`
 export const WhatAreEmbeddingsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are Embeddings' , p2: EN_P2, p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '1. What Are Embeddings' , p3: EN_P3, p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: whatAreEmbeddingsSectionSv, ko: whatAreEmbeddingsSectionKo })
   const [selectedSentence, setSelectedSentence] = useState(SENTENCES[0])
   const [inputText, setInputText] = useState('')
 
@@ -214,7 +214,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
           {Object.entries(CLUSTER_COLORS).map(([key, val]) => (
             <div key={key} className="flex items-center gap-1.5">
               <span className={`size-2.5 rounded-full ${val.dot}`} />
-              <span className="text-xs text-zinc-400">{val.label}</span>
+              <span className="text-xs text-zinc-400">{tLabel(lang, val.label)}</span>
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { openVsClosedSv, openVsClosedKo } from './translations'
 
 export const OpenVsClosedBusiness: React.FC = () => {

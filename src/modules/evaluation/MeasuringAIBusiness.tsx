@@ -1,5 +1,5 @@
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { measuringSv, measuringKo } from './translations'
 
 const RATINGS = [

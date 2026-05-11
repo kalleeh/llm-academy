@@ -2,7 +2,7 @@ import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { SelfExplain } from '../../components/SelfExplain'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { decisionSv, decisionKo } from './translations'
 
 const ICONS: IconName[] = ['clipboard', 'bar-chart', 'chat', 'file']

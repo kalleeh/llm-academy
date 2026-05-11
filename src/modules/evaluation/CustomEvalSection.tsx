@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { customEvalSectionSv, customEvalSectionKo } from './tech-translations'
 import { taskTypesTranslations } from './data-translations'
 
@@ -46,11 +44,10 @@ def evaluate_model(eval_set_path: str, model: str):
 
 const EN_P4 = `Public benchmarks test general capabilities. For`
 const EN_P3 = `Public benchmarks test general capabilities. For`
-const EN_P2 = `{c.p2}`
 export const CustomEvalSection: React.FC = () => {
   const { lang } = useLanguage()
   const tASK_TYPEST = tArray(lang, TASK_TYPES, taskTypesTranslations)
-  const c = useT({ title: '3. Custom Evaluation' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
+  const c = useT({ title: '3. Custom Evaluation'  , p3: EN_P3 , p4: EN_P4 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
   const [selectedTask, setSelectedTask] = useState(0)
   const task = TASK_TYPES[selectedTask]
 

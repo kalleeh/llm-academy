@@ -27,7 +27,7 @@ export const playersTranslations = {
 
 export const comparisonTranslations = {
   sv: [
-    { dimension: 'Kapacitet', open: 'Llama 4, DeepSeek V3 matchar GPT-4o på de flesta benchmarks', closed: 'GPT-5, Claude Opus 4.6 leder fortfarande på de svåraste uppgifterna' },
+    { dimension: 'Kapacitet', open: 'Llama 4, DeepSeek V3 matchar GPT-4o på de flesta benchmarks', closed: 'GPT-5.5, Claude Opus 4.7 leder fortfarande på de svåraste uppgifterna' },
     { dimension: 'Kostnad', open: 'Gratis vikter; betala bara för beräkning', closed: 'Per-token-prissättning; kan vara billigare vid låg volym' },
     { dimension: 'Integritet', open: 'Full kontroll över data — men säkerhet är ditt ansvar', closed: 'Data behandlas av leverantör — företagsnivåer erbjuder stark efterlevnad' },
     { dimension: 'Anpassning', open: 'Full åtkomst — finjustera, kvantisera, slå samman, destillera', closed: 'Begränsat till API-parametrar och systemprompts' },
@@ -37,7 +37,7 @@ export const comparisonTranslations = {
     { dimension: 'Licens', open: 'Varierar: Apache 2.0, Llama Community, etc.', closed: 'Proprietär; användningsvillkor kan ändras' },
   ],
   ko: [
-    { dimension: '능력', open: 'Llama 4, DeepSeek V3가 대부분의 벤치마크에서 GPT-4o와 일치', closed: 'GPT-5, Claude Opus 4.6이 가장 어려운 작업에서 여전히 선두' },
+    { dimension: '능력', open: 'Llama 4, DeepSeek V3가 대부분의 벤치마크에서 GPT-4o와 일치', closed: 'GPT-5.5, Claude Opus 4.7이 가장 어려운 작업에서 여전히 선두' },
     { dimension: '비용', open: '무료 가중치; 컴퓨팅만 지불', closed: '토큰당 가격; 저볼륨에서 더 저렴할 수 있음' },
     { dimension: '프라이버시', open: '데이터에 대한 완전한 통제 — 하지만 보안은 본인 책임', closed: '제공업체가 데이터 처리 — 엔터프라이즈 티어가 강력한 컴플라이언스 제공' },
     { dimension: '커스터마이징', open: '완전한 접근 — 파인튜닝, 양자화, 병합, 증류', closed: 'API 파라미터와 시스템 프롬프트로 제한' },

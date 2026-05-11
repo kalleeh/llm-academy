@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { designPatternsSectionSv, designPatternsSectionKo } from './tech-translations'
 import { patternsTranslations } from './data-translations'
 

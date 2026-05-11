@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { patternsSv, patternsKo } from './translations'
 
 interface Pattern {

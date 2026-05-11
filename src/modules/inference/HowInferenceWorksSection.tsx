@@ -1,28 +1,28 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useLanguage, tLabel, useT } from '../../i18n'
 import { howInferenceWorksSectionSv, howInferenceWorksSectionKo } from './tech-translations'
 
 const PHASES = [
-  { label: 'Prompt Tokens', color: 'bg-blue-500', desc: 'User input tokenized into IDs' },
-  { label: 'Prefill', color: 'bg-amber-500', desc: 'Process all tokens at once — build initial KV cache' },
-  { label: 'Decode', color: 'bg-green-500', desc: 'Generate one token at a time (autoregressive)' },
+  { label: 'promptTokens', color: 'bg-blue-500', desc: 'promptTokensDesc' },
+  { label: 'prefill', color: 'bg-amber-500', desc: 'prefillDesc' },
+  { label: 'decode', color: 'bg-green-500', desc: 'decodeDesc' },
 ] as const
 
 const KV_EXAMPLES = [
-  { tokens: 1024, label: '1K', cacheGB: 0.001 },
-  { tokens: 4096, label: '4K', cacheGB: 0.016 },
-  { tokens: 8192, label: '8K', cacheGB: 0.064 },
-  { tokens: 32768, label: '32K', cacheGB: 1 },
-  { tokens: 65536, label: '64K', cacheGB: 4 },
-  { tokens: 131072, label: '128K', cacheGB: 16 },
+  { tokens: 1024, label: '1K', cacheGB: 0.16 },
+  { tokens: 4096, label: '4K', cacheGB: 0.66 },
+  { tokens: 8192, label: '8K', cacheGB: 1.3 },
+  { tokens: 32768, label: '32K', cacheGB: 5.2 },
+  { tokens: 65536, label: '64K', cacheGB: 10.5 },
+  { tokens: 131072, label: '128K', cacheGB: 21 },
 ] as const
 
 const EN_P5 = `KV Cache Size vs Context Length`
 const EN_P4 = `KV Cache Size vs Context Length`
 const EN_P2 = `Inference is the process of generating text from a trained model. It happens in two distinct phases —`
-const EN_P3 = `{c.p3}`
 export const HowInferenceWorksSection: React.FC = () => {
-  const c = useT({ title: '1. How Inference Works' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '1. How Inference Works' , p2: EN_P2 , p4: EN_P4 , p5: EN_P5 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
   const [activePhase, setActivePhase] = useState(0)
   const [ctxSlider, setCtxSlider] = useState(0)
 
@@ -32,7 +32,7 @@ export const HowInferenceWorksSection: React.FC = () => {
   }, [])
 
   const kvEntry = KV_EXAMPLES[ctxSlider]
-  const barPct = useMemo(() => Math.max(2, (kvEntry.cacheGB / 16) * 100), [kvEntry.cacheGB])
+  const barPct = useMemo(() => Math.max(2, (kvEntry.cacheGB / 40) * 100), [kvEntry.cacheGB])
 
   return (
     <section aria-labelledby="how-inference-works">
@@ -49,7 +49,7 @@ export const HowInferenceWorksSection: React.FC = () => {
         <div className="flex items-center gap-2">
           {PHASES.map((phase, i) => (
             <button
-              key={phase.label}
+              key={tLabel(lang, phase.label)}
               onClick={handlePhaseClick(i)}
               className={`flex-1 rounded-md border px-4 py-3 text-left transition-all ${
                 activePhase === i
@@ -60,7 +60,7 @@ export const HowInferenceWorksSection: React.FC = () => {
             >
               <span className="block text-xs font-bold uppercase tracking-wider">
                 {i > 0 && '→ '}
-                {phase.label}
+                {tLabel(lang, phase.label)}
               </span>
             </button>
           ))}
@@ -122,7 +122,7 @@ export const HowInferenceWorksSection: React.FC = () => {
           {[
             { label: 'Why it exists', text: 'Avoids recomputing attention keys/values for all previous tokens at each decode step' },
             { label: 'How it grows', text: 'Proportional to sequence_length × num_layers × num_heads × head_dim × 2 (K+V)' },
-            { label: 'Why it\'s the bottleneck', text: 'At 128K context on a 70B model, KV cache alone needs ~16 GB — often more than the model weights (quantized)' },
+            { label: 'Why it\'s the bottleneck', text: 'At 128K context on a 70B model, KV cache alone needs ~40 GB — often more than the model weights (quantized)' },
           ].map(item => (
             <div key={item.label} className="rounded-md bg-zinc-800 p-3">
               <p className="mb-1 text-xs font-bold uppercase tracking-wider text-zinc-400">{item.label}</p>

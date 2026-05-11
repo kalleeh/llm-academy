@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { conversionPipelineSectionSv, conversionPipelineSectionKo } from './tech-translations'
 
 const STEPS: TerminalStep[] = [
@@ -36,7 +36,7 @@ const STEPS: TerminalStep[] = [
     command: 'llama-quantize mistral-7b.f16.gguf mistral-7b.Q4_K_M.gguf Q4_K_M',
     output: `Quantizing model with Q4_K_M...
   Original size:  14500.0 MiB
-  Quantized size:  4073.4 MiB (4.89 BPW)
+  Quantized size:  4073.4 MiB (4.83 BPW)
   Compression ratio: 3.56x
   Written: mistral-7b.Q4_K_M.gguf (4.0 GiB)`,
     delay: 1000,
@@ -70,7 +70,7 @@ while retaining most of its capability.`,
 
 const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   [-1]: {
-    label: 'Original SafeTensors model (14 GB)',
+    label: 'cpOriginal',
     tree: [
       {
         name: 'mistral-7b-instruct',
@@ -88,7 +88,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Starting point: a HuggingFace model in SafeTensors format. 3 shards totaling ~14 GB at FP16 precision.',
   },
   [2]: {
-    label: 'After GGUF conversion (FP16)',
+    label: 'cpGgufFp16',
     tree: [
       {
         name: 'mistral-7b-instruct',
@@ -107,7 +107,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Converted to GGUF format at FP16. Same size, but now in a single file with embedded tokenizer and metadata.',
   },
   [3]: {
-    label: 'After Q4_K_M quantization (4 GB)',
+    label: 'cpQuantized',
     tree: [
       {
         name: 'mistral-7b-instruct',
@@ -127,7 +127,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Q4_K_M quantization: 14.5 GB → 4.0 GB. Mixed precision — attention layers get more bits, FFN layers get fewer.',
   },
   [4]: {
-    label: 'Modelfile for Ollama',
+    label: 'cpModelfile',
     tree: [
       {
         name: 'mistral-7b-instruct',
@@ -148,7 +148,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Modelfile tells Ollama how to load the GGUF: which file, prompt template, and inference parameters.',
   },
   [5]: {
-    label: 'Registered in Ollama',
+    label: 'cpRegistered',
     tree: [
       { name: 'mistral-7b.Q4_K_M.gguf', type: 'file', size: '4.0 GB' },
       { name: 'Modelfile', type: 'file', size: '112 B' },

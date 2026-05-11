@@ -1,5 +1,4 @@
-import { useLanguage } from '../../LanguageContext'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { trainingSection2Sv, trainingSection2Ko } from './tech-translations'
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
@@ -12,35 +11,35 @@ import { SelfExplain } from '../../components/SelfExplain'
 
 const LOOP_STAGES: { label: string; icon: IconName; active: string; desc: string; detail: string }[] = [
   {
-    label: 'Load Batch',
+    label: 'trainLoadBatch',
     icon: 'box',
     active: 'bg-blue-500/20 border-blue-500/50 text-blue-300 ring-2 ring-blue-500/30',
     desc: 'Grab a chunk of text (e.g. 4096 tokens) from the training data. This is one "batch" the model will learn from.',
     detail: 'batch_size=4096 tokens from OpenWebText',
   },
   {
-    label: 'Forward Pass',
+    label: 'trainForwardPass',
     icon: 'arrow-right',
     active: 'bg-purple-500/20 border-purple-500/50 text-purple-300 ring-2 ring-purple-500/30',
     desc: 'Feed the tokens through all 32 layers. Each layer transforms the data — attention, feed-forward, normalize. The model predicts the next token at each position.',
     detail: '32 layers × (attention → FFN → norm)',
   },
   {
-    label: 'Compute Loss',
+    label: 'trainComputeLoss',
     icon: 'chart-down',
     active: 'bg-red-500/20 border-red-500/50 text-red-300 ring-2 ring-red-500/30',
     desc: 'Compare predictions to the actual next tokens. The "loss" measures how wrong the model was. High loss = bad predictions.',
     detail: 'cross_entropy(predicted, actual) → 3.42',
   },
   {
-    label: 'Backward Pass',
+    label: 'trainBackwardPass',
     icon: 'arrow-left',
     active: 'bg-amber-500/20 border-amber-500/50 text-amber-300 ring-2 ring-amber-500/30',
-    desc: 'Calculate gradients — for each of the 6.7B weights, figure out which direction to nudge it to reduce the loss. This is backpropagation.',
-    detail: '∂loss/∂weight for all 6.7B parameters',
+    desc: 'Calculate gradients — for each of the billions of weights, figure out which direction to nudge it to reduce the loss. This is backpropagation.',
+    detail: '∂loss/∂weight for all parameters',
   },
   {
-    label: 'Update Weights',
+    label: 'trainUpdateWeights',
     icon: 'wrench',
     active: 'bg-green-500/20 border-green-500/50 text-green-300 ring-2 ring-green-500/30',
     desc: 'Nudge every weight slightly in the direction that reduces loss. The learning rate controls how big each nudge is.',
@@ -121,7 +120,7 @@ function TrainingLoopViz() {
             const isPast = activeStage >= 0 && i < activeStage
             return (
               <button
-                key={stage.label}
+                key={tLabel(lang, stage.label)}
                 onClick={() => clickStage(i)}
                 className={`group relative flex flex-1 flex-col items-center gap-1.5 rounded-lg border px-2 py-3 text-center transition-all duration-300 ${
                   isActive
@@ -134,7 +133,7 @@ function TrainingLoopViz() {
                 <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-125' : ''}`}>
                   <Icon name={stage.icon} />
                 </span>
-                <span className="text-[10px] font-medium leading-tight">{stage.label}</span>
+                <span className="text-[10px] font-medium leading-tight">{tLabel(lang, stage.label)}</span>
                 <span className={`font-mono text-[9px] leading-tight transition-opacity ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                   {stage.detail}
                 </span>
@@ -250,7 +249,7 @@ const trainSteps: TerminalStep[] = [
     delay: 1200,
   },
   {
-    command: '# ...~1 hour in...',
+    command: '# ...~1.5 hours in...',
     output:
       'step   5000 | loss  3.89 | val_bpb 0.812 | lr 5.8e-4 | tok/s 489000\n' +
       'step  10000 | loss  3.21 | val_bpb 0.784 | lr 5.2e-4 | tok/s 491000\n' +
@@ -258,18 +257,18 @@ const trainSteps: TerminalStep[] = [
     delay: 1000,
   },
   {
-    command: '# ...~2 hours — training complete!',
+    command: '# ...~3 hours — training complete!',
     output:
       'step  19000 | loss  2.41 | val_bpb 0.748 | lr 1.2e-5 | tok/s 490000\n' +
       'step  19531 | loss  2.38 | val_bpb 0.745 | lr 0.0e+0 | tok/s 491000\n' +
       '─────────────────────────────────────────\n' +
       '✓ Training complete!\n' +
       '  CORE metric: 0.2585 (beats GPT-2: 0.2565)\n' +
-      '  Wall time: 1h 48m on 8× H100\n' +
-      '  Cost: ~$48 (spot: ~$15)\n' +
+      '  Wall time: ~3h on 8× H100\n' +
+      '  Cost: ~$73 (spot: ~$25)\n' +
       '  Model saved: logs/d26/model.pt\n\n' +
       '  For reference: GPT-2 cost ~$43,000 to train in 2019.\n' +
-      '  7 years of progress: 900× cheaper.',
+      '  7 years of progress: 600× cheaper.',
     delay: 1500,
   },
 ]
@@ -281,7 +280,7 @@ const filesystemByStep: Record<number, FileNode[]> = {
       { name: 'dataloader.py', type: 'file', size: '5.1 KB' },
     ]},
     { name: 'data/', type: 'folder', children: [
-      { name: 'tok32768.model', type: 'file', size: '1.2 MB', annotation: '← Tokenizer' },
+      { name: 'tok65536.model', type: 'file', size: '1.2 MB', annotation: '← Tokenizer' },
       { name: 'climbmix/', type: 'folder', annotation: '← Training data shards' },
     ]},
   ],
@@ -290,7 +289,7 @@ const filesystemByStep: Record<number, FileNode[]> = {
       { name: 'gpt.py', type: 'file', size: '8.2 KB' },
     ]},
     { name: 'data/', type: 'folder', children: [
-      { name: 'tok32768.model', type: 'file', size: '1.2 MB' },
+      { name: 'tok65536.model', type: 'file', size: '1.2 MB' },
       { name: 'climbmix/', type: 'folder', annotation: '← Streaming shards' },
     ]},
     { name: 'logs/', type: 'folder', annotation: '← NEW', children: [
@@ -359,7 +358,7 @@ export const TrainingSection2: React.FC = () => {
       {/* Connected workspace: terminal + filesystem + loss curve */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-zinc-400"><Icon name="terminal" /> nanochat Speedrun — GPT-2 for $48</span>
+          <span className="text-xs font-medium text-zinc-400"><Icon name="terminal" /> nanochat Speedrun — GPT-2 for ~$73</span>
           <span className="h-px flex-1 bg-zinc-800" />
         </div>
         <div className="grid gap-3 lg:grid-cols-2">

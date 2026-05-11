@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { whereItsHeadingSectionSv, whereItsHeadingSectionKo } from './tech-translations'
 import { trendsTranslations } from './data-translations'
 
@@ -35,8 +33,8 @@ const TRENDS: Trend[] = [
     tagline: 'Text + image + audio + video in one model',
     color: 'border-blue-500',
     detail:
-      'Frontier models now process and generate text, images, audio, and video natively — not as bolted-on modules. Gemini was trained multimodal from the start. GPT-5 and Claude handle images, audio, and documents in a single context.',
-    examples: ['Gemini 3.1 Pro (native)', 'GPT-5 (omni)', 'Llama 4 (vision)'],
+      'Frontier models now process and generate text, images, audio, and video natively — not as bolted-on modules. Gemini was trained multimodal from the start. GPT-5.5 and Claude handle images, audio, and documents in a single context.',
+    examples: ['Gemini 3.1 Pro (native)', 'GPT-5.5 (omni)', 'Llama 4 (vision)'],
   },
   {
     id: 'agentic',

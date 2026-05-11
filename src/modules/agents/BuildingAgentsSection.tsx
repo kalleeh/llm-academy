@@ -1,7 +1,5 @@
 import { SimulatedTerminal, type TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { buildingAgentsSectionSv, buildingAgentsSectionKo } from './tech-translations'
 import { frameworksTranslations } from './data-translations'
 
@@ -132,7 +130,7 @@ const EN_P2 = `A basic agent is just a loop: send messages → check for tool ca
 export const BuildingAgentsSection: React.FC = () => {
   const { lang } = useLanguage()
   const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
-  const c = useT({ title: '5. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
+  const c = useT({ title: '6. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">
     <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>

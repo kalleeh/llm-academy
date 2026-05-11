@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { postTrainingPipelineSectionSv, postTrainingPipelineSectionKo } from './tech-translations'
 import { pipelineTranslations, trendsTranslations } from './data-translations'
 

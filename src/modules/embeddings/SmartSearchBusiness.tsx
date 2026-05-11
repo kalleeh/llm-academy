@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { smartSearchSv, smartSearchKo } from './translations'
 
 const DEMOS = [

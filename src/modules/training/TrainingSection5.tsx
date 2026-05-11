@@ -1,6 +1,4 @@
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { trainingSection5Sv, trainingSection5Ko } from './tech-translations'
 import { useState, useMemo, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
@@ -59,7 +57,7 @@ const inspectSteps: TerminalStep[] = [
       '─────────────────────────────────────────────────────\n' +
       'Tensor Name                              Shape              Dtype\n' +
       '─────────────────────────────────────────────────────\n' +
-      'transformer.wte.weight                   [32768, 1280]      bf16\n' +
+      'transformer.wte.weight                   [65536, 1280]      bf16\n' +
       'transformer.h.0.attn.c_attn.weight       [1280, 3840]       bf16\n' +
       'transformer.h.0.attn.c_proj.weight       [1280, 1280]       bf16\n' +
       'transformer.h.0.mlp.c_fc.weight          [1280, 5120]       bf16\n' +

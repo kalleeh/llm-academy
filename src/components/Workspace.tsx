@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { tLabel, useLanguage } from '../i18n'
 import { SimulatedTerminal } from './SimulatedTerminal'
 import type { TerminalStep } from './SimulatedTerminal'
 import { FileExplorer } from './FileExplorer'
@@ -27,6 +28,7 @@ interface WorkspaceProps {
 }
 
 export const Workspace: React.FC<WorkspaceProps> = ({ title, terminalTitle, steps, snapshots }) => {
+  const { lang } = useLanguage()
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {
@@ -66,7 +68,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({ title, terminalTitle, step
           {snapshot ? (
             <>
               {snapshot.label && (
-                <p className="shrink-0 px-4 pt-3 text-xs font-medium text-zinc-400">{snapshot.label}</p>
+                <p className="shrink-0 px-4 pt-3 text-xs font-medium text-zinc-400">{tLabel(lang, snapshot.label)}</p>
               )}
               <div className="flex-1 overflow-y-auto px-1">
                 <FileExplorer tree={snapshot.tree} title="~/project" />

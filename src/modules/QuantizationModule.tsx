@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { SelfExplain } from '../components/SelfExplain'

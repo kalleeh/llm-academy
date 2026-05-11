@@ -4,7 +4,7 @@ import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { fineTuningRunSectionSv, fineTuningRunSectionKo } from './tech-translations'
 
 const STEPS: TerminalStep[] = [
@@ -83,7 +83,7 @@ const STEPS: TerminalStep[] = [
 
 const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   [-1]: {
-    label: 'Project setup',
+    label: 'ftProjectSetup',
     tree: [
       { name: 'finetune.py', type: 'file', size: '4.2 KB' },
       {
@@ -98,7 +98,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Starting point: your fine-tuning script and prepared training data.',
   },
   [2]: {
-    label: 'Base model loaded in 4-bit',
+    label: 'ftBaseLoaded',
     tree: [
       { name: 'finetune.py', type: 'file', size: '4.2 KB' },
       {
@@ -124,7 +124,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: '4-bit quantized loading: 14.96 GB → 4.65 GB VRAM. Enough room for training on a single A100.',
   },
   [3]: {
-    label: 'LoRA adapter configured',
+    label: 'ftLoraConfigured',
     tree: [
       { name: 'finetune.py', type: 'file', size: '4.2 KB' },
       {
@@ -139,7 +139,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'LoRA injects small trainable matrices into q_proj and v_proj. Only 0.087% of parameters are trained — 6.5M out of 7.5B.',
   },
   [5]: {
-    label: 'Training complete',
+    label: 'ftTrainingComplete',
     tree: [
       { name: 'finetune.py', type: 'file', size: '4.2 KB' },
       {
@@ -165,7 +165,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Loss dropped from 1.84 → 0.43 over 938 steps. Training took ~5 min on A100. Peak VRAM: 11.2 GB.',
   },
   [6]: {
-    label: 'Adapter saved',
+    label: 'ftAdapterSaved',
     tree: [
       { name: 'finetune.py', type: 'file', size: '4.2 KB' },
       {
@@ -272,21 +272,17 @@ const EN_P16 = `LoRA and QLoRA modify the model's weight matrices — they chang
 const EN_P15 = `In the training run above, notice step 3:`
 const EN_P14 = `The PEFT family: LoRA, QLoRA, and Prefix Tuning`
 const EN_P13 = `Prefix Tuning — a different approach`
-const EN_P2 = `{c.p2}`
 const EN_P3 = `LoRA is the most popular way to fine-tune efficiently, but it&apos;s not the only one. The key question is always the same:`
-const EN_P4 = `{c.p4}`
 const EN_P5 = `Here&apos;s the idea: every number in a model&apos;s weights is normally stored with high precision — 16 bits per number (FP16), like measuring with a ruler that has millimeter marks. QLoRA says:`
 const EN_P6 = `The LoRA adapter matrices (the small part we&apos;re actually training) still use full precision — they need the fine-grained detail to learn properly. So you get the best of both worlds: a compressed base model that takes up little memory, plus precise adapter training on top.`
 const EN_P7 = `You can — but there&apos;s a cliff. At 4 bits, the quality loss from rounding is barely measurable. At 2 bits, the model starts forgetting things — like photocopying a photocopy, each round of compression loses detail. At 1 bit, you&apos;ve essentially reduced every weight to &quot;positive or negative&quot; — the model loses most of its nuance. 4-bit is the sweet spot where you save ~75% memory with &lt;1% quality loss.`
 const EN_P8 = `A 70B parameter model normally needs ~140 GB of memory (FP16). With QLoRA, the base model fits in ~35 GB, and you only need a few extra GB for the LoRA adapters. That&apos;s the difference between needing a cluster of GPUs and needing a single high-end GPU.`
-const EN_P9 = `{c.p9}`
-const EN_P10 = `{c.p10}`
 const EN_P11 = `Think of it like this: instead of retraining an employee (LoRA), you give them a detailed briefing note at the start of every task (prefix tuning). The employee&apos;s skills don&apos;t change, but the briefing steers their work in the right direction.`
 const EN_P12 = `In practice, prefix tuning is simpler but generally less effective than LoRA for most tasks. It was an important early PEFT method (2021), but LoRA has largely superseded it. You&apos;ll still see it in research and in some specialized use cases where you need to switch between many tasks quickly — swapping a prefix is cheaper than swapping an adapter.`
 const EN_INTRO = `A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.`
 
 export const FineTuningRunSection: React.FC = () => {
-  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p9: EN_P9, p10: EN_P10, p11: EN_P11, p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 , p17: EN_P17 , p18: EN_P18 , p19: EN_P19 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
+  const c = useT({ title: '3. The Fine-Tuning Run', intro: EN_INTRO , p3: EN_P3, p5: EN_P5, p6: EN_P6, p7: EN_P7, p8: EN_P8, p11: EN_P11, p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 , p17: EN_P17 , p18: EN_P18 , p19: EN_P19 }, { sv: fineTuningRunSectionSv, ko: fineTuningRunSectionKo })
   const steps = useMemo(() => STEPS, [])
 
   return (

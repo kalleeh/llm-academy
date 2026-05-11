@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { layerByLayerSectionSv, layerByLayerSectionKo } from './tech-translations'
 import { layerDataTranslations } from './data-translations'
 
@@ -84,11 +82,10 @@ function BarChart({ features }: { features: LayerInfo['features'] }) {
 
 const EN_P4 = `Watch how the representation of the token`
 const EN_P3 = `Watch how the representation of the token`
-const EN_P2 = `{c.p2}`
 export const LayerByLayerSection: React.FC = () => {
   const { lang } = useLanguage()
   const lAYER_DATAT = tArray(lang, LAYER_DATA, layerDataTranslations)
-  const c = useT({ title: '4 · Layer by Layer' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
+  const c = useT({ title: '4 · Layer by Layer'  , p3: EN_P3 , p4: EN_P4 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
   const [step, setStep] = useState(0)
 
   const handleStep = useCallback((s: number) => {

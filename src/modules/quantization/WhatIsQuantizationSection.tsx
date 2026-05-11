@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { whatIsQuantizationSectionSv, whatIsQuantizationSectionKo } from './tech-translations'
 
 const PRECISIONS = [
@@ -11,9 +11,8 @@ const PRECISIONS = [
 
 const EN_P4 = `The key insight: going from FP32 to INT4 cuts memory by`
 const EN_P3 = `The key insight: going from FP32 to INT4 cuts memory by`
-const EN_P2 = `{c.p2}`
 export const WhatIsQuantizationSection: React.FC = () => {
-  const c = useT({ title: '1. What is Quantization?' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
+  const c = useT({ title: '1. What is Quantization?'  , p3: EN_P3 , p4: EN_P4 }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
   const [level, setLevel] = useState(0)
   const precision = PRECISIONS[level]
 

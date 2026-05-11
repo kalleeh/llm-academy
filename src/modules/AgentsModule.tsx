@@ -1,10 +1,10 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { WhatAreAgentsSection } from './agents/WhatAreAgentsSection'
 import { FunctionCallingSection } from './agents/FunctionCallingSection'
 import { MCPSection } from './agents/MCPSection'
 import { DesignPatternsSection } from './agents/DesignPatternsSection'
+import { ContextFilesSection } from './agents/ContextFilesSection'
 import { BuildingAgentsSection } from './agents/BuildingAgentsSection'
 import { A2ASection } from './agents/A2ASection'
 import { SkillsHarnessSection } from './agents/SkillsHarnessSection'
@@ -12,6 +12,7 @@ import { WhatAreAgentsBusiness } from './agents/WhatAreAgentsBusiness'
 import { ToolUseBusiness } from './agents/ToolUseBusiness'
 import { AgentPatternsBusiness } from './agents/AgentPatternsBusiness'
 import { HowAgentsConnectBusiness } from './agents/HowAgentsConnectBusiness'
+import { ContextFilesBusiness } from './agents/ContextFilesBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
@@ -130,7 +131,7 @@ const BUSINESS_QUESTIONS: Question[] = [
       'It encrypts data sent to AI models',
     ],
     correctIndex: 1,
-    explanation: 'MCP is an open standard (created by Anthropic, adopted by OpenAI, AWS, Microsoft, and others) that standardizes how AI connects to tools. Like USB-C replaced a dozen different charger cables with one universal plug, MCP replaces custom integrations with one standard protocol. Over 2,000 MCP connectors already exist.',
+    explanation: 'MCP is an open standard (created by Anthropic, adopted by OpenAI, AWS, Microsoft, and others) that standardizes how AI connects to tools. Like USB-C replaced a dozen different charger cables with one universal plug, MCP replaces custom integrations with one standard protocol. Over 3,000 MCP connectors already exist.',
   },
 ]
 
@@ -145,6 +146,7 @@ export const AgentsModule: React.FC = () => {
         <ToolUseBusiness />
         <AgentPatternsBusiness />
         <HowAgentsConnectBusiness />
+        <ContextFilesBusiness />
         <KnowledgeCheck moduleId="agents-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -156,6 +158,7 @@ export const AgentsModule: React.FC = () => {
       <FunctionCallingSection />
       <MCPSection />
       <DesignPatternsSection />
+      <ContextFilesSection />
       <BuildingAgentsSection />
       <A2ASection />
       <SkillsHarnessSection />

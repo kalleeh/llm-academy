@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { BigPictureSection } from './transformer/BigPictureSection'
 import { AttentionSection } from './transformer/AttentionSection'
 import { MultiHeadSection } from './transformer/MultiHeadSection'
@@ -52,7 +51,7 @@ const questions: Question[] = [
   {
     id: 'transformer-4',
     type: 'free',
-    question: 'Layer normalization appears after both the attention and FFN sub-layers. Explain why a transformer would struggle to train without it, even though it doesn\'t add any "intelligence" to the model.',
+    question: 'Layer normalization appears in each transformer block (before or after sub-layers, depending on the variant). Explain why a transformer would struggle to train without it, even though it doesn\'t add any "intelligence" to the model.',
     modelAnswer: 'Without layer normalization, the numbers flowing through the network would grow or shrink uncontrollably as they pass through dozens of layers. Attention and FFN operations multiply and add values repeatedly — after 32+ layers, small values could vanish to zero (vanishing gradients) or explode to infinity (exploding gradients). Layer norm rescales the values at each step to have consistent mean and variance, keeping the numbers in a stable range. It\'s like recalibrating a measuring instrument between each measurement. Without it, training becomes unstable — the loss oscillates wildly or the model simply fails to learn. It doesn\'t add intelligence, but it makes learning possible.',
     explanation: 'Layer normalization is a training stability mechanism. It doesn\'t help the model "think" better, but without it, the model can\'t learn at all because the numerical values become unstable across many layers.',
   },

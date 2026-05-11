@@ -103,3 +103,67 @@ export const ragVsFinetuneTranslations = {
     { aspect: '비용', rag: '낮음 (임베딩 + 벡터 스토리지)', finetune: '중-높음 (GPU 학습)' },
   ],
 }
+
+// Case studies translations
+export const caseStudiesTranslations = {
+  sv: [
+    { title: 'Kundsupport', problem: 'E-handelsföretag får 10K supportärenden/dag. 60% är repetitiva. Behöver 24/7-täckning med korrekta, varumärkesanpassade svar.', solution: 'RAG + finjusterad liten modell', approach: 'RAG hämtar från kunskapsbas. Finjusterad 8B-modell säkerställer konsekvent varumärkesröst.', result: '70% ärendedeflektering, $0.002/fråga, 800ms snittlatens',
+      steps: [
+        { question: 'Ändras data ofta?', answer: 'Ja — policyer, produkter och FAQ uppdateras veckovis → RAG för kunskapshämtning' },
+        { question: 'Behövs specifik stil?', answer: 'Ja — varumärkesröst, empatisk ton → Finjustera en liten modell för stil' },
+        { question: 'Volym och latens?', answer: '10K/dag, <2s svar → Liten modell (8B) för hastighet, självhostad för kostnad' },
+        { question: 'Integritetsfrågor?', answer: 'Kunddata involverad → Självhostad för att hålla data internt' },
+      ] },
+    { title: 'Kodassistent', problem: 'Startup behöver AI-kodassistent som förstår deras ramverk. Måste hantera kodgenerering, felsökning och dokumentation.', solution: 'Stor modell-API + anpassade prompts', approach: 'Frontier API-modell för maximal kodkvalitet. Omfattande systemprompts med ramverksdokumentation.', result: '40% snabbare utveckling, $3K/mån API-kostnad för 500 utvecklare',
+      steps: [
+        { question: 'Uppgiftskomplexitet?', answer: 'Mycket hög — flerfilsresonemang, felsökning → Behöver frontier-modellkapacitet' },
+        { question: 'Proprietär kunskap?', answer: 'Ja — anpassade ramverksdokument → RAG för API-referens, systemprompt för mönster' },
+        { question: 'Träningsdata tillgänglig?', answer: 'Begränsad — litet ramverk, få exempel → Inte tillräckligt för effektiv finjustering' },
+        { question: 'Budget vs kvalitet?', answer: 'Kvalitet är kritisk för utvecklarförtroende → API-kostnad motiverad av kapacitetsgap' },
+      ] },
+    { title: 'Medicinsk dokumentanalys', problem: 'Sjukhusnätverk behöver extrahera strukturerad data från kliniska anteckningar. Måste hantera medicinsk terminologi och följa HIPAA.', solution: 'Finjusterad domänmodell', approach: 'Finjustera en medicinsk domänmodell på annoterade kliniska dokument. Självhostad för HIPAA.', result: '94% extraktionsnoggrannhet, HIPAA-kompatibel, 3s per dokument',
+      steps: [
+        { question: 'Domänspecificitet?', answer: 'Extremt hög — medicinsk terminologi, förkortningar → Finjustering nödvändig' },
+        { question: 'Regulatoriska krav?', answer: 'HIPAA — ingen data får lämna lokalen → Måste självhosta, inga externa API:er' },
+        { question: 'Utdataformat?', answer: 'Strukturerad extraktion (ICD-koder, mediciner) → Finjustera för konsekvent schema' },
+        { question: 'Datatillgänglighet?', answer: '50K annoterade kliniska anteckningar → Tillräckligt för effektiv finjustering' },
+      ] },
+    { title: 'Intern kunskapsbas', problem: 'Företag med 50K anställda kan inte hitta information. Anställda slösar 2 timmar/dag på att söka svar.', solution: 'RAG med vektorlagring', approach: 'Indexera alla interna dokument i en vektorlagring. RAG-pipeline hämtar relevanta delar och genererar svar med källänkar.', result: '85% svarsnoggrannhet, sparar 45min/anställd/dag, $1.2K/mån',
+      steps: [
+        { question: 'Datavolym och aktualitet?', answer: '100K+ dokument, uppdateras dagligen → RAG med inkrementell indexering' },
+        { question: 'Behövs källhänvisningar?', answer: 'Kritiskt — anställda måste verifiera svar → RAG ger källänkar' },
+        { question: 'Anpassning behövs?', answer: 'Minimal — generellt Q&A-format → Prompting räcker, ingen finjustering' },
+        { question: 'Skala?', answer: '50K användare, ~5K frågor/dag → API-modell för enkelhet, hanterbar kostnad' },
+      ] },
+  ],
+  ko: [
+    { title: '고객 지원', problem: '이커머스 회사가 하루 10K 지원 티켓을 받습니다. 60%가 반복적입니다. 정확하고 브랜드에 맞는 24/7 응대가 필요합니다.', solution: 'RAG + 파인튜닝된 소형 모델', approach: 'RAG가 지식 베이스에서 검색합니다. 파인튜닝된 8B 모델이 일관된 브랜드 보이스를 보장합니다.', result: '70% 티켓 전환, $0.002/쿼리, 800ms 평균 지연',
+      steps: [
+        { question: '데이터가 자주 변경되나요?', answer: '예 — 정책, 제품, FAQ가 매주 업데이트 → 지식 검색을 위한 RAG' },
+        { question: '특정 출력 스타일이 필요한가요?', answer: '예 — 브랜드 보이스, 공감적 톤 → 스타일을 위한 소형 모델 파인튜닝' },
+        { question: '볼륨과 지연시간?', answer: '하루 10K, <2초 응답 → 속도를 위한 소형 모델(8B), 비용을 위한 셀프 호스팅' },
+        { question: '개인정보 우려?', answer: '고객 데이터 관련 → 데이터를 내부에 유지하기 위한 셀프 호스팅' },
+      ] },
+    { title: '코드 어시스턴트', problem: '스타트업이 자체 프레임워크를 이해하는 AI 코드 어시스턴트가 필요합니다. 코드 생성, 디버깅, 문서화를 처리해야 합니다.', solution: '대형 모델 API + 커스텀 프롬프트', approach: '최대 코드 품질을 위한 프론티어 API 모델. 프레임워크 문서가 포함된 상세한 시스템 프롬프트.', result: '40% 빠른 개발, 500명 개발자에 월 $3K API 비용',
+      steps: [
+        { question: '작업 복잡도?', answer: '매우 높음 — 다중 파일 추론, 디버깅 → 프론티어 모델 능력 필요' },
+        { question: '독점 지식?', answer: '예 — 커스텀 프레임워크 문서 → API 참조를 위한 RAG, 패턴을 위한 시스템 프롬프트' },
+        { question: '학습 데이터 가용성?', answer: '제한적 — 작은 프레임워크, 적은 예시 → 효과적인 파인튜닝에 불충분' },
+        { question: '예산 vs 품질?', answer: '개발자 신뢰를 위해 품질이 중요 → 능력 격차로 API 비용 정당화' },
+      ] },
+    { title: '의료 문서 분석', problem: '병원 네트워크가 임상 노트에서 구조화된 데이터를 추출해야 합니다. 의료 용어를 처리하고 HIPAA를 준수해야 합니다.', solution: '파인튜닝된 도메인 모델', approach: '주석이 달린 임상 문서로 의료 도메인 모델을 파인튜닝합니다. HIPAA 준수를 위해 셀프 호스팅.', result: '94% 추출 정확도, HIPAA 준수, 문서당 3초',
+      steps: [
+        { question: '도메인 특수성?', answer: '매우 높음 — 의료 용어, 약어 → 파인튜닝 필수' },
+        { question: '규제 요구사항?', answer: 'HIPAA — 데이터가 구내를 떠날 수 없음 → 셀프 호스팅 필수, 외부 API 불가' },
+        { question: '출력 형식?', answer: '구조화된 추출 (ICD 코드, 약물) → 일관된 스키마를 위한 파인튜닝' },
+        { question: '데이터 가용성?', answer: '50K 주석 임상 노트 → 효과적인 파인튜닝에 충분' },
+      ] },
+    { title: '내부 지식 베이스', problem: '50K 직원 기업이 정보를 찾지 못합니다. 직원들이 하루 2시간을 답변 검색에 낭비합니다.', solution: '벡터 스토어를 사용한 RAG', approach: '모든 내부 문서를 벡터 스토어에 인덱싱합니다. RAG 파이프라인이 관련 청크를 검색하고 소스 링크와 함께 답변을 생성합니다.', result: '85% 답변 정확도, 직원당 하루 45분 절약, 월 $1.2K',
+      steps: [
+        { question: '데이터 볼륨과 최신성?', answer: '100K+ 문서, 매일 업데이트 → 증분 인덱싱을 사용한 RAG' },
+        { question: '인용이 필요한가요?', answer: '필수 — 직원이 답변을 검증해야 함 → RAG가 소스 링크 제공' },
+        { question: '커스터마이징 필요?', answer: '최소 — 일반 Q&A 형식 → 프롬프팅으로 충분, 파인튜닝 불필요' },
+        { question: '규모?', answer: '50K 사용자, 하루 ~5K 쿼리 → 단순성을 위한 API 모델, 관리 가능한 비용' },
+      ] },
+  ],
+}

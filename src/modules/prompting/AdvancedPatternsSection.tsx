@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { advancedPatternsSectionSv, advancedPatternsSectionKo } from './tech-translations'
 import { patternsTranslations } from './data-translations'
 
@@ -136,7 +134,7 @@ Step 3 → "Prioritize implementing claims 1 & 3 (strong evidence).
   },
 ]
 
-const EN_P2 = `Modern models (GPT-4o, Claude 4, Gemini 2) are good enough that simple, clear prompts often beat complex techniques. Use these patterns when simple prompts fail — not as a default.`
+const EN_P2 = `Modern models (GPT-5.5, Claude Opus 4.7, Gemini 3.1 Pro) are good enough that simple, clear prompts often beat complex techniques. Use these patterns when simple prompts fail — not as a default.`
 const EN_INTRO = `Sophisticated techniques for complex tasks. Each pattern includes a visual diagram and a practical example.`
 
 export const AdvancedPatternsSection: React.FC = () => {

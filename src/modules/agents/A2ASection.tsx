@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { a2ASectionSv, a2ASectionKo } from './tech-translations'
 import { protocolsTranslations } from './data-translations'
 
@@ -36,17 +34,16 @@ const A2A_AGENT_CARD = `{
 }`
 
 const PROTOCOLS = [
-  { name: 'MCP', direction: 'Agent → Tool/Resource', analogy: 'USB — connecting peripherals to a computer', scope: 'One agent accessing external capabilities (APIs, databases, file systems)', standard: 'Anthropic (open, adopted by OpenAI, AWS, Microsoft)', status: '2,300+ servers, production-ready' },
-  { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (150+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
+  { name: 'MCP', direction: 'Agent → Tool/Resource', analogy: 'USB — connecting peripherals to a computer', scope: 'One agent accessing external capabilities (APIs, databases, file systems)', standard: 'Anthropic (open, adopted by OpenAI, AWS, Microsoft)', status: '3,000+ servers, production-ready' },
+  { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (100+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
 ]
 
 const EN_P4 = `Example: cross-team agent collaboration`
-const EN_P2 = `{c.p2}`
 const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
   const { lang } = useLanguage()
   const pROTOCOLST = tArray(lang, PROTOCOLS, protocolsTranslations)
-  const c = useT({ title: '6. A2A — Agent-to-Agent Protocol' , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
+  const c = useT({ title: '7. A2A — Agent-to-Agent Protocol' , p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])
 
@@ -55,7 +52,7 @@ export const A2ASection: React.FC = () => {
       <h2 id="a2a-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
         MCP connects agents to <em>tools</em>. A2A connects agents to <em>other agents</em>.
-        Launched by Google in April 2025 and donated to the Linux Foundation, A2A defines how
+        Launched by Google in April 2025 and donated to the Linux Foundation in June 2025, A2A defines how
         opaque agents discover each other, negotiate capabilities, exchange tasks, and stream results —
         regardless of framework or vendor.
       </p>

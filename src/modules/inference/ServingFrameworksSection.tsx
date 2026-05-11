@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { servingFrameworksSectionSv, servingFrameworksSectionKo } from './tech-translations'
 import { frameworksTranslations } from './data-translations'
 
@@ -73,13 +71,12 @@ const FRAMEWORKS: Framework[] = [
 const TABLE_HEADERS = ['Framework', 'Throughput', 'Latency', 'Ease of Use', 'GPU Support'] as const
 
 const EN_P3 = `Inference in Practice — nanochat`
-const EN_P2 = `{c.p2}`
 const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
 
 export const ServingFrameworksSection: React.FC = () => {
   const { lang } = useLanguage()
   const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
-  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
+  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO  , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {

@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { DataTypesSection } from './datafoundations/DataTypesSection'
 import { PipelineSection } from './datafoundations/PipelineSection'

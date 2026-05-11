@@ -50,7 +50,7 @@ export const waysToFeedSv = {
   methods: [
     { name: 'Klistra in i chatten', youKnowItAs: 'Kopiera-klistra text i ChatGPT eller Claude', isRag: 'Inte RAG — du ger bara AI:n mer kontext i konversationen. Ingen sökning inblandad.' },
     { name: 'Ladda upp en fil', youKnowItAs: 'Dra en PDF eller Word-fil till ChatGPT, Claude eller Gemini', isRag: 'Vanligtvis inte RAG — filen stoppas in i kontexten, inte indexerad och sökbar.' },
-    { name: 'Kunskapsbas / Projektfiler', youKnowItAs: 'ChatGPT "Projekt", Claude "Projekt", Amazon Q Business', isRag: 'Ja — detta ÄR RAG. Plattformen indexerar dina dokument, söker i dem och matar relevanta delar till AI:n.' },
+    { name: 'Kunskapsbas / Projektfiler', youKnowItAs: 'ChatGPT "Projekt", Claude "Projekt", Amazon Quick', isRag: 'Ja — detta ÄR RAG. Plattformen indexerar dina dokument, söker i dem och matar relevanta delar till AI:n.' },
     { name: 'Eget RAG-system', youKnowItAs: 'Vad ditt teknikteam bygger med Amazon Bedrock Knowledge Bases', isRag: 'Ja — RAG med full kontroll. Företagsversionen av vad ChatGPT Projekt gör automatiskt.' },
   ],
   selfExplainPrompt: 'En kollega säger "jag laddar bara upp allt till ChatGPT och det fungerar bra — varför behöver vi ett eget RAG-system?" Hur förklarar du skillnaden?',
@@ -63,7 +63,7 @@ export const waysToFeedKo = {
   methods: [
     { name: '채팅에 붙여넣기', youKnowItAs: 'ChatGPT나 Claude에 텍스트 복사-붙여넣기', isRag: 'RAG가 아닙니다 — 대화에 더 많은 맥락을 제공하는 것뿐입니다. 검색이 관여하지 않습니다.' },
     { name: '파일 업로드', youKnowItAs: 'ChatGPT, Claude, Gemini에 PDF나 Word 문서 드래그', isRag: '보통 RAG가 아닙니다 — 파일이 컨텍스트에 넣어지며, 인덱싱되고 검색되지 않습니다.' },
-    { name: '지식 베이스 / 프로젝트 파일', youKnowItAs: 'ChatGPT "프로젝트", Claude "프로젝트", Amazon Q Business', isRag: '예 — 이것이 RAG입니다. 플랫폼이 문서를 인덱싱하고, 질문할 때 검색하고, 관련 부분을 AI에 제공합니다.' },
+    { name: '지식 베이스 / 프로젝트 파일', youKnowItAs: 'ChatGPT "프로젝트", Claude "프로젝트", Amazon Quick', isRag: '예 — 이것이 RAG입니다. 플랫폼이 문서를 인덱싱하고, 질문할 때 검색하고, 관련 부분을 AI에 제공합니다.' },
     { name: '커스텀 RAG 시스템', youKnowItAs: '엔지니어링 팀이 Amazon Bedrock Knowledge Bases로 구축하는 것', isRag: '예 — 완전한 통제가 가능한 RAG. ChatGPT 프로젝트가 자동으로 하는 것의 엔터프라이즈 버전입니다.' },
   ],
   selfExplainPrompt: '동료가 "ChatGPT에 다 업로드하면 잘 되는데 — 왜 커스텀 RAG 시스템이 필요해?"라고 합니다. 차이를 어떻게 설명하시겠습니까?',

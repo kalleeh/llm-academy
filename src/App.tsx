@@ -1,27 +1,27 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { lazy, Suspense, useState, useEffect, useRef, useCallback, useMemo, startTransition } from 'react'
 import { useDifficulty } from './DifficultyContext'
-import { useLanguage, LANGUAGE_META, type Language } from './LanguageContext'
-import { t, MODULE_LABELS } from './ui-labels'
+import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i18n'
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
-import { AIProblemModule } from './modules/AIProblemModule'
-import { DataFoundationsModule } from './modules/DataFoundationsModule'
-import { TokensModule } from './modules/TokensModule'
-import { TransformerModule } from './modules/TransformerModule'
-import { TrainingModule } from './modules/TrainingModule'
-import { LLMDataModule } from './modules/LLMDataModule'
-import { AlignmentModule } from './modules/AlignmentModule'
-import { ArchitectureModule } from './modules/ArchitectureModule'
-import { SolutionModule } from './modules/SolutionModule'
-import { EvaluationModule } from './modules/EvaluationModule'
-import { QuantizationModule } from './modules/QuantizationModule'
-import { InferenceModule } from './modules/InferenceModule'
-import { IndustryModule } from './modules/IndustryModule'
-import { EmbeddingsModule } from './modules/EmbeddingsModule'
-import { PromptingModule } from './modules/PromptingModule'
-import { AgentsModule } from './modules/AgentsModule'
-import { FineTuningModule } from './modules/FineTuningModule'
-import { AIInOrgModule } from './modules/AIInOrgModule'
+
+const AIProblemModule = lazy(() => import('./modules/AIProblemModule').then(m => ({ default: m.AIProblemModule })))
+const DataFoundationsModule = lazy(() => import('./modules/DataFoundationsModule').then(m => ({ default: m.DataFoundationsModule })))
+const TokensModule = lazy(() => import('./modules/TokensModule').then(m => ({ default: m.TokensModule })))
+const TransformerModule = lazy(() => import('./modules/TransformerModule').then(m => ({ default: m.TransformerModule })))
+const TrainingModule = lazy(() => import('./modules/TrainingModule').then(m => ({ default: m.TrainingModule })))
+const LLMDataModule = lazy(() => import('./modules/LLMDataModule').then(m => ({ default: m.LLMDataModule })))
+const AlignmentModule = lazy(() => import('./modules/AlignmentModule').then(m => ({ default: m.AlignmentModule })))
+const ArchitectureModule = lazy(() => import('./modules/ArchitectureModule').then(m => ({ default: m.ArchitectureModule })))
+const SolutionModule = lazy(() => import('./modules/SolutionModule').then(m => ({ default: m.SolutionModule })))
+const EvaluationModule = lazy(() => import('./modules/EvaluationModule').then(m => ({ default: m.EvaluationModule })))
+const QuantizationModule = lazy(() => import('./modules/QuantizationModule').then(m => ({ default: m.QuantizationModule })))
+const InferenceModule = lazy(() => import('./modules/InferenceModule').then(m => ({ default: m.InferenceModule })))
+const IndustryModule = lazy(() => import('./modules/IndustryModule').then(m => ({ default: m.IndustryModule })))
+const EmbeddingsModule = lazy(() => import('./modules/EmbeddingsModule').then(m => ({ default: m.EmbeddingsModule })))
+const PromptingModule = lazy(() => import('./modules/PromptingModule').then(m => ({ default: m.PromptingModule })))
+const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ default: m.AgentsModule })))
+const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
+const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 
 type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning'
 
@@ -165,8 +165,10 @@ function App() {
   useEffect(() => {
     const isVisible = visibleModules.some((m) => m.id === activeModule)
     if (!isVisible && visibleModules.length > 0) {
-      setActiveModule(visibleModules[0].id)
-      setVisited((prev) => new Set(prev).add(visibleModules[0].id))
+      startTransition(() => {
+        setActiveModule(visibleModules[0].id)
+        setVisited((prev) => new Set(prev).add(visibleModules[0].id))
+      })
     }
   }, [visibleModules, activeModule])
 
@@ -205,8 +207,8 @@ function App() {
 
   // Refresh due count periodically and when returning from review
   useEffect(() => {
-    if (!showReview) setDueCount(getDueReviewCount())
-    const id = setInterval(() => setDueCount(getDueReviewCount()), 60_000)
+    if (!showReview) startTransition(() => setDueCount(getDueReviewCount()))
+    const id = setInterval(() => startTransition(() => setDueCount(getDueReviewCount())), 60_000)
     return () => clearInterval(id)
   }, [showReview])
 
@@ -386,7 +388,9 @@ function App() {
             />
           ) : (
             <>
-              <ActiveComponent />
+              <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-600 border-t-amber-400" /></div>}>
+                <ActiveComponent />
+              </Suspense>
               <ModuleNavigation activeModule={activeModule} onNavigate={navigateTo} visibleModules={visibleModules} />
             </>
           )}

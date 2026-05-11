@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { waysToFeedSv, waysToFeedKo } from './translations'
 
 const METHODS = [
   { name: 'Paste into chat', youKnowItAs: 'Copy-pasting text into ChatGPT or Claude', howItWorks: 'The text goes directly into the conversation as context.', whatItHandles: ['Short text (emails, paragraphs)', 'Quick one-off questions'], limits: 'Limited by context window. Nothing saved between conversations.', isRag: 'Not RAG — just giving the AI more context.', color: 'border-blue-500/30 bg-blue-500/5' },
   { name: 'Upload a file in chat', youKnowItAs: 'Dragging a PDF or Word doc into ChatGPT, Claude, or Gemini', howItWorks: 'The tool extracts text and puts it into conversation context.', whatItHandles: ['PDFs, Word docs, spreadsheets, images', 'Asking about a specific document'], limits: 'Still limited by context window. Gone when you start a new conversation.', isRag: 'Usually not RAG — the file is stuffed into context, not indexed.', color: 'border-emerald-500/30 bg-emerald-500/5' },
-  { name: 'Knowledge base / Project files', youKnowItAs: 'ChatGPT Projects, Claude Projects, Amazon Q Business', howItWorks: 'You upload many documents to a persistent collection. The tool searches across all of them per question.', whatItHandles: ['Dozens to thousands of documents', 'Ongoing Q&A about a body of knowledge'], limits: 'You trust the platform\'s chunking and search quality.', isRag: 'Yes — this IS RAG. The platform indexes, searches, and feeds relevant chunks to the AI.', color: 'border-amber-500/30 bg-amber-500/5' },
+  { name: 'Knowledge base / Project files', youKnowItAs: 'ChatGPT Projects, Claude Projects, Amazon Quick', howItWorks: 'You upload many documents to a persistent collection. The tool searches across all of them per question.', whatItHandles: ['Dozens to thousands of documents', 'Ongoing Q&A about a body of knowledge'], limits: 'You trust the platform\'s chunking and search quality.', isRag: 'Yes — this IS RAG. The platform indexes, searches, and feeds relevant chunks to the AI.', color: 'border-amber-500/30 bg-amber-500/5' },
   { name: 'Custom RAG system', youKnowItAs: 'What your engineering team builds using Amazon Bedrock Knowledge Bases or similar', howItWorks: 'Your team controls every step: chunking, embedding, vector database, retrieval, generation.', whatItHandles: ['Thousands to millions of documents', 'Customer-facing chatbots that need accuracy'], limits: 'Requires engineering effort. But you get full control.', isRag: 'Yes — RAG with full control. The enterprise-grade version.', color: 'border-purple-500/30 bg-purple-500/5' },
 ]
 

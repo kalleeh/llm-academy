@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { DataSourcesSection } from './llmdata/DataSourcesSection'
 import { CleaningPipelineSection } from './llmdata/CleaningPipelineSection'
 import { DataMixSection } from './llmdata/DataMixSection'

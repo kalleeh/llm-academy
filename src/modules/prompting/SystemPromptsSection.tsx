@@ -1,15 +1,15 @@
 import { useState, useCallback, useMemo } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { systemPromptsSectionSv, systemPromptsSectionKo } from './tech-translations'
 
 const FRAMEWORK_FIELDS = [
-  { key: 'goal', label: 'Goal', placeholder: 'Classify customer support tickets by urgency', color: 'text-violet-400' },
-  { key: 'context', label: 'Context', placeholder: 'You work for an e-commerce company with 3 urgency levels: low, medium, high', color: 'text-blue-400' },
-  { key: 'format', label: 'Format', placeholder: 'Respond with JSON: {"urgency": "...", "reason": "..."}', color: 'text-green-400' },
-  { key: 'tone', label: 'Tone', placeholder: 'Be concise and professional', color: 'text-amber-400' },
-  { key: 'constraints', label: 'Constraints', placeholder: 'Never make up information. If unsure, classify as medium.', color: 'text-red-400' },
+  { key: 'goal', label: 'spGoal', placeholder: 'Classify customer support tickets by urgency', color: 'text-violet-400' },
+  { key: 'context', label: 'spContext', placeholder: 'You work for an e-commerce company with 3 urgency levels: low, medium, high', color: 'text-blue-400' },
+  { key: 'format', label: 'spFormat', placeholder: 'Respond with JSON: {"urgency": "...", "reason": "..."}', color: 'text-green-400' },
+  { key: 'tone', label: 'spTone', placeholder: 'Be concise and professional', color: 'text-amber-400' },
+  { key: 'constraints', label: 'spConstraints', placeholder: 'Never make up information. If unsure, classify as medium.', color: 'text-red-400' },
 ] as const
 
 type FieldKey = (typeof FRAMEWORK_FIELDS)[number]['key']
@@ -25,6 +25,7 @@ const DEFAULT_VALUES: Record<FieldKey, string> = {
 const EN_INTRO = `Edit each component to build your system prompt. The preview updates live.`
 
 export const SystemPromptsSection: React.FC = () => {
+  const { lang } = useLanguage()
   const c = useT({ title: '3. System Prompts', intro: EN_INTRO }, { sv: systemPromptsSectionSv, ko: systemPromptsSectionKo })
   const [values, setValues] = useState<Record<FieldKey, string>>(DEFAULT_VALUES)
 
@@ -99,7 +100,7 @@ print(response.choices[0].message.content)
             {FRAMEWORK_FIELDS.map(field => (
               <div key={field.key}>
                 <label htmlFor={`sp-${field.key}`} className={`mb-1 block text-xs font-medium ${field.color}`}>
-                  {field.label}
+                  {tLabel(lang, field.label)}
                 </label>
                 <input
                   id={`sp-${field.key}`}

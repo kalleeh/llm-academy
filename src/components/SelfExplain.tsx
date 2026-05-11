@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { useLanguage } from '../LanguageContext'
-import { t } from '../ui-labels'
-import { translateSelfExplain } from '../selfexplain-translations'
+import { t, translateSelfExplain, useLanguage } from '../i18n'
 import { Icon } from './Icon'
 
 interface SelfExplainProps {

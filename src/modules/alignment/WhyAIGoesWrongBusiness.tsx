@@ -1,5 +1,5 @@
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { whyAIGoesWrongSv, whyAIGoesWrongKo } from './translations'
 
 const FAILURES = [
@@ -23,7 +23,7 @@ const FAILURES = [
     title: 'Data leaks — sharing what it shouldn\'t',
     analogy: 'An employee who gossips about confidential meetings',
     description: 'If AI is trained on or has access to sensitive data, it might reveal that information to people who shouldn\'t see it — like an employee who accidentally shares confidential details.',
-    example: 'Samsung engineers pasted proprietary source code into ChatGPT for help. That code became part of the training data, potentially accessible to others.',
+    example: 'Samsung engineers pasted proprietary source code into ChatGPT for help. That data was sent to external servers, raising concerns about confidentiality and potential exposure.',
     risk: 'Intellectual property loss. Privacy violations. Regulatory fines.',
     color: 'border-purple-500/30 bg-purple-500/5',
   },

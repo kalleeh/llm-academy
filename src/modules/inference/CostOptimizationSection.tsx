@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { costOptimizationSectionSv, costOptimizationSectionKo } from './tech-translations'
 
 type ModelTier = '7b' | '70b' | '405b'

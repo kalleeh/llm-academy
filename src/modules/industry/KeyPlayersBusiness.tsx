@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { keyPlayersSv, keyPlayersKo } from './translations'
 
 const PLAYERS = [

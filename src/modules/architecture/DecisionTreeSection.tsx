@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { decisionTreeSectionSv, decisionTreeSectionKo } from './tech-translations'
 
 type Step = 'budget' | 'finetune' | 'result'
@@ -58,14 +58,10 @@ const EN_P9 = `Prompting, RAG, or API use only`
 const EN_P8 = `Custom data, domain-specific tasks`
 const EN_P7 = `Do you need to fine-tune the model?`
 const EN_P6 = `What's your compute budget?`
-const EN_P2 = `{c.p2}`
-const EN_P3 = `{c.p3}`
-const EN_P4 = `{c.p4}`
-const EN_P5 = `{c.p5}`
 const EN_INTRO = `Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.`
 
 export const DecisionTreeSection: React.FC = () => {
-  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5 , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
+  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO  , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
   const [state, setState] = useState<DecisionState>({ budget: null, finetune: null })
 
   const currentStep: Step = state.budget === null ? 'budget' : state.finetune === null ? 'finetune' : 'result'

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { fFNSectionSv, fFNSectionKo } from './tech-translations'
 
 type Mode = 'dense' | 'moe'
@@ -46,7 +46,7 @@ function MoEView() {
       {/* Router */}
       <div className="rounded-lg border border-purple-700 bg-purple-950 px-4 py-2 text-center">
         <div className="font-mono text-xs font-bold text-purple-300">Router</div>
-        <p className="text-[10px] text-purple-400/70">Picks top-2 experts per token</p>
+        <p className="text-[10px] text-purple-400/70">Picks top-K experts per token</p>
       </div>
 
       {/* Fan-out lines */}
@@ -100,9 +100,9 @@ function MoEView() {
   )
 }
 
-const EN_P5 = `Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.`
+const EN_P5 = `Only K of N experts activate per token (e.g., 8 of 256 in DeepSeek V3). DeepSeek V3 has 671B total parameters but only uses 37B per token — more knowledge, same compute cost.`
 const EN_P4 = `After attention gathers context, each token passes through a`
-const EN_P3 = `Only 2 of N experts activate per token. A model can have 400B+ total parameters but only use ~50B per token — more knowledge, same compute cost.`
+const EN_P3 = `Only K of N experts activate per token (e.g., 8 of 256 in DeepSeek V3). DeepSeek V3 has 671B total parameters but only uses 37B per token — more knowledge, same compute cost.`
 const EN_P2 = `After attention gathers context, each token passes through a`
 const EN_INTRO = `Every token activates all parameters. Simple but expensive at scale — a 70B model
             uses all 70B parameters for every single token.`

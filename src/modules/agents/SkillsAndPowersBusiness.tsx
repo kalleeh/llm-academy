@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { skillsAndPowersSv, skillsAndPowersKo } from './translations'
 
 interface Capability {
@@ -16,7 +16,7 @@ const CAPABILITIES: Capability[] = [
     name: 'MCP Servers (tools)',
     analogy: 'A power outlet — plug in any appliance',
     whatItIs: 'A universal connector that lets AI access one specific external system. An MCP server for Salesforce lets any AI tool read and write CRM data. One connector, many AI clients.',
-    example: 'Your company builds an MCP server for your internal ticketing system. Now Claude, Kiro, Amazon Q, and any other MCP-compatible tool can create, read, and update tickets — without building separate integrations for each.',
+    example: 'Your company builds an MCP server for your internal ticketing system. Now Claude, Kiro, Amazon Quick, and any other MCP-compatible tool can create, read, and update tickets — without building separate integrations for each.',
     bestFor: 'Connecting AI to a specific tool or data source. The building block everything else is built on.',
     color: 'border-emerald-500/30 bg-emerald-500/5',
   },

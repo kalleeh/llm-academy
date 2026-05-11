@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { dataSourcesSectionSv, dataSourcesSectionKo } from './tech-translations'
 import { sourcesTranslations } from './data-translations'
 
@@ -16,11 +14,11 @@ interface DataSource {
 const SOURCES: DataSource[] = [
   {
     name: 'Common Crawl', percent: 65, barColor: 'bg-blue-500', color: 'text-blue-400',
-    details: 'Web pages scraped monthly since 2008. FineWeb by HuggingFace extracted 15T tokens with aggressive quality filtering. DCLM (DataComp-LM) and RedPajama also build on Common Crawl with different filtering strategies.',
+    details: 'Web pages scraped regularly since 2008. FineWeb by HuggingFace extracted 15T tokens with aggressive quality filtering. DCLM (DataComp-LM) and RedPajama also build on Common Crawl with different filtering strategies.',
   },
   {
     name: 'Code', percent: 12, barColor: 'bg-green-500', color: 'text-green-400',
-    details: 'GitHub repos, StackOverflow, docs. The Stack v2 has 67.5B lines across 619 languages. Code data dramatically improves reasoning and structured output.',
+    details: 'GitHub repos, StackOverflow, docs. The Stack v2 is 67.5 TB across 619 languages (~900B tokens). Code data dramatically improves reasoning and structured output.',
   },
   {
     name: 'Books', percent: 8, barColor: 'bg-amber-500', color: 'text-amber-400',

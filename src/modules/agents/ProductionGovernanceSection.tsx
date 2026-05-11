@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { productionGovernanceSectionSv, productionGovernanceSectionKo } from './tech-translations'
 import { autonomyTiersTranslations, governanceControlsTranslations } from './data-translations'
 
@@ -31,10 +29,6 @@ const EN_P9 = `Organizations without proactive governance could see a`
 const EN_P8 = `Agent-specific failure modes (beyond hallucination)`
 const EN_P7 = `Autonomy tiers — match oversight to risk`
 const EN_P2 = `Deploying agents to production is fundamentally different from deploying APIs. An API does what you coded. An agent`
-const EN_P3 = `{c.p3}`
-const EN_P4 = `{c.p4}`
-const EN_P5 = `{c.p5}`
-const EN_P6 = `{c.p6}`
 const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselves only with AI systems
         saying the wrong thing; they must contend with systems doing the wrong thing."`
 
@@ -42,7 +36,7 @@ export const ProductionGovernanceSection: React.FC = () => {
   const { lang } = useLanguage()
   const aUTONOMY_TIERST = tArray(lang, AUTONOMY_TIERS, autonomyTiersTranslations)
   const gOVERNANCE_CONTROLST = tArray(lang, GOVERNANCE_CONTROLS, governanceControlsTranslations)
-  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 

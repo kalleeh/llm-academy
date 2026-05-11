@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { whoBuiltWhatSectionSv, whoBuiltWhatSectionKo } from './tech-translations'
 import { playersTranslations } from './data-translations'
 
@@ -19,32 +17,32 @@ const PLAYERS: Player[] = [
   {
     name: 'OpenAI',
     color: 'border-green-500',
-    models: ['GPT-5', 'o3', 'GPT-4o'],
+    models: ['GPT-5.5', 'GPT-5.4', 'o3'],
     approach: 'Closed-source, API-first, massive scale',
     openClosed: 'Closed',
-    innovation: 'Pioneered RLHF at scale; o3 reasoning via RL-trained chain-of-thought',
+    innovation: 'Pioneered RLHF at scale; o3 reasoning via RL-trained chain-of-thought; GPT-5.5 leads coding (88.7% SWE-bench)',
     detail:
-      'Valued at $100B+. Defined the modern LLM era with ChatGPT. GPT-5 pushes multimodal and agentic capabilities. o3 set new benchmarks on ARC-AGI and math reasoning.',
+      'Frontier lab. Defined the modern LLM era with ChatGPT. GPT-5.5 (released April 2026) sets new bars on coding and professional benchmarks. GPT-Rosalind specialised for drug discovery and genomics. o3 leads reasoning benchmarks.',
   },
   {
     name: 'Anthropic',
     color: 'border-amber-500',
-    models: ['Claude Opus 4.6', 'Claude Sonnet 4', 'Claude Haiku 3.5'],
+    models: ['Claude Opus 4.7', 'Claude Sonnet 4.5', 'Claude Haiku 4.5'],
     approach: 'Safety-focused, Constitutional AI',
     openClosed: 'Closed',
-    innovation: 'Constitutional AI — self-supervised alignment without human labels',
+    innovation: 'Constitutional AI — alignment using AI feedback guided by explicit principles, reducing need for human labels on harmful outputs',
     detail:
-      'Founded by ex-OpenAI researchers. Leads on safety research. Claude Opus 4.6 competes at the frontier while maintaining strong refusal and harmlessness properties.',
+      'Founded by ex-OpenAI researchers. Leads on safety and agentic coding. Claude Opus 4.7 (released April 16, 2026) hits 87.6% on SWE-bench Verified at $5/$25 per MTok with a 1M token context window. Investors offered ~$800B valuation; running at ~$30B annualised revenue.',
   },
   {
     name: 'Google DeepMind',
     color: 'border-blue-500',
-    models: ['Gemini 3.1 Pro', 'Gemini Ultra', 'Gemma 3'],
+    models: ['Gemini 3.1 Pro', 'Gemini 3.1 Flash', 'Gemma 3'],
     approach: 'Vertical integration — TPUs, data, distribution',
     openClosed: 'Closed',
     innovation: 'Custom TPU hardware; 1M+ token context windows; Gemma open models',
     detail:
-      'Merged Google Brain + DeepMind. Gemini natively multimodal from training. Owns the full stack: TPU chips, training infra, Search/Android/Cloud distribution.',
+      'Merged Google Brain + DeepMind. Gemini natively multimodal from training. Gemini 3.1 Pro adds smarter reasoning and better factual grounding. Owns the full stack: TPU chips, training infra, Search/Android/Cloud distribution.',
   },
   {
     name: 'Meta',
@@ -64,7 +62,7 @@ const PLAYERS: Player[] = [
     openClosed: 'Open',
     innovation: 'MoE + Multi-head Latent Attention + FP8 training — V3 trained for ~$5.5M',
     detail:
-      'Chinese lab that shocked the industry. V3 (671B total, 37B active) trained on 14.8T tokens for a fraction of typical cost. R1 matches o1 on reasoning via pure RL — no supervised fine-tuning.',
+      'Chinese lab that shocked the industry. V3 (671B total, 37B active) trained on 14.8T tokens for a fraction of typical cost. R1 matches o1 on reasoning — R1-Zero proved pure RL can develop reasoning; the final R1 adds minimal cold-start SFT for readability.',
   },
   {
     name: 'Mistral',
@@ -92,7 +90,7 @@ const PLAYERS: Player[] = [
     models: ['Grok 3', 'Grok 2'],
     approach: 'Real-time data via X/Twitter, massive compute',
     openClosed: 'Closed',
-    innovation: 'Trained on 100K H100 Colossus cluster; real-time information access',
+    innovation: 'Trained on 200K GPU Colossus cluster (H100/H200); real-time information access',
     detail:
       'Elon Musk\'s AI company. Grok 3 trained on one of the largest GPU clusters ever built. Integrates live data from X platform. Open-sourced Grok 1 weights early on.',
   },

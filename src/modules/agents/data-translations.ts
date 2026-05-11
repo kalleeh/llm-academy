@@ -2,12 +2,12 @@
 
 export const protocolsTranslations = {
   sv: [
-    { name: 'MCP', direction: 'Agent → Verktyg/Resurs', analogy: 'USB — ansluta kringutrustning', scope: 'En agent som använder externa funktioner', standard: 'Anthropic (öppen, antagen av OpenAI, AWS, Microsoft)', status: '2300+ servrar, produktionsklar' },
-    { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — datorer som pratar med datorer', scope: 'Agenter som upptäcker och samarbetar med andra agenter', standard: 'Google → Linux Foundation (150+ org: AWS, Microsoft, Salesforce)', status: 'Spec stabil, tidig produktionsanvändning' },
+    { name: 'MCP', direction: 'Agent → Verktyg/Resurs', analogy: 'USB — ansluta kringutrustning', scope: 'En agent som använder externa funktioner', standard: 'Anthropic (öppen, antagen av OpenAI, AWS, Microsoft)', status: '3000+ servrar, produktionsklar' },
+    { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — datorer som pratar med datorer', scope: 'Agenter som upptäcker och samarbetar med andra agenter', standard: 'Google → Linux Foundation (100+ org: AWS, Microsoft, Salesforce)', status: 'Spec stabil, tidig produktionsanvändning' },
   ],
   ko: [
-    { name: 'MCP', direction: '에이전트 → 도구/리소스', analogy: 'USB — 주변기기 연결', scope: '하나의 에이전트가 외부 기능 사용', standard: 'Anthropic (오픈, OpenAI, AWS, Microsoft 채택)', status: '2300+ 서버, 프로덕션 준비' },
-    { name: 'A2A', direction: '에이전트 → 에이전트', analogy: 'HTTP — 컴퓨터 간 통신', scope: '에이전트가 다른 에이전트를 발견하고 협업', standard: 'Google → Linux Foundation (150+ 조직: AWS, Microsoft, Salesforce)', status: '스펙 안정, 초기 프로덕션 채택' },
+    { name: 'MCP', direction: '에이전트 → 도구/리소스', analogy: 'USB — 주변기기 연결', scope: '하나의 에이전트가 외부 기능 사용', standard: 'Anthropic (오픈, OpenAI, AWS, Microsoft 채택)', status: '3000+ 서버, 프로덕션 준비' },
+    { name: 'A2A', direction: '에이전트 → 에이전트', analogy: 'HTTP — 컴퓨터 간 통신', scope: '에이전트가 다른 에이전트를 발견하고 협업', standard: 'Google → Linux Foundation (100+ 조직: AWS, Microsoft, Salesforce)', status: '스펙 안정, 초기 프로덕션 채택' },
   ],
 }
 
@@ -52,7 +52,7 @@ export const comparisonTranslations = {
   sv: [
     { aspect: 'Verktygsupptäckt', functionCalling: 'Hårdkodad i varje API-anrop', mcp: 'Dynamisk — klienten frågar servern vilka verktyg som finns' },
     { aspect: 'Standardisering', functionCalling: 'Leverantörsspecifik (OpenAI, Anthropic har olika format)', mcp: 'Universell standard — bygg en gång, fungerar överallt' },
-    { aspect: 'Ekosystem', functionCalling: 'Du bygger varje integration', mcp: '2300+ färdiga servrar' },
+    { aspect: 'Ekosystem', functionCalling: 'Du bygger varje integration', mcp: '3000+ färdiga servrar' },
     { aspect: 'Tillståndshantering', functionCalling: 'Du hanterar sessioner', mcp: 'Inbyggt sessionsstöd' },
     { aspect: 'Autentisering', functionCalling: 'Du implementerar per verktyg', mcp: 'Standardiserat via OAuth/API-nycklar' },
     { aspect: 'Transport', functionCalling: 'HTTP API-anrop', mcp: 'stdio, SSE, HTTP — flexibelt' },
@@ -60,7 +60,7 @@ export const comparisonTranslations = {
   ko: [
     { aspect: '도구 발견', functionCalling: '각 API 호출에 하드코딩', mcp: '동적 — 클라이언트가 서버에 사용 가능한 도구 질의' },
     { aspect: '표준화', functionCalling: '벤더별 (OpenAI, Anthropic 다른 형식)', mcp: '범용 표준 — 한 번 구축, 어디서나 작동' },
-    { aspect: '생태계', functionCalling: '각 통합을 직접 구축', mcp: '2300+ 기성 서버' },
+    { aspect: '생태계', functionCalling: '각 통합을 직접 구축', mcp: '3000+ 기성 서버' },
     { aspect: '상태 관리', functionCalling: '세션을 직접 관리', mcp: '내장 세션 지원' },
     { aspect: '인증', functionCalling: '도구별로 직접 구현', mcp: 'OAuth/API 키로 표준화' },
     { aspect: '전송', functionCalling: 'HTTP API 호출', mcp: 'stdio, SSE, HTTP — 유연' },
@@ -102,15 +102,17 @@ export const governanceControlsTranslations = {
 }
 export const capabilitiesTranslations = {
   sv: [
-    { name: 'MCP Server', layer: 'Anslutning', what: 'Universell verktygskoppling', granularity: 'Enskilt verktyg', reusability: 'Alla MCP-kompatibla agenter', example: 'mcp-server-salesforce, mcp-server-postgres' },
-    { name: 'AgentCore Skill', layer: 'Beteende', what: 'Arbetsflödespaket — MCP-verktyg + instruktioner', granularity: 'Flerstegs affärsprocess', reusability: 'Alla AgentCore-harness', example: 'kundintroduktion, fakturabehandling' },
-    { name: 'Kiro Power', layer: 'Utvecklarupplevelse', what: 'Kurerade MCP-servrar + riktlinjer + hooks', granularity: 'Teknikdomän', reusability: 'Kiro IDE', example: 'AWS Observability, Arm Development' },
-    { name: 'AgentCore Harness', layer: 'Körtid', what: 'Hanterad agentloop — modell + prompt + verktyg + minne', granularity: 'Komplett agent', reusability: 'Produktionsdriftsättning', example: 'Supportagent, säljassistent' },
+    { name: 'MCP Server', layer: 'Anslutning', what: 'Universell verktygskoppling — exponerar ett API/databas/tjänst för alla MCP-klienter', granularity: 'Enskilt verktyg eller resurs', reusability: 'Alla MCP-kompatibla agenter', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
+    { name: 'Agent Skill (SKILL.md)', layer: 'Beteende', what: 'Öppen standard — mapp med SKILL.md (frontmatter + instruktioner) plus valfria scripts/, references/, assets/. Laddas progressivt: metadata alltid, kropp vid aktivering, filer vid behov.', granularity: 'Flerstegs arbetsflöde eller domänexpertis', reusability: 'Alla Skills-kompatibla agenter (Claude Code, Codex, Microsoft Agent Framework, Kiro, …)', example: 'customer-onboarding, pdf-processing, code-review' },
+    { name: 'AGENTS.md', layer: 'Projektkontext', what: 'README för agenter — repo-instruktioner: setup, kodstil, testkommandon, PR-regler. Öppen standard från Agentic AI Foundation.', granularity: 'Hela repot eller underkatalog (nestade filer stöds)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands m.fl.', example: 'monorepo-rot + AGENTS.md per paket' },
+    { name: 'Kiro Steering', layer: 'Workspace-kontext', what: 'Markdown-filer i .kiro/steering/ som ger Kiro persistent projektkunskap — konventioner, bibliotek, standarder.', granularity: 'Workspace', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
+    { name: 'Bedrock AgentCore', layer: 'Körtid', what: 'Hanterad agentkörtid på AWS — modell + prompt + verktyg + skills + minne + observability + gränser.', granularity: 'Komplett agent', reusability: 'Produktionsdriftsättning', example: 'Supportagent, säljassistent, IT-helpdesk' },
   ],
   ko: [
-    { name: 'MCP Server', layer: '연결', what: '범용 도구 커넥터', granularity: '단일 도구', reusability: '모든 MCP 호환 에이전트', example: 'mcp-server-salesforce, mcp-server-postgres' },
-    { name: 'AgentCore Skill', layer: '행동', what: '워크플로우 패키지 — MCP 도구 + 지시', granularity: '다단계 비즈니스 프로세스', reusability: '모든 AgentCore 하네스', example: '고객 온보딩, 인보이스 처리' },
-    { name: 'Kiro Power', layer: '개발자 경험', what: '큐레이션된 MCP 서버 + 가이드라인 + 훅', granularity: '기술 도메인', reusability: 'Kiro IDE', example: 'AWS Observability, Arm Development' },
-    { name: 'AgentCore Harness', layer: '런타임', what: '관리형 에이전트 루프 — 모델 + 프롬프트 + 도구 + 메모리', granularity: '완전한 에이전트', reusability: '프로덕션 배포', example: '지원 에이전트, 영업 어시스턴트' },
+    { name: 'MCP Server', layer: '연결', what: '범용 도구 커넥터 — 하나의 API/데이터베이스/서비스를 모든 MCP 클라이언트에 노출', granularity: '단일 도구 또는 리소스', reusability: '모든 MCP 호환 에이전트', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
+    { name: 'Agent Skill (SKILL.md)', layer: '행동', what: '오픈 표준 — SKILL.md(프론트매터 + 지시사항) 폴더와 선택적 scripts/, references/, assets/. 점진적 로드: 메타데이터 항상, 본문은 활성화 시, 파일은 필요 시.', granularity: '다단계 워크플로우 또는 도메인 전문성', reusability: '모든 Skills 호환 에이전트 (Claude Code, Codex, Microsoft Agent Framework, Kiro 등)', example: 'customer-onboarding, pdf-processing, code-review' },
+    { name: 'AGENTS.md', layer: '프로젝트 컨텍스트', what: '에이전트용 README — 저장소 수준 지시: 설정, 코드 스타일, 테스트 명령, PR 규칙. Agentic AI Foundation의 오픈 표준.', granularity: '저장소 전체 또는 하위 디렉토리 (중첩 파일 지원)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands 등', example: '모노레포 루트 + 패키지별 AGENTS.md' },
+    { name: 'Kiro Steering', layer: '워크스페이스 컨텍스트', what: '.kiro/steering/의 마크다운 파일이 Kiro에 지속적인 프로젝트 지식 제공 — 규칙, 라이브러리, 표준.', granularity: '워크스페이스', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
+    { name: 'Bedrock AgentCore', layer: '런타임', what: 'AWS의 관리형 에이전트 런타임 — 모델 + 프롬프트 + 도구 + 스킬 + 메모리 + 관측가능성 + 제한.', granularity: '완전한 에이전트', reusability: '프로덕션 배포', example: '지원 에이전트, 영업 어시스턴트, IT 헬프데스크' },
   ],
 }

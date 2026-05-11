@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { alignmentProblemSectionSv, alignmentProblemSectionKo } from './tech-translations'
 import { examplesTranslations } from './data-translations'
 

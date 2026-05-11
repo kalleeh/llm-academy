@@ -1,6 +1,4 @@
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { mCPSectionSv, mCPSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'

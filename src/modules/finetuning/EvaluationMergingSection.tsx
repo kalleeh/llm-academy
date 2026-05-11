@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { evaluationMergingSectionSv, evaluationMergingSectionKo } from './tech-translations'
 
 const STEPS: TerminalStep[] = [
@@ -81,7 +81,7 @@ const STEPS: TerminalStep[] = [
 
 const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   [-1]: {
-    label: 'Starting with trained adapter',
+    label: 'ftStartingAdapter',
     tree: [
       {
         name: 'output',
@@ -108,7 +108,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Starting with the LoRA adapter from training. Time to evaluate, merge, and deploy.',
   },
   [2]: {
-    label: 'Evaluation complete',
+    label: 'ftEvalComplete',
     tree: [
       {
         name: 'output',
@@ -122,7 +122,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Fine-tuned model: 91.2% code accuracy vs 34.8% baseline. Format compliance jumped from 23% to 99%.',
   },
   [3]: {
-    label: 'Merged model (standalone)',
+    label: 'ftMergedModel',
     tree: [
       {
         name: 'output',
@@ -145,7 +145,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Base (14 GB) + Adapter (16 MB) → Merged (14.96 GB). The adapter weights are baked into the model.',
   },
   [4]: {
-    label: 'Quantized GGUF',
+    label: 'ftQuantizedGguf',
     tree: [
       { name: 'merged-model/', type: 'folder', annotation: '14.96 GB' },
       { name: 'llama-medical.Q4_K_M.gguf', type: 'file', size: '4.37 GB', annotation: '← runs on laptop' },
@@ -153,7 +153,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'Merged 14.96 GB → Quantized 4.37 GB. Ready for local inference with llama.cpp or Ollama.',
   },
   [5]: {
-    label: 'Running locally via Ollama',
+    label: 'ftRunningOllama',
     tree: [
       { name: 'llama-medical.Q4_K_M.gguf', type: 'file', size: '4.37 GB' },
       { name: 'Modelfile', type: 'file', size: '156 B' },

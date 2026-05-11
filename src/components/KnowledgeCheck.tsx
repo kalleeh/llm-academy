@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { useLanguage } from '../LanguageContext'
-import { t } from '../ui-labels'
+import { t, useLanguage } from '../i18n'
 import { Icon } from './Icon'
 
 export interface Question {

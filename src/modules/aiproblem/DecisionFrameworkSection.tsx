@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useLanguage, useT } from '../../i18n'
 import { decisionFrameworkSectionSv, decisionFrameworkSectionKo } from './tech-translations'
+import { treeTranslations } from './data-translations'
 
 interface TreeNode {
   id: string
@@ -100,11 +101,14 @@ const NODE_COLORS: Record<string, string> = {
 const EN_INTRO = `Walk through this decision tree to find the right approach for your problem.`
 
 export const DecisionFrameworkSection: React.FC = () => {
+  const { lang } = useLanguage()
   const c = useT({ title: '3. The Decision Framework', intro: EN_INTRO }, { sv: decisionFrameworkSectionSv, ko: decisionFrameworkSectionKo })
   const [path, setPath] = useState<string[]>(['start'])
 
   const currentId = path[path.length - 1]
-  const current = TREE[currentId]
+  const baseNode = TREE[currentId]
+  const trNode = lang !== 'en' ? (treeTranslations[lang]?.[currentId] ?? {}) : {}
+  const current = { ...baseNode, ...trNode }
 
   const choose = useCallback(
     (nextId: string) => {
@@ -130,7 +134,9 @@ export const DecisionFrameworkSection: React.FC = () => {
         {/* Path breadcrumb */}
         <div className="flex flex-wrap items-center gap-1 border-b border-zinc-700 bg-zinc-800 px-6 py-3">
           {path.map((nodeId, i) => {
-            const node = TREE[nodeId]
+            const rawNode = TREE[nodeId]
+            const trBc = lang !== 'en' ? (treeTranslations[lang]?.[nodeId] ?? {}) : {}
+            const node = { ...rawNode, ...trBc }
             return (
               <span key={nodeId} className="flex items-center gap-1">
                 {i > 0 && <span className="text-xs text-zinc-600">→</span>}

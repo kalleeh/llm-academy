@@ -1,7 +1,6 @@
 import { Children, type ReactNode, type FC } from 'react'
 import { Reveal } from './Reveal'
-import { useLanguage } from '../LanguageContext'
-import { MODULE_LABELS } from '../ui-labels'
+import { MODULE_LABELS, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 
 interface ModuleLayoutProps {

@@ -1,11 +1,9 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { caseStudiesSectionSv, caseStudiesSectionKo } from './tech-translations'
-import { casesTranslations } from './data-translations'
+import { caseStudiesTranslations } from './data-translations'
 
 interface DecisionStep {
   question: string
@@ -95,7 +93,7 @@ const EN_INTRO = `Walk through real-world decision processes. Each case shows ho
 
 export const CaseStudiesSection: React.FC = () => {
   const { lang } = useLanguage()
-  const cASEST = tArray(lang, CASES, casesTranslations)
+  const cASEST = tArray(lang, CASES, caseStudiesTranslations)
   const c = useT({ title: '5. Case Studies', intro: EN_INTRO }, { sv: caseStudiesSectionSv, ko: caseStudiesSectionKo })
   const [activeCase, setActiveCase] = useState(0)
   const [revealedSteps, setRevealedSteps] = useState(0)

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { whatAreAgentsSectionSv, whatAreAgentsSectionKo } from './tech-translations'
 
 const TRACE_STEPS = [
@@ -50,9 +50,8 @@ const STEP_STYLES: Record<string, { border: string; bg: string; text: string; ba
 
 const EN_P4 = `A regular LLM generates text. An`
 const EN_P3 = `A regular LLM generates text. An`
-const EN_P2 = `{c.p2}`
 export const WhatAreAgentsSection: React.FC = () => {
-  const c = useT({ title: '1. What Are AI Agents?' , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
+  const c = useT({ title: '1. What Are AI Agents?'  , p3: EN_P3 , p4: EN_P4 }, { sv: whatAreAgentsSectionSv, ko: whatAreAgentsSectionKo })
   const [visibleSteps, setVisibleSteps] = useState(1)
 
   const showNext = useCallback(() => {

@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { tLabel, translateQuestions, useLanguage } from '../i18n'
 import { useState, useCallback, useMemo } from 'react'
 import { CodeBlock } from '../components/CodeBlock'
 import { FileExplorer } from '../components/FileExplorer'
@@ -401,10 +400,10 @@ function BPESection() {
 
 // ── Section 3: Token Economics ───────────────────────────────────────────────
 const ECONOMICS_EXAMPLES: { label: string; text: string; note: string }[] = [
-  { label: 'English prose', text: 'The quick brown fox jumps over the lazy dog.', note: 'Common words → fewer tokens' },
-  { label: 'Python code', text: 'def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)', note: 'Indentation & syntax add tokens' },
-  { label: 'JSON data', text: '{"name": "Alice", "age": 30, "scores": [95, 87, 92]}', note: 'Punctuation-heavy → more tokens' },
-  { label: 'Chinese text', text: '大型语言模型通过标记化将文本转换为数字', note: 'Each character often = 2-3 tokens' },
+  { label: 'tokEnglishProse', text: 'The quick brown fox jumps over the lazy dog.', note: 'tokNoteCommon' },
+  { label: 'tokPythonCode', text: 'def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)', note: 'tokNoteIndent' },
+  { label: 'tokJsonData', text: '{"name": "Alice", "age": 30, "scores": [95, 87, 92]}', note: 'tokNotePunct' },
+  { label: 'tokChineseText', text: '大型语言模型通过标记化将文本转换为数字', note: 'tokNoteChinese' },
 ]
 
 function estimateTokens(text: string): number {
@@ -414,6 +413,7 @@ function estimateTokens(text: string): number {
 }
 
 function TokenEconomicsSection() {
+  const { lang } = useLanguage()
   const [customText, setCustomText] = useState('')
 
   return (
@@ -450,7 +450,7 @@ function TokenEconomicsSection() {
                 <span className="font-mono text-amber-300">{estimateTokens(customText)}</span>
               </div>
               <div className="rounded border border-zinc-700 bg-zinc-800 px-4 py-2">
-                <span className="text-zinc-400">≈ Cost (GPT-4o): </span>
+                <span className="text-zinc-400">≈ Cost (GPT-4o input): </span>
                 <span className="font-mono text-green-400">
                   ${(estimateTokens(customText) * 0.0000025).toFixed(6)}
                 </span>
@@ -478,8 +478,8 @@ function TokenEconomicsSection() {
                 const tokens = estimateTokens(ex.text)
                 const ratio = (ex.text.length / tokens).toFixed(1)
                 return (
-                  <tr key={ex.label} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                    <td className="px-4 py-2 font-medium text-zinc-200">{ex.label}</td>
+                  <tr key={tLabel(lang, ex.label)} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+                    <td className="px-4 py-2 font-medium text-zinc-200">{tLabel(lang, ex.label)}</td>
                     <td className="max-w-xs truncate px-4 py-2 font-mono text-xs text-zinc-400">{ex.text}</td>
                     <td className="px-4 py-2 text-right font-mono text-zinc-300">{ex.text.length}</td>
                     <td className="px-4 py-2 text-right font-mono text-amber-300">{tokens}</td>
@@ -656,32 +656,32 @@ function TrainTokenizerSection() {
           {
             command: 'python -m scripts.tok_train',
             output:
-              'Training BPE tokenizer on FineWeb-Edu sample...\n' +
-              'Vocab size: 32,768 tokens\n' +
-              'Special tokens: <|endoftext|>, <|im_start|>, <|im_end|>\n' +
-              'Training on 1B characters...\n' +
+              'Training BPE tokenizer on ClimbMix sample...\n' +
+              'Vocab size: 65,536 tokens\n' +
+              'Special tokens: <|bos|>, <|user_start|>, <|user_end|>, <|assistant_start|>, <|assistant_end|>\n' +
+              'Training on 2B characters...\n' +
               '─────────────────────────────────────────\n' +
-              'Merge  1000/32768: "▁th" + "e" → "▁the"\n' +
-              'Merge  5000/32768: "▁com" + "put" → "▁comput"\n' +
-              'Merge 10000/32768: "▁inter" + "face" → "▁interface"\n' +
+              'Merge  1000/65536: "▁th" + "e" → "▁the"\n' +
+              'Merge  5000/65536: "▁com" + "put" → "▁comput"\n' +
+              'Merge 10000/65536: "▁inter" + "face" → "▁interface"\n' +
               '─────────────────────────────────────────\n' +
-              '✓ Tokenizer saved to data/tok32768.model\n' +
-              '  Vocab: 32,768 tokens | Model file: 1.2 MB',
+              '✓ Tokenizer saved to data/tok65536.model\n' +
+              '  Vocab: 65,536 tokens | Model file: 2.2 MB',
             delay: 1500,
           },
           {
             command: 'python -m scripts.tok_eval',
             output:
               'Evaluating tokenizer compression rate...\n' +
-              'Dataset: FineWeb-Edu validation split\n' +
+              'Dataset: ClimbMix validation split\n' +
               '─────────────────────────────────────────\n' +
-              'nanochat tok32768:  3.94 bytes/token\n' +
+              'nanochat tok65536:  3.72 bytes/token\n' +
               'GPT-4 (cl100k):    3.69 bytes/token\n' +
               'Llama 3 (128K):    3.52 bytes/token\n' +
               '─────────────────────────────────────────\n' +
               'Note: Larger vocabs compress better but cost\n' +
-              'more embedding parameters. 32K is the sweet\n' +
-              'spot for small models.',
+              'more embedding parameters. 65K balances\n' +
+              'compression and model size.',
             delay: 1000,
           },
         ]}
@@ -690,9 +690,9 @@ function TrainTokenizerSection() {
       <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
         <p className="text-sm text-amber-200/90">
           <strong>Why this matters:</strong> The tokenizer determines how efficiently your model
-          "sees" text. A compression rate of 3.94 bytes/token means every token carries ~4 characters
+          "sees" text. A compression rate of 3.72 bytes/token means every token carries ~4 characters
           of information. Better compression = shorter sequences = faster training = lower cost.
-          nanochat's 32K vocab is deliberately small to keep the embedding table manageable for
+          nanochat's 65K vocab is deliberately small to keep the embedding table manageable for
           models you can train on a single GPU node.
         </p>
       </div>
@@ -731,7 +731,7 @@ const tokensQuestions: Question[] = [
   {
     id: 'tokens-3',
     type: 'mc',
-    question: 'nanochat uses a 32K vocabulary while Llama 3 uses 128K. What is the tradeoff of a larger vocabulary?',
+    question: 'nanochat uses a 65K vocabulary while Llama 3 uses 128K. What is the tradeoff of a larger vocabulary?',
     options: [
       'Larger vocab = better compression (fewer tokens per sentence) but more embedding parameters and memory usage',
       'Larger vocab = worse performance because the model gets confused by too many tokens',
@@ -739,7 +739,7 @@ const tokensQuestions: Question[] = [
       'There is no tradeoff — larger vocabulary is always better',
     ],
     correctIndex: 0,
-    explanation: 'Larger vocabularies compress text better (fewer tokens per sentence = shorter sequences = more context in the window). But each token needs an embedding vector, so a 128K vocab needs 4× more embedding parameters than 32K. For small models like nanochat, that overhead is significant. For massive models like Llama 3, the embedding table is a tiny fraction of total parameters, so the compression benefit wins.',
+    explanation: 'Larger vocabularies compress text better (fewer tokens per sentence = shorter sequences = more context in the window). But each token needs an embedding vector, so a 128K vocab needs 2× more embedding parameters than 65K. For small models like nanochat, that overhead is significant. For massive models like Llama 3, the embedding table is a tiny fraction of total parameters, so the compression benefit wins.',
   },
   {
     id: 'tokens-4',

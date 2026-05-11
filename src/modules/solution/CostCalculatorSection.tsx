@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { costCalculatorSectionSv, costCalculatorSectionKo } from './tech-translations'
 
 type Approach = 'api' | 'self-hosted' | 'fine-tuned'
@@ -16,7 +16,7 @@ interface SelfHostedConfig {
 }
 
 const API_PRICING: PricingConfig = {
-  label: 'API Provider',
+  label: 'apiProvider',
   models: {
     small: { name: 'GPT-4o Mini', inputPer1M: 0.15, outputPer1M: 0.60 },
     medium: { name: 'Claude Sonnet', inputPer1M: 3.00, outputPer1M: 15.00 },
@@ -25,7 +25,7 @@ const API_PRICING: PricingConfig = {
 }
 
 const SELF_HOSTED: SelfHostedConfig = {
-  label: 'Self-Hosted',
+  label: 'selfHosted',
   models: {
     small: { name: 'Llama 3 8B', gpuType: 'A10G', gpuCostPerHr: 1.00, throughputReqPerHr: 600 },
     medium: { name: 'Llama 3 70B', gpuType: 'A100 40GB', gpuCostPerHr: 2.00, throughputReqPerHr: 150 },
@@ -85,7 +85,7 @@ export const CostCalculatorSection: React.FC = () => {
       const monthly = gpuHours * m.gpuCostPerHr
       results.push({
         approach: 'self-hosted',
-        label: 'Self-Hosted',
+        label: 'selfHosted',
         model: `${m.name} on ${m.gpuType}`,
         monthly,
         breakdown: `${gpuHours.toFixed(0)} GPU-hrs × $${m.gpuCostPerHr}/hr`,

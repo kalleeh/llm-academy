@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { lLMDifferenceSectionSv, lLMDifferenceSectionKo } from './tech-translations'
 import { comparisonTranslations, overkillCasesTranslations, mlBetterCasesTranslations } from './data-translations'
 
@@ -58,7 +56,6 @@ const ML_BETTER_CASES = [
 
 const EN_P4 = `Same Problem, Two Approaches: Sentiment Analysis`
 const EN_P3 = `Same Problem, Two Approaches: Sentiment Analysis`
-const EN_P2 = `{c.p2}`
 const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamentally different paradigm.`
 
 export const LLMDifferenceSection: React.FC = () => {
@@ -66,7 +63,7 @@ export const LLMDifferenceSection: React.FC = () => {
   const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
   const oVERKILL_CASEST = tArray(lang, OVERKILL_CASES, overkillCasesTranslations)
   const mL_BETTER_CASEST = tArray(lang, ML_BETTER_CASES, mlBetterCasesTranslations)
-  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
+  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO  , p3: EN_P3 , p4: EN_P4 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
   const [showLLM, setShowLLM] = useState(false)
 
   const toggle = useCallback(() => {

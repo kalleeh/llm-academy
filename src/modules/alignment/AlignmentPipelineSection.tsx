@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { alignmentPipelineStages } from './data-translations'
 import { alignmentPipelineSectionSv, alignmentPipelineSectionKo } from './tech-translations'
 

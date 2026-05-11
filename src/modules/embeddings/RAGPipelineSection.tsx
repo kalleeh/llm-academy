@@ -2,7 +2,7 @@ import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
+import { useLanguage, tLabel, useT } from '../../i18n'
 import { rAGPipelineSectionSv, rAGPipelineSectionKo } from './tech-translations'
 
 const RAG_STEPS: TerminalStep[] = [
@@ -82,11 +82,11 @@ costs are covered for defective items. [Sources: chunks 1, 2, 3]"
 ]
 
 const PIPELINE_STAGES: { label: string; icon: IconName; desc: string }[] = [
-  { label: 'Document', icon: 'file', desc: 'Raw source data' },
-  { label: 'Chunk', icon: 'scissors', desc: 'Split into pieces' },
-  { label: 'Embed', icon: 'numbers', desc: 'Convert to vectors' },
-  { label: 'Store', icon: 'database', desc: 'Vector database' },
-  { label: 'Query', icon: 'search', desc: 'Embed user query' },
+  { label: 'Document', icon: 'file', desc: 'ragDocument' },
+  { label: 'Chunk', icon: 'scissors', desc: 'ragChunk' },
+  { label: 'Embed', icon: 'numbers', desc: 'ragEmbed' },
+  { label: 'Store', icon: 'database', desc: 'ragStore' },
+  { label: 'Query', icon: 'search', desc: 'ragQuery' },
   { label: 'Search', icon: 'bolt', desc: 'ANN + BM25' },
   { label: 'Rerank', icon: 'target', desc: 'Cross-encoder' },
   { label: 'Generate', icon: 'robot', desc: 'LLM response' },
@@ -101,14 +101,10 @@ const EN_P11 = `Catches exact terms, acronyms, and proper nouns that vectors mis
 const EN_P10 = `Finds semantically similar content even with different wording`
 const EN_P9 = `Hybrid Search: Vector + Keyword`
 const EN_P8 = `Retrieval-Augmented Generation (RAG)`
-const EN_P2 = `{c.p2}`
-const EN_P3 = `{c.p3}`
 const EN_P4 = `Pure vector search misses exact keyword matches. Pure keyword search misses semantic similarity. The best systems combine both.`
-const EN_P5 = `{c.p5}`
-const EN_P6 = `{c.p6}`
-const EN_P7 = `{c.p7}`
 export const RAGPipelineSection: React.FC = () => {
-  const c = useT({ title: '5. The RAG Pipeline' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6, p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '5. The RAG Pipeline' , p4: EN_P4 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 , p14: EN_P14 , p15: EN_P15 , p16: EN_P16 }, { sv: rAGPipelineSectionSv, ko: rAGPipelineSectionKo })
   return (
   <section aria-labelledby="rag-pipeline">
     <h2 id="rag-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -127,7 +123,7 @@ export const RAGPipelineSection: React.FC = () => {
             <div className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-center">
               <span className="block text-lg"><Icon name={stage.icon} /></span>
               <span className="block text-xs font-bold text-zinc-200">{stage.label}</span>
-              <span className="block text-xs text-zinc-500">{stage.desc}</span>
+              <span className="block text-xs text-zinc-500">{tLabel(lang, stage.desc)}</span>
             </div>
             {i < PIPELINE_STAGES.length - 1 && (
               <span className="text-xs text-zinc-600">→</span>
@@ -184,7 +180,7 @@ export const RAGPipelineSection: React.FC = () => {
           Builds a <strong className="text-zinc-100">knowledge graph</strong> from documents before
           retrieval. Entities and relationships are extracted, enabling multi-hop reasoning.
           Particularly effective for questions that span multiple documents or require connecting
-          disparate facts. Microsoft Research showed 30-70% improvement on global questions.
+          disparate facts. Microsoft Research showed substantial improvements in comprehensiveness and diversity on global sensemaking questions.
         </p>
       </div>
       <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">

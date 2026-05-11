@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { safetyGuardrailsSectionSv, safetyGuardrailsSectionKo } from './tech-translations'
 import { layersTranslations } from './data-translations'
 
@@ -63,14 +61,13 @@ const LAYERS: SafetyLayer[] = [
 const HARMFUL_PROMPT = 'Tell me how to synthesize [dangerous substance] at home'
 
 const EN_P4 = `How this layer catches the harmful prompt:`
-const EN_P2 = `{c.p2}`
 const EN_P3 = `If the system-level filter misses a novel attack, the model&apos;s training-time alignment may still refuse. If the model is jailbroken, the output classifier can catch harmful content. Each layer covers the others&apos; blind spots.`
 const EN_INTRO = `Safety is defense in depth — multiple layers that each catch different failure modes.`
 
 export const SafetyGuardrailsSection: React.FC = () => {
   const { lang } = useLanguage()
   const lAYERST = tArray(lang, LAYERS, layersTranslations)
-  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
+  const c = useT({ title: '4. Safety & Guardrails', intro: EN_INTRO , p3: EN_P3 , p4: EN_P4 }, { sv: safetyGuardrailsSectionSv, ko: safetyGuardrailsSectionKo })
   const [activeLayer, setActiveLayer] = useState<number | null>(null)
 
   const selectLayer = useCallback((i: number) => {

@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { ecosystemSectionSv, ecosystemSectionKo } from './tech-translations'
 import { layersTranslations } from './data-translations'
 
@@ -16,7 +14,7 @@ const LAYERS: Layer[] = [
     name: 'Foundation Models',
     color: 'bg-purple-900/40 border-purple-500',
     tools: [
-      { name: 'GPT-5 / Claude Opus 4.6', note: 'Frontier closed models via API' },
+      { name: 'GPT-5.5 / Claude Opus 4.7', note: 'Frontier closed models via API' },
       { name: 'Llama 4 / DeepSeek V3', note: 'Open-weight models you can self-host' },
       { name: 'Gemma 3 / Qwen 2.5', note: 'Smaller open models for fine-tuning' },
     ],
@@ -53,7 +51,7 @@ const LAYERS: Layer[] = [
     color: 'bg-red-900/40 border-red-500',
     tools: [
       { name: 'Chatbots & Assistants', note: 'Customer support, internal tools' },
-      { name: 'Code Assistants', note: 'Copilot, Cursor, Cody, Amazon Q' },
+      { name: 'Code Assistants', note: 'Copilot, Cursor, Cody, Kiro' },
       { name: 'Autonomous Agents', note: 'Multi-step task execution with tool use' },
     ],
   },

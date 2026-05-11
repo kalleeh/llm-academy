@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { structuredOutputSectionSv, structuredOutputSectionKo } from './tech-translations'
 import { techniquesTranslations, promptLevelsTranslations } from './data-translations'
 

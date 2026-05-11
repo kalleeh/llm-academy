@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { landscapeSv, landscapeKo } from './translations'
 
 const EN = {

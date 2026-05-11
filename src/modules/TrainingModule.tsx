@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { TrainingSection1 } from './training/TrainingSection1'
 import { TrainingSection2 } from './training/TrainingSection2'
 import { TrainingSection3 } from './training/TrainingSection3'
@@ -47,7 +46,7 @@ const questions: Question[] = [
       'The model has learned 2.4 out of 10 possible language skills',
     ],
     correctIndex: 2,
-    explanation: 'Cross-entropy loss measures how far the model\'s predicted probability distribution is from the true answer. A loss of ~10 means the model assigns roughly equal probability to all ~32K tokens (random guessing). A loss of 2.4 means the model concentrates most probability on a small set of plausible next tokens, with the correct one getting significant weight. Lower is better, but it never reaches 0 because language has genuine ambiguity — multiple next tokens can be valid.',
+    explanation: 'Cross-entropy loss measures how far the model\'s predicted probability distribution is from the true answer. A loss of ~11 means the model assigns roughly equal probability to all ~65K tokens (random guessing). A loss of 2.4 means the model concentrates most probability on a small set of plausible next tokens, with the correct one getting significant weight. Lower is better, but it never reaches 0 because language has genuine ambiguity — multiple next tokens can be valid.',
   },
   {
     id: 'training-4',

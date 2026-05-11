@@ -1,5 +1,5 @@
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { choosingSv, choosingKo } from './translations'
 
 export const ChoosingModelsBusiness: React.FC = () => {

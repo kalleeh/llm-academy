@@ -2,9 +2,7 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { whyEvaluationSectionSv, whyEvaluationSectionKo } from './tech-translations'
 import { modelExamplesTranslations } from './data-translations'
 
@@ -69,15 +67,11 @@ const EN_P10 = `Loss is a training signal, not a quality metric.`
 const EN_P9 = `Compare these two models. Model A has`
 const EN_P8 = `Training loss tells you the model is learning`
 const EN_P7 = `Evaluation in Practice — nanochat`
-const EN_P2 = `{c.p2}`
-const EN_P3 = `{c.p3}`
 const EN_P4 = `Model A has lower perplexity because it produces &ldquo;safe&rdquo; generic sentences that are easy to predict. Model B takes more risks with specific facts and structure — harder to predict, but far more useful.`
-const EN_P5 = `{c.p5}`
-const EN_P6 = `{c.p6}`
 export const WhyEvaluationSection: React.FC = () => {
   const { lang } = useLanguage()
   const mODEL_EXAMPLEST = tArray(lang, MODEL_EXAMPLES, modelExamplesTranslations)
-  const c = useT({ title: '1. Why Evaluation Matters' , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
+  const c = useT({ title: '1. Why Evaluation Matters' , p4: EN_P4 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
   const [selectedModel, setSelectedModel] = useState(0)
   const [activeType, setActiveType] = useState(0)
 

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useLanguage } from '../../LanguageContext'
+import { useLanguage } from '../../i18n'
 import { getWhatAreAgentsContent } from './content'
 
 const LEVEL_STYLES = [

@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { chunkingStrategiesSectionSv, chunkingStrategiesSectionKo } from './tech-translations'
 
 type Strategy = 'fixed' | 'semantic' | 'recursive'
@@ -62,12 +62,13 @@ function chunkRecursive(text: string): string[] {
 }
 
 const STRATEGIES: { id: Strategy; label: string; desc: string }[] = [
-  { id: 'fixed', label: 'Fixed-Size (512 tokens)', desc: 'Split every N tokens regardless of content boundaries' },
-  { id: 'semantic', label: 'Semantic (by paragraph)', desc: 'Split on natural boundaries: paragraphs and sections' },
-  { id: 'recursive', label: 'Recursive (headers → paragraphs → sentences)', desc: 'Try headers first, then paragraphs, then sentences' },
+  { id: 'fixed', label: 'Fixed-Size (512 tokens)', desc: 'chunkFixed' },
+  { id: 'semantic', label: 'Semantic (by paragraph)', desc: 'chunkSemantic' },
+  { id: 'recursive', label: 'Recursive (headers → paragraphs → sentences)', desc: 'chunkRecursive' },
 ]
 
 export const ChunkingStrategiesSection: React.FC = () => {
+  const { lang } = useLanguage()
   const c = useT({ title: '4. Chunking Strategies' }, { sv: chunkingStrategiesSectionSv, ko: chunkingStrategiesSectionKo })
   const [strategy, setStrategy] = useState<Strategy>('fixed')
 
@@ -104,7 +105,7 @@ export const ChunkingStrategiesSection: React.FC = () => {
             aria-pressed={strategy === s.id}
           >
             <span className="block text-xs font-bold">{s.label}</span>
-            <span className="block text-xs opacity-70">{s.desc}</span>
+            <span className="block text-xs opacity-70">{tLabel(lang, s.desc)}</span>
           </button>
         ))}
       </div>
@@ -178,7 +179,7 @@ export const ChunkingStrategiesSection: React.FC = () => {
             </p>
             <p>
               <strong className="text-green-400">✓ Semantic chunking</strong> — produces{' '}
-              <strong className="text-zinc-100">40-60% better retrieval</strong> than fixed-size
+              <strong className="text-zinc-100">20-40% better retrieval precision</strong> than fixed-size
             </p>
             <p>
               <strong className="text-green-400">✓ Recursive splitting</strong> — best for

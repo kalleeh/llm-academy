@@ -1,6 +1,4 @@
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { trainingSection4Sv, trainingSection4Ko } from './tech-translations'
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
@@ -34,10 +32,10 @@ const VARIANTS: Variant[] = [
     id: 'scratch',
     label: 'From Scratch',
     emoji: 'build',
-    cost: '$48 – $100M+',
-    time: '2 hours (GPT-2) to months (frontier)',
+    cost: '$73 – $100M+',
+    time: '3 hours (GPT-2) to months (frontier)',
     data: 'Billions to trillions of tokens',
-    desc: 'Build the entire model from random weights. nanochat can reproduce GPT-2 capability on 8× H100 in ~2 hours for ~$48 — a task that cost $43,000 in 2019. Frontier models still cost millions.',
+    desc: 'Build the entire model from random weights. nanochat can reproduce GPT-2 capability on 8× H100 in ~3 hours for ~$73 — a task that cost $50,000 in 2019. Frontier models still cost millions.',
     code: `# nanochat: reproduce GPT-2 on 8× H100
 # The --depth flag is the ONLY dial — everything else is auto-calculated
 bash runs/speedrun.sh   # or manually:
@@ -45,11 +43,11 @@ bash runs/speedrun.sh   # or manually:
 OMP_NUM_THREADS=1 torchrun --standalone --nproc_per_node=8 \\
   -m scripts.base_train -- --depth=26
 
-# depth=12 → 124M params (GPT-1, ~5 min, ~$1)
-# depth=26 → 1.6B params (GPT-2, ~2 hrs, ~$48)
+# depth=12 → 124M params (GPT-2 Small, ~5 min, ~$1)
+# depth=26 → 1.6B params (GPT-2, ~3 hrs, ~$73)
 # All hyperparams (width, heads, LR, schedule) auto-scale`,
     steps: [
-      { command: 'bash runs/speedrun.sh', output: 'nanochat speedrun | depth=26 | 8× H100\nAuto: width=1280, heads=10, params=1.6B, lr=6e-4\nDataset: NVIDIA ClimbMix\n\n...training for ~2 hours...\n\n✓ CORE metric: 0.2585 (GPT-2 baseline: 0.2565)\n  Wall time: 1h 48m | Cost: ~$48\n  Model saved: logs/d26/model.pt', delay: 1000 },
+      { command: 'bash runs/speedrun.sh', output: 'nanochat speedrun | depth=26 | 8× H100\nAuto: width=1280, heads=10, params=1.6B, lr=6e-4\nDataset: NVIDIA ClimbMix\n\n...training for ~3 hours...\n\n✓ CORE metric: 0.2585 (GPT-2 baseline: 0.2565)\n  Wall time: ~3h | Cost: ~$73\n  Model saved: logs/d26/model.pt', delay: 1000 },
     ],
     snapshots: makeSnapshots(
       [{ name: 'logs/', type: 'folder', children: [
@@ -58,7 +56,7 @@ OMP_NUM_THREADS=1 torchrun --standalone --nproc_per_node=8 \\
           { name: 'state_step019531.pt', type: 'file', size: '9.6 GB', annotation: '← Full checkpoint + optimizer' },
         ]},
       ]}],
-      'GPT-2 capability reproduced for $48. In 2019 this cost $43,000 — 900× cheaper thanks to 7 years of hardware + software progress.',
+      'GPT-2 capability reproduced for ~$73. In 2019 this cost ~$43,000 — 600× cheaper thanks to 7 years of hardware + software progress.',
     ),
   },
   {

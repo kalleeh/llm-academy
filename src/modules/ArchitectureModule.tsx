@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { SelfExplain } from '../components/SelfExplain'
@@ -24,7 +23,7 @@ const questions: Question[] = [
     ],
     correctIndex: 1,
     explanation:
-      'MoE activates only a subset of parameters per token (fast inference), but all expert weights must be loaded into memory. A 8×7B MoE needs ~56B parameters in memory even though only ~14B are active per token.',
+      'MoE activates only a subset of parameters per token (fast inference), but all expert weights must be loaded into memory. Mixtral 8×7B needs ~46.7B parameters in memory even though only ~12.9B are active per token (shared layers like attention aren\'t replicated per expert).',
   },
   {
     id: 'arch-2',

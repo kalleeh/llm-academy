@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
+import { tLabel, useLanguage, useT } from '../../i18n'
 import { leaderboardSectionSv, leaderboardSectionKo } from './tech-translations'
 
 const PROBLEMS: { label: string; icon: IconName; desc: string; example: string }[] = [
-  { label: 'Data Contamination', icon: 'flask', desc: 'Models may have seen benchmark questions during training. If MMLU questions leak into the training data, high scores don\'t mean the model is smart — it memorized the answers.', example: 'A model scores 95% on MMLU but can\'t answer rephrased versions of the same questions.' },
-  { label: 'Benchmark Gaming', icon: 'gamepad', desc: 'Teams can optimize specifically for benchmark performance without improving general capability. Overfitting to the test.', example: 'Fine-tuning on benchmark-style questions boosts scores 5-10% without improving real-world usefulness.' },
-  { label: 'Narrow Measurement', icon: 'ruler', desc: 'Each benchmark tests one slice of capability. A model can ace MMLU (knowledge) while being terrible at following complex instructions.', example: 'Model ranks #1 on coding benchmarks but produces unusable code in real projects with ambiguous requirements.' },
-  { label: 'Saturation', icon: 'trend-up', desc: 'When top models all score 85-95%, the benchmark stops being useful for differentiation. The remaining 5-15% may be noise or edge cases.', example: 'MMLU scores: GPT-5 90%, Claude 88%, Gemini 87% — is that difference meaningful or noise?' },
+  { label: 'dataContamination', icon: 'flask', desc: 'Models may have seen benchmark questions during training. If MMLU questions leak into the training data, high scores don\'t mean the model is smart — it memorized the answers.', example: 'A model scores 95% on MMLU but can\'t answer rephrased versions of the same questions.' },
+  { label: 'benchmarkGaming', icon: 'gamepad', desc: 'Teams can optimize specifically for benchmark performance without improving general capability. Overfitting to the test.', example: 'Fine-tuning on benchmark-style questions boosts scores 5-10% without improving real-world usefulness.' },
+  { label: 'narrowMeasurement', icon: 'ruler', desc: 'Each benchmark tests one slice of capability. A model can ace MMLU (knowledge) while being terrible at following complex instructions.', example: 'Model ranks #1 on coding benchmarks but produces unusable code in real projects with ambiguous requirements.' },
+  { label: 'saturation', icon: 'trend-up', desc: 'When top models all score 85-95%, the benchmark stops being useful for differentiation. The remaining 5-15% may be noise or edge cases.', example: 'MMLU scores: GPT-5.5 91%, Claude Opus 4.7 89%, Gemini 3.1 Pro 88% — is that difference meaningful or noise?' },
 ]
 
 const EN_P12 = `Use benchmarks as a starting filter, then evaluate on`
@@ -17,15 +17,13 @@ const EN_P10 = `The Alternative: LMArena / Chatbot Arena`
 const EN_P9 = `Use benchmarks as a starting filter, then evaluate on`
 const EN_P8 = `Instead of automated benchmarks, LMArena uses`
 const EN_P7 = `The Alternative: LMArena / Chatbot Arena`
-const EN_P2 = `{c.p2}`
-const EN_P3 = `{c.p3}`
 const EN_P4 = `Can&apos;t be gamed (blind), measures what users actually care about, captures nuance that automated metrics miss.`
 const EN_P5 = `Biased toward chatty/verbose responses, English-centric, doesn&apos;t test specialized domains well.`
-const EN_P6 = `{c.p6}`
 const EN_INTRO = `Benchmarks are useful but flawed. Here's why you shouldn't pick a model based on leaderboard rank alone.`
 
 export const LeaderboardSection: React.FC = () => {
-  const c = useT({ title: '4. The Leaderboard Problem', intro: EN_INTRO , p2: EN_P2, p3: EN_P3, p4: EN_P4, p5: EN_P5, p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: leaderboardSectionSv, ko: leaderboardSectionKo })
+  const { lang } = useLanguage()
+  const c = useT({ title: '4. The Leaderboard Problem', intro: EN_INTRO , p4: EN_P4, p5: EN_P5 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: leaderboardSectionSv, ko: leaderboardSectionKo })
   const [expanded, setExpanded] = useState<number | null>(null)
 
   return (
@@ -41,7 +39,7 @@ export const LeaderboardSection: React.FC = () => {
               className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-zinc-800"
             >
               <span><Icon name={p.icon} /></span>
-              <span className="font-medium text-zinc-100">{p.label}</span>
+              <span className="font-medium text-zinc-100">{tLabel(lang, p.label)}</span>
               <span className="ml-auto text-zinc-500">{expanded === i ? '▾' : '▸'}</span>
             </button>
             {expanded === i && (

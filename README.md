@@ -35,36 +35,50 @@ npm run preview # Preview production build
 
 ```
 src/
-├── App.tsx                    # Main app — sidebar nav, module routing, progress tracking
-├── DifficultyContext.tsx       # Business/Technical track toggle
-├── LanguageContext.tsx         # EN/SV/KO language switching
-├── useT.tsx                   # Translation hook
-├── ui-labels.ts               # UI string translations + module labels
-├── quiz-translations.ts       # Quiz question translations
-├── selfexplain-translations.ts # SelfExplain prompt translations
+├── App.tsx                     # Main app — sidebar nav, module routing, progress tracking
+├── DifficultyContext.tsx        # Business/Technical track toggle
+├── i18n/
+│   └── index.ts                # Unified translation API (single import for all i18n)
+├── LanguageContext.tsx          # EN/SV/KO language switching + Language type
+├── useT.tsx                    # Component prose translation hook
+├── tArray.ts                   # Data array translation helper
+├── ui-labels.ts                # UI chrome strings + module sidebar labels
+├── quiz-translations.ts        # Quiz Q&A translations (SV/KO)
+├── selfexplain-translations.ts # SelfExplain prompt translations (SV/KO)
 ├── components/
-│   ├── SimulatedTerminal.tsx   # Step-through CLI with animation
-│   ├── FileExplorer.tsx        # Clickable file tree
-│   ├── Workspace.tsx           # Terminal + filesystem side-by-side
-│   ├── InteractiveDemo.tsx     # Step-through with min-height tracker
-│   ├── CodeBlock.tsx           # Syntax-highlighted code display
-│   ├── Icon.tsx                # 60+ custom SVG icons
-│   ├── KnowledgeCheck.tsx      # MC + free-recall quizzes
-│   ├── SelfExplain.tsx         # "Explain it" prompts
-│   ├── SpacedReview.tsx        # Spaced repetition system
-│   ├── ModuleLayout.tsx        # Module wrapper with scroll-reveal
-│   └── Reveal.tsx              # Scroll-triggered animations
+│   ├── SimulatedTerminal.tsx    # Step-through CLI with animation
+│   ├── FileExplorer.tsx         # Clickable file tree
+│   ├── Workspace.tsx            # Terminal + filesystem side-by-side
+│   ├── InteractiveDemo.tsx      # Step-through with min-height tracker
+│   ├── CodeBlock.tsx            # Syntax-highlighted code display
+│   ├── Icon.tsx                 # 60+ custom SVG icons
+│   ├── KnowledgeCheck.tsx       # MC + free-recall quizzes
+│   ├── SelfExplain.tsx          # "Explain it" prompts
+│   ├── SpacedReview.tsx         # Spaced repetition system
+│   ├── ModuleLayout.tsx         # Module wrapper with scroll-reveal
+│   └── Reveal.tsx               # Scroll-triggered animations
 └── modules/
-    ├── AIProblemModule.tsx      # Module 1: What's an AI Problem?
+    ├── AIProblemModule.tsx       # Module 1: What's an AI Problem?
     ├── DataFoundationsModule.tsx # Module 2: Data Foundations
-    ├── TokensModule.tsx         # Module 3: Tokens & Tokenizers
-    ├── ...                      # Modules 4-18
+    ├── TokensModule.tsx          # Module 3: Tokens & Tokenizers
+    ├── ...                       # Modules 4-18
     └── [module]/
-        ├── SectionName.tsx      # Technical track section
+        ├── SectionName.tsx       # Technical track section
         ├── SectionNameBusiness.tsx # Business track section
-        ├── translations.ts      # Business SV/KO translations
-        └── tech-translations.ts # Technical SV/KO translations
+        ├── translations.ts       # Business SV/KO translations
+        ├── tech-translations.ts  # Technical SV/KO translations
+        └── data-translations.ts  # Data array SV/KO translations
 ```
+
+## Translation Architecture
+
+All translation utilities are imported from a single barrel:
+
+```ts
+import { useT, useLanguage, tArray, translateQuestions, t, MODULE_LABELS } from '../i18n'
+```
+
+Translation content lives in per-module files for maintainability. The `i18n/index.ts` barrel re-exports everything from one place.
 
 ## Deployment
 

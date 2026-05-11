@@ -40,7 +40,7 @@ const initSteps: TerminalStep[] = [
 
 const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   [-1]: {
-    label: 'Empty — about to clone nanochat',
+    label: 'trainEmpty',
     tree: [],
     info: 'nanochat is Karpathy\'s minimal LLM training harness. One repo covers tokenization → pretraining → SFT → RLHF → eval → chat UI.',
   },
@@ -66,7 +66,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
           { name: 'chat_web.py', type: 'file', annotation: 'Talk via web UI' },
         ]},
         { name: 'runs/', type: 'folder', children: [
-          { name: 'speedrun.sh', type: 'file', annotation: '← Train GPT-2 for ~$48' },
+          { name: 'speedrun.sh', type: 'file', annotation: '← Train GPT-2 for ~$73' },
           { name: 'scaling_laws.sh', type: 'file' },
         ]},
         { name: 'pyproject.toml', type: 'file', size: '1.8 KB' },
@@ -75,7 +75,7 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'The entire LLM pipeline in one repo: tokenizer → pretraining → alignment → eval → chat. Each script is a single entry point.',
   },
   [1]: {
-    label: 'Dependencies installed',
+    label: 'trainDepsInstalled',
     tree: [
       { name: 'nanochat/', type: 'folder', children: [
         { name: '.venv/', type: 'folder', annotation: '← Python virtual env', children: [
@@ -97,14 +97,14 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
     info: 'uv sync installs PyTorch with CUDA, plus all dependencies. The --extra gpu flag pulls CUDA-enabled torch.',
   },
   [2]: {
-    label: 'Untrained model = gibberish',
+    label: 'trainUntrained',
     tree: [
       { name: 'nanochat/', type: 'folder', children: [
         { name: 'nanochat/', type: 'folder', children: [
           { name: 'gpt.py', type: 'file', size: '8.2 KB', annotation: '← Defines the architecture' },
         ]},
         { name: 'data/', type: 'folder', annotation: '← NEW', children: [
-          { name: 'tok32768.model', type: 'file', size: '1.2 MB', annotation: '← Default tokenizer' },
+          { name: 'tok65536.model', type: 'file', size: '1.2 MB', annotation: '← Default tokenizer' },
         ]},
       ]},
     ],

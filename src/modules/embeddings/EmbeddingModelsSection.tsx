@@ -1,14 +1,14 @@
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { embeddingModelsSectionSv, embeddingModelsSectionKo } from './tech-translations'
 import { CodeBlock } from '../../components/CodeBlock'
 
 const MODELS = [
-  { name: 'Voyage-3-large', provider: 'Voyage AI', dims: 1024, maxTokens: '32K', perf: '★★★★★', cost: '$0.06/1M', note: 'Best overall 2025-2026, outperforms by 9-20%' },
+  { name: 'Voyage-3-large', provider: 'Voyage AI', dims: 1024, maxTokens: '32K', perf: '★★★★★', cost: '$0.18/1M', note: 'Best overall 2025-2026, Matryoshka dims (256/512/1024/2048)' },
   { name: 'text-embedding-3-large', provider: 'OpenAI', dims: 3072, maxTokens: '8K', perf: '★★★★☆', cost: '$0.13/1M', note: 'Widely adopted, good all-rounder' },
-  { name: 'embed-v4', provider: 'Cohere', dims: 1024, maxTokens: '128K', perf: '★★★★☆', cost: '$0.10/1M', note: 'Long context, multimodal support' },
+  { name: 'embed-v4', provider: 'Cohere', dims: 1536, maxTokens: '128K', perf: '★★★★☆', cost: '$0.10/1M', note: 'Long context, multimodal (supports 256–1536 dims)' },
   { name: 'BGE-large-en-v1.5', provider: 'BAAI (open)', dims: 1024, maxTokens: '512', perf: '★★★☆☆', cost: 'Free', note: 'Best open-source, self-hosted' },
-  { name: 'E5-mistral-7b', provider: 'Microsoft (open)', dims: 4096, maxTokens: '32K', perf: '★★★★☆', cost: 'Free', note: 'LLM-based embeddings, high quality' },
-  { name: 'GTE-Qwen2', provider: 'Alibaba (open)', dims: 1536, maxTokens: '8K', perf: '★★★★☆', cost: 'Free', note: 'Strong multilingual performance' },
+  { name: 'E5-mistral-7b', provider: 'Microsoft (open)', dims: 4096, maxTokens: '4K', perf: '★★★★☆', cost: 'Free', note: 'LLM-based embeddings, high quality' },
+  { name: 'GTE-Qwen2-7B', provider: 'Alibaba (open)', dims: 3584, maxTokens: '32K', perf: '★★★★☆', cost: 'Free', note: 'Strong multilingual performance' },
 ] as const
 
 const EMBEDDING_CODE = `import openai
@@ -39,11 +39,10 @@ print(f"Similarity: {similarity:.3f}")  # ~0.92`
 const EN_P5 = `Embedding Model Comparison (2025-2026)`
 const EN_P4 = `Embedding Model Comparison (2025-2026)`
 const EN_P2 = `Embedding models and LLMs are both transformers, but they serve different purposes. LLMs`
-const EN_P3 = `{c.p3}`
 const EN_INTRO = `Input → Variable-length text output`
 
 export const EmbeddingModelsSection: React.FC = () => {
-  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2, p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
+  const c = useT({ title: '2. How Embedding Models Work', intro: EN_INTRO , p2: EN_P2 , p4: EN_P4 , p5: EN_P5 }, { sv: embeddingModelsSectionSv, ko: embeddingModelsSectionKo })
   return (
   <section aria-labelledby="embedding-models">
     <h2 id="embedding-models" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
@@ -69,7 +68,7 @@ export const EmbeddingModelsSection: React.FC = () => {
         <h3 className="mb-2 font-mono text-sm font-semibold text-violet-400">Embedding Model</h3>
         <p className="mb-3 text-xs text-zinc-400">Input → Fixed-size vector</p>
         <div className="space-y-1.5 text-xs text-zinc-300">
-          <p>• Encoder-only: processes all tokens at once</p>
+          <p>• Bidirectional or causal: processes all tokens, returns one vector</p>
           <p>• Output is always the same dimensionality</p>
           <p>• Used for: search, retrieval, clustering, classification</p>
           <p>• Example: Voyage-3-large, text-embedding-3-large</p>

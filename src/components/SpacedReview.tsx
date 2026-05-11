@@ -1,7 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { Icon } from './Icon'
-import { useLanguage } from '../LanguageContext'
-import { t } from '../ui-labels'
+import { t, useLanguage } from '../i18n'
 import type { Question } from './KnowledgeCheck'
 
 interface SpacedReviewProps {

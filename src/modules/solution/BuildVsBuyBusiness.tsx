@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../useT'
+import { useT } from '../../i18n'
 import { buildVsBuySv, buildVsBuyKo } from './translations'
 
 const FACTORS: { question: string; rent: string; buy: string; icon: IconName }[] = [

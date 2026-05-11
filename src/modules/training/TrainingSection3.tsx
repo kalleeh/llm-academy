@@ -15,7 +15,7 @@ const beforeTraining: FileNode[] = [
     name: 'data/',
     type: 'folder',
     children: [
-      { name: 'tok32768.model', type: 'file', size: '1.2 MB', annotation: '← Tokenizer' },
+      { name: 'tok65536.model', type: 'file', size: '1.2 MB', annotation: '← Tokenizer' },
       { name: 'climbmix/', type: 'folder', annotation: '← Training data shards' },
     ],
   },
@@ -39,7 +39,7 @@ const afterTraining: FileNode[] = [
     name: 'data/',
     type: 'folder',
     children: [
-      { name: 'tok32768.model', type: 'file', size: '1.2 MB' },
+      { name: 'tok65536.model', type: 'file', size: '1.2 MB' },
       { name: 'climbmix/', type: 'folder' },
     ],
   },

@@ -1,14 +1,15 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { SelfExplain } from '../components/SelfExplain'
 import { WhyEvaluationSection } from './evaluation/WhyEvaluationSection'
 import { BenchmarksSection } from './evaluation/BenchmarksSection'
+import { ModelSelectionSection } from './evaluation/ModelSelectionSection'
 import { CustomEvalSection } from './evaluation/CustomEvalSection'
 import { LeaderboardSection } from './evaluation/LeaderboardSection'
 import { MeasuringAIBusiness } from './evaluation/MeasuringAIBusiness'
+import { ModelPersonalitiesBusiness } from './evaluation/ModelPersonalitiesBusiness'
 import { ChoosingModelsBusiness } from './evaluation/ChoosingModelsBusiness'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -77,6 +78,7 @@ export const EvaluationModule: React.FC = () => {
       <ModuleLayout moduleId="evaluation" title="How to Know If It Works" subtitle="Measuring AI performance, choosing the right model, and why &quot;it seems good&quot; isn&apos;t good enough.">
         <MeasuringAIBusiness />
         <ChoosingModelsBusiness />
+        <ModelPersonalitiesBusiness />
         <KnowledgeCheck moduleId="evaluation-business" questions={translateQuestions(businessQuestions, lang)} />
       </ModuleLayout>
     )
@@ -87,6 +89,7 @@ export const EvaluationModule: React.FC = () => {
       <WhyEvaluationSection />
       <SelfExplain prompt="You just compared models with different perplexity scores and saw how low perplexity doesn't guarantee good responses. Explain in your own words why perplexity alone is insufficient for evaluating an LLM, and what you'd measure instead." modelAnswer="Perplexity measures average token prediction quality — a model can be great at predicting tokens while being terrible at following instructions, staying factual, or being safe. Instead, you'd measure: task-specific accuracy (does it answer correctly?), instruction following (does it do what you asked?), safety (does it refuse harmful requests?), and user preference (do humans prefer its responses?). These require task-specific benchmarks and human evaluation, not just a single number." />
       <BenchmarksSection />
+      <ModelSelectionSection />
       <CustomEvalSection />
       <LeaderboardSection />
       <KnowledgeCheck moduleId="evaluation" questions={translateQuestions(questions, lang)} />

@@ -1,7 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { modelConfigSectionSv, modelConfigSectionKo } from './tech-translations'
 import { presetsTranslations } from './data-translations'
 
@@ -37,8 +35,8 @@ function calcParams(c: Config) {
   const ffnSize = 4 * h
   // Attention: Q, K, V, O projections
   const attnPerLayer = 4 * h * h
-  // FFN per expert: up + down projections
-  const ffnPerExpert = 2 * h * ffnSize
+  // FFN per expert: gate + up + down projections (SwiGLU)
+  const ffnPerExpert = 3 * h * ffnSize
   const totalExperts = Math.max(c.experts, 1)
   const ffnPerLayer = ffnPerExpert * totalExperts
   // Router params (if MoE)

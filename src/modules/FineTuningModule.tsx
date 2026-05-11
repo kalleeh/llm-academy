@@ -1,5 +1,4 @@
-import { translateQuestions } from '../quiz-translations'
-import { useLanguage } from '../LanguageContext'
+import { translateQuestions, useLanguage } from '../i18n'
 import { WhenToFineTuneSection } from './finetuning/WhenToFineTuneSection'
 import { PreparingDataSection } from './finetuning/PreparingDataSection'
 import { FineTuningRunSection } from './finetuning/FineTuningRunSection'

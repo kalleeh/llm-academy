@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../useT'
-import { useLanguage } from '../../LanguageContext'
-import { tArray } from '../../tArray'
+import { tArray, useLanguage, useT } from '../../i18n'
 import { buildVsBuySectionSv, buildVsBuySectionKo } from './tech-translations'
 import { comparisonTranslations, constraintsTranslations } from './data-translations'
 
@@ -79,14 +77,13 @@ const APPROACH_META: Record<ApproachId, { label: string; color: string; examples
 
 const EN_P4 = `Decision Framework — Answer to Get a Recommendation`
 const EN_P3 = `Decision Framework — Answer to Get a Recommendation`
-const EN_P2 = `{c.p2}`
 const EN_INTRO = `Three main deployment approaches, each with different tradeoffs.`
 
 export const BuildVsBuySection: React.FC = () => {
   const { lang } = useLanguage()
   const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
   const cONSTRAINTST = tArray(lang, CONSTRAINTS, constraintsTranslations)
-  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
+  const c = useT({ title: '3. Build vs Buy', intro: EN_INTRO  , p3: EN_P3 , p4: EN_P4 }, { sv: buildVsBuySectionSv, ko: buildVsBuySectionKo })
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
   const selectOption = useCallback((constraintIdx: number, optionIdx: number) => {
