@@ -72,8 +72,8 @@ export const EcosystemSection: React.FC = () => {
 
   return (
     <section aria-labelledby="ecosystem">
-      <h2 id="ecosystem" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="ecosystem" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="space-y-2">
         {lAYERST.map((layer, idx) => (
@@ -84,18 +84,18 @@ export const EcosystemSection: React.FC = () => {
               aria-expanded={expanded === idx}
             >
               <div className="flex items-center justify-between">
-                <h3 className="font-mono text-sm font-bold text-zinc-100">{layer.name}</h3>
+                <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{layer.name}</h3>
                 <span className="text-xs text-zinc-500">
                   {layer.tools.map(t => t.name).join(' · ')}
                 </span>
               </div>
             </button>
             {expanded === idx && (
-              <div className="ml-4 mt-1 space-y-2 border-l-2 border-zinc-700 pl-4 pt-2">
+              <div className="ml-4 mt-1 space-y-2 border-l-2 border-zinc-200 dark:border-zinc-700 pl-4 pt-2">
                 {layer.tools.map(tool => (
-                  <div key={tool.name} className="rounded bg-zinc-900 p-3">
-                    <p className="font-mono text-xs font-bold text-zinc-100">{tool.name}</p>
-                    <p className="mt-1 text-xs text-zinc-400">{tool.note}</p>
+                  <div key={tool.name} className="rounded bg-white dark:bg-zinc-900 p-3">
+                    <p className="font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{tool.name}</p>
+                    <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{tool.note}</p>
                   </div>
                 ))}
               </div>
@@ -109,9 +109,9 @@ export const EcosystemSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-        <p className="text-xs leading-relaxed text-zinc-400">
-          <strong className="text-zinc-300">Key insight:</strong> {c.p2}
+      <div className="mt-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+        <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <strong className="text-zinc-700 dark:text-zinc-300">Key insight:</strong> {c.p2}
         </p>
       </div>
     </section>

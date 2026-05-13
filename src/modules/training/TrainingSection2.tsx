@@ -127,7 +127,7 @@ function TrainingLoopViz() {
                     ? stage.active
                     : isPast
                       ? 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400'
-                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-600 hover:border-zinc-700 hover:text-zinc-400'
+                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-600 hover:border-zinc-200 dark:border-zinc-700 hover:text-zinc-600 dark:text-zinc-400'
                 }`}
               >
                 <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-125' : ''}`}>

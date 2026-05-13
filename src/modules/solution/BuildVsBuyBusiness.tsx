@@ -26,24 +26,24 @@ export const BuildVsBuyBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="bvb-biz">
-      <h2 id="bvb-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="bvb-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         {c.intro}
       </p>
-      <p className="mb-6 max-w-2xl text-sm text-zinc-400">
+      <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
   {c.introSub}
       </p>
 
       <div className="mb-6 space-y-3">
         {FACTORS.map((f, i) => (
-          <div key={i} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-            <p className="mb-3 text-sm font-medium text-zinc-100"><Icon name={f.icon} className="mr-1 inline" /> {f.question}</p>
+          <div key={i} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+            <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100"><Icon name={f.icon} className="mr-1 inline" /> {f.question}</p>
             <div className="grid gap-2 sm:grid-cols-2">
-              <button onClick={() => select(i, 'rent')} className={`rounded-lg border p-3 text-left text-sm transition-all ${answers[i] === 'rent' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300' : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'}`}>
+              <button onClick={() => select(i, 'rent')} className={`rounded-lg border p-3 text-left text-sm transition-all ${answers[i] === 'rent' ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300' : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'}`}>
                 <span className="text-xs font-medium text-emerald-400">Rent (API service)</span>
                 <p className="mt-1 text-xs">{f.rent}</p>
               </button>
-              <button onClick={() => select(i, 'buy')} className={`rounded-lg border p-3 text-left text-sm transition-all ${answers[i] === 'buy' ? 'border-blue-500/50 bg-blue-500/10 text-blue-300' : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'}`}>
+              <button onClick={() => select(i, 'buy')} className={`rounded-lg border p-3 text-left text-sm transition-all ${answers[i] === 'buy' ? 'border-blue-500/50 bg-blue-500/10 text-blue-300' : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'}`}>
                 <span className="text-xs font-medium text-blue-400">Buy (self-hosted)</span>
                 <p className="mt-1 text-xs">{f.buy}</p>
               </button>
@@ -55,7 +55,7 @@ export const BuildVsBuyBusiness: React.FC = () => {
       {answered === FACTORS.length && (
         <div className="mb-8 rounded-lg border border-amber-500/30 bg-amber-500/5 p-5">
           <p className="mb-2 text-sm font-medium text-amber-300">Your result</p>
-          <p className="text-sm text-zinc-300">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">
             {rentScore > buyScore
               ? `You leaned toward renting (${rentScore}/${FACTORS.length}). An API service like Amazon Bedrock, Azure OpenAI, or Google Vertex AI is probably your best starting point. Bedrock is especially flexible — it gives you access to Claude, Llama, Mistral, and Amazon Nova through one API, so you're not locked into a single model provider. Low setup, no maintenance, and you can always switch later.`
               : buyScore > rentScore

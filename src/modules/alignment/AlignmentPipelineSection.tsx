@@ -18,7 +18,7 @@ const STAGES: Stage[] = [
   {
     id: 'base',
     label: 'Base Model',
-    color: 'text-zinc-400',
+    color: 'text-zinc-600 dark:text-zinc-400',
     bgColor: 'bg-zinc-700',
     description: 'Raw pre-trained model — predicts next tokens, no concept of helpfulness.',
     details: 'The base model has learned language structure and world knowledge from trillions of tokens. It can complete any text, but has no preference for helpful vs harmful completions. GPT-3 (175B params) was a base model — powerful but unpredictable.',
@@ -116,8 +116,8 @@ export const AlignmentPipelineSection: React.FC = () => {
 
   return (
     <section aria-labelledby="alignment-pipeline">
-      <h2 id="alignment-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="alignment-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Alignment pipeline stages">
@@ -128,7 +128,7 @@ export const AlignmentPipelineSection: React.FC = () => {
               className={`rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                 activeStage === i
                   ? `border-zinc-500 ${stage.bgColor} ${stage.color}`
-                  : `border-zinc-700 ${stage.color} hover:border-zinc-600`
+                  : `border-zinc-200 dark:border-zinc-700 ${stage.color} hover:border-zinc-600`
               }`}
             >
               {stage.label}
@@ -142,12 +142,12 @@ export const AlignmentPipelineSection: React.FC = () => {
 
       {/* Stage detail */}
       {activeStage !== null && (
-        <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+        <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
           <h3 className={`mb-1 text-sm font-semibold ${STAGES[activeStage].color}`}>
             {STAGES[activeStage].label}
           </h3>
-          <p className="mb-2 text-sm text-zinc-300">{STAGES[activeStage].description}</p>
-          <p className="text-xs leading-relaxed text-zinc-400">{STAGES[activeStage].details}</p>
+          <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">{STAGES[activeStage].description}</p>
+          <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{STAGES[activeStage].details}</p>
         </div>
       )}
 

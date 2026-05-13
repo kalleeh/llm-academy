@@ -145,7 +145,7 @@ export const CoreTechniquesSection: React.FC = () => {
             className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
               t.id === activeTab
                 ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100'
-                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-800 dark:text-zinc-200'
             }`}
           >
             {t.label}

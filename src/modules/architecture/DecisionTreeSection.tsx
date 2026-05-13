@@ -117,7 +117,7 @@ export const DecisionTreeSection: React.FC = () => {
                 <button
                   key={opt.value}
                   onClick={() => setBudget(opt.value)}
-                  className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800"
                 >
                   <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">{opt.label}</p>
                   <p className="mt-1 text-xs text-zinc-500">{opt.desc}</p>
@@ -135,14 +135,14 @@ export const DecisionTreeSection: React.FC = () => {
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setFinetune(true)}
-                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800"
               >
                 <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">Yes</p>
                 <p className="mt-1 text-xs text-zinc-500">{c.p8}</p>
               </button>
               <button
                 onClick={() => setFinetune(false)}
-                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                className="rounded-lg border border-zinc-200 dark:border-zinc-700 p-4 text-left transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800"
               >
                 <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">No</p>
                 <p className="mt-1 text-xs text-zinc-500">{c.p9}</p>
@@ -170,7 +170,7 @@ export const DecisionTreeSection: React.FC = () => {
 
             <button
               onClick={reset}
-              className="rounded-lg border border-zinc-200 dark:border-zinc-700 px-4 py-2 text-sm text-zinc-500 dark:text-zinc-400 transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              className="rounded-lg border border-zinc-200 dark:border-zinc-700 px-4 py-2 text-sm text-zinc-500 dark:text-zinc-400 transition-colors hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-800 dark:text-zinc-200"
             >
               ← Start Over
             </button>

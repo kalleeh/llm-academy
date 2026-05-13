@@ -53,8 +53,8 @@ export const CustomEvalSection: React.FC = () => {
 
   return (
     <section aria-labelledby="custom-eval">
-      <h2 id="custom-eval" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.p4}<em>your</em> fine-tuned model, you need
+      <h2 id="custom-eval" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p4}<em>your</em> fine-tuned model, you need
         evaluation sets from your domain. Pick your task type to see recommended metrics:
       </p>
 
@@ -65,8 +65,8 @@ export const CustomEvalSection: React.FC = () => {
             onClick={() => setSelectedTask(i)}
             className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
               selectedTask === i
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             {t.label}
@@ -74,11 +74,11 @@ export const CustomEvalSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{task.label}</h3>
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{task.label}</h3>
         <div className="mb-3 flex flex-wrap gap-2">
           {task.metrics.map(m => (
-            <span key={m} className="rounded-full bg-zinc-800 px-2.5 py-1 text-xs text-zinc-300">{m}</span>
+            <span key={m} className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-xs text-zinc-700 dark:text-zinc-300">{m}</span>
           ))}
         </div>
         <p className="text-sm text-amber-200/80"><Icon name="lightbulb" /> {task.tip}</p>

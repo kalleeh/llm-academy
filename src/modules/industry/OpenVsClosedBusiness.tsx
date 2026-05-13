@@ -17,8 +17,8 @@ export const OpenVsClosedBusiness: React.FC = () => {
   }, { sv: openVsClosedSv, ko: openVsClosedKo })
   return (
   <section aria-labelledby="ovc-biz">
-    <h2 id="ovc-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+    <h2 id="ovc-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
       {c.intro}
     </p>
 
@@ -35,7 +35,7 @@ export const OpenVsClosedBusiness: React.FC = () => {
             { pro: false, text: 'They control pricing — can increase anytime' },
             { pro: false, text: 'If they change or shut down, you\'re stuck' },
           ].map((item, i) => (
-            <p key={i} className="text-xs text-zinc-400">
+            <p key={i} className="text-xs text-zinc-600 dark:text-zinc-400">
               <span className={item.pro ? 'text-emerald-400' : 'text-red-400'}>{item.pro ? '✓' : '✗'}</span> {item.text}
             </p>
           ))}
@@ -53,7 +53,7 @@ export const OpenVsClosedBusiness: React.FC = () => {
             { pro: false, text: 'Security is YOUR responsibility — encryption, patching, access controls, compliance' },
             { pro: false, text: 'Usually slightly less capable than top closed models' },
           ].map((item, i) => (
-            <p key={i} className="text-xs text-zinc-400">
+            <p key={i} className="text-xs text-zinc-600 dark:text-zinc-400">
               <span className={item.pro ? 'text-emerald-400' : 'text-red-400'}>{item.pro ? '✓' : '✗'}</span> {item.text}
             </p>
           ))}
@@ -61,9 +61,9 @@ export const OpenVsClosedBusiness: React.FC = () => {
       </div>
     </div>
 
-    <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-      <p className="mb-2 text-sm font-medium text-zinc-100">{c.realPictureTitle}</p>
-      <p className="text-sm text-zinc-300">
+    <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+      <p className="mb-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.realPictureTitle}</p>
+      <p className="text-sm text-zinc-700 dark:text-zinc-300">
         {c.realPictureText} Many companies are more secure using a well-audited cloud
         service than running their own infrastructure.
       </p>

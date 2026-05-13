@@ -112,8 +112,8 @@ export const CaseStudiesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="case-studies">
-      <h2 id="case-studies" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="case-studies" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Case selector */}
       <div className="mb-6 grid gap-2 sm:grid-cols-4">
@@ -123,8 +123,8 @@ export const CaseStudiesSection: React.FC = () => {
             onClick={() => selectCase(i)}
             className={`rounded-lg border p-3 text-left transition-colors ${
               activeCase === i
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             <span className="text-lg"><Icon name={c.icon} /></span>
@@ -134,13 +134,13 @@ export const CaseStudiesSection: React.FC = () => {
       </div>
 
       {/* Case detail */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
         {/* Header */}
-        <div className="border-b border-zinc-700 bg-zinc-800 px-5 py-4">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-4">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
             <Icon name={study.icon} /> {study.title}
           </h3>
-          <p className="mt-1 text-sm text-zinc-400">{study.problem}</p>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{study.problem}</p>
         </div>
 
         <div className="p-5 space-y-4">
@@ -153,15 +153,15 @@ export const CaseStudiesSection: React.FC = () => {
                   key={i}
                   className={`rounded-md border p-3 transition-all ${
                     i < revealedSteps
-                      ? 'border-zinc-600 bg-zinc-800/50'
-                      : 'border-zinc-800 bg-zinc-900'
+                      ? 'border-zinc-600 bg-zinc-100 dark:bg-zinc-800/50'
+                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900'
                   }`}
                 >
-                  <p className="text-sm font-medium text-zinc-300">
+                  <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                     {i + 1}. {step.question}
                   </p>
                   {i < revealedSteps && (
-                    <p className="mt-1 text-sm text-zinc-400">→ {step.answer}</p>
+                    <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">→ {step.answer}</p>
                   )}
                 </div>
               ))}
@@ -169,7 +169,7 @@ export const CaseStudiesSection: React.FC = () => {
             {!allRevealed && (
               <button
                 onClick={revealNext}
-                className="mt-3 rounded-md bg-zinc-700 px-4 py-1.5 text-xs text-zinc-200 transition-colors hover:bg-zinc-600"
+                className="mt-3 rounded-md bg-zinc-700 px-4 py-1.5 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-600"
               >
                 Reveal Next Step →
               </button>
@@ -178,11 +178,11 @@ export const CaseStudiesSection: React.FC = () => {
 
           {/* Solution (shown after all steps revealed) */}
           {allRevealed && (
-            <div className="space-y-4 border-t border-zinc-700 pt-4">
+            <div className="space-y-4 border-t border-zinc-200 dark:border-zinc-700 pt-4">
               <div>
                 <p className="mb-1 text-xs font-medium text-zinc-500 uppercase">Solution</p>
                 <p className="text-sm font-medium text-green-400">{study.solution}</p>
-                <p className="mt-1 text-sm text-zinc-400">{study.approach}</p>
+                <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{study.approach}</p>
               </div>
 
               <div>
@@ -191,7 +191,7 @@ export const CaseStudiesSection: React.FC = () => {
                   {study.stack.map(item => (
                     <span
                       key={item}
-                      className="rounded-md border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-xs text-zinc-300"
+                      className="rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-xs text-zinc-700 dark:text-zinc-300"
                     >
                       {item}
                     </span>
@@ -201,7 +201,7 @@ export const CaseStudiesSection: React.FC = () => {
 
               <div className="rounded-md border border-green-500/20 bg-green-500/5 p-3">
                 <p className="text-xs font-medium text-green-400 uppercase">Result</p>
-                <p className="mt-1 text-sm text-zinc-300">{study.result}</p>
+                <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{study.result}</p>
               </div>
             </div>
           )}

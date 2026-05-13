@@ -34,8 +34,8 @@ export const BenchmarksSection: React.FC = () => {
 
   return (
     <section aria-labelledby="benchmarks">
-      <h2 id="benchmarks" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="benchmarks" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-4 flex flex-wrap gap-2">
         {bENCHMARKST.map((b, i) => (
@@ -43,7 +43,7 @@ export const BenchmarksSection: React.FC = () => {
             key={b.name}
             onClick={() => setSelected(i)}
             className={`rounded-lg border px-3 py-2 text-xs font-medium transition-all ${
-              selected === i ? b.color : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+              selected === i ? b.color : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             {b.name}
@@ -51,26 +51,26 @@ export const BenchmarksSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
         <div className="mb-3 flex items-center gap-3">
-          <h3 className="font-mono text-lg font-semibold text-zinc-100">{bench.name}</h3>
+          <h3 className="font-mono text-lg font-semibold text-zinc-900 dark:text-zinc-100">{bench.name}</h3>
           <span className={`rounded-full px-2.5 py-0.5 text-xs ${bench.color}`}>{bench.category}</span>
         </div>
-        <p className="mb-4 text-sm leading-relaxed text-zinc-300">{bench.what}</p>
+        <p className="mb-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{bench.what}</p>
 
-        <div className="mb-4 rounded-md border border-zinc-700 bg-zinc-950 p-3">
+        <div className="mb-4 rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-950 p-3">
           <span className="mb-1 block text-xs text-zinc-500">Example question:</span>
-          <pre className="whitespace-pre-wrap font-mono text-xs text-zinc-300">{bench.example}</pre>
+          <pre className="whitespace-pre-wrap font-mono text-xs text-zinc-700 dark:text-zinc-300">{bench.example}</pre>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-md bg-zinc-800/50 p-3">
-            <span className="text-xs font-medium text-zinc-400">Scoring</span>
-            <p className="mt-1 text-sm text-zinc-300">{bench.scoring}</p>
+          <div className="rounded-md bg-zinc-100 dark:bg-zinc-800/50 p-3">
+            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Scoring</span>
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{bench.scoring}</p>
           </div>
-          <div className="rounded-md bg-zinc-800/50 p-3">
-            <span className="text-xs font-medium text-zinc-400">Top Scores (2026)</span>
-            <pre className="mt-1 whitespace-pre-wrap font-mono text-xs text-zinc-300">{bench.topScores}</pre>
+          <div className="rounded-md bg-zinc-100 dark:bg-zinc-800/50 p-3">
+            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Top Scores (2026)</span>
+            <pre className="mt-1 whitespace-pre-wrap font-mono text-xs text-zinc-700 dark:text-zinc-300">{bench.topScores}</pre>
           </div>
         </div>
       </div>

@@ -13,24 +13,24 @@ export const GuardrailsBusiness: React.FC = () => {
   const c = useT({ title: '2. Keeping AI Safe — The Guardrails' , guardrails: GUARDRAILS, intro: 'Every company has rules for employees', introSub: 'Think of it like onboarding', goldenRule: 'Start tight, loosen gradually.', goldenRuleDetail: 'Launch with human review on everything.', platformNote: 'Cloud platforms offer built-in guardrail tools'}, { sv: guardrailsSv, ko: guardrailsKo })
   return (
   <section aria-labelledby="guardrails-biz">
-    <h2 id="guardrails-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
-    <p className="mb-6 max-w-2xl text-sm text-zinc-400">{c.introSub}</p>
+    <h2 id="guardrails-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+    <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.introSub}</p>
 
-    <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">
+    <div className="mb-8 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-zinc-700 bg-zinc-800">
-            <th className="px-4 py-2 text-left text-xs font-medium text-zinc-400">Risk</th>
-            <th className="px-4 py-2 text-left text-xs font-medium text-zinc-400">How to prevent it</th>
-            <th className="hidden px-4 py-2 text-left text-xs font-medium text-zinc-400 sm:table-cell">Think of it like…</th>
+          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+            <th className="px-4 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400">Risk</th>
+            <th className="px-4 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400">How to prevent it</th>
+            <th className="hidden px-4 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400 sm:table-cell">Think of it like…</th>
           </tr>
         </thead>
         <tbody>
           {c.guardrails.map((g) => (
-            <tr key={g.risk} className="border-b border-zinc-800 last:border-0">
-              <td className="px-4 py-3 font-medium text-zinc-200">{g.risk}</td>
-              <td className="px-4 py-3 text-zinc-300">{g.mitigation}</td>
+            <tr key={g.risk} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
+              <td className="px-4 py-3 font-medium text-zinc-800 dark:text-zinc-200">{g.risk}</td>
+              <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300">{g.mitigation}</td>
               <td className="hidden px-4 py-3 text-zinc-500 italic sm:table-cell">{g.analogy}</td>
             </tr>
           ))}
@@ -38,10 +38,10 @@ export const GuardrailsBusiness: React.FC = () => {
       </table>
     </div>
 
-    <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-      <p className="mb-3 text-sm font-medium text-zinc-100">{c.goldenRule}</p>
-      <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.goldenRuleDetail}</p>
-      <p className="text-sm text-zinc-400">{c.platformNote}</p>
+    <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+      <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.goldenRule}</p>
+      <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.goldenRuleDetail}</p>
+      <p className="text-sm text-zinc-600 dark:text-zinc-400">{c.platformNote}</p>
     </div>
 
     <SelfExplain

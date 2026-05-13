@@ -97,11 +97,11 @@ export const AdaptationSpectrumSection: React.FC = () => {
 
   return (
     <section aria-labelledby="adaptation-spectrum">
-      <h2 id="adaptation-spectrum" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="adaptation-spectrum" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Spectrum bar */}
-      <div className="mb-2 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-3">
+      <div className="mb-2 flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3">
         {aPPROACHEST.map(a => (
           <button
             key={a.id}
@@ -109,7 +109,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
             className={`flex-1 rounded-md py-3 text-center text-sm font-medium transition-all ${
               selected === a.id
                 ? `${a.color} text-white shadow-lg scale-105`
-                : `${a.color}/20 text-zinc-300 hover:${a.color}/30`
+                : `${a.color}/20 text-zinc-700 dark:text-zinc-300 hover:${a.color}/30`
             }`}
             aria-pressed={selected === a.id}
           >
@@ -124,8 +124,8 @@ export const AdaptationSpectrumSection: React.FC = () => {
 
       {/* Detail card */}
       {activeApproach && (
-        <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{activeApproach.label}</h3>
+        <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+          <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{activeApproach.label}</h3>
           <dl className="grid gap-3 sm:grid-cols-2">
             {([
               ['When to use', activeApproach.when],
@@ -134,9 +134,9 @@ export const AdaptationSpectrumSection: React.FC = () => {
               ['Data needed', activeApproach.data],
               ['Control level', activeApproach.control],
             ] as const).map(([label, value]) => (
-              <div key={label} className="rounded-md border border-zinc-800 bg-zinc-800/50 p-3">
+              <div key={label} className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/50 p-3">
                 <dt className="text-xs font-medium text-zinc-500 uppercase">{label}</dt>
-                <dd className="mt-1 text-sm text-zinc-300">{value}</dd>
+                <dd className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{value}</dd>
               </div>
             ))}
           </dl>
@@ -144,7 +144,7 @@ export const AdaptationSpectrumSection: React.FC = () => {
       )}
 
       {/* Scenario picker */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">
         <Icon name="target" />{c.p4}</h3>
       <div className="mb-4 flex flex-wrap gap-2">
         {sCENARIOST.map((s, i) => (
@@ -153,8 +153,8 @@ export const AdaptationSpectrumSection: React.FC = () => {
             onClick={() => selectScenario(i)}
             className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
               scenario === i
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             {s.label}
@@ -165,14 +165,14 @@ export const AdaptationSpectrumSection: React.FC = () => {
       {scenario !== null && (
         <div className="space-y-3">
           {/* Mini spectrum showing position */}
-          <div className="flex gap-1 rounded-lg border border-zinc-700 bg-zinc-900 p-3">
+          <div className="flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3">
             {aPPROACHEST.map((a, i) => (
               <div
                 key={a.id}
                 className={`flex-1 rounded-md py-2 text-center text-xs font-medium transition-all ${
                   i === sCENARIOST[scenario].position
                     ? `${a.color} text-white`
-                    : 'bg-zinc-800 text-zinc-600'
+                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600'
                 }`}
               >
                 {a.label}
@@ -180,8 +180,8 @@ export const AdaptationSpectrumSection: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-            <p className="text-sm text-zinc-300">{sCENARIOST[scenario].answer}</p>
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">{sCENARIOST[scenario].answer}</p>
           </div>
         </div>
       )}

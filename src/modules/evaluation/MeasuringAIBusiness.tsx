@@ -21,11 +21,11 @@ export const MeasuringAIBusiness: React.FC = () => {
   const c = useT({ title: '1. How to Tell If Your AI Is Working' , intro: '"It seems pretty good" isn\'t good enough.', introSub: 'Think of it like quality assurance before launching a product — test it systematically, not just casually.', goodAnswerLabel: 'Good answer', badAnswerLabel: 'Bad answer'}, { sv: measuringSv, ko: measuringKo })
   return (
   <section aria-labelledby="measuring-biz">
-    <h2 id="measuring-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
+    <h2 id="measuring-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
 {c.intro}
     </p>
-    <p className="mb-6 max-w-2xl text-sm text-zinc-400">
+    <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
 {c.introSub}
     </p>
 
@@ -38,9 +38,9 @@ export const MeasuringAIBusiness: React.FC = () => {
         { metric: 'Cost', question: 'How much per answer?', analogy: 'Like tracking cost-per-ticket in support', color: 'text-purple-400' },
         { metric: 'Consistency', question: 'Same question, same quality?', analogy: 'Like ensuring every branch gives the same service', color: 'text-cyan-400' },
       ].map((m) => (
-        <div key={m.metric} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+        <div key={m.metric} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
           <p className={`text-sm font-semibold ${m.color}`}>{m.metric}</p>
-          <p className="mt-1 text-sm text-zinc-200">{m.question}</p>
+          <p className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">{m.question}</p>
           <p className="mt-2 text-xs text-zinc-500 italic">{m.analogy}</p>
         </div>
       ))}
@@ -51,18 +51,18 @@ export const MeasuringAIBusiness: React.FC = () => {
       description="Compare these real-world examples. What makes one answer better than the other?"
       steps={RATINGS.map((r) => (
         <div key={r.question} className="space-y-3">
-          <p className="text-sm font-medium text-zinc-100">Customer asks: &quot;{r.question}&quot;</p>
+          <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Customer asks: &quot;{r.question}&quot;</p>
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
               <p className="mb-2 text-xs font-medium text-emerald-400">{c.goodAnswerLabel}</p>
-              <p className="text-sm text-zinc-300">{r.good}</p>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">{r.good}</p>
             </div>
             <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
               <p className="mb-2 text-xs font-medium text-red-400">{c.badAnswerLabel}</p>
-              <p className="text-sm text-zinc-300">{r.bad}</p>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">{r.bad}</p>
             </div>
           </div>
-          <p className="text-xs text-zinc-400">{r.why}</p>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">{r.why}</p>
         </div>
       ))}
     />

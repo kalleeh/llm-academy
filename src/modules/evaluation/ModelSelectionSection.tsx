@@ -136,29 +136,29 @@ export const ModelSelectionSection: React.FC = () => {
 
   return (
     <section aria-labelledby="model-selection">
-      <h2 id="model-selection" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="model-selection" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-2">
         {MODELS.map((m, i) => (
-          <div key={m.name} className={`rounded-lg border ${m.color} bg-zinc-900/40`}>
+          <div key={m.name} className={`rounded-lg border ${m.color} bg-white dark:bg-zinc-900/40`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-sm font-medium text-zinc-100">{m.name}</span>
+                  <span className="font-mono text-sm font-medium text-zinc-900 dark:text-zinc-100">{m.name}</span>
                   <span className="text-xs text-zinc-500">— {m.vendor} — {m.released}</span>
                 </div>
-                <p className="mt-1 font-mono text-xs text-zinc-400">{m.contextWindow} · {m.pricePer1M}</p>
+                <p className="mt-1 font-mono text-xs text-zinc-600 dark:text-zinc-400">{m.contextWindow} · {m.pricePer1M}</p>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-xs">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-xs">
                 <div>
                   <p className="mb-1 font-medium text-zinc-500">Headline benchmarks</p>
                   <ul className="space-y-1">
                     {m.benchmarks.map((b) => (
-                      <li key={b.name} className="font-mono text-zinc-300">
+                      <li key={b.name} className="font-mono text-zinc-700 dark:text-zinc-300">
                         <span className="text-zinc-500">{b.name}:</span> <span className="text-amber-300">{b.score}</span>
                       </li>
                     ))}
@@ -166,15 +166,15 @@ export const ModelSelectionSection: React.FC = () => {
                 </div>
                 <div>
                   <p className="mb-1 font-medium text-zinc-500">Training-time choice that produces the behavior</p>
-                  <p className="text-zinc-300">{m.trainingChoice}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{m.trainingChoice}</p>
                 </div>
                 <div>
                   <p className="mb-1 font-medium text-red-400">Known failure mode</p>
-                  <p className="text-zinc-300">{m.failureMode}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{m.failureMode}</p>
                 </div>
                 <div>
                   <p className="mb-1 font-medium text-emerald-400">Pick when</p>
-                  <p className="text-zinc-300">{m.pickWhen}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{m.pickWhen}</p>
                 </div>
               </div>
             )}
@@ -182,19 +182,19 @@ export const ModelSelectionSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">Decision rules of thumb</p>
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">Decision rules of thumb</p>
         <div className="space-y-2">
           {DECISION_RULES.map((r) => (
-            <div key={r.title} className="rounded bg-zinc-800/50 px-4 py-3">
+            <div key={r.title} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
               <p className="font-mono text-sm text-amber-300">{r.title}</p>
-              <p className="mt-1 text-xs text-zinc-400">{r.detail}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{r.detail}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5 text-xs text-zinc-300">
+      <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5 text-xs text-zinc-700 dark:text-zinc-300">
         <p className="mb-1 font-medium text-amber-300">⚠ This page ages fast</p>
         <p>
           Frontier model versions ship every 1-3 months. The behaviors above are tied to specific

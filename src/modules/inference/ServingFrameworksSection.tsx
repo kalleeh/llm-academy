@@ -94,7 +94,7 @@ export const ServingFrameworksSection: React.FC = () => {
           <button
             key={fw.name}
             onClick={() => toggle(fw.name)}
-            className={`rounded-lg border-l-4 ${fw.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800`}
+            className={`rounded-lg border-l-4 ${fw.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800`}
             aria-expanded={expanded === fw.name}
           >
             <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</h3>
@@ -124,7 +124,7 @@ export const ServingFrameworksSection: React.FC = () => {
           </thead>
           <tbody>
             {fRAMEWORKST.map(fw => (
-              <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-zinc-900/50">
+              <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-white dark:bg-zinc-900/50">
                 <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</td>
                 <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.throughput}</td>
                 <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.latency}</td>

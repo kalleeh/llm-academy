@@ -64,14 +64,14 @@ export const WhatAreAgentsSection: React.FC = () => {
 
   return (
     <section aria-labelledby="what-are-agents">
-      <h2 id="what-are-agents" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.p4}<strong className="text-zinc-100">agent</strong> is an LLM
+      <h2 id="what-are-agents" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p4}<strong className="text-zinc-900 dark:text-zinc-100">agent</strong> is an LLM
         that can <em>take actions</em> — call APIs, query databases, run code — then use the results
         to keep reasoning. It closes the loop between thinking and doing.
       </p>
 
       {/* Agent flow diagram */}
-      <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+      <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         <p className="mb-3 text-xs font-medium text-zinc-500">The Agent Loop</p>
         <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
           {[
@@ -97,17 +97,17 @@ export const WhatAreAgentsSection: React.FC = () => {
           )}
         </div>
         <p className="mt-4 text-center text-xs text-zinc-500">
-          The <strong className="text-zinc-400">ReAct</strong> loop: Thought → Action → Observation — repeat until the task is done.
+          The <strong className="text-zinc-600 dark:text-zinc-400">ReAct</strong> loop: Thought → Action → Observation — repeat until the task is done.
         </p>
       </div>
 
       {/* Interactive agent trace */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-5 py-3">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
             Agent Trace: Weather Query
           </h3>
-          <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-300">
+          <span className="rounded-full bg-zinc-700 px-2.5 py-0.5 text-xs text-zinc-700 dark:text-zinc-300">
             Step {visibleSteps} of {TRACE_STEPS.length}
           </span>
         </div>
@@ -128,18 +128,18 @@ export const WhatAreAgentsSection: React.FC = () => {
           })}
         </div>
 
-        <div className="flex items-center gap-3 border-t border-zinc-700 bg-zinc-800 px-5 py-3">
+        <div className="flex items-center gap-3 border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
           {visibleSteps < TRACE_STEPS.length ? (
             <button
               onClick={showNext}
-              className="rounded bg-zinc-600 px-4 py-1.5 text-xs text-zinc-100 transition-colors hover:bg-zinc-500"
+              className="rounded bg-zinc-600 px-4 py-1.5 text-xs text-zinc-900 dark:text-zinc-100 transition-colors hover:bg-zinc-500"
             >
               Next step →
             </button>
           ) : (
             <button
               onClick={reset}
-              className="rounded bg-zinc-600 px-4 py-1.5 text-xs text-zinc-100 transition-colors hover:bg-zinc-500"
+              className="rounded bg-zinc-600 px-4 py-1.5 text-xs text-zinc-900 dark:text-zinc-100 transition-colors hover:bg-zinc-500"
             >
               ↺ Replay
             </button>

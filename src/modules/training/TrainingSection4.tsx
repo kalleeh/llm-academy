@@ -200,7 +200,7 @@ export const TrainingSection4: React.FC = () => {
             className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
               selected === v.id
                 ? 'border-amber-400 dark:border-amber-500/50 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300'
-                : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-300'
+                : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-700 dark:text-zinc-300'
             }`}
           >
             <Icon name={v.emoji} /> {v.label}

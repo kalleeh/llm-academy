@@ -114,13 +114,13 @@ export const CostCalculatorSection: React.FC = () => {
 
   return (
     <section aria-labelledby="cost-calculator">
-      <h2 id="cost-calculator" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="cost-calculator" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Controls */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         {/* Approach selector */}
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
           <p className="mb-2 text-xs font-medium text-zinc-500 uppercase">Approaches to Compare</p>
           <div className="flex flex-col gap-2">
             {([
@@ -134,7 +134,7 @@ export const CostCalculatorSection: React.FC = () => {
                 className={`rounded-md border px-3 py-1.5 text-left text-sm transition-colors ${
                   approaches.includes(id)
                     ? `border-zinc-500 bg-zinc-700 ${color}`
-                    : 'border-zinc-700 text-zinc-500 hover:border-zinc-600'
+                    : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-zinc-600'
                 }`}
                 aria-pressed={approaches.includes(id)}
               >
@@ -145,7 +145,7 @@ export const CostCalculatorSection: React.FC = () => {
         </div>
 
         {/* Volume slider */}
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
           <p className="mb-2 text-xs font-medium text-zinc-500 uppercase">Requests / Day</p>
           <input
             type="range"
@@ -157,7 +157,7 @@ export const CostCalculatorSection: React.FC = () => {
             className="w-full accent-zinc-400"
             aria-label="Requests per day"
           />
-          <p className="mt-1 text-center font-mono text-lg text-zinc-100">
+          <p className="mt-1 text-center font-mono text-lg text-zinc-900 dark:text-zinc-100">
             {volume.toLocaleString()}
           </p>
           <p className="text-center text-xs text-zinc-500">
@@ -166,7 +166,7 @@ export const CostCalculatorSection: React.FC = () => {
         </div>
 
         {/* Model size */}
-        <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
           <p className="mb-2 text-xs font-medium text-zinc-500 uppercase">Model Size</p>
           <div className="flex flex-col gap-2">
             {([
@@ -179,8 +179,8 @@ export const CostCalculatorSection: React.FC = () => {
                 onClick={() => setModelSize(id)}
                 className={`rounded-md border px-3 py-1.5 text-left text-sm transition-colors ${
                   modelSize === id
-                    ? 'border-zinc-500 bg-zinc-700 text-zinc-100'
-                    : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                    ? 'border-zinc-500 bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                    : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
                 }`}
                 aria-pressed={modelSize === id}
               >
@@ -194,7 +194,7 @@ export const CostCalculatorSection: React.FC = () => {
       {/* Results */}
       <div className="space-y-3">
         {costs.map(c => (
-          <div key={c.approach} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div key={c.approach} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <div className="mb-2 flex items-center justify-between">
               <div>
                 <span className={`font-mono text-sm font-semibold ${
@@ -204,11 +204,11 @@ export const CostCalculatorSection: React.FC = () => {
                 </span>
                 <span className="ml-2 text-xs text-zinc-500">{c.model}</span>
               </div>
-              <span className="font-mono text-lg font-bold text-zinc-100">
+              <span className="font-mono text-lg font-bold text-zinc-900 dark:text-zinc-100">
                 {formatCost(c.monthly)}<span className="text-xs text-zinc-500">/mo</span>
               </span>
             </div>
-            <div className="mb-1 h-3 rounded-full bg-zinc-800">
+            <div className="mb-1 h-3 rounded-full bg-zinc-100 dark:bg-zinc-800">
               <div
                 className={`h-3 rounded-full transition-all ${
                   c.approach === 'api' ? 'bg-green-500' : c.approach === 'self-hosted' ? 'bg-blue-500' : 'bg-amber-500'
@@ -221,8 +221,8 @@ export const CostCalculatorSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm leading-relaxed text-zinc-400">
+      <div className="mt-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <strong className="text-amber-400">Note:</strong> {c.p2}
         </p>
       </div>

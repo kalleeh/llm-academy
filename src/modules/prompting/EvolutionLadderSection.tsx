@@ -116,7 +116,7 @@ export const EvolutionLadderSection: React.FC = () => {
               className={`flex items-center gap-2 rounded-md px-3 py-2.5 text-left text-sm transition-colors ${
                 i === activeRung
                   ? 'bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300 ring-1 ring-violet-500/40'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-200'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-800 dark:text-zinc-200'
               }`}
             >
               <span className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${

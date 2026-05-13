@@ -144,7 +144,7 @@ export const DataTypesSection: React.FC = () => {
                   <div key={ex.label}>
                     <button
                       onClick={() => toggle(key)}
-                      className="flex w-full items-center gap-2 rounded-md border border-zinc-200/50 dark:border-zinc-700/50 bg-white/50 dark:bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/50"
+                      className="flex w-full items-center gap-2 rounded-md border border-zinc-200/50 dark:border-zinc-700/50 bg-white/50 dark:bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50"
                       aria-expanded={isOpen}
                     >
                       <Icon name={ex.icon} />
@@ -185,7 +185,7 @@ export const DataTypesSection: React.FC = () => {
               ['4', 'Dave', '$45.99', '2024-01-17'],
               ['5', 'Eve', '$310.25', '2024-01-18'],
             ].map(row => (
-              <tr key={row[0]} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/50">
+              <tr key={row[0]} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50">
                 {row.map((cell, j) => (
                   <td key={j} className="px-4 py-1.5">{cell}</td>
                 ))}

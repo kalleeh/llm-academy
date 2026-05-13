@@ -478,7 +478,7 @@ function TokenEconomicsSection() {
                 const tokens = estimateTokens(ex.text)
                 const ratio = (ex.text.length / tokens).toFixed(1)
                 return (
-                  <tr key={tLabel(lang, ex.label)} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-800/50">
+                  <tr key={tLabel(lang, ex.label)} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:bg-zinc-800/50">
                     <td className="px-4 py-2 font-medium text-zinc-800 dark:text-zinc-200">{tLabel(lang, ex.label)}</td>
                     <td className="max-w-xs truncate px-4 py-2 font-mono text-xs text-zinc-500 dark:text-zinc-400">{ex.text}</td>
                     <td className="px-4 py-2 text-right font-mono text-zinc-700 dark:text-zinc-300">{ex.text.length}</td>

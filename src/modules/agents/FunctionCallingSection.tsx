@@ -118,20 +118,20 @@ export const FunctionCallingSection: React.FC = () => {
 
   return (
     <section aria-labelledby="function-calling">
-      <h2 id="function-calling" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="function-calling" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         Function calling is how LLMs use tools. The model receives{' '}
-        <strong className="text-zinc-100">tool schemas</strong> (JSON descriptions of available
+        <strong className="text-zinc-900 dark:text-zinc-100">tool schemas</strong> (JSON descriptions of available
         functions), decides which to call, and returns{' '}
-        <strong className="text-zinc-100">structured arguments</strong>. The key insight:{' '}
+        <strong className="text-zinc-900 dark:text-zinc-100">structured arguments</strong>. The key insight:{' '}
         <em className="text-amber-300">the model doesn&apos;t execute the function — your code does</em>,
         then feeds the result back.
       </p>
 
       {/* Interactive 3-step demo */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-5 py-3">
-          <h3 className="font-mono text-sm font-semibold text-zinc-100">How Function Calling Works</h3>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">How Function Calling Works</h3>
         </div>
         <div className="grid gap-4 p-5 lg:grid-cols-[200px_1fr]">
           <div className="flex flex-col gap-1" role="tablist" aria-label="Function calling steps">
@@ -144,11 +144,11 @@ export const FunctionCallingSection: React.FC = () => {
                 className={`flex items-center gap-2 rounded-md px-3 py-2.5 text-left text-sm transition-colors ${
                   i === activeStep
                     ? 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-500/40'
-                    : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800 hover:text-zinc-800 dark:text-zinc-200'
                 }`}
               >
                 <span className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                  i <= activeStep ? 'bg-amber-500/30 text-amber-300' : 'bg-zinc-800 text-zinc-500'
+                  i <= activeStep ? 'bg-amber-500/30 text-amber-300' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
                 }`}>
                   {i + 1}
                 </span>
@@ -157,8 +157,8 @@ export const FunctionCallingSection: React.FC = () => {
             ))}
           </div>
           <div>
-            <p className="mb-2 text-sm text-zinc-300">{dEMO_STEPST[activeStep].description}</p>
-            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-green-300">
+            <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">{dEMO_STEPST[activeStep].description}</p>
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-green-300">
               {dEMO_STEPST[activeStep].content}
             </pre>
           </div>
@@ -168,9 +168,9 @@ export const FunctionCallingSection: React.FC = () => {
       {/* Full code example */}
       <CodeBlock code={FULL_EXAMPLE} language="python" title="function_calling.py — Full flow" />
 
-      <div className="mt-4 rounded-md bg-zinc-800 p-4">
-        <p className="text-sm leading-relaxed text-zinc-300">
-          <strong className="text-zinc-100">Key takeaway:</strong> The model is a{' '}
+      <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
+        <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <strong className="text-zinc-900 dark:text-zinc-100">Key takeaway:</strong> The model is a{' '}
           <em>decision-maker</em>, not an executor. It picks the right tool and arguments. Your
           application code runs the function, handles errors, and sends results back. This keeps the
           model sandboxed and your system in control.

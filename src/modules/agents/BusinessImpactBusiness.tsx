@@ -52,36 +52,36 @@ export const BusinessImpactBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="impact-biz">
-      <h2 id="impact-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
-      <p className="mb-6 max-w-2xl text-sm text-zinc-400">{c.introSub}</p>
+      <h2 id="impact-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.introSub}</p>
 
       <InteractiveDemo
         title={c.title}
         steps={AUTONOMY_LEVELS.map((l) => (
           <div key={l.level} className={`rounded-lg border p-5 ${l.color}`}>
-            <div className="mb-3"><span className="text-sm font-semibold text-zinc-100">{l.level}</span><span className="ml-2 text-xs text-zinc-400">— {l.analogy}</span></div>
-            <p className="mb-3 text-sm text-zinc-300">{l.description}</p>
+            <div className="mb-3"><span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{l.level}</span><span className="ml-2 text-xs text-zinc-600 dark:text-zinc-400">— {l.analogy}</span></div>
+            <p className="mb-3 text-sm text-zinc-700 dark:text-zinc-300">{l.description}</p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Org change</p><p className="mt-1 text-xs text-zinc-300">{l.orgChange}</p></div>
-              <div className="rounded bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Risk</p><p className="mt-1 text-xs text-zinc-300">{l.risk}</p></div>
-              <div className="rounded bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Examples</p><p className="mt-1 text-xs text-zinc-300">{l.examples}</p></div>
+              <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Org change</p><p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{l.orgChange}</p></div>
+              <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Risk</p><p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{l.risk}</p></div>
+              <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><p className="text-xs text-zinc-500">Examples</p><p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{l.examples}</p></div>
             </div>
           </div>
         ))}
       />
 
       <div className="mt-10 mb-8">
-        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-100">{c.carTitle}</h3>
-        <p className="mb-4 max-w-2xl text-sm text-zinc-300">{c.carIntro}</p>
+        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-900 dark:text-zinc-100">{c.carTitle}</h3>
+        <p className="mb-4 max-w-2xl text-sm text-zinc-700 dark:text-zinc-300">{c.carIntro}</p>
         <div className="space-y-3">
           {SELF_DRIVING_PARALLELS.map((p, i) => (
-            <div key={i} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+            <div key={i} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded bg-zinc-800/50 px-3 py-2"><p className="text-xs font-medium text-blue-400">Self-driving cars</p><p className="mt-1 text-xs text-zinc-300">{p.car}</p></div>
-                <div className="rounded bg-zinc-800/50 px-3 py-2"><p className="text-xs font-medium text-amber-400">AI agents</p><p className="mt-1 text-xs text-zinc-300">{p.ai}</p></div>
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><p className="text-xs font-medium text-blue-400">Self-driving cars</p><p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{p.car}</p></div>
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2"><p className="text-xs font-medium text-amber-400">AI agents</p><p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{p.ai}</p></div>
               </div>
-              <p className="mt-2 text-xs text-zinc-400 italic">{p.but}</p>
+              <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 italic">{p.but}</p>
             </div>
           ))}
         </div>
@@ -92,15 +92,15 @@ export const BusinessImpactBusiness: React.FC = () => {
           <span>{showFramework ? '▾' : '▸'}</span>{c.frameworkButton}
         </button>
         {showFramework && (
-          <div className="overflow-hidden rounded-lg border border-zinc-700">
+          <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
             <table className="w-full text-xs">
               <tbody>
                 {RISK_FRAMEWORK.map((r) => (
-                  <tr key={r.decision} className="border-b border-zinc-800 last:border-0">
-                    <td className="px-3 py-2 text-zinc-300">{r.decision}</td>
+                  <tr key={r.decision} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
+                    <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{r.decision}</td>
                     <td className={`px-3 py-2 font-medium ${r.color}`}>{r.impact}</td>
-                    <td className="px-3 py-2 text-zinc-400">{r.reversible}</td>
-                    <td className="hidden px-3 py-2 text-zinc-400 sm:table-cell">{r.recommendation}</td>
+                    <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{r.reversible}</td>
+                    <td className="hidden px-3 py-2 text-zinc-600 dark:text-zinc-400 sm:table-cell">{r.recommendation}</td>
                   </tr>
                 ))}
               </tbody>
@@ -109,14 +109,14 @@ export const BusinessImpactBusiness: React.FC = () => {
         )}
       </div>
 
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.failTitle}</p>
-        <p className="mb-3 text-sm text-zinc-300">{c.failIntro}</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.failTitle}</p>
+        <p className="mb-3 text-sm text-zinc-700 dark:text-zinc-300">{c.failIntro}</p>
         <div className="space-y-2">
           {FAILURE_PATTERNS.map((f) => (
-            <div key={f.pattern} className="rounded bg-zinc-800/50 px-4 py-3">
-              <p className="text-sm font-medium text-zinc-200">{f.pattern}</p>
-              <p className="mt-1 text-xs text-zinc-400">{f.detail}</p>
+            <div key={f.pattern} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
+              <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{f.pattern}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{f.detail}</p>
             </div>
           ))}
         </div>

@@ -177,8 +177,8 @@ export const EvaluationMergingSection: React.FC = () => {
 
   return (
     <section aria-labelledby="eval-merging">
-      <h2 id="eval-merging" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="eval-merging" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <Workspace
         title="Evaluate → Merge → Deploy"
@@ -187,9 +187,9 @@ export const EvaluationMergingSection: React.FC = () => {
         snapshots={SNAPSHOTS}
       />
 
-      <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+      <div className="mt-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
         <p className="mb-2 text-sm font-semibold text-amber-400">Size pipeline</p>
-        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-300">
+        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-700 dark:text-zinc-300">
           <span className="rounded bg-zinc-700 px-2 py-1">Base: 14 GB</span>
           <span className="text-zinc-500">+</span>
           <span className="rounded bg-amber-900/40 px-2 py-1 text-amber-300">Adapter: 16 MB</span>

@@ -116,8 +116,8 @@ export const ModelPersonalitiesBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="model-personalities-biz">
-      <h2 id="model-personalities-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="model-personalities-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-3">
         {MODELS.map((m, i) => (
@@ -125,39 +125,39 @@ export const ModelPersonalitiesBusiness: React.FC = () => {
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-4 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-medium text-zinc-100">{m.name}</span>
+                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{m.name}</span>
                   <span className={`rounded px-2 py-0.5 text-xs ${m.badgeColor}`}>{m.vendor}</span>
                   <span className="text-xs text-zinc-500">{m.released}</span>
                 </div>
-                <p className="mt-1 text-xs text-zinc-400">{m.bestAt}</p>
+                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{m.bestAt}</p>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-sm">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-sm">
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Personality</p>
-                  <p className="text-zinc-200">{m.personality}</p>
+                  <p className="text-zinc-800 dark:text-zinc-200">{m.personality}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Why it behaves this way</p>
-                  <p className="text-zinc-300">{m.why}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{m.why}</p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
                     <p className="mb-1 text-xs font-medium text-emerald-400">✓ Use when</p>
-                    <ul className="space-y-1 text-xs text-zinc-300">
+                    <ul className="space-y-1 text-xs text-zinc-700 dark:text-zinc-300">
                       {m.useWhen.map((x) => <li key={x}>• {x}</li>)}
                     </ul>
                   </div>
                   <div>
                     <p className="mb-1 text-xs font-medium text-red-400">⚠ Watch out for</p>
-                    <ul className="space-y-1 text-xs text-zinc-300">
+                    <ul className="space-y-1 text-xs text-zinc-700 dark:text-zinc-300">
                       {m.watchFor.map((x) => <li key={x}>• {x}</li>)}
                     </ul>
                   </div>
                 </div>
-                <div className="rounded bg-zinc-800/50 px-3 py-2">
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
                   <span className="text-xs text-zinc-500">Pricing & context: </span>
                   <span className="text-xs text-amber-300">{m.pricing}</span>
                 </div>
@@ -169,7 +169,7 @@ export const ModelPersonalitiesBusiness: React.FC = () => {
 
       <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5">
         <p className="mb-2 text-sm font-medium text-amber-300">{c.insightTitle}</p>
-        <p className="text-sm text-zinc-300">{c.insightText}</p>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300">{c.insightText}</p>
       </div>
 
       <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />

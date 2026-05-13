@@ -87,11 +87,11 @@ export const ModernAlternativesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="modern-alternatives">
-      <h2 id="modern-alternatives" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="modern-alternatives" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Tabs */}
-      <div className="mb-4 flex gap-1 rounded-lg border border-zinc-700 bg-zinc-800 p-1" role="tablist">
+      <div className="mb-4 flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 p-1" role="tablist">
         {mETHODST.map((m, i) => (
           <button
             key={m.id}
@@ -100,8 +100,8 @@ export const ModernAlternativesSection: React.FC = () => {
             onClick={() => selectTab(i)}
             className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
               activeTab === i
-                ? 'bg-zinc-700 text-zinc-100'
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200'
             }`}
           >
             {m.label}
@@ -110,18 +110,18 @@ export const ModernAlternativesSection: React.FC = () => {
       </div>
 
       {/* Active method detail */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5" role="tabpanel">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5" role="tabpanel">
         <div className="mb-3">
           <h3 className={`text-lg font-semibold ${method.color}`}>{method.label}</h3>
           <p className="text-xs text-zinc-500">{method.tagline}</p>
         </div>
-        <p className="mb-4 text-sm leading-relaxed text-zinc-300">{method.description}</p>
+        <p className="mb-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{method.description}</p>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <h4 className="mb-1 text-xs font-semibold text-green-400">Pros</h4>
             <ul className="space-y-1">
               {method.pros.map(p => (
-                <li key={p} className="text-xs text-zinc-400">+ {p}</li>
+                <li key={p} className="text-xs text-zinc-600 dark:text-zinc-400">+ {p}</li>
               ))}
             </ul>
           </div>
@@ -129,7 +129,7 @@ export const ModernAlternativesSection: React.FC = () => {
             <h4 className="mb-1 text-xs font-semibold text-red-400">Cons</h4>
             <ul className="space-y-1">
               {method.cons.map(c => (
-                <li key={c} className="text-xs text-zinc-400">− {c}</li>
+                <li key={c} className="text-xs text-zinc-600 dark:text-zinc-400">− {c}</li>
               ))}
             </ul>
           </div>
@@ -137,13 +137,13 @@ export const ModernAlternativesSection: React.FC = () => {
       </div>
 
       {/* Comparison table */}
-      <div className="overflow-hidden rounded-lg border border-zinc-700">
+      <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
-              <th className="px-4 py-2 text-left text-xs font-medium text-zinc-400">Method</th>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              <th className="px-4 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400">Method</th>
               {COMPARISON_FIELDS.map(f => (
-                <th key={f.key} className="px-4 py-2 text-left text-xs font-medium text-zinc-400">
+                <th key={f.key} className="px-4 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400">
                   {f.label}
                 </th>
               ))}
@@ -151,10 +151,10 @@ export const ModernAlternativesSection: React.FC = () => {
           </thead>
           <tbody>
             {mETHODST.map(m => (
-              <tr key={m.id} className="border-b border-zinc-800 last:border-0">
+              <tr key={m.id} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                 <td className={`px-4 py-2 font-medium ${m.color}`}>{m.label}</td>
                 {COMPARISON_FIELDS.map(f => (
-                  <td key={f.key} className="px-4 py-2 text-zinc-300">{m[f.key]}</td>
+                  <td key={f.key} className="px-4 py-2 text-zinc-700 dark:text-zinc-300">{m[f.key]}</td>
                 ))}
               </tr>
             ))}

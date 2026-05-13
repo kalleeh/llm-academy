@@ -143,38 +143,38 @@ export const CostRealityBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="cost-reality-biz">
-      <h2 id="cost-reality-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="cost-reality-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-2">
         {SCENARIOS.map((s, i) => (
           <div key={s.scenario} className={`rounded-lg border ${s.color}`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
-              <span className="text-sm font-medium text-zinc-100">{s.scenario}</span>
+              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{s.scenario}</span>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-xs">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-xs">
                 <div className="grid gap-2 sm:grid-cols-3">
                   <div className="rounded border border-emerald-500/20 bg-emerald-500/5 px-3 py-2">
                     <p className="font-medium text-emerald-400">Cheapest sensible</p>
-                    <p className="mt-1 text-zinc-300">{s.cheapestApproach}</p>
+                    <p className="mt-1 text-zinc-700 dark:text-zinc-300">{s.cheapestApproach}</p>
                     <p className="mt-1 font-mono text-amber-300">{s.cheapestCost}</p>
                   </div>
                   <div className="rounded border border-amber-500/20 bg-amber-500/5 px-3 py-2">
                     <p className="font-medium text-amber-400">Mid-tier</p>
-                    <p className="mt-1 text-zinc-300">{s.midApproach}</p>
+                    <p className="mt-1 text-zinc-700 dark:text-zinc-300">{s.midApproach}</p>
                     <p className="mt-1 font-mono text-amber-300">{s.midCost}</p>
                   </div>
                   <div className="rounded border border-red-500/20 bg-red-500/5 px-3 py-2">
                     <p className="font-medium text-red-400">Premium / managed</p>
-                    <p className="mt-1 text-zinc-300">{s.premiumApproach}</p>
+                    <p className="mt-1 text-zinc-700 dark:text-zinc-300">{s.premiumApproach}</p>
                     <p className="mt-1 font-mono text-amber-300">{s.premiumCost}</p>
                   </div>
                 </div>
-                <div className="rounded bg-zinc-800/50 p-3">
-                  <p className="mb-1 font-medium text-zinc-400">Recommendation</p>
-                  <p className="text-zinc-300" dangerouslySetInnerHTML={{ __html: s.recommendation }} />
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3">
+                  <p className="mb-1 font-medium text-zinc-600 dark:text-zinc-400">Recommendation</p>
+                  <p className="text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: s.recommendation }} />
                 </div>
               </div>
             )}
@@ -186,18 +186,18 @@ export const CostRealityBusiness: React.FC = () => {
         <p className="mb-3 text-sm font-medium text-red-300">{c.hiddenTitle}</p>
         <ul className="space-y-2 text-xs">
           {HIDDEN_COSTS.map((h) => (
-            <li key={h.cost} className="rounded bg-zinc-900 px-3 py-2">
-              <p className="font-medium text-zinc-100">{h.cost}</p>
-              <p className="mt-1 text-zinc-400" dangerouslySetInnerHTML={{ __html: h.detail }} />
+            <li key={h.cost} className="rounded bg-white dark:bg-zinc-900 px-3 py-2">
+              <p className="font-medium text-zinc-900 dark:text-zinc-100">{h.cost}</p>
+              <p className="mt-1 text-zinc-600 dark:text-zinc-400" dangerouslySetInnerHTML={{ __html: h.detail }} />
               <p className="mt-1 font-mono text-amber-300">{h.rough}</p>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.rulesTitle}</p>
-        <ul className="space-y-1.5 text-xs text-zinc-300">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.rulesTitle}</p>
+        <ul className="space-y-1.5 text-xs text-zinc-700 dark:text-zinc-300">
           {RULES.map((r, i) => (
             <li key={i} dangerouslySetInnerHTML={{ __html: '• ' + r.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-amber-300">$1</strong>') }} />
           ))}

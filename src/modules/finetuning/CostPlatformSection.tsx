@@ -47,18 +47,18 @@ export const CostPlatformSection: React.FC = () => {
 
   return (
     <section aria-labelledby="cost-platform">
-      <h2 id="cost-platform" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="cost-platform" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-8 overflow-x-auto">
         <table className="w-full text-sm" role="table">
           <thead>
-            <tr className="border-b border-zinc-700 text-left">
-              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-400">Platform</th>
-              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-400">GPU</th>
-              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-400">VRAM</th>
-              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-400">Cost</th>
-              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-400">Ease</th>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 text-left">
+              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">Platform</th>
+              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">GPU</th>
+              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">VRAM</th>
+              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">Cost</th>
+              <th className="px-3 py-2 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">Ease</th>
             </tr>
           </thead>
           <tbody>
@@ -66,13 +66,13 @@ export const CostPlatformSection: React.FC = () => {
               <tr
                 key={p.name}
                 onClick={() => handleSelect(i)}
-                className={`cursor-pointer border-b border-zinc-800 transition-colors ${
-                  selectedPlatform === i ? 'bg-zinc-800' : 'hover:bg-zinc-800/50'
+                className={`cursor-pointer border-b border-zinc-200 dark:border-zinc-800 transition-colors ${
+                  selectedPlatform === i ? 'bg-zinc-100 dark:bg-zinc-800' : 'hover:bg-zinc-100 dark:bg-zinc-800/50'
                 }`}
               >
-                <td className="px-3 py-2.5 font-medium text-zinc-200">{p.name}</td>
-                <td className="px-3 py-2.5 font-mono text-xs text-zinc-300">{p.gpu}</td>
-                <td className="px-3 py-2.5 font-mono text-xs text-zinc-300">{p.vram}</td>
+                <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{p.name}</td>
+                <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{p.gpu}</td>
+                <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{p.vram}</td>
                 <td className="px-3 py-2.5 font-mono text-xs text-amber-400">{p.cost}</td>
                 <td className="px-3 py-2.5 text-xs text-yellow-500">{EASE_LABELS[p.ease]}</td>
               </tr>
@@ -80,30 +80,30 @@ export const CostPlatformSection: React.FC = () => {
           </tbody>
         </table>
         {selectedPlatform !== null && (
-          <div className="mt-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3">
-            <p className="text-xs leading-relaxed text-zinc-300">
-              <strong className="text-zinc-100">{pLATFORMST[selectedPlatform].name}:</strong>{' '}
+          <div className="mt-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
+            <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
+              <strong className="text-zinc-900 dark:text-zinc-100">{pLATFORMST[selectedPlatform].name}:</strong>{' '}
               {pLATFORMST[selectedPlatform].notes}
             </p>
           </div>
         )}
       </div>
 
-      <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-400 uppercase">
+      <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 uppercase">
         Realistic cost estimate
       </h3>
       <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-5">
         <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2">
           {Object.entries(COST_ESTIMATE).map(([key, value]) => (
             <div key={key} className="flex justify-between gap-4">
-              <span className="text-sm text-zinc-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
-              <span className="font-mono text-sm font-medium text-zinc-200">{value}</span>
+              <span className="text-sm text-zinc-600 dark:text-zinc-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
+              <span className="font-mono text-sm font-medium text-zinc-800 dark:text-zinc-200">{value}</span>
             </div>
           ))}
         </div>
         <div className="mt-4 border-t border-amber-500/20 pt-3">
-          <p className="text-sm text-zinc-300">
-            <strong className="text-amber-400">Bottom line:</strong> {c.p2} <strong className="text-zinc-100">$0.50–$1.00</strong> on
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">
+            <strong className="text-amber-400">Bottom line:</strong> {c.p2} <strong className="text-zinc-900 dark:text-zinc-100">$0.50–$1.00</strong> on
             cloud GPUs, or free if you have a local RTX 3090/4090.
           </p>
         </div>

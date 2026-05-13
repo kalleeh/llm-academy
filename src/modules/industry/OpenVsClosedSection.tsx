@@ -47,8 +47,8 @@ export const OpenVsClosedSection: React.FC = () => {
 
   return (
     <section aria-labelledby="open-vs-closed">
-      <h2 id="open-vs-closed" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="open-vs-closed" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Tab switcher */}
       <div className="mb-6 flex gap-2" role="tablist">
@@ -59,7 +59,7 @@ export const OpenVsClosedSection: React.FC = () => {
             aria-selected={tab === t}
             onClick={() => switchTab(t)}
             className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-              tab === t ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-400 hover:text-zinc-200'
+              tab === t ? 'bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200'
             }`}
           >
             {t === 'table' ? 'Comparison' : 'Open Models Rising'}
@@ -68,21 +68,21 @@ export const OpenVsClosedSection: React.FC = () => {
       </div>
 
       {tab === 'table' ? (
-        <div className="overflow-x-auto rounded-lg border border-zinc-700">
+        <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800">
-                <th className="px-4 py-3 font-mono text-xs font-semibold text-zinc-400">Dimension</th>
+              <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+                <th className="px-4 py-3 font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-400">Dimension</th>
                 <th className="px-4 py-3 font-mono text-xs font-semibold text-green-400">Open-weight</th>
                 <th className="px-4 py-3 font-mono text-xs font-semibold text-red-400">Closed-source</th>
               </tr>
             </thead>
             <tbody>
               {cOMPARISONT.map(row => (
-                <tr key={row.dimension} className="border-b border-zinc-800 last:border-0 hover:bg-zinc-900/50">
-                  <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-100">{row.dimension}</td>
-                  <td className="px-4 py-3 text-xs text-zinc-300">{row.open}</td>
-                  <td className="px-4 py-3 text-xs text-zinc-300">{row.closed}</td>
+                <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-white dark:bg-zinc-900/50">
+                  <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{row.dimension}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{row.open}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{row.closed}</td>
                 </tr>
               ))}
             </tbody>
@@ -90,15 +90,15 @@ export const OpenVsClosedSection: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="mb-4 text-sm text-zinc-400">{c.p5}</p>
+          <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">{c.p5}</p>
           {oPEN_MODELST.map(m => (
-            <div key={m.name} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+            <div key={m.name} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
               <div className="flex items-baseline justify-between">
-                <h3 className="font-mono text-sm font-bold text-zinc-100">{m.name}</h3>
+                <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{m.name}</h3>
                 <span className="text-xs text-zinc-500">{m.org}</span>
               </div>
-              <p className="mt-1 text-xs text-zinc-400">{m.params}</p>
-              <p className="mt-1 text-xs text-zinc-300">{m.note}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{m.params}</p>
+              <p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{m.note}</p>
             </div>
           ))}
           <div className="mt-4 rounded-lg border border-green-900/50 bg-green-950/20 p-4">

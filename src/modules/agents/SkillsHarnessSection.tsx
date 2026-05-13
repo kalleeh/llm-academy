@@ -99,27 +99,27 @@ export const SkillsHarnessSection: React.FC = () => {
   const c = useT({ title: '8. Skills, Steering, and the Managed Runtime', intro: EN_INTRO }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
   return (
   <section aria-labelledby="skills-tech">
-    <h2 id="skills-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+    <h2 id="skills-tech" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
     {/* Capability comparison */}
-    <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-700">
+    <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
       <table className="w-full text-xs">
         <thead>
-          <tr className="border-b border-zinc-700 bg-zinc-800">
+          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
             {['Name', 'Layer', 'What it is', 'Granularity', 'Reusability'].map((h) => (
-              <th key={h} className="px-3 py-2 text-left font-medium text-zinc-400">{h}</th>
+              <th key={h} className="px-3 py-2 text-left font-medium text-zinc-600 dark:text-zinc-400">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {cAPABILITIEST.map((cap) => (
-            <tr key={cap.name} className="border-b border-zinc-800 last:border-0 align-top">
+            <tr key={cap.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 align-top">
               <td className="px-3 py-2 font-medium text-amber-300 whitespace-nowrap">{cap.name}</td>
-              <td className="px-3 py-2 text-zinc-400">{cap.layer}</td>
-              <td className="px-3 py-2 text-zinc-300">{cap.what}</td>
-              <td className="px-3 py-2 text-zinc-400">{cap.granularity}</td>
-              <td className="px-3 py-2 text-zinc-400">{cap.reusability}</td>
+              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.layer}</td>
+              <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{cap.what}</td>
+              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.granularity}</td>
+              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.reusability}</td>
             </tr>
           ))}
         </tbody>
@@ -128,9 +128,9 @@ export const SkillsHarnessSection: React.FC = () => {
 
     {/* SKILL.md format */}
     <div className="mb-6">
-      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-100">Agent Skills — SKILL.md</h3>
-      <p className="mb-2 text-sm text-zinc-300">
-        <strong className="text-zinc-100">Skills</strong> encode multi-step workflows or domain
+      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Agent Skills — SKILL.md</h3>
+      <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">Skills</strong> encode multi-step workflows or domain
         expertise as portable, folder-based packages. The format was launched by Anthropic in
         October 2025 and donated as an open standard (
         <a href="https://agentskills.io/specification" target="_blank" rel="noreferrer" className="text-amber-300 underline">agentskills.io</a>
@@ -144,7 +144,7 @@ export const SkillsHarnessSection: React.FC = () => {
       <div className="mt-3">
         <CodeBlock code={SKILL_EXAMPLE} language="markdown" title="SKILL.md — frontmatter + body" />
       </div>
-      <div className="mt-3 rounded-md border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-zinc-300">
+      <div className="mt-3 rounded-md border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-zinc-700 dark:text-zinc-300">
         <strong className="text-amber-300">Frontmatter rules:</strong>{' '}
         <code>name</code> is required, max 64 chars, lowercase kebab-case, must match the parent
         directory name. <code>description</code> is required, max 1024 chars, must describe both
@@ -156,10 +156,10 @@ export const SkillsHarnessSection: React.FC = () => {
 
     {/* Runtime / harness */}
     <div className="mb-6">
-      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-100">The managed runtime</h3>
-      <p className="mb-2 text-sm text-zinc-300">
+      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The managed runtime</h3>
+      <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
         SKILL.md and AGENTS.md are <em>authoring</em> formats — they describe what the agent should
-        do. A managed runtime like <strong className="text-zinc-100">Bedrock AgentCore</strong> is
+        do. A managed runtime like <strong className="text-zinc-900 dark:text-zinc-100">Bedrock AgentCore</strong> is
         the <em>execution</em> layer: it runs the loop, calls tools, manages memory, enforces
         limits, and emits observability traces.
       </p>

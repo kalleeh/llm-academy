@@ -49,8 +49,8 @@ export const A2ASection: React.FC = () => {
 
   return (
     <section aria-labelledby="a2a-tech">
-      <h2 id="a2a-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="a2a-tech" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         MCP connects agents to <em>tools</em>. A2A connects agents to <em>other agents</em>.
         Launched by Google in April 2025 and donated to the Linux Foundation in June 2025, A2A defines how
         opaque agents discover each other, negotiate capabilities, exchange tasks, and stream results —
@@ -58,23 +58,23 @@ export const A2ASection: React.FC = () => {
       </p>
 
       {/* MCP vs A2A comparison */}
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-700">
+      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
               {['Protocol', 'Direction', 'Scope', 'Backed by', 'Status'].map((h) => (
-                <th key={h} className="px-3 py-2 text-left text-xs font-medium text-zinc-400">{h}</th>
+                <th key={h} className="px-3 py-2 text-left text-xs font-medium text-zinc-600 dark:text-zinc-400">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {pROTOCOLST.map((p) => (
-              <tr key={p.name} className="border-b border-zinc-800 last:border-0">
+              <tr key={p.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                 <td className="px-3 py-2 font-mono font-medium text-amber-300">{p.name}</td>
-                <td className="px-3 py-2 text-zinc-300">{p.direction}</td>
-                <td className="px-3 py-2 text-zinc-400">{p.scope}</td>
-                <td className="px-3 py-2 text-zinc-400">{p.standard}</td>
-                <td className="px-3 py-2 text-zinc-400">{p.status}</td>
+                <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{p.direction}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{p.scope}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{p.standard}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{p.status}</td>
               </tr>
             ))}
           </tbody>
@@ -82,7 +82,7 @@ export const A2ASection: React.FC = () => {
       </div>
 
       {/* A2A architecture */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
         <p className="mb-3 text-xs font-medium text-zinc-500">A2A core concepts</p>
         <div className="grid gap-3 sm:grid-cols-2">
           {[
@@ -91,9 +91,9 @@ export const A2ASection: React.FC = () => {
             { term: 'Message / Part', desc: 'Communication within a task. Supports text, files, structured data. Multi-turn conversations between agents.' },
             { term: 'Push Notifications', desc: 'Remote agent can notify the client when async work completes — no polling required.' },
           ].map((c) => (
-            <div key={c.term} className="rounded bg-zinc-800/50 px-3 py-2">
+            <div key={c.term} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
               <p className="text-xs font-medium text-emerald-400">{c.term}</p>
-              <p className="mt-1 text-xs text-zinc-400">{c.desc}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -101,7 +101,7 @@ export const A2ASection: React.FC = () => {
 
       {/* Agent Card example */}
       <div className="mb-6">
-        <button onClick={toggleCard} className="mb-2 flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200">
+        <button onClick={toggleCard} className="mb-2 flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200">
           <Icon name="file" size={14} />
           {showCard ? 'Hide' : 'Show'} example Agent Card
         </button>
@@ -109,7 +109,7 @@ export const A2ASection: React.FC = () => {
       </div>
 
       {/* Multi-agent flow */}
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
         <p className="mb-3 text-xs font-medium text-zinc-500">{c.p4}</p>
         <div className="space-y-2 font-mono text-xs">
           {[

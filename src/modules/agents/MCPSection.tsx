@@ -69,9 +69,9 @@ export const MCPSection: React.FC = () => {
   const c = useT({ title: '3. MCP (Model Context Protocol)' , p2: EN_P2 }, { sv: mCPSectionSv, ko: mCPSectionKo })
   return (
   <section aria-labelledby="mcp">
-    <h2 id="mcp" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-      MCP is the <strong className="text-zinc-100">2025–2026 standard</strong> for connecting LLMs
+    <h2 id="mcp" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+      MCP is the <strong className="text-zinc-900 dark:text-zinc-100">2025–2026 standard</strong> for connecting LLMs
       to tools. Think of it as{' '}
       <strong className="text-amber-300">&quot;USB-C for AI&quot;</strong> — one protocol, many
       tools. Created by Anthropic, now adopted across the industry by OpenAI, Google, Microsoft, and
@@ -79,7 +79,7 @@ export const MCPSection: React.FC = () => {
     </p>
 
     {/* Architecture diagram */}
-    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
       <p className="mb-3 text-xs font-medium text-zinc-500">MCP Architecture</p>
       <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
         <div className="rounded-md border border-purple-500/30 bg-purple-500/10 px-4 py-2 text-center">
@@ -108,20 +108,20 @@ export const MCPSection: React.FC = () => {
     </div>
 
     {/* Comparison table */}
-    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700">
+    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-zinc-700 bg-zinc-800">
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Aspect</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Function Calling</th>
+          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Aspect</th>
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Function Calling</th>
             <th className="px-4 py-3 text-left font-mono text-xs text-amber-400">MCP</th>
           </tr>
         </thead>
         <tbody>
           {cOMPARISONT.map(row => (
-            <tr key={row.aspect} className="border-b border-zinc-800 last:border-0">
-              <td className="px-4 py-2.5 font-medium text-zinc-200">{row.aspect}</td>
-              <td className="px-4 py-2.5 text-zinc-400">{row.functionCalling}</td>
+            <tr key={row.aspect} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
+              <td className="px-4 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{row.aspect}</td>
+              <td className="px-4 py-2.5 text-zinc-600 dark:text-zinc-400">{row.functionCalling}</td>
               <td className="px-4 py-2.5 text-amber-300">{row.mcp}</td>
             </tr>
           ))}
@@ -131,9 +131,9 @@ export const MCPSection: React.FC = () => {
 
     <CodeBlock code={MCP_SERVER_EXAMPLE} language="typescript" title="weather-server.ts — MCP server example" />
 
-    <div className="mt-4 rounded-md bg-zinc-800 p-4">
-      <p className="text-sm leading-relaxed text-zinc-300">
-        <strong className="text-zinc-100">Why MCP matters:</strong> {c.p2}
+    <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
+      <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">Why MCP matters:</strong> {c.p2}
       </p>
     </div>
   </section>

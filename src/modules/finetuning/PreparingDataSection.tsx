@@ -88,8 +88,8 @@ export const PreparingDataSection: React.FC = () => {
 
   return (
     <section aria-labelledby="preparing-data">
-      <h2 id="preparing-data" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="preparing-data" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 flex gap-2" role="tablist" aria-label="Data format selector">
         {FORMATS.map(f => (
@@ -101,7 +101,7 @@ export const PreparingDataSection: React.FC = () => {
             className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               activeFormat === f
                 ? 'bg-amber-600/20 text-amber-400'
-                : 'bg-zinc-800 text-zinc-400 hover:text-zinc-200'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:text-zinc-200'
             }`}
           >
             {FORMAT_EXAMPLES[f].label}
@@ -110,18 +110,18 @@ export const PreparingDataSection: React.FC = () => {
       </div>
 
       <div className="mb-6">
-        <p className="mb-3 text-sm text-zinc-400">{fmt.description}</p>
+        <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">{fmt.description}</p>
         <CodeBlock code={fmt.code} language="javascript" title={`${fmt.label} — example.jsonl`} />
       </div>
 
       <div className="mb-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-400 uppercase">
+        <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 uppercase">
           Training data directory
         </h3>
         <FileExplorer tree={TRAINING_TREE} title="~/project/training-data" />
       </div>
 
-      <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-400 uppercase">
+      <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 uppercase">
         Quality checklist
       </h3>
       <div className="grid gap-2 sm:grid-cols-2">
@@ -132,14 +132,14 @@ export const PreparingDataSection: React.FC = () => {
             className={`flex items-start gap-3 rounded-lg border p-3 text-left transition-colors ${
               checked.has(i)
                 ? 'border-green-500/40 bg-green-500/10'
-                : 'border-zinc-700 bg-zinc-800/50 hover:border-zinc-600'
+                : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 hover:border-zinc-600'
             }`}
           >
             <span className={`mt-0.5 text-sm ${checked.has(i) ? 'text-green-400' : 'text-zinc-600'}`}>
               {checked.has(i) ? '☑' : '☐'}
             </span>
             <div>
-              <p className="text-sm font-medium text-zinc-200">{item.label}</p>
+              <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{item.label}</p>
               <p className="text-xs text-zinc-500">{item.detail}</p>
             </div>
           </button>
@@ -151,17 +151,17 @@ export const PreparingDataSection: React.FC = () => {
         </p>
       )}
 
-      <div className="mt-8 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="mb-2 text-sm font-medium text-zinc-200">
+      <div className="mt-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="mb-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">
           <Icon name="box" /> nanochat's approach to SFT data
         </p>
-        <p className="mb-3 text-sm leading-relaxed text-zinc-400">
+        <p className="mb-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           nanochat uses <code className="text-amber-300">chat_sft.py</code> with data from the{' '}
-          <strong className="text-zinc-200">SmolTalk</strong> dataset (HuggingFace) — a curated
+          <strong className="text-zinc-800 dark:text-zinc-200">SmolTalk</strong> dataset (HuggingFace) — a curated
           collection of multi-turn conversations. You can also create custom tasks using{' '}
           <code className="text-amber-300">tasks/customjson.py</code> with any JSONL file of conversations.
         </p>
-        <p className="text-sm leading-relaxed text-zinc-400">
+        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           Want to give your model a personality? Karpathy's{' '}
           <a href="https://github.com/karpathy/nanochat/discussions/139" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
             identity guide

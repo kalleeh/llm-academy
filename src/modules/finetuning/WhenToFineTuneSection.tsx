@@ -57,14 +57,14 @@ export const WhenToFineTuneSection: React.FC = () => {
 
   return (
     <section aria-labelledby="when-to-finetune">
-      <h2 id="when-to-finetune" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="when-to-finetune" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-6">
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         <div className="mb-4 flex items-center gap-2">
           <span className="font-mono text-xs text-zinc-500">Decision path:</span>
           {path.map((id, i) => (
-            <span key={i} className="font-mono text-xs text-zinc-400">
+            <span key={i} className="font-mono text-xs text-zinc-600 dark:text-zinc-400">
               {i > 0 && ' → '}{id}
             </span>
           ))}
@@ -72,7 +72,7 @@ export const WhenToFineTuneSection: React.FC = () => {
 
         {currentNode && !endpoint ? (
           <div className="space-y-4">
-            <p className="text-lg font-medium text-zinc-100">{currentNode.question}</p>
+            <p className="text-lg font-medium text-zinc-900 dark:text-zinc-100">{currentNode.question}</p>
             <div className="flex gap-3">
               <button
                 onClick={() => handleChoice(currentNode.yes)}
@@ -91,10 +91,10 @@ export const WhenToFineTuneSection: React.FC = () => {
         ) : endpoint ? (
           <div className="space-y-3">
             <p className={`text-lg font-bold ${endpoint.color}`}>{endpoint.icon && <Icon name={endpoint.icon} />} {endpoint.label}</p>
-            <p className="text-sm text-zinc-300">{endpoint.detail}</p>
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">{endpoint.detail}</p>
             <button
               onClick={handleReset}
-              className="rounded-md bg-zinc-700 px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:bg-zinc-600"
+              className="rounded-md bg-zinc-700 px-3 py-1.5 text-xs text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-zinc-600"
             >
               Start over
             </button>
@@ -102,14 +102,14 @@ export const WhenToFineTuneSection: React.FC = () => {
         ) : null}
       </div>
 
-      <h3 className="mb-4 font-mono text-sm font-semibold tracking-wider text-zinc-400 uppercase">
+      <h3 className="mb-4 font-mono text-sm font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 uppercase">
         Where fine-tuning wins
       </h3>
       <div className="grid gap-3 sm:grid-cols-2">
         {wIN_CASEST.map(c => (
-          <div key={c.title} className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+          <div key={c.title} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
             <p className="mb-1 text-sm font-semibold text-amber-400">{c.title}</p>
-            <p className="text-xs leading-relaxed text-zinc-400">{c.desc}</p>
+            <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{c.desc}</p>
           </div>
         ))}
       </div>

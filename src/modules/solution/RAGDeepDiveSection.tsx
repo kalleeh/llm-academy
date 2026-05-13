@@ -45,15 +45,15 @@ export const RAGDeepDiveSection: React.FC = () => {
 
   return (
     <section aria-labelledby="rag-deep-dive">
-      <h2 id="rag-deep-dive" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
-        <strong className="text-zinc-100">Retrieval-Augmented Generation</strong> gives an LLM
+      <h2 id="rag-deep-dive" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">Retrieval-Augmented Generation</strong> gives an LLM
         access to external knowledge without retraining. Instead of baking facts into weights,
         you retrieve relevant documents at query time and inject them into the prompt.
       </p>
 
       {/* Pipeline visual */}
-      <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-700 bg-zinc-900 p-5">
+      <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
         <p className="mb-4 font-mono text-xs text-zinc-500 uppercase">RAG Pipeline</p>
         <div className="flex items-center gap-2">
           {PIPELINE_STEPS.map((step, i) => (
@@ -63,7 +63,7 @@ export const RAGDeepDiveSection: React.FC = () => {
                 className={`flex flex-col items-center rounded-lg border p-3 transition-all ${
                   activeStep === i
                     ? 'border-blue-500 bg-blue-500/10 text-blue-400'
-                    : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                    : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
                 }`}
                 style={{ minWidth: '5.5rem' }}
                 aria-pressed={activeStep === i}
@@ -78,9 +78,9 @@ export const RAGDeepDiveSection: React.FC = () => {
           ))}
         </div>
         {activeStep !== null && (
-          <div className="mt-4 rounded-md border border-zinc-700 bg-zinc-800/50 p-3">
-            <p className="text-sm text-zinc-300">
-              <strong className="text-zinc-100">Step {activeStep + 1}:</strong>{' '}
+          <div className="mt-4 rounded-md border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-3">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">
+              <strong className="text-zinc-900 dark:text-zinc-100">Step {activeStep + 1}:</strong>{' '}
               {PIPELINE_STEPS[activeStep].desc}
             </p>
           </div>
@@ -88,11 +88,11 @@ export const RAGDeepDiveSection: React.FC = () => {
       </div>
 
       {/* RAG vs Fine-tuning */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">When RAG Beats Fine-tuning</h3>
-      <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-700">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">When RAG Beats Fine-tuning</h3>
+      <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
               <th className="px-4 py-2 text-xs text-zinc-500 uppercase">Aspect</th>
               <th className="px-4 py-2 text-xs text-blue-400/70 uppercase">RAG</th>
               <th className="px-4 py-2 text-xs text-amber-400/70 uppercase">Fine-tuning</th>
@@ -100,10 +100,10 @@ export const RAGDeepDiveSection: React.FC = () => {
           </thead>
           <tbody>
             {rAG_VS_FINETUNET.map(row => (
-              <tr key={row.aspect} className="border-b border-zinc-800">
-                <td className="px-4 py-2 font-medium text-zinc-300">{row.aspect}</td>
-                <td className="px-4 py-2 text-zinc-400">{row.rag}</td>
-                <td className="px-4 py-2 text-zinc-400">{row.finetune}</td>
+              <tr key={row.aspect} className="border-b border-zinc-200 dark:border-zinc-800">
+                <td className="px-4 py-2 font-medium text-zinc-700 dark:text-zinc-300">{row.aspect}</td>
+                <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.rag}</td>
+                <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.finetune}</td>
               </tr>
             ))}
           </tbody>
@@ -111,11 +111,11 @@ export const RAGDeepDiveSection: React.FC = () => {
       </div>
 
       {/* Terminal demo */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300"><Icon name="terminal" /> RAG Pipeline Setup</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300"><Icon name="terminal" /> RAG Pipeline Setup</h3>
       <SimulatedTerminal steps={TERMINAL_STEPS} title="rag-pipeline" />
 
-      <div className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm leading-relaxed text-zinc-400">
+      <div className="mt-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <strong className="text-amber-400">Key insight:</strong> {c.p2}
         </p>
       </div>

@@ -119,7 +119,7 @@ export const LLMDataSection: React.FC = () => {
         <button
           onClick={toggleView}
           className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+            showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800'
           }`}
         >
           ML vs LLM Comparison
@@ -127,7 +127,7 @@ export const LLMDataSection: React.FC = () => {
         <button
           onClick={toggleView}
           className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-            !showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+            !showComparison ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800'
           }`}
         >
           Data Sources & Scale

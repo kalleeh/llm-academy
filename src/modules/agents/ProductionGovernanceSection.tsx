@@ -42,35 +42,35 @@ export const ProductionGovernanceSection: React.FC = () => {
 
   return (
     <section aria-labelledby="governance-tech">
-      <h2 id="governance-tech" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">
+      <h2 id="governance-tech" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         {c.p2} <em>decides</em> what to do. This shifts risk from implementation
-        bugs to <strong className="text-zinc-100">behavioral failures</strong> — the agent does
+        bugs to <strong className="text-zinc-900 dark:text-zinc-100">behavioral failures</strong> — the agent does
         something technically correct but contextually wrong.
       </p>
-      <p className="mb-6 max-w-2xl text-sm text-zinc-400">{c.intro}</p>
+      <p className="mb-6 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.intro}</p>
 
       {/* Autonomy tiers */}
-      <div className="mb-8 overflow-hidden rounded-lg border border-zinc-700">
-        <div className="border-b border-zinc-700 bg-zinc-800 px-4 py-2">
-          <span className="text-xs font-medium text-zinc-400">{c.p7}</span>
+      <div className="mb-8 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+          <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">{c.p7}</span>
         </div>
         <table className="w-full text-xs">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-800/50">
+            <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/50">
               {['Tier', 'Loop', 'Oversight', 'Examples', 'Risk'].map((h) => (
-                <th key={h} className="px-3 py-2 text-left font-medium text-zinc-400">{h}</th>
+                <th key={h} className="px-3 py-2 text-left font-medium text-zinc-600 dark:text-zinc-400">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {aUTONOMY_TIERST.map((t) => (
-              <tr key={t.tier} className="border-b border-zinc-800/50 last:border-0">
+              <tr key={t.tier} className="border-b border-zinc-200 dark:border-zinc-800/50 last:border-0">
                 <td className={`px-3 py-2 font-medium ${t.color} rounded`}>{t.tier}</td>
-                <td className="px-3 py-2 text-zinc-300">{t.loop}</td>
-                <td className="px-3 py-2 text-zinc-400">{t.oversight}</td>
-                <td className="px-3 py-2 text-zinc-400">{t.examples}</td>
-                <td className="px-3 py-2 text-zinc-400">{t.risk}</td>
+                <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{t.loop}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.oversight}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.examples}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.risk}</td>
               </tr>
             ))}
           </tbody>
@@ -79,17 +79,17 @@ export const ProductionGovernanceSection: React.FC = () => {
 
       {/* Governance controls */}
       <div className="mb-8">
-        <button onClick={toggleControls} className="mb-3 flex items-center gap-2 text-sm font-medium text-zinc-200 hover:text-zinc-100" aria-expanded={showControls}>
+        <button onClick={toggleControls} className="mb-3 flex items-center gap-2 text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 dark:text-zinc-100" aria-expanded={showControls}>
           <Icon name="shield" size={14} />
           {showControls ? 'Hide' : 'Show'} governance controls checklist
         </button>
         {showControls && (
           <div className="space-y-2">
             {gOVERNANCE_CONTROLST.map((g) => (
-              <div key={g.control} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-                <p className="text-sm font-medium text-zinc-100">{g.control}</p>
-                <p className="mt-1 text-sm text-zinc-300">{g.what}</p>
-                <p className="mt-2 text-xs text-zinc-500"><strong className="text-zinc-400">Implementation:</strong> {g.implementation}</p>
+              <div key={g.control} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+                <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{g.control}</p>
+                <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{g.what}</p>
+                <p className="mt-2 text-xs text-zinc-500"><strong className="text-zinc-600 dark:text-zinc-400">Implementation:</strong> {g.implementation}</p>
               </div>
             ))}
           </div>
@@ -97,8 +97,8 @@ export const ProductionGovernanceSection: React.FC = () => {
       </div>
 
       {/* Failure modes */}
-      <div className="mb-8 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">{c.p8}</p>
+      <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.p8}</p>
         <div className="space-y-2">
           {[
             { mode: 'Goal drift', desc: 'Agent optimizes for a proxy metric instead of the actual goal. Support agent minimizes ticket count by closing tickets prematurely instead of resolving issues.', mitigation: 'Measure outcomes (CSAT, reopen rate), not just throughput.' },
@@ -106,8 +106,8 @@ export const ProductionGovernanceSection: React.FC = () => {
             { mode: 'Infinite loops', desc: 'Agent retries a failing action with slight variations, burning tokens and time.', mitigation: 'max_iterations in harness config. Circuit breaker on repeated tool errors.' },
             { mode: 'Scope creep', desc: 'Agent takes actions outside its intended domain — a support agent starts making product recommendations or offering discounts it\'s not authorized to give.', mitigation: 'Strict action whitelists. Bedrock Guardrails denied topics. Regular behavioral audits.' },
           ].map((f) => (
-            <div key={f.mode} className="rounded bg-zinc-800/50 px-4 py-3">
-              <p className="text-sm text-zinc-200"><strong className="text-red-400">{f.mode}:</strong> {f.desc}</p>
+            <div key={f.mode} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
+              <p className="text-sm text-zinc-800 dark:text-zinc-200"><strong className="text-red-400">{f.mode}:</strong> {f.desc}</p>
               <p className="mt-1 text-xs text-emerald-400">Mitigation: {f.mitigation}</p>
             </div>
           ))}
@@ -117,10 +117,10 @@ export const ProductionGovernanceSection: React.FC = () => {
       {/* Industry stats */}
       <div className="mb-8 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5">
         <p className="mb-2 text-sm font-medium text-amber-300">Industry reality check</p>
-        <div className="space-y-1 text-sm text-zinc-300">
-          <p>Up to <strong className="text-zinc-100">40% of agentic AI initiatives</strong> may face cancellation by 2027 — not due to model quality but governance, integration, and organizational readiness failures.</p>
-          <p>{c.p11}<strong className="text-zinc-100">50% decline in model adoption</strong> and user acceptance by 2026 (Gartner).</p>
-          <p>{c.p12}<strong className="text-zinc-100">7% of global turnover</strong> for prohibited AI practices.</p>
+        <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
+          <p>Up to <strong className="text-zinc-900 dark:text-zinc-100">40% of agentic AI initiatives</strong> may face cancellation by 2027 — not due to model quality but governance, integration, and organizational readiness failures.</p>
+          <p>{c.p11}<strong className="text-zinc-900 dark:text-zinc-100">50% decline in model adoption</strong> and user acceptance by 2026 (Gartner).</p>
+          <p>{c.p12}<strong className="text-zinc-900 dark:text-zinc-100">7% of global turnover</strong> for prohibited AI practices.</p>
         </div>
       </div>
 

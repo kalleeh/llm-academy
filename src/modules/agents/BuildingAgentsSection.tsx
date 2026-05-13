@@ -133,31 +133,31 @@ export const BuildingAgentsSection: React.FC = () => {
   const c = useT({ title: '6. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
   return (
   <section aria-labelledby="building-agents">
-    <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+    <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
       You don&apos;t need a framework to build an agent. Start with{' '}
-      <strong className="text-zinc-100">raw function calling</strong> — it&apos;s just a while loop.
+      <strong className="text-zinc-900 dark:text-zinc-100">raw function calling</strong> — it&apos;s just a while loop.
       Add a framework when your agent needs complex routing, state management, or multi-agent
       coordination.
     </p>
 
     {/* Framework comparison table */}
-    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700">
+    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-zinc-700 bg-zinc-800">
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Framework</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Complexity</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Flexibility</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Learning Curve</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-400">Best For</th>
+          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Framework</th>
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Complexity</th>
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Flexibility</th>
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Learning Curve</th>
+            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Best For</th>
           </tr>
         </thead>
         <tbody>
           {fRAMEWORKST.map(fw => (
-            <tr key={fw.name} className="border-b border-zinc-800 last:border-0">
+            <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
               <td className="px-4 py-2.5">
-                <span className="font-medium text-zinc-200">{fw.name}</span>
+                <span className="font-medium text-zinc-800 dark:text-zinc-200">{fw.name}</span>
                 <p className="mt-0.5 text-xs text-zinc-500">{fw.description}</p>
               </td>
               <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[fw.complexity]}`}>
@@ -169,7 +169,7 @@ export const BuildingAgentsSection: React.FC = () => {
               <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[fw.learningCurve]}`}>
                 {fw.learningCurve}
               </td>
-              <td className="px-4 py-2.5 text-xs text-zinc-400">{fw.bestFor}</td>
+              <td className="px-4 py-2.5 text-xs text-zinc-600 dark:text-zinc-400">{fw.bestFor}</td>
             </tr>
           ))}
         </tbody>
@@ -179,9 +179,9 @@ export const BuildingAgentsSection: React.FC = () => {
     {/* Simulated terminal */}
     <SimulatedTerminal steps={TERMINAL_STEPS} title="Building a simple agent from scratch" />
 
-    <div className="mt-4 rounded-md bg-zinc-800 p-4">
-      <p className="text-sm leading-relaxed text-zinc-300">
-        <strong className="text-zinc-100">Start simple.</strong> {c.p2}
+    <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
+      <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">Start simple.</strong> {c.p2}
       </p>
     </div>
   </section>

@@ -81,13 +81,13 @@ export const WhyEvaluationSection: React.FC = () => {
 
   return (
     <section aria-labelledby="why-evaluation">
-      <h2 id="why-evaluation" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-300">{c.p11}<em>something</em> — but not whether it&apos;s
-        learning anything <strong className="text-zinc-100">useful</strong>. A model can achieve
+      <h2 id="why-evaluation" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p11}<em>something</em> — but not whether it&apos;s
+        learning anything <strong className="text-zinc-900 dark:text-zinc-100">useful</strong>. A model can achieve
         excellent perplexity while being terrible at following instructions, giving accurate answers,
         or being safe.
       </p>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.p12}<strong className="text-zinc-100">lower perplexity</strong>{' '}
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p12}<strong className="text-zinc-900 dark:text-zinc-100">lower perplexity</strong>{' '}
         (better by that metric), but which response would you actually want?
       </p>
 
@@ -98,8 +98,8 @@ export const WhyEvaluationSection: React.FC = () => {
             onClick={() => selectModel(i)}
             className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
               selectedModel === i
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             {m.label}
@@ -107,9 +107,9 @@ export const WhyEvaluationSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-700">
-        <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-4 py-2">
-          <span className="font-mono text-xs text-zinc-400">
+      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+        <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+          <span className="font-mono text-xs text-zinc-600 dark:text-zinc-400">
             Instruction: {example.instruction}
           </span>
           <span
@@ -122,21 +122,21 @@ export const WhyEvaluationSection: React.FC = () => {
             {example.rating === 'good' ? '✓ Helpful' : '✗ Unhelpful'} · PPL {example.perplexity}
           </span>
         </div>
-        <div className="bg-zinc-900 p-4">
-          <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-zinc-300">
+        <div className="bg-white dark:bg-zinc-900 p-4">
+          <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {example.response}
           </pre>
         </div>
       </div>
 
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
-        <p className="text-sm leading-relaxed text-zinc-400">
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <strong className="text-amber-400">Key insight:</strong> {c.p4}
-          <strong className="text-zinc-100">{c.p13}</strong>
+          <strong className="text-zinc-900 dark:text-zinc-100">{c.p13}</strong>
         </p>
       </div>
 
-      <h3 className="mb-4 font-mono text-lg font-semibold text-zinc-100">Types of Evaluation</h3>
+      <h3 className="mb-4 font-mono text-lg font-semibold text-zinc-900 dark:text-zinc-100">Types of Evaluation</h3>
 
       <div className="mb-4 flex gap-2">
         {EVAL_TYPES.map((t, i) => (
@@ -145,8 +145,8 @@ export const WhyEvaluationSection: React.FC = () => {
             onClick={() => setActiveType(i)}
             className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
               activeType === i
-                ? 'border-zinc-500 bg-zinc-800 text-zinc-100'
-                : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                ? 'border-zinc-500 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
             }`}
           >
             <Icon name={t.icon} /> {t.name}
@@ -154,16 +154,16 @@ export const WhyEvaluationSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h4 className="mb-2 font-mono text-sm font-semibold text-zinc-100">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h4 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           <Icon name={EVAL_TYPES[activeType].icon} /> {EVAL_TYPES[activeType].name}
         </h4>
-        <p className="mb-3 text-sm leading-relaxed text-zinc-300">
+        <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
           {EVAL_TYPES[activeType].description}
         </p>
         <div className="mb-3 flex flex-wrap gap-2">
           {EVAL_TYPES[activeType].examples.map((ex) => (
-            <span key={ex} className="rounded-full bg-zinc-800 px-2.5 py-1 text-xs text-zinc-300">
+            <span key={ex} className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-xs text-zinc-700 dark:text-zinc-300">
               {ex}
             </span>
           ))}
@@ -171,18 +171,18 @@ export const WhyEvaluationSection: React.FC = () => {
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-md bg-green-500/10 p-3">
             <span className="text-xs font-medium text-green-400">✓ Strengths</span>
-            <p className="mt-1 text-sm text-zinc-300">{EVAL_TYPES[activeType].pros}</p>
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{EVAL_TYPES[activeType].pros}</p>
           </div>
           <div className="rounded-md bg-red-500/10 p-3">
             <span className="text-xs font-medium text-red-400">✗ Weaknesses</span>
-            <p className="mt-1 text-sm text-zinc-300">{EVAL_TYPES[activeType].cons}</p>
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{EVAL_TYPES[activeType].cons}</p>
           </div>
         </div>
       </div>
 
       <div className="mt-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">{c.p7}</h3>
-        <p className="mb-3 text-sm text-zinc-400">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">{c.p7}</h3>
+        <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">
           nanochat includes two eval scripts that cover both base model quality and chat capabilities.
           The CORE metric (from the DCLM paper) is the primary benchmark for the GPT-2 speedrun leaderboard.
         </p>

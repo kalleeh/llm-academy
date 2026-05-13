@@ -89,7 +89,7 @@ export const LLMDifferenceSection: React.FC = () => {
           </thead>
           <tbody>
             {cOMPARISONT.map(row => (
-              <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/50">
+              <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50">
                 <td className="px-4 py-3 font-medium text-zinc-800 dark:text-zinc-200">{row.dimension}</td>
                 <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{row.ml}</td>
                 <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{row.llm}</td>

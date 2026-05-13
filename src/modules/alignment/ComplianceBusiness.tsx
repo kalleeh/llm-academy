@@ -154,11 +154,11 @@ export const ComplianceBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="compliance-biz">
-      <h2 id="compliance-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="compliance-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Risk tiers */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.riskTiersTitle}</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.riskTiersTitle}</h3>
       <div className="mb-6 space-y-2">
         {RISK_TIERS.map((t, i) => (
           <div key={t.tier} className={`rounded-lg border ${t.color}`}>
@@ -166,24 +166,24 @@ export const ComplianceBusiness: React.FC = () => {
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className={`rounded px-2 py-0.5 text-xs ${t.badge}`}>{t.tier.split(' — ')[0]}</span>
-                  <span className="text-sm font-medium text-zinc-100">{t.tier.split(' — ')[1]}</span>
+                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t.tier.split(' — ')[1]}</span>
                 </div>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-xs">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-xs">
                 <div>
                   <p className="mb-1 font-medium text-zinc-500">Examples</p>
-                  <p className="text-zinc-300" dangerouslySetInnerHTML={{ __html: t.examples }} />
+                  <p className="text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: t.examples }} />
                 </div>
                 <div>
                   <p className="mb-1 font-medium text-zinc-500">Obligations</p>
-                  <p className="text-zinc-300" dangerouslySetInnerHTML={{ __html: t.obligations }} />
+                  <p className="text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: t.obligations }} />
                 </div>
                 <div>
                   <p className="mb-1 font-medium text-amber-300">Deadline (May 2026 status)</p>
-                  <p className="text-zinc-300">{t.deadline}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{t.deadline}</p>
                 </div>
               </div>
             )}
@@ -192,24 +192,24 @@ export const ComplianceBusiness: React.FC = () => {
       </div>
 
       {/* Concrete obligations */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.obligationsTitle}</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.obligationsTitle}</h3>
       <div className="mb-6 space-y-2">
         {CONCRETE_OBLIGATIONS.map((o) => (
-          <div key={o.obligation} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div key={o.obligation} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <p className="mb-1 font-mono text-sm font-medium text-amber-300">{o.obligation}</p>
-            <p className="mt-1 text-xs text-zinc-300" dangerouslySetInnerHTML={{ __html: o.whatItMeans }} />
+            <p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: o.whatItMeans }} />
             <p className="mt-2 text-xs text-zinc-500">Who: {o.whoBears}</p>
           </div>
         ))}
       </div>
 
       {/* Regional */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.regionalTitle}</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.regionalTitle}</h3>
       <div className="mb-6 grid gap-2 sm:grid-cols-2">
         {REGIONAL.map((r) => (
-          <div key={r.region} className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3">
-            <p className="font-mono text-sm font-medium text-zinc-100">{r.region}</p>
-            <p className="mt-1 text-xs text-zinc-400">{r.summary}</p>
+          <div key={r.region} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-4 py-3">
+            <p className="font-mono text-sm font-medium text-zinc-900 dark:text-zinc-100">{r.region}</p>
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{r.summary}</p>
           </div>
         ))}
       </div>
@@ -217,7 +217,7 @@ export const ComplianceBusiness: React.FC = () => {
       {/* Checklist */}
       <div className="mb-6 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-5">
         <p className="mb-3 text-sm font-medium text-emerald-300">{c.checklistTitle}</p>
-        <ul className="space-y-1.5 text-xs text-zinc-300">
+        <ul className="space-y-1.5 text-xs text-zinc-700 dark:text-zinc-300">
           {PRACTICAL_CHECKLIST.map((item, i) => (
             <li key={i} dangerouslySetInnerHTML={{ __html: '☐ ' + item }} />
           ))}

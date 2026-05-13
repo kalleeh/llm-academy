@@ -45,8 +45,8 @@ export const ApproachesBusiness: React.FC = () => {
   const c = useT({ title: '1. Four Ways to Use AI', intro: 'There\'s a spectrum from simple to complex. Most businesses should start at the simple end and only move up when they hit a real limitation.' , approaches: APPROACHES}, { sv: approachesSv, ko: approachesKo })
   return (
   <section aria-labelledby="approaches-biz">
-    <h2 id="approaches-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+    <h2 id="approaches-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
       {c.intro}
     </p>
 
@@ -56,20 +56,20 @@ export const ApproachesBusiness: React.FC = () => {
       steps={c.approaches.map((a, i) => (
         <div key={a.name} className={`rounded-lg border p-5 ${(APPROACHES[i]?.color ?? "")}`}>
           <div className="mb-3 flex items-center gap-3">
-            <span className="text-sm font-semibold text-zinc-100">{a.name}</span>
-            <span className="text-xs text-zinc-400">— {a.plain}</span>
+            <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{a.name}</span>
+            <span className="text-xs text-zinc-600 dark:text-zinc-400">— {a.plain}</span>
           </div>
-          <p className="mb-3 text-sm leading-relaxed text-zinc-300">{a.analogy}</p>
+          <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{a.analogy}</p>
           <div className="grid gap-3 sm:grid-cols-3">
-            <div className="rounded bg-zinc-800/50 px-3 py-2">
+            <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
               <p className="text-xs text-zinc-500">When to use</p>
-              <p className="mt-1 text-xs text-zinc-300">{a.when}</p>
+              <p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{a.when}</p>
             </div>
-            <div className="rounded bg-zinc-800/50 px-3 py-2">
+            <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
               <p className="text-xs text-zinc-500">Effort</p>
               <p className="mt-1 text-xs text-amber-300">{a.effort}</p>
             </div>
-            <div className="rounded bg-zinc-800/50 px-3 py-2">
+            <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
               <p className="text-xs text-zinc-500">Cost</p>
               <p className="mt-1 text-xs text-amber-300">{a.cost}</p>
             </div>

@@ -132,7 +132,7 @@ const FORMATS: FormatRow[] = [
     spec: 'Vendor docs',
     good: 'Vendor-specific overrides on top of AGENTS.md — e.g. instructions only relevant inside one tool.',
     bad: 'Don\'t maintain three copies. Put shared content in AGENTS.md and link from the others.',
-    color: 'border-zinc-600/40 bg-zinc-800/40',
+    color: 'border-zinc-600/40 bg-zinc-100 dark:bg-zinc-800/40',
   },
 ]
 
@@ -145,16 +145,16 @@ export const ContextFilesSection: React.FC = () => {
 
   return (
     <section aria-labelledby="context-files">
-      <h2 id="context-files" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="context-files" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Mental model */}
-      <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-100">The three layers</p>
-        <ul className="space-y-2 text-sm text-zinc-300">
-          <li><code className="rounded bg-zinc-800 px-1.5 py-0.5 text-amber-300">AGENTS.md</code> — <strong>WHAT</strong> to do in this repo (project instructions)</li>
-          <li><code className="rounded bg-zinc-800 px-1.5 py-0.5 text-amber-300">SKILL.md</code> — <strong>HOW</strong> to do specific tasks (reusable capabilities)</li>
-          <li><code className="rounded bg-zinc-800 px-1.5 py-0.5 text-amber-300">MCP config</code> — <strong>WHICH</strong> external tools are available (services)</li>
+      <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">The three layers</p>
+        <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+          <li><code className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-amber-300">AGENTS.md</code> — <strong>WHAT</strong> to do in this repo (project instructions)</li>
+          <li><code className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-amber-300">SKILL.md</code> — <strong>HOW</strong> to do specific tasks (reusable capabilities)</li>
+          <li><code className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-amber-300">MCP config</code> — <strong>WHICH</strong> external tools are available (services)</li>
         </ul>
         <p className="mt-3 text-xs text-zinc-500">
           AGENTS.md says &quot;follow our content standards.&quot; A SKILL.md provides the
@@ -168,28 +168,28 @@ export const ContextFilesSection: React.FC = () => {
           <div key={f.format} className={`rounded-lg border ${f.color}`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
-                <span className="font-mono text-sm font-medium text-zinc-100">{f.format}</span>
-                <span className="ml-3 text-xs text-zinc-400">— {f.scope}</span>
+                <span className="font-mono text-sm font-medium text-zinc-900 dark:text-zinc-100">{f.format}</span>
+                <span className="ml-3 text-xs text-zinc-600 dark:text-zinc-400">— {f.scope}</span>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4 text-xs">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4 text-xs">
                 <div>
                   <p className="mb-1 text-zinc-500">Audience</p>
-                  <p className="text-zinc-300">{f.audience}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{f.audience}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-zinc-500">Origin / spec</p>
-                  <p className="text-zinc-300">{f.origin} <span className="text-zinc-500">(spec: {f.spec})</span></p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{f.origin} <span className="text-zinc-500">(spec: {f.spec})</span></p>
                 </div>
                 <div>
                   <p className="mb-1 text-emerald-400">✓ Good for</p>
-                  <p className="text-zinc-300">{f.good}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{f.good}</p>
                 </div>
                 <div>
                   <p className="mb-1 text-red-400">✗ Don&apos;t put</p>
-                  <p className="text-zinc-300">{f.bad}</p>
+                  <p className="text-zinc-700 dark:text-zinc-300">{f.bad}</p>
                 </div>
               </div>
             )}
@@ -199,8 +199,8 @@ export const ContextFilesSection: React.FC = () => {
 
       {/* AGENTS.md example */}
       <div className="mb-6">
-        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-100">AGENTS.md — minimal example</h3>
-        <p className="mb-2 text-xs text-zinc-400">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">AGENTS.md — minimal example</h3>
+        <p className="mb-2 text-xs text-zinc-600 dark:text-zinc-400">
           Drop at the repo root. Monorepos can nest — the closest file wins for any given path.
         </p>
         <CodeBlock code={AGENTS_MD} language="markdown" title="AGENTS.md (root of repo)" />
@@ -208,8 +208,8 @@ export const ContextFilesSection: React.FC = () => {
 
       {/* SKILL.md example */}
       <div className="mb-6">
-        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-100">SKILL.md — minimal example</h3>
-        <p className="mb-2 text-xs text-zinc-400">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">SKILL.md — minimal example</h3>
+        <p className="mb-2 text-xs text-zinc-600 dark:text-zinc-400">
           One folder per skill. The agent reads only the frontmatter at startup; the body and{' '}
           <code className="text-amber-300">references/</code> load on demand.
         </p>
@@ -218,8 +218,8 @@ export const ContextFilesSection: React.FC = () => {
 
       {/* Kiro steering */}
       <div className="mb-6">
-        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-100">Kiro steering — workspace context</h3>
-        <p className="mb-2 text-xs text-zinc-400">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Kiro steering — workspace context</h3>
+        <p className="mb-2 text-xs text-zinc-600 dark:text-zinc-400">
           Steering files live in <code className="text-amber-300">.kiro/steering/</code> and are
           always in context for Kiro. Run <code className="text-amber-300">kiro</code> &quot;Generate Steering Docs&quot;
           to bootstrap the typical four files from your codebase, then edit.
@@ -233,7 +233,7 @@ export const ContextFilesSection: React.FC = () => {
       {/* Practical guidance */}
       <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5">
         <p className="mb-2 text-sm font-medium text-amber-300">Practical rules of thumb</p>
-        <ul className="space-y-1.5 text-xs text-zinc-300">
+        <ul className="space-y-1.5 text-xs text-zinc-700 dark:text-zinc-300">
           <li>• <strong>Start with AGENTS.md.</strong> It works in every modern coding agent and is the lowest-effort win. Most existing CLAUDE.md / .cursorrules content moves cleanly into it.</li>
           <li>• <strong>Add a SKILL.md when you find yourself re-explaining the same workflow.</strong> &quot;How we file expenses,&quot; &quot;how we cut a release,&quot; &quot;how we triage incidents.&quot;</li>
           <li>• <strong>Keep SKILL.md bodies under ~5K tokens.</strong> Push details into <code className="text-amber-300">references/</code>; the agent loads them only when needed.</li>

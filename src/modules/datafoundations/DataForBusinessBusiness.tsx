@@ -49,7 +49,7 @@ export const DataForBusinessBusiness: React.FC = () => {
 
       <div className="mb-4 flex gap-2">
         {([{ id: 'structured' as Tab, label: c.structuredLabel }, { id: 'unstructured' as Tab, label: c.unstructuredLabel }, { id: 'semi' as Tab, label: c.whyItMattersLabel }]).map((t) => (
-          <button key={t.id} onClick={() => setTab(t.id)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${tab === t.id ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>{t.label}</button>
+          <button key={t.id} onClick={() => setTab(t.id)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${tab === t.id ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800'}`}>{t.label}</button>
         ))}
       </div>
 

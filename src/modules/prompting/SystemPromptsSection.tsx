@@ -108,7 +108,7 @@ print(response.choices[0].message.content)
                   value={values[field.key]}
                   onChange={e => handleChange(field.key, e.target.value)}
                   placeholder={field.placeholder}
-                  className="w-full rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 dark:placeholder:text-zinc-600"
+                  className="w-full rounded-md border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-600 dark:text-zinc-400 dark:placeholder:text-zinc-600"
                 />
               </div>
             ))}

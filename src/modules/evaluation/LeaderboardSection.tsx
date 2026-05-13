@@ -28,26 +28,26 @@ export const LeaderboardSection: React.FC = () => {
 
   return (
     <section aria-labelledby="leaderboard-problem">
-      <h2 id="leaderboard-problem" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="leaderboard-problem" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="mb-6 space-y-3">
         {PROBLEMS.map((p, i) => (
-          <div key={i} className="rounded-lg border border-zinc-700 bg-zinc-900 overflow-hidden">
+          <div key={i} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden">
             <button
               onClick={() => setExpanded(expanded === i ? null : i)}
-              className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-zinc-800"
+              className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-zinc-100 dark:bg-zinc-800"
             >
               <span><Icon name={p.icon} /></span>
-              <span className="font-medium text-zinc-100">{tLabel(lang, p.label)}</span>
+              <span className="font-medium text-zinc-900 dark:text-zinc-100">{tLabel(lang, p.label)}</span>
               <span className="ml-auto text-zinc-500">{expanded === i ? '▾' : '▸'}</span>
             </button>
             {expanded === i && (
-              <div className="border-t border-zinc-800 px-4 py-3 space-y-2">
-                <p className="text-sm text-zinc-300">{p.desc}</p>
-                <div className="rounded bg-zinc-800/50 p-3">
+              <div className="border-t border-zinc-200 dark:border-zinc-800 px-4 py-3 space-y-2">
+                <p className="text-sm text-zinc-700 dark:text-zinc-300">{p.desc}</p>
+                <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3">
                   <span className="text-xs text-zinc-500">Example:</span>
-                  <p className="mt-1 text-xs text-zinc-400">{p.example}</p>
+                  <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{p.example}</p>
                 </div>
               </div>
             )}
@@ -55,22 +55,22 @@ export const LeaderboardSection: React.FC = () => {
         ))}
       </div>
 
-      <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-5">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-100">{c.p10}</h3>
-        <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.p11}<strong className="text-zinc-100">blind human
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.p10}</h3>
+        <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p11}<strong className="text-zinc-900 dark:text-zinc-100">blind human
           preference</strong>. Real users chat with two anonymous models side-by-side and pick the
           better one. Results are aggregated into an ELO rating — like chess rankings.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-md bg-green-500/10 p-3">
             <span className="text-xs font-medium text-green-400">✓ Why it works</span>
-            <p className="mt-1 text-sm text-zinc-300">
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">
               {c.p4}
             </p>
           </div>
           <div className="rounded-md bg-red-500/10 p-3">
             <span className="text-xs font-medium text-red-400">✗ Limitations</span>
-            <p className="mt-1 text-sm text-zinc-300">
+            <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">
               {c.p5}
             </p>
           </div>

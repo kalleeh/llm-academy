@@ -95,32 +95,32 @@ export const ContextFilesBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="context-files-biz">
-      <h2 id="context-files-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300" dangerouslySetInnerHTML={{ __html: c.intro }} />
+      <h2 id="context-files-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: c.intro }} />
 
       <div className="mb-6 space-y-2">
         {FILES.map((f, i) => (
           <div key={i} className={`rounded-lg border ${f.color}`}>
             <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
               <div className="min-w-0">
-                <span className="text-sm font-medium text-zinc-100">{f.name}</span>
+                <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{f.name}</span>
                 <span className="ml-2 text-xs text-zinc-500">— {f.analogy}</span>
               </div>
               <span className="ml-2 shrink-0 text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
             </button>
             {expanded === i && (
-              <div className="space-y-3 border-t border-zinc-800 px-5 py-4">
+              <div className="space-y-3 border-t border-zinc-200 dark:border-zinc-800 px-5 py-4">
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">What it actually is</p>
-                  <p className="text-sm text-zinc-300" dangerouslySetInnerHTML={{ __html: f.whatItIs }} />
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: f.whatItIs }} />
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Concrete example</p>
-                  <p className="text-sm text-zinc-300" dangerouslySetInnerHTML={{ __html: f.example }} />
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: f.example }} />
                 </div>
                 <div>
                   <p className="mb-1 text-xs font-medium text-zinc-500">Who actually writes one</p>
-                  <p className="text-sm text-zinc-300" dangerouslySetInnerHTML={{ __html: f.whoUsesIt }} />
+                  <p className="text-sm text-zinc-700 dark:text-zinc-300" dangerouslySetInnerHTML={{ __html: f.whoUsesIt }} />
                 </div>
               </div>
             )}
@@ -130,7 +130,7 @@ export const ContextFilesBusiness: React.FC = () => {
 
       <div className="mb-6 rounded-lg border border-amber-500/20 bg-amber-500/5 p-5">
         <p className="mb-2 text-sm font-medium text-amber-300">{c.whyItMatters}</p>
-        <p className="text-sm text-zinc-300">{c.whyItMattersText}</p>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300">{c.whyItMattersText}</p>
       </div>
 
       <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />

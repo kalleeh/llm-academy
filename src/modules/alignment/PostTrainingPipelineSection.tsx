@@ -13,7 +13,7 @@ interface PipelineStage {
 const PIPELINE: PipelineStage[] = [
   {
     label: 'Base Model',
-    color: 'text-zinc-400',
+    color: 'text-zinc-600 dark:text-zinc-400',
     bgColor: 'bg-zinc-700',
     description: 'Pre-trained on trillions of tokens. Knows language and facts, but no behavioral alignment.',
   },
@@ -93,8 +93,8 @@ export const PostTrainingPipelineSection: React.FC = () => {
 
   return (
     <section aria-labelledby="post-training-pipeline">
-      <h2 id="post-training-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="post-training-pipeline" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2" role="list" aria-label="Post-training pipeline">
@@ -105,7 +105,7 @@ export const PostTrainingPipelineSection: React.FC = () => {
               className={`rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
                 activeStage === i
                   ? `border-zinc-500 ${stage.bgColor} ${stage.color}`
-                  : `border-zinc-700 ${stage.color} hover:border-zinc-600`
+                  : `border-zinc-200 dark:border-zinc-700 ${stage.color} hover:border-zinc-600`
               }`}
             >
               {stage.label}
@@ -118,23 +118,23 @@ export const PostTrainingPipelineSection: React.FC = () => {
       </div>
 
       {activeStage !== null && (
-        <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-800/50 p-4">
+        <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
           <h3 className={`mb-1 text-sm font-semibold ${pIPELINET[activeStage].color}`}>
             {pIPELINET[activeStage].label}
           </h3>
-          <p className="text-sm leading-relaxed text-zinc-300">
+          <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             {pIPELINET[activeStage].description}
           </p>
         </div>
       )}
 
       {/* Trends */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">Key Trends</h3>
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Key Trends</h3>
       <div className="grid gap-3 sm:grid-cols-2">
         {tRENDST.map(trend => (
-          <div key={trend.label} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
+          <div key={trend.label} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
             <h4 className={`mb-1 text-sm font-medium ${trend.color}`}>{trend.label}</h4>
-            <p className="text-xs leading-relaxed text-zinc-400">{trend.description}</p>
+            <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{trend.description}</p>
           </div>
         ))}
       </div>

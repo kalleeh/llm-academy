@@ -106,14 +106,14 @@ export const BuildVsBuySection: React.FC = () => {
 
   return (
     <section aria-labelledby="build-vs-buy">
-      <h2 id="build-vs-buy" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="build-vs-buy" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       {/* Comparison table */}
-      <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-700">
+      <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-700 bg-zinc-800">
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
               <th className="px-4 py-2 text-xs text-zinc-500 uppercase">Aspect</th>
               <th className="px-4 py-2 text-xs text-green-400/70 uppercase">API</th>
               <th className="px-4 py-2 text-xs text-blue-400/70 uppercase">Open-Source</th>
@@ -122,11 +122,11 @@ export const BuildVsBuySection: React.FC = () => {
           </thead>
           <tbody>
             {cOMPARISONT.map(row => (
-              <tr key={row.aspect} className="border-b border-zinc-800">
-                <td className="px-4 py-2 font-medium text-zinc-300">{row.aspect}</td>
-                <td className="px-4 py-2 text-zinc-400">{row.api}</td>
-                <td className="px-4 py-2 text-zinc-400">{row.openSource}</td>
-                <td className="px-4 py-2 text-zinc-400">{row.fineTuned}</td>
+              <tr key={row.aspect} className="border-b border-zinc-200 dark:border-zinc-800">
+                <td className="px-4 py-2 font-medium text-zinc-700 dark:text-zinc-300">{row.aspect}</td>
+                <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.api}</td>
+                <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.openSource}</td>
+                <td className="px-4 py-2 text-zinc-600 dark:text-zinc-400">{row.fineTuned}</td>
               </tr>
             ))}
           </tbody>
@@ -134,12 +134,12 @@ export const BuildVsBuySection: React.FC = () => {
       </div>
 
       {/* Decision framework */}
-      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-300">
+      <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">
         <Icon name="compass" />{c.p4}</h3>
       <div className="mb-6 space-y-4">
         {cONSTRAINTST.map((c, ci) => (
-          <div key={ci} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-            <p className="mb-2 text-sm font-medium text-zinc-200">{c.question}</p>
+          <div key={ci} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+            <p className="mb-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">{c.question}</p>
             <div className="flex flex-wrap gap-2">
               {c.options.map((opt, oi) => (
                 <button
@@ -147,8 +147,8 @@ export const BuildVsBuySection: React.FC = () => {
                   onClick={() => selectOption(ci, oi)}
                   className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
                     answers[ci] === oi
-                      ? 'border-zinc-500 bg-zinc-700 text-zinc-100'
-                      : 'border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                      ? 'border-zinc-500 bg-zinc-700 text-zinc-900 dark:text-zinc-100'
+                      : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-600'
                   }`}
                 >
                   {opt.text}
@@ -161,8 +161,8 @@ export const BuildVsBuySection: React.FC = () => {
 
       {/* Recommendation */}
       {recommendation && (
-        <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 p-5">
-          <p className="mb-3 text-sm font-medium text-zinc-200"><Icon name="bar-chart" /> Based on your constraints:</p>
+        <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-5">
+          <p className="mb-3 text-sm font-medium text-zinc-800 dark:text-zinc-200"><Icon name="bar-chart" /> Based on your constraints:</p>
           <div className="mb-3 flex gap-4">
             {(Object.entries(scores) as [ApproachId, number][]).map(([id, score]) => (
               <div key={id} className="flex-1">
@@ -183,12 +183,12 @@ export const BuildVsBuySection: React.FC = () => {
               </div>
             ))}
           </div>
-          <p className="text-sm text-zinc-300">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">
             <strong className={APPROACH_META[recommendation].color}>
               Recommendation: {APPROACH_META[recommendation].label}
             </strong>
             {' — '}
-            <span className="text-zinc-400">e.g., {APPROACH_META[recommendation].examples}</span>
+            <span className="text-zinc-600 dark:text-zinc-400">e.g., {APPROACH_META[recommendation].examples}</span>
           </p>
         </div>
       )}

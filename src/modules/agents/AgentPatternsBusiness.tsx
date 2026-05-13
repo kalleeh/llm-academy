@@ -80,10 +80,10 @@ export const AgentPatternsBusiness: React.FC = () => {
 
   return (
     <section aria-labelledby="patterns-biz">
-      <h2 id="patterns-biz" className="mb-4 font-mono text-xl font-bold text-zinc-100">
+      <h2 id="patterns-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
         {c.title}
       </h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
         {c.intro}
       </p>
 
@@ -93,18 +93,18 @@ export const AgentPatternsBusiness: React.FC = () => {
         steps={c.patterns.map((p, i) => (
           <div key={p.name} className={`rounded-lg border p-5 ${(PATTERNS[i]?.color ?? "")}`}>
             <div className="mb-3">
-              <span className="text-sm font-semibold text-zinc-100">{p.name}</span>
-              <span className="ml-2 text-xs text-zinc-400">— {p.analogy}</span>
+              <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{p.name}</span>
+              <span className="ml-2 text-xs text-zinc-600 dark:text-zinc-400">— {p.analogy}</span>
             </div>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">{p.howItWorks}</p>
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{p.howItWorks}</p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg bg-zinc-800/50 p-3">
+              <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800/50 p-3">
                 <p className="text-xs font-medium text-zinc-500">Best for</p>
-                <p className="mt-1 text-sm text-zinc-300">{p.bestFor}</p>
+                <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{p.bestFor}</p>
               </div>
-              <div className="rounded-lg bg-zinc-800/50 p-3">
+              <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800/50 p-3">
                 <p className="text-xs font-medium text-zinc-500">Real example</p>
-                <p className="mt-1 text-sm text-zinc-300">{p.realExample}</p>
+                <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{p.realExample}</p>
               </div>
             </div>
           </div>
@@ -124,13 +124,13 @@ export const AgentPatternsBusiness: React.FC = () => {
         {showDecision && (
           <div className="space-y-3">
             {DECISION_QUESTIONS.map((dq, i) => (
-              <div key={i} className="rounded-lg border border-zinc-700 bg-zinc-900 p-4">
-                <p className="mb-2 text-sm font-medium text-zinc-200">{dq.question}</p>
+              <div key={i} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+                <p className="mb-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">{dq.question}</p>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <div className="rounded bg-zinc-800/50 px-3 py-2 text-xs text-zinc-400">
+                  <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2 text-xs text-zinc-600 dark:text-zinc-400">
                     <span className="text-emerald-400">Simple → </span>{dq.simple}
                   </div>
-                  <div className="rounded bg-zinc-800/50 px-3 py-2 text-xs text-zinc-400">
+                  <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2 text-xs text-zinc-600 dark:text-zinc-400">
                     <span className="text-amber-400">Complex → </span>{dq.complex}
                   </div>
                 </div>

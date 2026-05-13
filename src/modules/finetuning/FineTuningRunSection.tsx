@@ -287,8 +287,8 @@ export const FineTuningRunSection: React.FC = () => {
 
   return (
     <section aria-labelledby="finetuning-run">
-      <h2 id="finetuning-run" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="finetuning-run" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <Workspace
         title="LoRA Fine-Tune — Llama 3.1 8B"
@@ -298,7 +298,7 @@ export const FineTuningRunSection: React.FC = () => {
       />
 
       <div className="mt-6">
-        <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-400 uppercase">
+        <h3 className="mb-3 font-mono text-sm font-semibold tracking-wider text-zinc-600 dark:text-zinc-400 uppercase">
           Full training script
         </h3>
         <CodeBlock code={FULL_SCRIPT} language="python" title="finetune.py" />
@@ -311,9 +311,9 @@ export const FineTuningRunSection: React.FC = () => {
 
       {/* PEFT Landscape */}
       <div className="mt-10">
-        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-100">{c.p17}</h3>
-        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          {c.p3} <strong className="text-zinc-100">how do you teach a
+        <h3 className="mb-3 font-mono text-lg font-semibold text-zinc-900 dark:text-zinc-100">{c.p17}</h3>
+        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          {c.p3} <strong className="text-zinc-900 dark:text-zinc-100">how do you teach a
           model new tricks without rewriting its entire brain?</strong>
         </p>
 
@@ -321,23 +321,23 @@ export const FineTuningRunSection: React.FC = () => {
           {/* QLoRA explanation */}
           <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-5">
             <h4 className="mb-2 font-mono text-sm font-semibold text-amber-300">QLoRA — LoRA on a budget</h4>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.p18}<em className="text-zinc-200">&quot;Loading in 4-bit...
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p18}<em className="text-zinc-800 dark:text-zinc-200">&quot;Loading in 4-bit...
               4.65 GB VRAM (was 14.96 GB at FP16)&quot;</em>. That&apos;s QLoRA in action.
             </p>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              {c.p5} <strong className="text-zinc-100">during training, we don&apos;t need
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+              {c.p5} <strong className="text-zinc-900 dark:text-zinc-100">during training, we don&apos;t need
               that precision for the frozen base weights</strong>. We can round them to 4 bits — like
               using a ruler with only centimeter marks. The base model becomes ~4× smaller in memory.
             </p>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
               {c.p6}
             </p>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
-              <strong className="text-zinc-100">Why not 2-bit or 1-bit?</strong> {c.p7}
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+              <strong className="text-zinc-900 dark:text-zinc-100">Why not 2-bit or 1-bit?</strong> {c.p7}
             </p>
-            <div className="rounded bg-zinc-800/50 px-4 py-3">
-              <p className="text-xs text-zinc-400">
-                <strong className="text-zinc-300">Practical impact:</strong> {c.p8}
+            <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                <strong className="text-zinc-700 dark:text-zinc-300">Practical impact:</strong> {c.p8}
               </p>
             </div>
           </div>
@@ -345,45 +345,45 @@ export const FineTuningRunSection: React.FC = () => {
           {/* Prefix Tuning explanation */}
           <div className="rounded-lg border border-purple-500/30 bg-purple-500/5 p-5">
             <h4 className="mb-2 font-mono text-sm font-semibold text-purple-300">{c.p13}</h4>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">{c.p19}<em>how</em> the
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p19}<em>how</em> the
               model processes information. Prefix tuning takes a completely different approach: it
               doesn&apos;t touch the weights at all. Instead, it prepends a set of learnable
               &quot;virtual tokens&quot; to the input at every layer.
             </p>
-            <p className="mb-3 text-sm leading-relaxed text-zinc-300">
+            <p className="mb-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
               {c.p11}
             </p>
-            <p className="text-sm leading-relaxed text-zinc-300">
+            <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
               {c.p12}
             </p>
           </div>
         </div>
 
         {/* Comparison table */}
-        <div className="overflow-hidden rounded-lg border border-zinc-700">
+        <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
           <table className="w-full text-xs">
             <thead>
-              <tr className="border-b border-zinc-700 bg-zinc-800">
-                <th className="px-3 py-2 text-left text-zinc-400">Method</th>
-                <th className="px-3 py-2 text-left text-zinc-400">What it changes</th>
-                <th className="px-3 py-2 text-left text-zinc-400">Memory</th>
-                <th className="px-3 py-2 text-left text-zinc-400">Quality</th>
-                <th className="hidden px-3 py-2 text-left text-zinc-400 sm:table-cell">When to use</th>
+              <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+                <th className="px-3 py-2 text-left text-zinc-600 dark:text-zinc-400">Method</th>
+                <th className="px-3 py-2 text-left text-zinc-600 dark:text-zinc-400">What it changes</th>
+                <th className="px-3 py-2 text-left text-zinc-600 dark:text-zinc-400">Memory</th>
+                <th className="px-3 py-2 text-left text-zinc-600 dark:text-zinc-400">Quality</th>
+                <th className="hidden px-3 py-2 text-left text-zinc-600 dark:text-zinc-400 sm:table-cell">When to use</th>
               </tr>
             </thead>
             <tbody>
               {[
-                { method: 'Full fine-tuning', what: 'All weights', memory: 'Very high', quality: 'Highest', when: 'Unlimited budget, maximum control', color: 'text-zinc-300' },
+                { method: 'Full fine-tuning', what: 'All weights', memory: 'Very high', quality: 'Highest', when: 'Unlimited budget, maximum control', color: 'text-zinc-700 dark:text-zinc-300' },
                 { method: 'LoRA', what: 'Low-rank adapter matrices', memory: 'Moderate', quality: 'Near-full', when: 'Default choice — best quality/cost ratio', color: 'text-blue-400' },
                 { method: 'QLoRA', what: 'Same as LoRA, base model quantized', memory: 'Low', quality: 'Near-full', when: 'Limited GPU memory — single-GPU fine-tuning', color: 'text-amber-400' },
                 { method: 'Prefix tuning', what: 'Learnable input prefixes', memory: 'Very low', quality: 'Good', when: 'Many tasks, fast switching, research', color: 'text-purple-400' },
               ].map((row) => (
-                <tr key={row.method} className="border-b border-zinc-800 last:border-0">
+                <tr key={row.method} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                   <td className={`px-3 py-2 font-medium ${row.color}`}>{row.method}</td>
-                  <td className="px-3 py-2 text-zinc-400">{row.what}</td>
-                  <td className="px-3 py-2 text-zinc-400">{row.memory}</td>
-                  <td className="px-3 py-2 text-zinc-400">{row.quality}</td>
-                  <td className="hidden px-3 py-2 text-zinc-400 sm:table-cell">{row.when}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{row.what}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{row.memory}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{row.quality}</td>
+                  <td className="hidden px-3 py-2 text-zinc-600 dark:text-zinc-400 sm:table-cell">{row.when}</td>
                 </tr>
               ))}
             </tbody>

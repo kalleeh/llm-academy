@@ -92,28 +92,28 @@ export const WhereItsHeadingSection: React.FC = () => {
 
   return (
     <section aria-labelledby="where-heading">
-      <h2 id="where-heading" className="mb-4 font-mono text-xl font-bold text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-300">{c.intro}</p>
+      <h2 id="where-heading" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {tRENDST.map(t => (
           <button
             key={t.id}
             onClick={() => toggle(t.id)}
-            className={`rounded-lg border-l-4 ${t.color} bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-800`}
+            className={`rounded-lg border-l-4 ${t.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-100 dark:bg-zinc-800`}
             aria-expanded={expanded === t.id}
           >
             <div className="flex items-center gap-2">
               <Icon name={t.icon} className="text-lg" />
-              <h3 className="font-mono text-sm font-bold text-zinc-100">{t.title}</h3>
+              <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{t.title}</h3>
             </div>
-            <p className="mt-1 text-xs text-zinc-400">{t.tagline}</p>
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{t.tagline}</p>
             {expanded === t.id && (
-              <div className="mt-3 border-t border-zinc-700 pt-3">
-                <p className="text-xs leading-relaxed text-zinc-300">{t.detail}</p>
+              <div className="mt-3 border-t border-zinc-200 dark:border-zinc-700 pt-3">
+                <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">{t.detail}</p>
                 <div className="mt-2 flex flex-wrap gap-1">
                   {t.examples.map(ex => (
-                    <span key={ex} className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] text-zinc-300">
+                    <span key={ex} className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-[10px] text-zinc-700 dark:text-zinc-300">
                       {ex}
                     </span>
                   ))}
