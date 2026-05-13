@@ -144,11 +144,29 @@ function getDueReviewCount(): number {
   return due
 }
 
+function parseHash(): { module?: ModuleId; track?: 'technical' | 'business' } {
+  const hash = window.location.hash.replace(/^#\/?/, '')
+  if (!hash) return {}
+  const [track, mod] = hash.split('/')
+  const validTracks = ['technical', 'business'] as const
+  const validModules = modules.map(m => m.id)
+  const result: { module?: ModuleId; track?: 'technical' | 'business' } = {}
+  if (validTracks.includes(track as typeof validTracks[number])) result.track = track as 'technical' | 'business'
+  if (validModules.includes(mod as ModuleId)) result.module = mod as ModuleId
+  return result
+}
+
 function App() {
   const { mode, toggle: toggleMode } = useDifficulty()
   const { lang, setLang } = useLanguage()
-  const [activeModule, setActiveModule] = useState<ModuleId>('ai-problem')
-  const [visited, setVisited] = useState<Set<ModuleId>>(() => new Set(['ai-problem']))
+  const [activeModule, setActiveModule] = useState<ModuleId>(() => {
+    const { module } = parseHash()
+    return module ?? 'ai-problem'
+  })
+  const [visited, setVisited] = useState<Set<ModuleId>>(() => {
+    const { module } = parseHash()
+    return new Set([module ?? 'ai-problem'])
+  })
   const [fadeIn, setFadeIn] = useState(true)
   const [showReview, setShowReview] = useState(false)
   const [dueCount, setDueCount] = useState(() => getDueReviewCount())
@@ -173,6 +191,36 @@ function App() {
     }
   }, [visibleModules, activeModule])
 
+  // Sync URL hash with current state
+  useEffect(() => {
+    const newHash = `#/${mode}/${activeModule}`
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash)
+    }
+  }, [mode, activeModule])
+
+  // Handle browser back/forward
+  useEffect(() => {
+    const onPopState = () => {
+      const { module, track } = parseHash()
+      if (track && track !== mode) toggleMode()
+      if (module && module !== activeModule) {
+        setShowReview(false)
+        setActiveModule(module)
+        setVisited(prev => new Set(prev).add(module))
+      }
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [mode, activeModule, toggleMode])
+
+  // On initial load, apply track from hash
+  useEffect(() => {
+    const { track } = parseHash()
+    if (track && track !== mode) toggleMode()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const navigateTo = useCallback(
     (id: ModuleId) => {
       if (id === activeModule && !showReview) return
@@ -183,12 +231,13 @@ function App() {
         setVisited((prev) => new Set(prev).add(id))
         setDueCount(getDueReviewCount())
         setSidebarOpen(false)
+        window.history.pushState(null, '', `#/${mode}/${id}`)
         // Scroll to top immediately, then fade in after scroll completes
         mainRef.current?.scrollTo({ top: 0 })
         requestAnimationFrame(() => setFadeIn(true))
       }, 150)
     },
-    [activeModule, showReview],
+    [activeModule, showReview, mode],
   )
 
   useEffect(() => {
