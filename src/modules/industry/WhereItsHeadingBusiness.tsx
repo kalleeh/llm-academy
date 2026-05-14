@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
 
 interface Trend {
   title: string
@@ -87,7 +86,10 @@ const TRENDS: Trend[] = [
   },
 ]
 
-const EN = {
+// NOTE: this component never had SV/KO translations in the legacy system
+// (it called `useT(EN, {})` with empty translation overrides). EN remains
+// inline pending future translation work — same behavior as before.
+const C = {
   title: '3. Where AI Is Heading — and What It Means for You',
   intro:
     'Five trends that matter for business decisions over the next 12-24 months. Each one is already happening, not speculative — but the pace at which they show up in your daily tools varies.',
@@ -98,14 +100,13 @@ const EN = {
 }
 
 export const WhereItsHeadingBusiness: React.FC = () => {
-  const c = useT(EN, {})
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 
   return (
     <section aria-labelledby="heading-biz">
-      <h2 id="heading-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <h2 id="heading-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{C.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{C.intro}</p>
 
       <div className="mb-6 space-y-2">
         {TRENDS.map((t, i) => (
@@ -141,7 +142,7 @@ export const WhereItsHeadingBusiness: React.FC = () => {
         ))}
       </div>
 
-      <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />
+      <SelfExplain prompt={C.selfExplainPrompt} modelAnswer={C.selfExplainAnswer} />
     </section>
   )
 }

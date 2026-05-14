@@ -1,46 +1,21 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { openVsClosedSectionSv, openVsClosedSectionKo } from './tech-translations'
-import { comparisonTranslations, openModelsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 type Tab = 'table' | 'trend'
 
-interface ComparisonRow {
-  dimension: string
-  open: string
-  closed: string
-}
-
-const COMPARISON: ComparisonRow[] = [
-  { dimension: 'Access', open: 'Download weights, run anywhere', closed: 'API-only, vendor lock-in' },
-  { dimension: 'Fine-tuning', open: 'Full control — LoRA, full FT, merging', closed: 'Limited API fine-tuning or none' },
-  { dimension: 'Cost', open: 'Infra cost only; free weights', closed: 'Per-token API pricing' },
-  { dimension: 'Privacy', open: 'Full control over data — but security is your responsibility', closed: 'Data processed by provider — enterprise tiers offer strong compliance (SOC 2, HIPAA)' },
-  { dimension: 'Community', open: 'Huge ecosystem — HF, Reddit, Discord', closed: 'Vendor docs and support' },
-  { dimension: 'Cutting-edge', open: 'Closing fast — DeepSeek R1 ≈ o1', closed: 'Still leads on hardest benchmarks' },
-  { dimension: 'Safety tooling', open: 'DIY guardrails, community tools', closed: 'Built-in moderation, content filters' },
-  { dimension: 'Deployment', open: 'Self-host, edge, on-device', closed: 'Cloud-only via provider' },
-]
-
-const OPEN_MODELS = [
-  { name: 'Llama 4 Maverick', org: 'Meta', params: '400B (17B active)', note: 'MoE, 128 experts, rivals GPT-4o' },
-  { name: 'DeepSeek R1', org: 'DeepSeek', params: '671B (37B active)', note: 'Matches o1 on reasoning benchmarks' },
-  { name: 'Qwen 2.5 72B', org: 'Alibaba', params: '72B', note: 'Strong multilingual, code, math' },
-  { name: 'Mistral Large 2', org: 'Mistral', params: '123B', note: 'Competitive with GPT-4 Turbo' },
-  { name: 'Gemma 3 27B', org: 'Google', params: '27B', note: 'Best-in-class at size, open weights' },
-]
-
-const EN_P5 = `Open models that compete with frontier closed models (as of mid-2026):`
-const EN_P4 = `Open models that compete with frontier closed models (as of mid-2026):`
-const EN_P3 = `Open models now match or exceed closed models on most standard benchmarks. The remaining gap is in agentic capabilities, long-context reliability, and safety tooling — and it&apos;s shrinking fast.`
-const EN_INTRO = `The gap between open-weight and closed-source models has narrowed dramatically.`
+// Per-open-model non-translatable metadata. Order matches the `openModels`
+// array in `useTranslation().modules.industry.openVsClosedSection.openModels`.
+const OPEN_MODEL_META = [
+  { org: 'Meta',     params: '400B (17B active)' },
+  { org: 'DeepSeek', params: '671B (37B active)' },
+  { org: 'Alibaba',  params: '72B' },
+  { org: 'Mistral',  params: '123B' },
+  { org: 'Google',   params: '27B' },
+] as const
 
 export const OpenVsClosedSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
-  const oPEN_MODELST = tArray(lang, OPEN_MODELS, openModelsTranslations)
-  const c = useT({ title: '2. Open vs Closed', intro: EN_INTRO , p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: openVsClosedSectionSv, ko: openVsClosedSectionKo })
+  const c = useTranslation().modules.industry.openVsClosedSection
   const [tab, setTab] = useState<Tab>('table')
 
   const switchTab = useCallback((t: Tab) => setTab(t), [])
@@ -78,7 +53,7 @@ export const OpenVsClosedSection: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {cOMPARISONT.map(row => (
+              {c.comparison.map(row => (
                 <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-white dark:bg-zinc-900/50">
                   <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{row.dimension}</td>
                   <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{row.open}</td>
@@ -90,20 +65,23 @@ export const OpenVsClosedSection: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">{c.p5}</p>
-          {oPEN_MODELST.map(m => (
-            <div key={m.name} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
-              <div className="flex items-baseline justify-between">
-                <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{m.name}</h3>
-                <span className="text-xs text-zinc-500">{m.org}</span>
+          <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">{c.openModelsHeading}</p>
+          {c.openModels.map((m, i) => {
+            const meta = OPEN_MODEL_META[i]
+            return (
+              <div key={m.name} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
+                <div className="flex items-baseline justify-between">
+                  <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{m.name}</h3>
+                  <span className="text-xs text-zinc-500">{meta.org}</span>
+                </div>
+                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{meta.params}</p>
+                <p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{m.note}</p>
               </div>
-              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{m.params}</p>
-              <p className="mt-1 text-xs text-zinc-700 dark:text-zinc-300">{m.note}</p>
-            </div>
-          ))}
+            )
+          })}
           <div className="mt-4 rounded-lg border border-green-900/50 bg-green-950/20 p-4">
             <p className="text-sm text-green-300">
-              <strong>The trend:</strong> {c.p3}
+              <strong>The trend:</strong> {c.trendCallout}
             </p>
           </div>
         </div>

@@ -207,5 +207,114 @@ export const sv: DeepPartial<Translation> = {
         ],
       },
     },
+    industry: {
+      // From legacy: src/modules/industry/translations.ts → keyPlayersSv
+      keyPlayers: {
+        title: '1. Vem gör AI?',
+        intro:
+          'En handfull företag dominerar AI-landskapet. Tänk på det som smartphonemarknaden — några stora aktörer, var och en med en egen strategi. Klicka på varje för att lära dig mer.',
+        players: [
+          { name: 'OpenAI', product: 'ChatGPT, GPT-4o', position: 'Den alla känner till — som AI:ns iPhone. Först på marknaden, störst varumärkeskännedom.', users: 'Miljontals konsumenter och företag. Microsoft är deras största partner.' },
+          { name: 'Google', product: 'Gemini', position: 'Inbyggd i allt Google — Sök, Gmail, Docs, Android. Massiv distributionsfördel.', users: 'Alla som använder Google-produkter. Företag på Google Cloud.' },
+          { name: 'Anthropic', product: 'Claude', position: 'Företaget med "säkerhet först". Populärt bland företag som bryr sig om tillförlitlighet.', users: 'Företag, utvecklare, Amazon (stor investerare och partner via AWS).' },
+          { name: 'Amazon / AWS', product: 'Bedrock, Nova, AgentCore', position: 'Istället för att bygga en modell byggde AWS plattformen — Amazon Bedrock ger tillgång till 100+ modeller genom ett enda API med företagssäkerhet.', users: 'Företag redan på AWS. Företag som vill ha modellval utan leverantörslåsning.' },
+          { name: 'Meta', product: 'Llama (gratis)', position: 'Ger bort sin AI gratis. Strategi: bygg ekosystemet, som Android vs iPhone.', users: 'Utvecklare och företag som vill köra AI på egna servrar.' },
+          { name: 'Övriga', product: 'Mistral, DeepSeek, Cohere m.fl.', position: 'Mindre aktörer med specifika styrkor — vissa är billigare, vissa bättre för vissa språk.', users: 'Företag som söker alternativ eller specialiserade funktioner.' },
+        ],
+      },
+      // From legacy: src/modules/industry/translations.ts → openVsClosedSv
+      openVsClosed: {
+        title: '2. Öppen vs stängd AI — Vad det betyder för dig',
+        intro:
+          'Vissa AI-modeller är **"stängda"** (du betalar för att använda dem, företaget kontrollerar allt) och vissa är **"öppna"** (gratis att ladda ner och köra själv). Tänk på det som **Microsoft Office vs LibreOffice**, eller **iPhone vs Android**.',
+        closedTitle: 'Stängda modeller (GPT-4o, Claude, Gemini)',
+        closedSubtitle: 'Som att använda Microsoft Office 365',
+        openTitle: 'Öppna modeller (Llama, Mistral, DeepSeek)',
+        openSubtitle: 'Som att använda Android eller LibreOffice',
+        realPictureTitle: 'Den verkliga bilden: det är inte svart eller vitt',
+        realPictureText:
+          'Uppfattningen "öppen = privat, stängd = riskfyllt" är föråldrad. Företags-AI-tjänster i molnet (Azure OpenAI, AWS Bedrock, Google Vertex) erbjuder säkerhetscertifieringar och efterlevnadsgarantier som de flesta företag inte kan replikera själva. Självhosting ger dig kontroll, men **kontroll ≠ säkerhet** — du behöver teamet och expertisen för att faktiskt säkra det.',
+        selfExplainPrompt:
+          'Din CTO säger "vi borde använda AI med öppen källkod för att undvika leverantörslåsning." Vilka avvägningar vill du diskutera?',
+        selfExplainAnswer:
+          'Jag skulle ta upp: (1) Vi undviker leverantörslåsning men tar på oss underhållsansvar — har vi teknisk personal? (2) Dataintegritet är bättre. (3) Öppna modeller är något mindre kapabla för komplexa uppgifter — vi bör testa. (4) Installation tar veckor vs timmar. (5) En hybridmetod kan fungera. (6) Total kostnad: GPU-hosting är inte gratis.',
+      },
+      // From legacy: src/modules/industry/tech-translations.ts → whoBuiltWhatSectionSv
+      whoBuiltWhatSection: {
+        title: '1. Vem byggde vad',
+        intro: 'LLM-landskapet domineras av en handfull välfinansierade labb med olika filosofier.',
+        // From legacy: src/modules/industry/data-translations.ts → playersTranslations.sv
+        players: [
+          { name: 'OpenAI', approach: 'Stängd källkod, API-först, massiv skala', innovation: 'Pionjär inom RLHF i skala; o3 resonemang via RL-tränad chain-of-thought', detail: 'Värderat till $100B+. Definierade den moderna LLM-eran med ChatGPT.' },
+          { name: 'Anthropic', approach: 'Säkerhetsfokuserat, Constitutional AI', innovation: 'Constitutional AI — självövervakad anpassning utan mänskliga etiketter', detail: 'Grundat av ex-OpenAI-forskare. Leder inom säkerhetsforskning.' },
+          { name: 'Google DeepMind', approach: 'Vertikal integration — TPU:er, data, distribution', innovation: 'Anpassad TPU-hårdvara; 1M+ token kontextfönster; Gemma öppna modeller', detail: 'Sammanslagna Google Brain + DeepMind. Gemini nativt multimodal.' },
+          { name: 'Meta', approach: 'Ledare inom öppen källkod, MoE-arkitektur', innovation: 'Största öppna modellerna; Llama 4 använder MoE', detail: 'Llama 4 Maverick (400B totalt, 17B aktiva) konkurrerar med GPT-4o.' },
+          { name: 'DeepSeek', approach: 'Effektivitet-först, öppna vikter', innovation: 'MoE + Multi-head Latent Attention + FP8-träning — V3 tränad för ~$5.5M', detail: 'Kinesiskt labb som chockade branschen. V3 tränad till en bråkdel av typisk kostnad.' },
+          { name: 'Mistral', approach: 'Europeiskt, öppna vikter, effektivitetsfokuserat', innovation: 'Sliding Window Attention; presterar över sin viktklass', detail: 'Paris-baserat. Stark EU-regulatorisk positionering.' },
+          { name: 'Amazon / AWS', approach: 'Plattform + egna modeller — Bedrock hostar 100+ modeller', innovation: 'Bedrock modellmarknadsplats; AgentCore för företagsagenter; Nova-familjen', detail: 'AWS byggde plattformlagret: Amazon Bedrock ger ett enda API till Claude, Llama, Mistral och Amazons egna Nova-modeller.' },
+          { name: 'xAI', approach: 'Realtidsdata via X/Twitter, massiv beräkning', innovation: 'Tränad på 100K H100 Colossus-kluster; realtidsinformationsåtkomst', detail: 'Elon Musks AI-företag. Grok 3 tränad på ett av de största GPU-klustren.' },
+          { name: 'Apple', approach: 'På enheten, integritetsfokuserat', innovation: 'Modeller på enheten som körs på Apple Silicon; Private Cloud Compute', detail: 'Apple Foundation Models körs lokalt på iPhone/Mac.' },
+        ],
+      },
+      // From legacy: src/modules/industry/tech-translations.ts → openVsClosedSectionSv
+      openVsClosedSection: {
+        title: '2. Öppen vs stängd',
+        intro: 'Gapet mellan öppna och stängda modeller har minskat dramatiskt.',
+        // MT
+        trendCallout:
+          'Öppna modeller matchar eller överträffar nu stängda modeller på de flesta standardbenchmarks. Det återstående gapet finns i agentiska förmågor, lång kontext-tillförlitlighet och säkerhetsverktyg — och det krymper snabbt.',
+        // MT
+        openModelsHeading: 'Öppna modeller som konkurrerar med stängda frontiermodeller (mitten av 2026):',
+        // From legacy: comparisonTranslations.sv
+        comparison: [
+          { dimension: 'Kapacitet', open: 'Llama 4, DeepSeek V3 matchar GPT-4o på de flesta benchmarks', closed: 'GPT-5.5, Claude Opus 4.7 leder fortfarande på de svåraste uppgifterna' },
+          { dimension: 'Kostnad', open: 'Gratis vikter; betala bara för beräkning', closed: 'Per-token-prissättning; kan vara billigare vid låg volym' },
+          { dimension: 'Integritet', open: 'Full kontroll över data — men säkerhet är ditt ansvar', closed: 'Data behandlas av leverantör — företagsnivåer erbjuder stark efterlevnad' },
+          { dimension: 'Anpassning', open: 'Full åtkomst — finjustera, kvantisera, slå samman, destillera', closed: 'Begränsat till API-parametrar och systemprompts' },
+          { dimension: 'Hastighet', open: 'Beror på din hårdvara och optimering', closed: 'Optimerad infrastruktur, konsekvent latens' },
+          { dimension: 'Ekosystem', open: 'HuggingFace, vLLM, Unsloth, GGUF — massivt community', closed: 'Leverantörsspecifika SDK:er och verktyg' },
+          { dimension: 'Säkerhet', open: 'Community-granskad; du ansvarar för skyddsräcken', closed: 'Leverantörshanterade skyddsräcken och innehållsfilter' },
+          { dimension: 'Licens', open: 'Varierar: Apache 2.0, Llama Community, etc.', closed: 'Proprietär; användningsvillkor kan ändras' },
+        ],
+        // From legacy: openModelsTranslations.sv
+        openModels: [
+          { name: 'Llama 4 Maverick', note: '400B totalt, 17B aktiva via 128 experter' },
+          { name: 'DeepSeek V3', note: '671B totalt, 37B aktiva. Tränad för ~.5M' },
+          { name: 'Mistral Large 2', note: 'Europeiskt, stark flerspråkig prestanda' },
+          { name: 'Qwen 2.5', note: 'Alibabas flaggskepp, stark på kinesiska + engelska' },
+          { name: 'Gemma 3', note: 'Googles öppna modell, optimerad för effektivitet' },
+        ],
+      },
+      // From legacy: src/modules/industry/tech-translations.ts → ecosystemSectionSv
+      ecosystemSection: {
+        title: '3. Ekosystemet',
+        intro: 'LLM:er existerar inte isolerat. En full stack kopplar grundmodeller till slutanvändare.',
+        // MT
+        keyInsight:
+          'Du bygger sällan från grunden. De flesta team väljer en grundmodell, finjusterar den eventuellt, kör den med ett befintligt ramverk och kopplar in den i sin app med ett orkestreringslager. Ekosystemet gör detta möjligt utan att träna en enda vikt.',
+        // From legacy: layersTranslations.sv (only `name` and `note` were translated; tools array structure preserved)
+        layers: [
+          { name: 'Grundmodeller' },
+          { name: 'Finjustering & Anpassning' },
+          { name: 'Inferens & Serving' },
+          { name: 'Orkestrering & Agenter' },
+          { name: 'Applikationer' },
+        ],
+      },
+      // From legacy: src/modules/industry/tech-translations.ts → whereItsHeadingSectionSv
+      whereItsHeadingSection: {
+        title: '4. Vart det är på väg',
+        intro: 'Sex trender som formar LLM-landskapet 2026 och framåt.',
+        // From legacy: trendsTranslations.sv
+        trends: [
+          { title: 'Resonemangsmodeller', tagline: 'Modeller som tänker innan de svarar', detail: 'o3, DeepSeek-R1 och liknande modeller använder RL för att lära sig chain-of-thought-resonemang.', examples: ['o3 (OpenAI), DeepSeek-R1, Gemini 2 Flash Thinking'] },
+          { title: 'Multimodala modeller', tagline: 'Text, bild, ljud, video i en modell', detail: 'Modeller som nativt förstår och genererar flera modaliteter.', examples: ['GPT-4o, Gemini, Claude (vision), Amazon Nova'] },
+          { title: 'Öppen konvergens', tagline: 'Öppna modeller närmar sig stängda', detail: 'Gapet minskar snabbt tack vare MoE, distillation och community-innovation.', examples: ['Llama 4, DeepSeek V3, Mistral Large 2'] },
+          { title: 'Agentiska system', tagline: 'Från text till handling', detail: 'LLM:er som kan planera, använda verktyg och utföra flerstegsuppgifter autonomt.', examples: ['Amazon Bedrock AgentCore, OpenAI Assistants, LangGraph'] },
+          { title: 'Effektivitet', tagline: 'Mer med mindre', detail: 'Kvantisering, MoE, distillation och bättre data gör modeller billigare att köra.', examples: ['GGUF, AWQ, Llama 4 Scout (17B aktiva av 109B)'] },
+          { title: 'Reglering', tagline: 'EU AI Act och globala ramverk', detail: 'Regulatoriska krav formar hur modeller utvecklas och driftsätts.', examples: ['EU AI Act (2025-2027), Bidens Executive Order, Kinas AI-regler'] },
+        ],
+      },
+    },
   },
 }

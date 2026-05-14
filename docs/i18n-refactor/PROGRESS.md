@@ -3,6 +3,14 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 3 — DONE (`industry` module migrated)
+
+- Added `t.modules.industry.*` to `en.ts` (keyPlayers, openVsClosed, whoBuiltWhatSection, openVsClosedSection, ecosystemSection, whereItsHeadingSection).
+- Extended `sv.ts` and `ko.ts` with industry content. Preserved every existing human translation. 4 MT-marked entries per language.
+- Migrated 7 components in `src/modules/industry/`. `WhereItsHeadingBusiness.tsx` previously had no SV/KO; EN remains inline pending future translation.
+- Deleted `src/modules/industry/{translations,tech-translations,data-translations}.ts`.
+- `npm run build` clean (253 ms).
+
 ## Checkpoint 2 — DONE (`aiproblem` module migrated)
 
 - Added `t.modules.aiproblem.*` to `en.ts` (landscape, decision, landscapeSection, classificationSection, decisionFrameworkSection, llmDifferenceSection, toolboxSection).
@@ -83,7 +91,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `evaluation` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `quantization` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
 | `inference` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
-| `industry` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~8 .tsx | ⏳ |
+| `industry` | (deleted) | 7 .tsx migrated | ✅ |
 | `embeddings` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `prompting` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `agents` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~16 .tsx | ⏳ |

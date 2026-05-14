@@ -623,6 +623,106 @@ const modules = {
       ],
     },
   },
+  industry: {
+    // Business: 1. Who Makes AI?
+    keyPlayers: {
+      title: '1. Who Makes AI?',
+      intro:
+        'A handful of companies dominate the AI landscape. Think of it like the smartphone market — a few big players, each with a different strategy. Click each to learn more.',
+      players: [
+        { name: 'OpenAI', product: 'ChatGPT, GPT-4o', position: 'The one everyone knows — like the iPhone of AI. First to market, biggest brand recognition.', users: 'Millions of consumers and businesses. Microsoft is their biggest partner (Copilot runs on OpenAI).' },
+        { name: 'Google', product: 'Gemini', position: 'Built into everything Google — Search, Gmail, Docs, Android. Massive distribution advantage.', users: 'Anyone using Google products. Enterprises on Google Cloud.' },
+        { name: 'Anthropic', product: 'Claude', position: 'The "safety-first" company. Popular with enterprises who care about reliability and responsible AI.', users: 'Enterprises, developers, Amazon (major investor and partner via AWS).' },
+        { name: 'Amazon / AWS', product: 'Bedrock, Nova, AgentCore', position: "Rather than building one model, AWS built the platform — Amazon Bedrock gives you access to 100+ models (Claude, Llama, Mistral, and Amazon's own Nova family) through a single API with enterprise security. AgentCore handles deploying AI agents at scale.", users: 'Enterprises already on AWS. Companies that want model choice without vendor lock-in to a single AI provider.' },
+        { name: 'Meta', product: 'Llama (free)', position: 'Gives away their AI for free. Strategy: build the ecosystem, like Android vs iPhone. If everyone builds on Llama, Meta wins.', users: 'Developers and companies who want to run AI on their own servers.' },
+        { name: 'Others', product: 'Mistral, DeepSeek, Cohere, etc.', position: 'Smaller players with specific strengths — some are cheaper, some are better for certain languages or tasks.', users: 'Companies looking for alternatives or specialized capabilities.' },
+      ],
+    },
+    // Business: 2. Open vs Closed AI
+    openVsClosed: {
+      title: '2. Open vs Closed AI — What It Means for You',
+      intro:
+        'Some AI models are closed (you pay to use them) and some are open (free to download and run yourself). Think of it like Microsoft Office vs LibreOffice, or iPhone vs Android.',
+      closedTitle: 'Closed models (GPT-4o, Claude, Gemini)',
+      closedSubtitle: 'Like using Microsoft Office 365',
+      openTitle: 'Open models (Llama, Mistral, DeepSeek)',
+      openSubtitle: 'Like using Android or LibreOffice',
+      realPictureTitle: 'The real picture: it is not black and white',
+      realPictureText:
+        'The open = private, closed = risky framing is outdated. Enterprise cloud AI services (Azure OpenAI, AWS Bedrock, Google Vertex) offer security certifications and compliance guarantees most companies cannot replicate themselves. Self-hosting gives you control, but control ≠ security — you need the team and expertise to actually secure it.',
+      selfExplainPrompt:
+        "Your CTO says 'we should use open-source AI to avoid vendor lock-in.' What are the trade-offs you'd want to discuss before making that decision?",
+      selfExplainAnswer:
+        "I'd raise these points: (1) We avoid vendor lock-in and per-use costs, but we take on maintenance responsibility — do we have the technical staff? (2) Data privacy is better since nothing leaves our servers, which matters for our regulated data. (3) Open models are slightly less capable for complex tasks — we should test with our actual use cases. (4) Setup takes weeks vs hours for an API. (5) A hybrid approach might work: use open models for high-volume, simple tasks (cost savings) and closed APIs for complex, low-volume tasks (best quality). (6) We should factor in the total cost: GPU hosting isn't free, even if the model is.",
+    },
+    // Tech: 1. Who Built What
+    whoBuiltWhatSection: {
+      title: '1. Who Built What',
+      intro:
+        'The LLM landscape is dominated by a handful of well-funded labs, each with a distinct philosophy. Click any card to see details.',
+      players: [
+        { name: 'OpenAI', approach: 'Closed-source, API-first, massive scale', innovation: 'Pioneered RLHF at scale; o3 reasoning via RL-trained chain-of-thought; GPT-5.5 leads coding (88.7% SWE-bench)', detail: 'Frontier lab. Defined the modern LLM era with ChatGPT. GPT-5.5 (released April 2026) sets new bars on coding and professional benchmarks. GPT-Rosalind specialised for drug discovery and genomics. o3 leads reasoning benchmarks.' },
+        { name: 'Anthropic', approach: 'Safety-focused, Constitutional AI', innovation: 'Constitutional AI — alignment using AI feedback guided by explicit principles, reducing need for human labels on harmful outputs', detail: 'Founded by ex-OpenAI researchers. Leads on safety and agentic coding. Claude Opus 4.7 (released April 16, 2026) hits 87.6% on SWE-bench Verified at $5/$25 per MTok with a 1M token context window. Investors offered ~$800B valuation; running at ~$30B annualised revenue.' },
+        { name: 'Google DeepMind', approach: 'Vertical integration — TPUs, data, distribution', innovation: 'Custom TPU hardware; 1M+ token context windows; Gemma open models', detail: 'Merged Google Brain + DeepMind. Gemini natively multimodal from training. Gemini 3.1 Pro adds smarter reasoning and better factual grounding. Owns the full stack: TPU chips, training infra, Search/Android/Cloud distribution.' },
+        { name: 'Meta', approach: 'Open-source leader, MoE architecture', innovation: 'Largest open-weight models; Llama 4 uses MoE to match closed-model quality', detail: 'Llama 4 Maverick (400B total, 17B active via 128 experts) rivals GPT-4o on benchmarks. Open weights enable the entire ecosystem. Meta bets open-source wins long-term.' },
+        { name: 'DeepSeek', approach: 'Efficiency-first, open-weight', innovation: 'MoE + Multi-head Latent Attention + FP8 training — V3 trained for ~$5.5M', detail: 'Chinese lab that shocked the industry. V3 (671B total, 37B active) trained on 14.8T tokens for a fraction of typical cost. R1 matches o1 on reasoning — R1-Zero proved pure RL can develop reasoning; the final R1 adds minimal cold-start SFT for readability.' },
+        { name: 'Mistral', approach: 'European, open-weight, efficiency-focused', innovation: 'Sliding Window Attention; punches above weight class on efficiency', detail: 'Paris-based. Mistral 7B outperformed Llama 2 13B at launch. Mixtral popularized MoE for open models. Strong EU regulatory positioning.' },
+        { name: 'Amazon / AWS', approach: 'Platform + own models — Bedrock hosts 100+ models from all providers', innovation: 'Bedrock model marketplace; AgentCore for enterprise agent deployment; Nova family optimized for Bedrock', detail: "AWS built the platform layer: Amazon Bedrock provides a single API to access Claude, Llama, Mistral, and Amazon's own Nova models. AgentCore handles agent runtime, memory, identity, and observability at scale. Nova models (Micro/Lite/Pro/Premier) are optimized for cost-performance on Bedrock, with Nova Premier supporting 1M token context and model distillation." },
+        { name: 'xAI', approach: 'Real-time data via X/Twitter, massive compute', innovation: 'Trained on 200K GPU Colossus cluster (H100/H200); real-time information access', detail: "Elon Musk's AI company. Grok 3 trained on one of the largest GPU clusters ever built. Integrates live data from X platform. Open-sourced Grok 1 weights early on." },
+        { name: 'Apple', approach: 'On-device, privacy-first', innovation: 'On-device models running on Apple Silicon; Private Cloud Compute', detail: 'Apple Foundation Models (AFM) run locally on iPhone/Mac. Private Cloud Compute extends to Apple servers with cryptographic privacy guarantees. Focus on practical, integrated AI.' },
+      ],
+    },
+    // Tech: 2. Open vs Closed
+    openVsClosedSection: {
+      title: '2. Open vs Closed',
+      intro: 'The gap between open-weight and closed-source models has narrowed dramatically.',
+      trendCallout: 'Open models now match or exceed closed models on most standard benchmarks. The remaining gap is in agentic capabilities, long-context reliability, and safety tooling — and it\'s shrinking fast.',
+      openModelsHeading: 'Open models that compete with frontier closed models (as of mid-2026):',
+      comparison: [
+        { dimension: 'Access', open: 'Download weights, run anywhere', closed: 'API-only, vendor lock-in' },
+        { dimension: 'Fine-tuning', open: 'Full control — LoRA, full FT, merging', closed: 'Limited API fine-tuning or none' },
+        { dimension: 'Cost', open: 'Infra cost only; free weights', closed: 'Per-token API pricing' },
+        { dimension: 'Privacy', open: 'Full control over data — but security is your responsibility', closed: 'Data processed by provider — enterprise tiers offer strong compliance (SOC 2, HIPAA)' },
+        { dimension: 'Community', open: 'Huge ecosystem — HF, Reddit, Discord', closed: 'Vendor docs and support' },
+        { dimension: 'Cutting-edge', open: 'Closing fast — DeepSeek R1 ≈ o1', closed: 'Still leads on hardest benchmarks' },
+        { dimension: 'Safety tooling', open: 'DIY guardrails, community tools', closed: 'Built-in moderation, content filters' },
+        { dimension: 'Deployment', open: 'Self-host, edge, on-device', closed: 'Cloud-only via provider' },
+      ],
+      openModels: [
+        { name: 'Llama 4 Maverick', org: 'Meta', params: '400B (17B active)', note: 'MoE, 128 experts, rivals GPT-4o' },
+        { name: 'DeepSeek R1', org: 'DeepSeek', params: '671B (37B active)', note: 'Matches o1 on reasoning benchmarks' },
+        { name: 'Qwen 2.5 72B', org: 'Alibaba', params: '72B', note: 'Strong multilingual, code, math' },
+        { name: 'Mistral Large 2', org: 'Mistral', params: '123B', note: 'Competitive with GPT-4 Turbo' },
+        { name: 'Gemma 3 27B', org: 'Google', params: '27B', note: 'Best-in-class at size, open weights' },
+      ],
+    },
+    // Tech: 3. The Ecosystem
+    ecosystemSection: {
+      title: '3. The Ecosystem',
+      intro: "LLMs don't exist in isolation. A full stack connects foundation models to end users.",
+      keyInsight: 'You rarely build from scratch. Most teams pick a foundation model, optionally fine-tune it, serve it with an existing framework, and wire it into their app with an orchestration layer. The ecosystem makes this possible without training a single weight.',
+      layers: [
+        { name: 'Foundation Models', tools: [ { name: 'GPT-5.5 / Claude Opus 4.7', note: 'Frontier closed models via API' }, { name: 'Llama 4 / DeepSeek V3', note: 'Open-weight models you can self-host' }, { name: 'Gemma 3 / Qwen 2.5', note: 'Smaller open models for fine-tuning' } ] },
+        { name: 'Fine-tuning Tools', tools: [ { name: 'Hugging Face Transformers', note: 'De facto standard for model training & sharing' }, { name: 'Unsloth', note: '2-5× faster LoRA fine-tuning, lower memory' }, { name: 'Axolotl', note: 'Config-driven fine-tuning framework' } ] },
+        { name: 'Serving & Inference', tools: [ { name: 'vLLM', note: 'Production serving with PagedAttention' }, { name: 'Ollama', note: 'Local inference, one-command setup' }, { name: 'TensorRT-LLM', note: 'Nvidia-optimized, max throughput' } ] },
+        { name: 'Orchestration', tools: [ { name: 'LangChain', note: 'Chains, agents, tool use, RAG pipelines' }, { name: 'LlamaIndex', note: 'Data ingestion, indexing, retrieval' }, { name: 'Semantic Kernel', note: "Microsoft's orchestration SDK" } ] },
+        { name: 'Applications', tools: [ { name: 'Chatbots & Assistants', note: 'Customer support, internal tools' }, { name: 'Code Assistants', note: 'Copilot, Cursor, Cody, Kiro' }, { name: 'Autonomous Agents', note: 'Multi-step task execution with tool use' } ] },
+      ],
+    },
+    // Tech: 4. Where It Is Heading
+    whereItsHeadingSection: {
+      title: '4. Where It Is Heading',
+      intro: 'Six trends shaping the LLM landscape in 2026 and beyond. Click any card to dive deeper.',
+      trends: [
+        { id: 'reasoning', title: 'Reasoning Models', tagline: 'RL-trained chain-of-thought', detail: 'Models like o3 and DeepSeek R1 use reinforcement learning to develop internal chain-of-thought reasoning. They "think" before answering, dramatically improving math, code, and logic tasks. R1 proved you can get there with pure RL — no supervised fine-tuning needed.', examples: ['OpenAI o3', 'DeepSeek R1', 'Claude with extended thinking'] },
+        { id: 'multimodal', title: 'Native Multimodal', tagline: 'Text + image + audio + video in one model', detail: 'Frontier models now process and generate text, images, audio, and video natively — not as bolted-on modules. Gemini was trained multimodal from the start. GPT-5.5 and Claude handle images, audio, and documents in a single context.', examples: ['Gemini 3.1 Pro (native)', 'GPT-5.5 (omni)', 'Llama 4 (vision)'] },
+        { id: 'agentic', title: 'Agentic AI', tagline: 'Models that use tools and take actions', detail: 'LLMs are evolving from text generators to autonomous agents that browse the web, write and execute code, call APIs, and complete multi-step tasks. Computer use, MCP (Model Context Protocol), and tool-use frameworks are making this practical.', examples: ['Claude computer use', 'OpenAI Operator', 'Devin (code agent)', 'MCP ecosystem'] },
+        { id: 'on-device', title: 'On-Device AI', tagline: 'Smaller models running locally', detail: 'Quantized models (1-4B params) now run on phones and laptops. Apple Intelligence runs on-device by default. Gemma, Phi, and Llama small variants enable private, offline AI with zero API costs.', examples: ['Apple Intelligence (AFM)', 'Gemma 3 2B', 'Phi-4 mini', 'Llama 3.2 3B'] },
+        { id: 'efficiency', title: 'Efficiency Revolution', tagline: 'MoE, quantization, distillation', detail: 'DeepSeek V3 trained a 671B model for $5.5M — 10-50× cheaper than expected. Techniques: MoE (activate only needed experts), FP8 training, Multi-head Latent Attention, aggressive quantization, and distillation from large to small models.', examples: ['DeepSeek V3 ($5.5M training)', 'MoE routing', 'GGUF quantization', 'Knowledge distillation'] },
+        { id: 'regulation', title: 'Regulation & Safety', tagline: 'EU AI Act, safety requirements', detail: 'The EU AI Act is now in effect, classifying AI systems by risk level. High-risk systems (hiring, credit, law enforcement) face strict requirements. Foundation model providers must document training data, energy use, and safety testing. The US and China are developing parallel frameworks.', examples: ['EU AI Act (2024-2026 rollout)', 'NIST AI RMF', 'China interim AI rules', 'Frontier model safety commitments'] },
+      ],
+    },
+  },
 } as const
 
 /**
