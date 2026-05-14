@@ -1,25 +1,10 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { lLMDifferenceSectionSv, lLMDifferenceSectionKo } from './tech-translations'
-import { comparisonTranslations, overkillCasesTranslations, mlBetterCasesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface ComparisonRow {
-  dimension: string
-  ml: string
-  llm: string
-}
-
-const COMPARISON: ComparisonRow[] = [
-  { dimension: 'Training data', ml: 'Task-specific labeled datasets', llm: 'Massive unlabeled text (internet-scale)' },
-  { dimension: 'Deployment', ml: 'One model per task', llm: 'One model, many tasks' },
-  { dimension: 'Input format', ml: 'Structured features (numbers, categories)', llm: 'Natural language (free-form text)' },
-  { dimension: 'Adaptation', ml: 'Retrain from scratch or transfer learn', llm: 'Prompt engineering or fine-tuning' },
-  { dimension: 'Inference cost', ml: 'Cheap (milliseconds, minimal compute)', llm: 'Expensive (seconds, GPU-heavy)' },
-  { dimension: 'Strengths', ml: 'Precision on narrow, well-defined tasks', llm: 'Flexibility across broad, open-ended tasks' },
-]
-
+// ML/LLM "approach" interactive demo — never had SV/KO translations in the
+// legacy system, so EN remains inline for now (matches prior behavior).
 const ML_APPROACH = {
-  title: '4. What Makes LLMs Different',
+  title: 'Classical ML: Sentiment Classifier',
   steps: [
     '1. Collect 10,000 labeled reviews (positive/negative)',
     '2. Extract features: word counts, TF-IDF vectors',
@@ -42,28 +27,8 @@ const LLM_APPROACH = {
   cons: ['100x more expensive per request', '250x slower inference', 'Requires API access / GPU', 'Less predictable outputs'],
 }
 
-const OVERKILL_CASES = [
-  { label: 'Simple classification', detail: 'Binary yes/no on structured data — logistic regression is faster and cheaper.' },
-  { label: 'Structured data tasks', detail: 'Tabular data with clear features — tree-based models (XGBoost) dominate.' },
-  { label: 'Latency-critical systems', detail: 'Real-time scoring at <10ms — LLM inference is too slow.' },
-]
-
-const ML_BETTER_CASES = [
-  { label: 'Tabular data', detail: 'Rows and columns with numerical/categorical features — gradient boosting wins.' },
-  { label: 'Real-time scoring', detail: 'Fraud detection, ad bidding — need sub-millisecond responses.' },
-  { label: 'Interpretability required', detail: 'Regulated industries need to explain every decision (credit, healthcare).' },
-]
-
-const EN_P4 = `Same Problem, Two Approaches: Sentiment Analysis`
-const EN_P3 = `Same Problem, Two Approaches: Sentiment Analysis`
-const EN_INTRO = `LLMs aren't just "bigger ML models." They represent a fundamentally different paradigm.`
-
 export const LLMDifferenceSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
-  const oVERKILL_CASEST = tArray(lang, OVERKILL_CASES, overkillCasesTranslations)
-  const mL_BETTER_CASEST = tArray(lang, ML_BETTER_CASES, mlBetterCasesTranslations)
-  const c = useT({ title: '4. What Makes LLMs Different', intro: EN_INTRO  , p3: EN_P3 , p4: EN_P4 }, { sv: lLMDifferenceSectionSv, ko: lLMDifferenceSectionKo })
+  const c = useTranslation().modules.aiproblem.llmDifferenceSection
   const [showLLM, setShowLLM] = useState(false)
 
   const toggle = useCallback(() => {
@@ -88,7 +53,7 @@ export const LLMDifferenceSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {cOMPARISONT.map(row => (
+            {c.comparison.map(row => (
               <tr key={row.dimension} className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50">
                 <td className="px-4 py-3 font-medium text-zinc-800 dark:text-zinc-200">{row.dimension}</td>
                 <td className="px-4 py-3 text-zinc-600 dark:text-zinc-400">{row.ml}</td>
@@ -102,7 +67,7 @@ export const LLMDifferenceSection: React.FC = () => {
       {/* Interactive toggle: same problem, two approaches */}
       <div className="mb-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-4">
-          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.p4}</h3>
+          <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{c.sameProblemHeading}</h3>
           <button
             onClick={toggle}
             className="flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-600 bg-zinc-200 dark:bg-zinc-700 px-3 py-1 text-xs text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-600"
@@ -134,9 +99,9 @@ export const LLMDifferenceSection: React.FC = () => {
             <div>
               <p className="mb-2 text-xs font-semibold text-red-700 dark:text-red-400 uppercase">Cons</p>
               <ul className="space-y-1">
-                {active.cons.map(c => (
-                  <li key={c} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                    <span className="text-red-700 dark:text-red-500">✗</span> {c}
+                {active.cons.map(con => (
+                  <li key={con} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                    <span className="text-red-700 dark:text-red-500">✗</span> {con}
                   </li>
                 ))}
               </ul>
@@ -150,10 +115,10 @@ export const LLMDifferenceSection: React.FC = () => {
         <div className="rounded-lg border border-amber-300 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/5 p-4">
           <h3 className="mb-3 font-mono text-sm font-semibold text-amber-700 dark:text-amber-300">When LLMs Are Overkill</h3>
           <ul className="space-y-2">
-            {oVERKILL_CASEST.map(c => (
-              <li key={c.label}>
-                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{c.label}</p>
-                <p className="text-xs text-zinc-500">{c.detail}</p>
+            {c.overkillCases.map(item => (
+              <li key={item.label}>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{item.label}</p>
+                <p className="text-xs text-zinc-500">{item.detail}</p>
               </li>
             ))}
           </ul>
@@ -161,10 +126,10 @@ export const LLMDifferenceSection: React.FC = () => {
         <div className="rounded-lg border border-emerald-300 dark:border-emerald-500/20 bg-emerald-50 dark:bg-emerald-500/5 p-4">
           <h3 className="mb-3 font-mono text-sm font-semibold text-emerald-700 dark:text-emerald-300">When Classical ML Wins</h3>
           <ul className="space-y-2">
-            {mL_BETTER_CASEST.map(c => (
-              <li key={c.label}>
-                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{c.label}</p>
-                <p className="text-xs text-zinc-500">{c.detail}</p>
+            {c.mlBetterCases.map(item => (
+              <li key={item.label}>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{item.label}</p>
+                <p className="text-xs text-zinc-500">{item.detail}</p>
               </li>
             ))}
           </ul>

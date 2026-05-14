@@ -371,7 +371,259 @@ const moduleLabels = {
  * Keys mirror the moduleLabels keys (kebab-case module ids), section
  * sub-keys are camelCased from the legacy `*Sv`/`*Ko` export names.
  */
-const modules = {} as const
+const modules = {
+  aiproblem: {
+    // Business: 1. The AI Family Tree
+    landscape: {
+      title: '1. The AI Family Tree',
+      intro:
+        '"AI" is a big umbrella. Not everything under it is the same. Think of it like this: all LLMs are AI, but not all AI is an LLM — just like all golden retrievers are dogs, but not all dogs are golden retrievers. Click each layer to learn more.',
+      levels: [
+        {
+          label: 'Artificial Intelligence',
+          plain: 'Any smart automation',
+          analogy:
+            'A catch-all term for software that does things we used to think only humans could do — recognizing faces, understanding speech, making decisions.',
+          examples: [
+            'Spam filters in your email',
+            'Auto-complete when you type',
+            'Fraud detection on your credit card',
+          ],
+        },
+        {
+          label: 'Machine Learning',
+          plain: 'Learning from examples',
+          analogy:
+            'Instead of programming every rule by hand, you show the system thousands of examples and it figures out the patterns — like training a new hire by having them study past cases instead of reading a 500-page manual.',
+          examples: [
+            'Netflix recommendations ("people like you also watched…")',
+            'Email sorting into Primary/Social/Promotions',
+            'Predicting which customers might cancel',
+          ],
+        },
+        {
+          label: 'Deep Learning',
+          plain: 'Pattern recognition on steroids',
+          analogy:
+            'A more powerful version of machine learning that can handle messy, complex data like photos, audio, and text — things that are easy for humans but were impossible for traditional software.',
+          examples: [
+            'Face recognition to unlock your phone',
+            'Voice assistants understanding what you say',
+            'Translating between languages in real time',
+          ],
+        },
+        {
+          label: 'Large Language Models',
+          plain: 'AI that understands and generates language',
+          analogy:
+            'The AI behind ChatGPT, Copilot, and Gemini. Trained by reading billions of web pages, it learned to write, reason, summarize, translate, and have conversations — like an incredibly well-read colleague who can discuss almost any topic.',
+          examples: [
+            'ChatGPT, Claude, Gemini, Copilot',
+            'Drafting emails, summarizing documents',
+            'Answering questions about your company data',
+          ],
+        },
+      ],
+      examplesLabel: 'Examples you already use:',
+    },
+    // Business: 2. Should You Use AI for This?
+    decision: {
+      title: '2. Should You Use AI for This?',
+      intro:
+        'Not every problem needs AI. Sometimes a spreadsheet, a checklist, or a simple rule is better. The key question is: are there clear rules, or does it require judgment?',
+      introSub:
+        "Think of it this way: if you can write the complete instructions on a single page, you probably don't need AI. If it takes years of experience to do well, AI might help.",
+      scenarios: [
+        {
+          task: 'Calculate employee bonuses based on a fixed formula',
+          answer: 'No AI needed',
+          why: 'The rules are fixed and exact — like following a recipe step by step. A spreadsheet formula does this perfectly. AI would add complexity and might even get the numbers wrong.',
+        },
+        {
+          task: 'Predict which customers are likely to cancel next quarter',
+          answer: 'Machine Learning',
+          why: "There's historical data (past cancellations) and patterns to find (usage dropping, fewer logins). ML learns these patterns from examples — like a sales rep who develops a gut feeling for at-risk accounts, but backed by data.",
+        },
+        {
+          task: 'Answer employee questions about company policies',
+          answer: 'LLM + your documents',
+          why: 'Employees ask questions in natural language ("can I carry over vacation days?"). An LLM can understand the question, search your policy docs, and give a clear answer — like having an always-available HR assistant.',
+        },
+        {
+          task: 'Summarize a 50-page contract and flag key risks',
+          answer: 'LLM',
+          why: 'This requires reading, understanding context, and making judgments about what matters — exactly what LLMs are good at. Like asking a junior lawyer to do a first pass, but in 30 seconds.',
+        },
+      ],
+      bestFitLabel: 'Best fit:',
+      selfExplainPrompt:
+        'Think of a task at your job that takes a lot of time. Would AI help? Is it rule-based (spreadsheet), pattern-based (ML), or language-based (LLM)?',
+      selfExplainAnswer:
+        "Example: 'I spend 2 hours every Monday categorizing support tickets by priority.' This is pattern-based — there's historical data on how tickets were categorized, and the task requires reading the ticket text and making a judgment call. An LLM could read each ticket and categorize it based on past patterns, saving most of that time.",
+    },
+    // Tech: 1. The Landscape
+    landscapeSection: {
+      title: '1. The Landscape',
+      intro:
+        'AI is a broad field. Machine Learning is a subset, Deep Learning is a subset of that, and LLMs are a specific kind of deep learning. Click each layer to explore.',
+      levels: [
+        {
+          label: 'Artificial Intelligence',
+          definition:
+            'Any system that performs tasks normally requiring human intelligence — reasoning, planning, perception, or decision-making.',
+          examples: [
+            'Rule-based systems (if/else logic for tax calculations)',
+            'Expert systems (medical diagnosis from symptom rules)',
+            'Search algorithms (A*, minimax for chess/pathfinding)',
+            'Robotic process automation (RPA for form filling)',
+          ],
+        },
+        {
+          label: 'Machine Learning',
+          definition:
+            'Systems that learn patterns from data instead of being explicitly programmed. They improve with more data.',
+          examples: [
+            'Regression (predicting house prices from features)',
+            'Classification (spam vs. not spam)',
+            'Clustering (customer segmentation)',
+            'Recommendation engines (Netflix, Spotify)',
+          ],
+        },
+        {
+          label: 'Deep Learning',
+          definition:
+            'ML using neural networks with many layers. Excels at learning from raw, unstructured data like images, audio, and text.',
+          examples: [
+            'CNNs — image classification, object detection',
+            'RNNs/LSTMs — time-series, sequence modeling',
+            'Transformers — the architecture behind modern LLMs',
+            'GANs — image generation, style transfer',
+          ],
+        },
+        {
+          label: 'Large Language Models',
+          definition:
+            'Massive transformer models trained on internet-scale text. They predict the next token and emerge with reasoning, coding, and conversation abilities.',
+          examples: [
+            'GPT-4, Claude, Gemini — general-purpose reasoning',
+            'Llama, Mistral — open-weight models',
+            'Text generation, summarization, translation',
+            'Code generation, analysis, debugging',
+          ],
+        },
+      ],
+      overlays: [
+        {
+          label: 'Generative AI',
+          description:
+            'Models that create new content (text, images, audio, code). Spans Deep Learning and LLMs.',
+        },
+        {
+          label: 'Agentic AI',
+          description:
+            'LLMs augmented with tools, memory, and planning — they take actions, not just generate text.',
+        },
+      ],
+    },
+    // Tech: 2. Problem Classification
+    classificationSection: {
+      title: '2. Problem Classification',
+      p2: 'Not every problem needs an LLM. Click each card to reveal the best approach — and more importantly,',
+      scenarios: [
+        { problem: 'Calculate shipping costs based on weight and distance', approach: 'Rule-based / traditional software', why: 'The logic is deterministic — fixed formulas with known inputs. No learning needed, just math.' },
+        { problem: 'Detect fraudulent credit card transactions', approach: 'Classical ML (XGBoost, random forest)', why: 'Structured tabular data (amount, location, time) with labeled fraud/not-fraud examples. Tree-based models excel here with fast inference.' },
+        { problem: 'Predict customer churn next quarter', approach: 'Classical ML (logistic regression, gradient boosting)', why: 'Tabular customer features (tenure, usage, support tickets) predict a binary outcome. Interpretability matters for business decisions.' },
+        { problem: 'Classify product images by category', approach: 'Deep Learning (CNN / vision model)', why: "Images are unstructured pixel data. CNNs learn spatial hierarchies (edges → shapes → objects) that hand-crafted features can't match." },
+        { problem: 'Transcribe customer support calls', approach: 'Deep Learning (speech-to-text, Whisper)', why: 'Audio is raw waveform data. Deep learning models like Whisper learn to map acoustic patterns to text across accents and noise levels.' },
+        { problem: 'Summarize legal contracts', approach: 'LLM', why: 'Requires understanding complex language, legal jargon, and generating coherent summaries. LLMs handle long-context text comprehension natively.' },
+        { problem: 'Build a customer support chatbot', approach: 'LLM (+ RAG for company knowledge)', why: 'Needs natural conversation, intent understanding, and access to company-specific docs. RAG grounds the LLM in your actual knowledge base.' },
+        { problem: 'Generate code from requirements', approach: 'LLM', why: 'Requires understanding natural language specs and producing syntactically valid, logically correct code. LLMs are trained on billions of lines of code.' },
+        { problem: 'Recommend products based on purchase history', approach: 'Classical ML (collaborative filtering)', why: 'Structured user-item interaction data. Collaborative filtering finds patterns like "users who bought X also bought Y" efficiently at scale.' },
+        { problem: 'Detect anomalies in server metrics', approach: 'Classical ML (isolation forest, autoencoders)', why: 'Time-series numerical data with mostly normal patterns. Isolation forests efficiently isolate outliers without needing labeled anomaly examples.' },
+      ],
+    },
+    // Tech: 3. The Decision Framework
+    decisionFrameworkSection: {
+      title: '3. The Decision Framework',
+      intro: 'Walk through this decision tree to find the right approach for your problem.',
+      tree: {
+        start: { question: 'Is your problem well-defined with clear, deterministic rules?' },
+        'rule-based': {
+          answer: 'Rule-based system',
+          explanation: "If the logic can be fully captured in formulas, lookup tables, or decision rules — you don't need ML at all. Traditional software is cheaper, faster, and 100% predictable.",
+          example: 'Tax calculation, unit conversion, shipping cost formulas, form validation.',
+        },
+        structured: { question: 'Do you have structured/tabular data?' },
+        prediction: { question: 'Do you need prediction or pattern recognition?' },
+        'classical-ml': {
+          answer: 'Classical ML',
+          explanation: 'Structured data with rows and columns is the sweet spot for gradient boosting, random forests, and logistic regression. These models are fast, interpretable, and battle-tested.',
+          example: 'Fraud detection, churn prediction, credit scoring, demand forecasting.',
+        },
+        'rule-based-2': {
+          answer: 'Rule-based or simple analytics',
+          explanation: 'If you have structured data but just need aggregation, filtering, or reporting — SQL and business logic are the right tool.',
+          example: 'Dashboard metrics, inventory alerts, threshold-based notifications.',
+        },
+        media: { question: 'Does it involve images, audio, or video?' },
+        'deep-learning': {
+          answer: 'Deep Learning (CNN / speech models)',
+          explanation: 'Unstructured media data requires neural networks that learn hierarchical features. CNNs for images, specialized architectures like Whisper for audio.',
+          example: 'Image classification, object detection, speech-to-text, video analysis.',
+        },
+        text: { question: 'Does it involve understanding or generating natural language?' },
+        llm: {
+          answer: 'LLM',
+          explanation: 'If the task requires reading, writing, reasoning about, or generating text — LLMs are purpose-built for this. Add RAG for domain knowledge, fine-tuning for specialized behavior.',
+          example: 'Summarization, chatbots, code generation, document Q&A, translation.',
+        },
+        reassess: {
+          answer: 'Reassess the problem',
+          explanation: 'If none of the above fit, break the problem into smaller sub-problems. Most real-world systems combine multiple approaches — an LLM for text + classical ML for scoring + rules for validation.',
+          example: 'E-commerce: rules for pricing + ML for recommendations + LLM for product descriptions.',
+        },
+      },
+    },
+    // Tech: 4. What Makes LLMs Different
+    llmDifferenceSection: {
+      title: '4. What Makes LLMs Different',
+      intro: "LLMs aren't just \"bigger ML models.\" They represent a fundamentally different paradigm.",
+      sameProblemHeading: 'Same Problem, Two Approaches: Sentiment Analysis',
+      comparison: [
+        { dimension: 'Training data', ml: 'Task-specific labeled datasets', llm: 'Massive unlabeled text (internet-scale)' },
+        { dimension: 'Deployment', ml: 'One model per task', llm: 'One model, many tasks' },
+        { dimension: 'Input format', ml: 'Structured features (numbers, categories)', llm: 'Natural language (free-form text)' },
+        { dimension: 'Adaptation', ml: 'Retrain from scratch or transfer learn', llm: 'Prompt engineering or fine-tuning' },
+        { dimension: 'Inference cost', ml: 'Cheap (milliseconds, minimal compute)', llm: 'Expensive (seconds, GPU-heavy)' },
+        { dimension: 'Strengths', ml: 'Precision on narrow, well-defined tasks', llm: 'Flexibility across broad, open-ended tasks' },
+      ],
+      overkillCases: [
+        { label: 'Simple classification', detail: 'Binary yes/no on structured data — logistic regression is faster and cheaper.' },
+        { label: 'Structured data tasks', detail: 'Tabular data with clear features — tree-based models (XGBoost) dominate.' },
+        { label: 'Latency-critical systems', detail: 'Real-time scoring at <10ms — LLM inference is too slow.' },
+      ],
+      mlBetterCases: [
+        { label: 'Tabular data', detail: 'Rows and columns with numerical/categorical features — gradient boosting wins.' },
+        { label: 'Real-time scoring', detail: 'Fraud detection, ad bidding — need sub-millisecond responses.' },
+        { label: 'Interpretability required', detail: 'Regulated industries need to explain every decision (credit, healthcare).' },
+      ],
+    },
+    // Tech: 5. The AI/ML/LLM Toolbox
+    toolboxSection: {
+      title: '5. The AI/ML/LLM Toolbox',
+      intro: 'Each level of the AI landscape has its own ecosystem of tools and frameworks.',
+      upNextNote:
+        'The rest of this course dives deep into the LLM track — how they work under the hood, how to use them effectively, and how to build real applications with them.',
+      toolbox: [
+        { level: 'Rule-based', tools: ['if/else logic', 'regex', 'decision tables', 'state machines'] },
+        { level: 'Classical ML', tools: ['scikit-learn', 'XGBoost', 'LightGBM', 'statsmodels'] },
+        { level: 'Deep Learning', tools: ['PyTorch', 'TensorFlow', 'JAX', 'Keras'] },
+        { level: 'LLMs', tools: ['Hugging Face', 'OpenAI API', 'Ollama', 'vLLM'] },
+        { level: 'Agentic AI', tools: ['LangChain', 'CrewAI', 'AutoGen', 'LlamaIndex'] },
+      ],
+    },
+  },
+} as const
 
 /**
  * Quiz Q&A keyed by question ID (e.g. 'aiproblem-biz-1').

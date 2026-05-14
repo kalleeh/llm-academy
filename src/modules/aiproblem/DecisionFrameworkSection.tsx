@@ -1,92 +1,16 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useLanguage, useT } from '../../i18n'
-import { decisionFrameworkSectionSv, decisionFrameworkSectionKo } from './tech-translations'
-import { treeTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface TreeNode {
-  id: string
-  question?: string
-  answer?: string
-  explanation?: string
-  example?: string
-  yes?: string
-  no?: string
-}
-
-const TREE: Record<string, TreeNode> = {
-  start: {
-    id: 'start',
-    question: 'Is your problem well-defined with clear, deterministic rules?',
-    yes: 'rule-based',
-    no: 'structured',
-  },
-  'rule-based': {
-    id: 'rule-based',
-    answer: 'Rule-based system',
-    explanation:
-      'If the logic can be fully captured in formulas, lookup tables, or decision rules — you don\'t need ML at all. Traditional software is cheaper, faster, and 100% predictable.',
-    example: 'Tax calculation, unit conversion, shipping cost formulas, form validation.',
-  },
-  structured: {
-    id: 'structured',
-    question: 'Do you have structured/tabular data?',
-    yes: 'prediction',
-    no: 'media',
-  },
-  prediction: {
-    id: 'prediction',
-    question: 'Do you need prediction or pattern recognition?',
-    yes: 'classical-ml',
-    no: 'rule-based-2',
-  },
-  'classical-ml': {
-    id: 'classical-ml',
-    answer: 'Classical ML',
-    explanation:
-      'Structured data with rows and columns is the sweet spot for gradient boosting, random forests, and logistic regression. These models are fast, interpretable, and battle-tested.',
-    example: 'Fraud detection, churn prediction, credit scoring, demand forecasting.',
-  },
-  'rule-based-2': {
-    id: 'rule-based-2',
-    answer: 'Rule-based or simple analytics',
-    explanation:
-      'If you have structured data but just need aggregation, filtering, or reporting — SQL and business logic are the right tool.',
-    example: 'Dashboard metrics, inventory alerts, threshold-based notifications.',
-  },
-  media: {
-    id: 'media',
-    question: 'Does it involve images, audio, or video?',
-    yes: 'deep-learning',
-    no: 'text',
-  },
-  'deep-learning': {
-    id: 'deep-learning',
-    answer: 'Deep Learning (CNN / speech models)',
-    explanation:
-      'Unstructured media data requires neural networks that learn hierarchical features. CNNs for images, specialized architectures like Whisper for audio.',
-    example: 'Image classification, object detection, speech-to-text, video analysis.',
-  },
-  text: {
-    id: 'text',
-    question: 'Does it involve understanding or generating natural language?',
-    yes: 'llm',
-    no: 'reassess',
-  },
-  llm: {
-    id: 'llm',
-    answer: 'LLM',
-    explanation:
-      'If the task requires reading, writing, reasoning about, or generating text — LLMs are purpose-built for this. Add RAG for domain knowledge, fine-tuning for specialized behavior.',
-    example: 'Summarization, chatbots, code generation, document Q&A, translation.',
-  },
-  reassess: {
-    id: 'reassess',
-    answer: 'Reassess the problem',
-    explanation:
-      'If none of the above fit, break the problem into smaller sub-problems. Most real-world systems combine multiple approaches — an LLM for text + classical ML for scoring + rules for validation.',
-    example: 'E-commerce: rules for pricing + ML for recommendations + LLM for product descriptions.',
-  },
+// Non-translatable graph structure: which node id leads where on yes/no.
+// Translatable text (question / answer / explanation / example) lives in
+// `useTranslation().modules.aiproblem.decisionFrameworkSection.tree`.
+const TREE_GRAPH: Record<string, { yes?: string; no?: string }> = {
+  start: { yes: 'rule-based', no: 'structured' },
+  structured: { yes: 'prediction', no: 'media' },
+  prediction: { yes: 'classical-ml', no: 'rule-based-2' },
+  media: { yes: 'deep-learning', no: 'text' },
+  text: { yes: 'llm', no: 'reassess' },
 }
 
 const NODE_COLORS: Record<string, string> = {
@@ -98,24 +22,22 @@ const NODE_COLORS: Record<string, string> = {
   reassess: 'border-cyan-400 dark:border-cyan-500/50 bg-cyan-50 dark:bg-cyan-500/10',
 }
 
-const EN_INTRO = `Walk through this decision tree to find the right approach for your problem.`
-
 export const DecisionFrameworkSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const c = useT({ title: '3. The Decision Framework', intro: EN_INTRO }, { sv: decisionFrameworkSectionSv, ko: decisionFrameworkSectionKo })
+  const c = useTranslation().modules.aiproblem.decisionFrameworkSection
   const [path, setPath] = useState<string[]>(['start'])
 
   const currentId = path[path.length - 1]
-  const baseNode = TREE[currentId]
-  const trNode = lang !== 'en' ? (treeTranslations[lang]?.[currentId] ?? {}) : {}
-  const current = { ...baseNode, ...trNode }
+  const current = c.tree[currentId as keyof typeof c.tree] as {
+    question?: string
+    answer?: string
+    explanation?: string
+    example?: string
+  }
+  const graph = TREE_GRAPH[currentId]
 
-  const choose = useCallback(
-    (nextId: string) => {
-      setPath(prev => [...prev, nextId])
-    },
-    [],
-  )
+  const choose = useCallback((nextId: string) => {
+    setPath(prev => [...prev, nextId])
+  }, [])
 
   const reset = useCallback(() => {
     setPath(['start'])
@@ -134,9 +56,10 @@ export const DecisionFrameworkSection: React.FC = () => {
         {/* Path breadcrumb */}
         <div className="flex flex-wrap items-center gap-1 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-6 py-3">
           {path.map((nodeId, i) => {
-            const rawNode = TREE[nodeId]
-            const trBc = lang !== 'en' ? (treeTranslations[lang]?.[nodeId] ?? {}) : {}
-            const node = { ...rawNode, ...trBc }
+            const node = c.tree[nodeId as keyof typeof c.tree] as {
+              question?: string
+              answer?: string
+            }
             return (
               <span key={nodeId} className="flex items-center gap-1">
                 {i > 0 && <span className="text-xs text-zinc-500 dark:text-zinc-600">→</span>}
@@ -159,17 +82,17 @@ export const DecisionFrameworkSection: React.FC = () => {
             <div>
               <p className="mb-4 text-lg font-medium text-zinc-900 dark:text-zinc-100">{current.question}</p>
               <div className="flex gap-3">
-                {current.yes && (
+                {graph?.yes && (
                   <button
-                    onClick={() => choose(current.yes!)}
+                    onClick={() => choose(graph.yes!)}
                     className="rounded-lg border border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 px-6 py-2 text-sm font-medium text-emerald-700 dark:text-emerald-300 transition-colors hover:bg-emerald-100 dark:hover:bg-emerald-500/20"
                   >
                     Yes
                   </button>
                 )}
-                {current.no && (
+                {graph?.no && (
                   <button
-                    onClick={() => choose(current.no!)}
+                    onClick={() => choose(graph.no!)}
                     className="rounded-lg border border-red-400 dark:border-red-500/30 bg-red-50 dark:bg-red-500/10 px-6 py-2 text-sm font-medium text-red-700 dark:text-red-300 transition-colors hover:bg-red-100 dark:hover:bg-red-500/20"
                   >
                     No

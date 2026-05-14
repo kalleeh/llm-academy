@@ -1,90 +1,32 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { classificationSectionSv, classificationSectionKo } from './tech-translations'
-import { scenariosTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface Scenario {
-  problem: string
-  approach: string
-  category: 'rule-based' | 'classical-ml' | 'deep-learning' | 'llm'
-  why: string
-}
+type Category = 'rule-based' | 'classical-ml' | 'deep-learning' | 'llm'
 
-const SCENARIOS: Scenario[] = [
-  {
-    problem: 'Calculate shipping costs based on weight and distance',
-    approach: 'Rule-based / traditional software',
-    category: 'rule-based',
-    why: 'The logic is deterministic — fixed formulas with known inputs. No learning needed, just math.',
-  },
-  {
-    problem: 'Detect fraudulent credit card transactions',
-    approach: 'Classical ML (XGBoost, random forest)',
-    category: 'classical-ml',
-    why: 'Structured tabular data (amount, location, time) with labeled fraud/not-fraud examples. Tree-based models excel here with fast inference.',
-  },
-  {
-    problem: 'Predict customer churn next quarter',
-    approach: 'Classical ML (logistic regression, gradient boosting)',
-    category: 'classical-ml',
-    why: 'Tabular customer features (tenure, usage, support tickets) predict a binary outcome. Interpretability matters for business decisions.',
-  },
-  {
-    problem: 'Classify product images by category',
-    approach: 'Deep Learning (CNN / vision model)',
-    category: 'deep-learning',
-    why: 'Images are unstructured pixel data. CNNs learn spatial hierarchies (edges → shapes → objects) that hand-crafted features can\'t match.',
-  },
-  {
-    problem: 'Transcribe customer support calls',
-    approach: 'Deep Learning (speech-to-text, Whisper)',
-    category: 'deep-learning',
-    why: 'Audio is raw waveform data. Deep learning models like Whisper learn to map acoustic patterns to text across accents and noise levels.',
-  },
-  {
-    problem: 'Summarize legal contracts',
-    approach: 'LLM',
-    category: 'llm',
-    why: 'Requires understanding complex language, legal jargon, and generating coherent summaries. LLMs handle long-context text comprehension natively.',
-  },
-  {
-    problem: 'Build a customer support chatbot',
-    approach: 'LLM (+ RAG for company knowledge)',
-    category: 'llm',
-    why: 'Needs natural conversation, intent understanding, and access to company-specific docs. RAG grounds the LLM in your actual knowledge base.',
-  },
-  {
-    problem: 'Generate code from requirements',
-    approach: 'LLM',
-    category: 'llm',
-    why: 'Requires understanding natural language specs and producing syntactically valid, logically correct code. LLMs are trained on billions of lines of code.',
-  },
-  {
-    problem: 'Recommend products based on purchase history',
-    approach: 'Classical ML (collaborative filtering)',
-    category: 'classical-ml',
-    why: 'Structured user-item interaction data. Collaborative filtering finds patterns like "users who bought X also bought Y" efficiently at scale.',
-  },
-  {
-    problem: 'Detect anomalies in server metrics',
-    approach: 'Classical ML (isolation forest, autoencoders)',
-    category: 'classical-ml',
-    why: 'Time-series numerical data with mostly normal patterns. Isolation forests efficiently isolate outliers without needing labeled anomaly examples.',
-  },
+// Per-scenario non-translatable metadata. Order matches the `scenarios` array
+// in `useTranslation().modules.aiproblem.classificationSection.scenarios`.
+const SCENARIO_CATEGORIES: Category[] = [
+  'rule-based',
+  'classical-ml',
+  'classical-ml',
+  'deep-learning',
+  'deep-learning',
+  'llm',
+  'llm',
+  'llm',
+  'classical-ml',
+  'classical-ml',
 ]
 
-const CATEGORY_COLORS: Record<Scenario['category'], string> = {
+const CATEGORY_COLORS: Record<Category, string> = {
   'rule-based': 'border-zinc-500/50 bg-zinc-500/10 text-zinc-700 dark:text-zinc-300',
   'classical-ml': 'border-emerald-400 dark:border-emerald-500/50 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
   'deep-learning': 'border-purple-400 dark:border-purple-500/50 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300',
   'llm': 'border-amber-400 dark:border-amber-500/50 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300',
 }
 
-const EN_P2 = `Not every problem needs an LLM. Click each card to reveal the best approach — and more importantly,`
 export const ClassificationSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const sCENARIOST = tArray(lang, SCENARIOS, scenariosTranslations)
-  const c = useT({ title: '2. Problem Classification' , p2: EN_P2 }, { sv: classificationSectionSv, ko: classificationSectionKo })
+  const c = useTranslation().modules.aiproblem.classificationSection
   const [revealed, setRevealed] = useState<Set<number>>(new Set())
 
   const toggleCard = useCallback((index: number) => {
@@ -104,8 +46,9 @@ export const ClassificationSection: React.FC = () => {
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {sCENARIOST.map((s, i) => {
+        {c.scenarios.map((s, i) => {
           const isRevealed = revealed.has(i)
+          const category = SCENARIO_CATEGORIES[i]
           return (
             <button
               key={i}
@@ -121,7 +64,7 @@ export const ClassificationSection: React.FC = () => {
               {isRevealed ? (
                 <div className="mt-3 space-y-2">
                   <span
-                    className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium ${CATEGORY_COLORS[s.category]}`}
+                    className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium ${CATEGORY_COLORS[category]}`}
                   >
                     {s.approach}
                   </span>

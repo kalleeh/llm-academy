@@ -23,8 +23,10 @@
  */
 
 import { useMemo } from 'react'
-import { useLanguage, type Language } from '../LanguageContext'
+import { useLanguage } from '../LanguageContext'
 import { en, type Translation } from './en'
+import { sv } from './sv'
+import { ko } from './ko'
 import type { DeepPartial } from './types'
 
 // === New API ===
@@ -72,10 +74,9 @@ function deepMerge<T>(base: T, override: DeepPartial<T> | undefined): T {
   return (override as unknown as T)
 }
 
-// Lazy holders — avoid pulling sv.ts / ko.ts into the bundle when EN is the
-// active language. Populated when sv.ts / ko.ts are added in a later checkpoint.
-let svTable: DeepPartial<Translation> | null = null
-let koTable: DeepPartial<Translation> | null = null
+// Translation tables. Empty omissions / empty strings in sv/ko fall back to EN.
+const svTable: DeepPartial<Translation> = sv
+const koTable: DeepPartial<Translation> = ko
 
 /**
  * Returns the merged translation tree for the current language.
@@ -92,15 +93,6 @@ export function useTranslation(): Translation {
     // the strict `as const` literal type, so we assert.
     return deepMerge(en as Translation, override) as Translation
   }, [lang])
-}
-
-/**
- * Internal hook used by the (still-coexisting) legacy components.
- * Exposed so future component migrations can swap in lazily.
- */
-export function _setTranslationTable(lang: Exclude<Language, 'en'>, table: DeepPartial<Translation>): void {
-  if (lang === 'sv') svTable = table
-  else if (lang === 'ko') koTable = table
 }
 
 export type { Translation } from './en'

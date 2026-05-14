@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
 
 interface Approach {
   name: string
@@ -107,7 +106,10 @@ const DECISION_RULES = [
   },
 ]
 
-const EN = {
+// NOTE: this component never had SV/KO translations in the legacy system
+// (it called `useT(EN, {})` with empty translation overrides). Until SV/KO
+// strings are authored for it, EN renders for all languages — same as before.
+const C = {
   title: '3. AI ≠ AI: Rules vs ML vs LLMs',
   intro:
     '"AI" is a marketing word that covers three very different things. Picking the right one for your problem is the difference between a $50/month tool that works and a $5,000/month tool that disappoints.',
@@ -119,14 +121,13 @@ const EN = {
 }
 
 export const LLMvsMLBusiness: React.FC = () => {
-  const c = useT(EN, {})
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 
   return (
     <section aria-labelledby="llmvsml-biz">
-      <h2 id="llmvsml-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <h2 id="llmvsml-biz" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{C.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{C.intro}</p>
 
       <div className="mb-6 space-y-2">
         {APPROACHES.map((a, i) => (
@@ -183,7 +184,7 @@ export const LLMvsMLBusiness: React.FC = () => {
       </div>
 
       <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-5">
-        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.decisionTitle}</p>
+        <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{C.decisionTitle}</p>
         <ul className="space-y-2 text-xs text-zinc-700 dark:text-zinc-300">
           {DECISION_RULES.map((r) => (
             <li key={r.if} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
@@ -195,7 +196,7 @@ export const LLMvsMLBusiness: React.FC = () => {
         </ul>
       </div>
 
-      <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />
+      <SelfExplain prompt={C.selfExplainPrompt} modelAnswer={C.selfExplainAnswer} />
     </section>
   )
 }

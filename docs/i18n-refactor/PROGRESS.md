@@ -3,7 +3,17 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
-## Checkpoint 1 — DONE (this session)
+## Checkpoint 2 — DONE (`aiproblem` module migrated)
+
+- Added `t.modules.aiproblem.*` to `en.ts` (landscape, decision, landscapeSection, classificationSection, decisionFrameworkSection, llmDifferenceSection, toolboxSection).
+- Created `src/i18n/sv.ts` and `src/i18n/ko.ts` with `aiproblem` content. Preserved every existing human translation from the old files. 3 MT-marked entries per language (where legacy `tech-translations.ts` placeholders were empty `pN: ''`).
+- Updated `src/i18n/index.ts` to import `sv` and `ko` directly. Removed the lazy `_setTranslationTable` helper.
+- Refined `DeepPartial` in `types.ts` to widen literal primitive types so translations can supply different string values than the `as const` EN tree.
+- Migrated 8 components in `src/modules/aiproblem/` to `useTranslation()`. Note: `LLMvsMLBusiness.tsx` previously had no SV/KO and still doesn't — its EN remains inline pending future translation work.
+- Deleted `src/modules/aiproblem/{translations,tech-translations,data-translations}.ts`.
+- `npm run build` clean (241 ms).
+
+## Checkpoint 1 — DONE
 
 **Foundation files are in place and the build is clean.** No behavior change:
 the new API coexists with the legacy API, and every existing component still
@@ -61,7 +71,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 
 | Module | Old files to delete | Component files to migrate (count) | Status |
 |---|---|---|---|
-| `ai-problem` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
+| `ai-problem` | (deleted) | 8 .tsx migrated | ✅ |
 | `data-foundations` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~8 .tsx | ⏳ |
 | `tokens` | (none — content inline in `TokensModule.tsx`) | 1 .tsx | ⏳ |
 | `transformer` | `tech-translations.ts`, `data-translations.ts` | ~7 .tsx | ⏳ |
