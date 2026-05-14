@@ -3,15 +3,15 @@ import { Icon } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { SelfExplain } from '../../components/SelfExplain'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { cleaningPipelineSectionSv, cleaningPipelineSectionKo } from './tech-translations'
-import { stepsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface PipelineStep extends TerminalStep {
   sizeLabel: string
   sizeTB: number
 }
 
+// STEPS stays inline EN-only — terminal command/output content is technical, not user-facing prose.
+// Legacy stepsTranslations was {sv: [], ko: []} (empty by design).
 const STEPS: PipelineStep[] = [
   { command: 'echo "Stage 0: Raw crawl data"', output: 'Raw Common Crawl dump: 100 TB (WARC files)', sizeLabel: 'Raw', sizeTB: 100 },
   { command: 'python extract_text.py --input warc/ --output text/', output: '✓ HTML → plain text extraction complete\n  Removed markup, scripts, styles\n  Output: 80 TB', sizeLabel: 'Extract', sizeTB: 80 },
@@ -23,12 +23,8 @@ const STEPS: PipelineStep[] = [
 
 const MAX_TB = 100
 
-const EN_INTRO = `Raw web data is mostly garbage. A typical pipeline discards 85%+ through extraction, filtering, and deduplication.`
-
 export const CleaningPipelineSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const sTEPST = tArray(lang, STEPS, stepsTranslations)
-  const c = useT({ title: '2. Cleaning Pipeline', intro: EN_INTRO }, { sv: cleaningPipelineSectionSv, ko: cleaningPipelineSectionKo })
+  const c = useTranslation().modules.llmdata.cleaningPipelineSection
   const [executedStep, setExecutedStep] = useState(-1)
   const onStep = useCallback((i: number) => setExecutedStep(i), [])
 
@@ -54,7 +50,7 @@ export const CleaningPipelineSection: React.FC = () => {
           </div>
         </div>
         <div className="mt-2 flex justify-between text-xs text-zinc-500">
-          {sTEPST.map((s, i) => (
+          {STEPS.map((s, i) => (
             <span key={s.sizeLabel} className={i <= executedStep ? 'text-emerald-700 dark:text-emerald-400' : ''}>{s.sizeLabel}</span>
           ))}
         </div>

@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
-import { useT } from '../../i18n'
-import { syntheticDataSectionSv, syntheticDataSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 interface Example { instruction: string; response: string }
 
@@ -57,7 +56,7 @@ def generate_synthetic_data(seed_instructions, model="gpt-4"):
 # Phi-style: textbook-quality synthetic data for reasoning`
 
 export const SyntheticDataSection: React.FC = () => {
-  const c = useT({ title: '4. Synthetic Data' }, { sv: syntheticDataSectionSv, ko: syntheticDataSectionKo })
+  const c = useTranslation().modules.llmdata.syntheticDataSection
   const [isSynthetic, setIsSynthetic] = useState(false)
   const toggle = useCallback(() => setIsSynthetic(p => !p), [])
   const examples = isSynthetic ? SYNTHETIC : HUMAN

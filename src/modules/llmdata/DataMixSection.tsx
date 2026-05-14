@@ -1,6 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import { useT } from '../../i18n'
-import { dataMixSectionSv, dataMixSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const SLIDERS = [
   { label: 'Text (web, books)', key: 'text', color: 'text-blue-700 dark:text-blue-400', bar: 'bg-blue-500' },
@@ -16,11 +15,8 @@ const CAPS = [
   { name: 'Multilingual', fn: (m: Record<string, number>) => m.text * 1.0 + m.code * 0.1 },
 ]
 
-const EN_P3 = `Illustrative — real capability depends on model size, training duration, and data quality.`
-const EN_INTRO = `The ratio of data types directly shapes what the model is good at.`
-
 export const DataMixSection: React.FC = () => {
-  const c = useT({ title: '3. Data Mix', intro: EN_INTRO  , p3: EN_P3 }, { sv: dataMixSectionSv, ko: dataMixSectionKo })
+  const c = useTranslation().modules.llmdata.dataMixSection
   const [mix, setMix] = useState<Record<string, number>>({ text: 60, code: 25, math: 15 })
 
   const handleChange = useCallback((key: string, value: number) => {
@@ -39,7 +35,7 @@ export const DataMixSection: React.FC = () => {
   }, [])
 
   const caps = useMemo(
-    () => CAPS.map(c => ({ name: c.name, score: Math.min(100, Math.round(c.fn(mix))) })),
+    () => CAPS.map(cap => ({ name: cap.name, score: Math.min(100, Math.round(cap.fn(mix))) })),
     [mix],
   )
 
@@ -71,15 +67,15 @@ export const DataMixSection: React.FC = () => {
         <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
           <h3 className="mb-4 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">Estimated Capabilities</h3>
           <div className="space-y-3">
-            {caps.map(c => (
-              <div key={c.name}>
+            {caps.map(cap => (
+              <div key={cap.name}>
                 <div className="mb-1 flex items-center justify-between text-xs">
-                  <span className="text-zinc-600 dark:text-zinc-400">{c.name}</span>
-                  <span className="font-mono text-zinc-700 dark:text-zinc-300">{c.score}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{cap.name}</span>
+                  <span className="font-mono text-zinc-700 dark:text-zinc-300">{cap.score}</span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                   <div className="h-full rounded bg-gradient-to-r from-zinc-500 to-zinc-300 transition-all duration-300"
-                    style={{ width: `${c.score}%` }} />
+                    style={{ width: `${cap.score}%` }} />
                 </div>
               </div>
             ))}

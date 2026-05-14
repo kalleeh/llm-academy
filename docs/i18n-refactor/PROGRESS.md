@@ -3,6 +3,19 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 10 — DONE (`llmdata` module migrated)
+
+- Added `t.modules.llmdata.*` to `en.ts` (5 sections: dataSourcesSection, cleaningPipelineSection, dataMixSection, syntheticDataSection, dataFormatsSection).
+- Extended `sv.ts` and `ko.ts` with llmdata content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 5 components in `src/modules/llmdata/`:
+  - `DataSourcesSection`: title/p2/sources[] via tree; `SOURCE_META` holds non-translatable percent/barColor/color. Reordered legacy SV/KO `sources[]` arrays to match the new EN order — legacy was [Common Crawl, Wikipedia, Books, Code, Academic, Conversations] but the current EN component is [Common Crawl, Code, Books, Academic, Wikipedia, Other]. Pre-existing per-index merge bug fixed by reordering. Position 5 dropped (legacy "Conversations" doesn't match new EN "Other" semantically) → falls back to EN.
+  - `CleaningPipelineSection`: title/intro via tree; `STEPS` (terminal commands and outputs) stays inline EN-only since legacy `stepsTranslations` was `{sv: [], ko: []}` (empty by design — terminal command/output is technical, not user-facing prose).
+  - `DataMixSection`: title/intro/p3 via tree; SLIDERS + CAPS arrays stay inline (no legacy translations).
+  - `SyntheticDataSection`: title only via tree; legacy `intro` field was orphaned (component never rendered c.intro) — dropped.
+  - `DataFormatsSection`: title/intro via tree; TREE/PRE_EX/SFT_EX/RLHF_EX all stay inline (technical content).
+- Deleted `src/modules/llmdata/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (225 ms).
+
 ## Checkpoint 9 — DONE (`training` module migrated)
 
 - Added `t.modules.training.*` to `en.ts` (5 sections: trainingSection1, trainingSection2, trainingSection3, trainingSection4, trainingSection5).
@@ -156,7 +169,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `tokens` | (none — content inline in `TokensModule.tsx`) | 1 .tsx | ⏳ |
 | `transformer` | `tech-translations.ts`, `data-translations.ts` | ~7 .tsx | ⏳ |
 | `training` | (deleted) | 5 .tsx migrated | ✅ |
-| `llm-data` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
+| `llm-data` | (deleted) | 5 .tsx migrated | ✅ |
 | `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `architecture` | (deleted) | 5 .tsx migrated | ✅ |
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |

@@ -685,5 +685,40 @@ export const sv: DeepPartial<Translation> = {
         ],
       },
     },
+    llmdata: {
+      // From legacy: tech-translations.ts → dataSourcesSectionSv (title only) + data-translations.ts → sourcesTranslations.sv.
+      // Legacy SV array order [Common Crawl, Wikipedia, Böcker, Kod, Vetenskapliga artiklar, Konversationer]
+      // is misaligned with new EN order [Common Crawl, Code, Books, Academic, Wikipedia, Other] — reordered to match EN.
+      // Position 5 dropped: legacy "Konversationer" doesn't match new EN "Other" semantically → falls back to EN.
+      dataSourcesSection: {
+        title: '1. Datakällor',
+        sources: [
+          { name: 'Common Crawl', details: 'Webbskrapning av hela internet. Största öppna datakällan.' },
+          { name: 'Kod', details: 'GitHub, Stack Overflow. Förbättrar resonemang och kodning.' },
+          { name: 'Böcker', details: 'Lång form, välskriven text. Books3, Gutenberg.' },
+          { name: 'Vetenskapliga artiklar', details: 'ArXiv, PubMed. Domänspecifik kunskap.' },
+          { name: 'Wikipedia', details: 'Högkvalitativ, faktakontrollerad, flerspråkig.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → cleaningPipelineSectionSv
+      cleaningPipelineSection: {
+        title: '2. Rensningspipeline',
+        intro: 'Rå webbdata är mestadels skräp. En typisk pipeline kastar 85%+ genom filtrering.',
+      },
+      // From legacy: tech-translations.ts → dataMixSectionSv (p3 not in legacy → falls back to EN)
+      dataMixSection: {
+        title: '3. Datamix',
+        intro: 'Förhållandet mellan datatyper formar direkt vad modellen blir bra på.',
+      },
+      // From legacy: tech-translations.ts → syntheticDataSectionSv (title only — legacy intro orphaned in component)
+      syntheticDataSection: {
+        title: '4. Syntetisk data',
+      },
+      // From legacy: tech-translations.ts → dataFormatsSectionSv
+      dataFormatsSection: {
+        title: '5. Dataformat',
+        intro: 'Varje träningssteg använder ett annat format.',
+      },
+    },
   },
 }

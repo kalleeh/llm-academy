@@ -1,8 +1,7 @@
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
 import { CodeBlock } from '../../components/CodeBlock'
-import { useT } from '../../i18n'
-import { dataFormatsSectionSv, dataFormatsSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const PRETRAIN_CONTENT = '{"text": "The transformer architecture was introduced in 2017...", "source": "wikipedia", "language": "en"}\n{"text": "def quicksort(arr):\\n    if len(arr) <= 1:\\n        return arr...", "source": "github", "language": "python"}\n{"text": "In quantum mechanics, the wave function describes...", "source": "arxiv", "language": "en"}'
 
@@ -48,22 +47,20 @@ const RLHF_EX = `// RLHF: preference pairs (chosen > rejected)
   "rejected": "The ocean is big and has water..."
 }`
 
-const EN_INTRO = `Each training stage uses a different format.`
-
 export const DataFormatsSection: React.FC = () => {
-  const c = useT({ title: '5. Data Formats', intro: EN_INTRO }, { sv: dataFormatsSectionSv, ko: dataFormatsSectionKo })
+  const c = useTranslation().modules.llmdata.dataFormatsSection
   return (
-  <section aria-labelledby="data-formats">
-    <h2 id="data-formats" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <section aria-labelledby="data-formats">
+      <h2 id="data-formats" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
-    <div className="mb-6">
-      <FileExplorer tree={TREE} title="~/datasets" />
-    </div>
-    <div className="space-y-4">
-      <CodeBlock title="Pre-training format (JSONL)" language="javascript" code={PRE_EX} />
-      <CodeBlock title="SFT instruction format" language="javascript" code={SFT_EX} />
-      <CodeBlock title="RLHF preference pairs" language="javascript" code={RLHF_EX} />
-    </div>
-  </section>
+      <div className="mb-6">
+        <FileExplorer tree={TREE} title="~/datasets" />
+      </div>
+      <div className="space-y-4">
+        <CodeBlock title="Pre-training format (JSONL)" language="javascript" code={PRE_EX} />
+        <CodeBlock title="SFT instruction format" language="javascript" code={SFT_EX} />
+        <CodeBlock title="RLHF preference pairs" language="javascript" code={RLHF_EX} />
+      </div>
+    </section>
   )
 }

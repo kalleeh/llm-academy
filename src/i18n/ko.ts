@@ -676,5 +676,38 @@ export const ko: DeepPartial<Translation> = {
         ],
       },
     },
+    llmdata: {
+      // From legacy: data-translations.ts → sourcesTranslations.ko. Legacy order [Common Crawl, Wikipedia, 도서, 코드, 학술 논문, 대화]
+      // reordered to match new EN [Common Crawl, Code, Books, Academic, Wikipedia, Other]. Position 5 ("대화" vs "Other") dropped → falls back to EN.
+      dataSourcesSection: {
+        title: '1. 데이터 소스',
+        sources: [
+          { name: 'Common Crawl', details: '전체 인터넷 웹 스크래핑. 가장 큰 오픈 데이터 소스.' },
+          { name: '코드', details: 'GitHub, Stack Overflow. 추론과 코딩 능력 향상.' },
+          { name: '도서', details: '장문, 잘 쓰인 텍스트. Books3, Gutenberg.' },
+          { name: '학술 논문', details: 'ArXiv, PubMed. 도메인별 지식.' },
+          { name: 'Wikipedia', details: '고품질, 팩트체크, 다국어.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → cleaningPipelineSectionKo
+      cleaningPipelineSection: {
+        title: '2. 클리닝 파이프라인',
+        intro: '원시 웹 데이터는 대부분 쓰레기입니다. 일반적인 파이프라인은 필터링을 통해 85% 이상을 버립니다.',
+      },
+      // From legacy: tech-translations.ts → dataMixSectionKo (p3 not in legacy → falls back to EN)
+      dataMixSection: {
+        title: '3. 데이터 믹스',
+        intro: '데이터 유형의 비율이 모델의 능력을 직접 형성합니다.',
+      },
+      // From legacy: tech-translations.ts → syntheticDataSectionKo (title only — legacy intro orphaned)
+      syntheticDataSection: {
+        title: '4. 합성 데이터',
+      },
+      // From legacy: tech-translations.ts → dataFormatsSectionKo
+      dataFormatsSection: {
+        title: '5. 데이터 포맷',
+        intro: '각 학습 단계는 다른 형식을 사용합니다.',
+      },
+    },
   },
 }

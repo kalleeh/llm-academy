@@ -1223,6 +1223,41 @@ const modules = {
       ],
     },
   },
+  llmdata: {
+    // Tech: 1. Data Sources. SOURCE_META holds non-translatable percent/barColor/color.
+    dataSourcesSection: {
+      title: '1. Data Sources',
+      p2: 'Modern LLMs train on trillions of tokens from diverse sources. Key open datasets include',
+      sources: [
+        { name: 'Common Crawl', details: 'Web pages scraped regularly since 2008. FineWeb by HuggingFace extracted 15T tokens with aggressive quality filtering. DCLM (DataComp-LM) and RedPajama also build on Common Crawl with different filtering strategies.' },
+        { name: 'Code', details: 'GitHub repos, StackOverflow, docs. The Stack v2 is 67.5 TB across 619 languages (~900B tokens). Code data dramatically improves reasoning and structured output.' },
+        { name: 'Books', details: 'Digitized books provide extended narrative coherence and deep domain knowledge. Books3 (~196K books) was commonly used but faced copyright challenges.' },
+        { name: 'Academic', details: 'Papers from arXiv, PubMed, Semantic Scholar. Provides scientific reasoning and mathematical notation. peS2o contains 40M open-access papers.' },
+        { name: 'Wikipedia', details: 'All language editions. Despite being ~3% by volume, Wikipedia is high-quality factual text and is often upsampled during training for better factual grounding.' },
+        { name: 'Other', details: 'Reddit, forums, multilingual data, curated instruction datasets, government docs, patents, legal text. Diversity here helps generalization.' },
+      ],
+    },
+    // Tech: 2. Cleaning Pipeline. STEPS terminal content stays inline (technical commands, not translatable).
+    cleaningPipelineSection: {
+      title: '2. Cleaning Pipeline',
+      intro: 'Raw web data is mostly garbage. A typical pipeline discards 85%+ through extraction, filtering, and deduplication.',
+    },
+    // Tech: 3. Data Mix
+    dataMixSection: {
+      title: '3. Data Mix',
+      intro: 'The ratio of data types directly shapes what the model is good at.',
+      p3: 'Illustrative — real capability depends on model size, training duration, and data quality.',
+    },
+    // Tech: 4. Synthetic Data. Title only — legacy `intro` field is orphaned (component renders no c.intro).
+    syntheticDataSection: {
+      title: '4. Synthetic Data',
+    },
+    // Tech: 5. Data Formats
+    dataFormatsSection: {
+      title: '5. Data Formats',
+      intro: 'Each training stage uses a different format.',
+    },
+  },
 } as const
 
 /**
