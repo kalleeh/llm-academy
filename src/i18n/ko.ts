@@ -743,5 +743,32 @@ export const ko: DeepPartial<Translation> = {
         intro: '파인튜닝 작업을 어디서 실행하고, 비용이 얼마이며, 어떤 하드웨어가 필요한지.',
       },
     },
+    transformer: {
+      // From legacy: tech-translations.ts → bigPictureSectionKo. LAYERS stays inline EN-only (legacy layersTranslations had different concepts).
+      bigPictureSection: {
+        title: '1 · 전체 그림',
+        intro: '트랜스포머는 동일한 레이어의 스택입니다. 데이터가 입력에서 출력으로 흐릅니다.',
+      },
+      // From legacy: tech-translations.ts → attentionSectionKo. p2/p4 not in legacy → fall back to EN.
+      attentionSection: {
+        title: '2 · 어텐션 메커니즘',
+        intro: '어텐션은 각 단어가 다른 모든 단어를 보고 각각에 얼마나 집중할지 결정하게 합니다.',
+      },
+      // Map legacy intro → new p6 (semantically matches).
+      multiHeadSection: {
+        title: '3 · 멀티헤드 어텐션',
+        p6: '하나의 어텐션 패턴으로는 충분하지 않습니다. 모델은 여러 개를 병렬로 실행합니다.',
+      },
+      // Map legacy intro → new p4.
+      ffnSection: {
+        title: '5 · 피드포워드 네트워크',
+        p4: '어텐션이 컨텍스트를 수집한 후 각 토큰은 피드포워드 네트워크를 통과합니다.',
+      },
+      // Map legacy intro → new p4.
+      layerByLayerSection: {
+        title: '4 · 레이어별 분석',
+        p4: '각 레이어를 통해 토큰의 표현이 어떻게 변하는지 확인하세요.',
+      },
+    },
   },
 }

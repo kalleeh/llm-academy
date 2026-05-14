@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-import { useT } from '../../i18n'
-import { fFNSectionSv, fFNSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 type Mode = 'dense' | 'moe'
 
@@ -100,15 +99,8 @@ function MoEView() {
   )
 }
 
-const EN_P5 = `Only K of N experts activate per token (e.g., 8 of 256 in DeepSeek V3). DeepSeek V3 has 671B total parameters but only uses 37B per token — more knowledge, same compute cost.`
-const EN_P4 = `After attention gathers context, each token passes through a`
-const EN_P3 = `Only K of N experts activate per token (e.g., 8 of 256 in DeepSeek V3). DeepSeek V3 has 671B total parameters but only uses 37B per token — more knowledge, same compute cost.`
-const EN_P2 = `After attention gathers context, each token passes through a`
-const EN_INTRO = `Every token activates all parameters. Simple but expensive at scale — a 70B model
-            uses all 70B parameters for every single token.`
-
 export const FFNSection: React.FC = () => {
-  const c = useT({ title: '5 · The Feed-Forward Network', intro: EN_INTRO  , p2: EN_P2 , p3: EN_P3 , p4: EN_P4 , p5: EN_P5 }, { sv: fFNSectionSv, ko: fFNSectionKo })
+  const c = useTranslation().modules.transformer.ffnSection
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggleMode = useCallback((m: Mode) => {
@@ -119,7 +111,7 @@ export const FFNSection: React.FC = () => {
     <section aria-labelledby="ffn-heading">
       <h2 id="ffn-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{c.p4}<strong>feed-forward
-        network (FFN)</strong>. This is where the model stores factual knowledge — it's the
+        network (FFN)</strong>. This is where the model stores factual knowledge — it&apos;s the
         &quot;memory&quot; of the transformer. In <strong>Mixture of Experts (MoE)</strong> models,
         the single FFN is replaced by multiple specialized expert networks, with a router choosing
         which experts to activate per token.

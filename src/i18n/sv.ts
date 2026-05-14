@@ -759,5 +759,32 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Var du kör ditt finjusteringsjobb, vad det kostar och vilken hårdvara du behöver.',
       },
     },
+    transformer: {
+      // From legacy: tech-translations.ts → bigPictureSectionSv (title + intro). LAYERS stays inline EN-only.
+      bigPictureSection: {
+        title: '1 · Helhetsbilden',
+        intro: 'En transformer är en stack av identiska lager. Data flödar från indata till utdata.',
+      },
+      // From legacy: tech-translations.ts → attentionSectionSv (title + intro). p2/p4 not in legacy → fall back to EN.
+      attentionSection: {
+        title: '2 · Uppmärksamhetsmekanismen',
+        intro: 'Attention låter varje ord titta på alla andra ord och bestämma hur mycket fokus varje ska få.',
+      },
+      // From legacy: tech-translations.ts → multiHeadSectionSv (title + intro). Map legacy intro → new p6 (semantically matches).
+      multiHeadSection: {
+        title: '3 · Multi-Head Attention',
+        p6: 'Ett attention-mönster räcker inte. Modellen kör flera parallellt.',
+      },
+      // From legacy: tech-translations.ts → fFNSectionSv (title + intro). Map legacy intro → new p4 (semantically matches).
+      ffnSection: {
+        title: '5 · Feed-Forward-nätverket',
+        p4: 'Efter att attention samlat kontext passerar varje token genom ett feed-forward-nätverk.',
+      },
+      // From legacy: tech-translations.ts → layerByLayerSectionSv (title + intro). Map legacy intro → new p4 (semantically matches).
+      layerByLayerSection: {
+        title: '4 · Lager för lager',
+        p4: 'Se hur representationen av en token förändras genom varje lager.',
+      },
+    },
   },
 }

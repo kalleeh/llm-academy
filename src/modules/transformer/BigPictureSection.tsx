@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { bigPictureSectionSv, bigPictureSectionKo } from './tech-translations'
-import { layersTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface LayerDef {
   id: string
@@ -11,6 +9,8 @@ interface LayerDef {
   expandable?: boolean
 }
 
+// LAYERS stays inline EN-only — legacy layersTranslations had different concepts (components: embedding/attention/FFN/norm/residual/output)
+// while this array describes flow stages (input/embed/layer1/layer2/layerN/output). Pre-existing skew; legacy data dropped.
 const LAYERS: LayerDef[] = [
   { id: 'input', label: 'Input', color: 'bg-sky-900 border-sky-600', desc: 'Raw text tokens enter the model.' },
   { id: 'embed', label: 'Embedding', color: 'bg-violet-900 border-violet-600', desc: 'Each token is mapped to a dense vector that captures its meaning.' },
@@ -20,16 +20,8 @@ const LAYERS: LayerDef[] = [
   { id: 'output', label: 'Output', color: 'bg-amber-900 border-amber-600', desc: 'Probability distribution over the vocabulary for the next token.' },
 ]
 
-const EN_P7 = `Processes each token independently — where knowledge is stored`
-const EN_P6 = `Each token looks at every other token to gather context`
-const EN_P5 = `Processes each token independently — where knowledge is stored`
-const EN_P4 = `Each token looks at every other token to gather context`
-const EN_INTRO = `A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.`
-
 export const BigPictureSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const lAYERST = tArray(lang, LAYERS, layersTranslations)
-  const c = useT({ title: '1 · The Big Picture', intro: EN_INTRO  , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: bigPictureSectionSv, ko: bigPictureSectionKo })
+  const c = useTranslation().modules.transformer.bigPictureSection
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -42,7 +34,7 @@ export const BigPictureSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="flex flex-col items-center gap-1">
-        {lAYERST.map((layer, i) => (
+        {LAYERS.map((layer, i) => (
           <div key={layer.id} className="flex w-full max-w-md flex-col items-center">
             {/* Arrow between blocks */}
             {i > 0 && <div className="h-4 w-px bg-zinc-600" />}

@@ -1,5 +1,4 @@
-import { useT } from '../../i18n'
-import { attentionSectionSv, attentionSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 import { DEFAULT_WEIGHTS } from './attentionData'
 import { AttentionHeatmap } from './AttentionHeatmap'
 import { CodeBlock } from '../../components/CodeBlock'
@@ -20,12 +19,8 @@ def attention(Q, K, V):
     weights = F.softmax(scores, dim=-1)
     return torch.matmul(weights, V)`
 
-const EN_P4 = `Query, Key, Value — A Library Analogy`
-const EN_P2 = `Each row shows how much one word attends to every other word. Brighter = stronger attention. Notice how`
-const EN_INTRO = `Attention lets each word look at every other word in the sentence and decide how much to focus on each one.`
-
 export const AttentionSection: React.FC = () => {
-  const c = useT({ title: '2 · Attention Mechanism', intro: EN_INTRO , p2: EN_P2 , p4: EN_P4 }, { sv: attentionSectionSv, ko: attentionSectionKo })
+  const c = useTranslation().modules.transformer.attentionSection
   return (
   <section aria-labelledby="attention-heading">
     <h2 id="attention-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>

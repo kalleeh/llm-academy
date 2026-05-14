@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { layerByLayerSectionSv, layerByLayerSectionKo } from './tech-translations'
-import { layerDataTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 const TOKEN = 'it'
 
@@ -12,6 +10,9 @@ interface LayerInfo {
   features: { label: string; value: number; color: string }[]
 }
 
+// LAYER_DATA stays inline EN-only — legacy layerDataTranslations had different concepts
+// (raw token / embedding / layer 1 / layer 16) vs these (layer 1, 4, 8, 12 with feature breakdowns).
+// Pre-existing skew; legacy data dropped.
 const LAYER_DATA: LayerInfo[] = [
   {
     name: 'Layer 1 — Surface Features',
@@ -80,12 +81,8 @@ function BarChart({ features }: { features: LayerInfo['features'] }) {
   )
 }
 
-const EN_P4 = `Watch how the representation of the token`
-const EN_P3 = `Watch how the representation of the token`
 export const LayerByLayerSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const lAYER_DATAT = tArray(lang, LAYER_DATA, layerDataTranslations)
-  const c = useT({ title: '4 · Layer by Layer'  , p3: EN_P3 , p4: EN_P4 }, { sv: layerByLayerSectionSv, ko: layerByLayerSectionKo })
+  const c = useTranslation().modules.transformer.layerByLayerSection
   const [step, setStep] = useState(0)
 
   const handleStep = useCallback((s: number) => {
@@ -106,20 +103,20 @@ export const LayerByLayerSection: React.FC = () => {
     <section aria-labelledby="layers-heading">
       <h2 id="layers-heading" className="mb-2 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{c.p4}<strong className="text-amber-700 dark:text-amber-300">
-        &quot;{TOKEN}&quot;</strong> evolves as it passes through the transformer's layers.
+        &quot;{TOKEN}&quot;</strong> evolves as it passes through the transformer&apos;s layers.
         Early layers capture surface features; deeper layers build rich semantic understanding.
       </p>
 
       {/* Layer progress indicator */}
       <div className="mb-4 flex items-center gap-1">
-        {lAYER_DATAT.map((_, i) => (
+        {LAYER_DATA.map((_, i) => (
           <button
             key={i}
             onClick={() => handleStep(i)}
             className={`h-2 flex-1 rounded-full transition-all ${
               i <= step ? 'bg-amber-500' : 'bg-zinc-200 dark:bg-zinc-700'
             }`}
-            aria-label={`Go to ${lAYER_DATAT[i].name}`}
+            aria-label={`Go to ${LAYER_DATA[i].name}`}
           />
         ))}
       </div>

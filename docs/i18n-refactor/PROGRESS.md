@@ -3,6 +3,22 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 12 — DONE (`transformer` module migrated)
+
+- Added `t.modules.transformer.*` to `en.ts` (5 sections: bigPictureSection, attentionSection, multiHeadSection, ffnSection, layerByLayerSection).
+- Extended `sv.ts` and `ko.ts` with transformer content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 5 components in `src/modules/transformer/`. AttentionHeatmap.tsx is an internal helper with no i18n usage — left unchanged.
+- Renamed legacy section key `fFNSection` → `ffnSection` for clean camelCase.
+- 4 sections had EN_PN dead-duplicate pairs — dropped from the EN object/tree where the component never rendered them:
+  - `BigPictureSection`: EN_P4 == EN_P6, EN_P5 == EN_P7 → kept p6/p7 only
+  - `MultiHeadSection`: EN_P4 == EN_P6, EN_P5 == EN_P7 → kept p6/p7 only
+  - `FFNSection`: EN_P2 == EN_P4, EN_P3 == EN_P5 → kept p4/p5 only
+  - `LayerByLayerSection`: EN_P3 == EN_P4 → kept p4 only
+- Several legacy tech-section `intro` fields semantically remapped to the field the component actually renders (multiHead, ffn, layerByLayer all map intro → p6/p4). bigPicture and attention preserve intro as-is.
+- Two data arrays (`LAYERS` in BigPictureSection, `LAYER_DATA` in LayerByLayerSection) stay inline EN-only — legacy `layersTranslations` and `layerDataTranslations` had different conceptual content (components vs flow stages; raw token vs layer numbers) than the current EN arrays. Pre-existing skew. Legacy data dropped.
+- Deleted `src/modules/transformer/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (237 ms).
+
 ## Checkpoint 11 — DONE (`finetuning` module migrated)
 
 - Added `t.modules.finetuning.*` to `en.ts` (5 sections: whenToFineTuneSection, preparingDataSection, fineTuningRunSection, evaluationMergingSection, costPlatformSection).
@@ -181,7 +197,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `ai-problem` | (deleted) | 8 .tsx migrated | ✅ |
 | `data-foundations` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~8 .tsx | ⏳ |
 | `tokens` | (none — content inline in `TokensModule.tsx`) | 1 .tsx | ⏳ |
-| `transformer` | `tech-translations.ts`, `data-translations.ts` | ~7 .tsx | ⏳ |
+| `transformer` | (deleted) | 5 .tsx migrated | ✅ |
 | `training` | (deleted) | 5 .tsx migrated | ✅ |
 | `llm-data` | (deleted) | 5 .tsx migrated | ✅ |
 | `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |

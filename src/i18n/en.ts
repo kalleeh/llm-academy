@@ -1317,6 +1317,41 @@ const modules = {
       ],
     },
   },
+  transformer: {
+    // Tech: 1. The Big Picture. EN_P4 == EN_P6, EN_P5 == EN_P7 dead duplicates → drop p4, p5. LAYERS stays inline (legacy layersTranslations had different concepts).
+    bigPictureSection: {
+      title: '1 · The Big Picture',
+      intro: 'A transformer is a stack of identical layers. Data flows from input to output, getting richer at each step.',
+      p6: 'Each token looks at every other token to gather context',
+      p7: 'Processes each token independently — where knowledge is stored',
+    },
+    // Tech: 2. Attention Mechanism
+    attentionSection: {
+      title: '2 · Attention Mechanism',
+      intro: 'Attention lets each word look at every other word in the sentence and decide how much to focus on each one.',
+      p2: 'Each row shows how much one word attends to every other word. Brighter = stronger attention. Notice how',
+      p4: 'Query, Key, Value — A Library Analogy',
+    },
+    // Tech: 3. Multi-Head Attention. EN_P4 == EN_P6, EN_P5 == EN_P7 dead duplicates → drop p4, p5.
+    multiHeadSection: {
+      title: '3 · Multi-Head Attention',
+      p6: 'One attention pattern isn\'t enough. The model runs',
+      p7: 'After all heads compute their patterns, the results are',
+    },
+    // Tech: 5. Feed-Forward Network. EN_P2 == EN_P4, EN_P3 == EN_P5 dead duplicates → drop p2, p3.
+    // Section key normalized from legacy `fFNSection` to clean camelCase `ffnSection`.
+    ffnSection: {
+      title: '5 · The Feed-Forward Network',
+      intro: 'Every token activates all parameters. Simple but expensive at scale — a 70B model\n            uses all 70B parameters for every single token.',
+      p4: 'After attention gathers context, each token passes through a',
+      p5: 'Only K of N experts activate per token (e.g., 8 of 256 in DeepSeek V3). DeepSeek V3 has 671B total parameters but only uses 37B per token — more knowledge, same compute cost.',
+    },
+    // Tech: 4. Layer by Layer. EN_P3 == EN_P4 dead duplicate → drop p3. LAYER_DATA stays inline (legacy layerDataTranslations had different concepts).
+    layerByLayerSection: {
+      title: '4 · Layer by Layer',
+      p4: 'Watch how the representation of the token',
+    },
+  },
 } as const
 
 /**
