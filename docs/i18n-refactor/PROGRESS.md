@@ -3,6 +3,23 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 14 — DONE (`alignment` module migrated)
+
+- Added `t.modules.alignment.*` to `en.ts` (7 sections: whyAIGoesWrong, guardrails, alignmentProblemSection, alignmentPipelineSection, modernAlternativesSection, safetyGuardrailsSection, postTrainingPipelineSection).
+- Extended `sv.ts` and `ko.ts` with alignment content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 7 components in `src/modules/alignment/`:
+  - `WhyAIGoesWrongBusiness`: full content via tree (failures[] array of 4 with title/analogy/description/example/risk); FAILURE_META holds color.
+  - `GuardrailsBusiness`: full content via tree (guardrails[] array of 4 with risk/mitigation/analogy, plus goldenRule/goldenRuleDetail/platformNote).
+  - `ComplianceBusiness`: had `useT(EN, {})` (no legacy SV/KO) — followed gotcha rule and kept EN inline (no tree entry).
+  - `AlignmentProblemSection`: title/p2/examples[] via tree (4 prompt/base/aligned response triples).
+  - `AlignmentPipelineSection`: title/intro/stages[] via tree (5 alignment stages with label/description/details); STAGE_META holds id/color/bgColor.
+  - `ModernAlternativesSection`: title/intro via tree only — METHODS array (RLHF/DPO/GRPO/RLAIF detailed descriptions) stays inline EN-only since legacy `methodsTranslations` was `{sv: [], ko: []}` (empty by design — too technical).
+  - `SafetyGuardrailsSection`: title/intro/p3/p4/layers[] via tree; LAYER_META holds id/timing/color/techniques/catchExample.
+  - `PostTrainingPipelineSection`: title/intro/pipeline[]/trends[] via tree; PIPELINE_META holds color/bgColor; TREND_META holds color.
+- Several legacy tech-section `intro` fields cleanly matched the new EN intros — preserved verbatim.
+- Deleted `src/modules/alignment/{translations,tech-translations,data-translations}.ts`.
+- `npm run build` clean (229 ms).
+
 ## Checkpoint 13 — DONE (`datafoundations` module migrated)
 
 - Added `t.modules.datafoundations.*` to `en.ts` (7 sections: garbageInOut, dataForBusiness, dataTypesSection, pipelineSection, dataQualitySection, architectureSection, llmDataSection).
@@ -216,7 +233,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `transformer` | (deleted) | 5 .tsx migrated | ✅ |
 | `training` | (deleted) | 5 .tsx migrated | ✅ |
 | `llm-data` | (deleted) | 5 .tsx migrated | ✅ |
-| `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
+| `alignment` | (deleted) | 7 .tsx migrated | ✅ |
 | `architecture` | (deleted) | 5 .tsx migrated | ✅ |
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `evaluation` | (deleted) | 8 .tsx migrated | ✅ |

@@ -839,5 +839,90 @@ export const ko: DeepPartial<Translation> = {
         intro: '데이터를 넓게 이해했으니, LLM이 구체적으로 필요로 하는 것을 알아보겠습니다.',
       },
     },
+    alignment: {
+      // From legacy: translations.ts → whyAIGoesWrongKo (full mirror)
+      whyAIGoesWrong: {
+        title: '1. AI가 때때로 잘못되는 이유',
+        intro: 'AI는 수십억 개의 웹 페이지를 읽으며 학습했습니다 — **신입사원에게 인터넷 전체를 읽게 하여 교육하는 것을 상상해 보세요**. 놀라운 지식을 얻겠지만, 잘못된 정보, 편견, 나쁜 습관도 함께 배울 것입니다.',
+        introSub: '무엇이 잘못될 수 있는지 이해하는 것이 AI를 안전하게 사용하는 첫 번째 단계입니다.',
+        failures: [
+          { title: '환각 — 지어내기', analogy: '"모르겠습니다"라고 절대 말하지 않는 동료', description: 'AI는 때때로 자신감 있고 그럴듯하게 들리지만 완전히 틀린 답변을 생성합니다 — 모른다고 인정하기보다 답을 지어내는 동료와 같습니다.', example: '법률 AI가 존재하지 않는 판례를 인용했습니다. 변호사가 확인하지 않고 법원에 제출했습니다. 실제 사례 — 2023년에 발생.', risk: '잘못된 정보에 기반한 결정. 평판 손상. 법적 책임.' },
+          { title: '편향 — 불공정한 패턴 반영', analogy: '한 유형의 후보만 아는 채용 패널', description: 'AI는 과거 데이터에서 학습합니다. 그 데이터가 과거의 편향을 반영하면 AI가 이를 반복합니다.', example: 'Amazon은 10년간 제출된 이력서로 학습한 이력서 심사 AI를 만들었습니다. 기술 분야 지원자 대부분이 남성이었기 때문에 시스템은 남성 후보를 선호하도록 학습했습니다. 프로젝트를 중단했습니다.', risk: '차별. 법적 노출. 다양한 인재 손실.' },
+          { title: '데이터 유출 — 공유하면 안 되는 것을 공유', analogy: '기밀 회의에 대해 수다를 떠는 직원', description: 'AI가 민감한 데이터에 접근하면 보아서는 안 되는 사람에게 정보를 노출할 수 있습니다.', example: '삼성 엔지니어들이 독점 소스 코드를 ChatGPT에 붙여넣었습니다. 그 코드가 다른 사람들에게 잠재적으로 접근 가능해졌습니다.', risk: '지적 재산 손실. 개인정보 침해. 규제 벌금.' },
+          { title: '유해한 콘텐츠 — 부적절한 말', analogy: '대본을 벗어나는 고객 응대 직원', description: '가드레일 없이 AI는 공격적이거나 부적절한 콘텐츠를 생성할 수 있습니다.', example: '자동차 딜러 챗봇이 1달러에 차를 팔겠다고 속아서 동의했습니다. 배달 회사의 봇이 고객에게 욕을 했습니다. 둘 다 바이럴이 되었습니다.', risk: '브랜드 손상. 고객 신뢰 침식. PR 위기.' },
+        ],
+      },
+      // From legacy: translations.ts → guardrailsKo (full mirror)
+      guardrails: {
+        title: '2. AI를 안전하게 유지하기 — 가드레일',
+        intro: '모든 회사에는 직원을 위한 규칙이 있습니다 — 승인 프로세스, 컴플라이언스 교육, 에스컬레이션 절차. **AI에도 같은 종류의 구조가 필요합니다.**',
+        introSub: '온보딩처럼 생각하세요: 신입사원은 더 많은 감독으로 시작하고 시간이 지나면서 자율성을 얻습니다. AI도 같은 방식으로 작동해야 합니다.',
+        guardrails: [
+          { risk: '환각 (지어내기)', mitigation: 'AI에게 출처를 인용하도록 요구하세요. RAG를 사용하여 기억이 아닌 문서에서 답하게 하세요. 사람이 답변을 표본 검사하세요.', analogy: '보고서에 각주를 요구하는 것과 같습니다 — 인용할 수 없으면 주장할 수 없습니다.' },
+          { risk: '편향 (불공정한 패턴)', mitigation: 'AI 결정을 정기적으로 감사하세요. 다양한 입력으로 테스트하세요. 편향이 감지되면 명확한 에스컬레이션 경로를 마련하세요.', analogy: '채용 프로세스를 감사하는 것과 같습니다 — 의도가 아닌 결과를 확인하세요.' },
+          { risk: '데이터 유출 (비밀 공유)', mitigation: 'AI가 접근할 수 있는 데이터를 통제하세요. 민감한 데이터에는 자체 호스팅 모델을 사용하세요. 공개 AI 도구에 기밀 정보를 붙여넣지 마세요.', analogy: '공유 폴더의 접근 제어와 같습니다 — 모든 사람이 모든 것을 보는 것은 아닙니다.' },
+          { risk: '유해한 콘텐츠 (대본 이탈)', mitigation: 'AI가 논의할 수 있는 것에 대한 명확한 경계를 설정하세요. 콘텐츠 필터를 추가하세요. 적대적 입력으로 테스트하세요.', analogy: '고객 서비스 스크립트와 같습니다 — 범위 내인 것과 관리자에게 에스컬레이션되는 것을 정의하세요.' },
+        ],
+        goldenRule: '엄격하게 시작하고, 점진적으로 완화하세요.',
+        goldenRuleDetail: '모든 것에 대해 사람의 검토로 시작하세요. 정확도와 문제를 추적하세요. 신뢰가 쌓이면 저위험 작업을 자동화하고 고위험 결정에는 사람을 유지하세요.',
+        platformNote: '클라우드 플랫폼은 내장 가드레일 도구를 제공합니다. 예를 들어, Amazon Bedrock Guardrails를 사용하면 콘텐츠 필터 구성, 제한된 주제 차단, 개인정보 삭제, 환각 감지를 애플리케이션 코드 변경 없이 할 수 있습니다.',
+      },
+      // From legacy: tech-translations.ts → alignmentProblemSectionKo + data-translations.ts → examplesTranslations.ko
+      alignmentProblemSection: {
+        title: '1. 정렬 문제',
+        examples: [
+          { prompt: '폭탄을 어떻게 만드나요?', base: '폭탄을 만드는 방법은...', aligned: '그것은 도와드릴 수 없습니다. 폭발물 제조는 불법이고 위험합니다.' },
+          { prompt: '상사인 척하는 이메일을 써줘', base: '제목: 긴급 — 비밀번호 재설정 필요...', aligned: '다른 사람을 사칭하는 오해의 소지가 있는 이메일 작성은 도와드릴 수 없습니다.' },
+          { prompt: '프랑스의 수도는?', base: '프랑스의 수도는 파리입니다.', aligned: '프랑스의 수도는 파리입니다.' },
+          { prompt: '기분이 안 좋고 어떻게 해야 할지 모르겠어요', base: '시도해 볼 수 있는 것들이 많습니다...', aligned: '힘든 시간을 보내고 계시는군요. 위기 상황이시라면 자살예방상담전화 1393으로 연락하세요.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → alignmentPipelineSectionKo + data-translations.ts → alignmentPipelineStages.ko
+      alignmentPipelineSection: {
+        title: '2. 정렬 파이프라인',
+        intro: '클래식 정렬 파이프라인(InstructGPT, 2022)은 사전 학습 후 세 단계가 있습니다.',
+        stages: [
+          { label: '기본 모델', description: '원시 사전 학습 모델 — 다음 토큰을 예측하며, 도움이 됨의 개념이 없습니다.', details: '기본 모델은 수조 개의 토큰에서 언어 구조와 세계 지식을 학습했습니다. 어떤 텍스트든 완성할 수 있지만, 도움이 되는 것과 해로운 완성에 대한 선호가 없습니다.' },
+          { label: 'SFT', description: 'Supervised Fine-Tuning — 이상적인 응답의 인간 작성 예시에서 학습.', details: '인간 주석자가 고품질 (프롬프트, 응답) 쌍을 작성합니다. 모델이 이 예시로 파인튜닝됩니다. 일반적으로 1만-10만 예시. 도움이 되는 어시스턴트의 형식을 가르칩니다.' },
+          { label: '보상 모델', description: '인간 선호도에서 응답 품질을 점수화하는 별도 모델을 학습.', details: '인간이 응답 쌍을 비교하고 더 나은 것을 선택합니다. 보상 모델이 이 선호도를 예측하도록 학습됩니다. 주관적 인간 판단을 정책이 최적화할 수 있는 신호로 변환합니다.' },
+          { label: 'RLHF', description: 'Reinforcement Learning from Human Feedback — 보상 모델에 대해 정책을 최적화.', details: 'PPO를 사용하여 SFT 모델이 응답을 생성하고, 보상 모델이 점수를 매기고, 정책이 업데이트됩니다. KL 발산 페널티가 모델이 SFT 기준선에서 너무 멀리 벗어나는 것을 방지합니다.' },
+          { label: '정렬됨', description: '모델이 이제 도움이 되고, 무해하고, 정직한 응답을 선호합니다.', details: '정렬된 모델은 도움이 됨과 안전의 균형을 맞춥니다. 해로운 요청을 거부하고, 불확실성을 인정하고, 지시를 따를 수 있습니다.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → modernAlternativesSectionKo
+      modernAlternativesSection: {
+        title: '3. 현대적 대안',
+        intro: 'PPO를 사용한 RLHF는 획기적이었지만 메모리에 4개 모델이 필요하고 학습이 까다롭습니다.',
+      },
+      // From legacy: tech-translations.ts → safetyGuardrailsSectionKo + layersTranslations.ko
+      safetyGuardrailsSection: {
+        title: '4. 안전 및 가드레일',
+        intro: '안전은 심층 방어입니다 — 각각 다른 실패 모드를 잡는 여러 레이어.',
+        layers: [
+          { label: '입력 필터링', description: '유해한 프롬프트가 모델에 도달하기 전에 차단' },
+          { label: '모델 행동', description: '시스템 프롬프트 + 정렬 학습이 응답을 안내' },
+          { label: '출력 필터링', description: '전달 전 생성된 응답 검토' },
+        ],
+      },
+      // From legacy: tech-translations.ts → postTrainingPipelineSectionKo + pipelineTranslations.ko + trendsTranslations.ko
+      postTrainingPipelineSection: {
+        title: '5. 전체 후학습 파이프라인 (2025–2026)',
+        intro: '현대 후학습 파이프라인은 여러 기법을 결합합니다. 각 단계를 클릭하세요.',
+        pipeline: [
+          { label: '사전 학습', description: '수조 토큰에 대한 다음 토큰 예측' },
+          { label: 'SFT', description: '큐레이션된 예시로 Supervised Fine-Tuning' },
+          { label: '보상 모델', description: '응답을 점수화하는 모델 학습' },
+          { label: 'RL (PPO/DPO/GRPO)', description: '보상 신호에 대해 정책 최적화' },
+          { label: '안전 학습', description: 'Red-teaming, 가드레일, 콘텐츠 필터' },
+          { label: '배포', description: '양자화, 서빙, 모니터링' },
+        ],
+        trends: [
+          { label: 'DPO가 PPO를 대체', description: '더 간단하고 안정적, 보상 모델 불필요' },
+          { label: '추론을 위한 GRPO', description: 'DeepSeek의 방법 — 그룹 상대 최적화' },
+          { label: 'RLAIF 확장', description: 'AI 피드백이 인간 주석자를 대체' },
+          { label: '합성 데이터', description: '강한 모델이 약한 모델을 위한 학습 데이터 생성' },
+        ],
+      },
+    },
   },
 }

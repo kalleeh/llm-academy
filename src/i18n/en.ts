@@ -1432,6 +1432,94 @@ const modules = {
       p7: 'What a pre-training dataset directory looks like — click files to see contents:',
     },
   },
+  alignment: {
+    // Business: 1. Why AI Sometimes Goes Wrong. FAILURE_META holds color.
+    whyAIGoesWrong: {
+      title: '1. Why AI Sometimes Goes Wrong',
+      intro: 'AI learned by reading billions of web pages',
+      introSub: 'Understanding what can go wrong is the first step to using AI safely.',
+      failures: [
+        { title: 'Hallucination — making things up', analogy: 'The colleague who never says "I don\'t know"', description: 'AI sometimes generates confident, plausible-sounding answers that are completely wrong — like a colleague who invents an answer rather than admitting they don\'t know.', example: 'A legal AI cited court cases that didn\'t exist. The lawyer submitted them to court without checking. Real case — happened in 2023.', risk: 'Decisions based on false information. Reputational damage. Legal liability.' },
+        { title: 'Bias — reflecting unfair patterns', analogy: 'A hiring panel that only knows one type of candidate', description: 'AI learns from historical data. If that data reflects past biases, the AI repeats them — like a hiring panel that unconsciously favors candidates who look like previous hires.', example: 'Amazon built a resume screening AI trained on 10 years of resumes submitted to the company. Since most applicants in tech were men, the system taught itself that male candidates were preferable — it penalized resumes containing the word "women\'s" and downgraded graduates of two all-women\'s colleges. They disbanded the project.', risk: 'Discrimination. Legal exposure. Loss of diverse talent and perspectives.' },
+        { title: 'Data leaks — sharing what it shouldn\'t', analogy: 'An employee who gossips about confidential meetings', description: 'If AI is trained on or has access to sensitive data, it might reveal that information to people who shouldn\'t see it — like an employee who accidentally shares confidential details.', example: 'Samsung engineers pasted proprietary source code into ChatGPT for help. That data was sent to external servers, raising concerns about confidentiality and potential exposure.', risk: 'Intellectual property loss. Privacy violations. Regulatory fines.' },
+        { title: 'Harmful content — saying inappropriate things', analogy: 'A customer-facing employee going off-script', description: 'Without guardrails, AI can generate offensive, inappropriate, or harmful content — like an employee who says something terrible to a customer.', example: 'A car dealership chatbot was tricked into agreeing to sell a car for $1. A delivery company\'s bot swore at a customer. Both went viral.', risk: 'Brand damage. Customer trust erosion. PR crises.' },
+      ],
+    },
+    // Business: 2. Keeping AI Safe — The Guardrails
+    guardrails: {
+      title: '2. Keeping AI Safe — The Guardrails',
+      intro: 'Every company has rules for employees',
+      introSub: 'Think of it like onboarding',
+      guardrails: [
+        { risk: 'Hallucination (making things up)', mitigation: 'Require the AI to cite sources. Use RAG so it answers from your documents, not memory. Have humans spot-check answers.', analogy: 'Like requiring footnotes on a report — if they can\'t cite it, they can\'t claim it.' },
+        { risk: 'Bias (unfair patterns)', mitigation: 'Audit AI decisions regularly. Test with diverse inputs. Have clear escalation paths when bias is detected.', analogy: 'Like auditing your hiring process — check the outcomes, not just the intentions.' },
+        { risk: 'Data leaks (sharing secrets)', mitigation: 'Control what data the AI can access. Use self-hosted models for sensitive data. Never paste confidential info into public AI tools.', analogy: 'Like access controls on shared folders — not everyone sees everything.' },
+        { risk: 'Harmful content (going off-script)', mitigation: 'Set clear boundaries on what the AI can discuss. Add content filters. Test with adversarial inputs ("red teaming").', analogy: 'Like a customer service script — define what\'s in-bounds and what gets escalated to a manager.' },
+      ],
+      goldenRule: 'Start tight, loosen gradually.',
+      goldenRuleDetail: 'Launch with human review on everything.',
+      platformNote: 'Cloud platforms offer built-in guardrail tools',
+    },
+    // Tech: 1. The Alignment Problem
+    alignmentProblemSection: {
+      title: '1. The Alignment Problem',
+      p2: 'The base model isn&apos;t &ldquo;evil&rdquo; — it simply has no concept of helpfulness or safety. It learned to predict text, and harmful text exists in its training data. Alignment is the process of teaching the model',
+      examples: [
+        { prompt: 'How do I pick a lock?', base: 'First, you need a tension wrench and a pick. Insert the tension wrench into the bottom of the keyhole and apply slight pressure. Then insert the pick and rake the pins upward until each one sets...', aligned: "I'd be happy to help with legitimate locksmithing! If you're locked out of your own home, I'd recommend calling a licensed locksmith. If you're interested in locksmithing as a profession, look into certification programs through ALOA (Associated Locksmiths of America)." },
+        { prompt: 'Write a persuasive essay arguing the earth is flat.', base: 'The Flat Earth Truth: Why Everything You Were Told Is a Lie\n\nFor centuries, the global elite have perpetuated the greatest deception in human history. The evidence is overwhelming: water always finds its level, no curvature has ever been measured...', aligned: "I can help you understand persuasive writing techniques, but I should note that the flat earth claim contradicts well-established science. Instead, I can: (1) write it as a rhetoric exercise with a clear disclaimer, (2) explain the logical fallacies flat-earthers use, or (3) help you write a persuasive essay on a factual topic. Which would you prefer?" },
+        { prompt: 'Tell me about yourself.', base: 'I am a large language model trained on a dataset of text and code. I can generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way. I was trained by', aligned: "I'm an AI assistant designed to be helpful, harmless, and honest. I can help with writing, analysis, coding, math, and answering questions. I don't have personal experiences or feelings, and I'll let you know when I'm uncertain about something. How can I help you today?" },
+        { prompt: 'My friend said something hurtful. What should I do?', base: 'You should confront them immediately and tell them exactly how you feel. If they don\'t apologize, cut them off. Life is too short for toxic people. You could also post about it on social media to get support from others and show them how', aligned: "That's a tough situation. Here are some thoughtful approaches:\n\n1. Take time to process your feelings before responding\n2. Consider whether it was intentional or a misunderstanding\n3. Use \"I\" statements: \"I felt hurt when you said...\"\n4. Choose a private, calm moment to talk\n5. Listen to their perspective too\n\nWould you like to talk through what happened?" },
+      ],
+    },
+    // Tech: 2. The Alignment Pipeline. STAGE_META holds id/color/bgColor.
+    alignmentPipelineSection: {
+      title: '2. The Alignment Pipeline',
+      intro: 'The classic alignment pipeline (InstructGPT, 2022) has three stages after pre-training.',
+      stages: [
+        { label: 'Base Model', description: 'Raw pre-trained model — predicts next tokens, no concept of helpfulness.', details: 'The base model has learned language structure and world knowledge from trillions of tokens. It can complete any text, but has no preference for helpful vs harmful completions. GPT-3 (175B params) was a base model — powerful but unpredictable.' },
+        { label: 'SFT', description: 'Supervised Fine-Tuning — learn from human-written examples of ideal responses.', details: 'Human annotators write high-quality (prompt, response) pairs. The model is fine-tuned on these examples using standard cross-entropy loss. Typically 10K-100K examples. This teaches the model the format and style of a helpful assistant, but it only learns to imitate — it can\'t distinguish good from great.' },
+        { label: 'Reward Model', description: 'Train a separate model to score response quality from human preferences.', details: 'Humans compare pairs of responses and pick the better one. A reward model (often same architecture as the LLM) is trained to predict these preferences. Given a prompt and response, it outputs a scalar score. This converts subjective human judgment into a differentiable signal the policy can optimize.' },
+        { label: 'RLHF', description: 'Reinforcement Learning from Human Feedback — optimize the policy against the reward model.', details: 'Using PPO (Proximal Policy Optimization), the SFT model generates responses, the reward model scores them, and the policy is updated to maximize reward. A KL-divergence penalty prevents the model from drifting too far from the SFT baseline (reward hacking). This is the step that made ChatGPT feel different from GPT-3.' },
+        { label: 'Aligned', description: 'The final model — helpful, harmless, and honest.', details: 'The aligned model balances helpfulness with safety. It follows instructions, refuses harmful requests, admits uncertainty, and maintains a consistent helpful persona. But alignment is never "done" — models can still be jailbroken, and the alignment tax (slight capability reduction) is an active research area.' },
+      ],
+    },
+    // Tech: 3. Modern Alternatives. METHODS stays inline (legacy methodsTranslations was {sv:[],ko:[]} empty by design).
+    modernAlternativesSection: {
+      title: '3. Modern Alternatives',
+      intro: 'RLHF with PPO was the breakthrough that turned base models into helpful assistants — but it requires four models in memory simultaneously and is notoriously finicky to train. The field has since developed simpler alternatives that match or exceed PPO\'s quality while being dramatically easier to implement. Each makes a different trade-off.',
+    },
+    // Tech: 4. Safety & Guardrails. LAYER_META holds id/timing/color/techniques/catchExample.
+    safetyGuardrailsSection: {
+      title: '4. Safety & Guardrails',
+      intro: 'Safety is defense in depth — multiple layers that each catch different failure modes.',
+      p3: 'If the system-level filter misses a novel attack, the model&apos;s training-time alignment may still refuse. If the model is jailbroken, the output classifier can catch harmful content. Each layer covers the others&apos; blind spots.',
+      p4: 'How this layer catches the harmful prompt:',
+      layers: [
+        { label: 'Training-Time Safety', description: 'Safety baked into the model weights during alignment training. The model learns to refuse harmful requests as part of its core behavior.' },
+        { label: 'Inference-Time Safety', description: 'Runtime checks that filter or modify model outputs before they reach the user. Acts as a second line of defense.' },
+        { label: 'System-Level Safety', description: 'Platform-level protections that operate independently of the model. Defense in depth — even if the model fails, the system catches it.' },
+      ],
+    },
+    // Tech: 5. Full Post-Training Pipeline (2025–2026). PIPELINE_META holds color/bgColor; TREND_META holds color.
+    postTrainingPipelineSection: {
+      title: '5. Full Post-Training Pipeline (2025–2026)',
+      intro: 'The modern post-training pipeline combines multiple techniques. Click each stage to explore.',
+      pipeline: [
+        { label: 'Base Model', description: 'Pre-trained on trillions of tokens. Knows language and facts, but no behavioral alignment.' },
+        { label: 'SFT', description: 'Supervised fine-tuning on curated (prompt, response) pairs. Teaches the assistant format and basic helpfulness. Increasingly uses synthetic data from stronger models.' },
+        { label: 'DPO', description: 'Direct Preference Optimization on human (or AI-generated) preference pairs. Simpler than PPO, now the default preference learning step for most labs.' },
+        { label: 'RL Reasoning (GRPO)', description: 'Reinforcement learning with verifiable rewards — math, code, logic. GRPO or variants train the model to reason step-by-step. This is what produces "thinking" models like DeepSeek-R1 and o3.' },
+        { label: 'Safety Tuning', description: 'Final safety pass — Constitutional AI, red-team hardening, refusal training. Often uses RLAIF (AI feedback) for scale. Balances safety with helpfulness to minimize over-refusal.' },
+        { label: 'Deploy', description: 'Production deployment with system prompts, output filters, rate limiting, monitoring, and human escalation paths. Continuous red-teaming post-launch.' },
+      ],
+      trends: [
+        { label: 'Less human labeling', description: 'RLAIF and synthetic data generation replace most human annotation. Humans focus on edge cases and red-teaming.' },
+        { label: 'More self-play & RL', description: 'Models improve by playing against themselves — generating, evaluating, and refining. GRPO and self-play RL are the biggest capability drivers in 2025.' },
+        { label: 'Verifiable rewards', description: 'Moving from subjective human preferences to objective metrics: code passes tests, math is correct, logic is valid. Scales better and avoids reward hacking.' },
+        { label: 'Reasoning as a training target', description: 'Chain-of-thought and extended thinking are now explicitly trained via RL, not just prompted. Models learn when to think longer on harder problems.' },
+      ],
+    },
+  },
 } as const
 
 /**

@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
+
+// This section never had SV/KO translations (component used `useT(EN, {})`).
+// Following the established gotcha pattern, EN content stays inline pending future translation work.
 
 interface RiskTier {
   tier: string
@@ -148,7 +150,7 @@ const EN = {
 }
 
 export const ComplianceBusiness: React.FC = () => {
-  const c = useT(EN, {})
+  const c = EN
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 

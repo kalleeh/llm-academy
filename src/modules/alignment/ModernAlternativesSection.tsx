@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { modernAlternativesSectionSv, modernAlternativesSectionKo } from './tech-translations'
-import { methodsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface Method {
   id: string
@@ -16,6 +14,8 @@ interface Method {
   quality: string
 }
 
+// METHODS stays inline EN-only — legacy `methodsTranslations` was `{sv: [], ko: []}` (empty by design).
+// Detailed RLHF/DPO/GRPO/RLAIF descriptions are highly technical and weren't translated in legacy.
 const METHODS: Method[] = [
   {
     id: 'rlhf',
@@ -73,12 +73,8 @@ const COMPARISON_FIELDS: { key: keyof Pick<Method, 'complexity' | 'cost' | 'qual
   { key: 'quality', label: 'Quality' },
 ]
 
-const EN_INTRO = `RLHF with PPO was the breakthrough that turned base models into helpful assistants — but it requires four models in memory simultaneously and is notoriously finicky to train. The field has since developed simpler alternatives that match or exceed PPO's quality while being dramatically easier to implement. Each makes a different trade-off.`
-
 export const ModernAlternativesSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const mETHODST = tArray(lang, METHODS, methodsTranslations)
-  const c = useT({ title: '3. Modern Alternatives', intro: EN_INTRO }, { sv: modernAlternativesSectionSv, ko: modernAlternativesSectionKo })
+  const c = useTranslation().modules.alignment.modernAlternativesSection
   const [activeTab, setActiveTab] = useState(0)
 
   const selectTab = useCallback((i: number) => setActiveTab(i), [])
@@ -92,7 +88,7 @@ export const ModernAlternativesSection: React.FC = () => {
 
       {/* Tabs */}
       <div className="mb-4 flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 p-1" role="tablist">
-        {mETHODST.map((m, i) => (
+        {METHODS.map((m, i) => (
           <button
             key={m.id}
             role="tab"
@@ -128,8 +124,8 @@ export const ModernAlternativesSection: React.FC = () => {
           <div>
             <h4 className="mb-1 text-xs font-semibold text-red-400">Cons</h4>
             <ul className="space-y-1">
-              {method.cons.map(c => (
-                <li key={c} className="text-xs text-zinc-600 dark:text-zinc-400">− {c}</li>
+              {method.cons.map(con => (
+                <li key={con} className="text-xs text-zinc-600 dark:text-zinc-400">− {con}</li>
               ))}
             </ul>
           </div>
@@ -150,7 +146,7 @@ export const ModernAlternativesSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {mETHODST.map(m => (
+            {METHODS.map(m => (
               <tr key={m.id} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                 <td className={`px-4 py-2 font-medium ${m.color}`}>{m.label}</td>
                 {COMPARISON_FIELDS.map(f => (

@@ -855,5 +855,90 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Nu när du förstår data brett, här är vad LLM:er specifikt behöver.',
       },
     },
+    alignment: {
+      // From legacy: translations.ts → whyAIGoesWrongSv (full mirror)
+      whyAIGoesWrong: {
+        title: '1. Varför AI ibland går fel',
+        intro: 'AI lärde sig genom att läsa miljarder webbsidor — **tänk dig att utbilda en nyanställd genom att låta dem läsa hela internet**. De skulle få otrolig kunskap, men också felaktig information, fördomar och dåliga vanor.',
+        introSub: 'Att förstå vad som kan gå fel är första steget till att använda AI säkert.',
+        failures: [
+          { title: 'Hallucination — hittar på saker', analogy: 'Kollegan som aldrig säger "jag vet inte"', description: 'AI genererar ibland självsäkra, trovärdiga svar som är helt felaktiga — som en kollega som hittar på ett svar istället för att erkänna att de inte vet.', example: 'En juridisk AI citerade rättsfall som inte existerade. Advokaten lämnade in dem till domstolen utan att kontrollera. Verkligt fall — hände 2023.', risk: 'Beslut baserade på falsk information. Rykteskada. Juridiskt ansvar.' },
+          { title: 'Bias — speglar orättvisa mönster', analogy: 'En rekryteringspanel som bara känner en typ av kandidat', description: 'AI lär sig från historisk data. Om den datan speglar tidigare fördomar upprepar AI dem.', example: 'Amazon byggde en CV-gransknings-AI tränad på 10 års inskickade CV:n. Eftersom de flesta sökande inom tech var män lärde sig systemet att manliga kandidater var att föredra. De lade ner projektet.', risk: 'Diskriminering. Juridisk exponering. Förlust av mångfald.' },
+          { title: 'Dataläckor — delar det den inte borde', analogy: 'En anställd som skvallrar om konfidentiella möten', description: 'Om AI har tillgång till känslig data kan den avslöja information för personer som inte borde se den.', example: 'Samsung-ingenjörer klistrade in proprietär källkod i ChatGPT. Den koden blev potentiellt tillgänglig för andra.', risk: 'Förlust av immateriella rättigheter. Integritetsbrott. Regulatoriska böter.' },
+          { title: 'Skadligt innehåll — säger olämpliga saker', analogy: 'En kundvänd anställd som går utanför manuset', description: 'Utan skyddsräcken kan AI generera stötande eller olämpligt innehåll.', example: 'En bilhandlares chattbot lurades att gå med på att sälja en bil för 1 dollar. En leveransfirmas bot svor åt en kund. Båda blev virala.', risk: 'Varumärkesskada. Förlorat kundförtroende. PR-kriser.' },
+        ],
+      },
+      // From legacy: translations.ts → guardrailsSv (full mirror)
+      guardrails: {
+        title: '2. Att hålla AI säker — Skyddsräckena',
+        intro: 'Varje företag har regler för anställda — godkännandeprocesser, efterlevnadsutbildning, eskaleringsrutiner. **AI behöver samma typ av struktur.**',
+        introSub: 'Tänk på det som introduktion: en nyanställd börjar med mer övervakning och förtjänar autonomi över tid. AI bör fungera på samma sätt.',
+        guardrails: [
+          { risk: 'Hallucination (hittar på saker)', mitigation: 'Kräv att AI:n citerar källor. Använd RAG så den svarar från dina dokument, inte minnet. Låt människor stickprovskontrollera svar.', analogy: 'Som att kräva fotnoter i en rapport — kan de inte citera det, kan de inte hävda det.' },
+          { risk: 'Bias (orättvisa mönster)', mitigation: 'Granska AI-beslut regelbundet. Testa med varierade indata. Ha tydliga eskaleringsvägar.', analogy: 'Som att granska din rekryteringsprocess — kontrollera resultaten, inte bara intentionerna.' },
+          { risk: 'Dataläckor (delar hemligheter)', mitigation: 'Kontrollera vilken data AI:n kan komma åt. Använd självhostade modeller för känslig data. Klistra aldrig in konfidentiell info i publika AI-verktyg.', analogy: 'Som åtkomstkontroller på delade mappar — inte alla ser allt.' },
+          { risk: 'Skadligt innehåll (går utanför manuset)', mitigation: 'Sätt tydliga gränser för vad AI:n kan diskutera. Lägg till innehållsfilter. Testa med fientliga indata.', analogy: 'Som ett kundtjänstmanus — definiera vad som är inom ramarna och vad som eskaleras.' },
+        ],
+        goldenRule: 'Börja strikt, lossa gradvis.',
+        goldenRuleDetail: 'Lansera med mänsklig granskning av allt. Spåra noggrannhet och problem. När förtroendet växer, automatisera lågriskbeslut och behåll människor på högriskbeslut.',
+        platformNote: 'Molnplattformar erbjuder inbyggda skyddsverktyg. Till exempel låter Amazon Bedrock Guardrails dig konfigurera innehållsfilter, blockera begränsade ämnen, maskera personuppgifter och upptäcka hallucinationer — allt utan att ändra din applikationskod.',
+      },
+      // From legacy: tech-translations.ts → alignmentProblemSectionSv + data-translations.ts → examplesTranslations.sv
+      alignmentProblemSection: {
+        title: '1. Anpassningsproblemet',
+        examples: [
+          { prompt: 'Hur gör jag en bomb?', base: 'Här är instruktioner för att göra en bomb...', aligned: 'Jag kan inte hjälpa med det. Att tillverka sprängämnen är olagligt och farligt.' },
+          { prompt: 'Skriv ett mejl som utger sig för att vara min chef', base: 'Ämne: Brådskande — Lösenordsåterställning behövs...', aligned: 'Jag kan inte hjälpa till att skriva vilseledande mejl som utger sig för att vara någon annan.' },
+          { prompt: 'Vad är huvudstaden i Frankrike?', base: 'Huvudstaden i Frankrike är Paris.', aligned: 'Huvudstaden i Frankrike är Paris.' },
+          { prompt: 'Jag mår dåligt och vet inte vad jag ska göra', base: 'Det finns många saker du kan prova...', aligned: 'Jag förstår att du har det svårt. Om du är i kris, kontakta Självmordslinjen på 90101.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → alignmentPipelineSectionSv + data-translations.ts → alignmentPipelineStages.sv
+      alignmentPipelineSection: {
+        title: '2. Anpassningspipelinen',
+        intro: 'Den klassiska alignment-pipelinen (InstructGPT, 2022) har tre steg efter förträning.',
+        stages: [
+          { label: 'Basmodell', description: 'Rå förtränad modell — förutsäger nästa token, inget begrepp om hjälpsamhet.', details: 'Basmodellen har lärt sig språkstruktur och världskunskap från biljoner tokens. Den kan komplettera vilken text som helst, men har ingen preferens för hjälpsamma vs skadliga kompletteringar.' },
+          { label: 'SFT', description: 'Supervised Fine-Tuning — lär sig från mänskligt skrivna exempel på ideala svar.', details: 'Mänskliga annotatörer skriver högkvalitativa (prompt, svar)-par. Modellen finjusteras på dessa exempel. Typiskt 10K-100K exempel. Detta lär modellen formatet för en hjälpsam assistent.' },
+          { label: 'Reward-modell', description: 'Träna en separat modell att poängsätta svarskvalitet från mänskliga preferenser.', details: 'Människor jämför par av svar och väljer det bättre. En reward-modell tränas att förutsäga dessa preferenser. Den konverterar subjektivt mänskligt omdöme till en signal policyn kan optimera.' },
+          { label: 'RLHF', description: 'Reinforcement Learning from Human Feedback — optimera policyn mot reward-modellen.', details: 'Med PPO genererar SFT-modellen svar, reward-modellen poängsätter dem, och policyn uppdateras. En KL-divergensstraff förhindrar att modellen driver för långt från SFT-baslinjen.' },
+          { label: 'Anpassad', description: 'Modellen föredrar nu hjälpsamma, ofarliga och ärliga svar.', details: 'Den anpassade modellen balanserar hjälpsamhet med säkerhet. Den kan vägra skadliga förfrågningar, erkänna osäkerhet och följa instruktioner.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → modernAlternativesSectionSv (intro semantically matches new EN intro — used)
+      modernAlternativesSection: {
+        title: '3. Moderna alternativ',
+        intro: 'RLHF med PPO var genombrottet men kräver fyra modeller i minnet och är svårt att träna.',
+      },
+      // From legacy: tech-translations.ts → safetyGuardrailsSectionSv + data-translations.ts → layersTranslations.sv
+      safetyGuardrailsSection: {
+        title: '4. Säkerhet och skyddsräcken',
+        intro: 'Säkerhet är försvar på djupet — flera lager som fångar olika feltyper.',
+        layers: [
+          { label: 'Indatafiltrering', description: 'Blockera skadliga prompts innan de når modellen' },
+          { label: 'Modellbeteende', description: 'Systemprompt + alignment-träning styr svar' },
+          { label: 'Utdatafiltrering', description: 'Granska genererade svar innan leverans' },
+        ],
+      },
+      // From legacy: tech-translations.ts → postTrainingPipelineSectionSv + pipelineTranslations.sv + trendsTranslations.sv
+      postTrainingPipelineSection: {
+        title: '5. Fullständig efterträningspipeline (2025–2026)',
+        intro: 'Den moderna efterträningspipelinen kombinerar flera tekniker. Klicka på varje steg.',
+        pipeline: [
+          { label: 'Förträning', description: 'Nästa-token-prediktion på biljoner tokens' },
+          { label: 'SFT', description: 'Supervised Fine-Tuning med kurerade exempel' },
+          { label: 'Reward Model', description: 'Träna en modell att poängsätta svar' },
+          { label: 'RL (PPO/DPO/GRPO)', description: 'Optimera policyn mot reward-signalen' },
+          { label: 'Säkerhetsträning', description: 'Red-teaming, skyddsräcken, innehållsfilter' },
+          { label: 'Driftsättning', description: 'Kvantisering, serving, övervakning' },
+        ],
+        trends: [
+          { label: 'DPO ersätter PPO', description: 'Enklare, stabilare, ingen reward-modell behövs' },
+          { label: 'GRPO för resonemang', description: 'DeepSeeks metod — grupprelativ optimering' },
+          { label: 'RLAIF skalas', description: 'AI-feedback ersätter mänskliga annotatörer' },
+          { label: 'Syntetisk data', description: 'Starka modeller genererar träningsdata för svagare' },
+        ],
+      },
+    },
   },
 }
