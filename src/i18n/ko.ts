@@ -609,5 +609,37 @@ export const ko: DeepPartial<Translation> = {
         intro: '추론 비용은 프로덕션 LLM 시스템에서 지배적인 비용입니다.',
       },
     },
+    architecture: {
+      // From legacy: tech-translations.ts → denseMoESectionKo (title only — intro was empty) + data-translations.ts → comparisonTranslations.ko
+      denseMoESection: {
+        title: '1. Dense vs Mixture-of-Experts',
+        comparison: [
+          { aspect: '파라미터', dense: '모든 토큰에 모두 활성', moe: '토큰당 부분집합만 활성' },
+          { aspect: '계산', dense: '총 크기에 비례', moe: '활성 크기에 비례' },
+          { aspect: '메모리', dense: '모든 가중치가 메모리에', moe: '모든 가중치가 메모리에 (총 더 큼)' },
+          { aspect: '품질', dense: '일관적, 예측 가능', moe: '더 적은 FLOP으로 dense와 일치 가능' },
+          { aspect: '학습', dense: '더 간단, 더 안정적', moe: '로드 밸런싱 필요, 더 복잡' },
+        ],
+      },
+      // From legacy: tech-translations.ts → scalingLawsSectionKo (title only — legacy intro was empty)
+      scalingLawsSection: {
+        title: '2. 스케일링 법칙',
+      },
+      // From legacy: tech-translations.ts → attentionVariantsSectionKo
+      attentionVariantsSection: {
+        title: '3. 어텐션 변형',
+        intro: 'KV 캐시는 추론 시 주요 메모리 병목입니다. 다양한 어텐션 변형이 다른 트레이드오프를 만듭니다.',
+      },
+      // From legacy: tech-translations.ts → modelConfigSectionKo
+      modelConfigSection: {
+        title: '4. 모델 구성',
+        intro: '자체 모델 아키텍처를 구성하고 파라미터 선택이 총 크기에 어떤 영향을 미치는지 확인하세요.',
+      },
+      // From legacy: tech-translations.ts → decisionTreeSectionKo (p6-p9 not in legacy → fall back to EN)
+      decisionTreeSection: {
+        title: '5. 의사결정 트리',
+        intro: '아키텍처 선택은 예산, 사용 사례, 모델을 직접 서빙해야 하는지에 따라 달라집니다.',
+      },
+    },
   },
 }

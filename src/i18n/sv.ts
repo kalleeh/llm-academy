@@ -615,5 +615,37 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Inferenskostnad är den dominerande utgiften i produktions-LLM-system.',
       },
     },
+    architecture: {
+      // From legacy: tech-translations.ts → denseMoESectionSv (title only — intro was empty placeholder) + data-translations.ts → comparisonTranslations.sv
+      denseMoESection: {
+        title: '1. Dense vs Mixture-of-Experts',
+        comparison: [
+          { aspect: 'Parametrar', dense: 'Alla aktiva varje token', moe: 'Bara en delmängd aktiv per token' },
+          { aspect: 'Beräkning', dense: 'Proportionell mot total storlek', moe: 'Proportionell mot aktiv storlek' },
+          { aspect: 'Minne', dense: 'Alla vikter i minnet', moe: 'Alla vikter i minnet (större totalt)' },
+          { aspect: 'Kvalitet', dense: 'Konsekvent, förutsägbar', moe: 'Kan matcha dense med färre FLOP:ar' },
+          { aspect: 'Träning', dense: 'Enklare, mer stabil', moe: 'Kräver lastbalansering, mer komplex' },
+        ],
+      },
+      // From legacy: tech-translations.ts → scalingLawsSectionSv (title only — legacy intro was empty placeholder)
+      scalingLawsSection: {
+        title: '2. Skalningslagar',
+      },
+      // From legacy: tech-translations.ts → attentionVariantsSectionSv (title human; legacy `intro` matches new EN intro semantically)
+      attentionVariantsSection: {
+        title: '3. Uppmärksamhetsvarianter',
+        intro: 'KV-cachen är den största minnesflaskhalsen vid inferens. Olika attention-varianter gör olika avvägningar.',
+      },
+      // From legacy: tech-translations.ts → modelConfigSectionSv (title + intro human)
+      modelConfigSection: {
+        title: '4. Modellkonfiguration',
+        intro: 'Konfigurera din egen modellarkitektur och se hur parameterval påverkar total storlek.',
+      },
+      // From legacy: tech-translations.ts → decisionTreeSectionSv (title + intro human; p6-p9 not in legacy → fall back to EN)
+      decisionTreeSection: {
+        title: '5. Beslutsträdet',
+        intro: 'Att välja arkitektur beror på budget, användningsfall och om du behöver serva modellen själv.',
+      },
+    },
   },
 }

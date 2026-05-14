@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useT } from '../../i18n'
-import { decisionTreeSectionSv, decisionTreeSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 type Step = 'budget' | 'finetune' | 'result'
 
@@ -15,6 +14,8 @@ interface Recommendation {
   reasoning: string
 }
 
+// Decision logic stays inline — recommendation strings are EN-only currently.
+// Future translation work could lift these into the tree.
 function getRecommendation(state: DecisionState): Recommendation {
   const { budget, finetune } = state
 
@@ -54,14 +55,8 @@ function getRecommendation(state: DecisionState): Recommendation {
   }
 }
 
-const EN_P9 = `Prompting, RAG, or API use only`
-const EN_P8 = `Custom data, domain-specific tasks`
-const EN_P7 = `Do you need to fine-tune the model?`
-const EN_P6 = `What's your compute budget?`
-const EN_INTRO = `Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.`
-
 export const DecisionTreeSection: React.FC = () => {
-  const c = useT({ title: '5. The Decision Tree', intro: EN_INTRO  , p6: EN_P6 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 }, { sv: decisionTreeSectionSv, ko: decisionTreeSectionKo })
+  const c = useTranslation().modules.architecture.decisionTreeSection
   const [state, setState] = useState<DecisionState>({ budget: null, finetune: null })
 
   const currentStep: Step = state.budget === null ? 'budget' : state.finetune === null ? 'finetune' : 'result'

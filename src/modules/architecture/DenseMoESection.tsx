@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { denseMoESectionSv, denseMoESectionKo } from './tech-translations'
-import { comparisonTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 type Mode = 'dense' | 'moe'
 
@@ -12,18 +10,8 @@ const MODELS = [
   { name: 'GPT-4 (rumored)', type: 'MoE' as const, total: '~1.8T', active: '~220B', experts: '16 (top-2)', note: 'Unconfirmed; 16 expert mixture' },
 ]
 
-const COMPARISON = [
-  { aspect: 'Training ease', dense: 'Simpler — standard backprop', moe: 'Harder — load balancing, routing instability' },
-  { aspect: 'Fine-tuning', dense: 'Straightforward — all params updated', moe: 'Complex — expert freezing, routing drift' },
-  { aspect: 'Memory (inference)', dense: 'All params in VRAM', moe: 'All params in VRAM (larger total)' },
-  { aspect: 'Compute (inference)', dense: 'All params activated', moe: 'Only active experts computed — faster' },
-  { aspect: 'Scaling efficiency', dense: 'Linear cost increase', moe: 'Sub-linear — add experts cheaply' },
-]
-
 export const DenseMoESection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cOMPARISONT = tArray(lang, COMPARISON, comparisonTranslations)
-  const c = useT({ title: '1. Dense vs Mixture-of-Experts' }, { sv: denseMoESectionSv, ko: denseMoESectionKo })
+  const c = useTranslation().modules.architecture.denseMoESection
   const [mode, setMode] = useState<Mode>('dense')
 
   const toggle = useCallback(() => setMode(m => (m === 'dense' ? 'moe' : 'dense')), [])
@@ -166,7 +154,7 @@ export const DenseMoESection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {cOMPARISONT.map(row => (
+            {c.comparison.map(row => (
               <tr key={row.aspect} className="border-b border-zinc-200 dark:border-zinc-800">
                 <td className="px-4 py-2 font-medium text-zinc-700 dark:text-zinc-300">{row.aspect}</td>
                 <td className="px-4 py-2 text-zinc-500 dark:text-zinc-400">{row.dense}</td>

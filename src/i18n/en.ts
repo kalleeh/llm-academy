@@ -1142,6 +1142,48 @@ const modules = {
       intro: 'Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.',
     },
   },
+  architecture: {
+    // Tech: 1. Dense vs Mixture-of-Experts. Title only — legacy SV/KO had empty `intro`. comparison[] is tArray-driven.
+    denseMoESection: {
+      title: '1. Dense vs Mixture-of-Experts',
+      comparison: [
+        { aspect: 'Training ease', dense: 'Simpler — standard backprop', moe: 'Harder — load balancing, routing instability' },
+        { aspect: 'Fine-tuning', dense: 'Straightforward — all params updated', moe: 'Complex — expert freezing, routing drift' },
+        { aspect: 'Memory (inference)', dense: 'All params in VRAM', moe: 'All params in VRAM (larger total)' },
+        { aspect: 'Compute (inference)', dense: 'All params activated', moe: 'Only active experts computed — faster' },
+        { aspect: 'Scaling efficiency', dense: 'Linear cost increase', moe: 'Sub-linear — add experts cheaply' },
+      ],
+    },
+    // Tech: 2. Scaling Laws. EN_P5 == EN_P8 dead duplicate; EN_P6 == EN_P9 dead duplicate. Component renders only p7/p8/p9.
+    scalingLawsSection: {
+      title: '2. Scaling Laws',
+      intro:
+        'Before Chinchilla, models like GPT-3 (175B params, 300B tokens) were undertrained.\n        Chinchilla (70B params, 1.4T tokens) significantly outperformed GPT-3 with less compute.',
+      p7: 'Chinchilla-optimal for 37B active',
+      p8: 'DeepSeek\'s Challenge to Chinchilla',
+      p9: 'DeepSeek V3 (671B total, 37B active) trained on',
+    },
+    // Tech: 3. Attention Variants
+    attentionVariantsSection: {
+      title: '3. Attention Variants',
+      intro: 'The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.',
+      p3: 'Query Heads → KV Heads (8 query heads shown)',
+    },
+    // Tech: 4. Model Configuration. PRESETS stays inline (legacy presetsTranslations was {sv:[],ko:[]} — empty by design).
+    modelConfigSection: {
+      title: '4. Model Configuration',
+      intro: 'Configure your own model architecture and see how parameter choices affect total size.',
+    },
+    // Tech: 5. The Decision Tree. getRecommendation() in component returns inline EN strings (decision logic).
+    decisionTreeSection: {
+      title: '5. The Decision Tree',
+      intro: 'Choosing an architecture depends on your budget, use case, and whether you need to serve the model yourself.',
+      p6: 'What\'s your compute budget?',
+      p7: 'Do you need to fine-tune the model?',
+      p8: 'Custom data, domain-specific tasks',
+      p9: 'Prompting, RAG, or API use only',
+    },
+  },
 } as const
 
 /**

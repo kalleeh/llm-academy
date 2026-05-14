@@ -3,6 +3,19 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 8 — DONE (`architecture` module migrated)
+
+- Added `t.modules.architecture.*` to `en.ts` (5 sections: denseMoESection, scalingLawsSection, attentionVariantsSection, modelConfigSection, decisionTreeSection).
+- Extended `sv.ts` and `ko.ts` with architecture content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 5 components in `src/modules/architecture/`. Highlights:
+  - `tLabel(lang, key)` calls in `AttentionVariantsSection` (variant descriptions: mhaDesc/gqaDesc/mqaDesc/mlaDesc) and `ScalingLawsSection` (budget step notes: noteSmallResearch/noteGpt2Small/etc) replaced with `useTranslation().labels[key]` typed as `keyof Translation['labels']`.
+  - `ScalingLawsSection` had EN_P5 == EN_P8 and EN_P6 == EN_P9 dead duplicates; component renders only p7/p8/p9 → dropped p5/p6 from the EN object and tree.
+  - `DenseMoESection`'s `comparison` array migrated through the tree (legacy SV/KO data preserved verbatim); `MODELS` array (with model names like "Llama 3 70B") stays inline EN-only.
+  - `ModelConfigSection`'s `PRESETS` stays inline — labels are model identifiers ("Llama 3 8B" etc) that don't translate; legacy `presetsTranslations` was `{sv: [], ko: []}` (empty by design).
+  - `DecisionTreeSection`'s `getRecommendation()` returns inline EN strings (decision logic). Future translation work could lift these into the tree; for this checkpoint they stay inline matching the established pattern for component-side decision logic.
+- Deleted `src/modules/architecture/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (239 ms).
+
 ## Checkpoint 7 — DONE (`inference` module migrated)
 
 - Added `t.modules.inference.*` to `en.ts` (4 sections: howInferenceWorksSection, servingFrameworksSection, optimizationTechniquesSection, costOptimizationSection).
@@ -132,7 +145,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `training` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 | `llm-data` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 | `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
-| `architecture` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
+| `architecture` | (deleted) | 5 .tsx migrated | ✅ |
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `evaluation` | (deleted) | 8 .tsx migrated | ✅ |
 | `quantization` | (deleted) | 4 .tsx migrated | ✅ |

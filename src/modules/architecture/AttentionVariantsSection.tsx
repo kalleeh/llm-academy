@@ -1,8 +1,8 @@
 import { useState, useCallback, useMemo } from 'react'
-import { tLabel, useLanguage, useT } from '../../i18n'
-import { attentionVariantsSectionSv, attentionVariantsSectionKo } from './tech-translations'
+import { useTranslation, type Translation } from '../../i18n'
 
 type Variant = 'mha' | 'gqa' | 'mqa' | 'mla'
+type LabelKey = keyof Translation['labels']
 
 interface VariantInfo {
   label: string
@@ -12,7 +12,7 @@ interface VariantInfo {
   speed: string
   quality: string
   usedBy: string
-  description: string
+  description: LabelKey
 }
 
 const VARIANTS: Record<Variant, VariantInfo> = {
@@ -62,12 +62,9 @@ const VARIANT_KEYS: Variant[] = ['mha', 'gqa', 'mqa', 'mla']
 
 const KV_BARS: Record<Variant, number> = { mha: 100, gqa: 25, mqa: 3, mla: 8 }
 
-const EN_P3 = `Query Heads → KV Heads (8 query heads shown)`
-const EN_INTRO = `The KV cache is the main memory bottleneck during inference. Different attention variants trade off memory, speed, and quality.`
-
 export const AttentionVariantsSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const c = useT({ title: '3. Attention Variants', intro: EN_INTRO  , p3: EN_P3 }, { sv: attentionVariantsSectionSv, ko: attentionVariantsSectionKo })
+  const t = useTranslation()
+  const c = t.modules.architecture.attentionVariantsSection
   const [active, setActive] = useState<Variant>('mha')
 
   const selectVariant = useCallback((v: Variant) => setActive(v), [])
@@ -117,7 +114,7 @@ export const AttentionVariantsSection: React.FC = () => {
       {/* Visual */}
       <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6">
         <p className="mb-1 font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">{info.full}</p>
-        <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{tLabel(lang, info.description)}</p>
+        <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">{t.labels[info.description]}</p>
 
         {/* Head diagram */}
         <div className="mb-4">

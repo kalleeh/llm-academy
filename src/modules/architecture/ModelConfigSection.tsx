@@ -1,7 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { modelConfigSectionSv, modelConfigSectionKo } from './tech-translations'
-import { presetsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface Config {
   layers: number
@@ -15,6 +13,8 @@ interface Preset {
   config: Config
 }
 
+// Model name presets stay inline — labels are model identifiers ("Llama 3 8B" etc) that don't translate.
+// Legacy presetsTranslations was {sv: [], ko: []} — empty by design.
 const PRESETS: Preset[] = [
   { label: 'GPT-2 Small', config: { layers: 12, hiddenSize: 768, heads: 12, experts: 1 } },
   { label: 'Llama 3 8B', config: { layers: 32, hiddenSize: 4096, heads: 32, experts: 1 } },
@@ -69,12 +69,8 @@ const SLIDERS: { key: keyof Config; label: string; min: number; max: number; ste
   { key: 'experts', label: 'Experts (1 = dense)', min: 1, max: 256, step: 1 },
 ]
 
-const EN_INTRO = `Configure your own model architecture and see how parameter choices affect total size.`
-
 export const ModelConfigSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const pRESETST = tArray(lang, PRESETS, presetsTranslations)
-  const c = useT({ title: '4. Model Configuration', intro: EN_INTRO }, { sv: modelConfigSectionSv, ko: modelConfigSectionKo })
+  const c = useTranslation().modules.architecture.modelConfigSection
   const [config, setConfig] = useState<Config>(PRESETS[1].config)
 
   const updateField = useCallback((key: keyof Config, value: number) => {
@@ -94,7 +90,7 @@ export const ModelConfigSection: React.FC = () => {
 
       {/* Presets */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {pRESETST.map(p => (
+        {PRESETS.map(p => (
           <button
             key={p.label}
             onClick={() => applyPreset(p)}
