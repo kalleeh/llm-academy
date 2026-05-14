@@ -1,6 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useT } from '../../i18n'
-import { whatIsQuantizationSectionSv, whatIsQuantizationSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const PRECISIONS = [
   { label: 'FP32', bits: 32, size: 28, quality: 100, color: 'bg-blue-500' },
@@ -9,10 +8,8 @@ const PRECISIONS = [
   { label: 'INT4', bits: 4, size: 3.5, quality: 93, color: 'bg-red-500' },
 ] as const
 
-const EN_P4 = `The key insight: going from FP32 to INT4 cuts memory by`
-const EN_P3 = `The key insight: going from FP32 to INT4 cuts memory by`
 export const WhatIsQuantizationSection: React.FC = () => {
-  const c = useT({ title: '1. What is Quantization?'  , p3: EN_P3 , p4: EN_P4 }, { sv: whatIsQuantizationSectionSv, ko: whatIsQuantizationSectionKo })
+  const c = useTranslation().modules.quantization.whatIsQuantizationSection
   const [level, setLevel] = useState(0)
   const precision = PRECISIONS[level]
 
@@ -125,7 +122,7 @@ export const WhatIsQuantizationSection: React.FC = () => {
           <strong className="text-zinc-900 dark:text-zinc-100">{precision.size} GB</strong> of memory, retaining{' '}
           <strong className="text-zinc-900 dark:text-zinc-100">{precision.quality}%</strong> of original quality.
           {precision.bits <= 8 && (
-            <>{c.p4}<strong className="text-zinc-900 dark:text-zinc-100">87.5%</strong> while
+            <>The key insight: going from FP32 to INT4 cuts memory by<strong className="text-zinc-900 dark:text-zinc-100">87.5%</strong> while
               keeping ~93% quality — that&apos;s why quantization is essential for running LLMs locally.</>
           )}
         </p>

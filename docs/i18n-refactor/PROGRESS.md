@@ -3,6 +3,19 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 6 — DONE (`quantization` module migrated)
+
+- Added `t.modules.quantization.*` to `en.ts` (4 sections: whatIsQuantizationSection, quantizationMethodsSection, conversionPipelineSection, qualityVsSizeSection).
+- Extended `sv.ts` and `ko.ts` with quantization content. Preserved every existing human translation from `tech-translations.ts` and `data-translations.ts` (Methods array reordered to match the new EN tree order; per-item content unchanged). 0 MT-marked entries — every populated entry was preserved verbatim.
+- Migrated 4 components in `src/modules/quantization/`. Patterns:
+  - `WhatIsQuantizationSection.tsx`: only `title` migrated through the tree; the EN_P4 fragment was inlined into JSX (it was a UI fragment ending mid-sentence; legacy SV/KO `intro` was orphaned and dropped).
+  - `QuantizationMethodsSection.tsx`: full tree usage; `METHOD_META` holds non-translatable id and badge fields parallel to the methods array.
+  - `QualityVsSizeSection.tsx`: title and p2 from tree; QUANT_LEVELS array stays inline EN-only because legacy `quantLevelsTranslations` SV/KO data described different precision tiers (FP32/FP16/INT8/INT4) that don't match the component's GGUF-specific levels (Q2_K/Q3_K_M/Q4_K_M/...). Pre-existing literal `&apos;` artifacts in EN_P2 preserved bit-for-bit per policy.
+  - `ConversionPipelineSection.tsx`: title, intro, p2 from tree (legacy SV/KO `intro` field used; legacy `p2:''` placeholder skipped → falls back to EN).
+- Several legacy tech-section `intro` fields semantically remapped to the EN tree key the component actually renders (`p2` for conversionPipeline, `p2` for qualityVsSize), matching the pattern established in Checkpoint 5.
+- Deleted `src/modules/quantization/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (213 ms).
+
 ## Checkpoint 5 — DONE (`agents` module migrated)
 
 - Added `t.modules.agents.*` to `en.ts` (13 sections: whatAreAgents, whatAreAgentsSection, toolUse, functionCallingSection, mcpSection, patterns, designPatternsSection, connect, buildingAgentsSection, businessImpact, a2aSection, skillsHarnessSection, productionGovernanceSection).
@@ -108,7 +121,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `architecture` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `evaluation` | (deleted) | 8 .tsx migrated | ✅ |
-| `quantization` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
+| `quantization` | (deleted) | 4 .tsx migrated | ✅ |
 | `inference` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
 | `industry` | (deleted) | 7 .tsx migrated | ✅ |
 | `embeddings` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |

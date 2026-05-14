@@ -544,5 +544,34 @@ export const ko: DeepPartial<Translation> = {
         ],
       },
     },
+    quantization: {
+      // From legacy: tech-translations.ts → whatIsQuantizationSectionKo (title only — legacy intro orphaned, body is hardcoded EN in JSX)
+      whatIsQuantizationSection: {
+        title: '1. 양자화란?',
+      },
+      // From legacy: tech-translations.ts → quantizationMethodsSectionKo + data-translations.ts → methodsTranslations.ko
+      quantizationMethodsSection: {
+        title: '2. 양자화 방법',
+        intro: '네 가지 주요 접근 방식이 생태계를 지배합니다. 각각 다른 사용 사례를 대상으로 합니다.',
+        // Methods array re-ordered to match the new EN tree (legacy KO order: GPTQ, GGUF, AWQ, bitsandbytes;
+        // new EN order: GPTQ, AWQ, GGUF, BitsAndBytes). Per-item content preserved verbatim from legacy.
+        methods: [
+          { name: 'GPTQ', tagline: 'GPU 최적화, 캘리브레이션 양자화', howItWorks: '캘리브레이션 데이터를 사용하여 레이어별 최적 양자화 포인트를 찾습니다. GPU 최적화 모델을 생성합니다.', pros: ['캘리브레이션으로 높은 품질', '빠른 GPU 추론', '잘 확립된 생태계'], cons: ['GPU 필요', '캘리브레이션 데이터 필요', '느린 양자화 과정'], whenToUse: '품질 요구가 있는 프로덕션 GPU 추론' },
+          { name: 'AWQ', tagline: '활성화 인식, 중요한 가중치 보존', howItWorks: '활성화 패턴을 기반으로 가장 중요한 가중치를 식별하고 더 신중하게 양자화합니다.', pros: ['순진한 양자화보다 나은 품질', '빠른 추론', '4비트에 적합'], cons: ['캘리브레이션 데이터 필요', '더 새로운, 작은 생태계'], whenToUse: '4비트에서 품질이 중요할 때' },
+          { name: 'GGUF', tagline: 'CPU 친화적, llama.cpp 포맷', howItWorks: '선택 가능한 정밀도(Q4_K_M, Q5_K_S 등)로 가중치를 양자화합니다. llama.cpp를 통한 CPU 추론에 최적화.', pros: ['CPU에서 실행 (GPU 불필요)', '유연한 양자화 수준', '큰 커뮤니티, 많은 모델'], cons: ['GPU 방법보다 느림', '수준에 따라 품질 변동'], whenToUse: '노트북/데스크톱에서 로컬 추론, 엣지 디바이스' },
+          { name: 'bitsandbytes', tagline: 'HuggingFace 통합, 사용 간편', howItWorks: '로딩 시 플래그 하나로 모델을 양자화(load_in_4bit). QLoRA 파인튜닝에 자주 사용.', pros: ['가장 사용하기 쉬움', 'transformers 라이브러리에 통합', 'QLoRA에 완벽'], cons: ['NVIDIA GPU만', '순수 추론에 최적이 아님'], whenToUse: 'QLoRA 파인튜닝, 빠른 프로토타이핑' },
+        ],
+      },
+      // From legacy: tech-translations.ts → conversionPipelineSectionKo (title + intro human; legacy p2 was empty placeholder)
+      conversionPipelineSection: {
+        title: '3. 변환 파이프라인',
+        intro: '실제 과정을 진행하세요: HuggingFace 모델을 가져와 GGUF로 변환하고 양자화합니다.',
+      },
+      // From legacy: tech-translations.ts → qualityVsSizeSectionKo (title human; legacy `intro` semantically maps to new p2)
+      qualityVsSizeSection: {
+        title: '4. 품질 vs 크기',
+        p2: '모델 크기와 품질의 관계는 선형이 아닙니다. 최적점이 있습니다.',
+      },
+    },
   },
 }

@@ -1005,6 +1005,105 @@ const modules = {
       ],
     },
   },
+  quantization: {
+    // Tech: 1. What is Quantization? — only the section title is rendered through the tree;
+    // body prose is hardcoded EN in JSX. Legacy intro field was orphaned (component never rendered c.intro).
+    whatIsQuantizationSection: {
+      title: '1. What is Quantization?',
+    },
+    // Tech: 2. Quantization Methods — full content tree including the methods array
+    quantizationMethodsSection: {
+      title: '2. Quantization Methods',
+      intro: 'Four main approaches dominate the ecosystem. Each targets a different use case.',
+      methods: [
+        {
+          name: 'GPTQ',
+          tagline: 'Post-training, GPU-optimized quantization',
+          howItWorks:
+            'GPTQ quantizes weights layer-by-layer using a small calibration dataset (~128 samples). It minimizes the output error of each layer by solving an optimization problem, producing INT4/INT3 weights optimized for GPU inference via CUDA kernels.',
+          pros: [
+            'Excellent GPU inference speed with optimized kernels',
+            'Well-established with broad tooling support',
+            'Good quality at INT4 with proper calibration',
+          ],
+          cons: [
+            'Requires calibration data (quality-sensitive)',
+            'GPU-only — no CPU inference support',
+            'Quantization process is slow (hours for large models)',
+          ],
+          whenToUse: 'Legacy GPU deployments. Being superseded by AWQ for new projects.',
+        },
+        {
+          name: 'AWQ',
+          tagline: 'Activation-aware — the GPU production standard',
+          howItWorks:
+            'AWQ identifies the most important weights by analyzing activation patterns, then protects those weights during quantization. Instead of treating all weights equally, it preserves the 1% of weights that matter most for quality, achieving better accuracy at the same bit-width.',
+          pros: [
+            'Best quality-per-bit for GPU inference in 2025–2026',
+            'Faster quantization than GPTQ',
+            'Excellent vLLM and TGI integration',
+          ],
+          cons: [
+            'GPU-only (no CPU fallback)',
+            'Newer ecosystem — fewer pre-quantized models than GPTQ',
+            'Requires activation statistics from calibration data',
+          ],
+          whenToUse: 'Default choice for GPU production serving. Use with vLLM or TGI.',
+        },
+        {
+          name: 'GGUF',
+          tagline: 'The llama.cpp ecosystem format',
+          howItWorks:
+            'GGUF is a file format (not just a quantization method) designed for llama.cpp. It bundles model weights, tokenizer, and metadata into a single file. Supports many quantization levels (Q2_K through Q8_0) with mixed-precision: important layers get more bits, less important layers get fewer.',
+          pros: [
+            'Runs on CPU, GPU, or mixed (CPU offload)',
+            'Single-file format — easy to distribute',
+            'Huge ecosystem: Ollama, LM Studio, llama.cpp',
+            'Many quant levels for fine-grained size/quality control',
+          ],
+          cons: [
+            'Slower than AWQ/GPTQ on pure GPU inference',
+            'Quality can vary between quant levels',
+            'Format is llama.cpp-specific',
+          ],
+          whenToUse: 'Local inference, Ollama, LM Studio, or any CPU/hybrid deployment.',
+        },
+        {
+          name: 'BitsAndBytes',
+          tagline: 'Easy integration for training and inference',
+          howItWorks:
+            'BitsAndBytes provides on-the-fly quantization integrated directly into the HuggingFace Transformers library. Load any model in 4-bit or 8-bit with a single flag. Most importantly, it enables QLoRA — fine-tuning a 4-bit quantized model with LoRA adapters, making fine-tuning accessible on consumer GPUs.',
+          pros: [
+            'One-line integration with HuggingFace',
+            'Enables QLoRA fine-tuning on consumer GPUs',
+            'No separate quantization step needed',
+          ],
+          cons: [
+            'Slower inference than GPTQ/AWQ',
+            'Not ideal for production serving',
+            'NVIDIA GPU required',
+          ],
+          whenToUse: 'Fine-tuning with QLoRA, or quick experimentation. Not for production serving.',
+        },
+      ],
+    },
+    // Tech: 3. The Conversion Pipeline — title, intro, p2
+    conversionPipelineSection: {
+      title: '3. The Conversion Pipeline',
+      intro: 'Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.',
+      p2: 'SafeTensors (14 GB, 3 shards) → GGUF FP16 (14.5 GB, single file) → GGUF Q4_K_M (4 GB, quantized) → Ollama model. The final model runs on a laptop with 8 GB RAM.',
+    },
+    // Tech: 4. Quality vs Size — title + p2 only.
+    // Legacy `quantLevelsTranslations` SV/KO data (FP32/FP16/INT8/INT4 generic precision tiers) is misaligned
+    // with the current QUANT_LEVELS array (Q2_K/Q3_K_M/Q4_K_M/... GGUF quant levels) — pre-existing skew from a
+    // refactor; SV/KO data is dropped and QUANT_LEVELS stays inline EN-only until future translation work.
+    // Note: literal `&apos;` characters preserved in EN_P2 as-is (pre-existing rendering artifact —
+    // renders as `isn&apos;t`/`There&apos;s` for users today; preserving per "EN bit-for-bit" rule).
+    qualityVsSizeSection: {
+      title: '4. Quality vs Size',
+      p2: 'The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot is',
+    },
+  },
 } as const
 
 /**

@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { qualityVsSizeSectionSv, qualityVsSizeSectionKo } from './tech-translations'
-import { quantLevelsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface QuantLevel {
   label: string
@@ -12,6 +10,10 @@ interface QuantLevel {
   sweet?: boolean
 }
 
+// QUANT_LEVELS stays inline EN-only: legacy `quantLevelsTranslations` SV/KO data described
+// generic precision tiers (FP32/FP16/INT8/INT4/...) which are misaligned with this component's
+// GGUF-specific quant levels (Q2_K/Q3_K_M/Q4_K_M/...). Future translation work can re-introduce
+// a translatable `quantLevels` array under `useTranslation().modules.quantization.qualityVsSizeSection`.
 const QUANT_LEVELS: QuantLevel[] = [
   { label: 'Q2_K', size: 2.7, quality: 72, bpw: 2.50, useCase: 'Extreme compression — testing only' },
   { label: 'Q3_K_M', size: 3.3, quality: 82, bpw: 3.30, useCase: 'Very constrained memory, acceptable quality loss' },
@@ -26,11 +28,8 @@ const CHART_W = 600
 const CHART_H = 300
 const PAD = { top: 20, right: 30, bottom: 40, left: 50 }
 
-const EN_P2 = `The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot is`
 export const QualityVsSizeSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const qUANT_LEVELST = tArray(lang, QUANT_LEVELS, quantLevelsTranslations)
-  const c = useT({ title: '4. Quality vs Size' , p2: EN_P2 }, { sv: qualityVsSizeSectionSv, ko: qualityVsSizeSectionKo })
+  const c = useTranslation().modules.quantization.qualityVsSizeSection
   const [hovered, setHovered] = useState<number | null>(null)
 
   const handleHover = useCallback((i: number | null) => setHovered(i), [])
@@ -97,7 +96,7 @@ export const QualityVsSizeSection: React.FC = () => {
 
           {/* Line connecting points */}
           <polyline
-            points={qUANT_LEVELST.map((q) => `${toX(q.size)},${toY(q.quality)}`).join(' ')}
+            points={QUANT_LEVELS.map((q) => `${toX(q.size)},${toY(q.quality)}`).join(' ')}
             fill="none"
             stroke="#a1a1aa"
             strokeWidth={1.5}
@@ -105,7 +104,7 @@ export const QualityVsSizeSection: React.FC = () => {
           />
 
           {/* Data points */}
-          {qUANT_LEVELST.map((q, i) => (
+          {QUANT_LEVELS.map((q, i) => (
             <g key={q.label}>
               <circle
                 cx={toX(q.size)}
@@ -135,8 +134,8 @@ export const QualityVsSizeSection: React.FC = () => {
           {hovered !== null && (
             <g>
               <rect
-                x={Math.min(toX(qUANT_LEVELST[hovered].size) - 70, CHART_W - PAD.right - 145)}
-                y={toY(qUANT_LEVELST[hovered].quality) + 12}
+                x={Math.min(toX(QUANT_LEVELS[hovered].size) - 70, CHART_W - PAD.right - 145)}
+                y={toY(QUANT_LEVELS[hovered].quality) + 12}
                 width={140}
                 height={36}
                 fill="#27272a"
@@ -144,20 +143,20 @@ export const QualityVsSizeSection: React.FC = () => {
                 rx={4}
               />
               <text
-                x={Math.min(toX(qUANT_LEVELST[hovered].size) - 70, CHART_W - PAD.right - 145) + 8}
-                y={toY(qUANT_LEVELST[hovered].quality) + 28}
+                x={Math.min(toX(QUANT_LEVELS[hovered].size) - 70, CHART_W - PAD.right - 145) + 8}
+                y={toY(QUANT_LEVELS[hovered].quality) + 28}
                 fill="#e4e4e7"
                 fontSize="10"
               >
-                {qUANT_LEVELST[hovered].size} GB · {qUANT_LEVELST[hovered].quality}% quality
+                {QUANT_LEVELS[hovered].size} GB · {QUANT_LEVELS[hovered].quality}% quality
               </text>
               <text
-                x={Math.min(toX(qUANT_LEVELST[hovered].size) - 70, CHART_W - PAD.right - 145) + 8}
-                y={toY(qUANT_LEVELST[hovered].quality) + 42}
+                x={Math.min(toX(QUANT_LEVELS[hovered].size) - 70, CHART_W - PAD.right - 145) + 8}
+                y={toY(QUANT_LEVELS[hovered].quality) + 42}
                 fill="#a1a1aa"
                 fontSize="9"
               >
-                {qUANT_LEVELST[hovered].bpw} bits per weight
+                {QUANT_LEVELS[hovered].bpw} bits per weight
               </text>
             </g>
           )}
@@ -177,7 +176,7 @@ export const QualityVsSizeSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {qUANT_LEVELST.map((q) => (
+            {QUANT_LEVELS.map((q) => (
               <tr
                 key={q.label}
                 className={`border-b border-zinc-200 dark:border-zinc-800 ${q.sweet ? 'bg-amber-50 dark:bg-amber-500/5' : ''}`}

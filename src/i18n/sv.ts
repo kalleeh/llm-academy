@@ -550,5 +550,34 @@ export const sv: DeepPartial<Translation> = {
         ],
       },
     },
+    quantization: {
+      // From legacy: tech-translations.ts → whatIsQuantizationSectionSv (title only — legacy intro orphaned, body is hardcoded EN in JSX)
+      whatIsQuantizationSection: {
+        title: '1. Vad är kvantisering?',
+      },
+      // From legacy: tech-translations.ts → quantizationMethodsSectionSv + data-translations.ts → methodsTranslations.sv
+      quantizationMethodsSection: {
+        title: '2. Kvantiseringsmetoder',
+        intro: 'Fyra huvudmetoder dominerar ekosystemet. Var och en riktar sig mot olika användningsfall.',
+        // Methods array re-ordered to match the new EN tree (legacy SV order: GPTQ, GGUF, AWQ, bitsandbytes;
+        // new EN order: GPTQ, AWQ, GGUF, BitsAndBytes). Per-item content preserved verbatim from legacy.
+        methods: [
+          { name: 'GPTQ', tagline: 'GPU-optimerad, kalibrerad kvantisering', howItWorks: 'Använder kalibreringsdata för att hitta optimala kvantiseringspunkter per lager. Producerar GPU-optimerade modeller.', pros: ['Hög kvalitet med kalibrering', 'Snabb GPU-inferens', 'Väletablerat ekosystem'], cons: ['Kräver GPU', 'Kalibreringsdata behövs', 'Långsammare kvantiseringsprocess'], whenToUse: 'GPU-inferens i produktion med kvalitetskrav' },
+          { name: 'AWQ', tagline: 'Activation-aware, bevarar viktiga vikter', howItWorks: 'Identifierar vilka vikter som är viktigast baserat på aktiveringsmönster och kvantiserar dem mer försiktigt.', pros: ['Bättre kvalitet än naiv kvantisering', 'Snabb inferens', 'Bra för 4-bit'], cons: ['Kräver kalibreringsdata', 'Nyare, mindre ekosystem'], whenToUse: 'När kvalitet vid 4-bit är kritisk' },
+          { name: 'GGUF', tagline: 'CPU-vänligt, llama.cpp-format', howItWorks: 'Kvantiserar vikter till valbar precision (Q4_K_M, Q5_K_S etc). Optimerat för CPU-inferens via llama.cpp.', pros: ['Körs på CPU (ingen GPU krävs)', 'Flexibla kvantiseringsnivåer', 'Stort community, många modeller'], cons: ['Långsammare än GPU-metoder', 'Kvalitet varierar med nivå'], whenToUse: 'Lokal inferens på laptop/desktop, edge-enheter' },
+          { name: 'bitsandbytes', tagline: 'Integrerat i HuggingFace, enkelt att använda', howItWorks: 'Kvantiserar modellen vid laddning med en flagga (load_in_4bit). Används ofta med QLoRA för finjustering.', pros: ['Enklast att använda', 'Integrerat i transformers-biblioteket', 'Perfekt för QLoRA'], cons: ['Bara NVIDIA GPU:er', 'Inte optimalt för ren inferens'], whenToUse: 'QLoRA-finjustering, snabb prototypning' },
+        ],
+      },
+      // From legacy: tech-translations.ts → conversionPipelineSectionSv (title + intro human; legacy p2 was empty placeholder)
+      conversionPipelineSection: {
+        title: '3. Konverteringspipelinen',
+        intro: 'Gå igenom den verkliga processen: ta en HuggingFace-modell, konvertera till GGUF och kvantisera.',
+      },
+      // From legacy: tech-translations.ts → qualityVsSizeSectionSv (title human; legacy `intro` semantically maps to new p2)
+      qualityVsSizeSection: {
+        title: '4. Kvalitet vs storlek',
+        p2: 'Förhållandet mellan modellstorlek och kvalitet är inte linjärt. Det finns en sweet spot.',
+      },
+    },
   },
 }

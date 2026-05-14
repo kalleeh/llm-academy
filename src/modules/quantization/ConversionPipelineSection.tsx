@@ -2,8 +2,7 @@ import { useMemo } from 'react'
 import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../i18n'
-import { conversionPipelineSectionSv, conversionPipelineSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const STEPS: TerminalStep[] = [
   {
@@ -164,11 +163,8 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
-const EN_P2 = `SafeTensors (14 GB, 3 shards) → GGUF FP16 (14.5 GB, single file) → GGUF Q4_K_M (4 GB, quantized) → Ollama model. The final model runs on a laptop with 8 GB RAM.`
-const EN_INTRO = `Walk through the real process: take a HuggingFace model, convert it to GGUF, and quantize it.`
-
 export const ConversionPipelineSection: React.FC = () => {
-  const c = useT({ title: '3. The Conversion Pipeline', intro: EN_INTRO , p2: EN_P2 }, { sv: conversionPipelineSectionSv, ko: conversionPipelineSectionKo })
+  const c = useTranslation().modules.quantization.conversionPipelineSection
   const steps = useMemo(() => STEPS, [])
 
   return (
