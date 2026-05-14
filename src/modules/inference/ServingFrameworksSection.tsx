@@ -1,82 +1,21 @@
 import { useState, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { servingFrameworksSectionSv, servingFrameworksSectionKo } from './tech-translations'
-import { frameworksTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface Framework {
-  name: string
-  tagline: string
-  color: string
-  features: string[]
-  throughput: string
-  latency: string
-  ease: string
-  gpu: string
-}
-
-const FRAMEWORKS: Framework[] = [
-  {
-    name: 'vLLM',
-    tagline: 'PagedAttention · Continuous batching · Production standard',
-    color: 'border-blue-500',
-    features: ['PagedAttention for efficient KV cache', 'Continuous batching', 'OpenAI-compatible API', 'Tensor parallelism'],
-    throughput: '★★★★☆',
-    latency: '★★★★☆',
-    ease: '★★★★☆',
-    gpu: 'CUDA (Nvidia)',
-  },
-  {
-    name: 'SGLang',
-    tagline: 'RadixAttention · Fastest structured output',
-    color: 'border-green-500',
-    features: ['RadixAttention for prefix sharing', 'Fastest JSON/grammar output', 'Automatic KV cache reuse', 'Constrained decoding'],
-    throughput: '★★★★★',
-    latency: '★★★★★',
-    ease: '★★★☆☆',
-    gpu: 'CUDA (Nvidia)',
-  },
-  {
-    name: 'TensorRT-LLM',
-    tagline: 'Nvidia optimized · Best raw throughput',
-    color: 'border-amber-500',
-    features: ['Nvidia kernel fusion', 'FP8 quantization', 'In-flight batching', 'Multi-GPU via NVLink'],
-    throughput: '★★★★★',
-    latency: '★★★★★',
-    ease: '★★☆☆☆',
-    gpu: 'CUDA only (optimized)',
-  },
-  {
-    name: 'Ollama',
-    tagline: 'Local · Easy · GGUF format',
-    color: 'border-purple-500',
-    features: ['One-command install', 'GGUF model library', 'REST API built-in', 'macOS/Linux/Windows'],
-    throughput: '★★☆☆☆',
-    latency: '★★★☆☆',
-    ease: '★★★★★',
-    gpu: 'CUDA, Metal, ROCm',
-  },
-  {
-    name: 'llama.cpp',
-    tagline: 'C++ · CPU+GPU · Edge deployment',
-    color: 'border-red-500',
-    features: ['Pure C/C++ implementation', 'CPU + GPU hybrid inference', 'GGUF quantized models', 'Runs on phones & Raspberry Pi'],
-    throughput: '★★☆☆☆',
-    latency: '★★★☆☆',
-    ease: '★★★☆☆',
-    gpu: 'CUDA, Metal, Vulkan, SYCL',
-  },
+// Non-translatable per-framework metadata. Order matches `frameworks` array in
+// `useTranslation().modules.inference.servingFrameworksSection.frameworks`.
+const FRAMEWORK_META: { color: string; throughput: string; latency: string; ease: string; gpu: string }[] = [
+  { color: 'border-blue-500', throughput: '★★★★☆', latency: '★★★★☆', ease: '★★★★☆', gpu: 'CUDA (Nvidia)' },
+  { color: 'border-green-500', throughput: '★★★★★', latency: '★★★★★', ease: '★★★☆☆', gpu: 'CUDA (Nvidia)' },
+  { color: 'border-amber-500', throughput: '★★★★★', latency: '★★★★★', ease: '★★☆☆☆', gpu: 'CUDA only (optimized)' },
+  { color: 'border-purple-500', throughput: '★★☆☆☆', latency: '★★★☆☆', ease: '★★★★★', gpu: 'CUDA, Metal, ROCm' },
+  { color: 'border-red-500', throughput: '★★☆☆☆', latency: '★★★☆☆', ease: '★★★☆☆', gpu: 'CUDA, Metal, Vulkan, SYCL' },
 ]
 
 const TABLE_HEADERS = ['Framework', 'Throughput', 'Latency', 'Ease of Use', 'GPU Support'] as const
 
-const EN_P3 = `Inference in Practice — nanochat`
-const EN_INTRO = `A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.`
-
 export const ServingFrameworksSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
-  const c = useT({ title: '2. Serving Frameworks', intro: EN_INTRO  , p3: EN_P3 }, { sv: servingFrameworksSectionSv, ko: servingFrameworksSectionKo })
+  const c = useTranslation().modules.inference.servingFrameworksSection
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((name: string) => {
@@ -90,24 +29,27 @@ export const ServingFrameworksSection: React.FC = () => {
 
       {/* Cards */}
       <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {fRAMEWORKST.map(fw => (
-          <button
-            key={fw.name}
-            onClick={() => toggle(fw.name)}
-            className={`rounded-lg border-l-4 ${fw.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800`}
-            aria-expanded={expanded === fw.name}
-          >
-            <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</h3>
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{fw.tagline}</p>
-            {expanded === fw.name && (
-              <ul className="mt-3 space-y-1">
-                {fw.features.map(f => (
-                  <li key={f} className="text-xs text-zinc-700 dark:text-zinc-300">• {f}</li>
-                ))}
-              </ul>
-            )}
-          </button>
-        ))}
+        {c.frameworks.map((fw, i) => {
+          const meta = FRAMEWORK_META[i]
+          return (
+            <button
+              key={fw.name}
+              onClick={() => toggle(fw.name)}
+              className={`rounded-lg border-l-4 ${meta.color} bg-white dark:bg-zinc-900 p-4 text-left transition-all hover:bg-zinc-200 dark:hover:bg-zinc-100 dark:bg-zinc-800`}
+              aria-expanded={expanded === fw.name}
+            >
+              <h3 className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</h3>
+              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{fw.tagline}</p>
+              {expanded === fw.name && (
+                <ul className="mt-3 space-y-1">
+                  {fw.features.map(f => (
+                    <li key={f} className="text-xs text-zinc-700 dark:text-zinc-300">• {f}</li>
+                  ))}
+                </ul>
+              )}
+            </button>
+          )
+        })}
       </div>
 
       {/* Comparison table */}
@@ -123,15 +65,18 @@ export const ServingFrameworksSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {fRAMEWORKST.map(fw => (
-              <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-white dark:bg-zinc-900/50">
-                <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</td>
-                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.throughput}</td>
-                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.latency}</td>
-                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.ease}</td>
-                <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{fw.gpu}</td>
-              </tr>
-            ))}
+            {c.frameworks.map((fw, i) => {
+              const meta = FRAMEWORK_META[i]
+              return (
+                <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 hover:bg-white dark:bg-zinc-900/50">
+                  <td className="px-4 py-3 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{fw.name}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{meta.throughput}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{meta.latency}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{meta.ease}</td>
+                  <td className="px-4 py-3 text-xs text-zinc-700 dark:text-zinc-300">{meta.gpu}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

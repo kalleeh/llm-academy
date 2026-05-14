@@ -1,8 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { useT } from '../../i18n'
-import { costOptimizationSectionSv, costOptimizationSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 type ModelTier = '7b' | '70b' | '405b'
 
@@ -51,10 +50,8 @@ function formatCost(n: number): string {
   return `$${n.toFixed(2)}`
 }
 
-const EN_INTRO = `Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.`
-
 export const CostOptimizationSection: React.FC = () => {
-  const c = useT({ title: '4. Cost Optimization', intro: EN_INTRO }, { sv: costOptimizationSectionSv, ko: costOptimizationSectionKo })
+  const c = useTranslation().modules.inference.costOptimizationSection
   const [modelTier, setModelTier] = useState<ModelTier>('70b')
   const [reqPerDay, setReqPerDay] = useState(10000)
   const [avgTokens, setAvgTokens] = useState(500)
@@ -160,16 +157,16 @@ export const CostOptimizationSection: React.FC = () => {
           {/* Self-hosted */}
           <div>
             <p className="mb-2 text-xs font-bold uppercase tracking-wider text-zinc-500">Self-Hosted</p>
-            {[costs.single, costs.multi].map(c => (
-              <div key={c.label} className="mb-2">
+            {[costs.single, costs.multi].map(cost => (
+              <div key={cost.label} className="mb-2">
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-zinc-500 dark:text-zinc-400">{c.label}</span>
-                  <span className="font-mono text-zinc-800 dark:text-zinc-200">{formatCost(c.monthly)}/mo</span>
+                  <span className="text-zinc-500 dark:text-zinc-400">{cost.label}</span>
+                  <span className="font-mono text-zinc-800 dark:text-zinc-200">{formatCost(cost.monthly)}/mo</span>
                 </div>
                 <div className="h-4 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
                   <div
                     className="h-full rounded bg-violet-500 transition-all duration-500"
-                    style={{ width: `${Math.max(2, (c.monthly / maxCost) * 100)}%` }}
+                    style={{ width: `${Math.max(2, (cost.monthly / maxCost) * 100)}%` }}
                   />
                 </div>
               </div>

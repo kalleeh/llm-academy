@@ -579,5 +579,41 @@ export const sv: DeepPartial<Translation> = {
         p2: 'Förhållandet mellan modellstorlek och kvalitet är inte linjärt. Det finns en sweet spot.',
       },
     },
+    inference: {
+      // From legacy: tech-translations.ts → howInferenceWorksSectionSv (title human; legacy `intro` semantically maps to new p2)
+      howInferenceWorksSection: {
+        title: '1. Hur inferens fungerar',
+        p2: 'Inferens är processen att generera text från en tränad modell. Det sker i två faser.',
+      },
+      // From legacy: tech-translations.ts → servingFrameworksSectionSv + data-translations.ts → frameworksTranslations.sv
+      servingFrameworksSection: {
+        title: '2. Servingramverk',
+        intro: 'En tränad modell är bara vikter på disk. För att serva den i skala behöver du ett ramverk.',
+        frameworks: [
+          { name: 'vLLM', tagline: 'Snabbast för de flesta användningsfall', features: ['PagedAttention, continuous batching, tensor parallelism'] },
+          { name: 'TGI (HuggingFace)', tagline: 'Enkel integration med HuggingFace-ekosystemet', features: ['Flash attention, kvantisering, streaming'] },
+          { name: 'llama.cpp', tagline: 'CPU-inferens, GGUF-format', features: ['Körs överallt — laptop, telefon, Raspberry Pi'] },
+          { name: 'Ollama', tagline: 'Enklaste sättet att köra lokalt', features: ['En-kommando-installation, modellbibliotek, API'] },
+          { name: 'Amazon Bedrock', tagline: 'Hanterad inferens, 100+ modeller', features: ['Inget att hantera — API-anrop, autoskalning, företagssäkerhet'] },
+        ],
+      },
+      // From legacy: tech-translations.ts → optimizationTechniquesSectionSv + data-translations.ts → techniquesTranslations.sv
+      // Note: legacy SV/KO techniques arrays have 8 items (Continuous Batching, KV Cache, Speculative, Quantization, FlashAttention, Tensor Parallelism, PagedAttention, Prefix Caching) but the current EN tree has 4 items (Continuous Batching, KV Cache Paging, Speculative, Prefix Caching). Per-item content reordered/dropped to match the EN order. Items 4–6 of legacy SV are no longer rendered and are dropped.
+      optimizationTechniquesSection: {
+        title: '3. Optimeringstekniker',
+        intro: 'Rå modellinferens är långsam. Dessa tekniker kan förbättra genomströmningen 2-10x.',
+        techniques: [
+          { name: 'Continuous Batching', short: 'Fyll GPU:n hela tiden', description: 'Lägg till nya förfrågningar så fort platser frigörs istället för att vänta.' },
+          { name: 'PagedAttention', short: 'Effektiv KV-cache', description: 'Hantera KV-cache som virtuellt minne — allokera sidor vid behov istället för i förväg.' },
+          { name: 'Speculative Decoding', short: 'Gissa och verifiera', description: 'En liten modell genererar kandidater snabbt, den stora modellen verifierar parallellt.' },
+          { name: 'Prefix Caching', short: 'Återanvänd gemensamma prefix', description: 'Cachelagra KV-tillstånd för gemensamma systemprompts så de inte beräknas om.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → costOptimizationSectionSv (title human; legacy `intro` matches new EN intro semantically)
+      costOptimizationSection: {
+        title: '4. Kostnadsoptimering',
+        intro: 'Inferenskostnad är den dominerande utgiften i produktions-LLM-system.',
+      },
+    },
   },
 }

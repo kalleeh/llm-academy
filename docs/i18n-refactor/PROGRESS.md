@@ -3,6 +3,20 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 7 — DONE (`inference` module migrated)
+
+- Added `t.modules.inference.*` to `en.ts` (4 sections: howInferenceWorksSection, servingFrameworksSection, optimizationTechniquesSection, costOptimizationSection).
+- Extended `sv.ts` and `ko.ts` with inference content. Preserved every populated human translation from `tech-translations.ts` and `data-translations.ts`. 0 MT-marked entries.
+- Migrated 4 components in `src/modules/inference/`:
+  - `HowInferenceWorksSection.tsx`: title/p2/p5 from tree; `tLabel(lang, ...)` calls (for the prefill/decode phase labels) replaced with `useTranslation().labels[key]` typed as `keyof Translation['labels']`. Dropped EN_P4 dead duplicate of EN_P5.
+  - `OptimizationTechniquesSection.tsx`: title/intro/techniques[] via tree; `TECHNIQUE_META` holds non-translatable id/before/after/unit/visual fields parallel to the techniques array.
+  - `ServingFrameworksSection.tsx`: title/intro/p3/frameworks[] via tree; `FRAMEWORK_META` holds non-translatable color/throughput/latency/ease/gpu.
+  - `CostOptimizationSection.tsx`: title/intro from tree; GPU_CONFIGS/API_PRICING/TIPS arrays stay inline EN-only (no legacy data).
+- Legacy `optimizationTechniquesSection` techniques array (8 items: Continuous Batching/KV Cache/Speculative/Quantization/FlashAttention/Tensor Parallelism/PagedAttention/Prefix Caching) was reduced to 4 items in the new EN tree to match what the component actually renders. SV/KO arrays trimmed to the 4 retained items, preserving per-item content verbatim.
+- Several legacy tech-section `intro` fields semantically remapped to `p2` where the component renders `p2` instead (HowInferenceWorks).
+- Deleted `src/modules/inference/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (224 ms).
+
 ## Checkpoint 6 — DONE (`quantization` module migrated)
 
 - Added `t.modules.quantization.*` to `en.ts` (4 sections: whatIsQuantizationSection, quantizationMethodsSection, conversionPipelineSection, qualityVsSizeSection).
@@ -122,7 +136,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `evaluation` | (deleted) | 8 .tsx migrated | ✅ |
 | `quantization` | (deleted) | 4 .tsx migrated | ✅ |
-| `inference` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
+| `inference` | (deleted) | 4 .tsx migrated | ✅ |
 | `industry` | (deleted) | 7 .tsx migrated | ✅ |
 | `embeddings` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `prompting` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |

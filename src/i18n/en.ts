@@ -1104,6 +1104,44 @@ const modules = {
       p2: 'The relationship between model size and quality isn&apos;t linear. There&apos;s a sweet spot where you get most of the quality at a fraction of the size. For a 7B model, that sweet spot is',
     },
   },
+  inference: {
+    // Tech: 1. How Inference Works
+    // EN_P4 was a dead duplicate of EN_P5 in legacy; only c.p5 was rendered. Drop p4.
+    howInferenceWorksSection: {
+      title: '1. How Inference Works',
+      p2: 'Inference is the process of generating text from a trained model. It happens in two distinct phases —',
+      p5: 'KV Cache Size vs Context Length',
+    },
+    // Tech: 2. Serving Frameworks
+    servingFrameworksSection: {
+      title: '2. Serving Frameworks',
+      intro: 'A trained model is just weights on disk. To serve it at scale you need a framework that handles batching, scheduling, and optimization.',
+      p3: 'Inference in Practice — nanochat',
+      frameworks: [
+        { name: 'vLLM', tagline: 'PagedAttention · Continuous batching · Production standard', features: ['PagedAttention for efficient KV cache', 'Continuous batching', 'OpenAI-compatible API', 'Tensor parallelism'] },
+        { name: 'SGLang', tagline: 'RadixAttention · Fastest structured output', features: ['RadixAttention for prefix sharing', 'Fastest JSON/grammar output', 'Automatic KV cache reuse', 'Constrained decoding'] },
+        { name: 'TensorRT-LLM', tagline: 'Nvidia optimized · Best raw throughput', features: ['Nvidia kernel fusion', 'FP8 quantization', 'In-flight batching', 'Multi-GPU via NVLink'] },
+        { name: 'Ollama', tagline: 'Local · Easy · GGUF format', features: ['One-command install', 'GGUF model library', 'REST API built-in', 'macOS/Linux/Windows'] },
+        { name: 'llama.cpp', tagline: 'C++ · CPU+GPU · Edge deployment', features: ['Pure C/C++ implementation', 'CPU + GPU hybrid inference', 'GGUF quantized models', 'Runs on phones & Raspberry Pi'] },
+      ],
+    },
+    // Tech: 3. Optimization Techniques
+    optimizationTechniquesSection: {
+      title: '3. Optimization Techniques',
+      intro: 'Raw model inference is slow. These techniques can improve throughput 2-10x without changing the model.',
+      techniques: [
+        { name: 'Continuous Batching', short: 'Process multiple requests simultaneously', description: 'Static batching waits for all requests to finish before starting new ones. Continuous batching inserts new requests as soon as a slot opens — GPU stays busy, throughput jumps 2-5×.' },
+        { name: 'KV Cache Paging (vLLM)', short: 'Manage cache like virtual memory', description: 'Traditional KV cache pre-allocates contiguous memory per sequence, wasting space on short outputs. PagedAttention allocates cache in small blocks (pages) on demand — like OS virtual memory. Reduces waste from ~60% to ~4%.' },
+        { name: 'Speculative Decoding', short: 'Small model drafts, large model verifies', description: 'A small "draft" model generates K candidate tokens cheaply. The large model verifies all K in a single forward pass (parallel). If most are accepted, you get K tokens for the cost of ~1 large-model step. Typical speedup: 2-3×.' },
+        { name: 'Prefix Caching', short: 'Reuse KV cache for shared system prompts', description: 'Many requests share the same system prompt. Instead of recomputing its KV cache every time, cache it once and reuse across requests. SGLang\'s RadixAttention does this automatically with a trie structure. Saves 30-80% of prefill compute.' },
+      ],
+    },
+    // Tech: 4. Cost Optimization
+    costOptimizationSection: {
+      title: '4. Cost Optimization',
+      intro: 'Inference cost is the dominant expense in production LLM systems. Use this calculator to compare approaches.',
+    },
+  },
 } as const
 
 /**

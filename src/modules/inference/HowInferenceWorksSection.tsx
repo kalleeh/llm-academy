@@ -1,12 +1,13 @@
 import { useState, useMemo, useCallback } from 'react'
-import { useLanguage, tLabel, useT } from '../../i18n'
-import { howInferenceWorksSectionSv, howInferenceWorksSectionKo } from './tech-translations'
+import { useTranslation, type Translation } from '../../i18n'
 
-const PHASES = [
+type LabelKey = keyof Translation['labels']
+
+const PHASES: { label: LabelKey; color: string; desc: LabelKey }[] = [
   { label: 'promptTokens', color: 'bg-blue-500', desc: 'promptTokensDesc' },
   { label: 'prefill', color: 'bg-amber-500', desc: 'prefillDesc' },
   { label: 'decode', color: 'bg-green-500', desc: 'decodeDesc' },
-] as const
+]
 
 const KV_EXAMPLES = [
   { tokens: 1024, label: '1K', cacheGB: 0.16 },
@@ -17,12 +18,9 @@ const KV_EXAMPLES = [
   { tokens: 131072, label: '128K', cacheGB: 21 },
 ] as const
 
-const EN_P5 = `KV Cache Size vs Context Length`
-const EN_P4 = `KV Cache Size vs Context Length`
-const EN_P2 = `Inference is the process of generating text from a trained model. It happens in two distinct phases —`
 export const HowInferenceWorksSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const c = useT({ title: '1. How Inference Works' , p2: EN_P2 , p4: EN_P4 , p5: EN_P5 }, { sv: howInferenceWorksSectionSv, ko: howInferenceWorksSectionKo })
+  const t = useTranslation()
+  const c = t.modules.inference.howInferenceWorksSection
   const [activePhase, setActivePhase] = useState(0)
   const [ctxSlider, setCtxSlider] = useState(0)
 
@@ -49,7 +47,7 @@ export const HowInferenceWorksSection: React.FC = () => {
         <div className="flex items-center gap-2">
           {PHASES.map((phase, i) => (
             <button
-              key={tLabel(lang, phase.label)}
+              key={phase.label}
               onClick={handlePhaseClick(i)}
               className={`flex-1 rounded-md border px-4 py-3 text-left transition-all ${
                 activePhase === i
@@ -60,18 +58,18 @@ export const HowInferenceWorksSection: React.FC = () => {
             >
               <span className="block text-xs font-bold uppercase tracking-wider">
                 {i > 0 && '→ '}
-                {tLabel(lang, phase.label)}
+                {t.labels[phase.label]}
               </span>
             </button>
           ))}
         </div>
         <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
-          <p className="text-sm text-zinc-700 dark:text-zinc-300">{PHASES[activePhase].desc}</p>
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">{t.labels[PHASES[activePhase].desc]}</p>
           {activePhase === 0 && (
             <div className="mt-3 flex gap-1.5">
-              {['The', 'cat', 'sat', 'on', 'the', 'mat'].map(t => (
-                <span key={t} className="rounded bg-blue-100 dark:bg-blue-500/20 px-2 py-1 font-mono text-xs text-blue-700 dark:text-blue-300">
-                  {t}
+              {['The', 'cat', 'sat', 'on', 'the', 'mat'].map(tok => (
+                <span key={tok} className="rounded bg-blue-100 dark:bg-blue-500/20 px-2 py-1 font-mono text-xs text-blue-700 dark:text-blue-300">
+                  {tok}
                 </span>
               ))}
             </div>
@@ -96,9 +94,9 @@ export const HowInferenceWorksSection: React.FC = () => {
                 via the KV cache. One token per forward pass — this is the bottleneck.
               </p>
               <div className="flex gap-1">
-                {['▸', '▸', '▸', '…'].map((c, i) => (
+                {['▸', '▸', '▸', '…'].map((ch, i) => (
                   <span key={i} className="rounded bg-green-100 dark:bg-green-500/20 px-2 py-1 font-mono text-xs text-green-700 dark:text-green-300">
-                    {c}
+                    {ch}
                   </span>
                 ))}
               </div>

@@ -1,26 +1,11 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { optimizationTechniquesSectionSv, optimizationTechniquesSectionKo } from './tech-translations'
-import { techniquesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface Technique {
-  id: string
-  name: string
-  short: string
-  description: string
-  before: { label: string; value: number }
-  after: { label: string; value: number }
-  unit: string
-  visual: string[]
-}
-
-const TECHNIQUES: Technique[] = [
+// Non-translatable per-technique metadata. Order matches `techniques` array in
+// `useTranslation().modules.inference.optimizationTechniquesSection.techniques`.
+const TECHNIQUE_META: { id: string; before: { label: string; value: number }; after: { label: string; value: number }; unit: string; visual: string[] }[] = [
   {
     id: 'continuous-batching',
-    name: 'Continuous Batching',
-    short: 'Process multiple requests simultaneously',
-    description:
-      'Static batching waits for all requests to finish before starting new ones. Continuous batching inserts new requests as soon as a slot opens — GPU stays busy, throughput jumps 2-5×.',
     before: { label: 'Static batching', value: 40 },
     after: { label: 'Continuous batching', value: 150 },
     unit: 'req/s',
@@ -28,10 +13,6 @@ const TECHNIQUES: Technique[] = [
   },
   {
     id: 'kv-paging',
-    name: 'KV Cache Paging (vLLM)',
-    short: 'Manage cache like virtual memory',
-    description:
-      'Traditional KV cache pre-allocates contiguous memory per sequence, wasting space on short outputs. PagedAttention allocates cache in small blocks (pages) on demand — like OS virtual memory. Reduces waste from ~60% to ~4%.',
     before: { label: 'Contiguous allocation', value: 35 },
     after: { label: 'PagedAttention', value: 90 },
     unit: '% GPU utilization',
@@ -39,10 +20,6 @@ const TECHNIQUES: Technique[] = [
   },
   {
     id: 'speculative',
-    name: 'Speculative Decoding',
-    short: 'Small model drafts, large model verifies',
-    description:
-      'A small "draft" model generates K candidate tokens cheaply. The large model verifies all K in a single forward pass (parallel). If most are accepted, you get K tokens for the cost of ~1 large-model step. Typical speedup: 2-3×.',
     before: { label: 'Standard decode', value: 30 },
     after: { label: 'Speculative (K=5)', value: 75 },
     unit: 'tokens/s',
@@ -50,10 +27,6 @@ const TECHNIQUES: Technique[] = [
   },
   {
     id: 'prefix-caching',
-    name: 'Prefix Caching',
-    short: 'Reuse KV cache for shared system prompts',
-    description:
-      'Many requests share the same system prompt. Instead of recomputing its KV cache every time, cache it once and reuse across requests. SGLang\'s RadixAttention does this automatically with a trie structure. Saves 30-80% of prefill compute.',
     before: { label: 'No caching', value: 200 },
     after: { label: 'Prefix cached', value: 50 },
     unit: 'ms prefill',
@@ -61,20 +34,17 @@ const TECHNIQUES: Technique[] = [
   },
 ]
 
-const EN_INTRO = `Raw model inference is slow. These techniques can improve throughput 2-10x without changing the model.`
-
 export const OptimizationTechniquesSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const tECHNIQUEST = tArray(lang, TECHNIQUES, techniquesTranslations)
-  const c = useT({ title: '3. Optimization Techniques', intro: EN_INTRO }, { sv: optimizationTechniquesSectionSv, ko: optimizationTechniquesSectionKo })
-  const [activeTech, setActiveTech] = useState(TECHNIQUES[0].id)
-  const tech = TECHNIQUES.find(t => t.id === activeTech) ?? TECHNIQUES[0]
+  const c = useTranslation().modules.inference.optimizationTechniquesSection
+  const [activeIdx, setActiveIdx] = useState(0)
+  const tech = c.techniques[activeIdx]
+  const meta = TECHNIQUE_META[activeIdx]
 
-  const handleSelect = useCallback((id: string) => () => setActiveTech(id), [])
+  const handleSelect = useCallback((i: number) => () => setActiveIdx(i), [])
 
-  const beforePct = Math.round((tech.before.value / Math.max(tech.before.value, tech.after.value)) * 100)
-  const afterPct = Math.round((tech.after.value / Math.max(tech.before.value, tech.after.value)) * 100)
-  const isLowerBetter = tech.id === 'prefix-caching'
+  const beforePct = Math.round((meta.before.value / Math.max(meta.before.value, meta.after.value)) * 100)
+  const afterPct = Math.round((meta.after.value / Math.max(meta.before.value, meta.after.value)) * 100)
+  const isLowerBetter = meta.id === 'prefix-caching'
 
   return (
     <section aria-labelledby="optimization-techniques">
@@ -83,16 +53,16 @@ export const OptimizationTechniquesSection: React.FC = () => {
 
       {/* Technique selector */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {tECHNIQUEST.map(t => (
+        {c.techniques.map((t, i) => (
           <button
-            key={t.id}
-            onClick={handleSelect(t.id)}
+            key={TECHNIQUE_META[i].id}
+            onClick={handleSelect(i)}
             className={`rounded-md px-3 py-2 text-xs font-medium transition-colors ${
-              activeTech === t.id
+              activeIdx === i
                 ? 'bg-zinc-100 text-zinc-900'
                 : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700'
             }`}
-            aria-pressed={activeTech === t.id}
+            aria-pressed={activeIdx === i}
           >
             {t.name}
           </button>
@@ -107,7 +77,7 @@ export const OptimizationTechniquesSection: React.FC = () => {
 
         {/* ASCII visual */}
         <div className="mt-4 rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs text-zinc-500 dark:text-zinc-400">
-          {tech.visual.map((line, i) => (
+          {meta.visual.map((line, i) => (
             <div key={i}>{line}</div>
           ))}
         </div>
@@ -115,14 +85,14 @@ export const OptimizationTechniquesSection: React.FC = () => {
         {/* Before/after comparison */}
         <div className="mt-5">
           <p className="mb-2 text-xs font-bold uppercase tracking-wider text-zinc-500">
-            Before / After ({tech.unit})
+            Before / After ({meta.unit})
           </p>
           <div className="space-y-2">
             <div>
               <div className="mb-1 flex justify-between text-xs">
-                <span className="text-zinc-500 dark:text-zinc-400">{tech.before.label}</span>
+                <span className="text-zinc-500 dark:text-zinc-400">{meta.before.label}</span>
                 <span className={isLowerBetter ? 'text-red-700 dark:text-red-400' : 'text-zinc-700 dark:text-zinc-300'}>
-                  {tech.before.value} {tech.unit}
+                  {meta.before.value} {meta.unit}
                 </span>
               </div>
               <div className="h-5 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">
@@ -134,9 +104,9 @@ export const OptimizationTechniquesSection: React.FC = () => {
             </div>
             <div>
               <div className="mb-1 flex justify-between text-xs">
-                <span className="text-zinc-500 dark:text-zinc-400">{tech.after.label}</span>
+                <span className="text-zinc-500 dark:text-zinc-400">{meta.after.label}</span>
                 <span className={isLowerBetter ? 'text-green-700 dark:text-green-400' : 'text-green-700 dark:text-green-400'}>
-                  {tech.after.value} {tech.unit}
+                  {meta.after.value} {meta.unit}
                 </span>
               </div>
               <div className="h-5 w-full overflow-hidden rounded bg-zinc-100 dark:bg-zinc-800">

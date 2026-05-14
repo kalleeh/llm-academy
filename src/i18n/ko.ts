@@ -573,5 +573,41 @@ export const ko: DeepPartial<Translation> = {
         p2: '모델 크기와 품질의 관계는 선형이 아닙니다. 최적점이 있습니다.',
       },
     },
+    inference: {
+      // From legacy: tech-translations.ts → howInferenceWorksSectionKo (title human; legacy `intro` semantically maps to new p2)
+      howInferenceWorksSection: {
+        title: '1. 추론의 작동 방식',
+        p2: '추론은 학습된 모델에서 텍스트를 생성하는 과정입니다. 두 단계로 진행됩니다.',
+      },
+      // From legacy: tech-translations.ts → servingFrameworksSectionKo + data-translations.ts → frameworksTranslations.ko
+      servingFrameworksSection: {
+        title: '2. 서빙 프레임워크',
+        intro: '학습된 모델은 디스크의 가중치일 뿐입니다. 대규모로 서빙하려면 프레임워크가 필요합니다.',
+        frameworks: [
+          { name: 'vLLM', tagline: '대부분의 사용 사례에서 가장 빠름', features: ['PagedAttention, continuous batching, tensor parallelism'] },
+          { name: 'TGI (HuggingFace)', tagline: 'HuggingFace 생태계와 쉬운 통합', features: ['Flash attention, 양자화, 스트리밍'] },
+          { name: 'llama.cpp', tagline: 'CPU 추론, GGUF 포맷', features: ['어디서나 실행 — 노트북, 폰, Raspberry Pi'] },
+          { name: 'Ollama', tagline: '로컬 실행의 가장 쉬운 방법', features: ['원커맨드 설치, 모델 라이브러리, API'] },
+          { name: 'Amazon Bedrock', tagline: '관리형 추론, 100+ 모델', features: ['관리할 것 없음 — API 호출, 자동 스케일링, 엔터프라이즈 보안'] },
+        ],
+      },
+      // From legacy: tech-translations.ts → optimizationTechniquesSectionKo + data-translations.ts → techniquesTranslations.ko
+      // Note: legacy KO has 8 techniques; new EN tree has 4. Per-item content reordered to match EN order; legacy items 4–6 dropped.
+      optimizationTechniquesSection: {
+        title: '3. 최적화 기법',
+        intro: '원시 모델 추론은 느립니다. 이 기법들은 처리량을 2-10배 향상시킬 수 있습니다.',
+        techniques: [
+          { name: 'Continuous Batching', short: 'GPU를 항상 채우기', description: '전체 배치가 완료될 때까지 기다리지 않고 자리가 비면 새 요청 추가.' },
+          { name: 'PagedAttention', short: '효율적 KV 캐시', description: 'KV 캐시를 가상 메모리처럼 관리 — 미리가 아닌 필요 시 페이지 할당.' },
+          { name: 'Speculative Decoding', short: '추측하고 검증', description: '작은 모델이 후보를 빠르게 생성하고 큰 모델이 병렬로 검증.' },
+          { name: 'Prefix Caching', short: '공통 접두사 재사용', description: '공통 시스템 프롬프트의 KV 상태를 캐시하여 재계산 방지.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → costOptimizationSectionKo
+      costOptimizationSection: {
+        title: '4. 비용 최적화',
+        intro: '추론 비용은 프로덕션 LLM 시스템에서 지배적인 비용입니다.',
+      },
+    },
   },
 }
