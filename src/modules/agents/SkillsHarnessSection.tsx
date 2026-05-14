@@ -1,8 +1,6 @@
-import { tArray, useLanguage, useT } from '../../i18n'
-import { skillsHarnessSectionSv, skillsHarnessSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
-import { capabilitiesTranslations } from './data-translations'
 
 // Verified format from agentskills.io/specification (Anthropic Agent Skills, open standard
 // donated to the Agentic AI Foundation, December 18, 2025).
@@ -83,93 +81,81 @@ response = client.invoke_agent_runtime(
 # 3. AgentCore manages the full loop:
 # think → select tool / skill → call MCP server → read result → repeat → respond`
 
-const CAPABILITIES = [
-  { name: 'MCP Server', layer: 'Connectivity', what: 'Universal tool connector — exposes one API/database/service to any MCP client', granularity: 'Single tool or resource', reusability: 'Any MCP-compatible agent or IDE', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
-  { name: 'Agent Skill (SKILL.md)', layer: 'Behavior', what: 'Open-standard package — folder with SKILL.md (frontmatter + instructions) plus optional scripts/, references/, assets/. Loads progressively: metadata always, body when activated, files on demand.', granularity: 'Multi-step workflow or domain expertise', reusability: 'Any Skills-compatible agent (Claude Code, Codex, Microsoft Agent Framework, Kiro, …)', example: 'customer-onboarding, pdf-processing, code-review' },
-  { name: 'AGENTS.md', layer: 'Project context', what: 'README for agents — repo-level instructions: setup, code style, test commands, PR rules. Open standard from the Agentic AI Foundation.', granularity: 'Whole repo or subdirectory (nested files supported)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands, and more', example: 'monorepo root + per-package AGENTS.md' },
-  { name: 'Kiro Steering', layer: 'Workspace context', what: 'Markdown files in .kiro/steering/ that give Kiro persistent project knowledge — conventions, libraries, standards.', granularity: 'Workspace', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
-  { name: 'Bedrock AgentCore', layer: 'Runtime', what: 'Managed agent runtime on AWS — model + system prompt + tools + skills + memory + observability + limits.', granularity: 'Complete agent', reusability: 'Production deployment', example: 'Support agent, sales assistant, IT helpdesk' },
-]
-
-const EN_INTRO = `MCP gives agents tools. Agent Skills give them workflows. AGENTS.md and Kiro steering give them project context. Bedrock AgentCore gives them a managed runtime. The ecosystem has converged on distinct, layered standards — most of them open and donated to the Agentic AI Foundation (Linux Foundation, December 2025).`
-
 export const SkillsHarnessSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cAPABILITIEST = tArray(lang, CAPABILITIES, capabilitiesTranslations)
-  const c = useT({ title: '8. Skills, Steering, and the Managed Runtime', intro: EN_INTRO }, { sv: skillsHarnessSectionSv, ko: skillsHarnessSectionKo })
+  const c = useTranslation().modules.agents.skillsHarnessSection
   return (
-  <section aria-labelledby="skills-tech">
-    <h2 id="skills-tech" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+    <section aria-labelledby="skills-tech">
+      <h2 id="skills-tech" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
-    {/* Capability comparison */}
-    <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
-      <table className="w-full text-xs">
-        <thead>
-          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
-            {['Name', 'Layer', 'What it is', 'Granularity', 'Reusability'].map((h) => (
-              <th key={h} className="px-3 py-2 text-left font-medium text-zinc-600 dark:text-zinc-400">{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {cAPABILITIEST.map((cap) => (
-            <tr key={cap.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 align-top">
-              <td className="px-3 py-2 font-medium text-amber-300 whitespace-nowrap">{cap.name}</td>
-              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.layer}</td>
-              <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{cap.what}</td>
-              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.granularity}</td>
-              <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.reusability}</td>
+      {/* Capability comparison */}
+      <div className="mb-6 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              {['Name', 'Layer', 'What it is', 'Granularity', 'Reusability'].map((h) => (
+                <th key={h} className="px-3 py-2 text-left font-medium text-zinc-600 dark:text-zinc-400">{h}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    {/* SKILL.md format */}
-    <div className="mb-6">
-      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Agent Skills — SKILL.md</h3>
-      <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
-        <strong className="text-zinc-900 dark:text-zinc-100">Skills</strong> encode multi-step workflows or domain
-        expertise as portable, folder-based packages. The format was launched by Anthropic in
-        October 2025 and donated as an open standard (
-        <a href="https://agentskills.io/specification" target="_blank" rel="noreferrer" className="text-amber-300 underline">agentskills.io</a>
-        ) in December 2025. Skills load <em>progressively</em>: only the
-        frontmatter (~100 tokens) is read at startup; the body loads when the skill is activated;
-        files in <code className="text-amber-300">scripts/</code>,{' '}
-        <code className="text-amber-300">references/</code>, and{' '}
-        <code className="text-amber-300">assets/</code> load on demand.
-      </p>
-      <CodeBlock code={SKILL_DIRECTORY} language="bash" title="Skill directory layout" />
-      <div className="mt-3">
-        <CodeBlock code={SKILL_EXAMPLE} language="markdown" title="SKILL.md — frontmatter + body" />
+          </thead>
+          <tbody>
+            {c.capabilities.map((cap) => (
+              <tr key={cap.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 align-top">
+                <td className="px-3 py-2 font-medium text-amber-300 whitespace-nowrap">{cap.name}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.layer}</td>
+                <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{cap.what}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.granularity}</td>
+                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{cap.reusability}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="mt-3 rounded-md border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-zinc-700 dark:text-zinc-300">
-        <strong className="text-amber-300">Frontmatter rules:</strong>{' '}
-        <code>name</code> is required, max 64 chars, lowercase kebab-case, must match the parent
-        directory name. <code>description</code> is required, max 1024 chars, must describe both
-        what the skill does and when to use it (this is what the agent reads to decide whether to
-        activate). Optional fields: <code>license</code>, <code>compatibility</code>,{' '}
-        <code>metadata</code>, <code>allowed-tools</code> (experimental).
+
+      {/* SKILL.md format */}
+      <div className="mb-6">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">Agent Skills — SKILL.md</h3>
+        <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
+          <strong className="text-zinc-900 dark:text-zinc-100">Skills</strong> encode multi-step workflows or domain
+          expertise as portable, folder-based packages. The format was launched by Anthropic in
+          October 2025 and donated as an open standard (
+          <a href="https://agentskills.io/specification" target="_blank" rel="noreferrer" className="text-amber-300 underline">agentskills.io</a>
+          ) in December 2025. Skills load <em>progressively</em>: only the
+          frontmatter (~100 tokens) is read at startup; the body loads when the skill is activated;
+          files in <code className="text-amber-300">scripts/</code>,{' '}
+          <code className="text-amber-300">references/</code>, and{' '}
+          <code className="text-amber-300">assets/</code> load on demand.
+        </p>
+        <CodeBlock code={SKILL_DIRECTORY} language="bash" title="Skill directory layout" />
+        <div className="mt-3">
+          <CodeBlock code={SKILL_EXAMPLE} language="markdown" title="SKILL.md — frontmatter + body" />
+        </div>
+        <div className="mt-3 rounded-md border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-zinc-700 dark:text-zinc-300">
+          <strong className="text-amber-300">Frontmatter rules:</strong>{' '}
+          <code>name</code> is required, max 64 chars, lowercase kebab-case, must match the parent
+          directory name. <code>description</code> is required, max 1024 chars, must describe both
+          what the skill does and when to use it (this is what the agent reads to decide whether to
+          activate). Optional fields: <code>license</code>, <code>compatibility</code>,{' '}
+          <code>metadata</code>, <code>allowed-tools</code> (experimental).
+        </div>
       </div>
-    </div>
 
-    {/* Runtime / harness */}
-    <div className="mb-6">
-      <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The managed runtime</h3>
-      <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
-        SKILL.md and AGENTS.md are <em>authoring</em> formats — they describe what the agent should
-        do. A managed runtime like <strong className="text-zinc-900 dark:text-zinc-100">Bedrock AgentCore</strong> is
-        the <em>execution</em> layer: it runs the loop, calls tools, manages memory, enforces
-        limits, and emits observability traces.
-      </p>
-      <CodeBlock code={HARNESS_CONFIG} language="python" title="Bedrock AgentCore — production agent" />
-    </div>
+      {/* Runtime / harness */}
+      <div className="mb-6">
+        <h3 className="mb-2 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The managed runtime</h3>
+        <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">
+          SKILL.md and AGENTS.md are <em>authoring</em> formats — they describe what the agent should
+          do. A managed runtime like <strong className="text-zinc-900 dark:text-zinc-100">Bedrock AgentCore</strong> is
+          the <em>execution</em> layer: it runs the loop, calls tools, manages memory, enforces
+          limits, and emits observability traces.
+        </p>
+        <CodeBlock code={HARNESS_CONFIG} language="python" title="Bedrock AgentCore — production agent" />
+      </div>
 
-    <SelfExplain
-      prompt="You have an MCP server for your CRM and another for your email system. Explain how you'd compose these into a SKILL.md for 'lead follow-up' — what would go in the frontmatter, and what kind of decision logic does the body need beyond just listing the tool names?"
-      modelAnswer={"The frontmatter would be:\nname: lead-follow-up\ndescription: Identify warm leads with no recent contact and draft personalised follow-up emails. Use when a sales rep asks to review their pipeline or when leads have been silent for more than 7 days.\n\nThe MCP servers provide connectivity (read CRM, send email), but the SKILL.md body needs the workflow and business rules: (1) Query CRM for leads with status='demo_completed' and no follow-up in 3 days. (2) For each lead, check if a proposal was sent. (3) If no proposal: draft a follow-up using the lead's name, company, and demo notes. (4) If proposal sent but no response in 7 days: draft a gentle check-in. (5) Log the follow-up in CRM with timestamp. (6) If the lead has 'do not contact' set, skip and notify the rep instead. The skill encodes the decision logic that raw MCP tools don't have — and because it lives in a SKILL.md file, any Skills-compatible agent (Claude Code, Codex, Kiro, …) can use the same package."}
-    />
-  </section>
+      <SelfExplain
+        prompt="You have an MCP server for your CRM and another for your email system. Explain how you'd compose these into a SKILL.md for 'lead follow-up' — what would go in the frontmatter, and what kind of decision logic does the body need beyond just listing the tool names?"
+        modelAnswer={"The frontmatter would be:\nname: lead-follow-up\ndescription: Identify warm leads with no recent contact and draft personalised follow-up emails. Use when a sales rep asks to review their pipeline or when leads have been silent for more than 7 days.\n\nThe MCP servers provide connectivity (read CRM, send email), but the SKILL.md body needs the workflow and business rules: (1) Query CRM for leads with status='demo_completed' and no follow-up in 3 days. (2) For each lead, check if a proposal was sent. (3) If no proposal: draft a follow-up using the lead's name, company, and demo notes. (4) If proposal sent but no response in 7 days: draft a gentle check-in. (5) Log the follow-up in CRM with timestamp. (6) If the lead has 'do not contact' set, skip and notify the rep instead. The skill encodes the decision logic that raw MCP tools don't have — and because it lives in a SKILL.md file, any Skills-compatible agent (Claude Code, Codex, Kiro, …) can use the same package."}
+      />
+    </section>
   )
 }

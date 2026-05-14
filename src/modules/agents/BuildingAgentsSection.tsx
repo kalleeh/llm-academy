@@ -1,66 +1,15 @@
 import { SimulatedTerminal, type TerminalStep } from '../../components/SimulatedTerminal'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { buildingAgentsSectionSv, buildingAgentsSectionKo } from './tech-translations'
-import { frameworksTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface Framework {
-  name: string
-  description: string
-  complexity: 'Low' | 'Medium' | 'High'
-  flexibility: 'Low' | 'Medium' | 'High'
-  learningCurve: 'Easy' | 'Moderate' | 'Steep'
-  bestFor: string
-}
-
-const FRAMEWORKS: Framework[] = [
-  {
-    name: 'Raw function calling',
-    description: 'Direct API calls with tool schemas. No framework overhead.',
-    complexity: 'Low',
-    flexibility: 'Medium',
-    learningCurve: 'Easy',
-    bestFor: 'Simple agents, learning, prototypes',
-  },
-  {
-    name: 'Vercel AI SDK',
-    description: 'Web-focused, great TypeScript support, streaming-first.',
-    complexity: 'Low',
-    flexibility: 'Medium',
-    learningCurve: 'Easy',
-    bestFor: 'Web apps, Next.js, streaming UIs',
-  },
-  {
-    name: 'LangChain / LangGraph',
-    description: 'Most popular. LangGraph adds graph-based workflows for complex agents.',
-    complexity: 'Medium',
-    flexibility: 'High',
-    learningCurve: 'Moderate',
-    bestFor: 'Production agents, complex workflows',
-  },
-  {
-    name: 'CrewAI',
-    description: 'Multi-agent framework with role-based agents that collaborate.',
-    complexity: 'Medium',
-    flexibility: 'Medium',
-    learningCurve: 'Moderate',
-    bestFor: 'Multi-agent teams, role-based tasks',
-  },
-  {
-    name: 'AutoGen (Microsoft)',
-    description: 'Multi-agent conversations with human-in-the-loop support.',
-    complexity: 'High',
-    flexibility: 'High',
-    learningCurve: 'Steep',
-    bestFor: 'Research, complex multi-agent systems',
-  },
-  {
-    name: 'Amazon Bedrock AgentCore',
-    description: 'Managed infrastructure for deploying agents at scale — runtime, memory, identity, observability. Works with any framework (LangGraph, CrewAI, Strands).',
-    complexity: 'Medium',
-    flexibility: 'High',
-    learningCurve: 'Moderate',
-    bestFor: 'Enterprise deployment, production agents on AWS',
-  },
+// Non-translatable per-framework metadata. Order matches `frameworks` array in
+// `useTranslation().modules.agents.buildingAgentsSection.frameworks`.
+const FRAMEWORKS_META: { complexity: 'Low' | 'Medium' | 'High'; flexibility: 'Low' | 'Medium' | 'High'; learningCurve: 'Easy' | 'Moderate' | 'Steep' }[] = [
+  { complexity: 'Low', flexibility: 'Medium', learningCurve: 'Easy' },
+  { complexity: 'Low', flexibility: 'Medium', learningCurve: 'Easy' },
+  { complexity: 'Medium', flexibility: 'High', learningCurve: 'Moderate' },
+  { complexity: 'Medium', flexibility: 'Medium', learningCurve: 'Moderate' },
+  { complexity: 'High', flexibility: 'High', learningCurve: 'Steep' },
+  { complexity: 'Medium', flexibility: 'High', learningCurve: 'Moderate' },
 ]
 
 const LEVEL_COLORS: Record<string, string> = {
@@ -126,64 +75,64 @@ print(run_agent("What's trending in AI today?"))`,
   },
 ]
 
-const EN_P2 = `A basic agent is just a loop: send messages → check for tool calls → execute tools → feed results back → repeat. Add frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent state, or multi-agent orchestration.`
 export const BuildingAgentsSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const fRAMEWORKST = tArray(lang, FRAMEWORKS, frameworksTranslations)
-  const c = useT({ title: '6. Building Agents' , p2: EN_P2 }, { sv: buildingAgentsSectionSv, ko: buildingAgentsSectionKo })
+  const c = useTranslation().modules.agents.buildingAgentsSection
   return (
-  <section aria-labelledby="building-agents">
-    <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
-    <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
-      You don&apos;t need a framework to build an agent. Start with{' '}
-      <strong className="text-zinc-900 dark:text-zinc-100">raw function calling</strong> — it&apos;s just a while loop.
-      Add a framework when your agent needs complex routing, state management, or multi-agent
-      coordination.
-    </p>
-
-    {/* Framework comparison table */}
-    <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Framework</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Complexity</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Flexibility</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Learning Curve</th>
-            <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Best For</th>
-          </tr>
-        </thead>
-        <tbody>
-          {fRAMEWORKST.map(fw => (
-            <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
-              <td className="px-4 py-2.5">
-                <span className="font-medium text-zinc-800 dark:text-zinc-200">{fw.name}</span>
-                <p className="mt-0.5 text-xs text-zinc-500">{fw.description}</p>
-              </td>
-              <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[fw.complexity]}`}>
-                {fw.complexity}
-              </td>
-              <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[fw.flexibility]}`}>
-                {fw.flexibility}
-              </td>
-              <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[fw.learningCurve]}`}>
-                {fw.learningCurve}
-              </td>
-              <td className="px-4 py-2.5 text-xs text-zinc-600 dark:text-zinc-400">{fw.bestFor}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    {/* Simulated terminal */}
-    <SimulatedTerminal steps={TERMINAL_STEPS} title="Building a simple agent from scratch" />
-
-    <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
-      <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-        <strong className="text-zinc-900 dark:text-zinc-100">Start simple.</strong> {c.p2}
+    <section aria-labelledby="building-agents">
+      <h2 id="building-agents" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+        You don&apos;t need a framework to build an agent. Start with{' '}
+        <strong className="text-zinc-900 dark:text-zinc-100">raw function calling</strong> — it&apos;s just a while loop.
+        Add a framework when your agent needs complex routing, state management, or multi-agent
+        coordination.
       </p>
-    </div>
-  </section>
+
+      {/* Framework comparison table */}
+      <div className="mb-8 overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-700">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800">
+              <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Framework</th>
+              <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Complexity</th>
+              <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Flexibility</th>
+              <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Learning Curve</th>
+              <th className="px-4 py-3 text-left font-mono text-xs text-zinc-600 dark:text-zinc-400">Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            {c.frameworks.map((fw, i) => {
+              const meta = FRAMEWORKS_META[i]
+              return (
+                <tr key={fw.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
+                  <td className="px-4 py-2.5">
+                    <span className="font-medium text-zinc-800 dark:text-zinc-200">{fw.name}</span>
+                    <p className="mt-0.5 text-xs text-zinc-500">{fw.description}</p>
+                  </td>
+                  <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[meta.complexity]}`}>
+                    {meta.complexity}
+                  </td>
+                  <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[meta.flexibility]}`}>
+                    {meta.flexibility}
+                  </td>
+                  <td className={`px-4 py-2.5 font-mono text-xs ${LEVEL_COLORS[meta.learningCurve]}`}>
+                    {meta.learningCurve}
+                  </td>
+                  <td className="px-4 py-2.5 text-xs text-zinc-600 dark:text-zinc-400">{fw.bestFor}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Simulated terminal */}
+      <SimulatedTerminal steps={TERMINAL_STEPS} title="Building a simple agent from scratch" />
+
+      <div className="mt-4 rounded-md bg-zinc-100 dark:bg-zinc-800 p-4">
+        <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <strong className="text-zinc-900 dark:text-zinc-100">Start simple.</strong> {c.p2}
+        </p>
+      </div>
+    </section>
   )
 }

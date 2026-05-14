@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { a2ASectionSv, a2ASectionKo } from './tech-translations'
-import { protocolsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 const A2A_AGENT_CARD = `{
   "name": "billing-agent",
@@ -33,17 +31,8 @@ const A2A_AGENT_CARD = `{
   }
 }`
 
-const PROTOCOLS = [
-  { name: 'MCP', direction: 'Agent → Tool/Resource', analogy: 'USB — connecting peripherals to a computer', scope: 'One agent accessing external capabilities (APIs, databases, file systems)', standard: 'Anthropic (open, adopted by OpenAI, AWS, Microsoft)', status: '3,000+ servers, production-ready' },
-  { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (100+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
-]
-
-const EN_P4 = `Example: cross-team agent collaboration`
-const EN_P3 = `MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.`
 export const A2ASection: React.FC = () => {
-  const { lang } = useLanguage()
-  const pROTOCOLST = tArray(lang, PROTOCOLS, protocolsTranslations)
-  const c = useT({ title: '7. A2A — Agent-to-Agent Protocol' , p3: EN_P3 , p4: EN_P4 }, { sv: a2ASectionSv, ko: a2ASectionKo })
+  const c = useTranslation().modules.agents.a2aSection
   const [showCard, setShowCard] = useState(false)
   const toggleCard = useCallback(() => setShowCard((p) => !p), [])
 
@@ -68,7 +57,7 @@ export const A2ASection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {pROTOCOLST.map((p) => (
+            {c.protocols.map((p) => (
               <tr key={p.name} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                 <td className="px-3 py-2 font-mono font-medium text-amber-300">{p.name}</td>
                 <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{p.direction}</td>
@@ -90,10 +79,10 @@ export const A2ASection: React.FC = () => {
             { term: 'Task', desc: 'The unit of work. A client agent sends a task, the remote agent processes it, returns results. Tasks can be long-running with streaming updates.' },
             { term: 'Message / Part', desc: 'Communication within a task. Supports text, files, structured data. Multi-turn conversations between agents.' },
             { term: 'Push Notifications', desc: 'Remote agent can notify the client when async work completes — no polling required.' },
-          ].map((c) => (
-            <div key={c.term} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
-              <p className="text-xs font-medium text-emerald-400">{c.term}</p>
-              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{c.desc}</p>
+          ].map((cc) => (
+            <div key={cc.term} className="rounded bg-zinc-100 dark:bg-zinc-800/50 px-3 py-2">
+              <p className="text-xs font-medium text-emerald-400">{cc.term}</p>
+              <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{cc.desc}</p>
             </div>
           ))}
         </div>

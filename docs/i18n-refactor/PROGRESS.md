@@ -3,6 +3,17 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 5 — DONE (`agents` module migrated)
+
+- Added `t.modules.agents.*` to `en.ts` (13 sections: whatAreAgents, whatAreAgentsSection, toolUse, functionCallingSection, mcpSection, patterns, designPatternsSection, connect, buildingAgentsSection, businessImpact, a2aSection, skillsHarnessSection, productionGovernanceSection).
+- Extended `sv.ts` and `ko.ts` with agents content. Preserved every existing human translation from `translations.ts` and `tech-translations.ts` and `data-translations.ts`. 2 MT-marked entries per language (insightTitle / insightText for the `connect` section, which were new EN-only fields with no legacy equivalent).
+- Migrated 15 components in `src/modules/agents/`. Three components had only inline EN with no SV/KO (`useT(EN, {})` pattern): `ContextFilesSection.tsx` and `ContextFilesBusiness.tsx` keep EN inline; `HowAgentsConnectBusiness.tsx` was reconnected to its orphaned legacy `connectSv`/`connectKo` translations through the new tree. Several legacy tech-section `intro` fields that the current components never rendered were dropped as orphans; one (`buildingAgentsSection`, `productionGovernanceSection`, `a2aSection`) was semantically remapped to the field the component actually renders (`p2` or `p3`).
+- Migrated `WhatAreAgentsBusiness.tsx` from a parallel `getWhatAreAgentsContent(lang)` system (loaded from `src/modules/agents/content/whatAreAgents.{en,sv,ko}.ts`) to the unified tree. Deleted the `content/` subdirectory.
+- Renamed two section keys for clean camelCase: legacy `mCPSection` → `mcpSection`, legacy `a2ASection` → `a2aSection`. Component imports updated accordingly.
+- Lifted previously inline-EN-only arrays (TOOLS, GUARDRAIL_SCENARIOS, DECISION_QUESTIONS, AUTONOMY_LEVELS, SELF_DRIVING_PARALLELS, RISK_FRAMEWORK, FAILURE_PATTERNS) into the tree under their parent section so future SV/KO translations can populate them. Non-translatable per-item fields (color, icon, diagram) live in parallel `*_META` consts indexed by position, matching the established pattern from industry / aiproblem.
+- Deleted `src/modules/agents/{translations,tech-translations,data-translations}.ts` plus the `content/` subdirectory.
+- `npm run build` clean (220 ms).
+
 ## Checkpoint 4 — DONE (`evaluation` module migrated)
 
 - Added `t.modules.evaluation.*` to `en.ts` (measuring, choosing, whyEvaluationSection, benchmarksSection, customEvalSection, leaderboardSection).
@@ -102,7 +113,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `industry` | (deleted) | 7 .tsx migrated | ✅ |
 | `embeddings` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `prompting` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
-| `agents` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~16 .tsx | ⏳ |
+| `agents` | (deleted) | 15 .tsx migrated | ✅ |
 | `ai-in-org` | (none — content inline in `AIInOrgModule.tsx`) | 1 .tsx | ⏳ |
 | `fine-tuning` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 

@@ -786,6 +786,225 @@ const modules = {
       bottomLine: 'Use benchmarks as a starting filter, then evaluate on',
     },
   },
+  agents: {
+    // Business: 1. What Are AI Agents? (was getWhatAreAgentsContent(lang) reading from src/modules/agents/content/)
+    whatAreAgents: {
+      sectionTitle: '1. What Are AI Agents?',
+      intro: 'Most AI tools today are like **a very smart colleague you can text** — they answer questions, but they can\'t actually *do* anything. An AI agent is different: it\'s more like **a personal assistant who can take action on your behalf**.',
+      introSub: 'Think of the difference between asking someone "what time is the meeting?" vs. "reschedule my meeting to Thursday and tell everyone."',
+      demoTitle: 'From Chatbot to Agent',
+      demoDescription: 'Click through to see how AI capabilities evolve — like going from a colleague who answers questions to an assistant who handles tasks.',
+      levels: [
+        { level: 'Chatbot', analogy: 'Like texting a knowledgeable friend', description: 'You ask a question, you get an answer. That\'s it. The AI can\'t check anything, look anything up, or do anything on your behalf. It only knows what it was trained on.', everyday: 'Imagine asking a colleague a question over Slack — they answer from memory, but they can\'t open your spreadsheet or check your calendar for you.', limit: 'If the answer requires up-to-date info or doing something, you\'re stuck doing it yourself.' },
+        { level: 'AI + Search', analogy: 'Like a colleague who can Google things', description: 'The AI can look things up before answering — searching your company documents, checking a knowledge base, or browsing the web. This is called RAG (Retrieval-Augmented Generation).', everyday: 'Like asking your colleague a question and they say "hang on, let me check the shared drive" — then come back with an answer that references actual documents.', limit: 'It can find information, but still can\'t take action. It can tell you the meeting is at 3pm, but can\'t reschedule it.' },
+        { level: 'AI Agent', analogy: 'Like a personal assistant who gets things done', description: 'The AI can think about what needs to happen, take actions (send emails, update spreadsheets, book meetings, query databases), check the results, and keep going until the job is done.', everyday: 'Like telling your executive assistant "reschedule my Thursday meetings to next week and email the attendees." They figure out the steps, do them, handle any issues, and report back.', limit: 'More powerful but needs guardrails — you want to approve big decisions before the assistant acts.' },
+      ],
+      loopTitle: 'How does an agent actually work?',
+      loopIntro: 'An agent follows a simple loop — the same one a good assistant uses:',
+      loopSteps: [
+        { label: 'Think', desc: 'What needs to happen next?' },
+        { label: 'Act', desc: 'Do something (send email, look up data, update a record)' },
+        { label: 'Check', desc: 'Did it work? What happened?' },
+        { label: 'Repeat', desc: 'Until the task is done' },
+      ],
+      loopOutro: 'This is exactly what you do when you delegate a task to someone: they think about it, take a step, check the result, and keep going. The difference is the AI does this in seconds.',
+      beforeAfterTitle: 'Before & after: what agents change',
+      examples: [
+        { scenario: 'Customer support', without: 'Agent answers the question from a script. Customer still has to navigate the website themselves to change their plan.', with: 'Agent looks up the customer\'s account, checks their billing, changes the plan, sends a confirmation email — all in one conversation.' },
+        { scenario: 'Expense reports', without: 'AI can explain the expense policy. Employee still fills out the form manually.', with: 'Employee forwards a receipt. Agent reads it, fills out the expense form, categorizes it correctly, and submits it for approval.' },
+        { scenario: 'Meeting prep', without: 'AI summarizes a document you paste in. You still have to find the right documents yourself.', with: 'You say "prep me for the 2pm client call." Agent pulls the client\'s recent emails, last meeting notes, open proposals, and creates a one-page brief.' },
+      ],
+      withoutLabel: 'Without agent',
+      withLabel: 'With agent',
+      everydayLabel: 'Everyday comparison',
+      limitLabel: 'Limitation:',
+      selfExplainPrompt: 'In your own words, explain the difference between a chatbot and an agent to a colleague who has never heard of AI agents. Use an everyday comparison.',
+      selfExplainAnswer: 'A chatbot is like texting a really knowledgeable friend — they can answer your questions, but they can\'t do anything for you. An agent is like having a personal assistant — you can say "book me a flight to London next Tuesday, under $500, aisle seat" and they\'ll actually search flights, compare options, book it, and send you the confirmation. The key difference is action: a chatbot talks, an agent does.',
+    },
+    // Tech: 1. What Are AI Agents? — only the section title is rendered through the tree;
+    // the body paragraph stays inline in JSX (was effectively already EN-only).
+    whatAreAgentsSection: {
+      title: '1. What Are AI Agents?',
+    },
+    // Business: 2. What Can Agents Actually Do?
+    toolUse: {
+      title: '2. What Can Agents Actually Do?',
+      intro: 'An agent\'s power comes from its tools — the things it can connect to and use. Think of it like hiring an assistant and giving them access to your email, calendar, and filing system.',
+      tools: [
+        { name: 'Search / Retrieval', analogy: 'Like looking something up in a filing cabinet', whatItDoes: 'The agent searches your company documents, knowledge base, or the web.', businessExample: 'A customer asks about your return policy. The agent searches your policy documents and gives an accurate answer.' },
+        { name: 'Email & Messaging', analogy: 'Like asking your assistant to send a message', whatItDoes: 'The agent can draft and send emails, Slack messages, or notifications.', businessExample: 'After resolving a support ticket, the agent sends a follow-up email.' },
+        { name: 'Data Lookup', analogy: 'Like checking a spreadsheet or database', whatItDoes: 'The agent can query your CRM, ERP, or any business system.', businessExample: '"What\'s the status of the Acme Corp deal?" — the agent checks Salesforce.' },
+        { name: 'Calculations', analogy: 'Like handing someone a calculator', whatItDoes: 'The agent can run calculations and generate reports accurately.', businessExample: '"What would our margin be if we discount 15%?" — the agent calculates exactly.' },
+        { name: 'Actions & Updates', analogy: 'Like asking someone to update a record', whatItDoes: 'The agent can create, update, or delete records in your business systems.', businessExample: '"Create a follow-up task for the Acme account." — the agent creates it.' },
+      ],
+      guardrailScenarios: [
+        { action: 'Look up information', risk: 'Low', recommendation: 'Let the agent do this freely.' },
+        { action: 'Send an email to a customer', risk: 'Medium', recommendation: 'Show a draft and ask for approval before sending.' },
+        { action: 'Update a financial record', risk: 'High', recommendation: 'Always require human approval.' },
+        { action: 'Delete customer data', risk: 'Critical', recommendation: 'Never automate this. Require explicit human action.' },
+      ],
+      trustTitle: 'The trust question: what should agents do alone?',
+      trustIntro: 'Just like you wouldn\'t give a new employee the company credit card on day one, you need to decide what an agent can do on its own vs. what needs your approval. The bigger the consequence of a mistake, the more human oversight you need.',
+      platformNote: 'Platforms like Amazon Bedrock AgentCore handle the plumbing — connecting to tools, managing memory across conversations, running securely at scale — so your team can focus on the agent\'s logic rather than infrastructure.',
+      selfExplainPrompt: 'Your manager asks: "Should we let the AI agent send emails to customers without approval?" How would you think through this decision?',
+      selfExplainAnswer: 'I\'d consider the risk: a wrong email could damage the relationship. I\'d recommend starting with a draft-and-approve workflow. Over time, auto-send routine responses while keeping human review for sensitive communications. Start cautious, loosen as trust builds.',
+    },
+    // Tech: 2. Function Calling — body prose is hardcoded EN in JSX; only title is migrated.
+    functionCallingSection: {
+      title: '2. Function Calling',
+    },
+    // Tech: 3. MCP (Model Context Protocol). Key normalized from legacy `mCPSection` to `mcpSection`.
+    mcpSection: {
+      title: '3. MCP (Model Context Protocol)',
+      p2: 'Instead of writing custom integrations for every model provider, you build one MCP server. Any MCP-compatible client — Claude, ChatGPT, Cursor, VS Code, your own app — can discover and use your tools automatically.',
+    },
+    // Business: 3. How to Set Up Agents for Your Team
+    patterns: {
+      title: '3. How to Set Up Agents for Your Team',
+      intro: 'There\'s no one-size-fits-all. Just like you organize a team differently for a quick task vs. a major project, there are different ways to set up AI agents.',
+      patterns: [
+        { name: 'Single Agent', analogy: 'One assistant handling everything', howItWorks: 'One AI agent receives the task, figures out the steps, and does them all. Simple and fast for straightforward tasks.', bestFor: 'Tasks with clear steps that one person could handle — answering questions, filling forms, simple lookups.', realExample: 'A customer asks "what\'s my order status?" The agent checks the order system and responds. Done in one go.' },
+        { name: 'Handoff (Routing)', analogy: 'A receptionist directing you to the right department', howItWorks: 'A "router" agent figures out what kind of request this is, then hands it off to a specialist agent. Like calling a company and being transferred to the right department.', bestFor: 'When you have different types of requests that need different expertise — support vs. sales vs. billing.', realExample: 'Customer writes in. Router agent detects it\'s a billing issue and hands off to the billing specialist agent, which has access to payment systems.' },
+        { name: 'Multi-Agent Team', analogy: 'A project team where each person has a role', howItWorks: 'Multiple specialized agents work together, each handling their part. One might research, another writes, another reviews — like a team collaborating on a project.', bestFor: 'Complex tasks that benefit from different perspectives or skills — report generation, research projects, content creation.', realExample: 'Creating a market analysis: one agent gathers data, another analyzes trends, a third writes the executive summary, and a fourth checks the numbers.' },
+        { name: 'Human-in-the-Loop', analogy: 'An assistant who checks with you before big decisions', howItWorks: 'The agent does the work but pauses at key decision points to get your approval. Like an assistant who drafts the email but waits for you to hit send.', bestFor: 'High-stakes tasks where mistakes are costly — financial transactions, customer communications, legal documents.', realExample: 'Agent prepares a contract amendment, shows you the changes, and waits for your "looks good" before sending it to the client.' },
+      ],
+      decisionQuestions: [
+        { question: 'How complex is the task?', simple: 'Single agent — keep it simple', complex: 'Multi-agent team — divide and conquer' },
+        { question: 'How risky are mistakes?', simple: 'Let the agent run autonomously', complex: 'Add human-in-the-loop checkpoints' },
+        { question: 'Are there different request types?', simple: 'One agent handles all', complex: 'Router + specialist agents' },
+        { question: 'How fast does it need to be?', simple: 'Single agent is fastest', complex: 'Multi-agent adds latency but improves quality' },
+      ],
+    },
+    // Tech: 4. Agent Design Patterns
+    designPatternsSection: {
+      title: '4. Agent Design Patterns',
+      intro: 'Not all agents work the same way. These are the core architectural patterns — each suited to different types of tasks.',
+      patterns: [
+        { name: 'ReAct', description: 'The most common pattern. The agent alternates between thinking (reasoning about what to do), acting (calling a tool), and observing (reading the result). Repeats until the task is done.', useCase: 'General-purpose agents, Q&A with tool use, data retrieval tasks.', example: '"What are the top 3 restaurants near me?" → thinks → calls search API → reads results → thinks → responds' },
+        { name: 'Reflection', description: 'The agent generates an output, then reviews its own work and improves it. A second LLM call (or the same model with a critic prompt) evaluates quality and suggests fixes.', useCase: 'Code generation, writing tasks, any output that benefits from self-review.', example: 'Write code → review for bugs → fix issues → verify tests pass → return final version' },
+        { name: 'Planning', description: 'Before executing anything, the agent creates a step-by-step plan. Then it follows the plan, potentially re-planning if something unexpected happens.', useCase: 'Complex multi-step tasks, research, project management.', example: '"Build me a dashboard" → plan: 1) gather requirements 2) design schema 3) create components 4) test' },
+        { name: 'Multi-Agent', description: 'Multiple specialized agents collaborate. Each agent has a specific role (researcher, coder, reviewer) and they pass work between each other.', useCase: 'Complex workflows, software development, research pipelines.', example: 'Researcher finds info → Writer drafts content → Editor reviews → Publisher formats' },
+        { name: 'Human-in-the-Loop', description: 'The agent pauses before risky actions and asks for human approval. Essential for production systems where mistakes have real consequences.', useCase: 'Financial transactions, infrastructure changes, data deletion, production deployments.', example: '"Delete all inactive users" → agent pauses → shows list of 847 users → waits for confirmation' },
+      ],
+    },
+    // Business: 4. How Agents Connect to Everything (HowAgentsConnectBusiness).
+    // Component currently uses `useT(EN, {})` (empty overrides), but the legacy `connectSv/Ko`
+    // contains preserved human translations — reconnected here through sv.ts/ko.ts.
+    connect: {
+      title: '4. How Agents Connect to Everything',
+      intro: 'An agent is only useful if it can do things. Here is how the ecosystem fits together — what each piece does, where you actually see it in your tools, and whether you need to do anything about it.',
+      concepts: [
+        { name: 'MCP — connecting AI to your tools', analogy: 'Universal access badges for your systems', whatItIs: 'An open standard (often called the "USB-C of AI") that lets any AI tool talk to any external system through one protocol. Built by Anthropic, adopted across the industry. Hundreds of public connectors exist for things like GitHub, Slack, Salesforce, Postgres, Google Drive, Jira, Linear, Notion.', whereYouSeeIt: 'When you click "Connect to Slack" or "Connect to Salesforce" inside a Claude Project, Custom GPT, Cursor, or Kiro — that&apos;s often an MCP connection under the hood. Your IT admin sees them in tool settings as "MCP servers" or "connectors."', doIneedToDoSomething: 'Usually no — the AI tool comes with a list of pre-built MCP connectors. You just click "connect" and authorise. For non-standard internal systems, your engineering team might build a custom MCP server (a one-time effort).', whyCare: 'Without MCP your AI is a smart text box. With MCP it can read your real data and take real actions — file a Jira ticket, query your database, send a Slack message. This is where AI stops being a chat toy and starts replacing busywork.', example: 'Your team installs the GitHub MCP server. Now everyone&apos;s AI tool — Claude, Cursor, Kiro — can review pull requests, file issues, and read code in your private repos. One install, every tool benefits.' },
+        { name: 'Skills — packaged expertise for AI', analogy: 'A training manual for one specific task — packaged so any AI can use it', whatItIs: 'A folder of instructions (a SKILL.md file) that teaches an AI HOW to do one thing — the workflow, decision rules, edge cases. Skills are an open standard from Anthropic. The AI loads only the skills it needs, when it needs them.', whereYouSeeIt: 'A "Skills" panel in Claude or Anthropic&apos;s API console. A "skills/" folder in a code repo. A library of installable skills inside Microsoft Agent Framework or Amazon Quick. The newest tools list available skills like an app store.', doIneedToDoSomething: 'You can use skills others have built (more like installing an app) without writing one. Writing one is a markdown file — no code required. Operations, HR, finance teams write skills for their own processes.', whyCare: 'Without a skill, you have to re-explain a multi-step process to AI every time. With a skill, the AI just knows how your team files an expense, runs a release, or onboards a customer — once and forever, no matter which AI tool the user picks.', example: 'Your finance team writes an "expense-policy" skill. From then on, anyone in the company who asks any AI tool to file an expense gets the right approver, right policy version, and right escalation path — automatically.' },
+        { name: 'Kiro Powers — bundled expertise for developers', analogy: 'A specialist consultant who arrives with their own toolkit', whatItIs: 'A Kiro-specific feature: curated bundles of MCP servers + best-practice rules + automation hooks for a specific tech domain. Think "AWS Observability Power" or "Feature Flags Power."', whereYouSeeIt: 'Inside the Kiro IDE — in the Powers panel. When you mention a relevant keyword, Kiro auto-loads the right Power.', doIneedToDoSomething: 'Engineering teams using Kiro can install Powers from the marketplace. Other teams don&apos;t need to do anything — Powers are an engineering tool.', whyCare: 'For engineering managers: Powers let you encode "how we do AWS observability" or "how we use feature flags" as a shareable bundle. Newcomers get up to speed in days, not months.', example: 'Your team installs the "AWS Observability" Power. Now every engineer using Kiro automatically gets your company&apos;s logging conventions, your CloudWatch dashboards, and your incident playbooks — without having to learn them from scratch.' },
+        { name: 'A2A — agents talking to other agents', analogy: 'Departments sending requests to each other', whatItIs: 'Where MCP connects an agent to TOOLS, A2A (Agent-to-Agent) connects an agent to OTHER AGENTS. Created by Google in 2025, donated to the Linux Foundation. Backed by 100+ organisations.', whereYouSeeIt: 'Mostly behind the scenes today — but you&apos;ll see it as "agent marketplaces" emerge: a Salesforce agent calling an Atlassian agent, your support agent delegating to a billing agent. The user just sees one conversation; behind the scenes, multiple agents collaborated.', doIneedToDoSomething: 'For most teams, no action needed in 2026. As more vendors ship A2A-compatible agents, this becomes the plumbing for cross-system AI workflows.', whyCare: 'A2A is the difference between "10 disconnected AI tools" and "your AI tools work together." Today most companies have the disconnected version. Watch this space over the next 12-18 months.', example: 'A customer asks your support agent for a refund. Via A2A, the support agent delegates to the billing agent (which has the actual access to issue refunds). The user sees one smooth response; two agents collaborated.' },
+      ],
+      platformNote: 'Platforms like Amazon Bedrock AgentCore, Microsoft Copilot Studio, and Salesforce Agentforce wrap all of this together — they manage which model runs, which tools are available, how memory works, what limits apply. Most companies don\'t build this from scratch; they pick a platform that fits their existing stack.',
+      insightTitle: 'The pattern: open standards, not lock-in',
+      insightText: 'Notice the pattern: most of these are open standards, not vendor lock-in. MCP, Agent Skills, A2A — all donated to the Linux Foundation under the Agentic AI Foundation (December 2025). That means a skill or MCP connector you write or buy works across vendors. This is rare in enterprise software and worth pushing your AI tool vendors to honour.',
+      selfExplainPrompt: 'Think of a multi-step process at your company that involves multiple systems (e.g. closing a deal, onboarding a hire, processing a refund). Which of the four concepts above would each step rely on?',
+      selfExplainAnswer: 'Example — closing a deal: (1) MCP connects the agent to your CRM, email, calendar, project management, and billing systems. (2) A "deal-close" Skill encodes your team&apos;s 6-step workflow. (3) Powers are not relevant here (engineering-specific). (4) A2A could come into play if the deal-close agent has to delegate billing setup to a finance team agent. The platform (Quick / Copilot Studio / Agentforce) ties them all together at runtime.',
+    },
+    // Tech: 6. Building Agents
+    buildingAgentsSection: {
+      title: '6. Building Agents',
+      p2: 'A basic agent is just a loop: send messages → check for tool calls → execute tools → feed results back → repeat. Add frameworks like LangGraph or CrewAI only when you need graph-based routing, persistent state, or multi-agent orchestration.',
+      frameworks: [
+        { name: 'Raw function calling', description: 'Direct API calls with tool schemas. No framework overhead.', bestFor: 'Simple agents, learning, prototypes' },
+        { name: 'Vercel AI SDK', description: 'Web-focused, great TypeScript support, streaming-first.', bestFor: 'Web apps, Next.js, streaming UIs' },
+        { name: 'LangChain / LangGraph', description: 'Most popular. LangGraph adds graph-based workflows for complex agents.', bestFor: 'Production agents, complex workflows' },
+        { name: 'CrewAI', description: 'Multi-agent framework with role-based agents that collaborate.', bestFor: 'Multi-agent teams, role-based tasks' },
+        { name: 'AutoGen (Microsoft)', description: 'Multi-agent conversations with human-in-the-loop support.', bestFor: 'Research, complex multi-agent systems' },
+        { name: 'Amazon Bedrock AgentCore', description: 'Managed infrastructure for deploying agents at scale — runtime, memory, identity, observability. Works with any framework (LangGraph, CrewAI, Strands).', bestFor: 'Enterprise deployment, production agents on AWS' },
+      ],
+    },
+    // Business: 6. Business Reality — When AI Takes the Wheel
+    businessImpact: {
+      title: '6. The Business Reality — When AI Takes the Wheel',
+      intro: 'Every executive wants AI transformation. But when it is time to actually let AI make decisions, the room gets quiet. This is the self-driving car problem — the technology might be ready, but are the people and processes?',
+      introSub: 'Understanding the spectrum of AI autonomy — and honestly assessing where your organization is ready — is the difference between successful adoption and expensive failures.',
+      levels: [
+        { level: 'AI as a tool', analogy: 'A calculator — you press the buttons', description: 'AI does exactly what you ask, one task at a time.', orgChange: 'Minimal. Individual productivity boost.', risk: 'Low — the human is always in control.', examples: 'ChatGPT for drafting emails. Copilot for code suggestions.' },
+        { level: 'AI as an assistant', analogy: 'A junior employee — does the legwork, you review', description: 'AI handles multi-step tasks but checks with you at key points.', orgChange: 'Moderate. Workflows change: humans shift from doing to reviewing.', risk: 'Medium — mistakes are caught at review points.', examples: 'AI drafts customer responses for human approval. AI triages support tickets.' },
+        { level: 'AI as a colleague', analogy: 'A trusted team member — handles their area, escalates exceptions', description: 'AI autonomously handles routine decisions within defined boundaries.', orgChange: 'Significant. Roles shift from execution to oversight.', risk: 'Higher — the AI acts without per-action approval.', examples: 'AI resolves routine support tickets end-to-end. AI processes expense reports.' },
+        { level: 'AI as an autonomous operator', analogy: 'A self-driving car — no one at the wheel', description: 'AI makes and executes decisions independently across complex workflows.', orgChange: 'Transformational. Entire processes are redesigned.', risk: 'Highest — cascading errors, accountability gaps.', examples: 'Fully autonomous trading systems. Self-driving supply chain optimization.' },
+      ],
+      carTitle: 'The self-driving car lesson',
+      carIntro: 'The parallels between autonomous vehicles and autonomous AI agents are striking — and the lessons are directly applicable to your AI strategy.',
+      parallels: [
+        { car: 'Self-driving cars are statistically safer than human drivers', ai: 'AI agents can be more consistent and accurate than humans for routine tasks', but: 'But when a self-driving car crashes, it makes national news. We hold autonomous systems to a higher standard.' },
+        { car: 'People are more afraid of plane crashes than car crashes', ai: 'People are more afraid of AI making a wrong decision than a human making the same wrong decision', but: 'The fear is about control. We accept risks we feel we control (driving) more than risks we don\'t (flying, AI).' },
+        { car: 'Tesla: ship it, iterate. Waymo: test exhaustively, launch slowly.', ai: 'Some companies go all-in on autonomous AI. Others start with human-in-the-loop.', but: 'Both have merit. Low-risk tasks can tolerate the Tesla approach; high-stakes decisions need the Waymo approach.' },
+      ],
+      frameworkButton: 'Practical framework: which decisions can AI make?',
+      riskFramework: [
+        { decision: 'Answer a FAQ', impact: 'Low', reversible: 'Yes', recommendation: 'Fully autonomous' },
+        { decision: 'Send a marketing email', impact: 'Medium', reversible: 'No', recommendation: 'Draft + human approval first, then auto-send routine ones' },
+        { decision: 'Issue a refund under $50', impact: 'Medium', reversible: 'Partially', recommendation: 'Autonomous with audit trail' },
+        { decision: 'Change contract terms', impact: 'High', reversible: 'Difficult', recommendation: 'Always human approval' },
+        { decision: 'Hiring/firing recommendation', impact: 'Critical', reversible: 'No', recommendation: 'AI provides data only — never the decision' },
+      ],
+      failTitle: 'Why 40% of agentic AI projects may fail',
+      failIntro: 'Industry analysts project that up to 40% of agentic AI initiatives could be cancelled by 2027 — not because the technology does not work, but because organizations are not ready.',
+      failurePatterns: [
+        { pattern: 'Technology-first, process-second', detail: 'Teams build the agent before defining what decisions it can make and who is accountable.' },
+        { pattern: 'No escalation path', detail: 'The agent handles 95% of cases well, but the 5% it can\'t handle have no clear path to a human.' },
+        { pattern: 'Rubber-stamp reviews', detail: 'Humans are "in the loop" but approve everything without checking.' },
+        { pattern: 'All-or-nothing thinking', detail: 'Leaders want full autonomy or nothing. The gradual approach feels too slow but is far more likely to succeed.' },
+      ],
+      selfExplainPrompt: 'Your CEO says "I want our customer support to be fully autonomous by Q4." How would you advise them?',
+      selfExplainAnswer: 'I recommend the Waymo approach: Start with Level 2 for routine tasks in Q1. Move to Level 3 in Q2 once we have data showing 98%+ accuracy. Keep complex tasks at Level 2 through Q3. Evaluate full autonomy in Q4 based on actual performance data. This gets 70% of the efficiency gains early with minimal risk.',
+    },
+    // Tech: 7. A2A — Agent-to-Agent Protocol. Key normalized from `a2ASection` to `a2aSection`.
+    a2aSection: {
+      title: '7. A2A — Agent-to-Agent Protocol',
+      p3: 'MCP handles agent→tool connections. A2A handles agent→agent delegation. Together they enable cross-team workflows where each team owns and operates their own agent.',
+      p4: 'Example: cross-team agent collaboration',
+      protocols: [
+        { name: 'MCP', direction: 'Agent → Tool/Resource', analogy: 'USB — connecting peripherals to a computer', scope: 'One agent accessing external capabilities (APIs, databases, file systems)', standard: 'Anthropic (open, adopted by OpenAI, AWS, Microsoft)', status: '3,000+ servers, production-ready' },
+        { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — computers talking to computers', scope: 'Agents discovering, delegating to, and collaborating with other agents across org boundaries', standard: 'Google → Linux Foundation (100+ orgs: AWS, Microsoft, Salesforce, SAP)', status: 'Spec stable, early production adoption' },
+      ],
+    },
+    // Tech: 8. Skills, Steering, and the Managed Runtime
+    skillsHarnessSection: {
+      title: '8. Skills, Steering, and the Managed Runtime',
+      intro: 'MCP gives agents tools. Agent Skills give them workflows. AGENTS.md and Kiro steering give them project context. Bedrock AgentCore gives them a managed runtime. The ecosystem has converged on distinct, layered standards — most of them open and donated to the Agentic AI Foundation (Linux Foundation, December 2025).',
+      capabilities: [
+        { name: 'MCP Server', layer: 'Connectivity', what: 'Universal tool connector — exposes one API/database/service to any MCP client', granularity: 'Single tool or resource', reusability: 'Any MCP-compatible agent or IDE', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
+        { name: 'Agent Skill (SKILL.md)', layer: 'Behavior', what: 'Open-standard package — folder with SKILL.md (frontmatter + instructions) plus optional scripts/, references/, assets/. Loads progressively: metadata always, body when activated, files on demand.', granularity: 'Multi-step workflow or domain expertise', reusability: 'Any Skills-compatible agent (Claude Code, Codex, Microsoft Agent Framework, Kiro, …)', example: 'customer-onboarding, pdf-processing, code-review' },
+        { name: 'AGENTS.md', layer: 'Project context', what: 'README for agents — repo-level instructions: setup, code style, test commands, PR rules. Open standard from the Agentic AI Foundation.', granularity: 'Whole repo or subdirectory (nested files supported)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands, and more', example: 'monorepo root + per-package AGENTS.md' },
+        { name: 'Kiro Steering', layer: 'Workspace context', what: 'Markdown files in .kiro/steering/ that give Kiro persistent project knowledge — conventions, libraries, standards.', granularity: 'Workspace', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
+        { name: 'Bedrock AgentCore', layer: 'Runtime', what: 'Managed agent runtime on AWS — model + system prompt + tools + skills + memory + observability + limits.', granularity: 'Complete agent', reusability: 'Production deployment', example: 'Support agent, sales assistant, IT helpdesk' },
+      ],
+    },
+    // Tech: 8. Production Governance — Trust at Scale.
+    // Note: section number "8" is a pre-existing duplicate with skillsHarnessSection — preserved from legacy.
+    // Drops dead p3-p6, p9, p10 keys (legacy had p3-p20 placeholders; component only renders p2/p7/p8/p11/p12).
+    productionGovernanceSection: {
+      title: '8. Production Governance — Trust at Scale',
+      intro: 'McKinsey (2026): "Organizations can no longer concern themselves only with AI systems saying the wrong thing; they must contend with systems doing the wrong thing."',
+      p2: 'Deploying agents to production is fundamentally different from deploying APIs. An API does what you coded. An agent',
+      p7: 'Autonomy tiers — match oversight to risk',
+      p8: 'Agent-specific failure modes (beyond hallucination)',
+      p11: 'Organizations without proactive governance could see a',
+      p12: 'The EU AI Act (phasing in 2025-2027) imposes fines up to',
+      autonomyTiers: [
+        { tier: 'L0 — Copilot', loop: 'Human acts, AI suggests', oversight: 'Every action', examples: 'Code completion, email drafts, search suggestions', risk: 'Minimal — human executes' },
+        { tier: 'L1 — Executor', loop: 'Human approves, AI acts', oversight: 'Per-action approval', examples: 'AI drafts + human sends email, AI prepares + human files ticket', risk: 'Low — human gate on every action' },
+        { tier: 'L2 — Bounded autonomy', loop: 'AI acts within rules, human monitors', oversight: 'Async review + alerts', examples: 'Auto-resolve L1 tickets, process refunds <$100, schedule meetings', risk: 'Medium — errors may not be caught immediately' },
+        { tier: 'L3 — Supervised autonomy', loop: 'AI acts, escalates exceptions', oversight: 'Exception-based + audits', examples: 'End-to-end customer onboarding, automated incident response', risk: 'High — cascading errors possible, need kill switches' },
+        { tier: 'L4 — Full autonomy', loop: 'AI acts, human sets strategy', oversight: 'Outcome-based review', examples: 'Autonomous trading, self-healing infrastructure, supply chain optimization', risk: 'Critical — accountability gaps, regulatory exposure' },
+      ],
+      governanceControls: [
+        { control: 'Action boundaries', what: 'Whitelist of permitted actions per agent. Anything not explicitly allowed is denied.', implementation: 'System prompt constraints + AgentCore harness max_iterations + tool-level IAM policies' },
+        { control: 'Spend limits', what: 'Cap on financial impact per action and per session.', implementation: 'Guardrails on refund amounts, purchase limits, API call budgets. Hard-coded in skill logic, not just prompt instructions.' },
+        { control: 'Audit trail', what: 'Every agent action logged with reasoning trace, tool calls, inputs/outputs.', implementation: 'AgentCore Observability — step-by-step execution traces, metadata tagging, trajectory inspection.' },
+        { control: 'Kill switch', what: 'Ability to immediately halt an agent or class of agents.', implementation: 'AgentCore Runtime session termination. Circuit breakers on error rate thresholds.' },
+        { control: 'Human escalation', what: 'Defined triggers that pause the agent and route to a human.', implementation: 'Confidence thresholds, topic classifiers (Bedrock Guardrails), explicit escalation rules in skills.' },
+        { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
+      ],
+    },
+  },
 } as const
 
 /**

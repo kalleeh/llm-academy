@@ -367,5 +367,182 @@ export const ko: DeepPartial<Translation> = {
         intro: '벤치마크는 유용하지만 결함이 있습니다. 리더보드 순위만으로 모델을 선택하면 안 되는 이유입니다.',
       },
     },
+    agents: {
+      // From legacy: src/modules/agents/content/whatAreAgents.ko.ts (full human translation)
+      whatAreAgents: {
+        sectionTitle: '1. AI 에이전트란?',
+        intro: '오늘날 대부분의 AI 도구는 **문자를 보낼 수 있는 똑똑한 동료** 같습니다 — 질문에 답해주지만, 실제로 무언가를 *해주지는* 못합니다. AI 에이전트는 다릅니다: **여러분을 대신해 행동할 수 있는 개인 비서**에 더 가깝습니다.',
+        introSub: '"회의 몇 시야?"라고 묻는 것과 "내 회의를 목요일로 옮기고 참석자들에게 알려줘"라고 말하는 것의 차이를 생각해 보세요.',
+        demoTitle: '챗봇에서 에이전트로',
+        demoDescription: '클릭하면서 AI 기능이 어떻게 발전하는지 확인하세요 — 질문에 답하는 동료에서 업무를 처리하는 비서로.',
+        levels: [
+          { level: '챗봇', analogy: '아는 것이 많은 친구에게 문자하는 것과 같음', description: '질문하면 답을 받습니다. 그게 전부입니다. AI는 무언가를 확인하거나, 검색하거나, 대신 해줄 수 없습니다. 학습된 내용만 알고 있습니다.', everyday: 'Slack(또는 카카오톡)으로 동료에게 질문하는 것을 상상해 보세요 — 기억에 의존해서 답하지만, 여러분의 스프레드시트를 열거나 캘린더를 확인해 줄 수는 없습니다.', limit: '답변에 최신 정보가 필요하거나 무언가를 해야 한다면, 직접 해야 합니다.' },
+          { level: 'AI + 검색', analogy: '검색할 줄 아는 동료와 같음', description: 'AI가 답하기 전에 정보를 찾아볼 수 있습니다 — 회사 문서를 검색하거나, 지식 베이스를 확인하거나, 웹을 탐색합니다. 이것을 RAG(검색 증강 생성)라고 합니다.', everyday: '동료에게 질문했더니 "잠깐, 공유 드라이브 확인해 볼게"라고 하고 — 실제 문서를 참조한 답변을 가져오는 것과 같습니다.', limit: '정보를 찾을 수는 있지만, 여전히 행동은 할 수 없습니다. 회의가 오후 3시라고 알려줄 수는 있지만, 일정을 변경해 줄 수는 없습니다.' },
+          { level: 'AI 에이전트', analogy: '일을 처리해 주는 개인 비서와 같음', description: 'AI가 무엇을 해야 하는지 생각하고, 행동하고(이메일 보내기, 스프레드시트 업데이트, 회의 예약, 데이터베이스 조회), 결과를 확인하고, 작업이 완료될 때까지 계속합니다.', everyday: '비서에게 "목요일 회의들을 다음 주로 옮기고 참석자들에게 이메일 보내줘"라고 말하는 것과 같습니다. 단계를 파악하고, 실행하고, 문제를 처리하고, 결과를 보고합니다.', limit: '더 강력하지만 가드레일이 필요합니다 — 큰 결정은 비서가 행동하기 전에 승인하고 싶을 것입니다.' },
+        ],
+        loopTitle: '에이전트는 실제로 어떻게 작동하나요?',
+        loopIntro: '에이전트는 간단한 루프를 따릅니다 — 좋은 비서가 사용하는 것과 같은 방식입니다:',
+        loopSteps: [
+          { label: '생각', desc: '다음에 무엇을 해야 하나?' },
+          { label: '행동', desc: '무언가를 한다 (이메일 보내기, 데이터 조회, 기록 업데이트)' },
+          { label: '확인', desc: '잘 됐나? 무슨 일이 있었나?' },
+          { label: '반복', desc: '작업이 완료될 때까지' },
+        ],
+        loopOutro: '이것은 누군가에게 업무를 위임할 때 하는 것과 정확히 같습니다: 생각하고, 한 단계를 실행하고, 결과를 확인하고, 계속합니다. 차이점은 AI가 이것을 몇 초 만에 한다는 것입니다.',
+        beforeAfterTitle: '전과 후: 에이전트가 바꾸는 것',
+        examples: [
+          { scenario: '고객 지원', without: '에이전트가 스크립트에서 질문에 답합니다. 고객은 여전히 직접 웹사이트를 탐색해서 요금제를 변경해야 합니다.', with: '에이전트가 고객 계정을 조회하고, 청구 내역을 확인하고, 요금제를 변경하고, 확인 이메일을 보냅니다 — 모두 하나의 대화에서.' },
+          { scenario: '경비 보고서', without: 'AI가 경비 정책을 설명할 수 있습니다. 직원은 여전히 양식을 수동으로 작성해야 합니다.', with: '직원이 영수증을 전달합니다. 에이전트가 읽고, 경비 양식을 작성하고, 올바르게 분류하고, 승인을 위해 제출합니다.' },
+          { scenario: '회의 준비', without: 'AI가 붙여넣은 문서를 요약합니다. 올바른 문서를 찾는 것은 여전히 직접 해야 합니다.', with: '"오후 2시 고객 미팅 준비해 줘"라고 말합니다. 에이전트가 고객의 최근 이메일, 지난 회의록, 진행 중인 제안서를 가져와 한 페이지 브리핑을 만듭니다.' },
+        ],
+        withoutLabel: '에이전트 없이',
+        withLabel: '에이전트와 함께',
+        everydayLabel: '일상적인 비교',
+        limitLabel: '한계:',
+        selfExplainPrompt: 'AI 에이전트에 대해 들어본 적 없는 동료에게 챗봇과 에이전트의 차이를 본인의 말로 설명해 보세요. 일상적인 비유를 사용하세요.',
+        selfExplainAnswer: '챗봇은 아는 것이 정말 많은 친구에게 문자하는 것과 같습니다 — 질문에 답해줄 수 있지만, 대신 해줄 수는 없습니다. 에이전트는 개인 비서가 있는 것과 같습니다 — "다음 주 화요일 런던행 항공편 예약해 줘, 50만원 이하, 통로석"이라고 말하면 실제로 항공편을 검색하고, 옵션을 비교하고, 예약하고, 확인서를 보내줍니다. 핵심 차이는 행동입니다: 챗봇은 말하고, 에이전트는 합니다.',
+      },
+      // From legacy: tech-translations.ts → whatAreAgentsSectionKo (title only — legacy intro orphaned, body is hardcoded EN in JSX)
+      whatAreAgentsSection: {
+        title: '1. AI 에이전트란?',
+      },
+      // From legacy: translations.ts → toolUseKo (full human translation; guardrailScenarios array has no legacy KO → falls back to EN)
+      toolUse: {
+        title: '2. 에이전트가 실제로 할 수 있는 것',
+        intro: '에이전트의 힘은 **도구**에서 옵니다 — 연결하고 사용할 수 있는 것들. 비서를 고용하고 이메일, 캘린더, 파일 시스템에 대한 접근 권한을 주는 것과 같습니다.',
+        tools: [
+          { name: '검색 / 조회', analogy: '서류함에서 찾아보는 것과 같음', whatItDoes: '에이전트가 회사 문서, 지식 베이스, 웹을 검색합니다.', businessExample: '고객이 반품 정책을 물어봅니다. 에이전트가 정책 문서를 검색하고 정확한 답변을 제공합니다.' },
+          { name: '이메일 & 메시징', analogy: '비서에게 메시지를 보내달라고 하는 것과 같음', whatItDoes: '에이전트가 이메일, Slack(또는 카카오워크) 메시지, 알림을 작성하고 보낼 수 있습니다.', businessExample: '지원 티켓 해결 후 에이전트가 고객에게 후속 이메일을 보냅니다.' },
+          { name: '데이터 조회', analogy: '스프레드시트나 데이터베이스를 확인하는 것과 같음', whatItDoes: '에이전트가 CRM, ERP 또는 비즈니스 시스템을 조회할 수 있습니다.', businessExample: '"Acme Corp 거래 상태가 어떻게 되나요?" — 에이전트가 Salesforce를 확인합니다.' },
+          { name: '계산', analogy: '계산기를 건네주는 것과 같음', whatItDoes: '에이전트가 정확하게 계산하고 보고서를 생성할 수 있습니다.', businessExample: '"15% 할인하면 마진이 어떻게 되나요?" — 에이전트가 정확히 계산합니다.' },
+          { name: '작업 & 업데이트', analogy: '기록을 업데이트해 달라고 하는 것과 같음', whatItDoes: '에이전트가 비즈니스 시스템에서 기록을 생성, 업데이트, 삭제할 수 있습니다.', businessExample: '"Acme 계정에 후속 작업을 만들어 주세요." — 에이전트가 생성합니다.' },
+        ],
+        trustTitle: '신뢰 질문: 에이전트가 혼자 무엇을 해야 하나요?',
+        trustIntro: '신입사원에게 첫날부터 법인카드를 주지 않듯이, 에이전트가 혼자 할 수 있는 것과 승인이 필요한 것을 결정해야 합니다.',
+        platformNote: '**Amazon Bedrock AgentCore** 같은 플랫폼이 인프라를 관리합니다 — 도구 연결, 메모리 관리, 대규모 보안.',
+        selfExplainPrompt: '매니저가 묻습니다: "AI 에이전트가 승인 없이 고객에게 이메일을 보내게 해야 할까요?" 이 결정을 어떻게 생각하시겠습니까?',
+        selfExplainAnswer: '위험을 고려하겠습니다: 잘못된 이메일은 관계를 손상시킬 수 있습니다. "초안 작성 후 승인" 워크플로우로 시작하는 것을 추천합니다. 시간이 지나면서 품질에 대한 신뢰가 쌓이면 일상적인 응답은 자동 발송하고 민감한 커뮤니케이션은 사람 검토를 유지합니다.',
+      },
+      // From legacy: tech-translations.ts → functionCallingSectionKo (title only)
+      functionCallingSection: {
+        title: '2. 함수 호출',
+      },
+      // From legacy: tech-translations.ts → mCPSectionKo (title only — legacy p2 was empty placeholder)
+      mcpSection: {
+        title: '3. MCP (모델 컨텍스트 프로토콜)',
+      },
+      // From legacy: translations.ts → patternsKo (title, intro, patterns[] human; decisionQuestions falls back to EN)
+      patterns: {
+        title: '3. 팀을 위한 에이전트 설정 방법',
+        intro: '만능 해결책은 없습니다. 빠른 작업과 큰 프로젝트에 팀을 다르게 구성하듯이, AI 에이전트를 설정하는 방법도 다양합니다.',
+        patterns: [
+          { name: '단일 에이전트', analogy: '모든 것을 처리하는 한 명의 비서', howItWorks: '하나의 AI 에이전트가 작업을 받아 모두 처리합니다. 간단하고 빠릅니다.', bestFor: '한 사람이 처리할 수 있는 명확한 단계의 작업.', realExample: '고객이 "주문 상태가 어떻게 되나요?"라고 물으면 에이전트가 확인하고 답합니다.' },
+          { name: '핸드오프 (라우팅)', analogy: '올바른 부서로 안내하는 안내원', howItWorks: '"라우터" 에이전트가 요청 유형을 파악하고 전문 에이전트에게 넘깁니다.', bestFor: '다른 전문성이 필요한 다양한 유형의 요청.', realExample: '고객이 문의합니다. 라우터 에이전트가 청구 문제임을 감지하고 청구 전문 에이전트에게 넘깁니다.' },
+          { name: '멀티 에이전트 팀', analogy: '각자 역할이 있는 프로젝트 팀', howItWorks: '여러 전문 에이전트가 협력하여 각자의 부분을 처리합니다.', bestFor: '다양한 관점이 도움이 되는 복잡한 작업.', realExample: '시장 분석: 한 에이전트가 데이터를 수집하고, 다른 하나가 분석하고, 세 번째가 요약을 작성합니다.' },
+          { name: '휴먼 인 더 루프', analogy: '큰 결정 전에 확인하는 비서', howItWorks: '에이전트가 작업을 수행하지만 주요 결정 지점에서 승인을 위해 일시 중지합니다.', bestFor: '실수 비용이 큰 고위험 작업.', realExample: '에이전트가 계약 수정안을 준비하고, 변경 사항을 보여주고, 확인을 기다립니다.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → designPatternsSectionKo + data-translations.ts → patternsTranslations.ko
+      designPatternsSection: {
+        title: '4. 에이전트 디자인 패턴',
+        intro: '모든 에이전트가 같은 방식으로 작동하지 않습니다. 핵심 아키텍처 패턴입니다.',
+        patterns: [
+          { name: 'ReAct', description: '가장 일반적인 패턴. 에이전트가 생각, 행동, 관찰을 번갈아 수행.', useCase: '범용 에이전트, 도구 사용 Q&A.', example: '"근처 최고 레스토랑 3곳?" → 생각 → 검색 → 읽기 → 응답' },
+          { name: '반성', description: '에이전트가 출력을 생성한 후 자체 작업을 검토하고 개선.', useCase: '코드 생성, 작문 작업.', example: '코드 생성 → 버그 검토 → 수정 → 전달' },
+          { name: '계획 후 실행', description: '에이전트가 먼저 계획을 세운 후 각 단계를 실행.', useCase: '복잡한 다단계 작업.', example: '"도쿄 여행 계획" → 단계 나열 → 항공편 예약 → 호텔 예약 → 일정 생성' },
+          { name: '멀티 에이전트', description: '여러 전문 에이전트가 각자의 역할로 협업.', useCase: '전문화가 도움이 되는 복잡한 작업.', example: '연구 에이전트 + 작성 에이전트 + 검토 에이전트' },
+          { name: '휴먼 인 더 루프', description: '에이전트가 주요 결정 지점에서 인간 승인을 위해 일시 중지.', useCase: '고위험 작업, 민감한 결정.', example: '에이전트가 계약 준비 → 인간 검토 → 에이전트 발송' },
+        ],
+      },
+      // From legacy: translations.ts → connectKo (orphaned in legacy — component used `useT(EN, {})`).
+      // Reconnected via the new tree. concepts[] has 4 of 7 fields; whereYouSeeIt/doIneedToDoSomething/whyCare fall back to EN.
+      connect: {
+        title: '4. 에이전트가 모든 것에 연결하는 방법',
+        intro: '에이전트는 *무언가를 할 수 있어야* 유용합니다. 도구, 스킬, 프로토콜의 생태계가 어떻게 맞물리는지 알아보겠습니다.',
+        concepts: [
+          { name: 'MCP — 도구에 연결', analogy: '시스템을 위한 범용 접근 배지', whatItIs: '어떤 AI든 어떤 도구에든 연결할 수 있는 오픈 표준("AI의 USB-C"). 이미 3,000개 이상의 커넥터가 있습니다.', example: '회사가 티켓 시스템용 MCP 서버를 구축합니다. 이제 모든 AI 도구가 티켓을 생성하고 업데이트할 수 있습니다.' },
+          { name: '스킬 — 에이전트에게 워크플로우 가르치기', analogy: '도구 벨트가 아닌 교육 매뉴얼', whatItIs: 'MCP는 에이전트에게 도구를 줍니다. 스킬은 사용 방법을 가르칩니다 — 워크플로우, 모범 사례, 의사결정 로직.', example: '"고객 온보딩" 스킬은 7단계 프로세스를 알고 있습니다: 계약 확인, 워크스페이스 생성, 환영 이메일 발송...' },
+          { name: 'Powers — 개발자를 위한 전문 컨설턴트', analogy: '자체 도구와 전문성을 가지고 오는 전문가', whatItIs: 'Kiro IDE를 위한 큐레이션된 패키지로 MCP 서버, 가이드라인, 자동화 훅을 번들합니다.', example: '"AWS Observability" Power는 Kiro에게 CloudWatch와 모니터링 모범 사례에 대한 지식을 제공합니다.' },
+          { name: 'A2A — 에이전트끼리 대화', analogy: '부서 간 요청을 보내는 것', whatItIs: 'MCP가 에이전트를 도구에 연결하는 반면, A2A는 에이전트를 다른 에이전트에 연결합니다. Google이 만들고 100개 이상의 조직이 지원합니다.', example: '지원 에이전트가 청구 문제를 감지합니다. A2A를 통해 재무팀의 청구 에이전트에게 환불 요청을 보냅니다.' },
+        ],
+        platformNote: '**Amazon Bedrock AgentCore** 같은 플랫폼이 이 모든 것을 연결하는 런타임을 관리합니다.',
+        // MT
+        insightTitle: '패턴: 벤더 종속이 아닌 오픈 표준',
+        // MT
+        insightText: '패턴에 주목하세요: 이들 대부분은 벤더 종속이 아닌 오픈 표준입니다. MCP, Agent Skills, A2A 모두 Agentic AI Foundation(Linux Foundation, 2025년 12월) 산하로 기증되었습니다. 즉, 작성하거나 구입한 스킬이나 MCP 커넥터가 여러 벤더에서 작동한다는 뜻입니다. 엔터프라이즈 소프트웨어에서는 드문 일이며 AI 도구 벤더에게 이를 준수하도록 요구할 가치가 있습니다.',
+        selfExplainPrompt: '회사에서 여러 시스템을 포함하는 다단계 프로세스를 생각해 보세요. 에이전트에게 어떤 MCP 도구가 필요할까요? 어떤 워크플로우 로직(스킬)이 연결할까요?',
+        selfExplainAnswer: '예시 — 새 거래 성사: MCP 도구: CRM, 이메일, 캘린더, 프로젝트 관리, 청구. 스킬 워크플로우: (1) CRM 업데이트. (2) 온보딩 프로젝트 생성. (3) 킥오프 미팅 예약. (4) 환영 이메일 발송. (5) 인보이스 생성. (6) 영업 매니저에게 알림.',
+      },
+      // From legacy: tech-translations.ts → buildingAgentsSectionKo + data-translations.ts → frameworksTranslations.ko.
+      // Legacy `intro` is semantically the new `p2` callout — mapped accordingly.
+      buildingAgentsSection: {
+        title: '6. 에이전트 구축',
+        p2: '에이전트를 구축하는 데 프레임워크가 필요하지 않습니다. 원시 함수 호출로 시작하고 필요에 따라 확장하세요.',
+        frameworks: [
+          { name: '원시 함수 호출', description: '도구 스키마를 사용한 직접 API 호출. 프레임워크 오버헤드 없음.', bestFor: '간단한 에이전트, 학습, 프로토타입' },
+          { name: 'Vercel AI SDK', description: '웹 중심, 좋은 TypeScript 지원, 스트리밍 우선.', bestFor: '웹 앱, Next.js, 스트리밍 UI' },
+          { name: 'LangChain / LangGraph', description: '가장 인기. LangGraph가 그래프 기반 워크플로우 추가.', bestFor: '프로덕션 에이전트, 복잡한 워크플로우' },
+          { name: 'CrewAI', description: '역할 기반 에이전트가 협업하는 멀티 에이전트 프레임워크.', bestFor: '멀티 에이전트 팀, 역할 기반 작업' },
+          { name: 'AutoGen (Microsoft)', description: '휴먼 인 더 루프 지원이 있는 멀티 에이전트 대화.', bestFor: '연구, 복잡한 멀티 에이전트 시스템' },
+          { name: 'Amazon Bedrock AgentCore', description: '대규모 에이전트를 위한 관리형 인프라. 모든 프레임워크와 작동.', bestFor: '엔터프라이즈 배포, AWS의 프로덕션 에이전트' },
+        ],
+      },
+      // From legacy: translations.ts → businessImpactKo (full human prose; arrays have no legacy KO → fall back to EN).
+      // Legacy loopTitle/loopDesc fields are orphaned (component does not render them) — dropped.
+      businessImpact: {
+        title: '6. 비즈니스 현실 — AI가 운전대를 잡을 때',
+        intro: '모든 임원이 AI 전환을 원합니다. 하지만 실제로 AI가 결정을 내리게 할 때가 되면 회의실이 조용해집니다. 이것이 자율주행차 문제입니다 — 기술은 준비되었을 수 있지만, 사람과 프로세스는 준비되었나요?',
+        introSub: 'AI 자율성의 스펙트럼을 이해하고 — 조직이 어디까지 준비되었는지 솔직하게 평가하는 것이 — 성공적인 도입과 비싼 실패의 차이입니다.',
+        carTitle: '자율주행차의 교훈',
+        carIntro: '자율주행차와 자율 AI 에이전트 사이의 유사점은 놀랍습니다 — 그리고 교훈은 AI 전략에 직접 적용됩니다.',
+        frameworkButton: '실용적 프레임워크: AI가 어떤 결정을 내릴 수 있나요?',
+        failTitle: '에이전틱 AI 프로젝트의 40%가 실패할 수 있는 이유',
+        failIntro: '업계 분석가들은 에이전틱 AI 이니셔티브의 최대 40%가 2027년까지 취소될 수 있다고 예측합니다 — 기술이 작동하지 않아서가 아니라 조직이 준비되지 않았기 때문입니다.',
+        selfExplainPrompt: 'CEO가 "Q4까지 고객 지원을 완전 자율화하고 싶다 — 사람은 루프에 없어도 된다"고 말합니다. 자율성 스펙트럼과 자율주행차 비유를 사용하여 어떻게 조언하시겠습니까?',
+        selfExplainAnswer: '이렇게 말하겠습니다: "야망을 공유하지만, 자율주행차 업계에서 배우겠습니다. Waymo 접근법을 추천합니다: Q1에 일상 업무에 대해 레벨 2로 시작. Q2에 98%+ 정확도 데이터가 있으면 레벨 3으로 이동. Q3까지 복잡한 업무는 레벨 2 유지. Q4에 실제 성과 데이터를 기반으로 완전 자율성 평가."',
+      },
+      // From legacy: tech-translations.ts → a2ASectionKo (title human; legacy intro maps to new p3) + data-translations.ts → protocolsTranslations.ko
+      a2aSection: {
+        title: '7. A2A — 에이전트 간 프로토콜',
+        p3: 'MCP는 에이전트를 도구에 연결합니다. A2A는 에이전트를 다른 에이전트에 연결합니다.',
+        protocols: [
+          { name: 'MCP', direction: '에이전트 → 도구/리소스', analogy: 'USB — 주변기기 연결', scope: '하나의 에이전트가 외부 기능 사용', standard: 'Anthropic (오픈, OpenAI, AWS, Microsoft 채택)', status: '3000+ 서버, 프로덕션 준비' },
+          { name: 'A2A', direction: '에이전트 → 에이전트', analogy: 'HTTP — 컴퓨터 간 통신', scope: '에이전트가 다른 에이전트를 발견하고 협업', standard: 'Google → Linux Foundation (100+ 조직: AWS, Microsoft, Salesforce)', status: '스펙 안정, 초기 프로덕션 채택' },
+        ],
+      },
+      // From legacy: tech-translations.ts → skillsHarnessSectionKo + data-translations.ts → capabilitiesTranslations.ko
+      skillsHarnessSection: {
+        title: '8. 스킬, 스티어링, 관리형 런타임',
+        intro: 'MCP는 에이전트에게 도구를, Agent Skills는 워크플로우를, AGENTS.md와 Kiro steering은 프로젝트 컨텍스트를, Bedrock AgentCore는 관리형 런타임을 제공합니다. 에코시스템이 명확한 계층으로 수렴했고, 대부분 오픈 표준이며 Agentic AI Foundation(Linux Foundation, 2025년 12월)에 기증되었습니다.',
+        capabilities: [
+          { name: 'MCP Server', layer: '연결', what: '범용 도구 커넥터 — 하나의 API/데이터베이스/서비스를 모든 MCP 클라이언트에 노출', granularity: '단일 도구 또는 리소스', reusability: '모든 MCP 호환 에이전트', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
+          { name: 'Agent Skill (SKILL.md)', layer: '행동', what: '오픈 표준 — SKILL.md(프론트매터 + 지시사항) 폴더와 선택적 scripts/, references/, assets/. 점진적 로드: 메타데이터 항상, 본문은 활성화 시, 파일은 필요 시.', granularity: '다단계 워크플로우 또는 도메인 전문성', reusability: '모든 Skills 호환 에이전트 (Claude Code, Codex, Microsoft Agent Framework, Kiro 등)', example: 'customer-onboarding, pdf-processing, code-review' },
+          { name: 'AGENTS.md', layer: '프로젝트 컨텍스트', what: '에이전트용 README — 저장소 수준 지시: 설정, 코드 스타일, 테스트 명령, PR 규칙. Agentic AI Foundation의 오픈 표준.', granularity: '저장소 전체 또는 하위 디렉토리 (중첩 파일 지원)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands 등', example: '모노레포 루트 + 패키지별 AGENTS.md' },
+          { name: 'Kiro Steering', layer: '워크스페이스 컨텍스트', what: '.kiro/steering/의 마크다운 파일이 Kiro에 지속적인 프로젝트 지식 제공 — 규칙, 라이브러리, 표준.', granularity: '워크스페이스', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
+          { name: 'Bedrock AgentCore', layer: '런타임', what: 'AWS의 관리형 에이전트 런타임 — 모델 + 프롬프트 + 도구 + 스킬 + 메모리 + 관측가능성 + 제한.', granularity: '완전한 에이전트', reusability: '프로덕션 배포', example: '지원 에이전트, 영업 어시스턴트, IT 헬프데스크' },
+        ],
+      },
+      // From legacy: tech-translations.ts → productionGovernanceSectionKo (title human; legacy intro is semantically the new p2)
+      // + data-translations.ts → autonomyTiersTranslations.ko + governanceControlsTranslations.ko
+      productionGovernanceSection: {
+        title: '8. 프로덕션 거버넌스 — 대규모 신뢰',
+        p2: '에이전트를 프로덕션에 배포하는 것은 API 배포와 근본적으로 다릅니다.',
+        autonomyTiers: [
+          { tier: 'L0 — 코파일럿', loop: '인간이 행동, AI가 제안', oversight: '모든 행동', examples: '코드 완성, 이메일 초안', risk: '최소' },
+          { tier: 'L1 — 실행자', loop: '인간이 승인, AI가 행동', oversight: '행동별 승인', examples: 'AI 작성 + 인간 발송', risk: '낮음' },
+          { tier: 'L2 — 제한된 자율', loop: 'AI가 규칙 내 행동, 인간 모니터링', oversight: '비동기 검토 + 알림', examples: 'L1 티켓 자동 해결, 5만원 미만 환불', risk: '중간' },
+          { tier: 'L3 — 감독된 자율', loop: 'AI가 행동, 예외 에스컬레이션', oversight: '예외 기반 + 감사', examples: '고객 온보딩, 인시던트 대응', risk: '높음' },
+          { tier: 'L4 — 완전 자율', loop: 'AI가 행동, 인간이 전략 설정', oversight: '결과 기반 검토', examples: '자율 거래, 자가 치유 인프라', risk: '치명적' },
+        ],
+        governanceControls: [
+          { control: '행동 경계', what: '에이전트별 허용된 행동의 화이트리스트.' },
+          { control: '지출 한도', what: '행동 및 세션당 재정적 영향 상한.' },
+          { control: '감사 추적', what: '모든 에이전트 행동이 추론 추적과 함께 기록.' },
+          { control: '킬 스위치', what: '에이전트를 즉시 중지하는 기능.' },
+          { control: '인간 에스컬레이션', what: '에이전트를 일시 중지하는 정의된 트리거.' },
+          { control: '드리프트 감지', what: '시간에 따른 행동 변화 모니터링.' },
+        ],
+      },
+    },
   },
 }

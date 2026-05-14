@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
+
+// This section never had SV/KO translations (component used `useT(EN, {})`).
+// Following the established gotcha pattern, EN content stays inline pending future translation work.
 
 // Verified examples below come from:
 // - https://agents.md/                    (open standard, AAIF / OpenAI / Sourcegraph)
@@ -138,8 +140,10 @@ const FORMATS: FormatRow[] = [
 
 const EN_INTRO = `Modern AI coding tools are increasingly programmed by markdown files, not code. There are now three converging open formats — plus a handful of vendor-specific ones — and they layer rather than compete.`
 
+const EN = { title: '5. Context Files: AGENTS.md, SKILL.md, Steering', intro: EN_INTRO }
+
 export const ContextFilesSection: React.FC = () => {
-  const c = useT({ title: '5. Context Files: AGENTS.md, SKILL.md, Steering', intro: EN_INTRO }, {})
+  const c = EN
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 

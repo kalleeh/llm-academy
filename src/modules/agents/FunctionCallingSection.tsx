@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { functionCallingSectionSv, functionCallingSectionKo } from './tech-translations'
-import { demoStepsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 const TOOL_SCHEMA = `{
   "type": "function",
@@ -88,6 +86,7 @@ final = client.chat.completions.create(
     model="gpt-4o", messages=messages, tools=tools
 )`
 
+// Terminal demo content stays in English — legacy demoStepsTranslations was {sv: [], ko: []}.
 const DEMO_STEPS = [
   {
     label: 'Tool Schema',
@@ -107,9 +106,7 @@ const DEMO_STEPS = [
 ]
 
 export const FunctionCallingSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const dEMO_STEPST = tArray(lang, DEMO_STEPS, demoStepsTranslations)
-  const c = useT({ title: '2. Function Calling' }, { sv: functionCallingSectionSv, ko: functionCallingSectionKo })
+  const c = useTranslation().modules.agents.functionCallingSection
   const [activeStep, setActiveStep] = useState(0)
 
   const handleStepClick = useCallback((index: number) => {
@@ -135,7 +132,7 @@ export const FunctionCallingSection: React.FC = () => {
         </div>
         <div className="grid gap-4 p-5 lg:grid-cols-[200px_1fr]">
           <div className="flex flex-col gap-1" role="tablist" aria-label="Function calling steps">
-            {dEMO_STEPST.map((s, i) => (
+            {DEMO_STEPS.map((s, i) => (
               <button
                 key={s.label}
                 role="tab"
@@ -157,9 +154,9 @@ export const FunctionCallingSection: React.FC = () => {
             ))}
           </div>
           <div>
-            <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">{dEMO_STEPST[activeStep].description}</p>
+            <p className="mb-2 text-sm text-zinc-700 dark:text-zinc-300">{DEMO_STEPS[activeStep].description}</p>
             <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-zinc-50 dark:bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-green-300">
-              {dEMO_STEPST[activeStep].content}
+              {DEMO_STEPS[activeStep].content}
             </pre>
           </div>
         </div>

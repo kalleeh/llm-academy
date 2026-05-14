@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useLanguage } from '../../i18n'
-import { getWhatAreAgentsContent } from './content'
+import { useTranslation } from '../../i18n'
 
 const LEVEL_STYLES = [
   { color: 'border-blue-500/30 bg-blue-500/5', badge: 'bg-blue-500/20 text-blue-300' },
@@ -18,8 +17,7 @@ const LOOP_STYLES = [
 ]
 
 export const WhatAreAgentsBusiness: React.FC = () => {
-  const { lang } = useLanguage()
-  const c = getWhatAreAgentsContent(lang)
+  const c = useTranslation().modules.agents.whatAreAgents
   const [expandedExample, setExpandedExample] = useState<number | null>(null)
 
   const toggleExample = useCallback((i: number) => {

@@ -1,42 +1,20 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { Icon } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { productionGovernanceSectionSv, productionGovernanceSectionKo } from './tech-translations'
-import { autonomyTiersTranslations, governanceControlsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-const AUTONOMY_TIERS = [
-  { tier: 'L0 — Copilot', loop: 'Human acts, AI suggests', oversight: 'Every action', examples: 'Code completion, email drafts, search suggestions', risk: 'Minimal — human executes', color: 'bg-emerald-500/20 text-emerald-300' },
-  { tier: 'L1 — Executor', loop: 'Human approves, AI acts', oversight: 'Per-action approval', examples: 'AI drafts + human sends email, AI prepares + human files ticket', risk: 'Low — human gate on every action', color: 'bg-blue-500/20 text-blue-300' },
-  { tier: 'L2 — Bounded autonomy', loop: 'AI acts within rules, human monitors', oversight: 'Async review + alerts', examples: 'Auto-resolve L1 tickets, process refunds <$100, schedule meetings', risk: 'Medium — errors may not be caught immediately', color: 'bg-amber-500/20 text-amber-300' },
-  { tier: 'L3 — Supervised autonomy', loop: 'AI acts, escalates exceptions', oversight: 'Exception-based + audits', examples: 'End-to-end customer onboarding, automated incident response', risk: 'High — cascading errors possible, need kill switches', color: 'bg-red-500/20 text-red-300' },
-  { tier: 'L4 — Full autonomy', loop: 'AI acts, human sets strategy', oversight: 'Outcome-based review', examples: 'Autonomous trading, self-healing infrastructure, supply chain optimization', risk: 'Critical — accountability gaps, regulatory exposure', color: 'bg-red-500/30 text-red-400' },
+// Non-translatable per-tier color metadata. Order matches `autonomyTiers` array in
+// `useTranslation().modules.agents.productionGovernanceSection.autonomyTiers`.
+const TIER_META = [
+  { color: 'bg-emerald-500/20 text-emerald-300' },
+  { color: 'bg-blue-500/20 text-blue-300' },
+  { color: 'bg-amber-500/20 text-amber-300' },
+  { color: 'bg-red-500/20 text-red-300' },
+  { color: 'bg-red-500/30 text-red-400' },
 ]
-
-const GOVERNANCE_CONTROLS = [
-  { control: 'Action boundaries', what: 'Whitelist of permitted actions per agent. Anything not explicitly allowed is denied.', implementation: 'System prompt constraints + AgentCore harness max_iterations + tool-level IAM policies' },
-  { control: 'Spend limits', what: 'Cap on financial impact per action and per session.', implementation: 'Guardrails on refund amounts, purchase limits, API call budgets. Hard-coded in skill logic, not just prompt instructions.' },
-  { control: 'Audit trail', what: 'Every agent action logged with reasoning trace, tool calls, inputs/outputs.', implementation: 'AgentCore Observability — step-by-step execution traces, metadata tagging, trajectory inspection.' },
-  { control: 'Kill switch', what: 'Ability to immediately halt an agent or class of agents.', implementation: 'AgentCore Runtime session termination. Circuit breakers on error rate thresholds.' },
-  { control: 'Human escalation', what: 'Defined triggers that pause the agent and route to a human.', implementation: 'Confidence thresholds, topic classifiers (Bedrock Guardrails), explicit escalation rules in skills.' },
-  { control: 'Drift detection', what: 'Monitor for behavioral changes over time — is the agent doing something it didn\'t used to do?', implementation: 'Baseline metrics (action distribution, escalation rate, error rate). Alert on statistical deviation.' },
-]
-
-const EN_P12 = `The EU AI Act (phasing in 2025-2027) imposes fines up to`
-const EN_P11 = `Organizations without proactive governance could see a`
-const EN_P10 = `The EU AI Act (phasing in 2025-2027) imposes fines up to`
-const EN_P9 = `Organizations without proactive governance could see a`
-const EN_P8 = `Agent-specific failure modes (beyond hallucination)`
-const EN_P7 = `Autonomy tiers — match oversight to risk`
-const EN_P2 = `Deploying agents to production is fundamentally different from deploying APIs. An API does what you coded. An agent`
-const EN_INTRO = `McKinsey (2026): "Organizations can no longer concern themselves only with AI systems
-        saying the wrong thing; they must contend with systems doing the wrong thing."`
 
 export const ProductionGovernanceSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const aUTONOMY_TIERST = tArray(lang, AUTONOMY_TIERS, autonomyTiersTranslations)
-  const gOVERNANCE_CONTROLST = tArray(lang, GOVERNANCE_CONTROLS, governanceControlsTranslations)
-  const c = useT({ title: '8. Production Governance — Trust at Scale', intro: EN_INTRO , p2: EN_P2 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 }, { sv: productionGovernanceSectionSv, ko: productionGovernanceSectionKo })
+  const c = useTranslation().modules.agents.productionGovernanceSection
   const [showControls, setShowControls] = useState(false)
   const toggleControls = useCallback(() => setShowControls((p) => !p), [])
 
@@ -64,15 +42,18 @@ export const ProductionGovernanceSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {aUTONOMY_TIERST.map((t) => (
-              <tr key={t.tier} className="border-b border-zinc-200 dark:border-zinc-800/50 last:border-0">
-                <td className={`px-3 py-2 font-medium ${t.color} rounded`}>{t.tier}</td>
-                <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{t.loop}</td>
-                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.oversight}</td>
-                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.examples}</td>
-                <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.risk}</td>
-              </tr>
-            ))}
+            {c.autonomyTiers.map((t, i) => {
+              const meta = TIER_META[i]
+              return (
+                <tr key={t.tier} className="border-b border-zinc-200 dark:border-zinc-800/50 last:border-0">
+                  <td className={`px-3 py-2 font-medium ${meta.color} rounded`}>{t.tier}</td>
+                  <td className="px-3 py-2 text-zinc-700 dark:text-zinc-300">{t.loop}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.oversight}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.examples}</td>
+                  <td className="px-3 py-2 text-zinc-600 dark:text-zinc-400">{t.risk}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
@@ -85,7 +66,7 @@ export const ProductionGovernanceSection: React.FC = () => {
         </button>
         {showControls && (
           <div className="space-y-2">
-            {gOVERNANCE_CONTROLST.map((g) => (
+            {c.governanceControls.map((g) => (
               <div key={g.control} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-4">
                 <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{g.control}</p>
                 <p className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">{g.what}</p>

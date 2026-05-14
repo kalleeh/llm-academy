@@ -373,5 +373,182 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Benchmarks är användbara men bristfälliga. Här är varför du inte bör välja modell baserat på ranking.',
       },
     },
+    agents: {
+      // From legacy: src/modules/agents/content/whatAreAgents.sv.ts (full human translation)
+      whatAreAgents: {
+        sectionTitle: '1. Vad är AI-agenter?',
+        intro: 'De flesta AI-verktyg idag är som **en väldigt smart kollega du kan smsa** — de svarar på frågor, men de kan inte faktiskt *göra* något. En AI-agent är annorlunda: den är mer som **en personlig assistent som kan agera å dina vägnar**.',
+        introSub: 'Tänk på skillnaden mellan att fråga någon "vilken tid är mötet?" och "flytta mitt möte till torsdag och meddela alla."',
+        demoTitle: 'Från chattbot till agent',
+        demoDescription: 'Klicka dig igenom för att se hur AI-kapaciteten utvecklas — från en kollega som svarar på frågor till en assistent som hanterar uppgifter.',
+        levels: [
+          { level: 'Chattbot', analogy: 'Som att smsa en kunnig vän', description: 'Du ställer en fråga, du får ett svar. Det är allt. AI:n kan inte kolla upp något, söka efter information eller göra något åt dig. Den vet bara det den tränats på.', everyday: 'Tänk dig att du frågar en kollega något på Slack — de svarar ur minnet, men de kan inte öppna ditt kalkylblad eller kolla din kalender åt dig.', limit: 'Om svaret kräver aktuell information eller att något görs, får du göra det själv.' },
+          { level: 'AI + Sökning', analogy: 'Som en kollega som kan googla saker', description: 'AI:n kan söka information innan den svarar — söka i företagets dokument, kolla en kunskapsbas eller surfa på webben. Detta kallas RAG (Retrieval-Augmented Generation).', everyday: 'Som att fråga din kollega något och de säger "vänta, jag kollar den delade mappen" — och sedan kommer tillbaka med ett svar som refererar till faktiska dokument.', limit: 'Den kan hitta information, men kan fortfarande inte agera. Den kan berätta att mötet är kl 15, men kan inte boka om det.' },
+          { level: 'AI-agent', analogy: 'Som en personlig assistent som får saker gjorda', description: 'AI:n kan tänka ut vad som behöver hända, utföra handlingar (skicka e-post, uppdatera kalkylblad, boka möten, söka i databaser), kontrollera resultaten och fortsätta tills uppgiften är klar.', everyday: 'Som att säga till din assistent "flytta mina torsdagsmöten till nästa vecka och maila deltagarna." De listar ut stegen, gör dem, hanterar eventuella problem och rapporterar tillbaka.', limit: 'Kraftfullare men behöver skyddsräcken — du vill godkänna stora beslut innan assistenten agerar.' },
+        ],
+        loopTitle: 'Hur fungerar en agent egentligen?',
+        loopIntro: 'En agent följer en enkel loop — samma som en bra assistent använder:',
+        loopSteps: [
+          { label: 'Tänk', desc: 'Vad behöver hända härnäst?' },
+          { label: 'Agera', desc: 'Gör något (skicka e-post, slå upp data, uppdatera en post)' },
+          { label: 'Kontrollera', desc: 'Fungerade det? Vad hände?' },
+          { label: 'Upprepa', desc: 'Tills uppgiften är klar' },
+        ],
+        loopOutro: 'Det här är precis vad du gör när du delegerar en uppgift till någon: de tänker på det, tar ett steg, kontrollerar resultatet och fortsätter. Skillnaden är att AI:n gör detta på sekunder.',
+        beforeAfterTitle: 'Före och efter: vad agenter förändrar',
+        examples: [
+          { scenario: 'Kundsupport', without: 'Agenten svarar på frågan från ett manus. Kunden måste fortfarande navigera webbplatsen själv för att ändra sitt abonnemang.', with: 'Agenten slår upp kundens konto, kontrollerar faktureringen, ändrar abonnemanget, skickar ett bekräftelsemail — allt i en konversation.' },
+          { scenario: 'Utläggsrapporter', without: 'AI:n kan förklara utläggspolicyn. Medarbetaren fyller fortfarande i formuläret manuellt.', with: 'Medarbetaren vidarebefordrar ett kvitto. Agenten läser det, fyller i utläggsformuläret, kategoriserar det korrekt och skickar in det för godkännande.' },
+          { scenario: 'Mötesförberedelser', without: 'AI:n sammanfattar ett dokument du klistrar in. Du måste fortfarande hitta rätt dokument själv.', with: 'Du säger "förbered mig inför kundsamtalet kl 14." Agenten hämtar kundens senaste e-post, förra mötesanteckningarna, öppna offerter och skapar en sammanfattning på en sida.' },
+        ],
+        withoutLabel: 'Utan agent',
+        withLabel: 'Med agent',
+        everydayLabel: 'Vardaglig jämförelse',
+        limitLabel: 'Begränsning:',
+        selfExplainPrompt: 'Förklara med egna ord skillnaden mellan en chattbot och en agent för en kollega som aldrig hört talas om AI-agenter. Använd en vardaglig jämförelse.',
+        selfExplainAnswer: 'En chattbot är som att smsa en väldigt kunnig vän — de kan svara på dina frågor, men de kan inte göra något åt dig. En agent är som att ha en personlig assistent — du kan säga "boka en flygresa till London nästa tisdag, under 5000 kr, gångplats" och de söker faktiskt efter flyg, jämför alternativ, bokar det och skickar dig bekräftelsen. Den avgörande skillnaden är handling: en chattbot pratar, en agent gör.',
+      },
+      // From legacy: tech-translations.ts → whatAreAgentsSectionSv (title only — legacy intro orphaned, body is hardcoded EN in JSX)
+      whatAreAgentsSection: {
+        title: '1. Vad är AI-agenter?',
+      },
+      // From legacy: translations.ts → toolUseSv (full human translation; guardrailScenarios array has no legacy SV → falls back to EN)
+      toolUse: {
+        title: '2. Vad kan agenter faktiskt göra?',
+        intro: 'En agents kraft kommer från dess **verktyg** — det den kan ansluta till och använda. Tänk på det som att anställa en assistent och ge dem tillgång till din e-post, kalender och arkivsystem.',
+        tools: [
+          { name: 'Sökning / Hämtning', analogy: 'Som att slå upp något i ett arkivskåp', whatItDoes: 'Agenten söker i dina företagsdokument, kunskapsbas eller webben.', businessExample: 'En kund frågar om er returpolicy. Agenten söker i policydokumenten och ger ett korrekt, aktuellt svar.' },
+          { name: 'E-post & Meddelanden', analogy: 'Som att be din assistent skicka ett meddelande', whatItDoes: 'Agenten kan skriva och skicka e-post, Slack-meddelanden eller notifieringar.', businessExample: 'Efter att ha löst ett supportärende skickar agenten ett uppföljningsmail.' },
+          { name: 'Datauppslag', analogy: 'Som att kolla ett kalkylblad eller databas', whatItDoes: 'Agenten kan fråga ditt CRM, ERP eller annat affärssystem.', businessExample: '"Vad är statusen på Acme Corp-affären?" — agenten kollar Salesforce.' },
+          { name: 'Beräkningar', analogy: 'Som att ge någon en miniräknare', whatItDoes: 'Agenten kan köra beräkningar och generera rapporter korrekt.', businessExample: '"Vad blir vår marginal om vi ger 15% rabatt?" — agenten beräknar exakt.' },
+          { name: 'Åtgärder & Uppdateringar', analogy: 'Som att be någon uppdatera en post', whatItDoes: 'Agenten kan skapa, uppdatera eller ta bort poster i dina system.', businessExample: '"Skapa en uppföljningsuppgift för Acme-kontot." — agenten skapar den.' },
+        ],
+        trustTitle: 'Förtroende: vad bör agenter göra själva?',
+        trustIntro: 'Precis som du inte ger en nyanställd företagskortet dag ett, behöver du bestämma vad en agent kan göra själv vs vad som behöver godkännande.',
+        platformNote: 'Plattformar som **Amazon Bedrock AgentCore** hanterar infrastrukturen — anslutning till verktyg, minneshantering, säkerhet i skala.',
+        selfExplainPrompt: 'Din chef frågar: "Ska vi låta AI-agenten skicka e-post till kunder utan godkännande?" Hur tänker du igenom detta?',
+        selfExplainAnswer: 'Jag skulle överväga risken: ett felaktigt e-postmeddelande kan skada relationen. Jag rekommenderar att börja med "skriv utkast och godkänn" — agenten skriver, en människa granskar och skickar. Över tid kan vi automatiskt skicka rutinsvar medan vi behåller granskning för känsliga ärenden.',
+      },
+      // From legacy: tech-translations.ts → functionCallingSectionSv (title only)
+      functionCallingSection: {
+        title: '2. Funktionsanrop',
+      },
+      // From legacy: tech-translations.ts → mCPSectionSv (title only — legacy p2 was empty placeholder)
+      mcpSection: {
+        title: '3. MCP (Model Context Protocol)',
+      },
+      // From legacy: translations.ts → patternsSv (title, intro, patterns[] human; decisionQuestions falls back to EN)
+      patterns: {
+        title: '3. Hur du sätter upp agenter för ditt team',
+        intro: 'Det finns ingen universallösning. Precis som du organiserar ett team olika för en snabb uppgift vs ett stort projekt, finns det olika sätt att sätta upp AI-agenter.',
+        patterns: [
+          { name: 'Ensam agent', analogy: 'En assistent som hanterar allt', howItWorks: 'En AI-agent tar emot uppgiften och gör allt. Enkelt och snabbt.', bestFor: 'Uppgifter med tydliga steg som en person kan hantera.', realExample: 'En kund frågar "vad är min orderstatus?" Agenten kollar och svarar.' },
+          { name: 'Överlämning (Routing)', analogy: 'En receptionist som dirigerar dig till rätt avdelning', howItWorks: 'En "router"-agent avgör vilken typ av förfrågan det är och lämnar över till en specialist.', bestFor: 'Olika typer av förfrågningar som behöver olika expertis.', realExample: 'Kund skriver in. Router-agenten upptäcker att det är fakturering och lämnar över.' },
+          { name: 'Multi-agent-team', analogy: 'Ett projektteam där var och en har en roll', howItWorks: 'Flera specialiserade agenter samarbetar, var och en hanterar sin del.', bestFor: 'Komplexa uppgifter som gynnas av olika perspektiv.', realExample: 'Marknadsanalys: en agent samlar data, en analyserar, en skriver sammanfattningen.' },
+          { name: 'Människa-i-loopen', analogy: 'En assistent som stämmer av före stora beslut', howItWorks: 'Agenten gör arbetet men pausar vid viktiga beslutspunkter för godkännande.', bestFor: 'Högriskuppgifter där misstag är kostsamma.', realExample: 'Agenten förbereder en kontraktsändring, visar dig ändringarna, väntar på ditt OK.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → designPatternsSectionSv + data-translations.ts → patternsTranslations.sv
+      designPatternsSection: {
+        title: '4. Designmönster för agenter',
+        intro: 'Inte alla agenter fungerar likadant. Dessa är de centrala arkitekturmönstren.',
+        patterns: [
+          { name: 'ReAct', description: 'Det vanligaste mönstret. Agenten alternerar mellan att tänka, agera och observera.', useCase: 'Allmänna agenter, Q&A med verktygsanvändning.', example: '"Vilka är de 3 bästa restaurangerna nära mig?" → tänker → söker → läser → svarar' },
+          { name: 'Reflektion', description: 'Agenten genererar output, granskar sedan sitt eget arbete och förbättrar det.', useCase: 'Kodgenerering, skrivuppgifter.', example: 'Generera kod → granska för buggar → fixa → leverera' },
+          { name: 'Planera-och-utför', description: 'Agenten skapar en plan först, utför sedan varje steg.', useCase: 'Komplexa flerstegsuppgifter.', example: '"Planera en resa till Tokyo" → lista steg → boka flyg → boka hotell → skapa resplan' },
+          { name: 'Multi-agent', description: 'Flera specialiserade agenter samarbetar, var och en med sin roll.', useCase: 'Komplexa uppgifter som gynnas av specialisering.', example: 'Forskningsagent + skribentagent + granskningsagent' },
+          { name: 'Human-in-the-loop', description: 'Agenten pausar vid viktiga beslutspunkter för mänskligt godkännande.', useCase: 'Högriskuppgifter, känsliga beslut.', example: 'Agent förbereder kontrakt → människa granskar → agent skickar' },
+        ],
+      },
+      // From legacy: translations.ts → connectSv (orphaned in legacy — component used `useT(EN, {})`).
+      // Reconnected via the new tree. concepts[] has 4 of 7 fields; whereYouSeeIt/doIneedToDoSomething/whyCare fall back to EN.
+      connect: {
+        title: '4. Hur agenter ansluter till allt',
+        intro: 'En agent är bara användbar om den kan *göra saker*. Så här passar ekosystemet av verktyg, färdigheter och protokoll ihop.',
+        concepts: [
+          { name: 'MCP — anslutning till verktyg', analogy: 'Universella åtkomstbrickor för dina system', whatItIs: 'En öppen standard ("USB-C för AI") som låter vilken AI som helst ansluta till vilket verktyg som helst. Över 2 000 kopplingar finns redan.', example: 'Ditt företag bygger en MCP-server för ert ärendesystem. Nu kan alla AI-verktyg skapa och uppdatera ärenden.' },
+          { name: 'Färdigheter — lär agenter arbetsflöden', analogy: 'En utbildningsmanual, inte bara ett verktygsbälte', whatItIs: 'MCP ger agenter verktyg. Färdigheter lär dem HUR de ska använda dem — arbetsflödet, bästa praxis och beslutslogik.', example: 'En "kundintroduktion"-färdighet vet 7-stegsprocessen: verifiera kontrakt, skapa arbetsyta, skicka välkomstmail...' },
+          { name: 'Powers — expertkonsulter för utvecklare', analogy: 'En specialist som kommer med egen verktygslåda', whatItIs: 'Kurerade paket för Kiro IDE som buntar MCP-servrar, riktlinjer och automatiseringskrokar.', example: '"AWS Observability" Power ger Kiro kunskap om CloudWatch och övervakningspraxis.' },
+          { name: 'A2A — agenter pratar med agenter', analogy: 'Avdelningar som skickar förfrågningar till varandra', whatItIs: 'Medan MCP ansluter agenter till verktyg, ansluter A2A agenter till ANDRA agenter. Skapat av Google, stöds av 100+ organisationer.', example: 'Din supportagent upptäcker ett faktureringsproblem. Via A2A skickar den en återbetalningsförfrågan till ekonomiteamets agent.' },
+        ],
+        platformNote: 'Plattformar som **Amazon Bedrock AgentCore** hanterar körtiden som binder ihop allt detta.',
+        // MT
+        insightTitle: 'Mönstret: öppna standarder, inte inlåsning',
+        // MT
+        insightText: 'Lägg märke till mönstret: de flesta av dessa är öppna standarder, inte leverantörsinlåsning. MCP, Agent Skills och A2A är alla donerade till Linux Foundation under Agentic AI Foundation (december 2025). Det betyder att en färdighet eller MCP-koppling du skriver eller köper fungerar tvärs över leverantörer. Det är ovanligt i företagsmjukvara och värt att kräva av dina AI-leverantörer.',
+        selfExplainPrompt: 'Tänk på en flerstegsprocess på ditt företag som involverar flera system. Vilka MCP-verktyg skulle en agent behöva? Vilken arbetsflödeslogik (färdighet) skulle binda ihop dem?',
+        selfExplainAnswer: 'Exempel — ny affär stängd: MCP-verktyg: CRM, e-post, kalender, projekthantering, fakturering. Färdighetsarbetsflöde: (1) Uppdatera CRM. (2) Skapa introduktionsprojekt. (3) Boka kickoff-möte. (4) Skicka välkomstmail. (5) Generera faktura. (6) Meddela säljchef.',
+      },
+      // From legacy: tech-translations.ts → buildingAgentsSectionSv + data-translations.ts → frameworksTranslations.sv.
+      // Legacy `intro` is semantically the new `p2` callout — mapped accordingly.
+      buildingAgentsSection: {
+        title: '6. Bygga agenter',
+        p2: 'Du behöver inget ramverk för att bygga en agent. Börja med rå funktionsanrop och skala upp vid behov.',
+        frameworks: [
+          { name: 'Rå funktionsanrop', description: 'Direkta API-anrop med verktygsscheman. Inget ramverksoverhead.', bestFor: 'Enkla agenter, lärande, prototyper' },
+          { name: 'Vercel AI SDK', description: 'Webbfokuserat, bra TypeScript-stöd, streaming-först.', bestFor: 'Webbappar, Next.js, streaming-UI' },
+          { name: 'LangChain / LangGraph', description: 'Mest populärt. LangGraph lägger till grafbaserade arbetsflöden.', bestFor: 'Produktionsagenter, komplexa arbetsflöden' },
+          { name: 'CrewAI', description: 'Multi-agent-ramverk med rollbaserade agenter som samarbetar.', bestFor: 'Multi-agent-team, rollbaserade uppgifter' },
+          { name: 'AutoGen (Microsoft)', description: 'Multi-agent-konversationer med human-in-the-loop-stöd.', bestFor: 'Forskning, komplexa multi-agent-system' },
+          { name: 'Amazon Bedrock AgentCore', description: 'Hanterad infrastruktur för agenter i skala. Fungerar med alla ramverk.', bestFor: 'Företagsdriftsättning, produktionsagenter på AWS' },
+        ],
+      },
+      // From legacy: translations.ts → businessImpactSv (full human prose; arrays levels/parallels/riskFramework/failurePatterns have no legacy SV → fall back to EN).
+      // Legacy loopTitle/loopDesc fields are orphaned (component does not render them) — dropped.
+      businessImpact: {
+        title: '6. Affärsverkligheten — När AI tar ratten',
+        intro: 'Varje chef vill ha AI-transformation. Men när det är dags att faktiskt låta AI fatta beslut blir det tyst i rummet. Detta är problemet med självkörande bilar — tekniken kanske är redo, men är människorna och processerna det?',
+        introSub: 'Att förstå spektrumet av AI-autonomi — och ärligt bedöma var din organisation är redo — är skillnaden mellan framgångsrik adoption och dyra misslyckanden.',
+        carTitle: 'Lärdomen från självkörande bilar',
+        carIntro: 'Parallellerna mellan autonoma fordon och autonoma AI-agenter är slående — och lärdomarna är direkt tillämpbara på din AI-strategi.',
+        frameworkButton: 'Praktiskt ramverk: vilka beslut kan AI fatta?',
+        failTitle: 'Varför 40% av agentiska AI-projekt kan misslyckas',
+        failIntro: 'Branschanalytiker bedömer att upp till 40% av agentiska AI-initiativ kan avbrytas till 2027 — inte för att tekniken inte fungerar, utan för att organisationer inte är redo.',
+        selfExplainPrompt: 'Din VD säger "Jag vill att vår kundsupport ska vara helt autonom till Q4 — inga människor i loopen." Hur skulle du råda dem med hjälp av autonomispektrumet och analogin med självkörande bilar?',
+        selfExplainAnswer: 'Jag skulle säga: "Jag delar ambitionen, men låt oss lära av branschen för självkörande bilar. Jag rekommenderar Waymo-metoden: Börja med Nivå 2 för rutinärenden i Q1. Flytta till Nivå 3 i Q2 när vi har data som visar 98%+ noggrannhet. Behåll komplexa ärenden på Nivå 2 genom Q3. Utvärdera full autonomi i Q4 baserat på faktisk prestanda."',
+      },
+      // From legacy: tech-translations.ts → a2ASectionSv (title human; legacy intro maps to new p3) + data-translations.ts → protocolsTranslations.sv
+      a2aSection: {
+        title: '7. A2A — Agent-till-Agent-protokollet',
+        p3: 'MCP kopplar agenter till verktyg. A2A kopplar agenter till andra agenter.',
+        protocols: [
+          { name: 'MCP', direction: 'Agent → Verktyg/Resurs', analogy: 'USB — ansluta kringutrustning', scope: 'En agent som använder externa funktioner', standard: 'Anthropic (öppen, antagen av OpenAI, AWS, Microsoft)', status: '3000+ servrar, produktionsklar' },
+          { name: 'A2A', direction: 'Agent → Agent', analogy: 'HTTP — datorer som pratar med datorer', scope: 'Agenter som upptäcker och samarbetar med andra agenter', standard: 'Google → Linux Foundation (100+ org: AWS, Microsoft, Salesforce)', status: 'Spec stabil, tidig produktionsanvändning' },
+        ],
+      },
+      // From legacy: tech-translations.ts → skillsHarnessSectionSv + data-translations.ts → capabilitiesTranslations.sv
+      skillsHarnessSection: {
+        title: '8. Skills, Steering och den hanterade körtiden',
+        intro: 'MCP ger agenter verktyg. Agent Skills ger dem arbetsflöden. AGENTS.md och Kiro steering ger dem projektkontext. Bedrock AgentCore ger dem en hanterad körtid. Ekosystemet har konvergerat till distinkta lager — de flesta öppna och donerade till Agentic AI Foundation (Linux Foundation, december 2025).',
+        capabilities: [
+          { name: 'MCP Server', layer: 'Anslutning', what: 'Universell verktygskoppling — exponerar ett API/databas/tjänst för alla MCP-klienter', granularity: 'Enskilt verktyg eller resurs', reusability: 'Alla MCP-kompatibla agenter', example: 'mcp-server-salesforce, mcp-server-postgres, mcp-server-slack' },
+          { name: 'Agent Skill (SKILL.md)', layer: 'Beteende', what: 'Öppen standard — mapp med SKILL.md (frontmatter + instruktioner) plus valfria scripts/, references/, assets/. Laddas progressivt: metadata alltid, kropp vid aktivering, filer vid behov.', granularity: 'Flerstegs arbetsflöde eller domänexpertis', reusability: 'Alla Skills-kompatibla agenter (Claude Code, Codex, Microsoft Agent Framework, Kiro, …)', example: 'customer-onboarding, pdf-processing, code-review' },
+          { name: 'AGENTS.md', layer: 'Projektkontext', what: 'README för agenter — repo-instruktioner: setup, kodstil, testkommandon, PR-regler. Öppen standard från Agentic AI Foundation.', granularity: 'Hela repot eller underkatalog (nestade filer stöds)', reusability: 'Codex CLI, Claude Code, Cursor, Aider, Kiro, OpenHands m.fl.', example: 'monorepo-rot + AGENTS.md per paket' },
+          { name: 'Kiro Steering', layer: 'Workspace-kontext', what: 'Markdown-filer i .kiro/steering/ som ger Kiro persistent projektkunskap — konventioner, bibliotek, standarder.', granularity: 'Workspace', reusability: 'Kiro CLI / IDE', example: 'product.md, structure.md, tech.md' },
+          { name: 'Bedrock AgentCore', layer: 'Körtid', what: 'Hanterad agentkörtid på AWS — modell + prompt + verktyg + skills + minne + observability + gränser.', granularity: 'Komplett agent', reusability: 'Produktionsdriftsättning', example: 'Supportagent, säljassistent, IT-helpdesk' },
+        ],
+      },
+      // From legacy: tech-translations.ts → productionGovernanceSectionSv (title human; legacy intro is semantically the new p2)
+      // + data-translations.ts → autonomyTiersTranslations.sv + governanceControlsTranslations.sv
+      productionGovernanceSection: {
+        title: '8. Produktionsstyrning — Tillit i skala',
+        p2: 'Att driftsätta agenter i produktion skiljer sig fundamentalt från att driftsätta API:er.',
+        autonomyTiers: [
+          { tier: 'L0 — Copilot', loop: 'Människa agerar, AI föreslår', oversight: 'Varje handling', examples: 'Kodkomplettering, mejlutkast', risk: 'Minimal' },
+          { tier: 'L1 — Utförare', loop: 'Människa godkänner, AI agerar', oversight: 'Godkännande per handling', examples: 'AI skriver + människa skickar mejl', risk: 'Låg' },
+          { tier: 'L2 — Begränsad autonomi', loop: 'AI agerar inom regler, människa övervakar', oversight: 'Asynkron granskning + varningar', examples: 'Autolösa L1-ärenden, återbetalningar <500kr', risk: 'Medel' },
+          { tier: 'L3 — Övervakad autonomi', loop: 'AI agerar, eskalerar undantag', oversight: 'Undantagsbaserad + revisioner', examples: 'Kundintroduktion, incidenthantering', risk: 'Hög' },
+          { tier: 'L4 — Full autonomi', loop: 'AI agerar, människa sätter strategi', oversight: 'Resultatbaserad granskning', examples: 'Autonom handel, självläkande infra', risk: 'Kritisk' },
+        ],
+        governanceControls: [
+          { control: 'Handlingsgränser', what: 'Vitlista av tillåtna handlingar per agent.' },
+          { control: 'Utgiftsgränser', what: 'Tak på ekonomisk påverkan per handling och session.' },
+          { control: 'Revisionsspår', what: 'Varje agenthandling loggas med resonemangsspår.' },
+          { control: 'Nödstopp', what: 'Möjlighet att omedelbart stoppa en agent.' },
+          { control: 'Mänsklig eskalering', what: 'Definierade triggers som pausar agenten.' },
+          { control: 'Driftdetektering', what: 'Övervaka beteendeförändringar över tid.' },
+        ],
+      },
+    },
   },
 }
