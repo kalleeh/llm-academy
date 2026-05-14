@@ -770,5 +770,74 @@ export const ko: DeepPartial<Translation> = {
         p4: '각 레이어를 통해 토큰의 표현이 어떻게 변하는지 확인하세요.',
       },
     },
+    datafoundations: {
+      // From legacy: translations.ts → garbageInOutKo (only title and goodDataTitle reachable through new tree shape)
+      garbageInOut: {
+        title: '1. 쓰레기를 넣으면 쓰레기가 나온다',
+        goodDataTitle: '"좋은 데이터"란 이런 것',
+      },
+      // From legacy: translations.ts → dataForBusinessKo (full mirror)
+      dataForBusiness: {
+        title: '2. 회사의 데이터 — AI가 보는 것',
+        intro: '회사에는 이미 AI가 필요로 하는 데이터가 있습니다. 하지만 모든 데이터가 같은 모습은 아닙니다. **실제 예시**를 보면서 차이를 확인해 보겠습니다.',
+        structuredLabel: '정형 데이터 (스프레드시트)',
+        unstructuredLabel: '비정형 데이터 (이메일, 문서)',
+        whyItMattersLabel: '왜 중요한가',
+        structuredNote: '모든 정보에 명확한 레이블(열)과 일관된 형식이 있습니다. AI가 "엔터프라이즈 고객이 몇 명인가요?"에 쉽게 답할 수 있습니다.',
+        unstructuredNote: '같은 고객 정보(Acme Corp, Sarah, 확장 계획)가 이메일, 문서, Slack(또는 카카오워크)에 흩어져 있습니다 — 다른 형식으로, 일관된 구조 없이. 이것이 **대부분 회사 데이터의 80% 이상**이며, LLM이 정말 빛나는 곳입니다.',
+        howMuchTitle: '얼마나 많은 데이터가 필요한가요?',
+        howMuchIntro: '작업에 따라 다릅니다 — 신입사원 교육처럼:',
+        amounts: [
+          { task: 'FAQ 답변', amount: '수십 개의 Q&A 쌍', analogy: '새 안내원에게 치트시트를 주는 것과 같음' },
+          { task: '지원 티켓 분류', amount: '수백 개의 레이블된 예시', analogy: '새 상담원에게 각 티켓 유형의 예시를 보여주는 것과 같음' },
+          { task: '브랜드 보이스로 작성', amount: '수천 개의 과거 커뮤니케이션', analogy: '최고의 작가를 수개월 동안 따라다니는 것과 같음' },
+        ],
+        selfExplainPrompt: '회사의 데이터를 생각해 보세요. 정형 데이터(스프레드시트, CRM)는 무엇인가요? 비정형 데이터(이메일, 문서, Slack/카카오워크)는 무엇인가요? AI를 둘 다에 연결하면 현재 아무도 빠르게 답할 수 없는 어떤 질문에 답할 수 있을까요?',
+        selfExplainAnswer: '예시: \'CRM에는 깨끗한 고객 기록(정형)이 있어 AI가 갱신 대상을 쉽게 답할 수 있습니다. 하지만 진짜 금은 비정형 데이터에 있습니다: 계정 관리자의 이메일 스레드에는 고객 감정에 대한 맥락이 있고, 회의록에는 구두 약속이 기록되어 있으며, Slack에는 위험 계정에 대한 실시간 신호가 있습니다.\'',
+      },
+      // From legacy: tech-translations.ts → dataTypesSectionKo + data-translations.ts → categoriesTranslations.ko
+      dataTypesSection: {
+        title: '1. 정형 vs 비정형 데이터',
+        intro: '모든 데이터는 세 가지 카테고리로 나뉩니다. 예시를 클릭하여 실제 모습을 확인하세요.',
+        categories: [
+          { title: '정형', description: '정의된 타입의 행과 열. 스프레드시트, SQL 데이터베이스, CSV 파일.' },
+          { title: '반정형', description: '일부 조직이 있지만 엄격한 스키마 없음. JSON, XML, 로그, 헤더가 있는 이메일.' },
+          { title: '비정형', description: '사전 정의된 구조 없음. 자유 텍스트, 이미지, 오디오, 비디오 — 전체 데이터의 80% 이상.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → pipelineSectionKo + data-translations.ts → stagesTranslations.ko
+      pipelineSection: {
+        title: '2. 데이터 파이프라인',
+        intro: '데이터는 사용 준비가 된 상태로 도착하는 경우가 드뭅니다. 파이프라인이 변환을 통해 이동시킵니다.',
+        stages: [
+          { label: '추출', description: '소스 시스템에서 원시 데이터 가져오기', details: ['API, 데이터베이스, 파일, 웹 스크래핑'] },
+          { label: '변환', description: '정제, 정규화, 보강', details: ['중복 제거, 형식 수정, 계산된 필드 추가'] },
+          { label: '로드', description: '대상 시스템에 쓰기', details: ['데이터 웨어하우스, 벡터 데이터베이스, 검색 인덱스'] },
+          { label: '검증', description: '품질과 완전성 확인', details: ['스키마 검증, null 체크, 분포 체크'] },
+          { label: '모니터링', description: '시간에 따른 파이프라인 건강 추적', details: ['데이터 드리프트, 볼륨 이상, 지연 경고'] },
+        ],
+      },
+      // From legacy: tech-translations.ts → dataQualitySectionKo
+      dataQualitySection: {
+        title: '3. 데이터 품질',
+        intro: '이 데이터셋에서 문제를 찾으세요. 각 문제 유형을 클릭하여 강조하세요.',
+      },
+      // From legacy: tech-translations.ts → architectureSectionKo + data-translations.ts → patternsTranslations.ko
+      architectureSection: {
+        title: '4. 데이터 아키텍처 패턴',
+        intro: '데이터는 어디에 있나요? 서로 다른 트레이드오프를 가진 네 가지 지배적 패턴.',
+        patterns: [
+          { title: '데이터 웨어하우스', tagline: '중앙화, 정형, SQL 쿼리', whenToUse: '비즈니스 분석, 보고, 대시보드' },
+          { title: '데이터 레이크', tagline: '모든 형식의 원시 데이터, schema-on-read', whenToUse: 'ML 학습, 탐색적 분석, 아카이빙' },
+          { title: '레이크하우스', tagline: '양쪽의 장점 — 레이크 스토리지 + 웨어하우스 기능', whenToUse: '둘 다 필요한 현대 데이터 플랫폼' },
+          { title: '벡터 스토어', tagline: '시맨틱 검색을 위한 임베딩', whenToUse: 'RAG, 추천, 유사도 검색' },
+        ],
+      },
+      // From legacy: tech-translations.ts → lLMDataSectionKo (renamed key llmDataSection)
+      llmDataSection: {
+        title: '5. LLM이 필요로 하는 것',
+        intro: '데이터를 넓게 이해했으니, LLM이 구체적으로 필요로 하는 것을 알아보겠습니다.',
+      },
+    },
   },
 }

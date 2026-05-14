@@ -1,9 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { dataTypesSectionSv, dataTypesSectionKo } from './tech-translations'
-import { categoriesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface DataExample {
   label: string
@@ -11,115 +9,48 @@ interface DataExample {
   preview: string
 }
 
-interface DataCategory {
-  title: string
+interface CategoryMeta {
   color: string
   borderColor: string
-  description: string
   examples: DataExample[]
 }
 
-const CATEGORIES: DataCategory[] = [
+// Non-translatable per-category metadata. Order matches `categories` array in
+// `useTranslation().modules.datafoundations.dataTypesSection.categories`.
+const CATEGORY_META: CategoryMeta[] = [
   {
-    title: '1. Structured vs Unstructured Data',
     color: 'bg-emerald-50 dark:bg-emerald-500/10',
     borderColor: 'border-emerald-400 dark:border-emerald-500/30',
-    description: 'Fixed schema, rows & columns. Every record follows the same format.',
     examples: [
-      {
-        label: 'Database Table',
-        icon: 'database',
-        preview:
-          '┌────────┬───────┬────────┬──────────┐\n│ id     │ name  │ price  │ category │\n├────────┼───────┼────────┼──────────┤\n│ 1      │ Bolt  │ 2.99   │ hardware │\n│ 2      │ Nut   │ 1.49   │ hardware │\n│ 3      │ Pipe  │ 12.00  │ plumbing │\n└────────┴───────┴────────┴──────────┘',
-      },
-      {
-        label: 'CSV File',
-        icon: 'bar-chart',
-        preview:
-          'id,name,email,signup_date\n1,Alice,[email],2024-01-15\n2,Bob,[email],2024-02-20\n3,Carol,[email],2024-03-10',
-      },
-      {
-        label: 'Spreadsheet',
-        icon: 'book',
-        preview:
-          '   A          B        C         D\n1  Quarter    Revenue  Costs     Profit\n2  Q1 2024    $1.2M    $800K     $400K\n3  Q2 2024    $1.5M    $900K     $600K\n4  Q3 2024    $1.8M    $950K     $850K',
-      },
-      {
-        label: 'Fixed-Schema JSON',
-        icon: 'clipboard',
-        preview:
-          '{\n  "user_id": 42,\n  "name": "Alice",\n  "age": 30,\n  "active": true\n}',
-      },
+      { label: 'Database Table', icon: 'database', preview: '┌────────┬───────┬────────┬──────────┐\n│ id     │ name  │ price  │ category │\n├────────┼───────┼────────┼──────────┤\n│ 1      │ Bolt  │ 2.99   │ hardware │\n│ 2      │ Nut   │ 1.49   │ hardware │\n│ 3      │ Pipe  │ 12.00  │ plumbing │\n└────────┴───────┴────────┴──────────┘' },
+      { label: 'CSV File', icon: 'bar-chart', preview: 'id,name,email,signup_date\n1,Alice,[email],2024-01-15\n2,Bob,[email],2024-02-20\n3,Carol,[email],2024-03-10' },
+      { label: 'Spreadsheet', icon: 'book', preview: '   A          B        C         D\n1  Quarter    Revenue  Costs     Profit\n2  Q1 2024    $1.2M    $800K     $400K\n3  Q2 2024    $1.5M    $900K     $600K\n4  Q3 2024    $1.8M    $950K     $850K' },
+      { label: 'Fixed-Schema JSON', icon: 'clipboard', preview: '{\n  "user_id": 42,\n  "name": "Alice",\n  "age": 30,\n  "active": true\n}' },
     ],
   },
   {
-    title: 'Unstructured',
     color: 'bg-amber-50 dark:bg-amber-500/10',
     borderColor: 'border-amber-400 dark:border-amber-500/30',
-    description: 'No predefined schema. Meaning is embedded in the content itself.',
     examples: [
-      {
-        label: 'Text Document',
-        icon: 'file',
-        preview:
-          'The quarterly earnings report showed\nunexpected growth in the APAC region,\ndriven primarily by new enterprise\ncontracts signed in Q3...',
-      },
-      {
-        label: 'Email',
-        icon: 'envelope',
-        preview:
-          'From: [email]\nTo: [email]\nSubject: Re: Project Update\n\nHey team, just wanted to flag that\nthe deadline moved to Friday...',
-      },
-      {
-        label: 'Image / Audio / Video',
-        icon: 'image',
-        preview:
-          '[Raw pixel data: 1920×1080×3 = 6.2M values]\n[Audio waveform: 44100 samples/sec × 180s]\n[Video: 30 fps × 1080p × 2hrs = ~11B values]',
-      },
-      {
-        label: 'PDF / Web Page',
-        icon: 'globe',
-        preview:
-          '<html>\n  <body>\n    <h1>Annual Report 2024</h1>\n    <p>Mixed text, tables, charts,\n       images, footnotes...</p>\n  </body>\n</html>',
-      },
+      { label: 'Text Document', icon: 'file', preview: 'The quarterly earnings report showed\nunexpected growth in the APAC region,\ndriven primarily by new enterprise\ncontracts signed in Q3...' },
+      { label: 'Email', icon: 'envelope', preview: 'From: [email]\nTo: [email]\nSubject: Re: Project Update\n\nHey team, just wanted to flag that\nthe deadline moved to Friday...' },
+      { label: 'Image / Audio / Video', icon: 'image', preview: '[Raw pixel data: 1920×1080×3 = 6.2M values]\n[Audio waveform: 44100 samples/sec × 180s]\n[Video: 30 fps × 1080p × 2hrs = ~11B values]' },
+      { label: 'PDF / Web Page', icon: 'globe', preview: '<html>\n  <body>\n    <h1>Annual Report 2024</h1>\n    <p>Mixed text, tables, charts,\n       images, footnotes...</p>\n  </body>\n</html>' },
     ],
   },
   {
-    title: 'Semi-Structured',
     color: 'bg-purple-50 dark:bg-purple-500/10',
     borderColor: 'border-purple-400 dark:border-purple-500/30',
-    description: 'Has some organization (tags, keys) but schema varies between records.',
     examples: [
-      {
-        label: 'Varying JSON',
-        icon: 'clipboard',
-        preview:
-          '// Record 1: has address\n{ "name": "Alice", "address": { "city": "NYC" } }\n\n// Record 2: no address, has tags\n{ "name": "Bob", "tags": ["vip", "beta"] }',
-      },
-      {
-        label: 'Server Logs',
-        icon: 'edit',
-        preview:
-          '2024-03-15T10:23:01Z INFO  [api] GET /users 200 45ms\n2024-03-15T10:23:02Z WARN  [db] slow query: 1200ms\n2024-03-15T10:23:05Z ERROR [auth] token expired uid=42',
-      },
-      {
-        label: 'XML / HTML',
-        icon: 'tag',
-        preview:
-          '<product>\n  <name>Widget Pro</name>\n  <price currency="USD">29.99</price>\n  <specs>\n    <weight unit="kg">0.5</weight>\n  </specs>\n</product>',
-      },
+      { label: 'Varying JSON', icon: 'clipboard', preview: '// Record 1: has address\n{ "name": "Alice", "address": { "city": "NYC" } }\n\n// Record 2: no address, has tags\n{ "name": "Bob", "tags": ["vip", "beta"] }' },
+      { label: 'Server Logs', icon: 'edit', preview: '2024-03-15T10:23:01Z INFO  [api] GET /users 200 45ms\n2024-03-15T10:23:02Z WARN  [db] slow query: 1200ms\n2024-03-15T10:23:05Z ERROR [auth] token expired uid=42' },
+      { label: 'XML / HTML', icon: 'tag', preview: '<product>\n  <name>Widget Pro</name>\n  <price currency="USD">29.99</price>\n  <specs>\n    <weight unit="kg">0.5</weight>\n  </specs>\n</product>' },
     ],
   },
 ]
 
-const EN_P4 = `LLMs work with unstructured text. This changes everything.`
-const EN_P3 = `LLMs work with unstructured text. This changes everything.`
-const EN_INTRO = `All data falls into three categories. Click any example to see what it actually looks like.`
-
 export const DataTypesSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cATEGORIEST = tArray(lang, CATEGORIES, categoriesTranslations)
-  const c = useT({ title: '1. Structured vs Unstructured Data', intro: EN_INTRO  , p3: EN_P3 , p4: EN_P4 }, { sv: dataTypesSectionSv, ko: dataTypesSectionKo })
+  const c = useTranslation().modules.datafoundations.dataTypesSection
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((key: string) => {
@@ -132,36 +63,39 @@ export const DataTypesSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        {cATEGORIEST.map(cat => (
-          <div key={cat.title} className={`rounded-lg border ${cat.borderColor} ${cat.color} p-4`}>
-            <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{cat.title}</h3>
-            <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">{cat.description}</p>
-            <div className="space-y-2">
-              {cat.examples.map(ex => {
-                const key = `${cat.title}-${ex.label}`
-                const isOpen = expanded === key
-                return (
-                  <div key={ex.label}>
-                    <button
-                      onClick={() => toggle(key)}
-                      className="flex w-full items-center gap-2 rounded-md border border-zinc-200/50 dark:border-zinc-700/50 bg-white/50 dark:bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50"
-                      aria-expanded={isOpen}
-                    >
-                      <Icon name={ex.icon} />
-                      <span className="text-zinc-800 dark:text-zinc-200">{ex.label}</span>
-                      <span className="ml-auto text-xs text-zinc-500">{isOpen ? '▲' : '▼'}</span>
-                    </button>
-                    {isOpen && (
-                      <pre className="mt-1 overflow-x-auto rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
-                        {ex.preview}
-                      </pre>
-                    )}
-                  </div>
-                )
-              })}
+        {c.categories.map((cat, i) => {
+          const meta = CATEGORY_META[i]
+          return (
+            <div key={cat.title} className={`rounded-lg border ${meta.borderColor} ${meta.color} p-4`}>
+              <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{cat.title}</h3>
+              <p className="mb-4 text-xs text-zinc-600 dark:text-zinc-400">{cat.description}</p>
+              <div className="space-y-2">
+                {meta.examples.map(ex => {
+                  const key = `${cat.title}-${ex.label}`
+                  const isOpen = expanded === key
+                  return (
+                    <div key={ex.label}>
+                      <button
+                        onClick={() => toggle(key)}
+                        className="flex w-full items-center gap-2 rounded-md border border-zinc-200/50 dark:border-zinc-700/50 bg-white/50 dark:bg-zinc-900/50 px-3 py-2 text-left text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-100 dark:bg-zinc-800/50"
+                        aria-expanded={isOpen}
+                      >
+                        <Icon name={ex.icon} />
+                        <span className="text-zinc-800 dark:text-zinc-200">{ex.label}</span>
+                        <span className="ml-auto text-xs text-zinc-500">{isOpen ? '▲' : '▼'}</span>
+                      </button>
+                      {isOpen && (
+                        <pre className="mt-1 overflow-x-auto rounded-md bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
+                          {ex.preview}
+                        </pre>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       {/* Mini table visualization */}

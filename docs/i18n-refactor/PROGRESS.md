@@ -3,6 +3,22 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 13 — DONE (`datafoundations` module migrated)
+
+- Added `t.modules.datafoundations.*` to `en.ts` (7 sections: garbageInOut, dataForBusiness, dataTypesSection, pipelineSection, dataQualitySection, architectureSection, llmDataSection).
+- Extended `sv.ts` and `ko.ts` with datafoundations content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 7 components in `src/modules/datafoundations/`. Highlights:
+  - Renamed legacy section key `lLMDataSection` → `llmDataSection` for clean camelCase.
+  - 5 sections had EN_PN dead-duplicate pairs — dropped from the EN object/tree where the component never rendered them: dataTypesSection EN_P3==EN_P4, pipelineSection EN_P3==EN_P4, architectureSection EN_P5==EN_P6, llmDataSection EN_P6==EN_P7.
+  - `GarbageInOutBusiness`: only `title` and `goodDataTitle` reachable through the EN component shape — the EN object passed `intro/showClean/showMessy` to useT but the JSX renders hardcoded EN strings instead. Tree migrates only the fields the component renders. Legacy SV/KO `intro/introSub/messyLabel/cleanLabel/qualities` are dropped (they were unreachable).
+  - `DataForBusinessBusiness`: full mirror of EN object via tree.
+  - `ArchitectureSection`, `DataTypesSection`, `PipelineSection`: data arrays migrated to tree with `*_META` parallel arrays in the component holding non-translatable fields (id/icon/color/borderColor for patterns; color/borderColor/examples for categories; id/icon/color for stages).
+  - `DataQualitySection`: `DATASET` and `ISSUES` arrays stay inline EN-only — legacy `datasetTranslations` and `issuesTranslations` were `{sv: [], ko: []}` (empty by design).
+  - `LLMDataSection`: title/intro/p4/p5/p7 from tree; `COMPARISON`, `DATASET_TREE`, `SOURCES` arrays stay inline (no legacy data).
+- Pre-existing typos preserved bit-for-bit in EN: `PATTERNS[0].title` and `CATEGORIES[0].title` both accidentally repeat their section heading. Legacy SV/KO have correct titles, so SV/KO users see the intended content.
+- Deleted `src/modules/datafoundations/{translations,tech-translations,data-translations}.ts`.
+- `npm run build` clean (234 ms).
+
 ## Checkpoint 12 — DONE (`transformer` module migrated)
 
 - Added `t.modules.transformer.*` to `en.ts` (5 sections: bigPictureSection, attentionSection, multiHeadSection, ffnSection, layerByLayerSection).
@@ -195,7 +211,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | Module | Old files to delete | Component files to migrate (count) | Status |
 |---|---|---|---|
 | `ai-problem` | (deleted) | 8 .tsx migrated | ✅ |
-| `data-foundations` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~8 .tsx | ⏳ |
+| `data-foundations` | (deleted) | 7 .tsx migrated | ✅ |
 | `tokens` | (none — content inline in `TokensModule.tsx`) | 1 .tsx | ⏳ |
 | `transformer` | (deleted) | 5 .tsx migrated | ✅ |
 | `training` | (deleted) | 5 .tsx migrated | ✅ |

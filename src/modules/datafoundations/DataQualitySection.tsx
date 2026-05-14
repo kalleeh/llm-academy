@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { dataQualitySectionSv, dataQualitySectionKo } from './tech-translations'
-import { datasetTranslations, issuesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface DataRow {
   id: number
@@ -85,14 +83,8 @@ const ISSUE_TEXT_COLORS: Record<DataIssue['type'], string> = {
   bias: 'text-cyan-700 dark:text-cyan-300',
 }
 
-const EN_P2 = `For classical ML, bad data means bad predictions. For LLMs, it&apos;s even worse — biased or noisy training data gets baked into the model&apos;s weights and surfaces as hallucinations, stereotypes, or factual errors across millions of interactions.`
-const EN_INTRO = `Spot the problems in this dataset. Click each issue type below to highlight it in the data.`
-
 export const DataQualitySection: React.FC = () => {
-  const { lang } = useLanguage()
-  const dATASETT = tArray(lang, DATASET, datasetTranslations)
-  const iSSUEST = tArray(lang, ISSUES, issuesTranslations)
-  const c = useT({ title: '3. Data Quality', intro: EN_INTRO , p2: EN_P2 }, { sv: dataQualitySectionSv, ko: dataQualitySectionKo })
+  const c = useTranslation().modules.datafoundations.dataQualitySection
   const [found, setFound] = useState<Set<string>>(new Set())
   const [activeIssue, setActiveIssue] = useState<string | null>(null)
 
@@ -131,7 +123,7 @@ export const DataQualitySection: React.FC = () => {
 
       {/* Issue buttons */}
       <div className="mb-4 flex flex-wrap gap-2">
-        {iSSUEST.map(issue => (
+        {ISSUES.map(issue => (
           <button
             key={issue.type}
             onClick={() => handleIssueClick(issue.type)}
@@ -173,7 +165,7 @@ export const DataQualitySection: React.FC = () => {
             </tr>
           </thead>
           <tbody className="font-mono text-xs">
-            {dATASETT.map(row => (
+            {DATASET.map(row => (
               <tr key={row.id} className="border-b border-zinc-200 dark:border-zinc-800">
                 {columns.map(col => {
                   const cellKey = `${row.id}-${col}`

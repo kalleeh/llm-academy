@@ -2,8 +2,7 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
-import { useT } from '../../i18n'
-import { lLMDataSectionSv, lLMDataSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const COMPARISON: { aspect: string; ml: string; llm: string }[] = [
   { aspect: 'Data format', ml: 'Labeled CSV, feature tables', llm: 'Massive raw text (books, web, code)' },
@@ -95,14 +94,8 @@ const SOURCES = [
   { name: 'Other', tokens: '~1.8T', pct: 12, color: 'bg-zinc-500' },
 ]
 
-const EN_P7 = `What a pre-training dataset directory looks like — click files to see contents:`
-const EN_P6 = `What a pre-training dataset directory looks like — click files to see contents:`
-const EN_P5 = `Typical pre-training data mix (~15T tokens)`
-const EN_P4 = `You now understand where data comes from, how it flows, and what quality means. Next, we&apos;ll dive into how LLMs actually`
-const EN_INTRO = `Now that you understand data broadly, here's what LLMs specifically need.`
-
 export const LLMDataSection: React.FC = () => {
-  const c = useT({ title: '5. What LLMs Need', intro: EN_INTRO , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 , p7: EN_P7 }, { sv: lLMDataSectionSv, ko: lLMDataSectionKo })
+  const c = useTranslation().modules.datafoundations.llmDataSection
   const [showComparison, setShowComparison] = useState(true)
 
   const toggleView = useCallback(() => {

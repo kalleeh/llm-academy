@@ -786,5 +786,74 @@ export const sv: DeepPartial<Translation> = {
         p4: 'Se hur representationen av en token förändras genom varje lager.',
       },
     },
+    datafoundations: {
+      // From legacy: translations.ts → garbageInOutSv (only title and goodDataTitle reachable through new tree shape; legacy intro/introSub/messyLabel/cleanLabel/showClean/showMessy/qualities not migrated since EN component renders hardcoded EN strings or doesn't render those fields at all).
+      garbageInOut: {
+        title: '1. Skräp in, skräp ut',
+        goodDataTitle: 'Vad "bra data" ser ut som',
+      },
+      // From legacy: translations.ts → dataForBusinessSv (full mirror)
+      dataForBusiness: {
+        title: '2. Ditt företags data — Vad AI ser',
+        intro: 'Ditt företag har redan den data AI behöver. Men all data ser inte likadan ut. Låt oss titta på **faktiska exempel** så du kan se skillnaden.',
+        structuredLabel: 'Strukturerad (kalkylblad)',
+        unstructuredLabel: 'Ostrukturerad (e-post, dokument)',
+        whyItMattersLabel: 'Varför det spelar roll',
+        structuredNote: 'Varje information har en tydlig etikett (kolumn) och konsekvent format. AI kan enkelt svara "hur många Enterprise-kunder har vi?"',
+        unstructuredNote: 'Samma kundinformation (Acme Corp, Sarah, expansionsplaner) är utspridd över e-post, dokument och Slack — i olika format, utan konsekvent struktur. Detta är **80%+ av de flesta företags data**, och det är här LLM:er verkligen lyser.',
+        howMuchTitle: 'Hur mycket data behöver du?',
+        howMuchIntro: 'Det beror på uppgiften — som att utbilda en nyanställd:',
+        amounts: [
+          { task: 'Svara på vanliga frågor', amount: 'Några dussin fråga-svar-par', analogy: 'Som att ge en ny receptionist ett fuskblad' },
+          { task: 'Klassificera supportärenden', amount: 'Några hundra märkta exempel', analogy: 'Som att visa en ny agent exempel på varje ärendetyp' },
+          { task: 'Skriva i ert varumärkes ton', amount: 'Tusentals av era tidigare kommunikationer', analogy: 'Som månader av att skugga er bästa skribent' },
+        ],
+        selfExplainPrompt: 'Tänk på ditt företags data. Vad är strukturerat (kalkylblad, CRM)? Vad är ostrukturerat (e-post, dokument, Slack)? Om du pekade en AI på båda, vilka frågor kunde den svara på som ingen kan svara snabbt idag?',
+        selfExplainAnswer: 'Exempel: \'Vår CRM har rena kundposter (strukturerat) — AI kunde enkelt svara vem som ska förnya. Men den riktiga guldet finns i vår ostrukturerade data: kontoansvariga e-posttrådar har kontext om kundsentiment, mötesanteckningar fångar muntliga åtaganden, och Slack har realtidssignaler om riskfyllda konton.\'',
+      },
+      // From legacy: tech-translations.ts → dataTypesSectionSv + data-translations.ts → categoriesTranslations.sv
+      dataTypesSection: {
+        title: '1. Strukturerad vs ostrukturerad data',
+        intro: 'All data faller i tre kategorier. Klicka på ett exempel för att se hur det ser ut.',
+        categories: [
+          { title: 'Strukturerad', description: 'Rader och kolumner med definierade typer. Tänk kalkylblad, SQL-databaser, CSV-filer.' },
+          { title: 'Semi-strukturerad', description: 'Har viss organisation men inget strikt schema. JSON, XML, loggar, e-post med rubriker.' },
+          { title: 'Ostrukturerad', description: 'Ingen fördefinierad struktur. Fritext, bilder, ljud, video — 80%+ av all data.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → pipelineSectionSv + data-translations.ts → stagesTranslations.sv
+      pipelineSection: {
+        title: '2. Datapipelines',
+        intro: 'Data anländer sällan redo att använda. En pipeline flyttar den genom transformationer.',
+        stages: [
+          { label: 'Extrahera', description: 'Hämta rå data från källsystem', details: ['API:er, databaser, filer, webbskrapning'] },
+          { label: 'Transformera', description: 'Rensa, normalisera, berika', details: ['Ta bort dubbletter, fixa format, lägg till beräknade fält'] },
+          { label: 'Ladda', description: 'Skriv till destinationssystem', details: ['Data warehouse, vektordatabas, sökindex'] },
+          { label: 'Validera', description: 'Kontrollera kvalitet och fullständighet', details: ['Schemavalidering, nullkontroller, distributionskontroller'] },
+          { label: 'Övervaka', description: 'Spåra pipeline-hälsa över tid', details: ['Datadrift, volymavvikelser, fördröjningsvarningar'] },
+        ],
+      },
+      // From legacy: tech-translations.ts → dataQualitySectionSv (p2 not in legacy → falls back to EN)
+      dataQualitySection: {
+        title: '3. Datakvalitet',
+        intro: 'Hitta problemen i detta dataset. Klicka på varje problemtyp för att markera den.',
+      },
+      // From legacy: tech-translations.ts → architectureSectionSv + data-translations.ts → patternsTranslations.sv
+      architectureSection: {
+        title: '4. Dataarkitekturmönster',
+        intro: 'Var bor data? Fyra dominerande mönster med olika avvägningar.',
+        patterns: [
+          { title: 'Data Warehouse', tagline: 'Centraliserad, strukturerad, SQL-frågor', whenToUse: 'Affärsanalys, rapportering, dashboards' },
+          { title: 'Data Lake', tagline: 'Rå data i alla format, schema-on-read', whenToUse: 'ML-träning, utforskande analys, arkivering' },
+          { title: 'Lakehouse', tagline: 'Bästa av båda — lake-lagring med warehouse-funktioner', whenToUse: 'Moderna dataplattformar som behöver båda' },
+          { title: 'Vektorlagring', tagline: 'Embeddings för semantisk sökning', whenToUse: 'RAG, rekommendationer, likhetssökning' },
+        ],
+      },
+      // From legacy: tech-translations.ts → lLMDataSectionSv (renamed key llmDataSection)
+      llmDataSection: {
+        title: '5. Vad LLM:er behöver',
+        intro: 'Nu när du förstår data brett, här är vad LLM:er specifikt behöver.',
+      },
+    },
   },
 }

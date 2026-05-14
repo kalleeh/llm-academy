@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
-import { useT } from '../../i18n'
-import { garbageInOutSv, garbageInOutKo } from './translations'
+import { useTranslation } from '../../i18n'
 
 const MESSY_ROWS = [
   ['C-1001', 'Acme Corp', 'sarah@acme.com', '$48,000', 'Active'],
@@ -50,7 +49,7 @@ const IMPACT_EXAMPLES = [
 ]
 
 export const GarbageInOutBusiness: React.FC = () => {
-  const c = useT({ title: '1. Garbage In, Garbage Out', intro: 'The #1 rule of AI: your AI is only as good as the data you feed it.', showClean: 'Show cleaned version', showMessy: 'Show messy version', goodDataTitle: 'What good data looks like' }, { sv: garbageInOutSv, ko: garbageInOutKo })
+  const c = useTranslation().modules.datafoundations.garbageInOut
   const [showClean, setShowClean] = useState(false)
 
   const toggleClean = useCallback(() => setShowClean((p) => !p), [])

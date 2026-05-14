@@ -1,83 +1,26 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { architectureSectionSv, architectureSectionKo } from './tech-translations'
-import { patternsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface ArchPattern {
+interface PatternMeta {
   id: string
-  title: string
   icon: IconName
   color: string
   borderColor: string
-  tagline: string
-  whenToUse: string
-  pros: string[]
-  cons: string[]
-  tools: string[]
 }
 
-const PATTERNS: ArchPattern[] = [
-  {
-    id: 'warehouse',
-    title: '4. Data Architecture Patterns',
-    icon: 'warehouse',
-    color: 'bg-blue-50 dark:bg-blue-500/10',
-    borderColor: 'border-blue-400 dark:border-blue-500/30',
-    tagline: 'Structured · Schema-on-Write · SQL · Analytics',
-    whenToUse: 'Business intelligence, dashboards, SQL analytics on clean, structured data.',
-    pros: ['Fast SQL queries (columnar storage)', 'Strong schema enforcement', 'Mature ecosystem & tooling'],
-    cons: ['Expensive at scale', 'Only structured data', 'Schema changes are painful'],
-    tools: ['Snowflake', 'BigQuery', 'Redshift', 'Databricks SQL'],
-  },
-  {
-    id: 'lake',
-    title: 'Data Lake',
-    icon: 'lake',
-    color: 'bg-emerald-50 dark:bg-emerald-500/10',
-    borderColor: 'border-emerald-400 dark:border-emerald-500/30',
-    tagline: 'Raw Files · Schema-on-Read · Cheap Storage',
-    whenToUse: 'Storing everything cheaply — logs, images, JSON, Parquet — and deciding how to use it later.',
-    pros: ['Very cheap storage (object stores)', 'Any data format', 'Schema flexibility'],
-    cons: ['Can become a "data swamp"', 'No ACID transactions', 'Query performance varies'],
-    tools: ['S3', 'ADLS', 'GCS', 'HDFS', 'MinIO'],
-  },
-  {
-    id: 'lakehouse',
-    title: 'Lakehouse',
-    icon: 'home',
-    color: 'bg-purple-50 dark:bg-purple-500/10',
-    borderColor: 'border-purple-400 dark:border-purple-500/30',
-    tagline: 'Best of Both · Open Formats · ACID on Lakes',
-    whenToUse: 'When you need warehouse-like performance and governance on top of lake-scale storage.',
-    pros: ['ACID transactions on object storage', 'Open table formats (no vendor lock-in)', 'Handles structured + unstructured'],
-    cons: ['More complex to set up', 'Newer ecosystem', 'Requires tuning for performance'],
-    tools: ['Delta Lake', 'Apache Iceberg', 'Apache Hudi', 'Databricks'],
-  },
-  {
-    id: 'vector',
-    title: 'Vector Store',
-    icon: 'compass',
-    color: 'bg-amber-50 dark:bg-amber-500/10',
-    borderColor: 'border-amber-400 dark:border-amber-500/30',
-    tagline: 'Embeddings · Semantic Search · RAG',
-    whenToUse: 'Storing and searching vector embeddings for similarity search, recommendation, and RAG.',
-    pros: ['Semantic (meaning-based) search', 'Powers RAG for LLMs', 'Sub-second nearest-neighbor lookup'],
-    cons: ['Not for general analytics', 'Embedding quality matters', 'Index rebuild on schema changes'],
-    tools: ['Pinecone', 'Weaviate', 'pgvector', 'ChromaDB', 'Qdrant'],
-  },
+// Non-translatable per-pattern metadata. Order matches `patterns` array in
+// `useTranslation().modules.datafoundations.architectureSection.patterns`.
+const PATTERN_META: PatternMeta[] = [
+  { id: 'warehouse', icon: 'warehouse', color: 'bg-blue-50 dark:bg-blue-500/10', borderColor: 'border-blue-400 dark:border-blue-500/30' },
+  { id: 'lake', icon: 'lake', color: 'bg-emerald-50 dark:bg-emerald-500/10', borderColor: 'border-emerald-400 dark:border-emerald-500/30' },
+  { id: 'lakehouse', icon: 'home', color: 'bg-purple-50 dark:bg-purple-500/10', borderColor: 'border-purple-400 dark:border-purple-500/30' },
+  { id: 'vector', icon: 'compass', color: 'bg-amber-50 dark:bg-amber-500/10', borderColor: 'border-amber-400 dark:border-amber-500/30' },
 ]
 
-const EN_P6 = `Vector Stores → LLMs (RAG Preview)`
-const EN_P5 = `Vector Stores → LLMs (RAG Preview)`
-const EN_P4 = `Retrieval-Augmented Generation (RAG)`
-const EN_INTRO = `Where does data live? Four dominant patterns, each with different tradeoffs.`
-
 export const ArchitectureSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const pATTERNST = tArray(lang, PATTERNS, patternsTranslations)
-  const c = useT({ title: '4. Data Architecture Patterns', intro: EN_INTRO  , p4: EN_P4 , p5: EN_P5 , p6: EN_P6 }, { sv: architectureSectionSv, ko: architectureSectionKo })
+  const c = useTranslation().modules.datafoundations.architectureSection
   const [expanded, setExpanded] = useState<string | null>(null)
 
   const toggle = useCallback((id: string) => {
@@ -90,20 +33,21 @@ export const ArchitectureSection: React.FC = () => {
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        {pATTERNST.map(p => {
-          const isOpen = expanded === p.id
+        {c.patterns.map((p, i) => {
+          const meta = PATTERN_META[i]
+          const isOpen = expanded === meta.id
           return (
             <button
-              key={p.id}
-              onClick={() => toggle(p.id)}
-              className={`rounded-lg border text-left transition-all ${p.borderColor} ${p.color} ${
+              key={meta.id}
+              onClick={() => toggle(meta.id)}
+              className={`rounded-lg border text-left transition-all ${meta.borderColor} ${meta.color} ${
                 isOpen ? 'ring-2 ring-zinc-400/50' : 'hover:brightness-125'
               }`}
               aria-expanded={isOpen}
             >
               <div className="p-4">
                 <div className="flex items-center gap-2">
-                  <Icon name={p.icon} />
+                  <Icon name={meta.icon} />
                   <h3 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">{p.title}</h3>
                 </div>
                 <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">{p.tagline}</p>

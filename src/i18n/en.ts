@@ -1352,6 +1352,86 @@ const modules = {
       p4: 'Watch how the representation of the token',
     },
   },
+  datafoundations: {
+    // Business: 1. Garbage In, Garbage Out.
+    // Note: the EN component passes intro/showClean/showMessy through useT, but the JSX renders hardcoded EN strings instead — so those legacy fields were unreachable. Tree migrates only the fields the component actually renders (title, goodDataTitle).
+    garbageInOut: {
+      title: '1. Garbage In, Garbage Out',
+      goodDataTitle: 'What good data looks like',
+    },
+    // Business: 2. Your Company's Data — What AI Sees
+    dataForBusiness: {
+      title: '2. Your Company\'s Data — What AI Sees',
+      intro: 'Your company already has the data AI needs. But not all data looks the same. Let us look at actual examples so you can see the difference.',
+      structuredLabel: 'Structured (spreadsheet)',
+      unstructuredLabel: 'Unstructured (emails, docs)',
+      whyItMattersLabel: 'Why it matters',
+      structuredNote: 'Every piece of information has a clear label (column) and consistent format. AI can easily answer "how many Enterprise customers do we have?"',
+      unstructuredNote: 'The same customer info is scattered across emails, docs, and Slack — in different formats. This is 80%+ of most companies\' data, and it\'s where LLMs shine.',
+      howMuchTitle: 'How much data do you need?',
+      howMuchIntro: 'It depends on the task — like training a new employee:',
+      amounts: [
+        { task: 'Answer FAQs', amount: 'A few dozen Q&A pairs', analogy: 'Like giving a new receptionist a cheat sheet' },
+        { task: 'Classify support tickets', amount: 'A few hundred labeled examples', analogy: 'Like showing a new agent examples of each ticket type' },
+        { task: 'Write in your brand voice', amount: 'Thousands of past communications', analogy: 'Like months of shadowing your best writer' },
+      ],
+      selfExplainPrompt: 'Think about your company\'s data. What\'s structured (spreadsheets, CRM)? What\'s unstructured (emails, docs, Slack)? If you pointed an AI at both, what questions could it answer that nobody can answer quickly today?',
+      selfExplainAnswer: 'Example: Our CRM has clean customer records (structured) — AI could easily answer who is up for renewal. But the real gold is in our unstructured data: account managers\' email threads have context about customer sentiment, meeting notes capture verbal commitments, and Slack has real-time signals about at-risk accounts.',
+    },
+    // Tech: 1. Structured vs Unstructured Data. EN_P3 == EN_P4 dead dup → drop p3. CATEGORY_META holds examples (icon+preview).
+    // Note: CATEGORIES[0].title accidentally repeats the section heading "1. Structured vs Unstructured Data" (pre-existing typo) — preserved bit-for-bit in EN.
+    dataTypesSection: {
+      title: '1. Structured vs Unstructured Data',
+      intro: 'All data falls into three categories. Click any example to see what it actually looks like.',
+      p4: 'LLMs work with unstructured text. This changes everything.',
+      categories: [
+        { title: '1. Structured vs Unstructured Data', description: 'Fixed schema, rows & columns. Every record follows the same format.' },
+        { title: 'Unstructured', description: 'No predefined schema. Meaning is embedded in the content itself.' },
+        { title: 'Semi-Structured', description: 'Has some organization (tags, keys) but schema varies between records.' },
+      ],
+    },
+    // Tech: 2. Data Pipelines. EN_P3 == EN_P4 dead dup → drop p3.
+    pipelineSection: {
+      title: '2. Data Pipelines',
+      intro: 'Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.',
+      p4: 'A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search',
+      stages: [
+        { label: 'Source', description: 'Where data originates', details: ['Databases — PostgreSQL, MySQL, MongoDB', 'APIs — REST, GraphQL, webhooks', 'Web scraping — crawlers, parsers', 'File uploads — CSV, JSON, Parquet', 'Streaming — Kafka, Kinesis, event buses'] },
+        { label: 'Ingest', description: 'How data enters the pipeline', details: ['Batch — scheduled jobs (hourly, daily)', 'Streaming — real-time event processing', 'ETL — Extract, Transform, then Load', 'ELT — Extract, Load, then Transform', 'CDC — Change Data Capture for incremental sync'] },
+        { label: 'Transform', description: 'Clean and reshape data', details: ['Cleaning — handle nulls, fix types, trim whitespace', 'Normalization — consistent formats, units, encodings', 'Deduplication — remove exact and fuzzy duplicates', 'Feature engineering — derive new columns from existing', 'Aggregation — group, summarize, window functions'] },
+        { label: 'Store', description: 'Where processed data lives', details: ['Data warehouse — Snowflake, BigQuery, Redshift', 'Data lake — S3, ADLS, GCS (raw files)', 'Lakehouse — Delta Lake, Iceberg, Hudi', 'Vector store — Pinecone, Weaviate, pgvector', 'Feature store — Feast, Tecton'] },
+        { label: 'Serve', description: 'How data reaches consumers', details: ['APIs — REST/GraphQL endpoints for apps', 'Dashboards — BI tools, Grafana, Metabase', 'Model training — feed into ML/LLM pipelines', 'RAG retrieval — semantic search over embeddings', 'Exports — reports, data shares, reverse ETL'] },
+      ],
+    },
+    // Tech: 3. Data Quality
+    dataQualitySection: {
+      title: '3. Data Quality',
+      intro: 'Spot the problems in this dataset. Click each issue type below to highlight it in the data.',
+      p2: 'For classical ML, bad data means bad predictions. For LLMs, it&apos;s even worse — biased or noisy training data gets baked into the model&apos;s weights and surfaces as hallucinations, stereotypes, or factual errors across millions of interactions.',
+    },
+    // Tech: 4. Data Architecture Patterns. EN_P5 == EN_P6 dead dup → drop p5.
+    // Note: PATTERNS[0].title accidentally repeats the section heading "4. Data Architecture Patterns" (pre-existing typo) — preserved bit-for-bit in EN.
+    architectureSection: {
+      title: '4. Data Architecture Patterns',
+      intro: 'Where does data live? Four dominant patterns, each with different tradeoffs.',
+      p4: 'Retrieval-Augmented Generation (RAG)',
+      p6: 'Vector Stores → LLMs (RAG Preview)',
+      patterns: [
+        { title: '4. Data Architecture Patterns', tagline: 'Structured · Schema-on-Write · SQL · Analytics', whenToUse: 'Business intelligence, dashboards, SQL analytics on clean, structured data.', pros: ['Fast SQL queries (columnar storage)', 'Strong schema enforcement', 'Mature ecosystem & tooling'], cons: ['Expensive at scale', 'Only structured data', 'Schema changes are painful'], tools: ['Snowflake', 'BigQuery', 'Redshift', 'Databricks SQL'] },
+        { title: 'Data Lake', tagline: 'Raw Files · Schema-on-Read · Cheap Storage', whenToUse: 'Storing everything cheaply — logs, images, JSON, Parquet — and deciding how to use it later.', pros: ['Very cheap storage (object stores)', 'Any data format', 'Schema flexibility'], cons: ['Can become a "data swamp"', 'No ACID transactions', 'Query performance varies'], tools: ['S3', 'ADLS', 'GCS', 'HDFS', 'MinIO'] },
+        { title: 'Lakehouse', tagline: 'Best of Both · Open Formats · ACID on Lakes', whenToUse: 'When you need warehouse-like performance and governance on top of lake-scale storage.', pros: ['ACID transactions on object storage', 'Open table formats (no vendor lock-in)', 'Handles structured + unstructured'], cons: ['More complex to set up', 'Newer ecosystem', 'Requires tuning for performance'], tools: ['Delta Lake', 'Apache Iceberg', 'Apache Hudi', 'Databricks'] },
+        { title: 'Vector Store', tagline: 'Embeddings · Semantic Search · RAG', whenToUse: 'Storing and searching vector embeddings for similarity search, recommendation, and RAG.', pros: ['Semantic (meaning-based) search', 'Powers RAG for LLMs', 'Sub-second nearest-neighbor lookup'], cons: ['Not for general analytics', 'Embedding quality matters', 'Index rebuild on schema changes'], tools: ['Pinecone', 'Weaviate', 'pgvector', 'ChromaDB', 'Qdrant'] },
+      ],
+    },
+    // Tech: 5. What LLMs Need. EN_P6 == EN_P7 dead dup → drop p6. Section key normalized from legacy `lLMDataSection` → `llmDataSection`.
+    llmDataSection: {
+      title: '5. What LLMs Need',
+      intro: 'Now that you understand data broadly, here\'s what LLMs specifically need.',
+      p4: 'You now understand where data comes from, how it flows, and what quality means. Next, we&apos;ll dive into how LLMs actually',
+      p5: 'Typical pre-training data mix (~15T tokens)',
+      p7: 'What a pre-training dataset directory looks like — click files to see contents:',
+    },
+  },
 } as const
 
 /**

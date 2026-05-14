@@ -4,90 +4,22 @@ import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { SelfExplain } from '../../components/SelfExplain'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { pipelineSectionSv, pipelineSectionKo } from './tech-translations'
-import { stagesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface PipelineStage {
+interface StageMeta {
   id: string
-  label: string
   icon: IconName
   color: string
-  description: string
-  details: string[]
 }
 
-const STAGES: PipelineStage[] = [
-  {
-    id: 'source',
-    label: 'Source',
-    icon: 'ingest',
-    color: 'border-blue-400 dark:border-blue-500/40 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300',
-    description: 'Where data originates',
-    details: [
-      'Databases — PostgreSQL, MySQL, MongoDB',
-      'APIs — REST, GraphQL, webhooks',
-      'Web scraping — crawlers, parsers',
-      'File uploads — CSV, JSON, Parquet',
-      'Streaming — Kafka, Kinesis, event buses',
-    ],
-  },
-  {
-    id: 'ingest',
-    label: 'Ingest',
-    icon: 'cycle',
-    color: 'border-emerald-400 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
-    description: 'How data enters the pipeline',
-    details: [
-      'Batch — scheduled jobs (hourly, daily)',
-      'Streaming — real-time event processing',
-      'ETL — Extract, Transform, then Load',
-      'ELT — Extract, Load, then Transform',
-      'CDC — Change Data Capture for incremental sync',
-    ],
-  },
-  {
-    id: 'transform',
-    label: 'Transform',
-    icon: 'gear',
-    color: 'border-purple-400 dark:border-purple-500/40 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300',
-    description: 'Clean and reshape data',
-    details: [
-      'Cleaning — handle nulls, fix types, trim whitespace',
-      'Normalization — consistent formats, units, encodings',
-      'Deduplication — remove exact and fuzzy duplicates',
-      'Feature engineering — derive new columns from existing',
-      'Aggregation — group, summarize, window functions',
-    ],
-  },
-  {
-    id: 'store',
-    label: 'Store',
-    icon: 'save',
-    color: 'border-amber-400 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300',
-    description: 'Where processed data lives',
-    details: [
-      'Data warehouse — Snowflake, BigQuery, Redshift',
-      'Data lake — S3, ADLS, GCS (raw files)',
-      'Lakehouse — Delta Lake, Iceberg, Hudi',
-      'Vector store — Pinecone, Weaviate, pgvector',
-      'Feature store — Feast, Tecton',
-    ],
-  },
-  {
-    id: 'serve',
-    label: 'Serve',
-    icon: 'rocket',
-    color: 'border-pink-400 dark:border-pink-500/40 bg-pink-50 dark:bg-pink-500/10 text-pink-700 dark:text-pink-300',
-    description: 'How data reaches consumers',
-    details: [
-      'APIs — REST/GraphQL endpoints for apps',
-      'Dashboards — BI tools, Grafana, Metabase',
-      'Model training — feed into ML/LLM pipelines',
-      'RAG retrieval — semantic search over embeddings',
-      'Exports — reports, data shares, reverse ETL',
-    ],
-  },
+// Non-translatable per-stage metadata. Order matches `stages` array in
+// `useTranslation().modules.datafoundations.pipelineSection.stages`.
+const STAGE_META: StageMeta[] = [
+  { id: 'source', icon: 'ingest', color: 'border-blue-400 dark:border-blue-500/40 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300' },
+  { id: 'ingest', icon: 'cycle', color: 'border-emerald-400 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300' },
+  { id: 'transform', icon: 'gear', color: 'border-purple-400 dark:border-purple-500/40 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300' },
+  { id: 'store', icon: 'save', color: 'border-amber-400 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300' },
+  { id: 'serve', icon: 'rocket', color: 'border-pink-400 dark:border-pink-500/40 bg-pink-50 dark:bg-pink-500/10 text-pink-700 dark:text-pink-300' },
 ]
 
 const TERMINAL_STEPS: TerminalStep[] = [
@@ -117,14 +49,8 @@ const TERMINAL_STEPS: TerminalStep[] = [
   },
 ]
 
-const EN_P4 = `A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search`
-const EN_P3 = `A mini pipeline in action: raw JSON → clean Parquet → vector embeddings → semantic search`
-const EN_INTRO = `Data rarely arrives ready to use. A pipeline moves it from source to consumer through a series of transformations.`
-
 export const PipelineSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const sTAGEST = tArray(lang, STAGES, stagesTranslations)
-  const c = useT({ title: '2. Data Pipelines', intro: EN_INTRO  , p3: EN_P3 , p4: EN_P4 }, { sv: pipelineSectionSv, ko: pipelineSectionKo })
+  const c = useTranslation().modules.datafoundations.pipelineSection
   const [activeStage, setActiveStage] = useState<string | null>(null)
 
   const toggleStage = useCallback((id: string) => {
@@ -138,33 +64,38 @@ export const PipelineSection: React.FC = () => {
 
       {/* Pipeline visualization */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
-        {sTAGEST.map((stage, i) => (
-          <div key={stage.id} className="flex items-center gap-2">
-            <button
-              onClick={() => toggleStage(stage.id)}
-              className={`rounded-lg border px-4 py-3 text-center transition-all ${stage.color} ${
-                activeStage === stage.id ? 'ring-2 ring-zinc-400/50 scale-105' : 'hover:brightness-125'
-              }`}
-              aria-expanded={activeStage === stage.id}
-            >
-              <div className="text-lg"><Icon name={stage.icon} /></div>
-              <div className="mt-1 text-xs font-medium">{stage.label}</div>
-            </button>
-            {i < STAGES.length - 1 && (
-              <span className="text-zinc-500 dark:text-zinc-600">→</span>
-            )}
-          </div>
-        ))}
+        {c.stages.map((stage, i) => {
+          const meta = STAGE_META[i]
+          return (
+            <div key={meta.id} className="flex items-center gap-2">
+              <button
+                onClick={() => toggleStage(meta.id)}
+                className={`rounded-lg border px-4 py-3 text-center transition-all ${meta.color} ${
+                  activeStage === meta.id ? 'ring-2 ring-zinc-400/50 scale-105' : 'hover:brightness-125'
+                }`}
+                aria-expanded={activeStage === meta.id}
+              >
+                <div className="text-lg"><Icon name={meta.icon} /></div>
+                <div className="mt-1 text-xs font-medium">{stage.label}</div>
+              </button>
+              {i < c.stages.length - 1 && (
+                <span className="text-zinc-500 dark:text-zinc-600">→</span>
+              )}
+            </div>
+          )
+        })}
       </div>
 
       {/* Stage details */}
       {activeStage && (() => {
-        const stage = STAGES.find(s => s.id === activeStage)
-        if (!stage) return null
+        const idx = STAGE_META.findIndex(s => s.id === activeStage)
+        if (idx < 0) return null
+        const stage = c.stages[idx]
+        const meta = STAGE_META[idx]
         return (
           <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 p-4">
             <h3 className="mb-1 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              <Icon name={stage.icon} /> {stage.label}: {stage.description}
+              <Icon name={meta.icon} /> {stage.label}: {stage.description}
             </h3>
             <ul className="mt-3 space-y-1">
               {stage.details.map(d => (

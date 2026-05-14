@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
-import { dataForBusinessSv, dataForBusinessKo } from './translations'
+import { useTranslation } from '../../i18n'
 
 type Tab = 'structured' | 'unstructured' | 'semi'
 
@@ -17,27 +16,8 @@ const UNSTRUCTURED_EXAMPLES = [
   { label: 'Slack message', content: '#sales-team\nMike: heads up — Acme Corp is looking at a competitor.\nSarah mentioned it casually on our call today.\nJen: I\'ll flag this in the account health dashboard.\nMike: thx' },
 ]
 
-const EN = {
-  title: '2. Your Company\'s Data — What AI Sees',
-  intro: 'Your company already has the data AI needs. But not all data looks the same. Let us look at actual examples so you can see the difference.',
-  structuredLabel: 'Structured (spreadsheet)',
-  unstructuredLabel: 'Unstructured (emails, docs)',
-  whyItMattersLabel: 'Why it matters',
-  structuredNote: 'Every piece of information has a clear label (column) and consistent format. AI can easily answer "how many Enterprise customers do we have?"',
-  unstructuredNote: 'The same customer info is scattered across emails, docs, and Slack — in different formats. This is 80%+ of most companies\' data, and it\'s where LLMs shine.',
-  howMuchTitle: 'How much data do you need?',
-  howMuchIntro: 'It depends on the task — like training a new employee:',
-  amounts: [
-    { task: 'Answer FAQs', amount: 'A few dozen Q&A pairs', analogy: 'Like giving a new receptionist a cheat sheet' },
-    { task: 'Classify support tickets', amount: 'A few hundred labeled examples', analogy: 'Like showing a new agent examples of each ticket type' },
-    { task: 'Write in your brand voice', amount: 'Thousands of past communications', analogy: 'Like months of shadowing your best writer' },
-  ],
-  selfExplainPrompt: 'Think about your company\'s data. What\'s structured (spreadsheets, CRM)? What\'s unstructured (emails, docs, Slack)? If you pointed an AI at both, what questions could it answer that nobody can answer quickly today?',
-  selfExplainAnswer: 'Example: Our CRM has clean customer records (structured) — AI could easily answer who is up for renewal. But the real gold is in our unstructured data: account managers\' email threads have context about customer sentiment, meeting notes capture verbal commitments, and Slack has real-time signals about at-risk accounts.',
-}
-
 export const DataForBusinessBusiness: React.FC = () => {
-  const c = useT(EN, { sv: dataForBusinessSv, ko: dataForBusinessKo })
+  const c = useTranslation().modules.datafoundations.dataForBusiness
   const [tab, setTab] = useState<Tab>('structured')
   const [exampleIdx, setExampleIdx] = useState(0)
   const nextExample = useCallback(() => setExampleIdx((p) => (p + 1) % UNSTRUCTURED_EXAMPLES.length), [])
@@ -86,7 +66,7 @@ export const DataForBusinessBusiness: React.FC = () => {
         <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{c.howMuchTitle}</p>
         <p className="mb-4 text-sm text-zinc-700 dark:text-zinc-300">{c.howMuchIntro}</p>
         <div className="space-y-2">
-          {(c.amounts ?? EN.amounts).map((row) => (
+          {c.amounts.map((row) => (
             <div key={row.task} className="flex items-start gap-3 rounded bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
               <div className="min-w-0 flex-1">
                 <span className="text-sm text-zinc-800 dark:text-zinc-200">{row.task}</span>
