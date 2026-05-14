@@ -2,8 +2,7 @@ import { useMemo } from 'react'
 import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
-import { useT } from '../../i18n'
-import { evaluationMergingSectionSv, evaluationMergingSectionKo } from './tech-translations'
+import { useTranslation } from '../../i18n'
 
 const STEPS: TerminalStep[] = [
   {
@@ -169,10 +168,8 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
-const EN_INTRO = `Test the fine-tuned model, compare before vs after, merge the LoRA adapter into the base model.`
-
 export const EvaluationMergingSection: React.FC = () => {
-  const c = useT({ title: '4. Evaluation & Merging', intro: EN_INTRO }, { sv: evaluationMergingSectionSv, ko: evaluationMergingSectionKo })
+  const c = useTranslation().modules.finetuning.evaluationMergingSection
   const steps = useMemo(() => STEPS, [])
 
   return (

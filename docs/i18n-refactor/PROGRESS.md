@@ -3,6 +3,20 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 11 — DONE (`finetuning` module migrated)
+
+- Added `t.modules.finetuning.*` to `en.ts` (5 sections: whenToFineTuneSection, preparingDataSection, fineTuningRunSection, evaluationMergingSection, costPlatformSection).
+- Extended `sv.ts` and `ko.ts` with finetuning content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 5 components in `src/modules/finetuning/`:
+  - `WhenToFineTuneSection`: title/intro/winCases via tree. Pre-existing typo preserved bit-for-bit in EN: WIN_CASES[0].title accidentally repeats the section heading ("1. When to Fine-Tune") — legacy SV/KO have the semantically-correct title ("Konsekvent utdataformat" / "일관된 출력 형식"), so SV/KO users now see the intended content while EN keeps the existing buggy display.
+  - `PreparingDataSection`: title/intro via tree. CHECKLIST stays inline EN-only — legacy `checklistTranslations` had different semantic items (format/balance/QA/dedup/length/split) that don't align with the current EN list (diversity/format/size/cleaning/validation/verification). Pre-existing skew; legacy data dropped.
+  - `FineTuningRunSection`: title/intro + 11 `pN` keys (p3, p5, p6, p7, p8, p11, p12, p13, p17, p18, p19) via tree. Dropped EN_P14/P15/P16 dead duplicates of EN_P17/P18/P19 (component never rendered them).
+  - `EvaluationMergingSection`: title/intro via tree.
+  - `CostPlatformSection`: title/intro/p2/platforms[]{name, notes} via tree; `PLATFORM_META` holds non-translatable gpu/vram/cost/ease. Legacy SV/KO platforms list dropped — different platform names than current EN component (legacy listed Unsloth/SageMaker/Vertex/Together/Modal; current EN lists Colab Free/Colab Pro/RunPod/SageMaker/Local). Pre-existing skew. SV/KO users now see the actual EN platform names with translated `intro` and `p2`.
+- Several legacy tech-section `intro` fields cleanly matched the new EN intro (whenToFineTune, preparingData, fineTuningRun, evaluationMerging, costPlatform) — preserved verbatim.
+- Deleted `src/modules/finetuning/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (238 ms).
+
 ## Checkpoint 10 — DONE (`llmdata` module migrated)
 
 - Added `t.modules.llmdata.*` to `en.ts` (5 sections: dataSourcesSection, cleaningPipelineSection, dataMixSection, syntheticDataSection, dataFormatsSection).
@@ -181,7 +195,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `prompting` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
 | `agents` | (deleted) | 15 .tsx migrated | ✅ |
 | `ai-in-org` | (none — content inline in `AIInOrgModule.tsx`) | 1 .tsx | ⏳ |
-| `fine-tuning` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
+| `fine-tuning` | (deleted) | 5 .tsx migrated | ✅ |
 
 ### Per-module migration recipe
 

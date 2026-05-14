@@ -1,10 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
-
 import type { IconName } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { whenToFineTuneSectionSv, whenToFineTuneSectionKo } from './tech-translations'
-import { winCasesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 type NodeId = 'start' | 'few-shot' | 'rag' | 'finetune' | 'done-prompt' | 'done-fewshot' | 'done-rag'
 
@@ -28,19 +25,8 @@ const ENDPOINTS: Record<string, { label: string; color: string; detail: string; 
   finetune: { label: 'Fine-tune the model', color: 'text-amber-400', detail: 'Train the model to internalize your patterns, format, and domain.', icon: 'wrench' as const },
 }
 
-const WIN_CASES = [
-  { title: '1. When to Fine-Tune', desc: 'Always return valid JSON, specific XML schema, or structured reports — without fragile prompt engineering.' },
-  { title: 'Domain terminology', desc: 'Medical, legal, or internal jargon that the base model gets wrong or hallucinates.' },
-  { title: 'Latency reduction', desc: 'A fine-tuned 8B model can match a general 70B model on your task — 10x faster, 10x cheaper.' },
-  { title: 'Behavior patterns', desc: 'Teach a specific tone, refusal style, or multi-step reasoning pattern that prompting can\'t reliably produce.' },
-]
-
-const EN_INTRO = `Fine-tuning is powerful but expensive. Walk through this decision tree to see if you actually need it.`
-
 export const WhenToFineTuneSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const wIN_CASEST = tArray(lang, WIN_CASES, winCasesTranslations)
-  const c = useT({ title: '1. When to Fine-Tune', intro: EN_INTRO }, { sv: whenToFineTuneSectionSv, ko: whenToFineTuneSectionKo })
+  const c = useTranslation().modules.finetuning.whenToFineTuneSection
   const [path, setPath] = useState<NodeId[]>(['start'])
 
   const currentId = path[path.length - 1]
@@ -106,10 +92,10 @@ export const WhenToFineTuneSection: React.FC = () => {
         Where fine-tuning wins
       </h3>
       <div className="grid gap-3 sm:grid-cols-2">
-        {wIN_CASEST.map(c => (
-          <div key={c.title} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
-            <p className="mb-1 text-sm font-semibold text-amber-400">{c.title}</p>
-            <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{c.desc}</p>
+        {c.winCases.map(wc => (
+          <div key={wc.title} className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
+            <p className="mb-1 text-sm font-semibold text-amber-400">{wc.title}</p>
+            <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">{wc.desc}</p>
           </div>
         ))}
       </div>

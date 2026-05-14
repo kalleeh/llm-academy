@@ -720,5 +720,44 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Varje träningssteg använder ett annat format.',
       },
     },
+    finetuning: {
+      // From legacy: tech-translations.ts → whenToFineTuneSectionSv + data-translations.ts → winCasesTranslations.sv.
+      // SV winCases[0].title is the legacy correct value ("Konsekvent utdataformat") — preserved verbatim.
+      // EN[0].title repeats the section heading due to a pre-existing typo in the EN component (preserved unchanged).
+      whenToFineTuneSection: {
+        title: '1. När ska man finjustera',
+        intro: 'Finjustering är kraftfullt men dyrt. Gå igenom beslutsträdet för att se om du behöver det.',
+        winCases: [
+          { title: 'Konsekvent utdataformat', desc: 'Returnera alltid giltig JSON, specifikt XML-schema eller strukturerade rapporter — utan bräcklig prompt engineering.' },
+          { title: 'Domänterminologi', desc: 'Medicinsk, juridisk eller intern jargong som basmodellen får fel eller hallucinerar.' },
+          { title: 'Latensreduktion', desc: 'En finjusterad 8B-modell kan matcha en generell 70B-modell på din uppgift — 10x snabbare, 10x billigare.' },
+          { title: 'Beteendemönster', desc: 'Lär ut en specifik ton, avvisningsstil eller flerstegsresonemang som prompting inte kan producera pålitligt.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → preparingDataSectionSv. CHECKLIST stays inline EN-only (legacy data was misaligned).
+      preparingDataSection: {
+        title: '2. Förbereda din data',
+        intro: 'Datakvalitet avgör finjusteringsframgång. Välj format, strukturera exempel och validera.',
+      },
+      // From legacy: tech-translations.ts → fineTuningRunSectionSv (title + intro only — pN keys not in legacy → fall back to EN)
+      fineTuningRunSection: {
+        title: '3. Finjusteringskörningen',
+        intro: 'En komplett LoRA-finjustering av Llama 3.1 8B med Unsloth. Stega igenom varje steg.',
+      },
+      // From legacy: tech-translations.ts → evaluationMergingSectionSv
+      evaluationMergingSection: {
+        title: '4. Utvärdering och sammanslagning',
+        intro: 'Testa den finjusterade modellen, jämför före och efter, slå samman LoRA-adaptern.',
+      },
+      // From legacy: tech-translations.ts → costPlatformSectionSv + data-translations.ts → platformsTranslations.sv.
+      // Legacy platform names align positionally with new EN: [Unsloth/Colab Free, SageMaker/Colab Pro, Vertex/RunPod, Together/SageMaker, Modal/Local]
+      // — wait, there's misalignment. Legacy SV platforms: [Unsloth (lokal), Amazon SageMaker, Google Vertex AI, Together AI, Modal/RunPod].
+      // Current EN platforms: [Google Colab Free, Colab Pro, RunPod/Lambda, AWS SageMaker, Local (own GPU)].
+      // Different platform sets — pre-existing skew. Drop legacy SV/KO platforms (falls back to EN platform names which are the actual platforms shown).
+      costPlatformSection: {
+        title: '5. Kostnad och plattformsguide',
+        intro: 'Var du kör ditt finjusteringsjobb, vad det kostar och vilken hårdvara du behöver.',
+      },
+    },
   },
 }

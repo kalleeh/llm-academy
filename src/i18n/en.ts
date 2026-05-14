@@ -1258,6 +1258,65 @@ const modules = {
       intro: 'Each training stage uses a different format.',
     },
   },
+  finetuning: {
+    // Tech: 1. When to Fine-Tune
+    // Note: WIN_CASES[0].title accidentally repeats the section heading ("1. When to Fine-Tune") in the
+    // current EN component — pre-existing typo. Preserved verbatim per "EN bit-for-bit" rule.
+    // Legacy SV/KO have the semantically-correct title ("Konsekvent utdataformat" / "일관된 출력 형식")
+    // for that position, so SV/KO users see the intended content while EN keeps the existing bug.
+    whenToFineTuneSection: {
+      title: '1. When to Fine-Tune',
+      intro: 'Fine-tuning is powerful but expensive. Walk through this decision tree to see if you actually need it.',
+      winCases: [
+        { title: '1. When to Fine-Tune', desc: 'Always return valid JSON, specific XML schema, or structured reports — without fragile prompt engineering.' },
+        { title: 'Domain terminology', desc: 'Medical, legal, or internal jargon that the base model gets wrong or hallucinates.' },
+        { title: 'Latency reduction', desc: 'A fine-tuned 8B model can match a general 70B model on your task — 10x faster, 10x cheaper.' },
+        { title: 'Behavior patterns', desc: 'Teach a specific tone, refusal style, or multi-step reasoning pattern that prompting can\'t reliably produce.' },
+      ],
+    },
+    // Tech: 2. Preparing Your Data. CHECKLIST stays inline EN-only — legacy checklistTranslations
+    // had different semantic items (format/balance/QA/dedup/length/split) that don't align with the
+    // current EN list (diversity/format/size/cleaning/validation/verification). Pre-existing skew.
+    preparingDataSection: {
+      title: '2. Preparing Your Data',
+      intro: 'Data quality determines fine-tuning success. Pick a format, structure your examples, and validate before training.',
+    },
+    // Tech: 3. The Fine-Tuning Run.
+    // Drop EN_P14 (== P17), EN_P15 (== P18), EN_P16 (== P19) dead duplicates from the EN object.
+    fineTuningRunSection: {
+      title: '3. The Fine-Tuning Run',
+      intro: 'A complete LoRA fine-tune of Llama 3.1 8B using Unsloth. Click through each step to see the model load, LoRA attach, training progress, and adapter save.',
+      p3: 'LoRA is the most popular way to fine-tune efficiently, but it&apos;s not the only one. The key question is always the same:',
+      p5: 'Here&apos;s the idea: every number in a model&apos;s weights is normally stored with high precision — 16 bits per number (FP16), like measuring with a ruler that has millimeter marks. QLoRA says:',
+      p6: 'The LoRA adapter matrices (the small part we&apos;re actually training) still use full precision — they need the fine-grained detail to learn properly. So you get the best of both worlds: a compressed base model that takes up little memory, plus precise adapter training on top.',
+      p7: 'You can — but there&apos;s a cliff. At 4 bits, the quality loss from rounding is barely measurable. At 2 bits, the model starts forgetting things — like photocopying a photocopy, each round of compression loses detail. At 1 bit, you&apos;ve essentially reduced every weight to &quot;positive or negative&quot; — the model loses most of its nuance. 4-bit is the sweet spot where you save ~75% memory with &lt;1% quality loss.',
+      p8: 'A 70B parameter model normally needs ~140 GB of memory (FP16). With QLoRA, the base model fits in ~35 GB, and you only need a few extra GB for the LoRA adapters. That&apos;s the difference between needing a cluster of GPUs and needing a single high-end GPU.',
+      p11: 'Think of it like this: instead of retraining an employee (LoRA), you give them a detailed briefing note at the start of every task (prefix tuning). The employee&apos;s skills don&apos;t change, but the briefing steers their work in the right direction.',
+      p12: 'In practice, prefix tuning is simpler but generally less effective than LoRA for most tasks. It was an important early PEFT method (2021), but LoRA has largely superseded it. You&apos;ll still see it in research and in some specialized use cases where you need to switch between many tasks quickly — swapping a prefix is cheaper than swapping an adapter.',
+      p13: 'Prefix Tuning — a different approach',
+      p17: 'The PEFT family: LoRA, QLoRA, and Prefix Tuning',
+      p18: 'In the training run above, notice step 3:',
+      p19: 'LoRA and QLoRA modify the model\'s weight matrices — they change',
+    },
+    // Tech: 4. Evaluation & Merging
+    evaluationMergingSection: {
+      title: '4. Evaluation & Merging',
+      intro: 'Test the fine-tuned model, compare before vs after, merge the LoRA adapter into the base model.',
+    },
+    // Tech: 5. Cost & Platform Guide. PLATFORM_META holds non-translatable gpu/vram/cost/ease.
+    costPlatformSection: {
+      title: '5. Cost & Platform Guide',
+      intro: 'Where to run your fine-tuning job, what it costs, and what hardware you need.',
+      p2: 'A LoRA fine-tune of an 8B model on 5K examples costs about',
+      platforms: [
+        { name: 'Google Colab (Free)', notes: 'Limited to ~12h sessions. T4 is slow for 8B+ models. Good for learning.' },
+        { name: 'Google Colab Pro', notes: 'Best value for occasional fine-tuning. A100 access not guaranteed.' },
+        { name: 'RunPod / Lambda', notes: 'On-demand GPU rental. Pay only for what you use. Great for serious work.' },
+        { name: 'AWS SageMaker', notes: 'Managed service with MLOps integration. Higher cost, more features.' },
+        { name: 'Local (own GPU)', notes: 'No recurring cost. 24 GB VRAM handles 8B models with QLoRA. Setup required.' },
+      ],
+    },
+  },
 } as const
 
 /**

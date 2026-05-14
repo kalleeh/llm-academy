@@ -709,5 +709,39 @@ export const ko: DeepPartial<Translation> = {
         intro: '각 학습 단계는 다른 형식을 사용합니다.',
       },
     },
+    finetuning: {
+      // From legacy: data-translations.ts → winCasesTranslations.ko. KO winCases[0].title is the legacy correct value;
+      // EN[0].title repeats the section heading due to a pre-existing typo (preserved unchanged in EN).
+      whenToFineTuneSection: {
+        title: '1. 파인튜닝 시기',
+        intro: '파인튜닝은 강력하지만 비쌉니다. 의사결정 트리를 통해 실제로 필요한지 확인하세요.',
+        winCases: [
+          { title: '일관된 출력 형식', desc: '항상 유효한 JSON, 특정 XML 스키마, 구조화된 보고서를 반환 — 취약한 프롬프트 엔지니어링 없이.' },
+          { title: '도메인 용어', desc: '기본 모델이 틀리거나 환각하는 의료, 법률, 내부 전문 용어.' },
+          { title: '지연시간 감소', desc: '파인튜닝된 8B 모델이 작업에서 범용 70B 모델과 일치 — 10배 빠르고 10배 저렴.' },
+          { title: '행동 패턴', desc: '프롬프팅으로 안정적으로 생성할 수 없는 특정 톤, 거부 스타일, 다단계 추론을 학습.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → preparingDataSectionKo. CHECKLIST stays inline EN-only (legacy was misaligned).
+      preparingDataSection: {
+        title: '2. 데이터 준비',
+        intro: '데이터 품질이 파인튜닝 성공을 결정합니다. 형식을 선택하고, 예시를 구조화하고, 검증하세요.',
+      },
+      // From legacy: tech-translations.ts → fineTuningRunSectionKo (title + intro only)
+      fineTuningRunSection: {
+        title: '3. 파인튜닝 실행',
+        intro: 'Unsloth를 사용한 Llama 3.1 8B의 완전한 LoRA 파인튜닝. 각 단계를 진행하세요.',
+      },
+      // From legacy: tech-translations.ts → evaluationMergingSectionKo
+      evaluationMergingSection: {
+        title: '4. 평가 및 병합',
+        intro: '파인튜닝된 모델을 테스트하고, 전후를 비교하고, LoRA 어댑터를 병합하세요.',
+      },
+      // From legacy: tech-translations.ts → costPlatformSectionKo. Legacy platforms list dropped (different platform names than current EN).
+      costPlatformSection: {
+        title: '5. 비용 및 플랫폼 가이드',
+        intro: '파인튜닝 작업을 어디서 실행하고, 비용이 얼마이며, 어떤 하드웨어가 필요한지.',
+      },
+    },
   },
 }

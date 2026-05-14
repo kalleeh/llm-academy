@@ -3,9 +3,7 @@ import { Icon } from '../../components/Icon'
 import { CodeBlock } from '../../components/CodeBlock'
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { preparingDataSectionSv, preparingDataSectionKo } from './tech-translations'
-import { checklistTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 type Format = 'instruction' | 'chat' | 'preference'
 
@@ -57,6 +55,8 @@ const TRAINING_TREE: FileNode[] = [
   },
 ]
 
+// CHECKLIST stays inline EN-only — legacy checklistTranslations had different semantic items
+// (format/balance/QA/dedup/length/split) that don't align with these (diversity/format/size/cleaning/validation/verification).
 const CHECKLIST = [
   { label: 'Diverse examples', detail: 'Cover edge cases, not just the happy path' },
   { label: 'Consistent format', detail: 'Every example follows the exact same schema' },
@@ -66,12 +66,8 @@ const CHECKLIST = [
   { label: 'Human-verified', detail: 'Spot-check at least 100 examples manually' },
 ]
 
-const EN_INTRO = `Data quality determines fine-tuning success. Pick a format, structure your examples, and validate before training.`
-
 export const PreparingDataSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const cHECKLISTT = tArray(lang, CHECKLIST, checklistTranslations)
-  const c = useT({ title: '2. Preparing Your Data', intro: EN_INTRO }, { sv: preparingDataSectionSv, ko: preparingDataSectionKo })
+  const c = useTranslation().modules.finetuning.preparingDataSection
   const [activeFormat, setActiveFormat] = useState<Format>('instruction')
   const [checked, setChecked] = useState<Set<number>>(new Set())
 
@@ -125,7 +121,7 @@ export const PreparingDataSection: React.FC = () => {
         Quality checklist
       </h3>
       <div className="grid gap-2 sm:grid-cols-2">
-        {cHECKLISTT.map((item, i) => (
+        {CHECKLIST.map((item, i) => (
           <button
             key={i}
             onClick={() => toggleCheck(i)}
@@ -153,7 +149,7 @@ export const PreparingDataSection: React.FC = () => {
 
       <div className="mt-8 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
         <p className="mb-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-          <Icon name="box" /> nanochat's approach to SFT data
+          <Icon name="box" /> nanochat&apos;s approach to SFT data
         </p>
         <p className="mb-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           nanochat uses <code className="text-amber-300">chat_sft.py</code> with data from the{' '}
@@ -162,7 +158,7 @@ export const PreparingDataSection: React.FC = () => {
           <code className="text-amber-300">tasks/customjson.py</code> with any JSONL file of conversations.
         </p>
         <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          Want to give your model a personality? Karpathy's{' '}
+          Want to give your model a personality? Karpathy&apos;s{' '}
           <a href="https://github.com/karpathy/nanochat/discussions/139" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline decoration-amber-400/30 hover:decoration-amber-400">
             identity guide
           </a>{' '}

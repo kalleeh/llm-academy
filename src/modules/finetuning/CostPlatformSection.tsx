@@ -1,23 +1,21 @@
 import { useState, useCallback } from 'react'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { costPlatformSectionSv, costPlatformSectionKo } from './tech-translations'
-import { platformsTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
-interface Platform {
-  name: string
+interface PlatformMeta {
   gpu: string
   vram: string
   cost: string
   ease: number
-  notes: string
 }
 
-const PLATFORMS: Platform[] = [
-  { name: 'Google Colab (Free)', gpu: 'T4', vram: '15 GB', cost: 'Free', ease: 5, notes: 'Limited to ~12h sessions. T4 is slow for 8B+ models. Good for learning.' },
-  { name: 'Google Colab Pro', gpu: 'A100 40GB', vram: '40 GB', cost: '~$10/mo', ease: 5, notes: 'Best value for occasional fine-tuning. A100 access not guaranteed.' },
-  { name: 'RunPod / Lambda', gpu: 'A100 80GB', vram: '80 GB', cost: '$1–2/hr', ease: 3, notes: 'On-demand GPU rental. Pay only for what you use. Great for serious work.' },
-  { name: 'AWS SageMaker', gpu: 'A100 / H100', vram: '40–80 GB', cost: '$3–5/hr', ease: 2, notes: 'Managed service with MLOps integration. Higher cost, more features.' },
-  { name: 'Local (own GPU)', gpu: 'RTX 4090', vram: '24 GB', cost: '$0 (amortized)', ease: 4, notes: 'No recurring cost. 24 GB VRAM handles 8B models with QLoRA. Setup required.' },
+// Non-translatable per-platform technical metadata. Order matches `platforms` array in
+// `useTranslation().modules.finetuning.costPlatformSection.platforms`.
+const PLATFORM_META: PlatformMeta[] = [
+  { gpu: 'T4', vram: '15 GB', cost: 'Free', ease: 5 },
+  { gpu: 'A100 40GB', vram: '40 GB', cost: '~$10/mo', ease: 5 },
+  { gpu: 'A100 80GB', vram: '80 GB', cost: '$1–2/hr', ease: 3 },
+  { gpu: 'A100 / H100', vram: '40–80 GB', cost: '$3–5/hr', ease: 2 },
+  { gpu: 'RTX 4090', vram: '24 GB', cost: '$0 (amortized)', ease: 4 },
 ]
 
 const EASE_LABELS = ['', '★', '★★', '★★★', '★★★★', '★★★★★']
@@ -32,13 +30,8 @@ const COST_ESTIMATE = {
   vram: '~11 GB peak',
 }
 
-const EN_P2 = `A LoRA fine-tune of an 8B model on 5K examples costs about`
-const EN_INTRO = `Where to run your fine-tuning job, what it costs, and what hardware you need.`
-
 export const CostPlatformSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const pLATFORMST = tArray(lang, PLATFORMS, platformsTranslations)
-  const c = useT({ title: '5. Cost & Platform Guide', intro: EN_INTRO , p2: EN_P2 }, { sv: costPlatformSectionSv, ko: costPlatformSectionKo })
+  const c = useTranslation().modules.finetuning.costPlatformSection
   const [selectedPlatform, setSelectedPlatform] = useState<number | null>(null)
 
   const handleSelect = useCallback((i: number) => {
@@ -62,28 +55,31 @@ export const CostPlatformSection: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {pLATFORMST.map((p, i) => (
-              <tr
-                key={p.name}
-                onClick={() => handleSelect(i)}
-                className={`cursor-pointer border-b border-zinc-200 dark:border-zinc-800 transition-colors ${
-                  selectedPlatform === i ? 'bg-zinc-100 dark:bg-zinc-800' : 'hover:bg-zinc-100 dark:bg-zinc-800/50'
-                }`}
-              >
-                <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{p.name}</td>
-                <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{p.gpu}</td>
-                <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{p.vram}</td>
-                <td className="px-3 py-2.5 font-mono text-xs text-amber-400">{p.cost}</td>
-                <td className="px-3 py-2.5 text-xs text-yellow-500">{EASE_LABELS[p.ease]}</td>
-              </tr>
-            ))}
+            {c.platforms.map((p, i) => {
+              const meta = PLATFORM_META[i]
+              return (
+                <tr
+                  key={p.name}
+                  onClick={() => handleSelect(i)}
+                  className={`cursor-pointer border-b border-zinc-200 dark:border-zinc-800 transition-colors ${
+                    selectedPlatform === i ? 'bg-zinc-100 dark:bg-zinc-800' : 'hover:bg-zinc-100 dark:bg-zinc-800/50'
+                  }`}
+                >
+                  <td className="px-3 py-2.5 font-medium text-zinc-800 dark:text-zinc-200">{p.name}</td>
+                  <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{meta.gpu}</td>
+                  <td className="px-3 py-2.5 font-mono text-xs text-zinc-700 dark:text-zinc-300">{meta.vram}</td>
+                  <td className="px-3 py-2.5 font-mono text-xs text-amber-400">{meta.cost}</td>
+                  <td className="px-3 py-2.5 text-xs text-yellow-500">{EASE_LABELS[meta.ease]}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
         {selectedPlatform !== null && (
           <div className="mt-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 px-4 py-3">
             <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
-              <strong className="text-zinc-900 dark:text-zinc-100">{pLATFORMST[selectedPlatform].name}:</strong>{' '}
-              {pLATFORMST[selectedPlatform].notes}
+              <strong className="text-zinc-900 dark:text-zinc-100">{c.platforms[selectedPlatform].name}:</strong>{' '}
+              {c.platforms[selectedPlatform].notes}
             </p>
           </div>
         )}
