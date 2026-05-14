@@ -3,6 +3,19 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 9 — DONE (`training` module migrated)
+
+- Added `t.modules.training.*` to `en.ts` (5 sections: trainingSection1, trainingSection2, trainingSection3, trainingSection4, trainingSection5).
+- Extended `sv.ts` and `ko.ts` with training content. Preserved every populated human translation. 0 MT-marked entries.
+- Migrated 5 components in `src/modules/training/`. Highlights:
+  - `TrainingSection1` and `TrainingSection3` previously had **no** `useT` calls — their headings were hardcoded EN, even though `tech-translations.ts` had legacy SV/KO titles for them. Both components now read their heading from the tree, **reconnecting** the orphaned legacy translations. EN headings preserved bit-for-bit; SV/KO users now see the legacy translated headings instead of EN.
+  - `TrainingSection2` had EN_P2 == EN_P3 dead duplicate; component renders only `c.p3` → dropped p2. The component also contained an inline `{en, sv, ko}[lang]` ad-hoc i18n with two strings ("Click a stage or animate the full cycle" subtitle and the longer idle hint) — both lifted into the tree as `subtitle` and `idle`.
+  - `tLabel(lang, ...)` calls (training stage labels: trainLoadBatch / trainForwardPass / trainComputeLoss / trainBackwardPass / trainUpdateWeights) replaced with `useTranslation().labels[key]` typed as `keyof Translation['labels']`.
+  - `TrainingSection4` variants[] migrated through the tree with the legacy SV/KO array reordered to match the new EN order (legacy was [scratch, continued, lora, fulltuning]; new EN is [scratch, continued, fulltuning, lora]). Per-item content preserved verbatim. `VARIANT_META` holds non-translatable id/emoji/cost/time/data/code/steps/snapshots.
+  - `TrainingSection5` formats[] migrated through the tree. Legacy SV/KO had 3 items but the 3rd was "JSONL" (training data file format) while the new EN 3rd is "PyTorch" (model weight file format) — pre-existing skew from a refactor. Preserved first 2 items verbatim; 3rd item dropped → falls back to EN.
+- Deleted `src/modules/training/{tech-translations,data-translations}.ts`.
+- `npm run build` clean (210 ms).
+
 ## Checkpoint 8 — DONE (`architecture` module migrated)
 
 - Added `t.modules.architecture.*` to `en.ts` (5 sections: denseMoESection, scalingLawsSection, attentionVariantsSection, modelConfigSection, decisionTreeSection).
@@ -142,7 +155,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `data-foundations` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~8 .tsx | ⏳ |
 | `tokens` | (none — content inline in `TokensModule.tsx`) | 1 .tsx | ⏳ |
 | `transformer` | `tech-translations.ts`, `data-translations.ts` | ~7 .tsx | ⏳ |
-| `training` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
+| `training` | (deleted) | 5 .tsx migrated | ✅ |
 | `llm-data` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 | `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `architecture` | (deleted) | 5 .tsx migrated | ✅ |

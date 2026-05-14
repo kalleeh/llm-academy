@@ -1184,6 +1184,45 @@ const modules = {
       p9: 'Prompting, RAG, or API use only',
     },
   },
+  training: {
+    // Tech: 1. Starting From Nothing. Component previously had no useT — heading was hardcoded EN. Legacy SV/KO `trainingSection1Sv.title` existed but was orphaned. Migrating to preserve those translations going forward.
+    trainingSection1: {
+      title: '1. Starting From Nothing',
+    },
+    // Tech: 2. The Training Loop. EN_P2 was a dead duplicate of EN_P3 — drop p2.
+    // `subtitle` and `idle` come from a small inline `{en,sv,ko}[lang]` ad-hoc i18n in the original component.
+    trainingSection2: {
+      title: '2. The Training Loop',
+      p3: 'Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —',
+      subtitle: 'Click a stage or animate the full cycle',
+      idle: 'Click a stage above or press Animate to see how each step works.',
+    },
+    // Tech: 3. The Filesystem After Training. Same as Section1 — legacy SV/KO title was orphaned in the original component.
+    trainingSection3: {
+      title: '3. The Filesystem After Training',
+    },
+    // Tech: 4. Training Variants
+    trainingSection4: {
+      title: '4. Training Variants',
+      p2: 'Training from scratch is just one option — and the most expensive. Most people start from an existing model and adapt it. Click each approach to compare, then run the terminal command to see the filesystem change.',
+      variants: [
+        { label: 'From Scratch', desc: 'Build the entire model from random weights. nanochat can reproduce GPT-2 capability on 8× H100 in ~3 hours for ~$73 — a task that cost $50,000 in 2019. Frontier models still cost millions.' },
+        { label: 'Continued Pre-training', desc: 'Start from an existing model and keep training on new domain data. Same architecture, shifted weights.' },
+        { label: 'Full Fine-tuning', desc: 'Update ALL weights on a specific task dataset. Same structure, all weights change.' },
+        { label: 'LoRA', desc: 'Freeze the base model. Train tiny adapter matrices that sit alongside the frozen weights. Two separate folders.' },
+      ],
+    },
+    // Tech: 5. What's Inside the Weight Files
+    trainingSection5: {
+      title: '5. What\'s Inside the Weight Files',
+      p2: 'Format comparison — when to use each:',
+      formats: [
+        { name: 'SafeTensors', ext: '.safetensors', useCase: 'Default for Hugging Face. Safe, fast, memory-mapped.', pros: 'No code execution risk, fast loading', cons: 'HF ecosystem only' },
+        { name: 'GGUF', ext: '.gguf', useCase: 'Quantized models for llama.cpp / Ollama / local inference.', pros: 'Single file, quantization built-in', cons: 'Inference only, not for training' },
+        { name: 'PyTorch', ext: '.bin / .pt', useCase: 'Legacy format. Uses Python pickle under the hood.', pros: 'Universal PyTorch support', cons: 'Security risk (arbitrary code execution)' },
+      ],
+    },
+  },
 } as const
 
 /**

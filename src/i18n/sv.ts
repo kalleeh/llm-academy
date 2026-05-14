@@ -647,5 +647,43 @@ export const sv: DeepPartial<Translation> = {
         intro: 'Att välja arkitektur beror på budget, användningsfall och om du behöver serva modellen själv.',
       },
     },
+    training: {
+      // From legacy: tech-translations.ts → trainingSection1Sv (title was orphaned in legacy — Section1 had no useT). Title preserved here.
+      trainingSection1: {
+        title: '1. Från slumpmässiga vikter',
+      },
+      // From legacy: tech-translations.ts → trainingSection2Sv (only `title` was populated; intro/p* were empty placeholders).
+      // `subtitle` and `idle` from inline {en,sv,ko}[lang] ad-hoc i18n preserved verbatim from the original component.
+      trainingSection2: {
+        title: '2. Träningsloopen',
+        subtitle: 'Klicka på ett steg eller animera hela cykeln',
+        idle: 'Klicka på ett steg ovan eller tryck Animera för att se hur varje steg fungerar.',
+      },
+      // From legacy: tech-translations.ts → trainingSection3Sv (title orphaned in legacy — preserved here)
+      trainingSection3: {
+        title: '3. Checkpoints och modeller',
+      },
+      // From legacy: tech-translations.ts → trainingSection4Sv (title only) + data-translations.ts → variantsTranslations.sv.
+      // Legacy SV array order was [scratch, continued, lora, fulltuning]; reordered to match new EN order [scratch, continued, fulltuning, lora].
+      trainingSection4: {
+        title: '4. Träningsmetoder',
+        variants: [
+          { label: 'Från grunden', desc: 'Träna en helt ny modell från slumpmässiga vikter. Dyrast men full kontroll.' },
+          { label: 'Fortsatt förträning', desc: 'Ta en befintlig modell och träna vidare på domänspecifik data.' },
+          { label: 'Full finjustering', desc: 'Uppdatera alla vikter. Bäst kvalitet men kräver mest resurser.' },
+          { label: 'LoRA / QLoRA', desc: 'Finjustera med små adapter-matriser. Billigt, snabbt, effektivt.' },
+        ],
+      },
+      // From legacy: tech-translations.ts → trainingSection5Sv (title only) + data-translations.ts → formatComparisonTranslations.sv.
+      // Legacy SV had 3 items but the 3rd was "JSONL" (training data format) while new EN 3rd is "PyTorch" (model weight format) — misaligned.
+      // Preserved first 2 items verbatim; 3rd item dropped → falls back to EN.
+      trainingSection5: {
+        title: '5. nanochat-speedrun',
+        formats: [
+          { name: 'SafeTensors', useCase: 'Standard för modellvikter. Säker, snabb laddning.' },
+          { name: 'GGUF', useCase: 'Kvantiserade modeller för llama.cpp. CPU-inferens.' },
+        ],
+      },
+    },
   },
 }

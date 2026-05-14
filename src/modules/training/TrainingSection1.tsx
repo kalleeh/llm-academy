@@ -1,6 +1,7 @@
 import { Workspace } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
+import { useTranslation } from '../../i18n'
 
 const initSteps: TerminalStep[] = [
   {
@@ -112,10 +113,12 @@ const SNAPSHOTS: Record<number, WorkspaceSnapshot> = {
   },
 }
 
-export const TrainingSection1: React.FC = () => (
+export const TrainingSection1: React.FC = () => {
+  const c = useTranslation().modules.training.trainingSection1
+  return (
   <section className="space-y-6" aria-labelledby="section-1-heading">
     <h3 id="section-1-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
-      1. Starting From Nothing
+      {c.title}
     </h3>
     <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
       Every LLM starts as an empty shell — billions of numbers, all random. Let's set up{' '}
@@ -142,4 +145,5 @@ export const TrainingSection1: React.FC = () => (
       </p>
     </div>
   </section>
-)
+  )
+}

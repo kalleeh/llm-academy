@@ -641,5 +641,40 @@ export const ko: DeepPartial<Translation> = {
         intro: '아키텍처 선택은 예산, 사용 사례, 모델을 직접 서빙해야 하는지에 따라 달라집니다.',
       },
     },
+    training: {
+      // From legacy: tech-translations.ts → trainingSection1Ko (title was orphaned in legacy — Section1 had no useT). Title preserved here.
+      trainingSection1: {
+        title: '1. 랜덤 가중치에서',
+      },
+      // From legacy: tech-translations.ts → trainingSection2Ko (only `title` was populated).
+      // `subtitle` and `idle` from inline ad-hoc i18n preserved verbatim.
+      trainingSection2: {
+        title: '2. 학습 루프',
+        subtitle: '단계를 클릭하거나 전체 사이클을 애니메이션',
+        idle: '위의 단계를 클릭하거나 애니메이션을 눌러 각 단계가 어떻게 작동하는지 확인하세요.',
+      },
+      // From legacy: tech-translations.ts → trainingSection3Ko (title orphaned — preserved here)
+      trainingSection3: {
+        title: '3. 체크포인트와 모델',
+      },
+      // From legacy: data-translations.ts → variantsTranslations.ko. Legacy order [scratch, continued, lora, fulltuning] reordered to match new EN [scratch, continued, fulltuning, lora].
+      trainingSection4: {
+        title: '4. 학습 방법',
+        variants: [
+          { label: '처음부터', desc: '랜덤 가중치에서 완전히 새로운 모델 학습. 가장 비싸지만 완전한 통제.' },
+          { label: '계속 사전 학습', desc: '기존 모델을 가져와 도메인별 데이터로 추가 학습.' },
+          { label: '전체 파인튜닝', desc: '모든 가중치 업데이트. 최고 품질이지만 가장 많은 리소스 필요.' },
+          { label: 'LoRA / QLoRA', desc: '작은 어댑터 행렬로 파인튜닝. 저렴하고 빠르고 효율적.' },
+        ],
+      },
+      // From legacy: data-translations.ts → formatComparisonTranslations.ko. 3rd item "JSONL" was misaligned with new EN 3rd "PyTorch" — dropped (falls back to EN).
+      trainingSection5: {
+        title: '5. nanochat 스피드런',
+        formats: [
+          { name: 'SafeTensors', useCase: '모델 가중치 표준. 안전하고 빠른 로딩.' },
+          { name: 'GGUF', useCase: 'llama.cpp용 양자화 모델. CPU 추론.' },
+        ],
+      },
+    },
   },
 }

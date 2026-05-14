@@ -1,6 +1,7 @@
 import { FileExplorer } from '../../components/FileExplorer'
 import type { FileNode } from '../../components/FileExplorer'
 import { Icon } from '../../components/Icon'
+import { useTranslation } from '../../i18n'
 
 const beforeTraining: FileNode[] = [
   {
@@ -75,10 +76,12 @@ const afterTraining: FileNode[] = [
   },
 ]
 
-export const TrainingSection3: React.FC = () => (
+export const TrainingSection3: React.FC = () => {
+  const c = useTranslation().modules.training.trainingSection3
+  return (
   <section className="space-y-6" aria-labelledby="section-3-heading">
     <h3 id="section-3-heading" className="font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">
-      3. The Filesystem After Training
+      {c.title}
     </h3>
     <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
       After training, the nanochat project directory gains a <code className="text-amber-700 dark:text-amber-300">logs/d26/</code> folder
@@ -107,4 +110,5 @@ export const TrainingSection3: React.FC = () => (
       </p>
     </div>
   </section>
-)
+  )
+}

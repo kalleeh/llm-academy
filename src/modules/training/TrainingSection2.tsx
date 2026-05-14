@@ -1,5 +1,4 @@
-import { tLabel, useLanguage, useT } from '../../i18n'
-import { trainingSection2Sv, trainingSection2Ko } from './tech-translations'
+import { useTranslation, type Translation } from '../../i18n'
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
@@ -9,7 +8,9 @@ import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { SelfExplain } from '../../components/SelfExplain'
 
-const LOOP_STAGES: { label: string; icon: IconName; active: string; desc: string; detail: string }[] = [
+type LabelKey = keyof Translation['labels']
+
+const LOOP_STAGES: { label: LabelKey; icon: IconName; active: string; desc: string; detail: string }[] = [
   {
     label: 'trainLoadBatch',
     icon: 'box',
@@ -48,7 +49,8 @@ const LOOP_STAGES: { label: string; icon: IconName; active: string; desc: string
 ]
 
 function TrainingLoopViz() {
-  const { lang } = useLanguage()
+  const t = useTranslation()
+  const c = t.modules.training.trainingSection2
   const [activeStage, setActiveStage] = useState(-1)
   const [isRunning, setIsRunning] = useState(false)
   const [iteration, setIteration] = useState(0)
@@ -91,7 +93,7 @@ function TrainingLoopViz() {
       <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-5 py-3">
         <div>
           <h4 className="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">The Training Loop</h4>
-          <p className="text-xs text-zinc-500">{{ en: `Click a stage or animate the full cycle`, sv: `Klicka på ett steg eller animera hela cykeln`, ko: `단계를 클릭하거나 전체 사이클을 애니메이션` }[lang] ?? `Click a stage or animate the full cycle`}</p>
+          <p className="text-xs text-zinc-500">{c.subtitle}</p>
         </div>
         <div className="flex items-center gap-3">
           {iteration > 0 && (
@@ -120,7 +122,7 @@ function TrainingLoopViz() {
             const isPast = activeStage >= 0 && i < activeStage
             return (
               <button
-                key={tLabel(lang, stage.label)}
+                key={stage.label}
                 onClick={() => clickStage(i)}
                 className={`group relative flex flex-1 flex-col items-center gap-1.5 rounded-lg border px-2 py-3 text-center transition-all duration-300 ${
                   isActive
@@ -133,7 +135,7 @@ function TrainingLoopViz() {
                 <span className={`text-lg transition-transform duration-300 ${isActive ? 'scale-125' : ''}`}>
                   <Icon name={stage.icon} />
                 </span>
-                <span className="text-[10px] font-medium leading-tight">{tLabel(lang, stage.label)}</span>
+                <span className="text-[10px] font-medium leading-tight">{t.labels[stage.label]}</span>
                 <span className={`font-mono text-[9px] leading-tight transition-opacity ${isActive ? 'opacity-100' : 'opacity-0'}`}>
                   {stage.detail}
                 </span>
@@ -178,11 +180,11 @@ function TrainingLoopViz() {
         {activeStage >= 0 ? (
           <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             <span className="mr-1.5"><Icon name={LOOP_STAGES[activeStage].icon} /></span>
-            <strong className="text-zinc-900 dark:text-zinc-100">{LOOP_STAGES[activeStage].label}:</strong>{' '}
+            <strong className="text-zinc-900 dark:text-zinc-100">{t.labels[LOOP_STAGES[activeStage].label]}:</strong>{' '}
             {LOOP_STAGES[activeStage].desc}
           </p>
         ) : (
-          <p className="text-sm text-zinc-500">{{ en: `Click a stage or animate the full cycle`, sv: `Klicka på ett steg ovan eller tryck Animera för att se hur varje steg fungerar.`, ko: `위의 단계를 클릭하거나 애니메이션을 눌러 각 단계가 어떻게 작동하는지 확인하세요.` }[lang] ?? `Click a stage above or press Animate to see how each step works.`}</p>
+          <p className="text-sm text-zinc-500">{c.idle}</p>
         )}
       </div>
     </div>
@@ -321,10 +323,8 @@ const filesystemByStep: Record<number, FileNode[]> = {
 // Map step index to loss curve progress (0-1)
 const PROGRESS_MAP: Record<number, number> = { [-1]: 0, 0: 0.02, 1: 0.15, 2: 0.5, 3: 1 }
 
-const EN_P3 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
-const EN_P2 = `Training is a loop that runs millions of times. Each iteration: show the model some text, see how wrong it is, then nudge the weights to be less wrong. Repeat until the loss stops dropping. In nanochat, one command kicks off the entire pre-training run —`
 export const TrainingSection2: React.FC = () => {
-  const c = useT({ title: '2. The Training Loop'   , p2: EN_P2 , p3: EN_P3 }, { sv: trainingSection2Sv, ko: trainingSection2Ko })
+  const c = useTranslation().modules.training.trainingSection2
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {

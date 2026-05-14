@@ -1,5 +1,4 @@
-import { tArray, useLanguage, useT } from '../../i18n'
-import { trainingSection4Sv, trainingSection4Ko } from './tech-translations'
+import { useTranslation } from '../../i18n'
 import { useState, useCallback } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Workspace } from '../../components/Workspace'
@@ -8,16 +7,13 @@ import type { FileNode } from '../../components/FileExplorer'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
-import { variantsTranslations } from './data-translations'
 
-interface Variant {
+interface VariantMeta {
   id: string
-  label: string
   emoji: IconName
   cost: string
   time: string
   data: string
-  desc: string
   code: string
   steps: TerminalStep[]
   snapshots: Record<number, WorkspaceSnapshot>
@@ -27,15 +23,15 @@ function makeSnapshots(tree: FileNode[], info: string): Record<number, Workspace
   return { [-1]: { tree: [], label: 'No files yet — run the command', info: 'Click "Run" in the terminal to start.' }, [0]: { tree, label: 'Result', info } }
 }
 
-const VARIANTS: Variant[] = [
+// Non-translatable per-variant metadata. Order matches `variants` array in
+// `useTranslation().modules.training.trainingSection4.variants`.
+const VARIANT_META: VariantMeta[] = [
   {
     id: 'scratch',
-    label: 'From Scratch',
     emoji: 'build',
     cost: '$73 – $100M+',
     time: '3 hours (GPT-2) to months (frontier)',
     data: 'Billions to trillions of tokens',
-    desc: 'Build the entire model from random weights. nanochat can reproduce GPT-2 capability on 8× H100 in ~3 hours for ~$73 — a task that cost $50,000 in 2019. Frontier models still cost millions.',
     code: `# nanochat: reproduce GPT-2 on 8× H100
 # The --depth flag is the ONLY dial — everything else is auto-calculated
 bash runs/speedrun.sh   # or manually:
@@ -61,12 +57,10 @@ OMP_NUM_THREADS=1 torchrun --standalone --nproc_per_node=8 \\
   },
   {
     id: 'continued',
-    label: 'Continued Pre-training',
     emoji: 'books',
     cost: '$10K – $500K',
     time: 'Days to weeks',
     data: 'Billions of tokens (domain-specific)',
-    desc: 'Start from an existing model and keep training on new domain data. Same architecture, shifted weights.',
     code: `# Continued pre-training on domain data
 python train.py \\
   --model_name meta-llama/Llama-3-8B \\
@@ -93,12 +87,10 @@ python train.py \\
   },
   {
     id: 'finetune',
-    label: 'Full Fine-tuning',
     emoji: 'target',
     cost: '$100 – $10K',
     time: 'Hours to days',
     data: 'Thousands to millions of examples',
-    desc: 'Update ALL weights on a specific task dataset. Same structure, all weights change.',
     code: `# Full fine-tuning with Hugging Face
 from transformers import Trainer, TrainingArguments
 
@@ -132,12 +124,10 @@ trainer.train()`,
   },
   {
     id: 'lora',
-    label: 'LoRA',
     emoji: 'puzzle',
     cost: '$10 – $100',
     time: 'Minutes to hours',
     data: 'Hundreds to thousands of examples',
-    desc: 'Freeze the base model. Train tiny adapter matrices that sit alongside the frozen weights. Two separate folders.',
     code: `# LoRA fine-tuning with PEFT
 from peft import LoraConfig, get_peft_model
 
@@ -171,16 +161,14 @@ model.print_trainable_parameters()`,
   },
 ]
 
-const EN_P2 = `Training from scratch is just one option — and the most expensive. Most people start from an existing model and adapt it. Click each approach to compare, then run the terminal command to see the filesystem change.`
 export const TrainingSection4: React.FC = () => {
-  const { lang } = useLanguage()
-  const vARIANTST = tArray(lang, VARIANTS, variantsTranslations)
-  const c = useT({ title: '4. Training Variants' , p2: EN_P2 }, { sv: trainingSection4Sv, ko: trainingSection4Ko })
-  const [selected, setSelected] = useState('scratch')
-  const variant = VARIANTS.find(v => v.id === selected)!
+  const c = useTranslation().modules.training.trainingSection4
+  const [selectedIdx, setSelectedIdx] = useState(0)
+  const variant = c.variants[selectedIdx]
+  const meta = VARIANT_META[selectedIdx]
 
-  const handleSelect = useCallback((id: string) => {
-    setSelected(id)
+  const handleSelect = useCallback((i: number) => {
+    setSelectedIdx(i)
   }, [])
 
   return (
@@ -191,19 +179,19 @@ export const TrainingSection4: React.FC = () => {
       </p>
 
       <div className="flex flex-wrap gap-2" role="tablist" aria-label="Training variant selection">
-        {vARIANTST.map(v => (
+        {c.variants.map((v, i) => (
           <button
-            key={v.id}
+            key={VARIANT_META[i].id}
             role="tab"
-            aria-selected={selected === v.id}
-            onClick={() => handleSelect(v.id)}
+            aria-selected={selectedIdx === i}
+            onClick={() => handleSelect(i)}
             className={`rounded-lg border px-4 py-2 text-sm font-medium transition-all ${
-              selected === v.id
+              selectedIdx === i
                 ? 'border-amber-400 dark:border-amber-500/50 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300'
                 : 'border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-700 dark:text-zinc-300'
             }`}
           >
-            <Icon name={v.emoji} /> {v.label}
+            <Icon name={VARIANT_META[i].emoji} /> {v.label}
           </button>
         ))}
       </div>
@@ -211,29 +199,29 @@ export const TrainingSection4: React.FC = () => {
       <div className="grid gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900/50 p-4 sm:grid-cols-3" role="tabpanel">
         <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Cost</div>
-          <div className="mt-1 font-mono text-sm font-bold text-green-700 dark:text-green-400">{variant.cost}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-green-700 dark:text-green-400">{meta.cost}</div>
         </div>
         <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Time</div>
-          <div className="mt-1 font-mono text-sm font-bold text-blue-700 dark:text-blue-400">{variant.time}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-blue-700 dark:text-blue-400">{meta.time}</div>
         </div>
         <div className="rounded bg-zinc-100 dark:bg-zinc-800/50 p-3 text-center">
           <div className="text-xs text-zinc-500">Data needed</div>
-          <div className="mt-1 font-mono text-sm font-bold text-purple-700 dark:text-purple-400">{variant.data}</div>
+          <div className="mt-1 font-mono text-sm font-bold text-purple-700 dark:text-purple-400">{meta.data}</div>
         </div>
       </div>
 
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{variant.desc}</p>
 
       <Workspace
-        key={variant.id}
+        key={meta.id}
         title={variant.label}
         terminalTitle={`terminal — ${variant.label.toLowerCase()}`}
-        steps={variant.steps}
-        snapshots={variant.snapshots}
+        steps={meta.steps}
+        snapshots={meta.snapshots}
       />
 
-      <CodeBlock code={variant.code} language="python" title={`${variant.label} — code`} />
+      <CodeBlock code={meta.code} language="python" title={`${variant.label} — code`} />
     </section>
   )
 }

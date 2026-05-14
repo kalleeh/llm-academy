@@ -1,12 +1,10 @@
-import { tArray, useLanguage, useT } from '../../i18n'
-import { trainingSection5Sv, trainingSection5Ko } from './tech-translations'
+import { useTranslation } from '../../i18n'
 import { useState, useMemo, useCallback } from 'react'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
 import { SelfExplain } from '../../components/SelfExplain'
-import { formatComparisonTranslations } from './data-translations'
 
 function WeightMatrix({
   trained, highlight }: { trained: boolean; highlight: boolean }) {
@@ -80,17 +78,8 @@ const inspectSteps: TerminalStep[] = [
   },
 ]
 
-const FORMAT_COMPARISON = [
-  { name: 'SafeTensors', ext: '.safetensors', useCase: 'Default for Hugging Face. Safe, fast, memory-mapped.', pros: 'No code execution risk, fast loading', cons: 'HF ecosystem only' },
-  { name: 'GGUF', ext: '.gguf', useCase: 'Quantized models for llama.cpp / Ollama / local inference.', pros: 'Single file, quantization built-in', cons: 'Inference only, not for training' },
-  { name: 'PyTorch', ext: '.bin / .pt', useCase: 'Legacy format. Uses Python pickle under the hood.', pros: 'Universal PyTorch support', cons: 'Security risk (arbitrary code execution)' },
-]
-
-const EN_P2 = `Format comparison — when to use each:`
 export const TrainingSection5: React.FC = () => {
-  const { lang } = useLanguage()
-  const fORMAT_COMPARISONT = tArray(lang, FORMAT_COMPARISON, formatComparisonTranslations)
-  const c = useT({ title: '5. What\'s Inside the Weight Files'  , p2: EN_P2 }, { sv: trainingSection5Sv, ko: trainingSection5Ko })
+  const c = useTranslation().modules.training.trainingSection5
   const [executedStep, setExecutedStep] = useState(-1)
 
   const handleStepExecuted = useCallback((stepIndex: number) => {
@@ -152,7 +141,7 @@ export const TrainingSection5: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {fORMAT_COMPARISONT.map(f => (
+              {c.formats.map(f => (
                 <tr key={f.name} className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                   <td className="px-3 py-2 font-mono font-medium text-zinc-900 dark:text-zinc-100">{f.name}</td>
                   <td className="px-3 py-2 font-mono text-amber-700 dark:text-amber-300">{f.ext}</td>
