@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
 
 // Verified facts (May 2026):
 // All benchmark numbers below are sourced from vendor announcements and the
@@ -130,7 +129,7 @@ const DECISION_RULES = [
 const EN_INTRO = `Frontier models in 2026 differ less in raw capability than in calibration. Each lab makes specific post-training trade-offs that produce specific behaviors. Knowing those trade-offs is more durable than memorising leaderboards.`
 
 export const ModelSelectionSection: React.FC = () => {
-  const c = useT({ title: '3. Choosing Models — Why They Differ and How to Pick', intro: EN_INTRO }, {})
+  const c = { title: '3. Choosing Models — Why They Differ and How to Pick', intro: EN_INTRO }
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 

@@ -723,6 +723,69 @@ const modules = {
       ],
     },
   },
+  evaluation: {
+    // Business: 1. How to Tell If Your AI Is Working
+    measuring: {
+      title: '1. How to Tell If Your AI Is Working',
+      intro: '"It seems pretty good" isn\'t good enough.',
+      introSub: 'Think of it like quality assurance before launching a product — test it systematically, not just casually.',
+      goodAnswerLabel: 'Good answer',
+      badAnswerLabel: 'Bad answer',
+    },
+    // Business: 2. Choosing the Right AI Model
+    choosing: {
+      title: '2. Choosing the Right AI Model',
+      intro: 'Choosing an AI model is like hiring for a specific role',
+      introSub: "A PhD in physics is impressive, but you wouldn't hire them for a receptionist role.",
+      tipsTitle: 'Reading AI leaderboards (like reading product reviews)',
+      selfExplainPrompt: 'How would you evaluate whether an AI chatbot is working well for your customer support team?',
+    },
+    // Tech: 1. Why Evaluation Matters
+    whyEvaluationSection: {
+      title: '1. Why Evaluation Matters',
+      lossTrainsSomething: 'Training loss tells you the model is learning ',
+      compareModelsLabel: 'Compare these two models. Model A has ',
+      keyInsightCallout: 'Model A has lower perplexity because it produces "safe" generic sentences that are easy to predict. Model B takes more risks with specific facts and structure — harder to predict, but far more useful.',
+      lossNotQuality: 'Loss is a training signal, not a quality metric.',
+      practiceHeading: 'Evaluation in Practice — nanochat',
+    },
+    // Tech: 2. Key Benchmarks
+    benchmarksSection: {
+      title: '2. Key Benchmarks (2025–2026)',
+      intro: 'The industry uses standardized benchmarks to compare models. No single benchmark tells the whole story.',
+      saturationCallout: 'Top models now score 85-95% on many benchmarks, making it hard to differentiate. The industry is shifting toward harder benchmarks (GPQA, ARC-AGI, SWE-bench) and human preference ratings (LMArena).',
+      benchmarks: [
+        { name: 'MMLU-Pro', category: 'Knowledge', what: 'Tests general knowledge across 14 disciplines — from biology to physics to law. Harder than original MMLU with 10-choice questions and reasoning-focused problems.', scoring: 'Accuracy (% correct). Multiple choice, 10 options.' },
+        { name: 'GPQA', category: 'Science', what: 'Graduate-level science questions written by PhD experts. Designed to be hard even for domain specialists outside their field.', scoring: 'Accuracy on expert-validated questions.' },
+        { name: 'HumanEval / SWE-bench', category: 'Coding', what: 'HumanEval: 164 Python problems. SWE-bench: real GitHub issues requiring multi-file fixes in actual repos.', scoring: 'Pass@1 (first attempt correct). SWE-bench: % of issues resolved.' },
+        { name: 'MATH / AIME', category: 'Math', what: 'MATH: competition-level math problems. AIME: American Invitational Mathematics Examination problems.', scoring: 'Accuracy. AIME scored 0-15.' },
+        { name: 'ARC-AGI', category: 'Reasoning', what: 'Abstract reasoning puzzles testing pattern recognition and generalization. Visual grid transformations.', scoring: '% of puzzles solved correctly.' },
+        { name: 'LMArena / Chatbot Arena', category: 'Human Pref', what: 'Blind side-by-side comparisons. Real users chat with two anonymous models and pick the better one. ELO rating system.', scoring: 'ELO rating from pairwise human preferences.' },
+      ],
+    },
+    // Tech: 3. Custom Evaluation
+    customEvalSection: {
+      title: '3. Custom Evaluation',
+      intro: 'Public benchmarks test general capabilities. For ',
+      taskTypes: [
+        { label: 'Classification', metrics: ['Accuracy', 'F1 Score', 'Precision / Recall'], tip: 'Build a balanced eval set with examples from every class. 200+ examples minimum.' },
+        { label: 'Text Generation', metrics: ['ROUGE-L', 'BLEU', 'BERTScore', 'Human rating'], tip: 'Automated metrics correlate poorly with quality. Always include human evaluation for generation tasks.' },
+        { label: 'Code Generation', metrics: ['Pass@1', 'Pass@5', 'Execution success rate'], tip: 'Run generated code in a sandbox. Test with edge cases, not just happy paths.' },
+        { label: 'Question Answering', metrics: ['Exact Match', 'F1 (token overlap)', 'Faithfulness'], tip: 'For RAG: measure both retrieval quality and answer quality separately.' },
+        { label: 'Conversational', metrics: ['Human preference (A/B)', 'Helpfulness rating', 'Safety rate'], tip: 'Use blind A/B comparisons against a baseline model. 100+ conversations minimum.' },
+      ],
+    },
+    // Tech: 4. The Leaderboard Problem
+    leaderboardSection: {
+      title: '4. The Leaderboard Problem',
+      intro: "Benchmarks are useful but flawed. Here's why you shouldn't pick a model based on leaderboard rank alone.",
+      arenaHeading: 'The Alternative: LMArena / Chatbot Arena',
+      arenaIntro: 'Instead of automated benchmarks, LMArena uses ',
+      arenaWorks: "Can't be gamed (blind), measures what users actually care about, captures nuance that automated metrics miss.",
+      arenaLimits: "Biased toward chatty/verbose responses, English-centric, doesn't test specialized domains well.",
+      bottomLine: 'Use benchmarks as a starting filter, then evaluate on',
+    },
+  },
 } as const
 
 /**

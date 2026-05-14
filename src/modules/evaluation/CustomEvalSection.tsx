@@ -1,17 +1,7 @@
 import { useState } from 'react'
 import { CodeBlock } from '../../components/CodeBlock'
 import { Icon } from '../../components/Icon'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { customEvalSectionSv, customEvalSectionKo } from './tech-translations'
-import { taskTypesTranslations } from './data-translations'
-
-const TASK_TYPES = [
-  { id: 'classification', label: 'Classification', metrics: ['Accuracy', 'F1 Score', 'Precision / Recall'], tip: 'Build a balanced eval set with examples from every class. 200+ examples minimum.' },
-  { id: 'generation', label: 'Text Generation', metrics: ['ROUGE-L', 'BLEU', 'BERTScore', 'Human rating'], tip: 'Automated metrics correlate poorly with quality. Always include human evaluation for generation tasks.' },
-  { id: 'code', label: 'Code Generation', metrics: ['Pass@1', 'Pass@5', 'Execution success rate'], tip: 'Run generated code in a sandbox. Test with edge cases, not just happy paths.' },
-  { id: 'qa', label: 'Question Answering', metrics: ['Exact Match', 'F1 (token overlap)', 'Faithfulness'], tip: 'For RAG: measure both retrieval quality and answer quality separately.' },
-  { id: 'chat', label: 'Conversational', metrics: ['Human preference (A/B)', 'Helpfulness rating', 'Safety rate'], tip: 'Use blind A/B comparisons against a baseline model. 100+ conversations minimum.' },
-]
+import { useTranslation } from '../../i18n'
 
 const EVAL_SCRIPT = `import json
 from openai import OpenAI  # or any model client
@@ -42,26 +32,22 @@ def evaluate_model(eval_set_path: str, model: str):
     print(f"Accuracy: {accuracy:.1%} ({correct}/{len(examples)})")
     return results`
 
-const EN_P4 = `Public benchmarks test general capabilities. For`
-const EN_P3 = `Public benchmarks test general capabilities. For`
 export const CustomEvalSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const tASK_TYPEST = tArray(lang, TASK_TYPES, taskTypesTranslations)
-  const c = useT({ title: '3. Custom Evaluation'  , p3: EN_P3 , p4: EN_P4 }, { sv: customEvalSectionSv, ko: customEvalSectionKo })
+  const c = useTranslation().modules.evaluation.customEvalSection
   const [selectedTask, setSelectedTask] = useState(0)
-  const task = TASK_TYPES[selectedTask]
+  const task = c.taskTypes[selectedTask]
 
   return (
     <section aria-labelledby="custom-eval">
       <h2 id="custom-eval" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p4}<em>your</em> fine-tuned model, you need
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}<em>your</em> fine-tuned model, you need
         evaluation sets from your domain. Pick your task type to see recommended metrics:
       </p>
 
       <div className="mb-4 flex flex-wrap gap-2">
-        {tASK_TYPEST.map((t, i) => (
+        {c.taskTypes.map((t, i) => (
           <button
-            key={t.id}
+            key={t.label}
             onClick={() => setSelectedTask(i)}
             className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
               selectedTask === i

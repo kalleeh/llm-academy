@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
-import { useT } from '../../i18n'
 
 // Verified facts (May 2026):
 // - Claude Opus 4.7 (Apr 16 2026): 87.6% SWE-bench Verified, 64.3% SWE-Bench Pro,
@@ -110,7 +109,7 @@ const EN = {
 }
 
 export const ModelPersonalitiesBusiness: React.FC = () => {
-  const c = useT(EN, {})
+  const c = EN
   const [expanded, setExpanded] = useState<number | null>(0)
   const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
 

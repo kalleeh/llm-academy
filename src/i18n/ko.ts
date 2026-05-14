@@ -313,5 +313,59 @@ export const ko: DeepPartial<Translation> = {
         ],
       },
     },
+    evaluation: {
+      // From legacy: src/modules/evaluation/translations.ts → measuringKo
+      measuring: {
+        title: '1. AI가 잘 작동하는지 어떻게 알 수 있나요',
+        intro: '**"꽤 괜찮아 보인다"는 충분하지 않습니다.** 신입사원을 느낌으로 평가하지 않듯이 — 명확한 기대치를 설정하고 결과를 측정해야 합니다. AI에도 같은 엄격함이 필요합니다.',
+        introSub: '제품 출시 전 품질 보증처럼 생각하세요 — 체계적으로 테스트하세요.',
+        goodAnswerLabel: '좋은 답변',
+        badAnswerLabel: '나쁜 답변',
+      },
+      // From legacy: src/modules/evaluation/translations.ts → choosingKo
+      choosing: {
+        title: '2. 올바른 AI 모델 선택하기',
+        intro: 'AI 모델을 선택하는 것은 **특정 역할에 채용하는 것**과 같습니다 — "최고의" 후보는 이력서가 아니라 여러분의 필요에 따라 달라집니다.',
+        introSub: '물리학 박사는 인상적이지만, 안내원으로 채용하지는 않을 것입니다. 마찬가지로, 가장 크고 비싼 AI 모델이 항상 올바른 선택은 아닙니다.',
+        tipsTitle: 'AI 리더보드 읽기 (제품 리뷰 읽기처럼)',
+        selfExplainPrompt: '고객 지원팀을 위한 AI 챗봇이 잘 작동하는지 어떻게 평가하시겠습니까? 구체적으로 무엇을 측정하시겠습니까?',
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → whyEvaluationSectionKo
+      whyEvaluationSection: {
+        title: '1. 평가가 중요한 이유',
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → benchmarksSectionKo
+      benchmarksSection: {
+        title: '2. 주요 벤치마크 (2025–2026)',
+        intro: '업계는 모델을 비교하기 위해 표준화된 벤치마크를 사용합니다. 단일 벤치마크로는 전체 이야기를 알 수 없습니다.',
+        // From legacy: benchmarksTranslations.ko
+        benchmarks: [
+          { name: 'MMLU', category: '지식', what: '57개 과목에 걸친 객관식 문제', scoring: '정확도 (%)' },
+          { name: 'HumanEval', category: '코딩', what: 'Python 프로그래밍 문제', scoring: 'pass@k (테스트 통과 %)' },
+          { name: 'GSM8K', category: '수학', what: '초등학교 수준 수학 문제', scoring: '정확도 (%)' },
+          { name: 'TruthfulQA', category: '진실성', what: '일반적인 오해를 유발하도록 설계된 질문', scoring: '진실된 답변 %' },
+          { name: 'MT-Bench', category: '대화', what: '다중 턴 대화 품질', scoring: 'GPT-4 판정 (1-10)' },
+          { name: 'ARC-AGI', category: '추론', what: '추상적 추론 퍼즐', scoring: '정확도 (%)' },
+        ],
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → customEvalSectionKo
+      customEvalSection: {
+        title: '3. 커스텀 평가',
+        intro: '공개 벤치마크는 일반적인 능력을 테스트합니다. 특정 작업에는 커스텀 평가가 필요합니다.',
+        // From legacy: taskTypesTranslations.ko
+        taskTypes: [
+          { label: '분류', metrics: ['정확도, F1, 정밀도, 재현율'], tip: '클래스별로 테스트 데이터를 층화' },
+          { label: '생성', metrics: ['BLEU, ROUGE, BERTScore, 인간 평가'], tip: '자동 지표는 품질과 상관관계가 낮음' },
+          { label: '추출', metrics: ['정확 일치, 토큰 수준 F1'], tip: '형식 변형으로 테스트' },
+          { label: '요약', metrics: ['ROUGE-L, 사실 일관성, 인간 평가'], tip: '요약이 사실을 환각하지 않는지 확인' },
+          { label: '대화', metrics: ['인간 선호도, LLM 판정, 작업 완료'], tip: '다중 턴 평가가 단일 응답이 놓치는 것을 포착' },
+        ],
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → leaderboardSectionKo
+      leaderboardSection: {
+        title: '4. 리더보드 문제',
+        intro: '벤치마크는 유용하지만 결함이 있습니다. 리더보드 순위만으로 모델을 선택하면 안 되는 이유입니다.',
+      },
+    },
   },
 }

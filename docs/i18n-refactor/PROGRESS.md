@@ -3,6 +3,14 @@
 Tracks the incremental migration from the legacy 44-file translation system
 to the unified `src/i18n/{en,sv,ko}.ts` tree. See `PLAN.md` for the spec.
 
+## Checkpoint 4 — DONE (`evaluation` module migrated)
+
+- Added `t.modules.evaluation.*` to `en.ts` (measuring, choosing, whyEvaluationSection, benchmarksSection, customEvalSection, leaderboardSection).
+- Extended `sv.ts` and `ko.ts` with evaluation content.
+- Migrated 8 components in `src/modules/evaluation/`. `ModelPersonalitiesBusiness.tsx` and the brand-new `ModelSelectionSection.tsx` previously had no SV/KO; EN remains inline pending future translation.
+- Deleted `src/modules/evaluation/{translations,tech-translations,data-translations}.ts`.
+- `npm run build` clean (249 ms).
+
 ## Checkpoint 3 — DONE (`industry` module migrated)
 
 - Added `t.modules.industry.*` to `en.ts` (keyPlayers, openVsClosed, whoBuiltWhatSection, openVsClosedSection, ecosystemSection, whereItsHeadingSection).
@@ -88,7 +96,7 @@ When all modules are migrated, do the cross-cutting cleanup checkpoint:
 | `alignment` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
 | `architecture` | `tech-translations.ts`, `data-translations.ts` | ~6 .tsx | ⏳ |
 | `solution` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~10 .tsx | ⏳ |
-| `evaluation` | `translations.ts`, `tech-translations.ts`, `data-translations.ts` | ~9 .tsx | ⏳ |
+| `evaluation` | (deleted) | 8 .tsx migrated | ✅ |
 | `quantization` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
 | `inference` | `tech-translations.ts`, `data-translations.ts` | ~5 .tsx | ⏳ |
 | `industry` | (deleted) | 7 .tsx migrated | ✅ |

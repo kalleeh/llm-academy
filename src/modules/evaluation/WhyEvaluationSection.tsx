@@ -2,9 +2,7 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
-import { tArray, useLanguage, useT } from '../../i18n'
-import { whyEvaluationSectionSv, whyEvaluationSectionKo } from './tech-translations'
-import { modelExamplesTranslations } from './data-translations'
+import { useTranslation } from '../../i18n'
 
 interface ModelExample {
   label: string
@@ -14,6 +12,8 @@ interface ModelExample {
   rating: 'good' | 'bad'
 }
 
+// MODEL_EXAMPLES never had translations in the legacy system
+// (modelExamplesTranslations was {sv: [], ko: []}). EN remains inline.
 const MODEL_EXAMPLES: ModelExample[] = [
   {
     label: 'Model A — Low Perplexity (12.3)',
@@ -34,44 +34,13 @@ const MODEL_EXAMPLES: ModelExample[] = [
 ]
 
 const EVAL_TYPES: { name: string; icon: IconName; description: string; examples: string[]; pros: string; cons: string }[] = [
-  {
-    name: 'Automated Benchmarks',
-    icon: 'bar-chart',
-    description: 'Standardized tests with known answers. Fast, reproducible, but narrow.',
-    examples: ['MMLU-Pro', 'HumanEval', 'MATH', 'HellaSwag'],
-    pros: 'Cheap, fast, reproducible',
-    cons: 'Can be gamed, may not reflect real use',
-  },
-  {
-    name: 'Human Evaluation',
-    icon: 'people',
-    description: 'Real people rate model outputs for quality, helpfulness, and safety.',
-    examples: ['Chatbot Arena', 'Side-by-side comparisons', 'Likert scale ratings'],
-    pros: 'Captures nuance, reflects real preferences',
-    cons: 'Expensive, slow, subjective variance',
-  },
-  {
-    name: 'Task-Specific Metrics',
-    icon: 'target',
-    description: 'Metrics designed for your exact use case and domain.',
-    examples: ['BLEU/ROUGE for translation', 'F1 for classification', 'Pass@k for code'],
-    pros: 'Directly measures what you care about',
-    cons: 'Requires custom eval sets, domain expertise',
-  },
+  { name: 'Automated Benchmarks', icon: 'bar-chart', description: 'Standardized tests with known answers. Fast, reproducible, but narrow.', examples: ['MMLU-Pro', 'HumanEval', 'MATH', 'HellaSwag'], pros: 'Cheap, fast, reproducible', cons: 'Can be gamed, may not reflect real use' },
+  { name: 'Human Evaluation', icon: 'people', description: 'Real people rate model outputs for quality, helpfulness, and safety.', examples: ['Chatbot Arena', 'Side-by-side comparisons', 'Likert scale ratings'], pros: 'Captures nuance, reflects real preferences', cons: 'Expensive, slow, subjective variance' },
+  { name: 'Task-Specific Metrics', icon: 'target', description: 'Metrics designed for your exact use case and domain.', examples: ['BLEU/ROUGE for translation', 'F1 for classification', 'Pass@k for code'], pros: 'Directly measures what you care about', cons: 'Requires custom eval sets, domain expertise' },
 ]
 
-const EN_P13 = `Loss is a training signal, not a quality metric.`
-const EN_P12 = `Compare these two models. Model A has`
-const EN_P11 = `Training loss tells you the model is learning`
-const EN_P10 = `Loss is a training signal, not a quality metric.`
-const EN_P9 = `Compare these two models. Model A has`
-const EN_P8 = `Training loss tells you the model is learning`
-const EN_P7 = `Evaluation in Practice — nanochat`
-const EN_P4 = `Model A has lower perplexity because it produces &ldquo;safe&rdquo; generic sentences that are easy to predict. Model B takes more risks with specific facts and structure — harder to predict, but far more useful.`
 export const WhyEvaluationSection: React.FC = () => {
-  const { lang } = useLanguage()
-  const mODEL_EXAMPLEST = tArray(lang, MODEL_EXAMPLES, modelExamplesTranslations)
-  const c = useT({ title: '1. Why Evaluation Matters' , p4: EN_P4 , p7: EN_P7 , p8: EN_P8 , p9: EN_P9 , p10: EN_P10 , p11: EN_P11 , p12: EN_P12 , p13: EN_P13 }, { sv: whyEvaluationSectionSv, ko: whyEvaluationSectionKo })
+  const c = useTranslation().modules.evaluation.whyEvaluationSection
   const [selectedModel, setSelectedModel] = useState(0)
   const [activeType, setActiveType] = useState(0)
 
@@ -82,17 +51,17 @@ export const WhyEvaluationSection: React.FC = () => {
   return (
     <section aria-labelledby="why-evaluation">
       <h2 id="why-evaluation" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
-      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p11}<em>something</em> — but not whether it&apos;s
+      <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.lossTrainsSomething}<em>something</em> — but not whether it&apos;s
         learning anything <strong className="text-zinc-900 dark:text-zinc-100">useful</strong>. A model can achieve
         excellent perplexity while being terrible at following instructions, giving accurate answers,
         or being safe.
       </p>
-      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.p12}<strong className="text-zinc-900 dark:text-zinc-100">lower perplexity</strong>{' '}
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.compareModelsLabel}<strong className="text-zinc-900 dark:text-zinc-100">lower perplexity</strong>{' '}
         (better by that metric), but which response would you actually want?
       </p>
 
       <div className="mb-4 flex gap-2">
-        {mODEL_EXAMPLEST.map((m, i) => (
+        {MODEL_EXAMPLES.map((m, i) => (
           <button
             key={i}
             onClick={() => selectModel(i)}
@@ -131,8 +100,8 @@ export const WhyEvaluationSection: React.FC = () => {
 
       <div className="mb-6 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/50 p-4">
         <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          <strong className="text-amber-400">Key insight:</strong> {c.p4}
-          <strong className="text-zinc-900 dark:text-zinc-100">{c.p13}</strong>
+          <strong className="text-amber-400">Key insight:</strong> {c.keyInsightCallout}
+          <strong className="text-zinc-900 dark:text-zinc-100">{c.lossNotQuality}</strong>
         </p>
       </div>
 
@@ -181,7 +150,7 @@ export const WhyEvaluationSection: React.FC = () => {
       </div>
 
       <div className="mt-8">
-        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">{c.p7}</h3>
+        <h3 className="mb-3 font-mono text-sm font-semibold text-zinc-700 dark:text-zinc-300">{c.practiceHeading}</h3>
         <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">
           nanochat includes two eval scripts that cover both base model quality and chat capabilities.
           The CORE metric (from the DCLM paper) is the primary benchmark for the GPT-2 speedrun leaderboard.

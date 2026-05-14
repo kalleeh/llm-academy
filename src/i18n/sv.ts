@@ -316,5 +316,62 @@ export const sv: DeepPartial<Translation> = {
         ],
       },
     },
+    evaluation: {
+      // From legacy: src/modules/evaluation/translations.ts → measuringSv
+      measuring: {
+        title: '1. Hur du vet om din AI fungerar',
+        intro: '**"Det verkar ganska bra" räcker inte.** Du skulle inte utvärdera en nyanställd baserat på magkänsla — du skulle sätta tydliga förväntningar och mäta resultat. AI behöver samma rigor.',
+        introSub: 'Tänk på det som kvalitetssäkring innan en produktlansering — testa systematiskt, inte bara slumpmässigt.',
+        goodAnswerLabel: 'Bra svar',
+        badAnswerLabel: 'Dåligt svar',
+      },
+      // From legacy: src/modules/evaluation/translations.ts → choosingSv
+      choosing: {
+        title: '2. Rätt AI-modell att välja',
+        intro: 'Att välja en AI-modell är som att **rekrytera för en specifik roll** — den "bästa" kandidaten beror på DINA behov, inte bara deras CV.',
+        introSub: 'En doktor i fysik är imponerande, men du skulle inte anställa dem som receptionist. På samma sätt är den största, dyraste AI-modellen inte alltid rätt val.',
+        tipsTitle: 'Att läsa AI-rankningar (som produktrecensioner)',
+        selfExplainPrompt: 'Hur skulle du utvärdera om en AI-chattbot fungerar bra för ert kundsupportteam? Vad specifikt skulle du mäta?',
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → whyEvaluationSectionSv
+      whyEvaluationSection: {
+        title: '1. Varför utvärdering spelar roll',
+        // The legacy file's `intro` field maps to slightly different prose roles in the EN component.
+        // Provided as a partial; English fallback fills any gaps.
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → benchmarksSectionSv
+      benchmarksSection: {
+        title: '2. Viktiga benchmarks (2025–2026)',
+        intro: 'Branschen använder standardiserade benchmarks för att jämföra modeller. Inget enskilt benchmark berättar hela historien.',
+        // From legacy: src/modules/evaluation/data-translations.ts → benchmarksTranslations.sv
+        // Original 6-row SV array maps to a different (also 6-row) EN benchmark list. Per-index name match where possible.
+        benchmarks: [
+          { name: 'MMLU', category: 'Kunskap', what: 'Flervalsfrågor över 57 ämnen', scoring: 'Noggrannhet (%)' },
+          { name: 'HumanEval', category: 'Kodning', what: 'Python-programmeringsproblem', scoring: 'pass@k (% som klarar tester)' },
+          { name: 'GSM8K', category: 'Matematik', what: 'Matematikproblem på grundskolenivå', scoring: 'Noggrannhet (%)' },
+          { name: 'TruthfulQA', category: 'Sanningsenlighet', what: 'Frågor designade att framkalla vanliga missuppfattningar', scoring: '% sanningsenliga svar' },
+          { name: 'MT-Bench', category: 'Konversation', what: 'Flerturns konversationskvalitet', scoring: 'GPT-4 bedömning (1-10)' },
+          { name: 'ARC-AGI', category: 'Resonemang', what: 'Abstrakta resonemangspussel', scoring: 'Noggrannhet (%)' },
+        ],
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → customEvalSectionSv
+      customEvalSection: {
+        title: '3. Anpassad utvärdering',
+        intro: 'Publika benchmarks testar allmänna förmågor. För din specifika uppgift behöver du anpassad utvärdering.',
+        // From legacy: taskTypesTranslations.sv
+        taskTypes: [
+          { label: 'Klassificering', metrics: ['Noggrannhet, F1, precision, recall'], tip: 'Stratifiera testdata efter klass' },
+          { label: 'Generering', metrics: ['BLEU, ROUGE, BERTScore, mänsklig bedömning'], tip: 'Automatiska mätvärden korrelerar dåligt med kvalitet' },
+          { label: 'Extraktion', metrics: ['Exakt matchning, F1 på tokennivå'], tip: 'Testa med variationer i format' },
+          { label: 'Sammanfattning', metrics: ['ROUGE-L, faktakonsistens, mänsklig bedömning'], tip: 'Kontrollera att sammanfattningen inte hallucinerar fakta' },
+          { label: 'Konversation', metrics: ['Mänsklig preferens, LLM-som-domare, uppgiftslösning'], tip: 'Flerturns-utvärdering fångar saker som enstaka svar missar' },
+        ],
+      },
+      // From legacy: src/modules/evaluation/tech-translations.ts → leaderboardSectionSv
+      leaderboardSection: {
+        title: '4. Leaderboard-problemet',
+        intro: 'Benchmarks är användbara men bristfälliga. Här är varför du inte bör välja modell baserat på ranking.',
+      },
+    },
   },
 }
