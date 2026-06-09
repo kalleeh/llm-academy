@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useLanguage, tLabel, useT } from '../../i18n'
 import { whatAreEmbeddingsSectionSv, whatAreEmbeddingsSectionKo } from './tech-translations'
@@ -80,7 +80,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
   const similarities = SIMILARITY_EXAMPLES[selectedSentence] ?? {}
   const comparisonEntries = Object.entries(similarities)
 
-  const matchedScore = useMemo(() => {
+  const matchedScore = ((): { text: string; score: number } | null => {
     if (!inputText.trim()) return null
     const lower = inputText.toLowerCase()
     for (const [text, score] of comparisonEntries) {
@@ -89,7 +89,7 @@ export const WhatAreEmbeddingsSection: React.FC = () => {
       }
     }
     return { text: inputText, score: 0.15 }
-  }, [inputText, comparisonEntries])
+  })()
 
   return (
     <section aria-labelledby="what-are-embeddings">

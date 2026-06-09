@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
 import { useTranslation } from '../../i18n'
 
@@ -85,9 +85,9 @@ export const LayerByLayerSection: React.FC = () => {
   const c = useTranslation().modules.transformer.layerByLayerSection
   const [step, setStep] = useState(0)
 
-  const handleStep = useCallback((s: number) => {
+  const handleStep = (s: number) => {
     setStep(s)
-  }, [])
+  }
 
   const steps = LAYER_DATA.map((layer, i) => (
     <div key={i}>

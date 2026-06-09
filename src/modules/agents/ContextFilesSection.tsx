@@ -123,7 +123,7 @@ const FORMATS: FormatRow[] = [
     origin: 'AWS Kiro, vendor-specific. Sits alongside AGENTS.md (Kiro reads both).',
     spec: 'kiro.dev/docs/cli/steering',
     good: 'Persistent project knowledge that should always be in context — tech stack, structure, style, product overview.',
-    bad: 'Per-task workflows. Use specs in \`.kiro/specs/\` or a SKILL.md instead.',
+    bad: 'Per-task workflows. Use specs in `.kiro/specs/` or a SKILL.md instead.',
     color: 'border-cyan-500/30 bg-cyan-500/5',
   },
   {
