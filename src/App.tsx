@@ -24,27 +24,30 @@ const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ de
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 
+type Course = 'understand' | 'use'
+type Persona = 'technical' | 'business'
+
 type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning'
 
-const modules: { id: ModuleId; label: string; businessLabel?: string; businessVisible: boolean }[] = [
-  { id: 'ai-problem', label: "What's an AI Problem?", businessVisible: true },
-  { id: 'data-foundations', label: 'Data Foundations', businessLabel: 'Why Data Quality Matters', businessVisible: true },
-  { id: 'tokens', label: 'Tokens & Tokenizers', businessVisible: false },
-  { id: 'transformer', label: 'The Transformer', businessVisible: false },
-  { id: 'training', label: 'Training From Scratch', businessVisible: false },
-  { id: 'llm-data', label: 'Data for LLM Training', businessVisible: false },
-  { id: 'alignment', label: 'Alignment & Safety', businessLabel: 'Trust & Safety', businessVisible: true },
-  { id: 'architecture', label: 'Architecture Decisions', businessVisible: false },
-  { id: 'solution', label: 'From Problem to Solution', businessVisible: true },
-  { id: 'evaluation', label: 'Evaluation & Benchmarks', businessLabel: 'How to Know If It Works', businessVisible: true },
-  { id: 'quantization', label: 'Quantization & Formats', businessVisible: false },
-  { id: 'inference', label: 'Inference & Deployment', businessVisible: false },
-  { id: 'industry', label: 'The Industry Map', businessLabel: 'Who Makes What', businessVisible: true },
-  { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', businessVisible: true },
-  { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', businessVisible: true },
-  { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', businessVisible: true },
-  { id: 'ai-in-org', label: 'AI in Your Organization', businessVisible: true },
-  { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', businessVisible: false },
+const modules: { id: ModuleId; label: string; businessLabel?: string; course: Course; personas: Persona[] }[] = [
+  { id: 'ai-problem', label: "What's an AI Problem?", course: 'understand', personas: ['technical', 'business'] },
+  { id: 'data-foundations', label: 'Data Foundations', businessLabel: 'Why Data Quality Matters', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'tokens', label: 'Tokens & Tokenizers', course: 'understand', personas: ['technical'] },
+  { id: 'transformer', label: 'The Transformer', course: 'understand', personas: ['technical'] },
+  { id: 'training', label: 'Training From Scratch', course: 'understand', personas: ['technical'] },
+  { id: 'llm-data', label: 'Data for LLM Training', course: 'understand', personas: ['technical'] },
+  { id: 'alignment', label: 'Alignment & Safety', businessLabel: 'Trust & Safety', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'architecture', label: 'Architecture Decisions', course: 'understand', personas: ['technical'] },
+  { id: 'solution', label: 'From Problem to Solution', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'evaluation', label: 'Evaluation & Benchmarks', businessLabel: 'How to Know If It Works', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'quantization', label: 'Quantization & Formats', course: 'understand', personas: ['technical'] },
+  { id: 'inference', label: 'Inference & Deployment', course: 'understand', personas: ['technical'] },
+  { id: 'industry', label: 'The Industry Map', businessLabel: 'Who Makes What', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
 ]
 
 const moduleComponents: Record<ModuleId, React.FC> = {
@@ -176,7 +179,7 @@ function App() {
   const ActiveComponent = moduleComponents[activeModule]
 
   const visibleModules = useMemo(
-    () => (mode === 'business' ? modules.filter((m) => m.businessVisible) : modules),
+    () => modules.filter((m) => m.personas.includes(mode)),
     [mode],
   )
 
