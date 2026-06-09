@@ -161,7 +161,7 @@ function parseHash(): { module?: ModuleId; track?: 'technical' | 'business' } {
 
 function App() {
   const { mode, toggle: toggleMode } = useDifficulty()
-  const { course } = useCourse()
+  const { course, setCourse } = useCourse()
   const { lang, setLang } = useLanguage()
   const [activeModule, setActiveModule] = useState<ModuleId>(() => {
     const { module } = parseHash()
@@ -301,6 +301,23 @@ function App() {
           <h1 className="font-mono text-sm font-semibold tracking-widest text-zinc-600 dark:text-zinc-400 uppercase">
             {t(lang, 'app.title')}
           </h1>
+          {/* Course switcher */}
+          <div className="flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-800 p-0.5" role="group" aria-label="Course">
+            {(['understand', 'use'] as Course[]).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCourse(c)}
+                aria-pressed={course === c}
+                className={`flex-1 rounded-md px-2 py-1.5 text-center text-xs font-medium transition-colors ${
+                  course === c
+                    ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                    : 'text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-700 dark:hover:text-zinc-300'
+                }`}
+              >
+                {t(lang, c === 'understand' ? 'course.understand' : 'course.use')}
+              </button>
+            ))}
+          </div>
           {/* Mode toggle */}
           <button
             onClick={toggleMode}
