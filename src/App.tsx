@@ -147,15 +147,29 @@ function getDueReviewCount(): number {
   return due
 }
 
-function parseHash(): { module?: ModuleId; track?: 'technical' | 'business' } {
+function parseHash(): { course?: Course; module?: ModuleId; track?: Persona } {
   const hash = window.location.hash.replace(/^#\/?/, '')
   if (!hash) return {}
-  const [track, mod] = hash.split('/')
+  const parts = hash.split('/')
+  const validCourses = ['understand', 'use'] as const
   const validTracks = ['technical', 'business'] as const
-  const validModules = modules.map(m => m.id)
-  const result: { module?: ModuleId; track?: 'technical' | 'business' } = {}
-  if (validTracks.includes(track as typeof validTracks[number])) result.track = track as 'technical' | 'business'
-  if (validModules.includes(mod as ModuleId)) result.module = mod as ModuleId
+  const validModules = modules.map((m) => m.id)
+  const result: { course?: Course; module?: ModuleId; track?: Persona } = {}
+
+  // New format: <course>/<track>/<module>
+  if (validCourses.includes(parts[0] as typeof validCourses[number])) {
+    result.course = parts[0] as Course
+    if (validTracks.includes(parts[1] as typeof validTracks[number])) result.track = parts[1] as Persona
+    if (validModules.includes(parts[2] as ModuleId)) result.module = parts[2] as ModuleId
+    return result
+  }
+
+  // Legacy format: <track>/<module>  → course defaults to 'understand'
+  if (validTracks.includes(parts[0] as typeof validTracks[number])) {
+    result.course = 'understand'
+    result.track = parts[0] as Persona
+    if (validModules.includes(parts[1] as ModuleId)) result.module = parts[1] as ModuleId
+  }
   return result
 }
 
@@ -197,16 +211,17 @@ function App() {
 
   // Sync URL hash with current state
   useEffect(() => {
-    const newHash = `#/${mode}/${activeModule}`
+    const newHash = `#/${course}/${mode}/${activeModule}`
     if (window.location.hash !== newHash) {
       window.history.replaceState(null, '', newHash)
     }
-  }, [mode, activeModule])
+  }, [course, mode, activeModule])
 
   // Handle browser back/forward
   useEffect(() => {
     const onPopState = () => {
-      const { module, track } = parseHash()
+      const { course: hashCourse, module, track } = parseHash()
+      if (hashCourse && hashCourse !== course) setCourse(hashCourse)
       if (track && track !== mode) toggleMode()
       if (module && module !== activeModule) {
         setShowReview(false)
@@ -216,11 +231,12 @@ function App() {
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [mode, activeModule, toggleMode])
+  }, [course, setCourse, mode, activeModule, toggleMode])
 
-  // On initial load, apply track from hash
+  // On initial load, apply course + track from hash
   useEffect(() => {
-    const { track } = parseHash()
+    const { course: hashCourse, track } = parseHash()
+    if (hashCourse && hashCourse !== course) setCourse(hashCourse)
     if (track && track !== mode) toggleMode()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -235,13 +251,13 @@ function App() {
         setVisited((prev) => new Set(prev).add(id))
         setDueCount(getDueReviewCount())
         setSidebarOpen(false)
-        window.history.pushState(null, '', `#/${mode}/${id}`)
+        window.history.pushState(null, '', `#/${course}/${mode}/${id}`)
         // Scroll to top immediately, then fade in after scroll completes
         mainRef.current?.scrollTo({ top: 0 })
         requestAnimationFrame(() => setFadeIn(true))
       }, 150)
     },
-    [activeModule, showReview, mode],
+    [activeModule, showReview, mode, course],
   )
 
   useEffect(() => {
