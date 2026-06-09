@@ -231,7 +231,11 @@ function App() {
       if (module && module !== activeModule) {
         setShowReview(false)
         setActiveModule(module)
-        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(module) }))
+        // Use the course from the hash, not the closure: on back/forward the
+        // closure's `course` can lag a course-boundary navigation by one render,
+        // which would record the module under the wrong course's visited set.
+        const targetCourse = hashCourse ?? course
+        setVisited((prev) => ({ ...prev, [targetCourse]: new Set(prev[targetCourse]).add(module) }))
       }
     }
     window.addEventListener('popstate', onPopState)
@@ -466,7 +470,7 @@ function App() {
         <div className="sticky top-0 z-10 h-0.5 bg-zinc-100 dark:bg-zinc-900">
           <div
             className="h-full bg-emerald-500/50 transition-all duration-700 ease-out"
-            style={{ width: showReview ? '100%' : `${((activeIndex + 1) / visibleModules.length) * 100}%` }}
+            style={{ width: showReview ? '100%' : visibleModules.length > 0 ? `${((activeIndex + 1) / visibleModules.length) * 100}%` : '0%' }}
           />
         </div>
 
