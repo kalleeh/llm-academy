@@ -181,9 +181,14 @@ function App() {
     const { module } = parseHash()
     return module ?? 'ai-problem'
   })
-  const [visited, setVisited] = useState<Set<ModuleId>>(() => {
-    const { module } = parseHash()
-    return new Set([module ?? 'ai-problem'])
+  const [visited, setVisited] = useState<Record<Course, Set<ModuleId>>>(() => {
+    const { course: hashCourse, module } = parseHash()
+    const initialCourse: Course = hashCourse ?? 'understand'
+    const initialModule = module ?? 'ai-problem'
+    return {
+      understand: new Set<ModuleId>(initialCourse === 'understand' ? [initialModule] : []),
+      use: new Set<ModuleId>(initialCourse === 'use' ? [initialModule] : []),
+    }
   })
   const [fadeIn, setFadeIn] = useState(true)
   const [showReview, setShowReview] = useState(false)
@@ -204,10 +209,10 @@ function App() {
     if (!isVisible && visibleModules.length > 0) {
       startTransition(() => {
         setActiveModule(visibleModules[0].id)
-        setVisited((prev) => new Set(prev).add(visibleModules[0].id))
+        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(visibleModules[0].id) }))
       })
     }
-  }, [visibleModules, activeModule])
+  }, [visibleModules, activeModule, course])
 
   // Sync URL hash with current state
   useEffect(() => {
@@ -226,7 +231,7 @@ function App() {
       if (module && module !== activeModule) {
         setShowReview(false)
         setActiveModule(module)
-        setVisited(prev => new Set(prev).add(module))
+        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(module) }))
       }
     }
     window.addEventListener('popstate', onPopState)
@@ -248,7 +253,7 @@ function App() {
       setFadeIn(false)
       setTimeout(() => {
         setActiveModule(id)
-        setVisited((prev) => new Set(prev).add(id))
+        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(id) }))
         setDueCount(getDueReviewCount())
         setSidebarOpen(false)
         window.history.pushState(null, '', `#/${course}/${mode}/${id}`)
@@ -283,8 +288,9 @@ function App() {
   }, [showReview])
 
   const activeIndex = visibleModules.findIndex((m) => m.id === activeModule)
-  const visitedVisible = visibleModules.filter((m) => visited.has(m.id)).length
-  const progressPercent = Math.round((visitedVisible / visibleModules.length) * 100)
+  const courseVisited = visited[course]
+  const visitedVisible = visibleModules.filter((m) => courseVisited.has(m.id)).length
+  const progressPercent = visibleModules.length > 0 ? Math.round((visitedVisible / visibleModules.length) * 100) : 0
 
   return (
     <div className="flex h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
@@ -417,7 +423,7 @@ function App() {
           </li>
           {visibleModules.map((mod, index) => {
             const isActive = activeModule === mod.id && !showReview
-            const isVisited = visited.has(mod.id)
+            const isVisited = courseVisited.has(mod.id)
             const displayLabel = (() => {
               const ml = MODULE_LABELS[lang]?.[mod.id]
               if (!ml) return mod.label
