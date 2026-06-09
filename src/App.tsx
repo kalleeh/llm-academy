@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState, useEffect, useRef, useCallback, useMemo, startTransition } from 'react'
 import { useDifficulty } from './DifficultyContext'
+import { useCourse, type Course } from './CourseContext'
 import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i18n'
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
@@ -24,7 +25,6 @@ const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ de
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 
-type Course = 'understand' | 'use'
 type Persona = 'technical' | 'business'
 
 type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning'
@@ -161,6 +161,7 @@ function parseHash(): { module?: ModuleId; track?: 'technical' | 'business' } {
 
 function App() {
   const { mode, toggle: toggleMode } = useDifficulty()
+  const { course } = useCourse()
   const { lang, setLang } = useLanguage()
   const [activeModule, setActiveModule] = useState<ModuleId>(() => {
     const { module } = parseHash()
@@ -179,8 +180,8 @@ function App() {
   const ActiveComponent = moduleComponents[activeModule]
 
   const visibleModules = useMemo(
-    () => modules.filter((m) => m.personas.includes(mode)),
-    [mode],
+    () => modules.filter((m) => m.course === course && m.personas.includes(mode)),
+    [course, mode],
   )
 
   // When switching to business mode, jump to first visible module if current is hidden
