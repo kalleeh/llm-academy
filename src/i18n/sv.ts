@@ -962,6 +962,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Anatomin hos ett agentiskt verktyg',
         intro: 'Vad händer egentligen när du ger en uppgift till ett agentiskt kodverktyg? Kör sessionen nedan — en trogen simulering av en Claude Code-körning. Se loopen: förstå → planera → agera → verifiera.',
         stepNote: 'Varje kommando är ett varv i den agentiska loopen. Lägg märke till att agenten kontrollerar sitt eget arbete innan den rapporterar klart.',
+        cliToggleLabel: 'Välj CLI: Claude Code eller Kiro',
         takeaway: 'Denna loop — planera, agera, verifiera, upprepa — är signaturen för varje agentiskt verktyg, oavsett om det redigerar kod eller ett kalkylblad. Skickligheten i att använda ett väl är mest skickligheten att skriva en tydlig uppgift och granska vid rätt kontrollpunkter.',
         bridgeBlurb: 'Loopen tänk → agera → verifiera har riktigt maskineri inuti — funktionsanrop, MCP, agentdesignmönster. Se hur det fungerar.',
       },
@@ -1211,8 +1212,10 @@ export const sv: DeepPartial<Translation> = {
         terminalTitle: 'claude-code',
         stepNote:
           'Varje kommando är ett varv i den agentiska loopen. Agenten läser kodbasen innan den redigerar, skriver ett test för sin egen ändring och kör sviten innan den förklarar sig klar.',
+        cliToggleLabel: 'Välj CLI: Claude Code eller Kiro',
         snapshotInitial: 'Utgångsläge: ett litet Express-API utan hastighetsbegränsning.',
         snapshotMiddlewareSeen: 'Agenten har läst strukturen och hittat var middleware kopplas in.',
+        snapshotKiroSpec: 'Kiro skrev specen först — krav, design och uppgifter under .kiro/specs/ innan koden rördes.',
         snapshotMiddlewareAdded: 'Ny rateLimiter-middlewarefil skapad — ännu inte inkopplad i routsen.',
         snapshotEdited: 'rateLimiter är nu inkopplad i den publika routern.',
         snapshotTested: 'Ett regressionstest lades till och sviten går igenom.',

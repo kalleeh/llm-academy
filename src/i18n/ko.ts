@@ -946,6 +946,7 @@ export const ko: DeepPartial<Translation> = {
         title: '2. 에이전틱 도구의 해부학',
         intro: '에이전틱 코딩 도구에 작업을 맡기면 실제로 무슨 일이 일어날까요? 아래 세션을 실행해 보세요 — Claude Code 실행의 충실한 시뮬레이션입니다. 루프를 관찰하세요: 이해 → 계획 → 행동 → 검증.',
         stepNote: '각 명령은 에이전틱 루프의 한 턴입니다. 에이전트가 완료를 보고하기 전에 자기 작업을 스스로 확인하는 것에 주목하세요.',
+        cliToggleLabel: 'CLI 선택: Claude Code 또는 Kiro',
         takeaway: '이 루프 — 계획, 행동, 검증, 반복 — 는 코드를 수정하든 스프레드시트를 수정하든 모든 에이전틱 도구의 시그니처입니다. 잘 사용하는 기술은 대부분 명확한 작업을 작성하고 올바른 체크포인트에서 검토하는 기술입니다.',
         bridgeBlurb: '생각 → 행동 → 검증 루프 안에는 실제 작동 원리가 있습니다 — 함수 호출, MCP, 에이전트 디자인 패턴. 어떻게 작동하는지 보세요.',
       },
@@ -1195,8 +1196,10 @@ export const ko: DeepPartial<Translation> = {
         terminalTitle: 'claude-code',
         stepNote:
           '각 명령은 에이전트 루프의 한 차례입니다. 에이전트는 편집하기 전에 코드베이스를 읽고, 자기 변경에 대한 테스트를 작성하며, 완료를 선언하기 전에 스위트를 실행합니다.',
+        cliToggleLabel: 'CLI 선택: Claude Code 또는 Kiro',
         snapshotInitial: '출발점: 속도 제한이 없는 작은 Express API.',
         snapshotMiddlewareSeen: '에이전트가 구조를 읽고 미들웨어가 연결되는 지점을 찾았습니다.',
+        snapshotKiroSpec: 'Kiro는 코드를 건드리기 전에 스펙을 먼저 작성했습니다 — .kiro/specs/ 아래의 요구사항, 설계, 작업.',
         snapshotMiddlewareAdded: '새 rateLimiter 미들웨어 파일이 생성됨 — 아직 라우트에 연결되지 않음.',
         snapshotEdited: 'rateLimiter가 이제 공개 라우터에 연결되었습니다.',
         snapshotTested: '회귀 테스트가 추가되었고 스위트가 통과합니다.',
