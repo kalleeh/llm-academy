@@ -2,7 +2,7 @@ import type { Course } from './CourseContext'
 
 export type Persona = 'technical' | 'business'
 
-export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow' | 'agentic-coding'
+export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow' | 'agentic-coding' | 'agentic-work'
 
 export interface ModuleMeta {
   id: ModuleId
@@ -35,4 +35,5 @@ export const MODULES: ModuleMeta[] = [
   { id: 'working-with-ai', label: 'Working With AI', course: 'use', personas: ['technical', 'business'] },
   { id: 'optimizing-workflow', label: 'Optimizing Your Workflow', course: 'use', personas: ['technical', 'business'] },
   { id: 'agentic-coding', label: 'Agentic Coding', course: 'use', personas: ['technical'] },
+  { id: 'agentic-work', label: 'Agentic Work', course: 'use', personas: ['business'] },
 ]
