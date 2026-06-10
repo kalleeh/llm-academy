@@ -6,6 +6,9 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { ToolCategoriesSection } from './toolslandscape/ToolCategoriesSection'
 import { AgenticLoopSection } from './toolslandscape/AgenticLoopSection'
 import { ChoosingStackSection } from './toolslandscape/ChoosingStackSection'
+import { ToolCategoriesBusiness } from './toolslandscape/ToolCategoriesBusiness'
+import { DelegationDemoBusiness } from './toolslandscape/DelegationDemoBusiness'
+import { PickingToolsBusiness } from './toolslandscape/PickingToolsBusiness'
 
 const QUESTIONS: Question[] = [
   {
@@ -71,6 +74,9 @@ export const ToolsLandscapeModule: React.FC = () => {
   if (mode === 'business') {
     return (
       <ModuleLayout moduleId="tools-landscape" title="AI Tools Landscape" subtitle="The AI tools your teams should be using — and how to pick the right one for each job.">
+        <ToolCategoriesBusiness />
+        <DelegationDemoBusiness />
+        <PickingToolsBusiness />
         <KnowledgeCheck moduleId="toolslandscape-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
