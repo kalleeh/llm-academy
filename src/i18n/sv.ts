@@ -315,6 +315,8 @@ export const sv: DeepPartial<Translation> = {
           { title: 'Reglering', tagline: 'EU AI Act och globala ramverk', detail: 'Regulatoriska krav formar hur modeller utvecklas och driftsätts.', examples: ['EU AI Act (2025-2027), Bidens Executive Order, Kinas AI-regler'] },
         ],
       },
+      bridgeToTools: 'Du vet vem som bygger modellerna. Andra sidan av myntet: vilka av dessa produkter borde DU använda dagligen?',
+      bridgeToToolsBusiness: 'Du känner till aktörerna. Se nu vilka av deras verktyg som passar dina team — och hur man väljer.',
     },
     evaluation: {
       // From legacy: src/modules/evaluation/translations.ts → measuringSv
@@ -954,12 +956,14 @@ export const sv: DeepPartial<Translation> = {
           { name: 'Agentiska arbetsappar', tagline: 'Delegera kontorsarbete, inte kod', description: 'Samma agentiska loop, riktad mot dokument, kalkylblad, research och arbetsflöden i stället för kod. Du delegerar en uppgift, agenten arbetar igenom den över filer och appar, och du övervakar resultatet.', when: 'Research och syntes, rapportutkast, datarensning, flerdokumentsarbete.', tools: 'Amazon Quick Desktop, Claude Cowork' },
         ],
         axisNote: 'Mönstret bakom kartan: när du går från chatt till agenter slutar verktyget svara och börjar göra. Ju mer autonomi, desto mer skiftar ditt jobb från att skriva till att granska.',
+        bridgeBlurb: 'Nyfiken på vem som faktiskt bygger modellerna bakom dessa verktyg — och varför vissa är öppna och andra stängda?',
       },
       agenticLoop: {
         title: '2. Anatomin hos ett agentiskt verktyg',
         intro: 'Vad händer egentligen när du ger en uppgift till ett agentiskt kodverktyg? Kör sessionen nedan — en trogen simulering av en Claude Code-körning. Se loopen: förstå → planera → agera → verifiera.',
         stepNote: 'Varje kommando är ett varv i den agentiska loopen. Lägg märke till att agenten kontrollerar sitt eget arbete innan den rapporterar klart.',
         takeaway: 'Denna loop — planera, agera, verifiera, upprepa — är signaturen för varje agentiskt verktyg, oavsett om det redigerar kod eller ett kalkylblad. Skickligheten i att använda ett väl är mest skickligheten att skriva en tydlig uppgift och granska vid rätt kontrollpunkter.',
+        bridgeBlurb: 'Loopen tänk → agera → verifiera har riktigt maskineri inuti — funktionsanrop, MCP, agentdesignmönster. Se hur det fungerar.',
       },
       choosingStack: {
         title: '3. Välja din verktygslåda',
@@ -985,6 +989,7 @@ export const sv: DeepPartial<Translation> = {
           { name: 'AI-verktyg för utvecklare', tagline: 'Ditt ingenjörsteams kraftverktyg', description: 'Agenter som skriver och ändrar riktig kod under ingenjörsövervakning. Du behöver inte använda dessa själv — men du bör veta att ditt utvecklingsteam kan leverera betydligt snabbare med dem, och budgetera därefter.', when: 'Ingenjörsarbete: funktioner, buggfixar, kodmodernisering. (Dina utvecklare kör; du finansierar och mäter.)', tools: 'Claude Code, Kiro CLI, GitHub Copilot' },
         ],
         axisNote: 'Mönstret: chattassistenter svarar, agentiska verktyg gör. Ju mer verktyget gör, desto mer skiftar dina medarbetare från att utföra arbetet till att specificera och granska det — det är den verkliga arbetsflödesförändringen att hantera.',
+        bridgeBlurb: 'Vill du veta vilka företag som står bakom verktygen, och vad deras strategier betyder för ditt företag?',
       },
       delegation: {
         title: '2. Se en AI utföra arbete',
