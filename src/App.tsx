@@ -26,6 +26,7 @@ const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ de
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 const ToolsLandscapeModule = lazy(() => import('./modules/ToolsLandscapeModule').then(m => ({ default: m.ToolsLandscapeModule })))
+const WorkingWithAIModule = lazy(() => import('./modules/WorkingWithAIModule').then(m => ({ default: m.WorkingWithAIModule })))
 
 const moduleComponents: Record<ModuleId, React.FC> = {
   'ai-problem': AIProblemModule,
@@ -47,6 +48,7 @@ const moduleComponents: Record<ModuleId, React.FC> = {
   'ai-in-org': AIInOrgModule,
   'fine-tuning': FineTuningModule,
   'tools-landscape': ToolsLandscapeModule,
+  'working-with-ai': WorkingWithAIModule,
 }
 
 function ModuleNavigation({
