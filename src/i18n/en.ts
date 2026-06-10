@@ -377,6 +377,10 @@ const moduleLabels = {
     subtitle: 'Where AI fits your day, reusable setups, team patterns — from one-off prompts to a system.',
     businessSubtitle: 'Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.',
   },
+  'agentic-coding': {
+    label: 'Agentic Coding',
+    subtitle: 'Coding with an agent as your pair — task decomposition, context & memory, review loops, MCP.',
+  },
 } as const
 
 /**
@@ -2161,6 +2165,97 @@ const modules = {
       ],
       bridgeBlurb:
         'Team habits are where individual productivity meets organizational change. See what it really takes for an organization to be ready for AI.',
+    },
+  },
+  agenticcoding: {
+    // 1. What Makes a Coding Agent Different
+    different: {
+      title: '1. What Makes a Coding Agent Different',
+      intro:
+        'An autocomplete finishes your line. A chat assistant answers in a window. A coding agent does neither — it works in your repo the way a teammate would: plan, edit across files, run things, check the result. Four capabilities set it apart. Click each.',
+      items: [
+        {
+          name: 'Task decomposition',
+          tagline: 'Turns a goal into a plan',
+          description:
+            'You say "add rate limiting to the public API." The agent breaks that into steps — find the middleware layer, add a limiter, wire it into the routes, add a test, run the suite — and works the plan, instead of emitting one blob of code and hoping.',
+        },
+        {
+          name: 'Codebase context',
+          tagline: 'Reads before it writes',
+          description:
+            'It greps, opens files, and traces how things connect — so its changes match your conventions and fit the existing structure. This is why it can edit a repo it has never seen, and why a chat assistant (which sees only what you paste) cannot.',
+        },
+        {
+          name: 'Tool use & MCP',
+          tagline: 'Acts, not just suggests',
+          description:
+            'The agent runs commands, executes tests, reads their output, and via MCP (Model Context Protocol) reaches external tools — your database, issue tracker, docs. Tool use is what turns "here is some code" into "I made the change and the tests pass."',
+        },
+        {
+          name: 'The verify loop',
+          tagline: 'Checks its own work',
+          description:
+            'After acting it inspects the result — runs the test, reads the error, re-reads the file — and adapts. This think → act → verify cycle is the heart of agentic coding: it is what lets you review outcomes at checkpoints instead of supervising every keystroke.',
+        },
+      ],
+      takeaway:
+        'Autocomplete predicts, chat advises, an agent acts and verifies. The shift is from getting code to delegating a coding task — which means your job moves from typing to specifying and reviewing.',
+    },
+    // 2. Drive a Real Session (Workspace emulation)
+    realSession: {
+      title: '2. Drive a Real Session',
+      intro:
+        'Here is a faithful simulation of a Claude Code session implementing a small feature. Run the commands and watch the repo change on the right. Notice the loop: explore → plan → edit → test → report.',
+      workspaceTitle: 'claude-code — add rate limiting',
+      terminalTitle: 'claude-code',
+      stepNote:
+        'Each command is one turn of the agentic loop. The agent reads the codebase before editing, writes a test for its own change, and runs the suite before declaring done.',
+      snapshotInitial: 'Starting point: a small Express API with no rate limiting.',
+      snapshotMiddlewareSeen: 'The agent has read the structure and located where middleware is wired in.',
+      snapshotMiddlewareAdded: 'New rateLimiter middleware file created — not yet wired into the routes.',
+      snapshotEdited: 'The rateLimiter is now wired into the public router.',
+      snapshotTested: 'A regression test was added and the suite passes.',
+      takeaway:
+        'You supplied one sentence of intent and reviewed at checkpoints; the agent did the search, the edits, the test, and the verification. That division of labor — you specify and review, it executes and proves — is what working with a coding agent feels like.',
+      selfExplainPrompt:
+        'In the session above, the agent wrote a test before saying it was done. Why is that verify step the thing that makes delegating to a coding agent safe?',
+      selfExplainAnswer:
+        'Because verification converts a plausible-looking diff into a checked one. A passing regression test means you can review the outcome ("does this do what I asked, and is it still green?") instead of re-reading every line to guess whether it works. Without the verify step you inherit all the risk and none of the time savings — you would have to manually re-check everything the agent touched. The test is the agent proving its work, which is what lets you operate at the checkpoint level.',
+    },
+    // 3. Working Effectively With a Coding Agent
+    effectively: {
+      title: '3. Working Effectively With a Coding Agent',
+      intro:
+        'The tool is capable; getting great results from it is a skill. Four habits separate people who fight their coding agent from people who ship with it. Click each.',
+      items: [
+        {
+          name: 'Scope like a tech lead',
+          tagline: 'Hand it a task, not a wish',
+          description:
+            'The best-sized task is one you could hand a competent engineer with a paragraph: clear outcome, the constraints that matter, how to know it is done. "Make the app better" fails; "add ret/backoff to the S3 client, max 3 tries, keep the existing interface, add a test for the timeout path" succeeds.',
+        },
+        {
+          name: 'Give it durable context',
+          tagline: 'Write the AGENTS.md once',
+          description:
+            'Stack, conventions, test commands, gotchas — put them in an AGENTS.md at the repo root so every session starts pre-briefed instead of guessing. Context you keep re-typing is context that belongs in a file the agent reads automatically.',
+        },
+        {
+          name: 'Review at checkpoints',
+          tagline: 'Outcomes, not keystrokes',
+          description:
+            'Let it complete a coherent unit — a function, a fix, a passing test — then review that, the way you would review a colleague\'s PR. Watching every token is slower than just writing the code; reviewing the diff is where your judgment actually adds value.',
+        },
+        {
+          name: 'Know when to take the wheel',
+          tagline: 'Stop the loop when it spins',
+          description:
+            'If the agent is thrashing — two failed attempts at the same error, edits drifting away from the goal — stop and intervene. Add the missing context, correct the plan, or take that piece yourself. A good operator redirects early instead of letting an agent dig a deeper hole.',
+        },
+      ],
+      bridgeBlurb:
+        'You have driven a coding agent. Now look under the hood: how tool use, function calling, MCP, and agent design patterns actually work — the machinery beneath the session you just ran.',
     },
   },
 } as const

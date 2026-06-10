@@ -1168,5 +1168,94 @@ export const sv: DeepPartial<Translation> = {
         bridgeBlurb: 'Teamvanor är där individuell produktivitet möter organisatorisk förändring. Se vad det verkligen krävs för att en organisation ska vara redo för AI.',
       },
     },
+    // MT
+    agenticcoding: {
+      different: {
+        title: '1. Vad som gör en kodningsagent annorlunda',
+        intro:
+          'En autokomplettering avslutar din rad. En chattassistent svarar i ett fönster. En kodningsagent gör inget av det — den arbetar i ditt repo som en kollega skulle: planerar, redigerar över flera filer, kör saker, kontrollerar resultatet. Fyra förmågor skiljer den från mängden. Klicka på varje.',
+        items: [
+          {
+            name: 'Uppgiftsnedbrytning',
+            tagline: 'Gör ett mål till en plan',
+            description:
+              'Du säger "lägg till hastighetsbegränsning på det publika API:et". Agenten bryter ner det i steg — hitta middleware-lagret, lägg till en limiter, koppla in den i routsen, lägg till ett test, kör sviten — och betar av planen, i stället för att spotta ur sig en klump kod och hoppas.',
+          },
+          {
+            name: 'Kodbaskontext',
+            tagline: 'Läser innan den skriver',
+            description:
+              'Den greppar, öppnar filer och spårar hur saker hänger ihop — så att dess ändringar följer dina konventioner och passar in i den befintliga strukturen. Det är därför den kan redigera ett repo den aldrig sett, och varför en chattassistent (som bara ser det du klistrar in) inte kan.',
+          },
+          {
+            name: 'Verktygsanvändning & MCP',
+            tagline: 'Agerar, föreslår inte bara',
+            description:
+              'Agenten kör kommandon, kör tester, läser deras utdata och når via MCP (Model Context Protocol) externa verktyg — din databas, ärendehanterare, dokumentation. Verktygsanvändning är det som förvandlar "här är lite kod" till "jag gjorde ändringen och testerna går igenom".',
+          },
+          {
+            name: 'Verifieringsloopen',
+            tagline: 'Kontrollerar sitt eget arbete',
+            description:
+              'Efter att ha agerat inspekterar den resultatet — kör testet, läser felet, läser om filen — och anpassar sig. Den här cykeln tänk → agera → verifiera är hjärtat i agentisk kodning: det är vad som låter dig granska utfall vid kontrollpunkter i stället för att övervaka varje tangenttryckning.',
+          },
+        ],
+        takeaway:
+          'Autokomplettering förutsäger, chatt råder, en agent agerar och verifierar. Skiftet går från att få kod till att delegera en kodningsuppgift — vilket innebär att ditt jobb flyttas från att skriva till att specificera och granska.',
+      },
+      realSession: {
+        title: '2. Styr en verklig session',
+        intro:
+          'Här är en trogen simulering av en Claude Code-session som implementerar en liten funktion. Kör kommandona och se repot ändras till höger. Lägg märke till loopen: utforska → planera → redigera → testa → rapportera.',
+        workspaceTitle: 'claude-code — add rate limiting',
+        terminalTitle: 'claude-code',
+        stepNote:
+          'Varje kommando är ett varv i den agentiska loopen. Agenten läser kodbasen innan den redigerar, skriver ett test för sin egen ändring och kör sviten innan den förklarar sig klar.',
+        snapshotInitial: 'Utgångsläge: ett litet Express-API utan hastighetsbegränsning.',
+        snapshotMiddlewareSeen: 'Agenten har läst strukturen och hittat var middleware kopplas in.',
+        snapshotMiddlewareAdded: 'Ny rateLimiter-middlewarefil skapad — ännu inte inkopplad i routsen.',
+        snapshotEdited: 'rateLimiter är nu inkopplad i den publika routern.',
+        snapshotTested: 'Ett regressionstest lades till och sviten går igenom.',
+        takeaway:
+          'Du levererade en mening med intention och granskade vid kontrollpunkter; agenten gjorde sökningen, redigeringarna, testet och verifieringen. Den arbetsfördelningen — du specificerar och granskar, den utför och bevisar — är hur det känns att arbeta med en kodningsagent.',
+        selfExplainPrompt:
+          'I sessionen ovan skrev agenten ett test innan den sa att den var klar. Varför är just det verifieringssteget det som gör det säkert att delegera till en kodningsagent?',
+        selfExplainAnswer:
+          'Eftersom verifiering förvandlar en trolig-ser-ut diff till en kontrollerad. Ett godkänt regressionstest betyder att du kan granska utfallet ("gör det här det jag bad om, och är det fortfarande grönt?") i stället för att läsa om varje rad och gissa om det fungerar. Utan verifieringssteget ärver du all risk och ingen av tidsbesparingen — du skulle behöva manuellt kontrollera allt agenten rört. Testet är agenten som bevisar sitt arbete, vilket är vad som låter dig arbeta på kontrollpunktsnivå.',
+      },
+      effectively: {
+        title: '3. Att arbeta effektivt med en kodningsagent',
+        intro:
+          'Verktyget är kapabelt; att få fantastiska resultat ur det är en färdighet. Fyra vanor skiljer dem som slåss mot sin kodningsagent från dem som levererar med den. Klicka på varje.',
+        items: [
+          {
+            name: 'Avgränsa som en tech lead',
+            tagline: 'Ge den en uppgift, inte en önskan',
+            description:
+              'Den bäst dimensionerade uppgiften är en du skulle kunna ge en kompetent ingenjör med ett stycke text: tydligt utfall, de begränsningar som spelar roll, hur man vet att den är klar. "Gör appen bättre" misslyckas; "lägg till retry/backoff i S3-klienten, max 3 försök, behåll det befintliga gränssnittet, lägg till ett test för timeout-vägen" lyckas.',
+          },
+          {
+            name: 'Ge den varaktig kontext',
+            tagline: 'Skriv AGENTS.md en gång',
+            description:
+              'Stack, konventioner, testkommandon, fallgropar — lägg dem i en AGENTS.md i repots rot så att varje session börjar förbriefad i stället för gissande. Kontext du skriver om gång på gång är kontext som hör hemma i en fil som agenten läser automatiskt.',
+          },
+          {
+            name: 'Granska vid kontrollpunkter',
+            tagline: 'Utfall, inte tangenttryckningar',
+            description:
+              'Låt den slutföra en sammanhängande enhet — en funktion, en fix, ett godkänt test — och granska sedan det, så som du skulle granska en kollegas PR. Att titta på varje token är långsammare än att bara skriva koden; att granska diffen är där din bedömning faktiskt tillför värde.',
+          },
+          {
+            name: 'Vet när du ska ta ratten',
+            tagline: 'Stoppa loopen när den snurrar',
+            description:
+              'Om agenten kör fast — två misslyckade försök på samma fel, redigeringar som driver bort från målet — stoppa och ingrip. Lägg till den saknade kontexten, korrigera planen eller ta den biten själv. En bra operatör styr om tidigt i stället för att låta en agent gräva en djupare grop.',
+          },
+        ],
+        bridgeBlurb:
+          'Du har styrt en kodningsagent. Titta nu under huven: hur verktygsanvändning, funktionsanrop, MCP och designmönster för agenter faktiskt fungerar — maskineriet under sessionen du just körde.',
+      },
+    },
   },
 }
