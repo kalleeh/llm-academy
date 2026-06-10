@@ -130,6 +130,8 @@ const PATHS: Record<string, [number, ...string[]]> = {
   envelope: [16, 'M2 4h12a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1V5a1 1 0 011-1z M2 4l6 5 6-5'],
   // 🖼️ image / picture
   image: [16, 'M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z M5 6a1 1 0 100 2 1 1 0 000-2z M15 10l-4-4-5 5'],
+  // 🎬 film / video
+  film: [16, 'M2 3h12v10H2z M5 3v10 M11 3v10 M2 5.5h3 M2 8h3 M2 10.5h3 M11 5.5h3 M11 8h3 M11 10.5h3'],
   // 🏷️ tag / label
   tag: [16, 'M1 8V2a1 1 0 011-1h6l6 7-6 6-7-6z M5 5a1 1 0 100 2 1 1 0 000-2z'],
   // 📗 book
