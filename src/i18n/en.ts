@@ -381,6 +381,11 @@ const moduleLabels = {
     label: 'Agentic Coding',
     subtitle: 'Coding with an agent as your pair — task decomposition, context & memory, review loops, MCP.',
   },
+  'agentic-work': {
+    label: 'Agentic Work',
+    subtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
+    businessSubtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
+  },
 } as const
 
 /**
