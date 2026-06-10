@@ -1017,5 +1017,80 @@ export const sv: DeepPartial<Translation> = {
         selfExplainAnswer: 'Exempel: "Varje måndag sammanställer vi ett nyhetssammandrag om konkurrenter. Brief: skanna dessa 12 källor efter nyheter om konkurrenterna X, Y, Z från senaste veckan; gruppera per konkurrent; två meningars sammanfattning per post med länk; flagga allt om priser eller uppsägningar som brådskande; leverera som en sida." Tydliga källor, format och eskaleringsregel — det är en delegeringsklar brief.',
       },
     },
+    // MT
+    workingwithai: {
+      modelSees: {
+        title: '1. Vad modellen faktiskt ser',
+        intro: 'Varje svar genereras från en enda sak: den kontext modellen har just nu. De flesta "AI:n är korkad"-ögonblick är egentligen "AI:n kan inte se det du tror att den ser". Klicka på varje del av kontexten för att utforska.',
+        items: [
+          { name: 'Systemprompten', tagline: 'Stående order du inte ser', description: 'Innan ditt första ord har assistenten redan läst instruktioner från sin tillverkare — ton, vägranden, formateringsvanor. Anpassade instruktioner låter dig lägga till ditt eget lager: vem du är, vilken stack du använder, hur du vill ha svaren. Ställ in en gång, gäller i varje chatt.' },
+          { name: 'Konversationen hittills', tagline: 'Minne, men bara i den här chatten', description: 'Modellen läser om hela tråden vid varje tur. Det är därför den kan följa "gör det kortare" — och därför en chatt som vandrat genom tre ämnen ger röriga svar. Ny uppgift, ny chatt är den billigaste kvalitetshöjning som finns.' },
+          { name: 'Filer och bilagor', tagline: 'Klistra in slår beskriva', description: 'Modellen kan inte öppna din dator. En vag beskrivning av din kod eller ditt dokument ger ett vagt svar om dem. Bifoga filen, klistra in felet ordagrant, ta med de faktiska siffrorna — modellen är dramatiskt bättre på att läsa än att gissa.' },
+          { name: 'Kontextgränsen', tagline: 'Fönstret har kanter', description: 'Kontextfönster är stora men ändliga, och kvaliteten kan sjunka redan före den hårda gränsen — detaljer från 200 meddelanden tillbaka får mindre uppmärksamhet än de senaste. För långa arbeten: sammanfatta framstegen i en ny chatt, eller flytta beständiga fakta till anpassade instruktioner eller ett projekt.' },
+        ],
+        takeaway: 'Innan du skyller på modellen, granska kontexten: har den faktiskt det den behöver för att svara bra? Färdigheten att chatta skickligt är mest färdigheten att förse modellen med kontext.',
+      },
+      iteration: {
+        title: '2. Iterera som ett proffs',
+        intro: 'Ingen får ett fantastiskt resultat från en enda prompt — proffs kommer dit på två eller tre turer eftersom de behandlar den första utmatningen som en diagnos, inte en besvikelse. Stega igenom en verklig iteration.',
+        stepLabel: 'Tur',
+        steps: [
+          { label: 'Den vaga prompten', content: '"Skriv ett Python-skript som städar upp den här datan."', note: 'Ingen fil bifogad, ingen definition av "städa", inget utdataformat. Modellen måste gissa alla tre.' },
+          { label: 'Den mediokra utmatningen — läs den som en diagnos', content: 'Modellen producerar ett generiskt pandas-skript: tar bort NA-rader, trimmar blanksteg, skriver en CSV. Rimligt — och värdelöst, eftersom din data har duplicerade ID:n med motstridiga tidsstämplar, och det är det verkliga problemet.', note: 'Gapet mellan vad du fick och vad du ville ha ÄR listan över kontext du inte levererade.' },
+          { label: 'Den förfinade prompten', content: '"Här är ett urval på 50 rader (bifogat). Rader delar order_id när en order har redigerats; behåll bara raden med senaste updated_at per order_id. Tidsstämplarna är ISO men vissa saknar tidszon — anta UTC. Utdata: en funktion jag kan importera, plus en doctest med kantfallet."', note: 'Exempeldata, den verkliga regeln, den kända fällan, den exakta leveransen. Samma modell — en helt annan förfrågan.' },
+          { label: 'Den starka utmatningen — och den billiga uppföljningen', content: 'Korrekt dedupliceringslogik, tidszonshantering, importerbar funktion, doctest. En tur till: "Låt den nu strömma från en 2 GB-fil i stället för att läsa in allt" — och eftersom tråden bär kontexten kostar det en mening.', note: 'Iteration ger ränta på ränta: varje tur ärver allt du etablerat före den.' },
+        ],
+        takeaway: 'Loopen är: prompta → läs utmatningen som en diagnos av saknad kontext → leverera den → upprepa. Två informerade turer slår tio vaga.',
+        selfExplainPrompt: 'Tänk på ett AI-svar som nyligen gjorde dig besviken. Läs det som en diagnos: vilken kontext hade du inte levererat?',
+        selfExplainAnswer: 'Exempel: "Jag bad om en regex för att validera e-postadresser och fick ett läroboksmönster som avvisade våra interna user+tag@corp-adresser. Jag sa aldrig vilka adressformer vi accepterar — modellen svarade på den generiska fråga jag faktiskt ställde. En menings kontext hade fixat det."',
+      },
+      powerFeatures: {
+        title: '3. Bortom den enskilda chatten',
+        intro: 'När dina prompter väl är bra, sluta skriva om dem. Varje större assistent har maskineri för att göra din kontext beständig. Klicka på varje funktion.',
+        items: [
+          { name: 'Anpassade instruktioner', tagline: 'Din personliga systemprompt', description: 'Fakta som gäller i varje chatt — "Jag är backend-utvecklare, vi använder Go och Postgres, svara kortfattat, inga artigheter" — hör hemma i anpassade instruktioner, inte i varje prompt. Skriv dem en gång; varje konversation startar färdigbriefad.' },
+          { name: 'Projekt & minne', tagline: 'Kontext som består mellan chattar', description: 'Projekt grupperar relaterade chattar och delar filer och instruktioner mellan dem. Kodbasdokumentationen du bifogade i måndags finns kvar på fredagen. Minnesfunktioner går längre och samlar i tysthet på sig fakta — granska vad som lagras.' },
+          { name: 'Filer & artefakter', tagline: 'Arbeta i dokument, inte bara om dem', description: 'Moderna assistenter redigerar dokument och kod i en vy sida vid sida, sparar versioner och låter dig rikta ändringar ("stram upp avsnitt 2"). För allt som är längre än ett stycke, arbeta i en artefakt i stället för att återgenerera väggar av chattext.' },
+          { name: 'Vet när det är dags att gå vidare', tagline: 'Chatten har ett tak', description: 'Om du klistrar filer fram och tillbaka, förklarar om ditt repo varje session eller vallar ett 10-stegs arbetsflöde för hand — då har uppgiften vuxit ur chatten. Det är vad agentiska verktyg är till för; kontextfärdigheterna du byggt här överförs direkt.' },
+        ],
+        bridgeBlurb: 'Att förfina prompter för hand är en färdighet med verklig teknik bakom sig — zero-shot vs few-shot, chain-of-thought, strukturerade utdata. Gå djupare.',
+      },
+      briefing: {
+        title: '1. Briefa den som en kollega',
+        intro: 'Den största enskilda uppgraderingen av dina AI-resultat kostar ingenting: skriv din förfrågan så som du skulle briefa en kompetent ny kollega. Fyra ingredienser gör det mesta av jobbet — klicka på varje.',
+        items: [
+          { name: 'Kontext — vem du är, vad det ska användas till', tagline: 'Modellen vet ingenting om dig', description: '"Jag leder customer success på ett SaaS-bolag med 40 anställda; detta går till kunder som lämnat oss" förändrar allt i svaret. En menings lägesbeskrivning slår tio rundor av att rätta ett generiskt utkast.' },
+          { name: 'Uppgift — vad du faktiskt vill ha', tagline: 'Bestäm dig, fråga sedan', description: '"Hjälp mig med det här mejlet" tvingar modellen att gissa. "Skriv om det här så att det blir varmare men behåll den fasta deadlinen" är en uppgift. Om du inte kan formulera vad du vill ha kommer den första utmatningen att visa det — läs den och bestäm dig.' },
+          { name: 'Format — hur leveransen ska se ut', tagline: 'Forma utmatningen innan den finns', description: '"Tre punkter jag kan klistra in i Slack", "en tabell som jämför alternativen", "max 150 ord". Formatinstruktioner åtlyds nästan alltid och besparar dig omformateringsvändan.' },
+          { name: 'Målgrupp & ton — vem som läser', tagline: 'Samma innehåll bär olika kläder', description: '"Till styrelsen" och "till ingenjörsteamet" ger olika dokument från samma fakta. Namnge läsaren och tonläget: formellt, vänligt, rakt på sak, försiktigt.' },
+        ],
+        takeaway: 'Kontext, uppgift, format, målgrupp. Du skulle aldrig ge en kollega en uppgift utan dem — AI:n misslyckas bara artigare när du hoppar över dem.',
+      },
+      vagueToValuable: {
+        title: '2. Från vagt till värdefullt',
+        intro: 'Se de fyra ingredienserna förvandla ett generiskt utkast till något du faktiskt skulle skicka iväg. Samma assistent, samma uppgift — olika brief.',
+        stepLabel: 'Steg',
+        steps: [
+          { label: 'Den vaga förfrågan', content: '"Skriv en jobbannons för en marknadsföringschef."', note: 'Modellen fyller varje lucka med genomsnitt — och genomsnitt är exakt vad du får.' },
+          { label: 'Det generiska resultatet', content: 'En fullkomligt grammatisk annons som kunde komma från vilket företag som helst i vilken bransch som helst: "dynamisk lagspelare", "högt tempo", en punktlista av klichéer. Inget i den är fel. Inget i den är ditt.', note: 'Generiskt in, generiskt ut. Utmatningen speglar briefen.' },
+          { label: 'Den verkliga briefen', content: '"Vi är ett e-handelsföretag inom friluftsutrustning med 12 anställda i Stockholm. Första marknadsföringsrekryteringen — personen kommer att äga allt från betald social media till förpackningstexter. Hellre en orädd generalist än en polerad specialist. Ton: som vi pratar — rak, lite lekfull, noll corporate-utfyllnad. Max 300 ord, avsluta med en enradig uppmaning att söka."', note: 'Kontext, uppgift, format, målgrupp — alla fyra ingredienser, fem meningar.' },
+          { label: 'Resultatet du skickar — efter en justering', content: 'En annons som låter som ditt företag och sållar fram rätt person. En uppföljning — "lägg till en rad om att distansarbete inom EU funkar" — och den glider in rent, eftersom konversationen minns briefen.', note: 'Iteration är billigt när grunden är rätt. Justeringar slår omskrivningar.' },
+        ],
+        takeaway: 'Första utkast är diagnoser. Om utmatningen är generisk var briefen generisk — fixa indatat, inte ditt tålamod.',
+        selfExplainPrompt: 'Ta en uppgift du normalt skulle delegera till en kollega. Skriv AI-briefen med alla fyra ingredienser: kontext, uppgift, format, målgrupp.',
+        selfExplainAnswer: 'Exempel: "Kontext: jag leder sales ops; vår kvartalsgenomgång går till ledningsgruppen på fredag. Uppgift: gör om dessa punktanteckningar (inklistrade) till en berättande sammanfattning på en sida. Format: tre korta avsnitt — framgångar, risker, önskemål — under 400 ord. Målgrupp: chefer som skummar; led med siffrorna, ingen jargong."',
+      },
+      makeItStick: {
+        title: '3. Gör bra resultat till standard',
+        intro: 'Bra briefer ska inte bo i ditt huvud. Några minuters förberedelse gör dina bästa prompter till standardupplevelsen. Klicka på varje vana.',
+        items: [
+          { name: 'Anpassade instruktioner', tagline: 'Säg det en gång, inte varje gång', description: 'Din roll, ditt företag, din föredragna ton och längd — sparade i inställningarna, tillämpade automatiskt i varje chatt. "Vem du är"-halvan av briefen, permanent avklarad.' },
+          { name: 'Ett personligt promptbibliotek', tagline: 'Dina bästa nummer, återanvändbara', description: 'När en brief ger ett fantastiskt resultat, spara den — ett anteckningsdokument duger fint. "Veckorapport", "mötessammanfattning", "kundsvar" — de flesta människors AI-användning är fem återkommande uppgifter. Sluta skriva om deras briefer från noll.' },
+          { name: 'Projekt per arbetsström', tagline: 'En briefad arbetsyta för återkommande arbete', description: 'Ett projekt rymmer delade filer och instruktioner för en arbetsström — "Q3-kampanjen" med varumärkesguiden och produktbladen bifogade. Varje chatt däri börjar med materialet redan inläst.' },
+          { name: 'Bifoga, sammanfatta inte', tagline: 'Låt den läsa originalet', description: 'Ladda upp det faktiska kontraktet, den faktiska dataexporten, det faktiska transkriptet. Din sammanfattning av ett dokument är en kopia med förluster; modellen gör sitt bästa arbete utifrån källan.' },
+        ],
+        bridgeBlurb: 'Att briefa väl är ett hantverk med namngivna tekniker bakom sig — exempel, steg-för-steg-resonemang, rollprompter. Se hur prompting verkligen fungerar.',
+      },
+    },
   },
 }

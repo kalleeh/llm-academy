@@ -367,6 +367,11 @@ const moduleLabels = {
     subtitle: 'Chat assistants, agentic work apps, coding agents — what tool for what job, and why.',
     businessSubtitle: 'The AI tools your teams should be using — and how to pick the right one for each job.',
   },
+  'working-with-ai': {
+    label: 'Working With AI',
+    subtitle: 'Context, iteration, files, custom instructions — getting great results from a chat assistant.',
+    businessSubtitle: 'Brief it like a colleague, iterate like an editor — make great AI results your default.',
+  },
 } as const
 
 /**
@@ -1725,6 +1730,220 @@ const modules = {
         'Think of the most repetitive multi-step task your team does every week. Could you delegate it to an agentic tool? Write the one-paragraph brief you would give it.',
       selfExplainAnswer:
         'Example: "Every Monday we compile a competitor-news digest. Brief: scan these 12 sources for news about competitors X, Y, Z from the past week; group by competitor; two-sentence summary per item with a link; flag anything about pricing or layoffs as urgent; output as one page." Clear sources, format, and escalation rule — that is a delegation-ready brief.',
+    },
+  },
+  workingwithai: {
+    // Tech: 1. What the Model Actually Sees
+    modelSees: {
+      title: '1. What the Model Actually Sees',
+      intro:
+        'Every reply is generated from one thing: the context the model has right now. Most "the AI is being dumb" moments are really "the AI can\'t see what you think it sees." Click each piece of the context to explore.',
+      items: [
+        {
+          name: 'The system prompt',
+          tagline: 'Standing orders you don\'t see',
+          description:
+            'Before your first word, the assistant has already read instructions from its maker — tone, refusals, formatting habits. Custom instructions let you add your own layer: who you are, what stack you use, how you like answers. Set once, applies to every chat.',
+        },
+        {
+          name: 'The conversation so far',
+          tagline: 'Memory, but only inside this chat',
+          description:
+            'The model re-reads the whole thread on every turn. That is why it can follow "make it shorter" — and why a chat that wandered through three topics gives muddled answers. New task, new chat is the cheapest quality upgrade there is.',
+        },
+        {
+          name: 'Files and attachments',
+          tagline: 'Paste beats describe',
+          description:
+            'The model cannot open your laptop. A vague description of your code or document produces a vague answer about it. Attach the file, paste the error verbatim, include the actual numbers — the model is dramatically better at reading than guessing.',
+        },
+        {
+          name: 'The context limit',
+          tagline: 'The window has edges',
+          description:
+            'Context windows are large but finite, and quality can sag before the hard limit — details from 200 messages ago get less attention than recent ones. For long work: summarize progress into a fresh chat, or move durable facts into custom instructions or a project.',
+        },
+      ],
+      takeaway:
+        'Before blaming the model, audit the context: does it actually have what it needs to answer well? The skill of chat fluency is mostly the skill of context supply.',
+    },
+    // Tech: 2. Iterate Like a Pro
+    iteration: {
+      title: '2. Iterate Like a Pro',
+      intro:
+        'Nobody gets a great result from one prompt — pros get there in two or three turns because they treat the first output as a diagnostic, not a disappointment. Step through a real iteration.',
+      stepLabel: 'Turn',
+      steps: [
+        {
+          label: 'The vague prompt',
+          content: '"Write me a Python script to clean up this data."',
+          note: 'No file attached, no definition of "clean", no output format. The model must guess all three.',
+        },
+        {
+          label: 'The mediocre output — read it as a diagnostic',
+          content:
+            'The model produces a generic pandas script: drops NA rows, strips whitespace, writes a CSV. Plausible — and useless, because your data has duplicated IDs with conflicting timestamps, and that\'s the actual problem.',
+          note: 'The gap between what you got and what you wanted IS the list of context you failed to supply.',
+        },
+        {
+          label: 'The refined prompt',
+          content:
+            '"Here\'s a 50-row sample (attached). Rows share an order_id when an order was edited; keep only the row with the latest updated_at per order_id. Timestamps are ISO but some lack timezones — assume UTC. Output: a function I can import, plus a doctest with the edge case."',
+          note: 'Sample data, the real rule, the known trap, the exact deliverable. Same model — completely different request.',
+        },
+        {
+          label: 'The strong output — and the cheap follow-up',
+          content:
+            'Correct dedup logic, timezone handling, importable function, doctest. One more turn: "Now make it stream from a 2 GB file instead of loading it all" — and because the thread carries the context, that costs one sentence.',
+          note: 'Iteration compounds: every turn inherits everything you established before it.',
+        },
+      ],
+      takeaway:
+        'The loop is: prompt → read the output as a diagnosis of missing context → supply it → repeat. Two informed turns beat ten vague ones.',
+      selfExplainPrompt:
+        'Recall a recent AI answer that disappointed you. Reading it as a diagnostic: what context had you failed to supply?',
+      selfExplainAnswer:
+        'Example: "I asked for a regex to validate emails and got a textbook pattern that rejected our internal user+tag@corp addresses. I never said which address forms we accept — the model answered the generic question I actually asked. One sentence of context would have fixed it."',
+    },
+    // Tech: 3. Beyond the Single Chat
+    powerFeatures: {
+      title: '3. Beyond the Single Chat',
+      intro:
+        'Once your prompts are good, stop re-typing them. Every major assistant has machinery for making your context durable. Click each feature.',
+      items: [
+        {
+          name: 'Custom instructions',
+          tagline: 'Your personal system prompt',
+          description:
+            'Facts that are true in every chat — "I\'m a backend dev, we use Go and Postgres, answer tersely, no pleasantries" — belong in custom instructions, not in every prompt. Write them once; every conversation starts pre-briefed.',
+        },
+        {
+          name: 'Projects & memory',
+          tagline: 'Context that persists across chats',
+          description:
+            'Projects group related chats and share files and instructions between them. The codebase docs you attached Monday are still there Friday. Memory features go further and quietly accumulate facts — review what gets stored.',
+        },
+        {
+          name: 'Files & artifacts',
+          tagline: 'Work on documents, not just about them',
+          description:
+            'Modern assistants edit documents and code in a side-by-side view, keep versions, and let you target changes ("tighten section 2"). For anything longer than a paragraph, work in an artifact instead of regenerating walls of chat text.',
+        },
+        {
+          name: 'Know when to graduate',
+          tagline: 'Chat has a ceiling',
+          description:
+            'If you are pasting files back and forth, re-explaining your repo every session, or shepherding a 10-step workflow by hand — the task has outgrown chat. That is what agentic tools are for; the context skills you built here transfer directly.',
+        },
+      ],
+      bridgeBlurb:
+        'Refining prompts by hand is a skill with real technique behind it — zero-shot vs few-shot, chain-of-thought, structured outputs. Go deeper.',
+    },
+    // Business: 1. Brief It Like a Colleague
+    briefing: {
+      title: '1. Brief It Like a Colleague',
+      intro:
+        'The single biggest upgrade to your AI results costs nothing: write your request the way you would brief a capable new colleague. Four ingredients do most of the work — click each.',
+      items: [
+        {
+          name: 'Context — who you are, what this is for',
+          tagline: 'The model knows nothing about you',
+          description:
+            '"I run customer success at a 40-person SaaS company; this goes to churned customers" changes everything about the answer. One sentence of situation beats ten rounds of correcting a generic draft.',
+        },
+        {
+          name: 'Task — what you actually want',
+          tagline: 'Decide, then ask',
+          description:
+            '"Help me with this email" makes the model guess. "Rewrite this to be warmer but keep the firm deadline" is a task. If you cannot state what you want, the first output will tell you — read it and decide.',
+        },
+        {
+          name: 'Format — what the deliverable looks like',
+          tagline: 'Shape the output before it exists',
+          description:
+            '"Three bullet points I can paste into Slack", "a table comparing the options", "max 150 words". Format instructions are nearly always obeyed and save you the reformatting pass.',
+        },
+        {
+          name: 'Audience & tone — who reads it',
+          tagline: 'The same content wears different clothes',
+          description:
+            '"For the board" and "for the engineering team" produce different documents from the same facts. Name the reader and the register: formal, friendly, blunt, careful.',
+        },
+      ],
+      takeaway:
+        'Context, task, format, audience. You would never hand a colleague a task without them — the AI just fails more politely when you skip them.',
+    },
+    // Business: 2. From Vague to Valuable
+    vagueToValuable: {
+      title: '2. From Vague to Valuable',
+      intro:
+        'Watch the four ingredients turn a generic draft into something you would actually ship. Same assistant, same task — different brief.',
+      stepLabel: 'Step',
+      steps: [
+        {
+          label: 'The vague ask',
+          content: '"Write a job posting for a marketing manager."',
+          note: 'The model fills every gap with averages — and average is exactly what you will get.',
+        },
+        {
+          label: 'The generic result',
+          content:
+            'A perfectly grammatical posting that could be from any company in any industry: "dynamic team player", "fast-paced environment", a bullet list of clichés. Nothing about it is wrong. Nothing about it is yours.',
+          note: 'Generic in, generic out. The output mirrors the brief.',
+        },
+        {
+          label: 'The real brief',
+          content:
+            '"We\'re a 12-person outdoor-gear e-commerce brand in Stockholm. First marketing hire — they\'ll own everything from paid social to packaging copy. Scrappy generalist over polished specialist. Tone: how we talk — direct, a bit playful, zero corporate filler. 300 words max, end with a one-line application ask."',
+          note: 'Context, task, format, audience — all four ingredients, five sentences.',
+        },
+        {
+          label: 'The result you ship — after one tweak',
+          content:
+            'A posting that sounds like your company and screens for the right person. One follow-up — "add a line that remote within the EU is fine" — and it slots in cleanly, because the conversation remembers the brief.',
+          note: 'Iteration is cheap once the foundation is right. Tweaks beat rewrites.',
+        },
+      ],
+      takeaway:
+        'First drafts are diagnostics. If the output is generic, the brief was generic — fix the input, not your patience.',
+      selfExplainPrompt:
+        'Take a task you would normally delegate to a colleague. Write the AI brief using all four ingredients: context, task, format, audience.',
+      selfExplainAnswer:
+        'Example: "Context: I lead sales ops; our quarterly review deck goes to the exec team Friday. Task: turn these bullet notes (pasted) into a one-page narrative summary. Format: three short sections — wins, risks, asks — under 400 words. Audience: execs who skim; lead with numbers, no jargon."',
+    },
+    // Business: 3. Make Good Results the Default
+    makeItStick: {
+      title: '3. Make Good Results the Default',
+      intro:
+        'Great briefs should not live in your head. A few minutes of setup turns your best prompts into the default experience. Click each habit.',
+      items: [
+        {
+          name: 'Custom instructions',
+          tagline: 'Tell it once, not every time',
+          description:
+            'Your role, your company, your preferred tone and length — saved in settings, applied to every chat automatically. The "who you are" half of the brief, permanently handled.',
+        },
+        {
+          name: 'A personal prompt library',
+          tagline: 'Your greatest hits, reusable',
+          description:
+            'When a brief produces a great result, save it — a notes doc is fine. "Weekly report", "meeting summary", "customer reply" — most people\'s AI use is five recurring tasks. Stop rewriting their briefs from scratch.',
+        },
+        {
+          name: 'Projects per workstream',
+          tagline: 'A briefed workspace for recurring work',
+          description:
+            'A project holds shared files and instructions for one stream of work — "Q3 campaign" with the brand guide and product sheets attached. Every chat inside starts already knowing the material.',
+        },
+        {
+          name: 'Attach, don\'t summarize',
+          tagline: 'Let it read the real thing',
+          description:
+            'Upload the actual contract, the actual data export, the actual transcript. Your summary of a document is a lossy copy; the model does its best work from the source.',
+        },
+      ],
+      bridgeBlurb:
+        'Briefing well is a craft with named techniques behind it — examples, step-by-step reasoning, role prompts. See how prompting really works.',
     },
   },
 } as const
