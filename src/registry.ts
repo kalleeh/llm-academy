@@ -2,7 +2,7 @@ import type { Course } from './CourseContext'
 
 export type Persona = 'technical' | 'business'
 
-export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai'
+export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow'
 
 export interface ModuleMeta {
   id: ModuleId
@@ -33,4 +33,5 @@ export const MODULES: ModuleMeta[] = [
   { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
   { id: 'tools-landscape', label: 'AI Tools Landscape', course: 'use', personas: ['technical', 'business'] },
   { id: 'working-with-ai', label: 'Working With AI', course: 'use', personas: ['technical', 'business'] },
+  { id: 'optimizing-workflow', label: 'Optimizing Your Workflow', course: 'use', personas: ['technical', 'business'] },
 ]

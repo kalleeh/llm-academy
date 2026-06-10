@@ -1,0 +1,46 @@
+import { useState, useCallback } from 'react'
+import { Icon } from '../../components/Icon'
+import type { IconName } from '../../components/Icon'
+import { useTranslation } from '../../i18n'
+
+// Order matches `items` in useTranslation().modules.optimizingworkflow.aiShapedTasks.
+const ITEM_META: { icon: IconName; color: string }[] = [
+  { icon: 'cycle', color: 'border-blue-400 dark:border-blue-500/40 bg-blue-50 dark:bg-blue-500/10' },
+  { icon: 'target', color: 'border-emerald-400 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/10' },
+  { icon: 'chat', color: 'border-amber-400 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10' },
+]
+
+export const AIShapedTasksBusiness: React.FC = () => {
+  const c = useTranslation().modules.optimizingworkflow.aiShapedTasks
+  const [expanded, setExpanded] = useState<number | null>(null)
+  const toggle = useCallback((i: number) => setExpanded((p) => (p === i ? null : i)), [])
+
+  return (
+    <section aria-labelledby="ai-shaped-tasks">
+      <h2 id="ai-shaped-tasks" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <div className="space-y-2">
+        {c.items.map((item, i) => (
+          <div key={item.name} className={`rounded-lg border ${ITEM_META[i]?.color ?? ''}`}>
+            <button onClick={() => toggle(i)} className="flex w-full items-center justify-between px-5 py-3 text-left" aria-expanded={expanded === i}>
+              <div className="flex items-center gap-2">
+                <Icon name={ITEM_META[i]?.icon ?? 'box'} className="shrink-0 text-zinc-600 dark:text-zinc-400" />
+                <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{item.name}</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400">— {item.tagline}</span>
+              </div>
+              <span className="text-xs text-zinc-500">{expanded === i ? '▲' : '▼'}</span>
+            </button>
+            {expanded === i && (
+              <div className="border-t border-zinc-200 dark:border-zinc-800 px-5 py-4">
+                <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{item.description}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 max-w-2xl rounded-lg border border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 p-4 text-sm text-zinc-700 dark:text-zinc-300">
+        <strong className="text-zinc-900 dark:text-zinc-100">{c.testLabel}</strong> {c.test}
+      </p>
+    </section>
+  )
+}

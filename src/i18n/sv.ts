@@ -1092,5 +1092,81 @@ export const sv: DeepPartial<Translation> = {
         bridgeBlurb: 'Att briefa väl är ett hantverk med namngivna tekniker bakom sig — exempel, steg-för-steg-resonemang, rollprompter. Se hur prompting verkligen fungerar.',
       },
     },
+    // MT
+    optimizingworkflow: {
+      whereItFits: {
+        title: '1. Kartlägg var AI passar in i din dag',
+        intro: 'Det snabbaste sättet att få ut mer av AI är inte en bättre prompt — det är att veta vilka delar av din dag den tillförlitligt förbättrar, och vilka du ska behålla för dig själv. Klicka på varje zon.',
+        items: [
+          { name: 'Förstå', tagline: 'Bli snabbt orienterad', description: 'En obekant kodbas, en tät RFC, en stacktrace du aldrig sett — det är här AI lyser som en outtröttlig förklarare. "Gå igenom hur autentiseringen flödar genom det här repot", "vad gör den här regexen", "sammanfatta det här 40-sidiga designdokumentet". Låg risk eftersom du verifierar mot det verkliga direkt.' },
+          { name: 'Generera', tagline: 'Hoppa över det tomma bladet', description: 'Boilerplate, teststommar, ett första migreringsutkast, en konfig du skrivit tio gånger förut. Modellen är snabb och du kan läsa utmatningen på sekunder. Vinsten är att starta från 80 % i stället för noll — inte att lita på den blint.' },
+          { name: 'Granskning & felsökning', tagline: 'Ett extra par ögon, på begäran', description: '"Vilka kantfall missar den här funktionen?", "varför kan det här testet vara instabilt?", "granska den här diffen för säkerhetsproblem." AI fångar en verklig andel av problemen direkt. Den kompletterar mänsklig granskning, ersätter den inte — den missar saker och hittar på andra.' },
+          { name: 'Kommunikation', tagline: 'Översätt mellan målgrupper', description: 'Gör en kortfattad changelog till release notes, en bugg till en tydlig ärendebeskrivning, en design till en sammanfattning på vanlig svenska för intressenter. Tråkigt, textformat och lätt att kontrollera — en söt fläck de flesta ingenjörer underutnyttjar.' },
+        ],
+        cautionLabel: 'Behåll dessa för dig själv:',
+        caution: 'Beslut som kräver full system- och affärskontext, allt du inte kan verifiera, och bedömningar du skulle skämmas över att tillskriva "AI:n sa åt mig". Tumregeln: delegera arbetet, aldrig ansvaret.',
+      },
+      reusableSetups: {
+        title: '2. Bygg återanvändbara uppsättningar',
+        intro: 'Om du har skrivit in samma kontext i chatten tre gånger har du hittat en uppsättning värd att spara. Se en tillfällig prompt bli varaktig infrastruktur.',
+        stepLabel: 'Steg',
+        steps: [
+          { label: 'Den tillfälliga prompten (tredje gången den här veckan)', content: '"Du hjälper till med en Go-tjänst som använder Postgres och sqlc; vi använder tabelldrivna tester och wrappar fel med %w. Skriv tester för den här handlern: [klistra in]."', note: 'Allt före "Skriv tester" är projektkontext du skriver om varenda gång. Det är ledtråden.' },
+          { label: 'Extrahera den stående kontexten', content: 'Flytta de varaktiga fakta till en AGENTS.md (eller verktygets anpassade instruktioner / projektinställningar): stack, konventioner, teststil, felhantering. Nu startar varje session med dem redan kända — du slutar betala omförklaringsskatten.', note: 'Stående kontext hör hemma i en fil som verktyget läser automatiskt, inte i ditt muskelminne.' },
+          { label: 'Fånga arbetsflödet', content: 'Den återkommande handlingen — "skriv tabelldrivna tester för den markerade handlern" — blir en sparad prompt, ett slash-kommando eller ett snippet. Den variabla delen (vilken handler) är det enda du levererar.', note: 'En bra uppsättning skiljer det stabila receptet från den enda ingrediens som ändras.' },
+          { label: 'Nu är det en enda invokering', content: 'Markera handlern, kör kommandot. Kontexten är inläst, receptet är fast, utmatningen är konsekvent i hela teamet. Den femminuters uppsättningen betalar sig själv vid tredje användningen — och den fortsätter betala.', note: 'Det är hela poängen: gör om en sak du förklarar om till en sak du invokerar.' },
+        ],
+        takeaway: 'Optimeringsenheten är den upprepade uppgiften, inte den enskilda prompten. Varje gång du tar dig själv på bar gärning med att skriva om kontext är det en uppsättning som ber om att byggas.',
+        selfExplainPrompt: 'Nämn en prompt eller kontext du skrivit om till en AI mer än två gånger den här månaden. Vilken stående kontext skulle du extrahera, och vad skulle den återanvändbara invokeringen vara?',
+        selfExplainAnswer: 'Exempel: "Jag klistrar ständigt in vår spec för API-felformat innan jag ber om en ny endpoint-handler. Stående kontext → ett projektdokument med felkuvertet, autentiseringsmiddleware och valideringskonventioner. Återanvändbar invokering → \'stomma upp en handler för <route> enligt våra konventioner\'. Specen slutar vara något jag klistrar in och blir något verktyget redan kan."',
+      },
+      teamPatterns: {
+        title: '3. Teammönster & skyddsräcken',
+        intro: 'Dina personliga uppsättningar blir en multiplikator när teamet delar dem — och en risk utan ett par skyddsräcken. Klicka på varje mönster.',
+        items: [
+          { name: 'Kontextfiler i repot', tagline: 'Checka in AI:ns kunskap i git', description: 'En AGENTS.md / kontextfil som committas till repot betyder att varje ingenjörs assistent delar samma bild av konventioner, arkitektur och fallgropar. Den granskas som kod, utvecklas med kodbasen och introducerar nyanställda (människa och AI) gratis.' },
+          { name: 'Ett delat prompt- och färdighetsbibliotek', tagline: 'Sluta låta alla uppfinna samma prompt på nytt', description: 'När någon spikar prompten för "generera en migrering" eller "skriv en runbook" hamnar den i ett delat bibliotek — en repo-mapp, en wiki eller verktygsnativa färdigheter. Teamets bästa prompt blir allas standard.' },
+          { name: 'Granskningsnormer för AI-författad kod', tagline: 'Författaren är ansvarig, inte modellen', description: 'Kom uttryckligen överens: AI-genererad kod får samma granskningskrav som handskriven kod, och människan som levererade den äger den. Inga "AI:n skrev den"-ursäkter. Vissa team flaggar AI-tunga PR:er så att granskare kalibrerar uppmärksamheten.' },
+          { name: 'Mät effekten ärligt', tagline: 'Tid sparad, inte rader genererade', description: 'Antal rader AI-kod är ett fåfängemått — det kan betyda fart eller svullnad. Spåra det som spelar roll: cykeltid, tid till första PR för nyanställda, hur mycket av en uppgift som blev "granska" i stället för "skriva". Var ärlig om var den inte hjälper.' },
+        ],
+        bridgeBlurb: 'Era granskningsnormer är teamets sista försvarslinje. Gå djupare in på hur modeller faktiskt anpassas — och var skyddsräcken för tillit och säkerhet egentligen sitter.',
+      },
+      aiShapedTasks: {
+        title: '1. Hitta dina AI-formade uppgifter',
+        intro: 'De flesta använder AI på det som råkar ligga framför dem. Det mer hävstångsskapande draget är att medvetet hitta de uppgifter där den lönar sig mest. En uppgift är AI-formad när tre saker är sanna — klicka på varje.',
+        items: [
+          { name: 'Återkommande', tagline: 'Du gör den om och om igen', description: 'En engångsgrej rättfärdigar sällan att bygga en uppsättning. En uppgift du gör varje vecka — statusöversikten, kunduppföljningen, datastädningen — tjänar in tiden du investerar i att briefa den väl, många gånger om.' },
+          { name: 'Bedömningssnål', tagline: 'Mest mekanisk, inte ett högriskbeslut', description: 'Sammanfatta, omformatera, utkasta, extrahera, jämföra — arbete där "bra och snabbt" slår "grubblat över". De bedömningstunga 10 % (det slutgiltiga beslutet, den känsliga avvägningen) stannar hos dig; AI röjer undan de andra 90 %.' },
+          { name: 'Textformad', tagline: 'Ord in, ord ut', description: 'AI är starkast där indata och utdata är språk: mejl, dokument, anteckningar, transkript, kalkylblad med text. Om uppgiften i grunden handlar om att läsa och skriva ligger den i den söta fläcken.' },
+        ],
+        testLabel: 'Veckans-tidssänke-testet:',
+        test: 'Titta på din kalender och din senaste vecka. Vilken återkommande, textformad, bedömningssnål uppgift åt mest timmar? Det är där du börjar — inte den flashigaste användningen, den mest upprepade.',
+      },
+      oneOffToSystem: {
+        title: '2. Från engångsgrej till system',
+        intro: 'Skillnaden mellan "jag använder AI ibland" och "AI sparar mitt team en dag i veckan" är system. Se en återkommande uppgift ta examen från handbyggd till hanterad.',
+        stepLabel: 'Steg',
+        steps: [
+          { label: 'Veckotröskan', content: 'Varje måndag bygger du om samma pipeline-rapport: öppna fem kalkylblad, klistra in höjdpunkter i chatten, förklara om formatet, fixa tonen, omformatera för chefsmejlet. Nittio minuter, varje vecka, från noll.', note: 'Du betalar om hela uppsättningskostnaden varenda gång. Det är slöseriet.' },
+          { label: 'Spara den vinnande briefen', content: 'Veckan den äntligen blev bra sparar du den prompten — den exakta kontexten, formatet och tonen som funkade. Nästa vecka startar du från den beprövade briefen i stället för att uppfinna den på nytt.', note: 'Den första återanvändbara tillgången är helt enkelt den bästa versionen av en prompt du redan skrivit.' },
+          { label: 'Gör det till ett projekt', content: 'Skapa ett projekt / en arbetsyta som rymmer de återkommande källorna och briefen tillsammans. Formatet bor där, källfilerna bifogas där. "Generera den här veckans rapport" är nu hela instruktionen.', note: 'Ett projekt gör en ritual av prompt-plus-bilagor till en enda briefad arbetsyta.' },
+          { label: 'Ett femminuters granskningsjobb', content: 'Måndag: släpp in veckans siffror, kör, läs utkastet, fixa en rad, skicka. Nittio minuter blev fem. Uppgiften försvann inte — ombyggandet gjorde det, och din bedömning är fortfarande sista steget.', note: 'Systematisering tar bort omgörandet, inte människan. Du granskar i stället för att montera ihop.' },
+        ],
+        takeaway: 'Ett system är bara en bra brief som slutade bo i ditt huvud. Uppsättningen kostar minuter en gång; omgörandet kostar dig varje vecka för evigt.',
+        selfExplainPrompt: 'Välj den återkommande uppgift som äter mest av din vecka. Vilken är briefen du skulle spara, och vad skulle du lägga i ett projekt för att göra det till ett femminutersjobb?',
+        selfExplainAnswer: 'Exempel: "Månatlig styrelseuppdatering. Sparad brief: kontext (vem läser den, vad de bryr sig om), tresektionsformatet, tonen med raka siffror. Projektinnehåll: exporten av mätvärdesdashboarden, förra månadens uppdatering för kontinuitet, varumärkesröstanteckningen. Sedan startar \'utkasta den här månadens styrelseuppdatering\' från allt den behöver."',
+      },
+      rollItOut: {
+        title: '3. Rulla ut det till ditt team',
+        intro: 'En person med bra AI-vanor sparar sin egen tid. Ett team med delade vanor förändrar vad teamet kan ta sig an. Klicka på varje utrullningsdrag.',
+        items: [
+          { name: 'Ett delat promptbibliotek', tagline: 'Alla startar från den bästa versionen', description: 'Ett enkelt delat dokument med "prompter som funkar här" — rapportbriefen, kundsvarsmallen, mötessammanfattningsformatet. Nya teammedlemmar blir produktiva dag ett i stället för att återupptäcka allas lärdomar.' },
+          { name: 'Utse en förkämpe', tagline: 'Någon äger att göra det bättre', description: 'Utrullningar stannar av utan en ägare. En entusiastisk person som kurerar biblioteket, svarar på "hur skulle du prompta det här?" och delar segrar gör mer än något direktiv. Gör det till en synlig del av rollen, inte en hobby vid sidan av.' },
+          { name: 'Lätt styrning', tagline: 'Tydliga linjer, inte en tjock regelbok', description: 'Folk behöver känna till de få skarpa linjerna — vilken data som aldrig får hamna i ett verktyg, var mänskligt godkännande krävs, vilka verktyg som är godkända. Håll det kort nog att alla faktiskt läser det; en vägg av policy driver bara fram skuggjanvändning.' },
+          { name: 'Mät tid sparad', tagline: 'Bevisa det, annars stryks det', description: 'Spåra den ärliga siffran: timmar tillbaka per vecka, snabbare leveranstid, mer hanterat utan fler anställda. Konkreta före/efter-segrar finansierar nästa steg och skyddar budgeten. "Det känns snabbare" överlever inte en kostnadsgranskning.' },
+        ],
+        bridgeBlurb: 'Teamvanor är där individuell produktivitet möter organisatorisk förändring. Se vad det verkligen krävs för att en organisation ska vara redo för AI.',
+      },
+    },
   },
 }
