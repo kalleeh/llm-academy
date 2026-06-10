@@ -24,10 +24,11 @@ const PromptingModule = lazy(() => import('./modules/PromptingModule').then(m =>
 const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ default: m.AgentsModule })))
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
+const ToolsLandscapeModule = lazy(() => import('./modules/ToolsLandscapeModule').then(m => ({ default: m.ToolsLandscapeModule })))
 
 type Persona = 'technical' | 'business'
 
-type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning'
+type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape'
 
 const modules: { id: ModuleId; label: string; businessLabel?: string; course: Course; personas: Persona[] }[] = [
   { id: 'ai-problem', label: "What's an AI Problem?", course: 'understand', personas: ['technical', 'business'] },
@@ -48,6 +49,7 @@ const modules: { id: ModuleId; label: string; businessLabel?: string; course: Co
   { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', course: 'understand', personas: ['technical', 'business'] },
   { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['technical', 'business'] },
   { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
+  { id: 'tools-landscape', label: 'AI Tools Landscape', course: 'use', personas: ['technical', 'business'] },
 ]
 
 const moduleComponents: Record<ModuleId, React.FC> = {
@@ -69,6 +71,7 @@ const moduleComponents: Record<ModuleId, React.FC> = {
   agents: AgentsModule,
   'ai-in-org': AIInOrgModule,
   'fine-tuning': FineTuningModule,
+  'tools-landscape': ToolsLandscapeModule,
 }
 
 function ModuleNavigation({
