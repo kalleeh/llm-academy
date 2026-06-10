@@ -116,6 +116,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'tools-landscape': { label: 'AI Tools Landscape', subtitle: 'Chat assistants, agentic work apps, coding agents — what tool for what job, and why.', businessSubtitle: 'The AI tools your teams should be using — and how to pick the right one for each job.' },
     'working-with-ai': { label: 'Working With AI', subtitle: 'Context, iteration, files, custom instructions — getting great results from a chat assistant.', businessSubtitle: 'Brief it like a colleague, iterate like an editor — make great AI results your default.' },
     'optimizing-workflow': { label: 'Optimizing Your Workflow', subtitle: 'Where AI fits your day, reusable setups, team patterns — from one-off prompts to a system.', businessSubtitle: 'Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.' },
+    'agentic-coding': { label: 'Agentic Coding', subtitle: 'Coding with an agent as your pair — task decomposition, context & memory, review loops, MCP.' },
   },
   sv: {
     'ai-problem': { label: 'Vad är ett AI-problem?', subtitle: 'Inte alla problem behöver en LLM — eller ens ML. Lär dig klassificera problem och välja rätt verktyg.', businessSubtitle: 'Inte allt behöver AI. Lär dig när det hjälper och när det inte gör det.' },
@@ -139,6 +140,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'tools-landscape': { label: 'AI-verktygslandskapet', subtitle: 'Chattassistenter, agentiska arbetsappar, kodagenter — vilket verktyg för vilket jobb, och varför.', businessSubtitle: 'AI-verktygen dina team borde använda — och hur man väljer rätt verktyg för varje jobb.' },
     'working-with-ai': { label: 'Att arbeta med AI', subtitle: 'Kontext, iteration, filer, anpassade instruktioner — få bra resultat från en chattassistent.', businessSubtitle: 'Briefa som till en kollega, iterera som en redaktör — gör bra AI-resultat till standard.' },
     'optimizing-workflow': { label: 'Optimera ditt arbetsflöde', subtitle: 'Var AI passar din dag, återanvändbara upplägg, teammönster — från enstaka prompts till ett system.', businessSubtitle: 'Hitta dina AI-formade uppgifter, gör engångsjobb till system och rulla ut det till teamet.' },
+    'agentic-coding': { label: 'Agentisk kodning', subtitle: 'Att koda med en agent som parprogrammerare — uppgiftsuppdelning, kontext & minne, granskningsloopar, MCP.' },
   },
   ko: {
     'ai-problem': { label: 'AI 문제란?', subtitle: '모든 문제에 LLM이 필요한 것은 아닙니다. 문제를 분류하고 올바른 도구를 선택하는 법을 배우세요.', businessSubtitle: '모든 것에 AI가 필요한 것은 아닙니다. 언제 도움이 되고 언제 안 되는지 배우세요.' },
@@ -162,5 +164,6 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'tools-landscape': { label: 'AI 도구 지형도', subtitle: '챗 어시스턴트, 에이전틱 업무 앱, 코딩 에이전트 — 어떤 작업에 어떤 도구를, 그리고 왜.', businessSubtitle: '팀이 사용해야 할 AI 도구들 — 그리고 각 작업에 맞는 도구를 고르는 법.' },
     'working-with-ai': { label: 'AI와 함께 일하기', subtitle: '컨텍스트, 반복, 파일, 사용자 지정 지침 — 챗 어시스턴트에서 좋은 결과 얻기.', businessSubtitle: '동료에게 브리핑하듯, 편집자처럼 반복하기 — 좋은 AI 결과를 기본값으로.' },
     'optimizing-workflow': { label: '워크플로우 최적화', subtitle: 'AI가 하루에 어디에 맞는지, 재사용 가능한 설정, 팀 패턴 — 일회성 프롬프트에서 시스템으로.', businessSubtitle: 'AI에 맞는 작업을 찾고, 일회성을 시스템으로 만들고, 팀에 확산하기.' },
+    'agentic-coding': { label: '에이전틱 코딩', subtitle: '에이전트를 짝으로 코딩하기 — 작업 분해, 컨텍스트와 메모리, 검토 루프, MCP.' },
   },
 }

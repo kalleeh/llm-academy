@@ -377,6 +377,10 @@ const moduleLabels = {
     subtitle: 'Where AI fits your day, reusable setups, team patterns — from one-off prompts to a system.',
     businessSubtitle: 'Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.',
   },
+  'agentic-coding': {
+    label: 'Agentic Coding',
+    subtitle: 'Coding with an agent as your pair — task decomposition, context & memory, review loops, MCP.',
+  },
 } as const
 
 /**
