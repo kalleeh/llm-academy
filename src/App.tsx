@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState, useEffect, useRef, useCallback, useMemo, startTransition } from 'react'
 import { useDifficulty } from './DifficultyContext'
+import { useCourse, type Course } from './CourseContext'
 import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i18n'
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
@@ -24,27 +25,29 @@ const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ de
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 
+type Persona = 'technical' | 'business'
+
 type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning'
 
-const modules: { id: ModuleId; label: string; businessLabel?: string; businessVisible: boolean }[] = [
-  { id: 'ai-problem', label: "What's an AI Problem?", businessVisible: true },
-  { id: 'data-foundations', label: 'Data Foundations', businessLabel: 'Why Data Quality Matters', businessVisible: true },
-  { id: 'tokens', label: 'Tokens & Tokenizers', businessVisible: false },
-  { id: 'transformer', label: 'The Transformer', businessVisible: false },
-  { id: 'training', label: 'Training From Scratch', businessVisible: false },
-  { id: 'llm-data', label: 'Data for LLM Training', businessVisible: false },
-  { id: 'alignment', label: 'Alignment & Safety', businessLabel: 'Trust & Safety', businessVisible: true },
-  { id: 'architecture', label: 'Architecture Decisions', businessVisible: false },
-  { id: 'solution', label: 'From Problem to Solution', businessVisible: true },
-  { id: 'evaluation', label: 'Evaluation & Benchmarks', businessLabel: 'How to Know If It Works', businessVisible: true },
-  { id: 'quantization', label: 'Quantization & Formats', businessVisible: false },
-  { id: 'inference', label: 'Inference & Deployment', businessVisible: false },
-  { id: 'industry', label: 'The Industry Map', businessLabel: 'Who Makes What', businessVisible: true },
-  { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', businessVisible: true },
-  { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', businessVisible: true },
-  { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', businessVisible: true },
-  { id: 'ai-in-org', label: 'AI in Your Organization', businessVisible: true },
-  { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', businessVisible: false },
+const modules: { id: ModuleId; label: string; businessLabel?: string; course: Course; personas: Persona[] }[] = [
+  { id: 'ai-problem', label: "What's an AI Problem?", course: 'understand', personas: ['technical', 'business'] },
+  { id: 'data-foundations', label: 'Data Foundations', businessLabel: 'Why Data Quality Matters', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'tokens', label: 'Tokens & Tokenizers', course: 'understand', personas: ['technical'] },
+  { id: 'transformer', label: 'The Transformer', course: 'understand', personas: ['technical'] },
+  { id: 'training', label: 'Training From Scratch', course: 'understand', personas: ['technical'] },
+  { id: 'llm-data', label: 'Data for LLM Training', course: 'understand', personas: ['technical'] },
+  { id: 'alignment', label: 'Alignment & Safety', businessLabel: 'Trust & Safety', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'architecture', label: 'Architecture Decisions', course: 'understand', personas: ['technical'] },
+  { id: 'solution', label: 'From Problem to Solution', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'evaluation', label: 'Evaluation & Benchmarks', businessLabel: 'How to Know If It Works', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'quantization', label: 'Quantization & Formats', course: 'understand', personas: ['technical'] },
+  { id: 'inference', label: 'Inference & Deployment', course: 'understand', personas: ['technical'] },
+  { id: 'industry', label: 'The Industry Map', businessLabel: 'Who Makes What', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
 ]
 
 const moduleComponents: Record<ModuleId, React.FC> = {
@@ -144,28 +147,48 @@ function getDueReviewCount(): number {
   return due
 }
 
-function parseHash(): { module?: ModuleId; track?: 'technical' | 'business' } {
+function parseHash(): { course?: Course; module?: ModuleId; track?: Persona } {
   const hash = window.location.hash.replace(/^#\/?/, '')
   if (!hash) return {}
-  const [track, mod] = hash.split('/')
+  const parts = hash.split('/')
+  const validCourses = ['understand', 'use'] as const
   const validTracks = ['technical', 'business'] as const
-  const validModules = modules.map(m => m.id)
-  const result: { module?: ModuleId; track?: 'technical' | 'business' } = {}
-  if (validTracks.includes(track as typeof validTracks[number])) result.track = track as 'technical' | 'business'
-  if (validModules.includes(mod as ModuleId)) result.module = mod as ModuleId
+  const validModules = modules.map((m) => m.id)
+  const result: { course?: Course; module?: ModuleId; track?: Persona } = {}
+
+  // New format: <course>/<track>/<module>
+  if (validCourses.includes(parts[0] as typeof validCourses[number])) {
+    result.course = parts[0] as Course
+    if (validTracks.includes(parts[1] as typeof validTracks[number])) result.track = parts[1] as Persona
+    if (validModules.includes(parts[2] as ModuleId)) result.module = parts[2] as ModuleId
+    return result
+  }
+
+  // Legacy format: <track>/<module>  → course defaults to 'understand'
+  if (validTracks.includes(parts[0] as typeof validTracks[number])) {
+    result.course = 'understand'
+    result.track = parts[0] as Persona
+    if (validModules.includes(parts[1] as ModuleId)) result.module = parts[1] as ModuleId
+  }
   return result
 }
 
 function App() {
   const { mode, toggle: toggleMode } = useDifficulty()
+  const { course, setCourse } = useCourse()
   const { lang, setLang } = useLanguage()
   const [activeModule, setActiveModule] = useState<ModuleId>(() => {
     const { module } = parseHash()
     return module ?? 'ai-problem'
   })
-  const [visited, setVisited] = useState<Set<ModuleId>>(() => {
-    const { module } = parseHash()
-    return new Set([module ?? 'ai-problem'])
+  const [visited, setVisited] = useState<Record<Course, Set<ModuleId>>>(() => {
+    const { course: hashCourse, module } = parseHash()
+    const initialCourse: Course = hashCourse ?? 'understand'
+    const initialModule = module ?? 'ai-problem'
+    return {
+      understand: new Set<ModuleId>(initialCourse === 'understand' ? [initialModule] : []),
+      use: new Set<ModuleId>(initialCourse === 'use' ? [initialModule] : []),
+    }
   })
   const [fadeIn, setFadeIn] = useState(true)
   const [showReview, setShowReview] = useState(false)
@@ -176,8 +199,8 @@ function App() {
   const ActiveComponent = moduleComponents[activeModule]
 
   const visibleModules = useMemo(
-    () => (mode === 'business' ? modules.filter((m) => m.businessVisible) : modules),
-    [mode],
+    () => modules.filter((m) => m.course === course && m.personas.includes(mode)),
+    [course, mode],
   )
 
   // When switching to business mode, jump to first visible module if current is hidden
@@ -186,37 +209,43 @@ function App() {
     if (!isVisible && visibleModules.length > 0) {
       startTransition(() => {
         setActiveModule(visibleModules[0].id)
-        setVisited((prev) => new Set(prev).add(visibleModules[0].id))
+        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(visibleModules[0].id) }))
       })
     }
-  }, [visibleModules, activeModule])
+  }, [visibleModules, activeModule, course])
 
   // Sync URL hash with current state
   useEffect(() => {
-    const newHash = `#/${mode}/${activeModule}`
+    const newHash = `#/${course}/${mode}/${activeModule}`
     if (window.location.hash !== newHash) {
       window.history.replaceState(null, '', newHash)
     }
-  }, [mode, activeModule])
+  }, [course, mode, activeModule])
 
   // Handle browser back/forward
   useEffect(() => {
     const onPopState = () => {
-      const { module, track } = parseHash()
+      const { course: hashCourse, module, track } = parseHash()
+      if (hashCourse && hashCourse !== course) setCourse(hashCourse)
       if (track && track !== mode) toggleMode()
       if (module && module !== activeModule) {
         setShowReview(false)
         setActiveModule(module)
-        setVisited(prev => new Set(prev).add(module))
+        // Use the course from the hash, not the closure: on back/forward the
+        // closure's `course` can lag a course-boundary navigation by one render,
+        // which would record the module under the wrong course's visited set.
+        const targetCourse = hashCourse ?? course
+        setVisited((prev) => ({ ...prev, [targetCourse]: new Set(prev[targetCourse]).add(module) }))
       }
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [mode, activeModule, toggleMode])
+  }, [course, setCourse, mode, activeModule, toggleMode])
 
-  // On initial load, apply track from hash
+  // On initial load, apply course + track from hash
   useEffect(() => {
-    const { track } = parseHash()
+    const { course: hashCourse, track } = parseHash()
+    if (hashCourse && hashCourse !== course) setCourse(hashCourse)
     if (track && track !== mode) toggleMode()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -228,16 +257,16 @@ function App() {
       setFadeIn(false)
       setTimeout(() => {
         setActiveModule(id)
-        setVisited((prev) => new Set(prev).add(id))
+        setVisited((prev) => ({ ...prev, [course]: new Set(prev[course]).add(id) }))
         setDueCount(getDueReviewCount())
         setSidebarOpen(false)
-        window.history.pushState(null, '', `#/${mode}/${id}`)
+        window.history.pushState(null, '', `#/${course}/${mode}/${id}`)
         // Scroll to top immediately, then fade in after scroll completes
         mainRef.current?.scrollTo({ top: 0 })
         requestAnimationFrame(() => setFadeIn(true))
       }, 150)
     },
-    [activeModule, showReview, mode],
+    [activeModule, showReview, mode, course],
   )
 
   useEffect(() => {
@@ -263,8 +292,9 @@ function App() {
   }, [showReview])
 
   const activeIndex = visibleModules.findIndex((m) => m.id === activeModule)
-  const visitedVisible = visibleModules.filter((m) => visited.has(m.id)).length
-  const progressPercent = Math.round((visitedVisible / visibleModules.length) * 100)
+  const courseVisited = visited[course]
+  const visitedVisible = visibleModules.filter((m) => courseVisited.has(m.id)).length
+  const progressPercent = visibleModules.length > 0 ? Math.round((visitedVisible / visibleModules.length) * 100) : 0
 
   return (
     <div className="flex h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
@@ -297,6 +327,23 @@ function App() {
           <h1 className="font-mono text-sm font-semibold tracking-widest text-zinc-600 dark:text-zinc-400 uppercase">
             {t(lang, 'app.title')}
           </h1>
+          {/* Course switcher */}
+          <div className="flex gap-1 rounded-lg border border-zinc-200 dark:border-zinc-800 p-0.5" role="group" aria-label="Course">
+            {(['understand', 'use'] as Course[]).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCourse(c)}
+                aria-pressed={course === c}
+                className={`flex-1 rounded-md px-2 py-1.5 text-center text-xs font-medium transition-colors ${
+                  course === c
+                    ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
+                    : 'text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-700 dark:hover:text-zinc-300'
+                }`}
+              >
+                {t(lang, c === 'understand' ? 'course.understand' : 'course.use')}
+              </button>
+            ))}
+          </div>
           {/* Mode toggle */}
           <button
             onClick={toggleMode}
@@ -380,7 +427,7 @@ function App() {
           </li>
           {visibleModules.map((mod, index) => {
             const isActive = activeModule === mod.id && !showReview
-            const isVisited = visited.has(mod.id)
+            const isVisited = courseVisited.has(mod.id)
             const displayLabel = (() => {
               const ml = MODULE_LABELS[lang]?.[mod.id]
               if (!ml) return mod.label
@@ -423,7 +470,7 @@ function App() {
         <div className="sticky top-0 z-10 h-0.5 bg-zinc-100 dark:bg-zinc-900">
           <div
             className="h-full bg-emerald-500/50 transition-all duration-700 ease-out"
-            style={{ width: showReview ? '100%' : `${((activeIndex + 1) / visibleModules.length) * 100}%` }}
+            style={{ width: showReview ? '100%' : visibleModules.length > 0 ? `${((activeIndex + 1) / visibleModules.length) * 100}%` : '0%' }}
           />
         </div>
 
