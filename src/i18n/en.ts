@@ -367,6 +367,11 @@ const moduleLabels = {
     subtitle: 'Chat assistants, agentic work apps, coding agents — what tool for what job, and why.',
     businessSubtitle: 'The AI tools your teams should be using — and how to pick the right one for each job.',
   },
+  'working-with-ai': {
+    label: 'Working With AI',
+    subtitle: 'Context, iteration, files, custom instructions — getting great results from a chat assistant.',
+    businessSubtitle: 'Brief it like a colleague, iterate like an editor — make great AI results your default.',
+  },
 } as const
 
 /**
