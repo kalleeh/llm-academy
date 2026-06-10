@@ -2,7 +2,7 @@ import type { Course } from './CourseContext'
 
 export type Persona = 'technical' | 'business'
 
-export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow' | 'agentic-coding' | 'agentic-work'
+export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow' | 'agentic-coding' | 'agentic-work' | 'genai-beyond-text'
 
 export interface ModuleMeta {
   id: ModuleId
@@ -36,4 +36,5 @@ export const MODULES: ModuleMeta[] = [
   { id: 'optimizing-workflow', label: 'Optimizing Your Workflow', course: 'use', personas: ['technical', 'business'] },
   { id: 'agentic-coding', label: 'Agentic Coding', course: 'use', personas: ['technical'] },
   { id: 'agentic-work', label: 'Agentic Work', course: 'use', personas: ['business'] },
+  { id: 'genai-beyond-text', label: 'Generative AI Beyond Text', course: 'use', personas: ['technical', 'business'] },
 ]

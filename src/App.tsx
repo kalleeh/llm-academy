@@ -30,6 +30,7 @@ const WorkingWithAIModule = lazy(() => import('./modules/WorkingWithAIModule').t
 const OptimizingWorkflowModule = lazy(() => import('./modules/OptimizingWorkflowModule').then(m => ({ default: m.OptimizingWorkflowModule })))
 const AgenticCodingModule = lazy(() => import('./modules/AgenticCodingModule').then(m => ({ default: m.AgenticCodingModule })))
 const AgenticWorkModule = lazy(() => import('./modules/AgenticWorkModule').then(m => ({ default: m.AgenticWorkModule })))
+const GenAIBeyondTextModule = lazy(() => import('./modules/GenAIBeyondTextModule').then(m => ({ default: m.GenAIBeyondTextModule })))
 
 const moduleComponents: Record<ModuleId, React.FC> = {
   'ai-problem': AIProblemModule,
@@ -55,6 +56,7 @@ const moduleComponents: Record<ModuleId, React.FC> = {
   'optimizing-workflow': OptimizingWorkflowModule,
   'agentic-coding': AgenticCodingModule,
   'agentic-work': AgenticWorkModule,
+  'genai-beyond-text': GenAIBeyondTextModule,
 }
 
 function ModuleNavigation({

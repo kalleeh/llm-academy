@@ -386,6 +386,11 @@ const moduleLabels = {
     subtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
     businessSubtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
   },
+  'genai-beyond-text': {
+    label: 'Generative AI Beyond Text',
+    subtitle: 'Image, voice, video, and multimodal — the models and APIs, and how to integrate them.',
+    businessSubtitle: 'Image, voice, video, and multimodal — what each is for, the tools, and using them responsibly.',
+  },
 } as const
 
 /**
@@ -2379,6 +2384,206 @@ const modules = {
         'An agent allowed to refund up to $1,000 autonomously gets a clearly fraudulent $950 request — and pays it, because a spend ceiling is not a fraud check. The missing guardrail was not a lower cap; it was a human-in-the-loop rule for refunds above a risk threshold. Caps limit size; they do not supply judgment.',
       bridgeBlurb:
         'Guardrails on one agent are the start. The bigger question — roles, decision rights, and why ~40% of agent initiatives stall on non-technical issues — is organizational. Go there.',
+    },
+  },
+  genaibeyondtext: {
+    // Tech: 1. The Modalities & Their Models
+    modalitiesModels: {
+      title: '1. The Modalities & Their Models',
+      intro:
+        'Beyond text, generative AI spans four modalities, each with its own model family and quirks. Click each to see what it is under the hood and the representative models in 2026.',
+      modelsLabel: 'Representative models:',
+      items: [
+        {
+          name: 'Image',
+          tagline: 'Diffusion models',
+          description:
+            'Text-to-image models work by denoising: they start from random noise and iteratively refine it toward an image matching the prompt, guided by a text encoder. Controllable via prompts, reference images, masks (inpainting), and structure maps. Fast, cheap, mature.',
+          models: 'Stable Diffusion 3.5, FLUX, Amazon Nova Canvas, Google Imagen, GPT Image',
+        },
+        {
+          name: 'Voice & audio',
+          tagline: 'TTS, STT, and speech-to-speech',
+          description:
+            'Three jobs: text-to-speech (TTS) synthesizes natural voices; speech-to-text (STT) transcribes; and newer speech-to-speech models converse directly in audio with low latency, preserving tone. Voice cloning is a TTS feature — and a rights minefield.',
+          models: 'Whisper (STT), ElevenLabs (TTS/clone), Amazon Nova Sonic, OpenAI Realtime',
+        },
+        {
+          name: 'Video',
+          tagline: 'Diffusion across time',
+          description:
+            'Video models extend image diffusion into the time dimension, generating coherent frames from a text or image prompt. Still the most compute-hungry and least controllable modality — clip lengths are short and consistency across shots is the hard problem.',
+          models: 'OpenAI Sora, Google Veo, Runway Gen-3, Amazon Nova Reel',
+        },
+        {
+          name: 'Multimodal',
+          tagline: 'One model, many inputs and outputs',
+          description:
+            'Frontier LLMs natively accept images (and increasingly audio/video) alongside text and reason across them — "what is wrong in this diagram?", "summarize this screenshot." The same model that chats can see. This is where most business value lands, because it needs no new pipeline.',
+          models: 'GPT-5.x (omni), Gemini 3.x, Claude (vision), Llama 4 (vision)',
+        },
+      ],
+      takeaway:
+        'Image and voice are mature and cheap; video is the frontier; multimodal understanding (a chat model that can see and hear) is quietly the most useful day to day. Match the modality to the job before you shop for a model.',
+    },
+    // Tech: 2. Calling a Multimodal Model (SimulatedTerminal emulation)
+    multimodalAPI: {
+      title: '2. Calling a Multimodal Model',
+      intro:
+        'Under the product UIs, these are ordinary HTTP APIs: you send content blocks, you get content (or a reference) back. Run the session to see the request/response shape for a vision call and an image-generation call.',
+      stepNote:
+        'Two calls: first a vision model reads an image and returns structured JSON; then a text-to-image model returns an image reference. Note the cost/latency line — media calls are pricier and slower than text.',
+      takeaway:
+        'Multimodal is "just an API": content blocks in, content or a reference out, billed per image/second/token. Once you see the request shape, integrating image or vision is the same engineering you already do for text — plus attention to cost, latency, and storing the binary output.',
+      selfExplainPrompt:
+        'Your app lets users photograph a receipt and get the line items as structured data. Which modality and roughly what API shape would you use, and what would you watch for in cost and reliability?',
+      selfExplainAnswer:
+        'A multimodal/vision model: send the image plus a prompt asking for line items as JSON (ideally with a strict schema / structured-output mode), get JSON back. Watch for: per-image cost and latency (cache or batch where possible), failure modes on blurry/rotated photos (validate the JSON, ask for confidence, fall back to a re-shoot prompt), and never trust the extraction blindly for anything financial — show the user the parsed result over the image for a quick confirm. It is the same request/response engineering as a text call, with image input and stricter output validation.',
+    },
+    // Tech: 3. Choosing & Integrating
+    choosingIntegrating: {
+      title: '3. Choosing & Integrating',
+      intro:
+        'Picking and shipping a generative-media capability has trade-offs text does not. Click each consideration.',
+      items: [
+        {
+          name: 'Hosted API vs self-host',
+          tagline: 'Rent the frontier, or run open weights',
+          description:
+            'Hosted APIs (Bedrock, OpenAI, fal) give you the best models with zero ops and pay-per-use; open weights (SD, Flux, Whisper) run on your own GPUs for data control and volume economics. Most teams start hosted and self-host only the high-volume, stable workloads.',
+        },
+        {
+          name: 'Latency, cost, quality',
+          tagline: 'Pick two, tune the third',
+          description:
+            'A 4-second video clip can cost dollars and take minutes; an image is cents and seconds; vision-on-text is near-chat cost. Budget per-asset, cache aggressively, generate at the smallest size/length that works, and reserve the expensive models for the moments that matter.',
+        },
+        {
+          name: 'Safety & provenance',
+          tagline: 'Watermark and label',
+          description:
+            'Generative media needs provenance: C2PA content credentials and invisible watermarks (e.g. SynthID) mark AI origin, and most providers attach them. You are responsible for disclosure, for not generating disallowed content, and for honoring likeness/voice rights.',
+        },
+        {
+          name: 'Evaluation is harder',
+          tagline: 'No single correct output',
+          description:
+            'There is no exact-match metric for "a good image" or "a natural voice." Lean on human review for quality, automated checks for policy/safety, and A/B or preference tests for model choice. Treat eval as continuous, not a one-time benchmark.',
+        },
+      ],
+      bridgeBlurb:
+        'You know the modalities and how to call them. Zoom out to the players: who builds these image, voice, and video models, open vs closed, and how the ecosystem fits together.',
+    },
+    // Business: 1. What Each Modality Is For
+    modalityUses: {
+      title: '1. What Each Modality Is For',
+      intro:
+        'Generative AI is not just chat. Four modalities each unlock different work — the trick is knowing which job each is good at. Click each.',
+      exampleLabel: 'For example:',
+      items: [
+        {
+          name: 'Image',
+          tagline: 'Visuals on demand',
+          description:
+            'Generate and edit images from a description: marketing creative, social posts, product mockups, presentation art, ad variations. Mature and cheap — often the first place a team sees real time savings.',
+          example: 'Spin up 20 on-brand ad variations for A/B testing in minutes, instead of a day with a designer.',
+        },
+        {
+          name: 'Voice & audio',
+          tagline: 'Speak and listen at scale',
+          description:
+            'Turn text into natural speech (narration, IVR, accessibility) and speech into text (meeting notes, call transcripts, captions). Newer tools hold real-time voice conversations for support.',
+          example: 'Add a natural-sounding voiceover to a training video in eight languages without a studio.',
+        },
+        {
+          name: 'Video',
+          tagline: 'Moving pictures from a prompt',
+          description:
+            'Generate short clips, animate stills, or cut long footage into highlights. Powerful but still the roughest edge — best for short social/marketing clips and drafts, with a human finishing the cut.',
+          example: 'Turn a one-hour webinar into ten 30-second social clips with captions, ready for review.',
+        },
+        {
+          name: 'Multimodal',
+          tagline: 'AI that sees and hears',
+          description:
+            'A chat assistant that also accepts images, audio, and documents: photograph a whiteboard and get the notes, drop in a screenshot and ask what is wrong, hand it a call recording and get the action items.',
+          example: 'Photograph a competitor\'s shelf and ask for a tidy table of their products and prices.',
+        },
+      ],
+      takeaway:
+        'Image and voice are ready for everyday work; video is great for drafts; multimodal "AI that can see" is the quiet workhorse. Start with the modality that fits a job you already do often.',
+    },
+    // Business: 2. Pick the Right Tool for a Job (InteractiveDemo)
+    pickTheTool: {
+      title: '2. Pick the Right Tool for a Job',
+      intro:
+        'Four real requests. For each: which modality, what kind of tool, and the one thing to watch. Step through.',
+      recommendLabel: 'Best fit:',
+      watchLabel: 'Watch out:',
+      scenarios: [
+        {
+          request: '"We need 30 product photos in different settings for the launch page — fast and on-brand."',
+          pick: 'Image generation (or background edit/inpainting)',
+          why: 'Image tools generate and edit on-brand visuals in minutes at near-zero cost — ideal for volume and variations.',
+          watch: 'Check brand accuracy and avoid implying real photos of a physical product you have not shipped; disclose AI imagery where required.',
+        },
+        {
+          request: '"Turn our 60-minute webinar recording into short clips for LinkedIn."',
+          pick: 'Video tools (highlight extraction + captioning)',
+          why: 'Video tools can find highlights and cut captioned clips, turning an afternoon of editing into a review pass.',
+          watch: 'A human should approve the cuts — automated highlights miss nuance and can clip a quote out of context.',
+        },
+        {
+          request: '"We want a natural voiceover for our help videos in English, Spanish, and German."',
+          pick: 'Text-to-speech (multilingual)',
+          why: 'Modern TTS produces natural multilingual narration without a studio, and is easy to re-generate when scripts change.',
+          watch: 'Only clone a specific person\'s voice with their consent; for brand voices, use licensed/synthetic voices and keep the rights clear.',
+        },
+        {
+          request: '"Staff photograph paper receipts; we want the amounts and dates as a spreadsheet."',
+          pick: 'Multimodal / vision model',
+          why: 'A vision model reads the photos and returns structured data — no new app, just the assistant your team already uses.',
+          watch: 'Verify extracted numbers before they hit finance; blurry or angled photos cause errors, so keep a human confirm step.',
+        },
+      ],
+      selfExplainPrompt:
+        'Pick a task your team does that involves images, audio, or video. Which modality fits, what kind of tool would you reach for, and what is the one thing you would double-check before trusting the output?',
+      selfExplainAnswer:
+        'Example: "We manually write alt-text and social captions for every product image. Modality: multimodal/vision — hand the image to an AI that can see and ask for alt-text plus three caption options in our voice. Tool: our existing multimodal assistant, no new system. Double-check: accuracy and brand tone on a sample before bulk-running, and that nothing invents a product feature the image does not actually show."',
+    },
+    // Business: 3. Use It Responsibly
+    useResponsibly: {
+      title: '3. Use It Responsibly',
+      intro:
+        'Generative media creates risks text rarely does — likeness, deception, brand. Four habits keep you safe. Click each.',
+      items: [
+        {
+          name: 'Disclose & label',
+          tagline: 'Say when it is AI',
+          description:
+            'Label AI-generated media where your audience or the law expects it, and keep provenance (C2PA content credentials) intact rather than stripping it. Quiet AI imagery in a news or trust context is a reputation risk waiting to happen.',
+        },
+        {
+          name: 'Respect rights & likeness',
+          tagline: 'Don\'t clone what you don\'t own',
+          description:
+            'Do not generate a real person\'s face or clone a voice without consent, and watch training-data/style claims. Use licensed or synthetic voices and models with clear commercial terms — "it was AI" is not a defense.',
+        },
+        {
+          name: 'Review for brand & accuracy',
+          tagline: 'A human signs off',
+          description:
+            'Generative tools confidently produce wrong hands, garbled text-in-images, or off-brand tone. Keep a human approval step before anything customer-facing ships — the same review bar you would apply to an agency draft.',
+        },
+        {
+          name: 'Mind the cost',
+          tagline: 'Video and audio add up',
+          description:
+            'Image is cheap, but video generation and large batch jobs get expensive fast. Set budgets, generate at the size/length you actually need, and measure cost-per-asset so a "quick experiment" does not become a surprise invoice.',
+        },
+      ],
+      bridgeBlurb:
+        'You know what these tools do and how to use them well. Curious who actually builds the image, voice, and video models behind them — and how the companies stack up? See the map.',
     },
   },
 } as const
