@@ -1951,6 +1951,218 @@ const modules = {
         'Briefing well is a craft with named techniques behind it — examples, step-by-step reasoning, role prompts. See how prompting really works.',
     },
   },
+  optimizingworkflow: {
+    // Tech: 1. Map Where AI Fits Your Day
+    whereItFits: {
+      title: '1. Map Where AI Fits Your Day',
+      intro:
+        'The fastest way to get more from AI is not a better prompt — it is knowing which parts of your day it reliably improves, and which parts to keep for yourself. Click each zone.',
+      items: [
+        {
+          name: 'Understanding',
+          tagline: 'Get oriented fast',
+          description:
+            'Unfamiliar codebase, a dense RFC, a stack trace you have never seen — this is where AI shines as a tireless explainer. "Walk me through how auth flows through this repo", "what does this regex do", "summarize this 40-page design doc". Low risk because you verify against the real thing immediately.',
+        },
+        {
+          name: 'Generation',
+          tagline: 'Skip the blank page',
+          description:
+            'Boilerplate, test scaffolding, a first-draft migration, a config you have written ten times before. The model is fast and you can read the output in seconds. The win is starting from 80% instead of zero — not trusting it blindly.',
+        },
+        {
+          name: 'Review & debugging',
+          tagline: 'A second pair of eyes, on demand',
+          description:
+            '"What edge cases does this function miss?", "why might this test be flaky?", "review this diff for security issues." AI catches a real fraction of problems instantly. It is additive to human review, not a replacement — it misses things and invents others.',
+        },
+        {
+          name: 'Communication',
+          tagline: 'Translate between audiences',
+          description:
+            'Turn a terse changelog into release notes, a bug into a clear ticket, a design into a plain-English summary for stakeholders. Tedious, text-shaped, and easy to check — a sweet spot most engineers under-use.',
+        },
+      ],
+      cautionLabel: 'Keep these for yourself:',
+      caution:
+        'Decisions that need full system and business context, anything you cannot verify, and judgment calls you would be embarrassed to attribute to "the AI told me to." The rule of thumb: delegate the work, never the accountability.',
+    },
+    // Tech: 2. Build Reusable Setups
+    reusableSetups: {
+      title: '2. Build Reusable Setups',
+      intro:
+        'If you have typed the same context into the chat three times, you have found a setup worth saving. Watch an ad-hoc prompt become durable infrastructure.',
+      stepLabel: 'Step',
+      steps: [
+        {
+          label: 'The ad-hoc prompt (third time this week)',
+          content:
+            '"You\'re helping on a Go service using Postgres and sqlc; we use table-driven tests and wrap errors with %w. Write tests for this handler: [paste]."',
+          note: 'Everything before "Write tests" is project context you re-type every single time. That is the tell.',
+        },
+        {
+          label: 'Extract the standing context',
+          content:
+            'Move the durable facts into an AGENTS.md (or the tool\'s custom-instructions / project settings): stack, conventions, test style, error handling. Now every session starts already knowing them — you stop paying the re-explanation tax.',
+          note: 'Standing context belongs in a file the tool reads automatically, not in your muscle memory.',
+        },
+        {
+          label: 'Capture the workflow',
+          content:
+            'The recurring action — "write table-driven tests for the selected handler" — becomes a saved prompt, a slash command, or a snippet. The variable part (which handler) is the only thing you supply.',
+          note: 'A good setup separates the stable recipe from the one changing ingredient.',
+        },
+        {
+          label: 'Now it is one invocation',
+          content:
+            'Select the handler, run the command. The context is loaded, the recipe is fixed, the output is consistent across the team. The five-minute setup pays for itself by the third use — and it keeps paying.',
+          note: 'This is the whole game: turn a thing you re-explain into a thing you invoke.',
+        },
+      ],
+      takeaway:
+        'The unit of optimization is the repeated task, not the individual prompt. Each time you catch yourself re-typing context, that is a setup asking to be built.',
+      selfExplainPrompt:
+        'Name a prompt or context you have re-typed to an AI more than twice this month. What standing context would you extract, and what would the reusable invocation be?',
+      selfExplainAnswer:
+        'Example: "I keep pasting our API error-format spec before asking for a new endpoint handler. Standing context → a project doc with the error envelope, auth middleware, and validation conventions. Reusable invocation → \'scaffold a handler for <route> following our conventions\'. The spec stops being something I paste and becomes something the tool already knows."',
+    },
+    // Tech: 3. Team Patterns & Guardrails
+    teamPatterns: {
+      title: '3. Team Patterns & Guardrails',
+      intro:
+        'Your personal setups become a multiplier when the team shares them — and a liability without a few guardrails. Click each pattern.',
+      items: [
+        {
+          name: 'Context files in the repo',
+          tagline: 'Check the AI\'s knowledge into git',
+          description:
+            'An AGENTS.md / context file committed to the repo means every engineer\'s assistant shares the same picture of conventions, architecture, and gotchas. It reviews like code, evolves with the codebase, and onboards new hires (human and AI) for free.',
+        },
+        {
+          name: 'A shared prompt & skill library',
+          tagline: 'Stop everyone reinventing the same prompt',
+          description:
+            'When someone nails the prompt for "generate a migration" or "write a runbook", it goes in a shared library — a repo folder, a wiki, or tool-native skills. The team\'s best prompt becomes everyone\'s default.',
+        },
+        {
+          name: 'Review norms for AI-authored code',
+          tagline: 'The author is accountable, not the model',
+          description:
+            'Agree explicitly: AI-generated code gets the same review bar as hand-written code, and the human who shipped it owns it. No "the AI wrote it" excuses. Some teams flag AI-heavy PRs so reviewers calibrate attention.',
+        },
+        {
+          name: 'Measure impact honestly',
+          tagline: 'Time saved, not lines generated',
+          description:
+            'Lines of AI code is a vanity metric — it can mean speed or it can mean bloat. Track what matters: cycle time, time-to-first-PR for new hires, how much of a task became "review" instead of "write." Be honest about where it does not help.',
+        },
+      ],
+      bridgeBlurb:
+        'Personal and team habits are the ground level. Zoom out: how does this autonomy reshape roles, decision rights, and risk across a whole organization?',
+    },
+    // Business: 1. Find Your AI-Shaped Tasks
+    aiShapedTasks: {
+      title: '1. Find Your AI-Shaped Tasks',
+      intro:
+        'Most people use AI on whatever is in front of them. The higher-leverage move is to deliberately find the tasks where it pays off most. A task is AI-shaped when three things are true — click each.',
+      items: [
+        {
+          name: 'Recurring',
+          tagline: 'You do it again and again',
+          description:
+            'A one-off rarely justifies building a setup. A task you do every week — the status digest, the customer follow-up, the data tidy-up — earns back the time you invest in briefing it well, many times over.',
+        },
+        {
+          name: 'Judgment-light',
+          tagline: 'Mostly mechanical, not a high-stakes call',
+          description:
+            'Summarizing, reformatting, drafting, extracting, comparing — work where "good and fast" beats "agonized over". The high-judgment 10% (the final decision, the sensitive call) stays with you; AI clears the other 90%.',
+        },
+        {
+          name: 'Text-shaped',
+          tagline: 'Words in, words out',
+          description:
+            'AI is strongest where the input and output are language: emails, documents, notes, transcripts, spreadsheets of text. If the task is fundamentally about reading and writing, it is in the sweet spot.',
+        },
+      ],
+      testLabel: 'The weekly-time-sink test:',
+      test:
+        'Look at your calendar and your last week. What recurring, text-shaped, judgment-light task ate the most hours? That is where to start — not the flashiest use, the most repeated one.',
+    },
+    // Business: 2. From One-Off to a System
+    oneOffToSystem: {
+      title: '2. From One-Off to a System',
+      intro:
+        'The difference between "I use AI sometimes" and "AI saves my team a day a week" is systems. Watch a recurring task graduate from hand-built to handled.',
+      stepLabel: 'Step',
+      steps: [
+        {
+          label: 'The weekly grind',
+          content:
+            'Every Monday you rebuild the same pipeline report: open five spreadsheets, paste highlights into the chat, re-explain the format, fix the tone, reformat for the exec email. Ninety minutes, every week, from scratch.',
+          note: 'You are re-paying the full setup cost every single time. That is the waste.',
+        },
+        {
+          label: 'Save the winning brief',
+          content:
+            'The week it finally came out great, you save that prompt — the exact context, format, and tone that worked. Next week you start from the proven brief instead of reinventing it.',
+          note: 'The first reusable asset is simply the best version of a prompt you already wrote.',
+        },
+        {
+          label: 'Make it a project',
+          content:
+            'Create a project / workspace that holds the recurring sources and the brief together. The format lives there, the source files attach there. "Generate this week\'s report" is now the whole instruction.',
+          note: 'A project turns a prompt-plus-attachments ritual into a single briefed workspace.',
+        },
+        {
+          label: 'A five-minute review job',
+          content:
+            'Monday: drop in the week\'s numbers, run it, read the draft, fix one line, send. Ninety minutes became five. The task did not disappear — the rebuilding did, and your judgment is still the last step.',
+          note: 'Systematizing removes the redo, not the human. You review instead of reassemble.',
+        },
+      ],
+      takeaway:
+        'A system is just a good brief that stopped living in your head. The setup costs minutes once; the redo costs you every week forever.',
+      selfExplainPrompt:
+        'Pick the recurring task that eats the most of your week. What is the brief you would save, and what would you put in a project to make it a five-minute job?',
+      selfExplainAnswer:
+        'Example: "Monthly board update. Saved brief: context (who reads it, what they care about), the three-section format, the plain-numbers tone. Project contents: the metrics dashboard export, last month\'s update for continuity, the brand voice note. Then \'draft this month\'s board update\' starts from everything it needs."',
+    },
+    // Business: 3. Roll It Out to Your Team
+    rollItOut: {
+      title: '3. Roll It Out to Your Team',
+      intro:
+        'One person with good AI habits saves their own time. A team with shared habits changes what the team can take on. Click each rollout move.',
+      items: [
+        {
+          name: 'A shared prompt library',
+          tagline: 'Everyone starts from the best version',
+          description:
+            'A simple shared doc of "prompts that work here" — the report brief, the customer-reply template, the meeting-summary format. New team members become productive on day one instead of rediscovering everyone\'s lessons.',
+        },
+        {
+          name: 'Name a champion',
+          tagline: 'Someone owns making it better',
+          description:
+            'Rollouts stall without an owner. One enthusiastic person who curates the library, answers "how would you prompt this?", and shares wins does more than any mandate. Make it a visible part of their role, not a side hobby.',
+        },
+        {
+          name: 'Light-touch governance',
+          tagline: 'Clear lines, not a thick rulebook',
+          description:
+            'People need to know the few bright lines — what data must never go into a tool, where human sign-off is required, which tools are approved. Keep it short enough that everyone actually reads it; a wall of policy just drives shadow usage.',
+        },
+        {
+          name: 'Measure time saved',
+          tagline: 'Prove it, or it gets cut',
+          description:
+            'Track the honest number: hours back per week, faster turnaround, more handled without more headcount. Concrete before/after wins fund the next step and protect the budget. "It feels faster" does not survive a cost review.',
+        },
+      ],
+      bridgeBlurb:
+        'Team habits are where individual productivity meets organizational change. See what it really takes for an organization to be ready for AI.',
+    },
+  },
 } as const
 
 /**
