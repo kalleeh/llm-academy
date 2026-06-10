@@ -1525,6 +1525,203 @@ const modules = {
       ],
     },
   },
+  toolslandscape: {
+    // Tech: 1. The Tool Categories
+    categories: {
+      title: '1. The Tool Categories',
+      intro:
+        'The AI tool space looks crowded, but almost everything falls into four categories — defined by how much autonomy the tool has and where it lives. Click each category to explore.',
+      whenLabel: 'When to reach for it:',
+      toolsLabel: 'Tools:',
+      items: [
+        {
+          name: 'Chat Assistants',
+          tagline: 'You ask, it answers',
+          description:
+            'A conversation surface. You bring the context, it brings the reasoning. Powerful for drafting, explaining, analyzing — but it only acts inside the chat: nothing happens in your files, repos, or apps unless you copy it there.',
+          when: 'Questions, drafts, analysis, brainstorming — any task where the deliverable is text and you stay in the loop on every turn.',
+          tools: 'ChatGPT, Claude, Gemini',
+        },
+        {
+          name: 'IDE Assistants',
+          tagline: 'Autocomplete that grew up',
+          description:
+            'Lives inside your editor, sees the file you have open, and suggests code inline. Low autonomy: it proposes, you accept. Great for keeping flow, weak when a change spans many files.',
+          when: 'Single-file edits, boilerplate, learning an unfamiliar API as you type.',
+          tools: 'GitHub Copilot, Cursor inline mode',
+        },
+        {
+          name: 'Agentic Coding Tools',
+          tagline: 'An agent in your terminal & repo',
+          description:
+            'You describe an outcome; the agent plans, reads your codebase, edits multiple files, runs commands and tests, and reports back. It works in steps — think → act → check — and you review at checkpoints.',
+          when: 'Multi-file features, refactors, debugging, test coverage — real engineering tasks you would hand a teammate.',
+          tools: 'Claude Code, Kiro CLI',
+        },
+        {
+          name: 'Agentic Work Apps',
+          tagline: 'Delegate office work, not code',
+          description:
+            'The same agentic loop, pointed at documents, spreadsheets, research, and workflows instead of code. You delegate a task, the agent works through it across files and apps, and you supervise the result.',
+          when: 'Research and synthesis, report drafting, data cleanup, multi-document work.',
+          tools: 'Amazon Quick Desktop, Claude Cowork',
+        },
+      ],
+      axisNote:
+        'The pattern behind the map: as you move from chat to agents, the tool stops answering and starts doing. The more autonomy, the more your job shifts from writing to reviewing.',
+    },
+    // Tech: 2. Anatomy of an Agentic Tool
+    agenticLoop: {
+      title: '2. Anatomy of an Agentic Tool',
+      intro:
+        'What actually happens when you hand a task to an agentic coding tool? Run the session below — it is a faithful simulation of a Claude Code run. Watch the loop: understand → plan → act → verify.',
+      stepNote: 'Each command is one turn of the agentic loop. Notice the agent checks its own work before reporting done.',
+      takeaway:
+        'This loop — plan, act, verify, repeat — is the signature of every agentic tool, whether it is editing code or a spreadsheet. The skill of using one well is mostly the skill of writing a clear task and reviewing at the right checkpoints.',
+    },
+    // Tech: 3. Choosing Your Stack
+    choosingStack: {
+      title: '3. Choosing Your Stack',
+      intro:
+        'Four realistic situations. For each: what would you reach for? Step through to see the reasoning.',
+      recommendLabel: 'Best fit:',
+      scenarios: [
+        {
+          situation: 'You need to understand an unfamiliar 50k-line codebase enough to fix a bug somewhere in the auth flow.',
+          pick: 'Agentic coding tool (Claude Code / Kiro)',
+          why: 'The agent can search the repo, trace the flow across files, and explain the architecture — then fix the bug and run the tests. A chat assistant cannot see your repo; an IDE assistant only sees the open file.',
+        },
+        {
+          situation: 'You are writing a one-off Python script to parse a CSV and you know exactly what you want.',
+          pick: 'IDE assistant — or just a chat assistant',
+          why: 'Full agentic autonomy is overkill for a task you can specify completely and verify at a glance. Inline completion keeps you in flow; a chat assistant can write the whole script in one shot.',
+        },
+        {
+          situation: 'You want a second opinion on a system design before you commit to it.',
+          pick: 'Chat assistant (Claude, ChatGPT)',
+          why: 'This is a reasoning-and-conversation task. You want to iterate on ideas, challenge assumptions, and explore trade-offs — the deliverable is understanding, not artifacts.',
+        },
+        {
+          situation: 'Your team needs the API documentation updated to match 30 endpoints that changed this quarter.',
+          pick: 'Agentic coding tool, supervised',
+          why: 'Repetitive, multi-file, verifiable — ideal agent work. The agent reads each endpoint, updates docs, and you spot-check. Doing this by hand in an IDE assistant means 30 manual passes.',
+        },
+      ],
+      selfExplainPrompt:
+        'Pick a real task from your current week. Which tool category fits it best, and what would you have to specify for the tool to succeed?',
+      selfExplainAnswer:
+        'Example: "Migrate our date handling from moment.js to date-fns" — agentic coding tool. I would specify: the libraries involved, that tests must pass after each file, and which edge cases (timezones) to be careful with. The clearer the outcome and constraints, the better the agent performs.',
+    },
+    // Business: 1. The Tool Categories (business lens)
+    categoriesBiz: {
+      title: '1. The Tool Categories',
+      intro:
+        'Your teams are already using AI — the question is whether they are using the right kind for each job. Almost every tool falls into one of three categories. Click each to explore.',
+      whenLabel: 'Use it for:',
+      toolsLabel: 'Tools:',
+      items: [
+        {
+          name: 'Chat Assistants',
+          tagline: 'A brilliant colleague in a chat window',
+          description:
+            'You ask questions, it answers; you paste material, it analyzes or rewrites. The catch: it only talks. Nothing lands in your documents or systems unless someone copies it there.',
+          when: 'Drafting emails and documents, summarizing material you paste in, brainstorming, quick analysis.',
+          tools: 'ChatGPT, Claude, Gemini',
+        },
+        {
+          name: 'Agentic Work Apps',
+          tagline: 'A capable assistant you delegate to',
+          description:
+            'You hand over a task — "turn these 30 interviews into a themes report" — and the AI works through it: opening files, extracting, organizing, drafting. You review at checkpoints instead of doing every step.',
+          when: 'Research and synthesis, recurring reports, data cleanup, any multi-document task that eats hours.',
+          tools: 'Amazon Quick Desktop, Claude Cowork',
+        },
+        {
+          name: 'Developer AI Tools',
+          tagline: 'Your engineering team\'s power tools',
+          description:
+            'Agents that write and change real code under engineer supervision. You do not need to operate these — but you should know your dev team can ship significantly faster with them, and budget accordingly.',
+          when: 'Engineering work: features, bug fixes, code modernization. (Your developers drive; you fund and measure.)',
+          tools: 'Claude Code, Kiro CLI, GitHub Copilot',
+        },
+      ],
+      axisNote:
+        'The pattern: chat assistants answer, agentic tools do. The more the tool does, the more your people shift from doing the work to specifying and reviewing it — that is the real workflow change to manage.',
+    },
+    // Business: 2. Watching an AI Do Work
+    delegation: {
+      title: '2. Watching an AI Do Work',
+      intro:
+        'The biggest mental shift is from chatting to delegating. Step through a real delegation to an agentic work app — notice where the human stays in control.',
+      steps: [
+        {
+          label: 'You delegate',
+          content:
+            '"Here are 30 customer interview transcripts. Identify the recurring themes, pull two supporting quotes per theme, and draft a 2-page summary for the product team."',
+          note: 'A good delegation looks like a good brief to a junior colleague: outcome, format, audience.',
+        },
+        {
+          label: 'The agent plans',
+          content:
+            'The agent proposes a plan: read all 30 transcripts → tag pain points per transcript → cluster into themes → select quotes → draft the summary. It asks one clarifying question: "Should pricing complaints be a separate theme or grouped under \'value\'?"',
+          note: 'You approve the plan or adjust it. This is your first checkpoint — cheap to correct now, expensive later.',
+        },
+        {
+          label: 'The agent works',
+          content:
+            'It processes the transcripts and shows progress: "14/30 read — 6 candidate themes emerging." You are free to do other work; it flags anything ambiguous instead of guessing.',
+          note: 'Unlike a chat assistant, it is actually operating on your files — not waiting for you to paste content in.',
+        },
+        {
+          label: 'You review the draft',
+          content:
+            'The draft lands with themes, quotes, and an appendix mapping every claim to its source transcript. You spot one theme that is really two, and say so. The agent restructures and updates the summary.',
+          note: 'Review is your real job now. The traceable sources are what make the review fast.',
+        },
+        {
+          label: 'The deliverable ships',
+          content:
+            'Final 2-page summary, ready for the product team. Elapsed human time: ~20 minutes of briefing and review, instead of two days of reading and writing.',
+          note: 'The work did not disappear — it changed shape: from doing to directing.',
+        },
+      ],
+      takeaway:
+        'Delegation quality determines output quality. The teams that get the most from agentic tools are the ones that write clear briefs and review at checkpoints — exactly the skills of a good manager.',
+    },
+    // Business: 3. Picking Tools for Your Team
+    pickingTools: {
+      title: '3. Picking Tools for Your Team',
+      intro:
+        'Four common team situations. Step through each to see which tool category fits and why.',
+      recommendLabel: 'Best fit:',
+      scenarios: [
+        {
+          situation: 'Your sales team spends every Friday afternoon assembling a pipeline summary from CRM exports and call notes.',
+          pick: 'Agentic work app',
+          why: 'Recurring, multi-source, well-defined output — ideal delegation. The agent assembles the draft from the exports; a rep reviews it in minutes. A chat assistant would require pasting everything in manually each week.',
+        },
+        {
+          situation: 'Legal needs a first-pass review of incoming NDAs against your standard playbook.',
+          pick: 'Agentic work app — with mandatory human review',
+          why: 'The agent compares each NDA to the playbook and flags deviations with references. A lawyer makes every judgment call. High-stakes domains keep the human as the decision-maker; the agent kills the reading time.',
+        },
+        {
+          situation: 'Marketing wants help punching up campaign copy and subject lines.',
+          pick: 'Chat assistant',
+          why: 'Creative iteration is conversation — generate options, react, refine. No files to operate on, no multi-step workflow. The simplest tool that works is the right tool.',
+        },
+        {
+          situation: 'Engineering says a legacy system rewrite will take three quarters.',
+          pick: 'Agentic coding tools for the dev team',
+          why: 'Modernization is where coding agents shine: large, repetitive, testable. Teams using them well report dramatic speedups on exactly this work. Your role: fund the tools, ask for before/after metrics.',
+        },
+      ],
+      selfExplainPrompt:
+        'Think of the most repetitive multi-step task your team does every week. Could you delegate it to an agentic tool? Write the one-paragraph brief you would give it.',
+      selfExplainAnswer:
+        'Example: "Every Monday we compile a competitor-news digest. Brief: scan these 12 sources for news about competitors X, Y, Z from the past week; group by competitor; two-sentence summary per item with a link; flag anything about pricing or layoffs as urgent; output as one page." Clear sources, format, and escalation rule — that is a delegation-ready brief.',
+    },
+  },
 } as const
 
 /**
