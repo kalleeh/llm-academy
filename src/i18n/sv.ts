@@ -1257,5 +1257,121 @@ export const sv: DeepPartial<Translation> = {
           'Du har styrt en kodningsagent. Titta nu under huven: hur verktygsanvändning, funktionsanrop, MCP och designmönster för agenter faktiskt fungerar — maskineriet under sessionen du just körde.',
       },
     },
+    // MT
+    agenticwork: {
+      whatItIs: {
+        title: '1. Vad agentiskt arbete faktiskt är',
+        intro:
+          'En chattassistent svarar; en app för agentiskt arbete agerar. Du ger den en uppgift i flera steg — tvärs över dina dokument, kalkylblad och appar — och den planerar, utför stegen och rapporterar tillbaka, medan du sitter kvar i regissörsstolen. Klicka på varje del.',
+        items: [
+          {
+            name: 'Assistent kontra agent',
+            tagline: 'Att svara kontra att göra',
+            description:
+              'En chattassistent ger dig ord tillbaka: ett utkast, ett svar, en sammanfattning som du sedan agerar på. En agent utför — den öppnar filerna, fyller raderna, skriver utkastet till mejlet, rör sig genom ett arbetsflöde. Skillnaden är inte intelligens; det är huruvida arbetet landar i dina system eller bara i chatten.',
+          },
+          {
+            name: 'Vad som gör en uppgift delegerbar',
+            tagline: 'Flera steg, kontrollerbar, återställbar',
+            description:
+              'Bra kandidater har flera steg (värt att sätta upp), en tydlig definition av klart (så att du kan kontrollera den) och är återställbara om de blir fel (ett utkast, inte ett skickat kontrakt). "Sammanställ veckans pipeline-rapport från dessa källor" passar; "besluta vem som ska sägas upp" gör det inte.',
+          },
+          {
+            name: 'Verktygen',
+            tagline: 'Quick Desktop, Cowork och deras släkt',
+            description:
+              'Amazon Quick Desktop och Claude Cowork är appar för agentiskt arbete: du delegerar kontorsuppgifter och övervakar medan de arbetar tvärs över filer och appar. De är affärssidans motsvarighet till vad kodningsagenter gör i ett repo — samma loop, riktad mot dokument och arbetsflöden i stället för kod.',
+          },
+          {
+            name: 'Din nya roll',
+            tagline: 'Regissör, inte utförare',
+            description:
+              'När utförandet är delegerat flyttas ditt värde till att briefa väl, besluta vad som spelar roll och granska resultatet — en chefs arbete, inte en enskild medarbetares. De team som vinner med agenter är de vars människor gör det här skiftet medvetet.',
+          },
+        ],
+        bridgeBlurb:
+          'De här assistenterna-som-agerar har riktigt maskineri under sig — verktygsanvändning, funktionsanrop, agentloopen. Se hur en AI faktiskt går från att svara till att vidta åtgärd.',
+      },
+      delegateSupervise: {
+        title: '2. Delegera och övervaka',
+        intro:
+          'Att delegera till en agent är en färdighet som liknar att leda en skarp junior medarbetare. Stega igenom en verklig delegering i flera steg och lägg märke till exakt var du stannar kvar i loopen.',
+        stepLabel: 'Steg',
+        steps: [
+          {
+            label: 'Du briefar uppgiften',
+            content:
+              '"Stäm av den här månadens utläggsrapport mot vår resepolicy. Flagga varje utlägg som bryter mot en regel, med regeln det bryter mot och beloppet över. Mata ut en tabell jag kan granska, plus en sammanfattning på en rad."',
+            note: 'En delegerbar brief namnger indata, regeln som ska tillämpas och den exakta leveransen — precis som att briefa en person.',
+          },
+          {
+            label: 'Agenten föreslår en plan',
+            content:
+              'Den läser policyn och utläggsbladet och föreslår: tolka 240 utläggsrader → matcha var och en mot relevant policyregel → flagga överträdelser med beloppet över → bygg granskningstabellen → skriv sammanfattningen. Den frågar en sak: "Ska saknade kvitton behandlas som en överträdelse eller som en separat lista \'behöver uppföljning\'?"',
+            note: 'Planen + den klargörande frågan är din första kontrollpunkt — billigt att styra nu, dyrt efter att den har kört.',
+          },
+          {
+            label: 'Den arbetar tvärs över dina filer',
+            content:
+              'Du väljer "separat uppföljningslista". Agenten bearbetar alla 240 rader, tillämpar policyn regel för regel och visar framsteg — utan att vänta på att du ska klistra in något. Den flaggar 11 överträdelser och 6 poster med saknade kvitton.',
+            note: 'Till skillnad från en chattassistent arbetar den direkt på kalkylbladet och policydokumentet — det är den agentiska delen.',
+          },
+          {
+            label: 'Du övervakar vid kontrollpunkten',
+            content:
+              'De 11 flaggorna kommer med regeln och övertrasseringen för var och en. Du upptäcker två som faktiskt är inom policyn (ett dagtraktamente som agenten läste för strikt) och säger det. Den korrigerar regeltolkningen och kör om de berörda raderna — 9 verkliga överträdelser kvarstår.',
+            note: 'Granskning är jobbet nu. Du kontrollerar bedömningsfrågor, inte gör om aritmetiken.',
+          },
+          {
+            label: 'Den levererar — du förblir ansvarig',
+            content:
+              'Slutlig tabell med 9 överträdelser + 6 uppföljningar + en sammanfattning på en rad, redo att skickas till ekonomi. Tjugo minuters briefning och granskning ersatte en eftermiddag av rad-för-rad-kontroll — och beslutet att skicka är fortfarande ditt.',
+            note: 'Arbetet delegerades; ansvaret gjorde det inte. Den uppdelningen är hela disciplinen.',
+          },
+        ],
+        takeaway:
+          'Delegera uppgiften, övervaka vid kontrollpunkter, äg utfallet. Agenten gör volymen; din bedömning är fortfarande grinden innan något levereras.',
+        selfExplainPrompt:
+          'Välj en uppgift i flera steg på ditt bord den här veckan. Skriv den brief du skulle ge en app för agentiskt arbete — indata, regeln eller målet, leveransen — och namnge den enda kontrollpunkt där du skulle insistera på att granska innan den fortsätter.',
+        selfExplainAnswer:
+          'Exempel: "Uppgift: triagera den här veckans 80 inkommande supportärenden. Brief — indata: ärendeexporten; regel: tagga varje efter brådska (P1–P3) med våra SLA-definitioner och gruppera per produktområde; leverans: en sorterad tabell plus P1-listan överst. Kontrollpunkt: jag granskar P1-listan innan något auto-eskaleras, eftersom en felaktig P1 väcker någon klockan 02 på natten." Kontrollpunkten sitter exakt där ett fel skulle vara kostsamt eller svårt att vända.',
+      },
+      guardrails: {
+        title: '3. Sätt skyddsräcken',
+        intro:
+          'En agent som agerar behöver gränser, på samma sätt som du inte skulle ge en nyanställd företagets kreditkort dag ett. Fyra skyddsräcken håller delegeringen säker. Klicka på varje.',
+        items: [
+          {
+            name: 'Omfångsgränser',
+            tagline: 'Vad den får röra',
+            description:
+              'Var tydlig med vilka filer, system och data en agent kan läsa och ändra. "Den här mappen och det här bladet" slår "den delade enheten". Snävt omfång begränsar misstag och håller känslig data utom räckhåll som standard.',
+          },
+          {
+            name: 'Tak för spenderande & åtgärder',
+            tagline: 'Gränser för konsekvensbärande drag',
+            description:
+              'Där en agent kan spendera pengar eller vidta utåtriktade åtgärder (ge återbetalningar, skicka till kunder, lägga beställningar) — sätt hårda tak och hastighetsgränser. Ett tak är nödvändigt men inte tillräckligt — para ihop det med regeln nedan.',
+          },
+          {
+            name: 'Människa i loopen',
+            tagline: 'Godkännande för det oåterkalleliga',
+            description:
+              'Allt som är svårt att ångra eller utåt synligt — att skicka till en kund, radera poster, slutföra en betalning — bör kräva ett mänskligt OK. Låt agenten förbereda och köa åtgärden; en människa trycker på skicka. Utkast är gratis; skickat är för evigt.',
+          },
+          {
+            name: 'Granskningslogg',
+            tagline: 'Vet vad den gjorde och varför',
+            description:
+              'Logga agentens åtgärder, indata och beslut så att du kan granska, felsöka och svara på "varför gjorde den så?". En granskningslogg förvandlar ett överraskande utfall till ett spårbart — och är ofta ett efterlevnadskrav, inte en lyx.',
+          },
+        ],
+        failureLabel: 'En lucka i skyddsräcket, konkret:',
+        failure:
+          'En agent som får återbetala upp till $1,000 självständigt får en uppenbart bedräglig begäran på $950 — och betalar den, eftersom ett spendertak inte är en bedrägerikontroll. Det saknade skyddsräcket var inte ett lägre tak; det var en regel om människa i loopen för återbetalningar över en riskgräns. Tak begränsar storlek; de tillhandahåller inte omdöme.',
+        bridgeBlurb:
+          'Skyddsräcken på en agent är början. Den större frågan — roller, beslutsrätt och varför ~40 % av agentinitiativen kör fast på icke-tekniska frågor — är organisatorisk. Gå dit.',
+      },
+    },
   },
 }
