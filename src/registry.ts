@@ -2,7 +2,7 @@ import type { Course } from './CourseContext'
 
 export type Persona = 'technical' | 'business'
 
-export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow'
+export type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape' | 'working-with-ai' | 'optimizing-workflow' | 'agentic-coding'
 
 export interface ModuleMeta {
   id: ModuleId
@@ -29,9 +29,10 @@ export const MODULES: ModuleMeta[] = [
   { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', course: 'understand', personas: ['technical', 'business'] },
   { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', course: 'understand', personas: ['technical', 'business'] },
   { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['technical', 'business'] },
+  { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['business'] },
   { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
   { id: 'tools-landscape', label: 'AI Tools Landscape', course: 'use', personas: ['technical', 'business'] },
   { id: 'working-with-ai', label: 'Working With AI', course: 'use', personas: ['technical', 'business'] },
   { id: 'optimizing-workflow', label: 'Optimizing Your Workflow', course: 'use', personas: ['technical', 'business'] },
+  { id: 'agentic-coding', label: 'Agentic Coding', course: 'use', personas: ['technical'] },
 ]
