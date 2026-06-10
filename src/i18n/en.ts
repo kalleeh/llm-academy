@@ -372,6 +372,11 @@ const moduleLabels = {
     subtitle: 'Context, iteration, files, custom instructions — getting great results from a chat assistant.',
     businessSubtitle: 'Brief it like a colleague, iterate like an editor — make great AI results your default.',
   },
+  'optimizing-workflow': {
+    label: 'Optimizing Your Workflow',
+    subtitle: 'Where AI fits your day, reusable setups, team patterns — from one-off prompts to a system.',
+    businessSubtitle: 'Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.',
+  },
 } as const
 
 /**
