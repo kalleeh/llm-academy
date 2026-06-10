@@ -245,14 +245,6 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState)
   }, [course, setCourse, mode, activeModule, toggleMode])
 
-  // On initial load, apply course + track from hash
-  useEffect(() => {
-    const { course: hashCourse, track } = parseHash()
-    if (hashCourse && hashCourse !== course) setCourse(hashCourse)
-    if (track && track !== mode) toggleMode()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   const navigateTo = useCallback(
     (id: ModuleId) => {
       if (id === activeModule && !showReview) return

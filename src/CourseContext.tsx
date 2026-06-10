@@ -18,6 +18,9 @@ const CourseContext = createContext<CourseContextValue>({
 
 export function CourseProvider({ children }: { children: ReactNode }) {
   const [course, setCourseState] = useState<Course>(() => {
+    // A course in the URL hash is an explicit deep-link intent — it wins over the stored preference.
+    const hashCourse = window.location.hash.match(/^#\/(understand|use)(?:\/|$)/)?.[1]
+    if (hashCourse === 'understand' || hashCourse === 'use') return hashCourse
     const stored = localStorage.getItem(STORAGE_KEY)
     return stored === 'use' ? 'use' : 'understand'
   })
