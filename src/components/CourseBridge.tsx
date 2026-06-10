@@ -41,6 +41,7 @@ export const CourseBridge: React.FC<CourseBridgeProps> = ({ target, blurb }) => 
       <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{blurb}</p>
       <button
         onClick={go}
+        aria-label={`${heading}: ${targetLabel}`}
         className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amber-700 dark:text-amber-300 transition-colors hover:text-amber-600 dark:hover:text-amber-200"
       >
         {targetLabel} <span aria-hidden="true">→</span>
