@@ -18,6 +18,9 @@ const DifficultyContext = createContext<DifficultyContextValue>({
 
 export function DifficultyProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<DifficultyMode>(() => {
+    // A track in the URL hash (new or legacy format) wins over the stored preference.
+    const hashMode = window.location.hash.match(/^#\/(?:(?:understand|use)\/)?(technical|business)(?:\/|$)/)?.[1]
+    if (hashMode === 'technical' || hashMode === 'business') return hashMode
     const stored = localStorage.getItem(STORAGE_KEY)
     return stored === 'business' ? 'business' : 'technical'
   })

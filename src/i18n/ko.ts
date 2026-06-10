@@ -312,6 +312,8 @@ export const ko: DeepPartial<Translation> = {
           { title: '규제', tagline: 'EU AI Act와 글로벌 프레임워크', detail: '규제 요구사항이 모델 개발과 배포 방식을 형성.', examples: ['EU AI Act (2025-2027), Biden Executive Order, 중국 AI 규칙'] },
         ],
       },
+      bridgeToTools: '누가 모델을 만드는지 알았습니다. 반대편 질문: 이 제품들 중 무엇을 매일 사용해야 할까요?',
+      bridgeToToolsBusiness: '주요 기업들을 알았습니다. 이제 그들의 도구 중 무엇이 우리 팀에 맞는지 — 그리고 고르는 법을 보세요.',
     },
     evaluation: {
       // From legacy: src/modules/evaluation/translations.ts → measuringKo
@@ -938,12 +940,14 @@ export const ko: DeepPartial<Translation> = {
           { name: '에이전틱 업무 앱', tagline: '코드가 아닌 사무 업무를 위임', description: '같은 에이전틱 루프를 코드 대신 문서, 스프레드시트, 리서치, 워크플로우에 적용합니다. 작업을 위임하면 에이전트가 파일과 앱을 오가며 처리하고, 당신은 결과를 감독합니다.', when: '리서치와 종합, 보고서 초안, 데이터 정리, 다중 문서 작업.', tools: 'Amazon Quick Desktop, Claude Cowork' },
         ],
         axisNote: '지도 뒤의 패턴: 챗에서 에이전트로 갈수록 도구는 답하기를 멈추고 실행하기 시작합니다. 자율성이 클수록 당신의 일은 쓰기에서 검토하기로 옮겨갑니다.',
+        bridgeBlurb: '이 도구들 뒤의 모델을 실제로 누가 만드는지 — 그리고 왜 어떤 것은 오픈이고 어떤 것은 클로즈드인지 궁금하신가요?',
       },
       agenticLoop: {
         title: '2. 에이전틱 도구의 해부학',
         intro: '에이전틱 코딩 도구에 작업을 맡기면 실제로 무슨 일이 일어날까요? 아래 세션을 실행해 보세요 — Claude Code 실행의 충실한 시뮬레이션입니다. 루프를 관찰하세요: 이해 → 계획 → 행동 → 검증.',
         stepNote: '각 명령은 에이전틱 루프의 한 턴입니다. 에이전트가 완료를 보고하기 전에 자기 작업을 스스로 확인하는 것에 주목하세요.',
         takeaway: '이 루프 — 계획, 행동, 검증, 반복 — 는 코드를 수정하든 스프레드시트를 수정하든 모든 에이전틱 도구의 시그니처입니다. 잘 사용하는 기술은 대부분 명확한 작업을 작성하고 올바른 체크포인트에서 검토하는 기술입니다.',
+        bridgeBlurb: '생각 → 행동 → 검증 루프 안에는 실제 작동 원리가 있습니다 — 함수 호출, MCP, 에이전트 디자인 패턴. 어떻게 작동하는지 보세요.',
       },
       choosingStack: {
         title: '3. 나의 도구 스택 고르기',
@@ -969,6 +973,7 @@ export const ko: DeepPartial<Translation> = {
           { name: '개발자 AI 도구', tagline: '엔지니어링 팀의 파워 툴', description: '엔지니어 감독하에 실제 코드를 작성하고 변경하는 에이전트입니다. 직접 다룰 필요는 없지만 개발팀이 이 도구로 훨씬 빠르게 출시할 수 있다는 것을 알고 그에 맞게 예산을 잡아야 합니다.', when: '엔지니어링 작업: 기능, 버그 수정, 코드 현대화. (개발자가 운전하고, 당신은 지원하고 측정합니다.)', tools: 'Claude Code, Kiro CLI, GitHub Copilot' },
         ],
         axisNote: '패턴: 챗 어시스턴트는 답하고, 에이전틱 도구는 실행합니다. 도구가 더 많이 할수록 구성원의 일은 직접 수행에서 명세와 검토로 옮겨갑니다 — 이것이 관리해야 할 진짜 워크플로우 변화입니다.',
+        bridgeBlurb: '이 도구들 뒤에 있는 회사들과, 그들의 전략이 비즈니스에 어떤 의미인지 알고 싶으신가요?',
       },
       delegation: {
         title: '2. AI가 일하는 모습 지켜보기',

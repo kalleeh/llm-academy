@@ -1,6 +1,7 @@
 import { SimulatedTerminal } from '../../components/SimulatedTerminal'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
 import { useTranslation } from '../../i18n'
+import { CourseBridge } from '../../components/CourseBridge'
 
 // Terminal content stays English by convention (matches PipelineSection).
 const TERMINAL_STEPS: TerminalStep[] = [
@@ -40,6 +41,7 @@ export const AgenticLoopSection: React.FC = () => {
       <p className="mb-4 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.stepNote}</p>
       <SimulatedTerminal steps={TERMINAL_STEPS} title="claude-code — fix CSV export bug" />
       <p className="mt-4 max-w-2xl rounded-lg border border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 p-4 text-sm text-zinc-700 dark:text-zinc-300">{c.takeaway}</p>
+      <CourseBridge target="agents" blurb={c.bridgeBlurb} />
     </section>
   )
 }

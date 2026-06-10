@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, useEffect, useRef, useCallback, useMemo, startTransition } from 'react'
 import { useDifficulty } from './DifficultyContext'
 import { useCourse, type Course } from './CourseContext'
+import { MODULES, type ModuleId, type Persona } from './registry'
 import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i18n'
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
@@ -25,32 +26,6 @@ const AgentsModule = lazy(() => import('./modules/AgentsModule').then(m => ({ de
 const FineTuningModule = lazy(() => import('./modules/FineTuningModule').then(m => ({ default: m.FineTuningModule })))
 const AIInOrgModule = lazy(() => import('./modules/AIInOrgModule').then(m => ({ default: m.AIInOrgModule })))
 const ToolsLandscapeModule = lazy(() => import('./modules/ToolsLandscapeModule').then(m => ({ default: m.ToolsLandscapeModule })))
-
-type Persona = 'technical' | 'business'
-
-type ModuleId = 'ai-problem' | 'data-foundations' | 'tokens' | 'transformer' | 'training' | 'llm-data' | 'alignment' | 'architecture' | 'solution' | 'evaluation' | 'quantization' | 'inference' | 'industry' | 'embeddings' | 'prompting' | 'agents' | 'ai-in-org' | 'fine-tuning' | 'tools-landscape'
-
-const modules: { id: ModuleId; label: string; businessLabel?: string; course: Course; personas: Persona[] }[] = [
-  { id: 'ai-problem', label: "What's an AI Problem?", course: 'understand', personas: ['technical', 'business'] },
-  { id: 'data-foundations', label: 'Data Foundations', businessLabel: 'Why Data Quality Matters', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'tokens', label: 'Tokens & Tokenizers', course: 'understand', personas: ['technical'] },
-  { id: 'transformer', label: 'The Transformer', course: 'understand', personas: ['technical'] },
-  { id: 'training', label: 'Training From Scratch', course: 'understand', personas: ['technical'] },
-  { id: 'llm-data', label: 'Data for LLM Training', course: 'understand', personas: ['technical'] },
-  { id: 'alignment', label: 'Alignment & Safety', businessLabel: 'Trust & Safety', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'architecture', label: 'Architecture Decisions', course: 'understand', personas: ['technical'] },
-  { id: 'solution', label: 'From Problem to Solution', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'evaluation', label: 'Evaluation & Benchmarks', businessLabel: 'How to Know If It Works', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'quantization', label: 'Quantization & Formats', course: 'understand', personas: ['technical'] },
-  { id: 'inference', label: 'Inference & Deployment', course: 'understand', personas: ['technical'] },
-  { id: 'industry', label: 'The Industry Map', businessLabel: 'Who Makes What', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'embeddings', label: 'Embeddings & Vector Search', businessLabel: 'Search & Knowledge Retrieval', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'prompting', label: 'Prompt Engineering', businessLabel: 'How to Talk to AI', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'agents', label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'ai-in-org', label: 'AI in Your Organization', course: 'understand', personas: ['technical', 'business'] },
-  { id: 'fine-tuning', label: 'Fine-Tuning Hands-On', course: 'understand', personas: ['technical'] },
-  { id: 'tools-landscape', label: 'AI Tools Landscape', course: 'use', personas: ['technical', 'business'] },
-]
 
 const moduleComponents: Record<ModuleId, React.FC> = {
   'ai-problem': AIProblemModule,
@@ -81,7 +56,7 @@ function ModuleNavigation({
 }: {
   activeModule: ModuleId
   onNavigate: (id: ModuleId) => void
-  visibleModules: typeof modules
+  visibleModules: typeof MODULES
 }) {
   const activeIndex = navModules.findIndex((m) => m.id === activeModule)
   const prev = activeIndex > 0 ? navModules[activeIndex - 1] : null
@@ -156,7 +131,7 @@ function parseHash(): { course?: Course; module?: ModuleId; track?: Persona } {
   const parts = hash.split('/')
   const validCourses = ['understand', 'use'] as const
   const validTracks = ['technical', 'business'] as const
-  const validModules = modules.map((m) => m.id)
+  const validModules = MODULES.map((m) => m.id)
   const result: { course?: Course; module?: ModuleId; track?: Persona } = {}
 
   // New format: <course>/<track>/<module>
@@ -202,7 +177,7 @@ function App() {
   const ActiveComponent = moduleComponents[activeModule]
 
   const visibleModules = useMemo(
-    () => modules.filter((m) => m.course === course && m.personas.includes(mode)),
+    () => MODULES.filter((m) => m.course === course && m.personas.includes(mode)),
     [course, mode],
   )
 
@@ -244,14 +219,6 @@ function App() {
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [course, setCourse, mode, activeModule, toggleMode])
-
-  // On initial load, apply course + track from hash
-  useEffect(() => {
-    const { course: hashCourse, track } = parseHash()
-    if (hashCourse && hashCourse !== course) setCourse(hashCourse)
-    if (track && track !== mode) toggleMode()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const navigateTo = useCallback(
     (id: ModuleId) => {
@@ -483,7 +450,7 @@ function App() {
           {showReview ? (
             <SpacedReview
               onNavigateToModule={(moduleId) => {
-                const target = modules.find((m) => m.id === moduleId)
+                const target = MODULES.find((m) => m.id === moduleId)
                 if (target) navigateTo(target.id)
               }}
             />
