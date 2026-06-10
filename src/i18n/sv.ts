@@ -1129,7 +1129,7 @@ export const sv: DeepPartial<Translation> = {
           { name: 'Granskningsnormer för AI-författad kod', tagline: 'Författaren är ansvarig, inte modellen', description: 'Kom uttryckligen överens: AI-genererad kod får samma granskningskrav som handskriven kod, och människan som levererade den äger den. Inga "AI:n skrev den"-ursäkter. Vissa team flaggar AI-tunga PR:er så att granskare kalibrerar uppmärksamheten.' },
           { name: 'Mät effekten ärligt', tagline: 'Tid sparad, inte rader genererade', description: 'Antal rader AI-kod är ett fåfängemått — det kan betyda fart eller svullnad. Spåra det som spelar roll: cykeltid, tid till första PR för nyanställda, hur mycket av en uppgift som blev "granska" i stället för "skriva". Var ärlig om var den inte hjälper.' },
         ],
-        bridgeBlurb: 'Personliga och teamvanor är grundnivån. Zooma ut: hur omformar denna autonomi roller, beslutsrätt och risk i en hel organisation?',
+        bridgeBlurb: 'Era granskningsnormer är teamets sista försvarslinje. Gå djupare in på hur modeller faktiskt anpassas — och var skyddsräcken för tillit och säkerhet egentligen sitter.',
       },
       aiShapedTasks: {
         title: '1. Hitta dina AI-formade uppgifter',

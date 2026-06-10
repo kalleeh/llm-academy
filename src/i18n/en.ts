@@ -2058,7 +2058,7 @@ const modules = {
         },
       ],
       bridgeBlurb:
-        'Personal and team habits are the ground level. Zoom out: how does this autonomy reshape roles, decision rights, and risk across a whole organization?',
+        'Your review norms are the team\'s last line of defense. Go deeper on how models are actually aligned — and where trust-and-safety guardrails really live.',
     },
     // Business: 1. Find Your AI-Shaped Tasks
     aiShapedTasks: {

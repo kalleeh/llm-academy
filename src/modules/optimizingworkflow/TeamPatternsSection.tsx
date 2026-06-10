@@ -40,7 +40,7 @@ export const TeamPatternsSection: React.FC = () => {
           </div>
         ))}
       </div>
-      <CourseBridge target="ai-in-org" blurb={c.bridgeBlurb} />
+      <CourseBridge target="alignment" blurb={c.bridgeBlurb} />
     </section>
   )
 }
