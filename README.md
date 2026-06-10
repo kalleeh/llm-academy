@@ -1,13 +1,16 @@
 # LLM Academy
 
-An interactive web app that teaches AI, ML, and Large Language Models through 18 modules with simulated terminals, filesystem explorers, interactive visualizations, and knowledge checks.
+An interactive web app that teaches AI, ML, and Large Language Models across two courses — **Understand AI** (how the technology works) and **Use AI** (how to operate the tools) — with simulated terminals, filesystem explorers, interactive visualizations, and knowledge checks.
 
 **Live:** [llm-academy.gurum.se](https://llm-academy.gurum.se)
 
 ## Features
 
-- **Two learning tracks:** Technical (for developers/engineers) and Business (for non-technical professionals)
-- **18 modules** covering the full AI/ML/LLM stack — from "What's an AI Problem?" to "Fine-Tuning Hands-On"
+- **Two courses:** *Understand AI* (18 modules, how it works) and *Use AI* (6 modules, how to operate the tools), switchable in the sidebar
+- **Two learning tracks** within each course: Technical (for developers/engineers) and Business (for non-technical professionals)
+- **Understand AI** covers the full AI/ML/LLM stack — from "What's an AI Problem?" to "Fine-Tuning Hands-On"
+- **Use AI** covers applied fluency — AI Tools Landscape, Working With AI, Optimizing Your Workflow, Agentic Coding, Agentic Work, and Generative AI Beyond Text
+- **CourseBridges:** curated cross-course links connecting "do it" ⟷ "understand it"
 - **Interactive elements:** simulated terminals, file explorers, decision trees, cost calculators, step-through demos
 - **Learning science:** spaced repetition review, retrieval practice quizzes, self-explanation prompts
 - **3 languages:** English, Swedish (Svenska), Korean (한국어)
