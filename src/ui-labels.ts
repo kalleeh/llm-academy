@@ -107,6 +107,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     agents: { label: 'Agents & Tool Use', businessLabel: 'AI Assistants That Take Action', subtitle: 'How LLMs call tools, the protocols that connect them, and patterns for reliable agents.', businessSubtitle: 'From chatbots to AI assistants that actually get things done.' },
     'ai-in-org': { label: 'AI in Your Organization', subtitle: 'How autonomy changes roles, decisions, and risk.', businessSubtitle: 'The technology works. The harder question: is your organization ready?' },
     'fine-tuning': { label: 'Fine-Tuning Hands-On', subtitle: 'From deciding whether to fine-tune, through data prep, to a complete LoRA training run.' },
+    'tools-landscape': { label: 'AI Tools Landscape', subtitle: 'Chat assistants, agentic work apps, coding agents — what tool for what job, and why.', businessSubtitle: 'The AI tools your teams should be using — and how to pick the right one for each job.' },
   },
   sv: {
     'ai-problem': { label: 'Vad är ett AI-problem?', subtitle: 'Inte alla problem behöver en LLM — eller ens ML. Lär dig klassificera problem och välja rätt verktyg.', businessSubtitle: 'Inte allt behöver AI. Lär dig när det hjälper och när det inte gör det.' },
@@ -127,6 +128,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     agents: { label: 'Agenter & Verktyg', businessLabel: 'AI-assistenter som agerar', subtitle: 'Hur LLM:er anropar verktyg, protokollen som kopplar ihop dem och mönster för pålitliga agenter.', businessSubtitle: 'Från chattbotar till AI-assistenter som faktiskt får saker gjorda.' },
     'ai-in-org': { label: 'AI i din organisation', subtitle: 'Hur autonomi förändrar roller, beslut och risk.', businessSubtitle: 'Tekniken fungerar. Den svårare frågan: är din organisation redo?' },
     'fine-tuning': { label: 'Finjustering i praktiken', subtitle: 'Från beslut om finjustering, genom dataförberedelse, till en komplett LoRA-träningskörning.' },
+    'tools-landscape': { label: 'AI-verktygslandskapet', subtitle: 'Chattassistenter, agentiska arbetsappar, kodagenter — vilket verktyg för vilket jobb, och varför.', businessSubtitle: 'AI-verktygen dina team borde använda — och hur man väljer rätt verktyg för varje jobb.' },
   },
   ko: {
     'ai-problem': { label: 'AI 문제란?', subtitle: '모든 문제에 LLM이 필요한 것은 아닙니다. 문제를 분류하고 올바른 도구를 선택하는 법을 배우세요.', businessSubtitle: '모든 것에 AI가 필요한 것은 아닙니다. 언제 도움이 되고 언제 안 되는지 배우세요.' },
@@ -147,5 +149,6 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     agents: { label: '에이전트 & 도구 사용', businessLabel: '행동하는 AI 비서', subtitle: 'LLM이 도구를 호출하는 방법, 연결 프로토콜, 신뢰할 수 있는 에이전트 패턴.', businessSubtitle: '챗봇에서 실제로 일을 처리하는 AI 비서까지.' },
     'ai-in-org': { label: '조직에서의 AI', subtitle: '자율성이 역할, 결정, 위험을 어떻게 변화시키는지.', businessSubtitle: '기술은 작동합니다. 더 어려운 질문: 조직이 준비되었나요?' },
     'fine-tuning': { label: '파인튜닝 실습', subtitle: '파인튜닝 결정부터 데이터 준비, 완전한 LoRA 학습 실행까지.' },
+    'tools-landscape': { label: 'AI 도구 지형도', subtitle: '챗 어시스턴트, 에이전틱 업무 앱, 코딩 에이전트 — 어떤 작업에 어떤 도구를, 그리고 왜.', businessSubtitle: '팀이 사용해야 할 AI 도구들 — 그리고 각 작업에 맞는 도구를 고르는 법.' },
   },
 }

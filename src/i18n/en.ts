@@ -362,6 +362,11 @@ const moduleLabels = {
     label: 'Fine-Tuning Hands-On',
     subtitle: 'From deciding whether to fine-tune, through data prep, to a complete LoRA training run.',
   },
+  'tools-landscape': {
+    label: 'AI Tools Landscape',
+    subtitle: 'Chat assistants, agentic work apps, coding agents — what tool for what job, and why.',
+    businessSubtitle: 'The AI tools your teams should be using — and how to pick the right one for each job.',
+  },
 } as const
 
 /**
