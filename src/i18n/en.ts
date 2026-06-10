@@ -386,6 +386,11 @@ const moduleLabels = {
     subtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
     businessSubtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.',
   },
+  'genai-beyond-text': {
+    label: 'Generative AI Beyond Text',
+    subtitle: 'Image, voice, video, and multimodal — the models and APIs, and how to integrate them.',
+    businessSubtitle: 'Image, voice, video, and multimodal — what each is for, the tools, and using them responsibly.',
+  },
 } as const
 
 /**

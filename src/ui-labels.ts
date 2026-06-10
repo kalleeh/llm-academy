@@ -118,6 +118,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'optimizing-workflow': { label: 'Optimizing Your Workflow', subtitle: 'Where AI fits your day, reusable setups, team patterns — from one-off prompts to a system.', businessSubtitle: 'Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.' },
     'agentic-coding': { label: 'Agentic Coding', subtitle: 'Coding with an agent as your pair — task decomposition, context & memory, review loops, MCP.' },
     'agentic-work': { label: 'Agentic Work', subtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.', businessSubtitle: 'AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.' },
+    'genai-beyond-text': { label: 'Generative AI Beyond Text', subtitle: 'Image, voice, video, and multimodal — the models and APIs, and how to integrate them.', businessSubtitle: 'Image, voice, video, and multimodal — what each is for, the tools, and using them responsibly.' },
   },
   sv: {
     'ai-problem': { label: 'Vad är ett AI-problem?', subtitle: 'Inte alla problem behöver en LLM — eller ens ML. Lär dig klassificera problem och välja rätt verktyg.', businessSubtitle: 'Inte allt behöver AI. Lär dig när det hjälper och när det inte gör det.' },
@@ -143,6 +144,7 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'optimizing-workflow': { label: 'Optimera ditt arbetsflöde', subtitle: 'Var AI passar din dag, återanvändbara upplägg, teammönster — från enstaka prompts till ett system.', businessSubtitle: 'Hitta dina AI-formade uppgifter, gör engångsjobb till system och rulla ut det till teamet.' },
     'agentic-coding': { label: 'Agentisk kodning', subtitle: 'Att koda med en agent som parprogrammerare — uppgiftsuppdelning, kontext & minne, granskningsloopar, MCP.' },
     'agentic-work': { label: 'Agentiskt arbete', subtitle: 'AI-assistenter som utför uppgifter åt dig — delegera flerstegsarbete, övervaka och sätt skyddsräcken.', businessSubtitle: 'AI-assistenter som utför uppgifter åt dig — delegera flerstegsarbete, övervaka och sätt skyddsräcken.' },
+    'genai-beyond-text': { label: 'Generativ AI bortom text', subtitle: 'Bild, röst, video och multimodalt — modellerna och API:erna, och hur man integrerar dem.', businessSubtitle: 'Bild, röst, video och multimodalt — vad varje sak är till för, verktygen och hur man använder dem ansvarsfullt.' },
   },
   ko: {
     'ai-problem': { label: 'AI 문제란?', subtitle: '모든 문제에 LLM이 필요한 것은 아닙니다. 문제를 분류하고 올바른 도구를 선택하는 법을 배우세요.', businessSubtitle: '모든 것에 AI가 필요한 것은 아닙니다. 언제 도움이 되고 언제 안 되는지 배우세요.' },
@@ -168,5 +170,6 @@ export const MODULE_LABELS: Record<Language, Record<string, { label: string; bus
     'optimizing-workflow': { label: '워크플로우 최적화', subtitle: 'AI가 하루에 어디에 맞는지, 재사용 가능한 설정, 팀 패턴 — 일회성 프롬프트에서 시스템으로.', businessSubtitle: 'AI에 맞는 작업을 찾고, 일회성을 시스템으로 만들고, 팀에 확산하기.' },
     'agentic-coding': { label: '에이전틱 코딩', subtitle: '에이전트를 짝으로 코딩하기 — 작업 분해, 컨텍스트와 메모리, 검토 루프, MCP.' },
     'agentic-work': { label: '에이전틱 워크', subtitle: '당신을 위해 작업을 수행하는 AI 어시스턴트 — 다단계 작업 위임, 감독, 가드레일 설정.', businessSubtitle: '당신을 위해 작업을 수행하는 AI 어시스턴트 — 다단계 작업 위임, 감독, 가드레일 설정.' },
+    'genai-beyond-text': { label: '텍스트를 넘어선 생성형 AI', subtitle: '이미지, 음성, 비디오, 멀티모달 — 모델과 API, 그리고 통합하는 법.', businessSubtitle: '이미지, 음성, 비디오, 멀티모달 — 각각의 용도, 도구, 그리고 책임감 있게 사용하는 법.' },
   },
 }
