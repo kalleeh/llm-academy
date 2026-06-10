@@ -1373,5 +1373,200 @@ export const sv: DeepPartial<Translation> = {
           'Skyddsräcken på en agent är början. Den större frågan — roller, beslutsrätt och varför ~40 % av agentinitiativen kör fast på icke-tekniska frågor — är organisatorisk. Gå dit.',
       },
     },
+    // MT
+    genaibeyondtext: {
+      modalitiesModels: {
+        title: '1. Modaliteterna och deras modeller',
+        intro:
+          'Bortom text spänner generativ AI över fyra modaliteter, var och en med sin egen modellfamilj och sina egenheter. Klicka på var och en för att se hur den fungerar under huven och vilka modeller som är representativa 2026.',
+        modelsLabel: 'Representativa modeller:',
+        items: [
+          {
+            name: 'Bild',
+            tagline: 'Diffusionsmodeller',
+            description:
+              'Text-till-bild-modeller arbetar genom avbrusning: de startar från slumpmässigt brus och förfinar det iterativt mot en bild som matchar prompten, styrda av en textkodare. De kan styras via prompter, referensbilder, masker (inpainting) och strukturkartor. Snabba, billiga, mogna.',
+            models: 'Stable Diffusion 3.5, FLUX, Amazon Nova Canvas, Google Imagen, GPT Image',
+          },
+          {
+            name: 'Röst & ljud',
+            tagline: 'TTS, STT och tal-till-tal',
+            description:
+              'Tre uppgifter: text-till-tal (TTS) syntetiserar naturliga röster; tal-till-text (STT) transkriberar; och nyare tal-till-tal-modeller konverserar direkt i ljud med låg latens och bevarad tonfall. Röstkloning är en TTS-funktion — och ett rättsligt minfält.',
+            models: 'Whisper (STT), ElevenLabs (TTS/klon), Amazon Nova Sonic, OpenAI Realtime',
+          },
+          {
+            name: 'Video',
+            tagline: 'Diffusion över tid',
+            description:
+              'Videomodeller utvidgar bilddiffusion till tidsdimensionen och genererar sammanhängande bildrutor från en text- eller bildprompt. Fortfarande den mest beräkningskrävande och minst styrbara modaliteten — kliplängderna är korta och konsistens mellan tagningar är det svåra problemet.',
+            models: 'OpenAI Sora, Google Veo, Runway Gen-3, Amazon Nova Reel',
+          },
+          {
+            name: 'Multimodal',
+            tagline: 'En modell, många in- och utdata',
+            description:
+              'Frontlinjens LLM:er accepterar bilder (och alltmer ljud/video) tillsammans med text och resonerar tvärs över dem — "vad är fel i det här diagrammet?", "sammanfatta den här skärmdumpen." Samma modell som chattar kan se. Det är här mest affärsvärde landar, eftersom det inte kräver någon ny pipeline.',
+            models: 'GPT-5.x (omni), Gemini 3.x, Claude (vision), Llama 4 (vision)',
+          },
+        ],
+        takeaway:
+          'Bild och röst är mogna och billiga; video är frontlinjen; multimodal förståelse (en chattmodell som kan se och höra) är i det tysta det mest användbara i vardagen. Matcha modaliteten till uppgiften innan du börjar shoppa efter en modell.',
+      },
+      multimodalAPI: {
+        title: '2. Att anropa en multimodal modell',
+        intro:
+          'Under produkternas gränssnitt är detta vanliga HTTP-API:er: du skickar innehållsblock och får innehåll (eller en referens) tillbaka. Kör sessionen för att se hur förfrågan/svar ser ut för ett vision-anrop och ett bildgenererings-anrop.',
+        stepNote:
+          'Två anrop: först läser en vision-modell en bild och returnerar strukturerad JSON; sedan returnerar en text-till-bild-modell en bildreferens. Notera raden om kostnad/latens — mediaanrop är dyrare och långsammare än text.',
+        takeaway:
+          'Multimodalt är "bara ett API": innehållsblock in, innehåll eller en referens ut, debiterat per bild/sekund/token. När du väl ser förfrågans form är det samma ingenjörsarbete att integrera bild eller vision som du redan gör för text — plus uppmärksamhet på kostnad, latens och att lagra den binära utdatan.',
+        selfExplainPrompt:
+          'Din app låter användare fotografera ett kvitto och få radposterna som strukturerad data. Vilken modalitet och ungefär vilken API-form skulle du använda, och vad skulle du vara vaksam på gällande kostnad och tillförlitlighet?',
+        selfExplainAnswer:
+          'En multimodal/vision-modell: skicka bilden plus en prompt som ber om radposterna som JSON (helst med ett strikt schema / läge för strukturerad utdata), få JSON tillbaka. Var vaksam på: kostnad och latens per bild (cacha eller batcha där det går), felmoder vid suddiga/roterade foton (validera JSON:en, be om konfidens, fall tillbaka på en uppmaning att fota om), och lita aldrig blint på extraktionen för något ekonomiskt — visa användaren det tolkade resultatet ovanpå bilden för en snabb bekräftelse. Det är samma förfrågan/svar-ingenjörsarbete som ett textanrop, med bild som indata och striktare validering av utdata.',
+      },
+      choosingIntegrating: {
+        title: '3. Att välja och integrera',
+        intro:
+          'Att välja och leverera en kapacitet för generativ media har avvägningar som text inte har. Klicka på varje övervägande.',
+        items: [
+          {
+            name: 'Hostat API kontra egen drift',
+            tagline: 'Hyr frontlinjen, eller kör öppna vikter',
+            description:
+              'Hostade API:er (Bedrock, OpenAI, fal) ger dig de bästa modellerna utan drift och med betalning per användning; öppna vikter (SD, Flux, Whisper) körs på dina egna GPU:er för datakontroll och volymekonomi. De flesta team börjar hostat och driftar bara de högvolymsmässiga, stabila arbetslasterna själva.',
+          },
+          {
+            name: 'Latens, kostnad, kvalitet',
+            tagline: 'Välj två, justera den tredje',
+            description:
+              'Ett fyra sekunder långt videoklipp kan kosta dollar och ta minuter; en bild kostar ören och tar sekunder; vision-på-text ligger nära chattkostnad. Budgetera per tillgång, cacha aggressivt, generera i den minsta storlek/längd som fungerar och reservera de dyra modellerna för de stunder som betyder något.',
+          },
+          {
+            name: 'Säkerhet & ursprung',
+            tagline: 'Vattenmärk och märk ut',
+            description:
+              'Generativ media behöver ursprungsspårning: C2PA-innehållsmärkning och osynliga vattenmärken (t.ex. SynthID) markerar AI-ursprung, och de flesta leverantörer fäster dem. Du ansvarar för att informera, för att inte generera otillåtet innehåll och för att respektera rättigheter till utseende/röst.',
+          },
+          {
+            name: 'Utvärdering är svårare',
+            tagline: 'Ingen enda korrekt utdata',
+            description:
+              'Det finns inget exaktmatchande mått för "en bra bild" eller "en naturlig röst." Luta dig mot mänsklig granskning för kvalitet, automatiska kontroller för policy/säkerhet och A/B- eller preferenstester för modellval. Behandla utvärdering som något kontinuerligt, inte ett engångsbenchmark.',
+          },
+        ],
+        bridgeBlurb:
+          'Du känner till modaliteterna och hur man anropar dem. Zooma ut till aktörerna: vilka bygger dessa bild-, röst- och videomodeller, öppet kontra slutet, och hur ekosystemet hänger ihop.',
+      },
+      modalityUses: {
+        title: '1. Vad varje modalitet är till för',
+        intro:
+          'Generativ AI är inte bara chatt. Fyra modaliteter låser var och en upp olika arbete — knepet är att veta vilken uppgift var och en är bra på. Klicka på var och en.',
+        exampleLabel: 'Till exempel:',
+        items: [
+          {
+            name: 'Bild',
+            tagline: 'Visuellt på begäran',
+            description:
+              'Generera och redigera bilder utifrån en beskrivning: marknadsföringsmaterial, sociala inlägg, produktmockuper, presentationsgrafik, annonsvarianter. Mogen och billig — ofta det första stället där ett team ser verklig tidsbesparing.',
+            example: 'Snickra ihop 20 varumärkesanpassade annonsvarianter för A/B-testning på minuter, i stället för en dag med en designer.',
+          },
+          {
+            name: 'Röst & ljud',
+            tagline: 'Tala och lyssna i stor skala',
+            description:
+              'Förvandla text till naturligt tal (berättarröst, IVR, tillgänglighet) och tal till text (mötesanteckningar, samtalsutskrifter, undertexter). Nyare verktyg för röstkonversationer i realtid för support.',
+            example: 'Lägg till en naturligt klingande berättarröst på en utbildningsvideo på åtta språk utan en studio.',
+          },
+          {
+            name: 'Video',
+            tagline: 'Rörliga bilder från en prompt',
+            description:
+              'Generera korta klipp, animera stillbilder eller klipp ihop långt material till höjdpunkter. Kraftfullt men fortfarande den skrovligaste kanten — bäst för korta sociala/marknadsklipp och utkast, med en människa som färdigställer klippningen.',
+            example: 'Förvandla ett en timme långt webbinarium till tio sociala klipp på 30 sekunder med undertexter, redo för granskning.',
+          },
+          {
+            name: 'Multimodal',
+            tagline: 'AI som ser och hör',
+            description:
+              'En chattassistent som också tar emot bilder, ljud och dokument: fotografera en whiteboard och få anteckningarna, släpp in en skärmdump och fråga vad som är fel, ge den en samtalsinspelning och få åtgärdspunkterna.',
+            example: 'Fotografera en konkurrents hylla och be om en prydlig tabell över deras produkter och priser.',
+          },
+        ],
+        takeaway:
+          'Bild och röst är redo för vardagsarbete; video är utmärkt för utkast; multimodal "AI som kan se" är den tysta arbetshästen. Börja med den modalitet som passar en uppgift du redan gör ofta.',
+      },
+      pickTheTool: {
+        title: '2. Välj rätt verktyg för uppgiften',
+        intro:
+          'Fyra verkliga förfrågningar. För var och en: vilken modalitet, vilken sorts verktyg och den enda sak att vara vaksam på. Stega igenom.',
+        recommendLabel: 'Bäst lämpat:',
+        watchLabel: 'Se upp:',
+        scenarios: [
+          {
+            request: '"Vi behöver 30 produktbilder i olika miljöer till lanseringssidan — snabbt och varumärkesanpassat."',
+            pick: 'Bildgenerering (eller bakgrundsredigering/inpainting)',
+            why: 'Bildverktyg genererar och redigerar varumärkesanpassade bilder på minuter till nästan noll kostnad — idealiskt för volym och varianter.',
+            watch: 'Kontrollera varumärkesriktigheten och undvik att antyda riktiga foton av en fysisk produkt du ännu inte levererat; informera om AI-bilder där det krävs.',
+          },
+          {
+            request: '"Förvandla vår 60 minuter långa webbinarieinspelning till korta klipp för LinkedIn."',
+            pick: 'Videoverktyg (höjdpunktsextraktion + undertextning)',
+            why: 'Videoverktyg kan hitta höjdpunkter och klippa undertextade klipp, vilket förvandlar en eftermiddags redigering till en granskningsrunda.',
+            watch: 'En människa bör godkänna klippen — automatiska höjdpunkter missar nyanser och kan klippa ett citat ur sitt sammanhang.',
+          },
+          {
+            request: '"Vi vill ha en naturlig berättarröst till våra hjälpvideor på engelska, spanska och tyska."',
+            pick: 'Text-till-tal (flerspråkig)',
+            why: 'Modern TTS producerar naturlig flerspråkig berättarröst utan en studio och är lätt att generera om när manus ändras.',
+            watch: 'Klona bara en specifik persons röst med deras samtycke; för varumärkesröster, använd licensierade/syntetiska röster och håll rättigheterna tydliga.',
+          },
+          {
+            request: '"Personalen fotograferar papperskvitton; vi vill ha beloppen och datumen som ett kalkylblad."',
+            pick: 'Multimodal / vision-modell',
+            why: 'En vision-modell läser fotona och returnerar strukturerad data — ingen ny app, bara assistenten ditt team redan använder.',
+            watch: 'Verifiera extraherade siffror innan de når ekonomi; suddiga eller sneda foton orsakar fel, så behåll ett mänskligt bekräftelsesteg.',
+          },
+        ],
+        selfExplainPrompt:
+          'Välj en uppgift ditt team gör som involverar bilder, ljud eller video. Vilken modalitet passar, vilken sorts verktyg skulle du sträcka dig efter, och vad är den enda sak du skulle dubbelkolla innan du litar på utdatan?',
+        selfExplainAnswer:
+          'Exempel: "Vi skriver manuellt alt-text och sociala bildtexter för varje produktbild. Modalitet: multimodal/vision — ge bilden till en AI som kan se och be om alt-text plus tre bildtextalternativ i vår ton. Verktyg: vår befintliga multimodala assistent, inget nytt system. Dubbelkoll: riktighet och varumärkeston på ett urval innan vi kör i stor skala, och att inget hittar på en produktegenskap som bilden faktiskt inte visar."',
+      },
+      useResponsibly: {
+        title: '3. Använd det ansvarsfullt',
+        intro:
+          'Generativ media skapar risker som text sällan gör — utseende, vilseledning, varumärke. Fyra vanor håller dig trygg. Klicka på var och en.',
+        items: [
+          {
+            name: 'Informera & märk ut',
+            tagline: 'Säg när det är AI',
+            description:
+              'Märk AI-genererad media där din publik eller lagen förväntar sig det, och behåll ursprungsspårningen (C2PA-innehållsmärkning) intakt i stället för att skala bort den. Tyst AI-bild i ett nyhets- eller förtroendesammanhang är en ryktesrisk som bara väntar på att inträffa.',
+          },
+          {
+            name: 'Respektera rättigheter & utseende',
+            tagline: 'Klona inte det du inte äger',
+            description:
+              'Generera inte en verklig persons ansikte eller klona en röst utan samtycke, och var uppmärksam på anspråk kring träningsdata/stil. Använd licensierade eller syntetiska röster och modeller med tydliga kommersiella villkor — "det var AI" är inte ett försvar.',
+          },
+          {
+            name: 'Granska för varumärke & riktighet',
+            tagline: 'En människa godkänner',
+            description:
+              'Generativa verktyg producerar självsäkert felaktiga händer, förvanskad text-i-bilder eller ton som inte stämmer med varumärket. Behåll ett mänskligt godkännandesteg innan något kundvänt levereras — samma granskningsnivå som du skulle tillämpa på ett byråutkast.',
+          },
+          {
+            name: 'Tänk på kostnaden',
+            tagline: 'Video och ljud blir dyrt',
+            description:
+              'Bild är billigt, men videogenerering och stora batchjobb blir snabbt dyra. Sätt budgetar, generera i den storlek/längd du faktiskt behöver och mät kostnad per tillgång så att ett "snabbt experiment" inte blir en överraskningsfaktura.',
+          },
+        ],
+        bridgeBlurb:
+          'Du vet vad dessa verktyg gör och hur man använder dem väl. Nyfiken på vem som faktiskt bygger bild-, röst- och videomodellerna bakom dem — och hur företagen står sig? Se kartan.',
+      },
+    },
   },
 }
