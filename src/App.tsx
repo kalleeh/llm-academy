@@ -29,6 +29,7 @@ const ToolsLandscapeModule = lazy(() => import('./modules/ToolsLandscapeModule')
 const WorkingWithAIModule = lazy(() => import('./modules/WorkingWithAIModule').then(m => ({ default: m.WorkingWithAIModule })))
 const OptimizingWorkflowModule = lazy(() => import('./modules/OptimizingWorkflowModule').then(m => ({ default: m.OptimizingWorkflowModule })))
 const AgenticCodingModule = lazy(() => import('./modules/AgenticCodingModule').then(m => ({ default: m.AgenticCodingModule })))
+const AgenticWorkModule = lazy(() => import('./modules/AgenticWorkModule').then(m => ({ default: m.AgenticWorkModule })))
 
 const moduleComponents: Record<ModuleId, React.FC> = {
   'ai-problem': AIProblemModule,
@@ -53,6 +54,7 @@ const moduleComponents: Record<ModuleId, React.FC> = {
   'working-with-ai': WorkingWithAIModule,
   'optimizing-workflow': OptimizingWorkflowModule,
   'agentic-coding': AgenticCodingModule,
+  'agentic-work': AgenticWorkModule,
 }
 
 function ModuleNavigation({
