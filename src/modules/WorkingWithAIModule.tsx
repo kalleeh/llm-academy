@@ -6,6 +6,9 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatModelSeesSection } from './workingwithai/WhatModelSeesSection'
 import { IterationLoopSection } from './workingwithai/IterationLoopSection'
 import { PowerFeaturesSection } from './workingwithai/PowerFeaturesSection'
+import { BriefingBusiness } from './workingwithai/BriefingBusiness'
+import { VagueToValuableBusiness } from './workingwithai/VagueToValuableBusiness'
+import { MakeItStickBusiness } from './workingwithai/MakeItStickBusiness'
 
 const QUESTIONS: Question[] = [
   {
@@ -71,6 +74,9 @@ export const WorkingWithAIModule: React.FC = () => {
   if (mode === 'business') {
     return (
       <ModuleLayout moduleId="working-with-ai" title="Working With AI" subtitle="Brief it like a colleague, iterate like an editor — make great AI results your default.">
+        <BriefingBusiness />
+        <VagueToValuableBusiness />
+        <MakeItStickBusiness />
         <KnowledgeCheck moduleId="workingwithai-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
