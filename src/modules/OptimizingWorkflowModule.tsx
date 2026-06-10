@@ -6,6 +6,9 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { WhereAIFitsSection } from './optimizingworkflow/WhereAIFitsSection'
 import { ReusableSetupsSection } from './optimizingworkflow/ReusableSetupsSection'
 import { TeamPatternsSection } from './optimizingworkflow/TeamPatternsSection'
+import { AIShapedTasksBusiness } from './optimizingworkflow/AIShapedTasksBusiness'
+import { OneOffToSystemBusiness } from './optimizingworkflow/OneOffToSystemBusiness'
+import { RollItOutBusiness } from './optimizingworkflow/RollItOutBusiness'
 
 const QUESTIONS: Question[] = [
   {
@@ -71,6 +74,9 @@ export const OptimizingWorkflowModule: React.FC = () => {
   if (mode === 'business') {
     return (
       <ModuleLayout moduleId="optimizing-workflow" title="Optimizing Your Workflow" subtitle="Find your AI-shaped tasks, turn one-offs into systems, and roll it out to your team.">
+        <AIShapedTasksBusiness />
+        <OneOffToSystemBusiness />
+        <RollItOutBusiness />
         <KnowledgeCheck moduleId="optimizingworkflow-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
