@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Workspace } from '../../components/Workspace'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
 import type { TerminalStep } from '../../components/SimulatedTerminal'
@@ -54,7 +55,7 @@ const BASE_TREE = [
 export const RealSessionSection: React.FC = () => {
   const c = useTranslation().modules.agenticcoding.realSession
 
-  const snapshots: Record<number, WorkspaceSnapshot> = {
+  const snapshots = useMemo<Record<number, WorkspaceSnapshot>>(() => ({
     [-1]: { label: c.workspaceTitle, tree: BASE_TREE, info: c.snapshotInitial },
     [0]: { label: c.workspaceTitle, tree: BASE_TREE, info: c.snapshotMiddlewareSeen },
     [1]: { label: c.workspaceTitle, tree: [
@@ -71,7 +72,7 @@ export const RealSessionSection: React.FC = () => {
         { name: 'public.test.js', type: 'file', size: '0.6 KB' },
       ] },
       { name: 'package.json', type: 'file', size: '0.4 KB' },
-    ], info: c.snapshotEdited },
+    ], info: c.snapshotMiddlewareAdded },
     [2]: { label: c.workspaceTitle, tree: [
       { name: 'src', type: 'folder', children: [
         { name: 'app.js', type: 'file', size: '1.1 KB' },
@@ -103,7 +104,7 @@ export const RealSessionSection: React.FC = () => {
       ] },
       { name: 'package.json', type: 'file', size: '0.4 KB' },
     ], info: c.snapshotTested },
-  }
+  }), [c])
 
   return (
     <section aria-labelledby="real-session">

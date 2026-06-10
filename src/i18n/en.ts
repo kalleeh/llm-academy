@@ -2213,7 +2213,8 @@ const modules = {
         'Each command is one turn of the agentic loop. The agent reads the codebase before editing, writes a test for its own change, and runs the suite before declaring done.',
       snapshotInitial: 'Starting point: a small Express API with no rate limiting.',
       snapshotMiddlewareSeen: 'The agent has read the structure and located where middleware is wired in.',
-      snapshotEdited: 'New rateLimiter middleware added and wired into the app.',
+      snapshotMiddlewareAdded: 'New rateLimiter middleware file created — not yet wired into the routes.',
+      snapshotEdited: 'The rateLimiter is now wired into the public router.',
       snapshotTested: 'A regression test was added and the suite passes.',
       takeaway:
         'You supplied one sentence of intent and reviewed at checkpoints; the agent did the search, the edits, the test, and the verification. That division of labor — you specify and review, it executes and proves — is what working with a coding agent feels like.',
