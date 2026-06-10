@@ -727,6 +727,8 @@ const modules = {
         { id: 'regulation', title: 'Regulation & Safety', tagline: 'EU AI Act, safety requirements', detail: 'The EU AI Act is now in effect, classifying AI systems by risk level. High-risk systems (hiring, credit, law enforcement) face strict requirements. Foundation model providers must document training data, energy use, and safety testing. The US and China are developing parallel frameworks.', examples: ['EU AI Act (2024-2026 rollout)', 'NIST AI RMF', 'China interim AI rules', 'Frontier model safety commitments'] },
       ],
     },
+    bridgeToTools: 'You know who builds the models. The flip side: which of these products should YOU be using day to day?',
+    bridgeToToolsBusiness: 'You know the players. Now see which of their tools fit your teams — and how to pick.',
   },
   evaluation: {
     // Business: 1. How to Tell If Your AI Is Working
@@ -1569,6 +1571,7 @@ const modules = {
       ],
       axisNote:
         'The pattern behind the map: as you move from chat to agents, the tool stops answering and starts doing. The more autonomy, the more your job shifts from writing to reviewing.',
+      bridgeBlurb: 'Curious who actually builds the models behind these tools — and why some are open and some closed?',
     },
     // Tech: 2. Anatomy of an Agentic Tool
     agenticLoop: {
@@ -1578,6 +1581,7 @@ const modules = {
       stepNote: 'Each command is one turn of the agentic loop. Notice the agent checks its own work before reporting done.',
       takeaway:
         'This loop — plan, act, verify, repeat — is the signature of every agentic tool, whether it is editing code or a spreadsheet. The skill of using one well is mostly the skill of writing a clear task and reviewing at the right checkpoints.',
+      bridgeBlurb: 'That think → act → verify loop has real machinery inside — function calling, MCP, agent design patterns. See how it works.',
     },
     // Tech: 3. Choosing Your Stack
     choosingStack: {
@@ -1647,6 +1651,7 @@ const modules = {
       ],
       axisNote:
         'The pattern: chat assistants answer, agentic tools do. The more the tool does, the more your people shift from doing the work to specifying and reviewing it — that is the real workflow change to manage.',
+      bridgeBlurb: 'Want to know the companies behind these tools, and what their strategies mean for your business?',
     },
     // Business: 2. Watching an AI Do Work
     delegation: {

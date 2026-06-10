@@ -1,4 +1,4 @@
-import { translateQuestions, useLanguage } from '../i18n'
+import { translateQuestions, useLanguage, useTranslation } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { WhoBuiltWhatSection } from './industry/WhoBuiltWhatSection'
 import { OpenVsClosedSection } from './industry/OpenVsClosedSection'
@@ -10,6 +10,7 @@ import { WhereItsHeadingBusiness } from './industry/WhereItsHeadingBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
+import { CourseBridge } from '../components/CourseBridge'
 
 const QUESTIONS: Question[] = [
   {
@@ -55,6 +56,7 @@ const BUSINESS_QUESTIONS: Question[] = [
 export const IndustryModule: React.FC = () => {
   const { mode } = useDifficulty()
   const { lang } = useLanguage()
+  const tr = useTranslation().modules.industry
 
   if (mode === 'business') {
     return (
@@ -62,6 +64,7 @@ export const IndustryModule: React.FC = () => {
         <KeyPlayersBusiness />
         <OpenVsClosedBusiness />
         <WhereItsHeadingBusiness />
+        <CourseBridge target="tools-landscape" blurb={tr.bridgeToToolsBusiness} />
         <KnowledgeCheck moduleId="industry-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -73,6 +76,7 @@ export const IndustryModule: React.FC = () => {
       <OpenVsClosedSection />
       <EcosystemSection />
       <WhereItsHeadingSection />
+      <CourseBridge target="tools-landscape" blurb={tr.bridgeToTools} />
       <KnowledgeCheck moduleId="industry" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

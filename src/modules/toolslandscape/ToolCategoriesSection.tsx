@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { useTranslation } from '../../i18n'
+import { CourseBridge } from '../../components/CourseBridge'
 
 // Non-translatable per-category metadata. Order matches the `items` array in
 // `useTranslation().modules.toolslandscape.categories.items`.
@@ -43,6 +44,7 @@ export const ToolCategoriesSection: React.FC = () => {
         ))}
       </div>
       <p className="mt-4 max-w-2xl rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/50 p-4 text-sm text-zinc-700 dark:text-zinc-300">{c.axisNote}</p>
+      <CourseBridge target="industry" blurb={c.bridgeBlurb} />
     </section>
   )
 }
