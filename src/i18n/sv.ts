@@ -940,5 +940,77 @@ export const sv: DeepPartial<Translation> = {
         ],
       },
     },
+    // MT
+    toolslandscape: {
+      categories: {
+        title: '1. Verktygskategorierna',
+        intro: 'AI-verktygsmarknaden ser rörig ut, men nästan allt faller inom fyra kategorier — definierade av hur mycket autonomi verktyget har och var det bor. Klicka på varje kategori för att utforska.',
+        whenLabel: 'När du ska använda det:',
+        toolsLabel: 'Verktyg:',
+        items: [
+          { name: 'Chattassistenter', tagline: 'Du frågar, den svarar', description: 'En konversationsyta. Du tar med kontexten, den står för resonemanget. Kraftfull för utkast, förklaringar, analys — men den agerar bara i chatten: inget händer i dina filer, repon eller appar om du inte kopierar dit det.', when: 'Frågor, utkast, analys, brainstorming — uppgifter där leveransen är text och du är med i varje steg.', tools: 'ChatGPT, Claude, Gemini' },
+          { name: 'IDE-assistenter', tagline: 'Autocomplete som växte upp', description: 'Bor i din editor, ser filen du har öppen och föreslår kod inline. Låg autonomi: den föreslår, du accepterar. Utmärkt för att hålla flytet, svag när en ändring spänner över många filer.', when: 'Enfilsändringar, boilerplate, att lära sig ett okänt API medan du skriver.', tools: 'GitHub Copilot, Cursor inline-läge' },
+          { name: 'Agentiska kodverktyg', tagline: 'En agent i din terminal & ditt repo', description: 'Du beskriver ett resultat; agenten planerar, läser din kodbas, redigerar flera filer, kör kommandon och tester och rapporterar tillbaka. Den arbetar i steg — tänk → agera → kontrollera — och du granskar vid kontrollpunkter.', when: 'Flerfilsfunktioner, refaktoreringar, felsökning, testtäckning — riktiga ingenjörsuppgifter du skulle ge en kollega.', tools: 'Claude Code, Kiro CLI' },
+          { name: 'Agentiska arbetsappar', tagline: 'Delegera kontorsarbete, inte kod', description: 'Samma agentiska loop, riktad mot dokument, kalkylblad, research och arbetsflöden i stället för kod. Du delegerar en uppgift, agenten arbetar igenom den över filer och appar, och du övervakar resultatet.', when: 'Research och syntes, rapportutkast, datarensning, flerdokumentsarbete.', tools: 'Amazon Quick Desktop, Claude Cowork' },
+        ],
+        axisNote: 'Mönstret bakom kartan: när du går från chatt till agenter slutar verktyget svara och börjar göra. Ju mer autonomi, desto mer skiftar ditt jobb från att skriva till att granska.',
+      },
+      agenticLoop: {
+        title: '2. Anatomin hos ett agentiskt verktyg',
+        intro: 'Vad händer egentligen när du ger en uppgift till ett agentiskt kodverktyg? Kör sessionen nedan — en trogen simulering av en Claude Code-körning. Se loopen: förstå → planera → agera → verifiera.',
+        stepNote: 'Varje kommando är ett varv i den agentiska loopen. Lägg märke till att agenten kontrollerar sitt eget arbete innan den rapporterar klart.',
+        takeaway: 'Denna loop — planera, agera, verifiera, upprepa — är signaturen för varje agentiskt verktyg, oavsett om det redigerar kod eller ett kalkylblad. Skickligheten i att använda ett väl är mest skickligheten att skriva en tydlig uppgift och granska vid rätt kontrollpunkter.',
+      },
+      choosingStack: {
+        title: '3. Välja din verktygslåda',
+        intro: 'Fyra realistiska situationer. För var och en: vad skulle du välja? Stega igenom för att se resonemanget.',
+        recommendLabel: 'Bästa valet:',
+        scenarios: [
+          { situation: 'Du behöver förstå en okänd kodbas på 50 000 rader tillräckligt för att fixa en bugg någonstans i auth-flödet.', pick: 'Agentiskt kodverktyg (Claude Code / Kiro)', why: 'Agenten kan söka i repot, spåra flödet över filer och förklara arkitekturen — och sedan fixa buggen och köra testerna. En chattassistent kan inte se ditt repo; en IDE-assistent ser bara den öppna filen.' },
+          { situation: 'Du skriver ett engångsskript i Python för att tolka en CSV och vet exakt vad du vill ha.', pick: 'IDE-assistent — eller bara en chattassistent', why: 'Full agentisk autonomi är överdrivet för en uppgift du kan specificera helt och verifiera med en blick. Inline-komplettering håller flytet; en chattassistent kan skriva hela skriptet i ett svep.' },
+          { situation: 'Du vill ha en andra åsikt om en systemdesign innan du bestämmer dig.', pick: 'Chattassistent (Claude, ChatGPT)', why: 'Detta är en resonemangs- och konversationsuppgift. Du vill iterera på idéer, utmana antaganden och utforska avvägningar — leveransen är förståelse, inte artefakter.' },
+          { situation: 'Ditt team behöver uppdatera API-dokumentationen för 30 endpoints som ändrats detta kvartal.', pick: 'Agentiskt kodverktyg, övervakat', why: 'Repetitivt, flerfiligt, verifierbart — idealiskt agentarbete. Agenten läser varje endpoint, uppdaterar dokumentationen och du stickprovskontrollerar. Att göra detta för hand i en IDE-assistent betyder 30 manuella pass.' },
+        ],
+        selfExplainPrompt: 'Välj en verklig uppgift från din nuvarande vecka. Vilken verktygskategori passar bäst, och vad skulle du behöva specificera för att verktyget ska lyckas?',
+        selfExplainAnswer: 'Exempel: "Migrera vår datumhantering från moment.js till date-fns" — agentiskt kodverktyg. Jag skulle specificera: biblioteken, att testerna måste passera efter varje fil och vilka kantfall (tidszoner) att vara försiktig med. Ju tydligare resultat och begränsningar, desto bättre presterar agenten.',
+      },
+      categoriesBiz: {
+        title: '1. Verktygskategorierna',
+        intro: 'Dina team använder redan AI — frågan är om de använder rätt sort för varje jobb. Nästan varje verktyg faller i en av tre kategorier. Klicka på varje för att utforska.',
+        whenLabel: 'Använd det till:',
+        toolsLabel: 'Verktyg:',
+        items: [
+          { name: 'Chattassistenter', tagline: 'En briljant kollega i ett chattfönster', description: 'Du ställer frågor, den svarar; du klistrar in material, den analyserar eller skriver om. Haken: den bara pratar. Inget hamnar i dina dokument eller system om inte någon kopierar dit det.', when: 'Utkast till mejl och dokument, sammanfattning av inklistrat material, brainstorming, snabb analys.', tools: 'ChatGPT, Claude, Gemini' },
+          { name: 'Agentiska arbetsappar', tagline: 'En kapabel assistent du delegerar till', description: 'Du lämnar över en uppgift — "gör om dessa 30 intervjuer till en temarapport" — och AI:n arbetar igenom den: öppnar filer, extraherar, organiserar, skriver utkast. Du granskar vid kontrollpunkter i stället för att göra varje steg.', when: 'Research och syntes, återkommande rapporter, datarensning, alla flerdokumentsuppgifter som slukar timmar.', tools: 'Amazon Quick Desktop, Claude Cowork' },
+          { name: 'AI-verktyg för utvecklare', tagline: 'Ditt ingenjörsteams kraftverktyg', description: 'Agenter som skriver och ändrar riktig kod under ingenjörsövervakning. Du behöver inte använda dessa själv — men du bör veta att ditt utvecklingsteam kan leverera betydligt snabbare med dem, och budgetera därefter.', when: 'Ingenjörsarbete: funktioner, buggfixar, kodmodernisering. (Dina utvecklare kör; du finansierar och mäter.)', tools: 'Claude Code, Kiro CLI, GitHub Copilot' },
+        ],
+        axisNote: 'Mönstret: chattassistenter svarar, agentiska verktyg gör. Ju mer verktyget gör, desto mer skiftar dina medarbetare från att utföra arbetet till att specificera och granska det — det är den verkliga arbetsflödesförändringen att hantera.',
+      },
+      delegation: {
+        title: '2. Se en AI utföra arbete',
+        intro: 'Det största mentala skiftet är från att chatta till att delegera. Stega igenom en verklig delegering till en agentisk arbetsapp — lägg märke till var människan behåller kontrollen.',
+        steps: [
+          { label: 'Du delegerar', content: '"Här är 30 transkript från kundintervjuer. Identifiera återkommande teman, ta fram två stödcitat per tema och skriv ett 2-sidigt sammandrag för produktteamet."', note: 'En bra delegering ser ut som en bra brief till en junior kollega: resultat, format, målgrupp.' },
+          { label: 'Agenten planerar', content: 'Agenten föreslår en plan: läs alla 30 transkript → tagga smärtpunkter per transkript → klustra till teman → välj citat → skriv sammandraget. Den ställer en klargörande fråga: "Ska prisklagomål vara ett eget tema eller grupperas under \'värde\'?"', note: 'Du godkänner planen eller justerar den. Detta är din första kontrollpunkt — billigt att rätta nu, dyrt senare.' },
+          { label: 'Agenten arbetar', content: 'Den bearbetar transkripten och visar framsteg: "14/30 lästa — 6 kandidat-teman växer fram." Du är fri att göra annat; den flaggar oklarheter i stället för att gissa.', note: 'Till skillnad från en chattassistent arbetar den faktiskt med dina filer — den väntar inte på att du ska klistra in innehåll.' },
+          { label: 'Du granskar utkastet', content: 'Utkastet landar med teman, citat och en bilaga som kopplar varje påstående till sitt källtranskript. Du upptäcker ett tema som egentligen är två, och säger det. Agenten omstrukturerar och uppdaterar sammandraget.', note: 'Granskning är ditt verkliga jobb nu. De spårbara källorna är det som gör granskningen snabb.' },
+          { label: 'Leveransen skickas', content: 'Färdigt 2-sidigt sammandrag, redo för produktteamet. Använd mänsklig tid: ~20 minuter briefing och granskning, i stället för två dagars läsande och skrivande.', note: 'Arbetet försvann inte — det bytte form: från att göra till att dirigera.' },
+        ],
+        takeaway: 'Delegeringskvalitet avgör resultatkvalitet. Teamen som får ut mest av agentiska verktyg är de som skriver tydliga briefer och granskar vid kontrollpunkter — exakt en bra chefs färdigheter.',
+      },
+      pickingTools: {
+        title: '3. Välja verktyg för ditt team',
+        intro: 'Fyra vanliga teamsituationer. Stega igenom var och en för att se vilken verktygskategori som passar och varför.',
+        recommendLabel: 'Bästa valet:',
+        scenarios: [
+          { situation: 'Ditt säljteam lägger varje fredagseftermiddag på att sammanställa en pipelinerapport från CRM-exporter och samtalsanteckningar.', pick: 'Agentisk arbetsapp', why: 'Återkommande, flera källor, väldefinierat resultat — idealisk delegering. Agenten sammanställer utkastet från exporterna; en säljare granskar det på minuter. En chattassistent skulle kräva manuell inklistring varje vecka.' },
+          { situation: 'Juridik behöver en första genomgång av inkommande NDA:er mot er standardspelbok.', pick: 'Agentisk arbetsapp — med obligatorisk mänsklig granskning', why: 'Agenten jämför varje NDA med spelboken och flaggar avvikelser med referenser. En jurist tar varje beslut. I domäner med höga insatser förblir människan beslutsfattaren; agenten eliminerar lästiden.' },
+          { situation: 'Marknadsföring vill ha hjälp att vässa kampanjtexter och ämnesrader.', pick: 'Chattassistent', why: 'Kreativ iteration är konversation — generera alternativ, reagera, förfina. Inga filer att arbeta med, inget flerstegsarbetsflöde. Det enklaste verktyget som fungerar är rätt verktyg.' },
+          { situation: 'Ingenjörsteamet säger att en omskrivning av legacysystemet tar tre kvartal.', pick: 'Agentiska kodverktyg för utvecklingsteamet', why: 'Modernisering är där kodagenter glänser: stort, repetitivt, testbart. Team som använder dem väl rapporterar dramatiska hastighetsökningar på exakt detta arbete. Din roll: finansiera verktygen, be om före/efter-mätvärden.' },
+        ],
+        selfExplainPrompt: 'Tänk på den mest repetitiva flerstegsuppgiften ditt team gör varje vecka. Skulle ni kunna delegera den till ett agentiskt verktyg? Skriv briefen på ett stycke som du skulle ge det.',
+        selfExplainAnswer: 'Exempel: "Varje måndag sammanställer vi ett nyhetssammandrag om konkurrenter. Brief: skanna dessa 12 källor efter nyheter om konkurrenterna X, Y, Z från senaste veckan; gruppera per konkurrent; två meningars sammanfattning per post med länk; flagga allt om priser eller uppsägningar som brådskande; leverera som en sida." Tydliga källor, format och eskaleringsregel — det är en delegeringsklar brief.',
+      },
+    },
   },
 }
