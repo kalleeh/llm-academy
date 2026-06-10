@@ -1,0 +1,36 @@
+import { InteractiveDemo } from '../../components/InteractiveDemo'
+import { SelfExplain } from '../../components/SelfExplain'
+import { useTranslation } from '../../i18n'
+
+// Order matches `scenarios` in useTranslation().modules.genaibeyondtext.pickTheTool.
+const SCENARIO_COLORS = [
+  'border-blue-400 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/5',
+  'border-emerald-400 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5',
+  'border-amber-400 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5',
+  'border-purple-400 dark:border-purple-500/30 bg-purple-50 dark:bg-purple-500/5',
+]
+
+export const PickTheToolBusiness: React.FC = () => {
+  const c = useTranslation().modules.genaibeyondtext.pickTheTool
+
+  return (
+    <section aria-labelledby="pick-the-tool">
+      <h2 id="pick-the-tool" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
+      <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+      <InteractiveDemo
+        title={c.title}
+        steps={c.scenarios.map((s, i) => (
+          <div key={i} className={`rounded-lg border p-5 ${SCENARIO_COLORS[i]}`}>
+            <p className="mb-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">{s.request}</p>
+            <div className="mb-3 inline-block rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">{c.recommendLabel} {s.pick}</div>
+            <p className="mb-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{s.why}</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400"><strong className="text-zinc-700 dark:text-zinc-300">{c.watchLabel}</strong> {s.watch}</p>
+          </div>
+        ))}
+      />
+      <div className="mt-8">
+        <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />
+      </div>
+    </section>
+  )
+}

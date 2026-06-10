@@ -6,6 +6,9 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { ModalitiesModelsSection } from './genaibeyondtext/ModalitiesModelsSection'
 import { MultimodalAPISection } from './genaibeyondtext/MultimodalAPISection'
 import { ChoosingIntegratingSection } from './genaibeyondtext/ChoosingIntegratingSection'
+import { ModalityUsesBusiness } from './genaibeyondtext/ModalityUsesBusiness'
+import { PickTheToolBusiness } from './genaibeyondtext/PickTheToolBusiness'
+import { UseResponsiblyBusiness } from './genaibeyondtext/UseResponsiblyBusiness'
 
 const QUESTIONS: Question[] = [
   {
@@ -71,6 +74,9 @@ export const GenAIBeyondTextModule: React.FC = () => {
   if (mode === 'business') {
     return (
       <ModuleLayout moduleId="genai-beyond-text" title="Generative AI Beyond Text" subtitle="Image, voice, video, and multimodal — what each is for, the tools, and using them responsibly.">
+        <ModalityUsesBusiness />
+        <PickTheToolBusiness />
+        <UseResponsiblyBusiness />
         <KnowledgeCheck moduleId="genaibeyondtext-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
