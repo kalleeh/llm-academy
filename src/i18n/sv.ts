@@ -995,6 +995,7 @@ export const sv: DeepPartial<Translation> = {
       delegation: {
         title: '2. Se en AI utföra arbete',
         intro: 'Det största mentala skiftet är från att chatta till att delegera. Stega igenom en verklig delegering till en agentisk arbetsapp — lägg märke till var människan behåller kontrollen.',
+        appToggleLabel: 'Välj app: Amazon Quick Desktop eller Claude Cowork',
         steps: [
           { label: 'Du delegerar', content: '"Här är 30 transkript från kundintervjuer. Identifiera återkommande teman, ta fram två stödcitat per tema och skriv ett 2-sidigt sammandrag för produktteamet."', note: 'En bra delegering ser ut som en bra brief till en junior kollega: resultat, format, målgrupp.' },
           { label: 'Agenten planerar', content: 'Agenten föreslår en plan: läs alla 30 transkript → tagga smärtpunkter per transkript → klustra till teman → välj citat → skriv sammandraget. Den ställer en klargörande fråga: "Ska prisklagomål vara ett eget tema eller grupperas under \'värde\'?"', note: 'Du godkänner planen eller justerar den. Detta är din första kontrollpunkt — billigt att rätta nu, dyrt senare.' },
@@ -1071,6 +1072,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Från vagt till värdefullt',
         intro: 'Se de fyra ingredienserna förvandla ett generiskt utkast till något du faktiskt skulle skicka iväg. Samma assistent, samma uppgift — olika brief.',
         stepLabel: 'Steg',
+        appToggleLabel: 'Välj assistent: ChatGPT eller Claude',
         steps: [
           { label: 'Den vaga förfrågan', content: '"Skriv en jobbannons för en marknadsföringschef."', note: 'Modellen fyller varje lucka med genomsnitt — och genomsnitt är exakt vad du får.' },
           { label: 'Det generiska resultatet', content: 'En fullkomligt grammatisk annons som kunde komma från vilket företag som helst i vilken bransch som helst: "dynamisk lagspelare", "högt tempo", en punktlista av klichéer. Inget i den är fel. Inget i den är ditt.', note: 'Generiskt in, generiskt ut. Utmatningen speglar briefen.' },
@@ -1147,6 +1149,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Från engångsgrej till system',
         intro: 'Skillnaden mellan "jag använder AI ibland" och "AI sparar mitt team en dag i veckan" är system. Se en återkommande uppgift ta examen från handbyggd till hanterad.',
         stepLabel: 'Steg',
+        appToggleLabel: 'Välj assistent: ChatGPT eller Claude',
         steps: [
           { label: 'Veckotröskan', content: 'Varje måndag bygger du om samma pipeline-rapport: öppna fem kalkylblad, klistra in höjdpunkter i chatten, förklara om formatet, fixa tonen, omformatera för chefsmejlet. Nittio minuter, varje vecka, från noll.', note: 'Du betalar om hela uppsättningskostnaden varenda gång. Det är slöseriet.' },
           { label: 'Spara den vinnande briefen', content: 'Veckan den äntligen blev bra sparar du den prompten — den exakta kontexten, formatet och tonen som funkade. Nästa vecka startar du från den beprövade briefen i stället för att uppfinna den på nytt.', note: 'Den första återanvändbara tillgången är helt enkelt den bästa versionen av en prompt du redan skrivit.' },
@@ -1299,6 +1302,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Delegera och övervaka',
         intro:
           'Att delegera till en agent är en färdighet som liknar att leda en skarp junior medarbetare. Stega igenom en verklig delegering i flera steg och lägg märke till exakt var du stannar kvar i loopen.',
+        appToggleLabel: 'Välj app: Amazon Quick Desktop eller Claude Cowork',
         stepLabel: 'Steg',
         steps: [
           {

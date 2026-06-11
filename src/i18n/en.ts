@@ -1683,6 +1683,7 @@ const modules = {
       title: '2. Watching an AI Do Work',
       intro:
         'The biggest mental shift is from chatting to delegating. Step through a real delegation to an agentic work app — notice where the human stays in control.',
+      appToggleLabel: 'Choose app: Amazon Quick Desktop or Claude Cowork',
       steps: [
         {
           label: 'You delegate',
@@ -1899,6 +1900,7 @@ const modules = {
       intro:
         'Watch the four ingredients turn a generic draft into something you would actually ship. Same assistant, same task — different brief.',
       stepLabel: 'Step',
+      appToggleLabel: 'Choose assistant: ChatGPT or Claude',
       steps: [
         {
           label: 'The vague ask',
@@ -2110,6 +2112,7 @@ const modules = {
       intro:
         'The difference between "I use AI sometimes" and "AI saves my team a day a week" is systems. Watch a recurring task graduate from hand-built to handled.',
       stepLabel: 'Step',
+      appToggleLabel: 'Choose assistant: ChatGPT or Claude',
       steps: [
         {
           label: 'The weekly grind',
@@ -2311,6 +2314,7 @@ const modules = {
       title: '2. Delegate and Supervise',
       intro:
         'Delegating to an agent is a skill that looks a lot like managing a sharp junior employee. Step through a real multi-step delegation and notice exactly where you stay in the loop.',
+      appToggleLabel: 'Choose app: Amazon Quick Desktop or Claude Cowork',
       stepLabel: 'Step',
       steps: [
         {
