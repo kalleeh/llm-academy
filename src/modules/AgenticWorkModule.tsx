@@ -5,6 +5,7 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatIsAgenticWorkSection } from './agenticwork/WhatIsAgenticWorkSection'
 import { DelegateSuperviseSection } from './agenticwork/DelegateSuperviseSection'
 import { GuardrailsSection } from './agenticwork/GuardrailsSection'
+import { BriefLibrarySection } from './agenticwork/BriefLibrarySection'
 
 const QUESTIONS: Question[] = [
   {
@@ -40,6 +41,7 @@ export const AgenticWorkModule: React.FC = () => {
       <WhatIsAgenticWorkSection />
       <DelegateSuperviseSection />
       <GuardrailsSection />
+      <BriefLibrarySection />
       <KnowledgeCheck moduleId="agenticwork" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

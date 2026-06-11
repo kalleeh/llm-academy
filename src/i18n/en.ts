@@ -1967,6 +1967,45 @@ const modules = {
       bridgeBlurb:
         'Briefing well is a craft with named techniques behind it — examples, step-by-step reasoning, role prompts. See how prompting really works.',
     },
+    // 4. Set It Once: Your Starter Kit (rendered in both personas)
+    starterKit: {
+      title: '4. Set It Once: Your Starter Kit',
+      intro:
+        'Everything this module teaches works without retyping it. Context goes in once — into settings, not into every prompt. Copy these two templates, fill in the brackets, and you are set up in five minutes.',
+      templateTitleA: 'Paste into your assistant\'s custom instructions',
+      templateTitleB: 'Save this skeleton — fill the brackets each time',
+      whereTitle: 'Where the setting lives',
+      where: [
+        { app: 'ChatGPT', path: 'Settings → Personalization → Custom instructions' },
+        { app: 'Claude', path: 'Settings → Profile — and per-workspace instructions inside a Project' },
+        { app: 'Copilot (Microsoft 365)', path: 'Settings → Copilot → Personalization' },
+      ],
+      tipsTitle: 'Pro tips',
+      tips: [
+        {
+          name: 'Make it interview you',
+          body: 'End big requests with "Ask me up to 3 clarifying questions before you answer." One sentence buys a tailored result instead of a generic one.',
+        },
+        {
+          name: 'Paste, don\'t paraphrase',
+          body: 'Your summary of a document is a lossy copy. Attach or paste the real thing — the model reads faster than you can describe.',
+        },
+        {
+          name: 'Ask for variants, pick, then refine',
+          body: '"Give me 3 versions: one safe, one bold, one short" beats regenerate-roulette. Pick one and say "more like #2, but…".',
+        },
+        {
+          name: 'Tell it what to leave out',
+          body: '"No emojis, no exclamation marks, don\'t restate my question" kills the most common annoyances in one line — and belongs in your custom instructions, not in every prompt.',
+        },
+        {
+          name: 'Reuse the thread for the same task',
+          body: 'Follow-ups inherit everything you established. But switch topics in a fresh chat, or the old context bleeds into the new answer.',
+        },
+      ],
+      takeaway:
+        'Five minutes of setup is the difference between an assistant that already knows you and a stranger you re-brief from scratch every day.',
+    },
   },
   optimizingworkflow: {
     // Tech: 1. Map Where AI Fits Your Day
@@ -2180,6 +2219,32 @@ const modules = {
       bridgeBlurb:
         'Team habits are where individual productivity meets organizational change. See what it really takes for an organization to be ready for AI.',
     },
+    // 4. Your First Prompt Library (business branch)
+    promptLibrary: {
+      title: '4. Your First Prompt Library',
+      intro:
+        'A prompt library sounds grand; it is a notes doc. Start it with these three — write each once, reuse it weekly. Copy, fill the brackets, save the filled version.',
+      templateTitleA: 'Weekly status report',
+      templateTitleB: 'Meeting → decisions and actions',
+      templateTitleC: 'Customer reply, in your voice',
+      tipsTitle: 'Pro tips',
+      tips: [
+        {
+          name: 'Save it the moment it works',
+          body: 'The best time to add to your library is the second a prompt produces something you would ship. "Later" never comes.',
+        },
+        {
+          name: 'Store the brief with a sample output',
+          body: 'Future-you needs to remember what "good" looked like, not just what you asked. Keep one great result next to each saved prompt.',
+        },
+        {
+          name: 'One doc, not a system',
+          body: 'A single pinned note beats a tagged database you will never maintain. Graduate to projects or folders only when the doc gets crowded.',
+        },
+      ],
+      takeaway:
+        'Three saved briefs is already a system. Most people\'s AI usage is five recurring tasks — a one-page library covers most of your week.',
+    },
   },
   agenticcoding: {
     // 1. What Makes a Coding Agent Different
@@ -2272,6 +2337,38 @@ const modules = {
       ],
       bridgeBlurb:
         'You have driven a coding agent. Now look under the hood: how tool use, function calling, MCP, and agent design patterns actually work — the machinery beneath the session you just ran.',
+    },
+    // 4. Steal This Setup
+    stealThisSetup: {
+      title: '4. Steal This Setup',
+      intro:
+        'The difference between fighting a coding agent and shipping with it is rarely the model — it is the setup. Copy this starter AGENTS.md into your repo root, fill the brackets, then steal the habits below.',
+      templateTitle: 'AGENTS.md starter — drop at the repo root',
+      tipsTitle: 'Pro tips',
+      tips: [
+        {
+          name: 'Ask for the plan before the code',
+          body: '"Tell me your plan first — don\'t write code yet." Reviewing a 5-line plan is ten times cheaper than reviewing a 500-line diff.',
+        },
+        {
+          name: 'Make checkpoints out of commits',
+          body: 'Have the agent commit after each working step. A bad step becomes a git revert, not an archaeology dig through a giant diff.',
+        },
+        {
+          name: 'Paste the real error',
+          body: 'The verbatim stack trace, the actual failing output. "It throws something about auth" sends the agent guessing; the trace sends it to the line.',
+        },
+        {
+          name: 'Guard the tests',
+          body: 'If a test fails, say "fix the code, not the test" — an agent under pressure will happily edit the assertion. Name the behaviors that are load-bearing.',
+        },
+        {
+          name: 'One task, one session',
+          body: 'Long mixed sessions accumulate stale context. Finish, commit, clear, start fresh — with an AGENTS.md, the agent re-onboards in seconds.',
+        },
+      ],
+      takeaway:
+        'A good AGENTS.md plus these five habits is most of what separates teams that ship with agents from teams that gave up after a week.',
     },
   },
   agenticwork: {
@@ -2391,6 +2488,35 @@ const modules = {
         'An agent allowed to refund up to $1,000 autonomously gets a clearly fraudulent $950 request — and pays it, because a spend ceiling is not a fraud check. The missing guardrail was not a lower cap; it was a human-in-the-loop rule for refunds above a risk threshold. Caps limit size; they do not supply judgment.',
       bridgeBlurb:
         'Guardrails on one agent are the start. The bigger question — roles, decision rights, and why ~40% of agent initiatives stall on non-technical issues — is organizational. Go there.',
+    },
+    // 4. A Brief You Can Steal
+    briefLibrary: {
+      title: '4. A Brief You Can Steal',
+      intro:
+        'You do not need to invent delegation from scratch. Copy this brief template, fill the brackets, and place the checkpoint where a mistake would actually cost you.',
+      templateTitle: 'The delegation brief — fill in the brackets',
+      exampleTitle: 'The same brief, filled in',
+      tipsTitle: 'Pro tips',
+      tips: [
+        {
+          name: 'Put the checkpoint where mistakes get expensive',
+          body: 'Before anything is sent, paid, deleted, or published — that is where "show me first" goes. Everything before that can run unattended.',
+        },
+        {
+          name: 'Ask what it needs',
+          body: 'End the brief with "What is missing from this brief?" Agents are good at spotting their own blockers before they hit them.',
+        },
+        {
+          name: 'Define done, or it is never done',
+          body: '"A table I can review" beats "look into the expenses". If you cannot check the deliverable in two minutes, you have not defined it yet.',
+        },
+        {
+          name: 'Name the escalation',
+          body: '"If a rule is ambiguous, list it under \'needs human\' instead of deciding" — one line that prevents confident wrong calls.',
+        },
+      ],
+      takeaway:
+        'A reusable brief turns delegation from a writing exercise into a fill-in-the-blanks habit — and the checkpoint line is the part that keeps it safe.',
     },
   },
   genaibeyondtext: {

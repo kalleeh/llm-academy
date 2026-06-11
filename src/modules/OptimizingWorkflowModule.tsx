@@ -6,6 +6,7 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { WhereAIFitsSection } from './optimizingworkflow/WhereAIFitsSection'
 import { ReusableSetupsSection } from './optimizingworkflow/ReusableSetupsSection'
 import { TeamPatternsSection } from './optimizingworkflow/TeamPatternsSection'
+import { PromptLibrarySection } from './optimizingworkflow/PromptLibrarySection'
 import { AIShapedTasksBusiness } from './optimizingworkflow/AIShapedTasksBusiness'
 import { OneOffToSystemBusiness } from './optimizingworkflow/OneOffToSystemBusiness'
 import { RollItOutBusiness } from './optimizingworkflow/RollItOutBusiness'
@@ -77,6 +78,7 @@ export const OptimizingWorkflowModule: React.FC = () => {
         <AIShapedTasksBusiness />
         <OneOffToSystemBusiness />
         <RollItOutBusiness />
+        <PromptLibrarySection />
         <KnowledgeCheck moduleId="optimizingworkflow-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )

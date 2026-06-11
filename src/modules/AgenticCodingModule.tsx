@@ -5,6 +5,7 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { CodingAgentDifferentSection } from './agenticcoding/CodingAgentDifferentSection'
 import { RealSessionSection } from './agenticcoding/RealSessionSection'
 import { WorkingEffectivelySection } from './agenticcoding/WorkingEffectivelySection'
+import { StealThisSetupSection } from './agenticcoding/StealThisSetupSection'
 
 const QUESTIONS: Question[] = [
   {
@@ -40,6 +41,7 @@ export const AgenticCodingModule: React.FC = () => {
       <CodingAgentDifferentSection />
       <RealSessionSection />
       <WorkingEffectivelySection />
+      <StealThisSetupSection />
       <KnowledgeCheck moduleId="agenticcoding" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )
