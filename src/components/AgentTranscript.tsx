@@ -90,16 +90,21 @@ export const AgentTranscript: React.FC<AgentTranscriptProps> = ({ variant, turns
         <span className={`ml-2 font-mono text-xs font-semibold ${meta.labelColor}`}>{meta.label}</span>
       </div>
       <div ref={scrollRef} className="flex-1 overflow-y-auto bg-zinc-900 p-4 font-mono text-sm">
-        {rendered.map((line, i) => (
-          <pre key={i} className={`whitespace-pre-wrap leading-relaxed ${lineClass(line.kind)}`}>
-            {line.kind === 'user' && <span className="text-zinc-500">{meta.glyph} </span>}
-            {line.kind === 'tool' && <span>{variant === 'kiro' ? '▶ ' : '⏺ '}</span>}
-            {line.kind === 'result' && <span className="text-zinc-600">{'  ⎿ '}</span>}
-            {line.kind === 'ok' && <span>{'✓ '}</span>}
-            {line.displayed}
-            {!line.done && <span className="animate-pulse text-amber-400">▌</span>}
-          </pre>
-        ))}
+        {rendered.map((line, i) => {
+          const colorClass = line.kind === 'tool' && variant === 'kiro'
+            ? 'text-violet-400'
+            : lineClass(line.kind)
+          return (
+            <pre key={i} className={`whitespace-pre-wrap leading-relaxed ${colorClass}`}>
+              {line.kind === 'user' && <span className="text-zinc-500">{meta.glyph} </span>}
+              {line.kind === 'tool' && <span>{variant === 'kiro' ? '▶ ' : '⏺ '}</span>}
+              {line.kind === 'result' && <span className="text-zinc-600">{'  ⎿ '}</span>}
+              {line.kind === 'ok' && <span>{'✓ '}</span>}
+              {line.displayed}
+              {!line.done && <span className="animate-pulse text-amber-400">▌</span>}
+            </pre>
+          )
+        })}
         {rendered.length === 0 && (
           <div className="flex items-center gap-1">
             <span className="text-zinc-500">{meta.glyph}</span>
