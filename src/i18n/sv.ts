@@ -960,8 +960,8 @@ export const sv: DeepPartial<Translation> = {
       },
       agenticLoop: {
         title: '2. Anatomin hos ett agentiskt verktyg',
-        intro: 'Vad händer egentligen när du ger en uppgift till ett agentiskt kodverktyg? Kör sessionen nedan — en trogen simulering av en Claude Code-körning. Se loopen: förstå → planera → agera → verifiera.',
-        stepNote: 'Varje kommando är ett varv i den agentiska loopen. Lägg märke till att agenten kontrollerar sitt eget arbete innan den rapporterar klart.',
+        intro: 'Vad händer egentligen när du ger en uppgift till ett agentiskt kodverktyg? Nedan körs samma buggfix i två riktiga CLI:er — växla mellan Claude Code och Kiro för att jämföra hur de arbetar.',
+        stepNote: 'Stega igenom varje varv. Claude Code kör en direkt verktygsloop — sök, läs, redigera, testa. Kiro arbetar spec-först och genererar krav, design och uppgifter innan den ändrar koden. Samma fix, två stilar.',
         cliToggleLabel: 'Välj CLI: Claude Code eller Kiro',
         takeaway: 'Denna loop — planera, agera, verifiera, upprepa — är signaturen för varje agentiskt verktyg, oavsett om det redigerar kod eller ett kalkylblad. Skickligheten i att använda ett väl är mest skickligheten att skriva en tydlig uppgift och granska vid rätt kontrollpunkter.',
         bridgeBlurb: 'Loopen tänk → agera → verifiera har riktigt maskineri inuti — funktionsanrop, MCP, agentdesignmönster. Se hur det fungerar.',
@@ -1207,11 +1207,11 @@ export const sv: DeepPartial<Translation> = {
       realSession: {
         title: '2. Styr en verklig session',
         intro:
-          'Här är en trogen simulering av en Claude Code-session som implementerar en liten funktion. Kör kommandona och se repot ändras till höger. Lägg märke till loopen: utforska → planera → redigera → testa → rapportera.',
+          'Här är samma funktion — lägg till hastighetsbegränsning i ett API — implementerad av två kodagenter. Växla mellan Claude Code och Kiro CLI, kör sessionen och se repot ändras till höger. Samma resultat, två metoder.',
         workspaceTitle: 'claude-code — add rate limiting',
         terminalTitle: 'claude-code',
         stepNote:
-          'Varje kommando är ett varv i den agentiska loopen. Agenten läser kodbasen innan den redigerar, skriver ett test för sin egen ändring och kör sviten innan den förklarar sig klar.',
+          'Stega igenom varje varv. Claude Code kör en direkt verktygsloop — läs, redigera, testa, verifiera. Kiro arbetar spec-först och skriver krav, design och uppgifter i .kiro/specs/ innan den rör koden.',
         cliToggleLabel: 'Välj CLI: Claude Code eller Kiro',
         snapshotInitial: 'Utgångsläge: ett litet Express-API utan hastighetsbegränsning.',
         snapshotMiddlewareSeen: 'Agenten har läst strukturen och hittat var middleware kopplas in.',
