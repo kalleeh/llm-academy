@@ -1900,6 +1900,7 @@ const modules = {
       intro:
         'Watch the four ingredients turn a generic draft into something you would actually ship. Same assistant, same task — different brief.',
       stepLabel: 'Step',
+      appToggleLabel: 'Choose assistant: ChatGPT or Claude',
       steps: [
         {
           label: 'The vague ask',
@@ -2111,6 +2112,7 @@ const modules = {
       intro:
         'The difference between "I use AI sometimes" and "AI saves my team a day a week" is systems. Watch a recurring task graduate from hand-built to handled.',
       stepLabel: 'Step',
+      appToggleLabel: 'Choose assistant: ChatGPT or Claude',
       steps: [
         {
           label: 'The weekly grind',

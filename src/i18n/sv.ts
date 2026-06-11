@@ -1072,6 +1072,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Från vagt till värdefullt',
         intro: 'Se de fyra ingredienserna förvandla ett generiskt utkast till något du faktiskt skulle skicka iväg. Samma assistent, samma uppgift — olika brief.',
         stepLabel: 'Steg',
+        appToggleLabel: 'Välj assistent: ChatGPT eller Claude',
         steps: [
           { label: 'Den vaga förfrågan', content: '"Skriv en jobbannons för en marknadsföringschef."', note: 'Modellen fyller varje lucka med genomsnitt — och genomsnitt är exakt vad du får.' },
           { label: 'Det generiska resultatet', content: 'En fullkomligt grammatisk annons som kunde komma från vilket företag som helst i vilken bransch som helst: "dynamisk lagspelare", "högt tempo", en punktlista av klichéer. Inget i den är fel. Inget i den är ditt.', note: 'Generiskt in, generiskt ut. Utmatningen speglar briefen.' },
@@ -1148,6 +1149,7 @@ export const sv: DeepPartial<Translation> = {
         title: '2. Från engångsgrej till system',
         intro: 'Skillnaden mellan "jag använder AI ibland" och "AI sparar mitt team en dag i veckan" är system. Se en återkommande uppgift ta examen från handbyggd till hanterad.',
         stepLabel: 'Steg',
+        appToggleLabel: 'Välj assistent: ChatGPT eller Claude',
         steps: [
           { label: 'Veckotröskan', content: 'Varje måndag bygger du om samma pipeline-rapport: öppna fem kalkylblad, klistra in höjdpunkter i chatten, förklara om formatet, fixa tonen, omformatera för chefsmejlet. Nittio minuter, varje vecka, från noll.', note: 'Du betalar om hela uppsättningskostnaden varenda gång. Det är slöseriet.' },
           { label: 'Spara den vinnande briefen', content: 'Veckan den äntligen blev bra sparar du den prompten — den exakta kontexten, formatet och tonen som funkade. Nästa vecka startar du från den beprövade briefen i stället för att uppfinna den på nytt.', note: 'Den första återanvändbara tillgången är helt enkelt den bästa versionen av en prompt du redan skrivit.' },
