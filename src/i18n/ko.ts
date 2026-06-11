@@ -979,6 +979,7 @@ export const ko: DeepPartial<Translation> = {
       delegation: {
         title: '2. AI가 일하는 모습 지켜보기',
         intro: '가장 큰 사고 전환은 채팅에서 위임으로의 전환입니다. 에이전틱 업무 앱에 실제 위임하는 과정을 단계별로 따라가 보세요 — 사람이 어디서 통제권을 유지하는지 주목하세요.',
+        appToggleLabel: '앱 선택: Amazon Quick Desktop 또는 Claude Cowork',
         steps: [
           { label: '위임한다', content: '"여기 고객 인터뷰 녹취록 30개가 있습니다. 반복되는 테마를 찾고, 테마당 근거 인용 두 개를 뽑고, 제품팀을 위한 2페이지 요약을 작성하세요."', note: '좋은 위임은 주니어 동료에게 주는 좋은 브리프와 같습니다: 결과물, 형식, 대상.' },
           { label: '에이전트가 계획한다', content: '에이전트가 계획을 제안합니다: 30개 녹취록 읽기 → 녹취록별 페인 포인트 태깅 → 테마로 클러스터링 → 인용 선택 → 요약 초안. 명확화 질문도 하나 합니다: "가격 불만은 별도 테마인가요, \'가치\' 아래로 묶나요?"', note: '계획을 승인하거나 조정합니다. 첫 체크포인트입니다 — 지금 고치면 싸고, 나중엔 비쌉니다.' },
@@ -1283,6 +1284,7 @@ export const ko: DeepPartial<Translation> = {
         title: '2. 위임하고 감독하기',
         intro:
           '에이전트에게 위임하는 것은 영리한 주니어 직원을 관리하는 것과 무척 닮은 기술입니다. 실제 여러 단계 위임을 차근차근 따라가며 당신이 정확히 어디에서 루프 안에 남는지 주목하세요.',
+        appToggleLabel: '앱 선택: Amazon Quick Desktop 또는 Claude Cowork',
         stepLabel: '단계',
         steps: [
           {
