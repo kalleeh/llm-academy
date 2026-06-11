@@ -1094,6 +1094,45 @@ export const sv: DeepPartial<Translation> = {
         ],
         bridgeBlurb: 'Att briefa väl är ett hantverk med namngivna tekniker bakom sig — exempel, steg-för-steg-resonemang, rollprompter. Se hur prompting verkligen fungerar.',
       },
+      // MT
+      starterKit: {
+        title: '4. Ställ in det en gång: ditt startkit',
+        intro:
+          'Allt den här modulen lär ut fungerar utan att du skriver om det. Kontexten läggs in en gång — i inställningarna, inte i varje prompt. Kopiera de här två mallarna, fyll i parenteserna, så är du redo på fem minuter.',
+        templateTitleA: 'Klistra in i din assistents anpassade instruktioner',
+        templateTitleB: 'Spara det här skelettet — fyll i parenteserna varje gång',
+        whereTitle: 'Var inställningen finns',
+        where: [
+          { app: 'ChatGPT', path: 'Settings → Personalization → Custom instructions' },
+          { app: 'Claude', path: 'Settings → Profile — and per-workspace instructions inside a Project' },
+          { app: 'Copilot (Microsoft 365)', path: 'Settings → Copilot → Personalization' },
+        ],
+        tipsTitle: 'Proffstips',
+        tips: [
+          {
+            name: 'Låt den intervjua dig',
+            body: 'Avsluta stora förfrågningar med "Ställ upp till 3 förtydligande frågor till mig innan du svarar." En mening köper ett skräddarsytt resultat i stället för ett generiskt.',
+          },
+          {
+            name: 'Klistra in, parafrasera inte',
+            body: 'Din sammanfattning av ett dokument är en kopia med förluster. Bifoga eller klistra in det riktiga — modellen läser snabbare än du kan beskriva.',
+          },
+          {
+            name: 'Be om varianter, välj, finslipa sedan',
+            body: '"Ge mig 3 versioner: en säker, en djärv, en kort" slår regenerera-roulett. Välj en och säg "mer som nr 2, men…".',
+          },
+          {
+            name: 'Säg vad den ska utelämna',
+            body: '"Inga emojis, inga utropstecken, upprepa inte min fråga" dödar de vanligaste irritationsmomenten på en rad — och hör hemma i dina anpassade instruktioner, inte i varje prompt.',
+          },
+          {
+            name: 'Återanvänd tråden för samma uppgift',
+            body: 'Uppföljningar ärver allt du etablerat. Men byt ämne i en ny chatt, annars blöder den gamla kontexten in i det nya svaret.',
+          },
+        ],
+        takeaway:
+          'Fem minuters uppsättning är skillnaden mellan en assistent som redan känner dig och en främling du briefar om från noll varje dag.',
+      },
     },
     // MT
     optimizingworkflow: {
@@ -1170,6 +1209,32 @@ export const sv: DeepPartial<Translation> = {
           { name: 'Mät tid sparad', tagline: 'Bevisa det, annars stryks det', description: 'Spåra den ärliga siffran: timmar tillbaka per vecka, snabbare leveranstid, mer hanterat utan fler anställda. Konkreta före/efter-segrar finansierar nästa steg och skyddar budgeten. "Det känns snabbare" överlever inte en kostnadsgranskning.' },
         ],
         bridgeBlurb: 'Teamvanor är där individuell produktivitet möter organisatorisk förändring. Se vad det verkligen krävs för att en organisation ska vara redo för AI.',
+      },
+      // MT
+      promptLibrary: {
+        title: '4. Ditt första promptbibliotek',
+        intro:
+          'Ett promptbibliotek låter storslaget; det är ett anteckningsdokument. Börja med de här tre — skriv var och en en gång, återanvänd den varje vecka. Kopiera, fyll i parenteserna, spara den ifyllda versionen.',
+        templateTitleA: 'Veckostatusrapport',
+        templateTitleB: 'Möte → beslut och åtgärder',
+        templateTitleC: 'Kundsvar, med din röst',
+        tipsTitle: 'Proffstips',
+        tips: [
+          {
+            name: 'Spara den i samma stund som den funkar',
+            body: 'Den bästa tiden att lägga till i ditt bibliotek är sekunden en prompt ger något du skulle leverera. "Senare" kommer aldrig.',
+          },
+          {
+            name: 'Spara briefen tillsammans med ett exempelresultat',
+            body: 'Framtida-du behöver minnas hur "bra" såg ut, inte bara vad du bad om. Behåll ett fantastiskt resultat bredvid varje sparad prompt.',
+          },
+          {
+            name: 'Ett dokument, inte ett system',
+            body: 'En enda fäst anteckning slår en taggad databas du aldrig kommer att underhålla. Gå över till projekt eller mappar först när dokumentet blir trångt.',
+          },
+        ],
+        takeaway:
+          'Tre sparade briefer är redan ett system. De flesta människors AI-användning är fem återkommande uppgifter — ett ensidigt bibliotek täcker större delen av din vecka.',
       },
     },
     // MT
@@ -1261,6 +1326,38 @@ export const sv: DeepPartial<Translation> = {
         ],
         bridgeBlurb:
           'Du har styrt en kodningsagent. Titta nu under huven: hur verktygsanvändning, funktionsanrop, MCP och designmönster för agenter faktiskt fungerar — maskineriet under sessionen du just körde.',
+      },
+      // MT
+      stealThisSetup: {
+        title: '4. Snor den här uppsättningen',
+        intro:
+          'Skillnaden mellan att slåss mot en kodningsagent och att leverera med den är sällan modellen — det är uppsättningen. Kopiera den här start-AGENTS.md till roten av ditt repo, fyll i parenteserna, och snor sedan vanorna nedan.',
+        templateTitle: 'AGENTS.md-start — lägg i roten av repot',
+        tipsTitle: 'Proffstips',
+        tips: [
+          {
+            name: 'Be om planen före koden',
+            body: '"Berätta din plan först — skriv ingen kod än." Att granska en plan på 5 rader är tio gånger billigare än att granska en diff på 500 rader.',
+          },
+          {
+            name: 'Gör checkpoints av commits',
+            body: 'Låt agenten committa efter varje fungerande steg. Ett dåligt steg blir en git revert, inte en arkeologisk utgrävning genom en jättediff.',
+          },
+          {
+            name: 'Klistra in det riktiga felet',
+            body: 'Den ordagranna stacktracen, den faktiska felande utmatningen. "Den kastar något om autentisering" skickar agenten på gissningsfärd; tracen skickar den till raden.',
+          },
+          {
+            name: 'Skydda testerna',
+            body: 'Om ett test misslyckas, säg "fixa koden, inte testet" — en agent under press ändrar gärna assertionen. Namnge de beteenden som är bärande.',
+          },
+          {
+            name: 'En uppgift, en session',
+            body: 'Långa blandade sessioner samlar på sig inaktuell kontext. Bli klar, committa, rensa, börja på nytt — med en AGENTS.md introduceras agenten på nytt på sekunder.',
+          },
+        ],
+        takeaway:
+          'En bra AGENTS.md plus de här fem vanorna är det mesta som skiljer team som levererar med agenter från team som gav upp efter en vecka.',
       },
     },
     // MT
@@ -1378,6 +1475,35 @@ export const sv: DeepPartial<Translation> = {
           'En agent som får återbetala upp till $1,000 självständigt får en uppenbart bedräglig begäran på $950 — och betalar den, eftersom ett spendertak inte är en bedrägerikontroll. Det saknade skyddsräcket var inte ett lägre tak; det var en regel om människa i loopen för återbetalningar över en riskgräns. Tak begränsar storlek; de tillhandahåller inte omdöme.',
         bridgeBlurb:
           'Skyddsräcken på en agent är början. Den större frågan — roller, beslutsrätt och varför ~40 % av agentinitiativen kör fast på icke-tekniska frågor — är organisatorisk. Gå dit.',
+      },
+      // MT
+      briefLibrary: {
+        title: '4. En brief du kan snor',
+        intro:
+          'Du behöver inte uppfinna delegering från grunden. Kopiera den här brief-mallen, fyll i parenteserna, och placera kontrollpunkten där ett misstag faktiskt skulle kosta dig.',
+        templateTitle: 'Delegeringsbriefen — fyll i parenteserna',
+        exampleTitle: 'Samma brief, ifylld',
+        tipsTitle: 'Proffstips',
+        tips: [
+          {
+            name: 'Placera kontrollpunkten där misstag blir dyra',
+            body: 'Innan något skickas, betalas, raderas eller publiceras — det är dit "visa mig först" hör. Allt före det kan köra obevakat.',
+          },
+          {
+            name: 'Fråga vad den behöver',
+            body: 'Avsluta briefen med "Vad saknas i den här briefen?" Agenter är bra på att upptäcka sina egna blockerare innan de stöter på dem.',
+          },
+          {
+            name: 'Definiera klart, annars blir det aldrig klart',
+            body: '"En tabell jag kan granska" slår "titta på utgifterna". Om du inte kan kontrollera leveransen på två minuter har du inte definierat den än.',
+          },
+          {
+            name: 'Namnge eskaleringen',
+            body: '"Om en regel är tvetydig, lista den under \'behöver människa\' i stället för att besluta" — en rad som förhindrar självsäkra felbeslut.',
+          },
+        ],
+        takeaway:
+          'En återanvändbar brief förvandlar delegering från en skrivövning till en fyll-i-luckorna-vana — och kontrollpunktsraden är den del som håller det säkert.',
       },
     },
     // MT
