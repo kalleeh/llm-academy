@@ -1,109 +1,113 @@
 import { useMemo } from 'react'
-import { Workspace } from '../../components/Workspace'
+import { AgentSession } from '../../components/AgentSession'
+import type { TranscriptTurn } from '../../components/AgentTranscript'
 import type { WorkspaceSnapshot } from '../../components/Workspace'
-import type { TerminalStep } from '../../components/SimulatedTerminal'
+import type { FileNode } from '../../components/FileExplorer'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useTranslation } from '../../i18n'
 
-// Terminal + filesystem content stays English by convention (matches FineTuningRunSection).
-const STEPS: TerminalStep[] = [
-  {
-    command: 'claude "add rate limiting to the public API — 100 req/min per IP, return 429 over the limit, add a test"',
-    output:
-      'I\'ll start by understanding the API structure.\n\n→ Grep "express()" src/ — found src/app.js\n→ Read src/app.js, src/routes/public.js\n\nNo rate limiting today. Plan:\n  1. Add a rateLimiter middleware (in-memory, 100/min/IP)\n  2. Wire it into the public router\n  3. Add a test for the 429 path\n  4. Run the suite',
-    delay: 900,
-  },
-  {
-    command: '[agent] Write src/middleware/rateLimiter.js',
-    output:
-      'Created rateLimiter.js — sliding-window counter keyed by req.ip,\nreturns 429 with Retry-After when the window is exceeded.',
-    delay: 600,
-  },
-  {
-    command: '[agent] Edit src/routes/public.js',
-    output:
-      "+ const rateLimiter = require('../middleware/rateLimiter')\n+ router.use(rateLimiter({ windowMs: 60000, max: 100 }))\n\n✓ middleware wired into the public router",
-    delay: 600,
-  },
-  {
-    command: '[agent] Write test/rateLimiter.test.js',
-    output:
-      'Added a test: fires 101 requests from one IP, asserts the\n101st returns 429 and includes a Retry-After header.',
-    delay: 600,
-  },
-  {
-    command: '[agent] Bash: npm test',
-    output:
-      'PASS test/public.test.js\nPASS test/rateLimiter.test.js\n\nTest Suites: 2 passed, Tests: 14 passed\n\nDone. Rate limiting is live on the public API (100/min/IP),\nover-limit requests get a 429 + Retry-After, and a regression\ntest locks the behavior in.',
-    delay: 800,
-  },
+// Transcript + filesystem content stays English by convention.
+// Same task in each CLI: add rate limiting (100 req/min/IP, 429 over limit) + a test.
+
+const CLAUDE_TURNS: TranscriptTurn[] = [
+  { lines: [
+    { kind: 'user', text: 'add rate limiting to the public API — 100 req/min per IP, return 429 over the limit, add a test' },
+  ], delay: 800 },
+  { lines: [
+    { kind: 'tool', text: 'Grep(pattern: "express()", path: "src/")' },
+    { kind: 'result', text: 'src/app.js' },
+    { kind: 'tool', text: 'Read(src/app.js, src/routes/public.js)' },
+    { kind: 'result', text: 'Read 2 files' },
+    { kind: 'assistant', text: 'No rate limiting today. Plan: add a rateLimiter middleware, wire it into the public router, add a 429 test, run the suite.' },
+  ], delay: 1100 },
+  { lines: [
+    { kind: 'tool', text: 'Write(src/middleware/rateLimiter.js)' },
+    { kind: 'result', text: 'Wrote 18 lines — sliding-window counter keyed by req.ip, 429 + Retry-After over the limit' },
+  ], delay: 800 },
+  { lines: [
+    { kind: 'tool', text: 'Update(src/routes/public.js)' },
+    { kind: 'result', text: 'Updated with 2 additions' },
+    { kind: 'diff-add', text: "    + const rateLimiter = require('../middleware/rateLimiter')" },
+    { kind: 'diff-add', text: '    + router.use(rateLimiter({ windowMs: 60000, max: 100 }))' },
+  ], delay: 800 },
+  { lines: [
+    { kind: 'tool', text: 'Write(test/rateLimiter.test.js)' },
+    { kind: 'result', text: 'Wrote 12 lines — fires 101 requests, asserts the 101st is 429 with Retry-After' },
+    { kind: 'tool', text: 'Bash(npm test)' },
+    { kind: 'result', text: '2 suites passed, 14 tests passed' },
+    { kind: 'assistant', text: 'Done. Rate limiting is live (100/min/IP), over-limit requests get 429 + Retry-After, and a regression test locks it in.' },
+  ], delay: 1200 },
 ]
 
-const BASE_TREE = [
-  { name: 'src', type: 'folder' as const, children: [
-    { name: 'app.js', type: 'file' as const, size: '1.1 KB' },
-    { name: 'routes', type: 'folder' as const, children: [
-      { name: 'public.js', type: 'file' as const, size: '0.8 KB' },
-    ] },
-  ] },
-  { name: 'test', type: 'folder' as const, children: [
-    { name: 'public.test.js', type: 'file' as const, size: '0.6 KB' },
-  ] },
-  { name: 'package.json', type: 'file' as const, size: '0.4 KB' },
+const KIRO_TURNS: TranscriptTurn[] = [
+  { lines: [
+    { kind: 'user', text: 'add rate limiting to the public API — 100 req/min per IP, return 429 over the limit, add a test' },
+  ], delay: 800 },
+  { lines: [
+    { kind: 'assistant', text: 'Generating a spec before writing code.' },
+    { kind: 'ok', text: 'Created .kiro/specs/add-rate-limit/requirements.md' },
+    { kind: 'ok', text: 'Created .kiro/specs/add-rate-limit/design.md' },
+    { kind: 'ok', text: 'Created .kiro/specs/add-rate-limit/tasks.md' },
+    { kind: 'result', text: 'Task 1 — rateLimiter middleware (sliding window, 100/min/IP)' },
+    { kind: 'result', text: 'Task 2 — wire into the public router' },
+    { kind: 'result', text: 'Task 3 — add 429 regression test, run suite' },
+  ], delay: 1200 },
+  { lines: [
+    { kind: 'tool', text: 'Execute task 1/3 — middleware' },
+    { kind: 'result', text: 'Created src/middleware/rateLimiter.js' },
+    { kind: 'tool', text: 'Execute task 2/3 — wire router' },
+    { kind: 'result', text: 'Updated src/routes/public.js' },
+  ], delay: 900 },
+  { lines: [
+    { kind: 'tool', text: 'Execute task 3/3 — test + suite' },
+    { kind: 'result', text: 'Created test/rateLimiter.test.js' },
+    { kind: 'result', text: 'npm test: 14 passed' },
+    { kind: 'assistant', text: 'All tasks complete. The change is traceable to .kiro/specs/add-rate-limit/ — requirements, design, and tasks live beside the code.' },
+  ], delay: 1100 },
 ]
+
+// Shared file nodes
+const F = (name: string, size: string, annotation?: string): FileNode => ({ name, type: 'file', size, ...(annotation ? { annotation } : {}) })
+const baseSrc = (publicSize = '0.8 KB', publicAnn?: string, withMiddleware?: 'new' | 'plain'): FileNode => ({
+  name: 'src', type: 'folder', children: [
+    F('app.js', '1.1 KB'),
+    ...(withMiddleware ? [{ name: 'middleware', type: 'folder' as const, children: [F('rateLimiter.js', '0.7 KB', withMiddleware === 'new' ? 'new' : undefined)] }] : []),
+    { name: 'routes', type: 'folder', children: [F('public.js', publicSize, publicAnn)] },
+  ],
+})
+const testFolder = (withRateTest?: boolean): FileNode => ({
+  name: 'test', type: 'folder', children: [
+    F('public.test.js', '0.6 KB'),
+    ...(withRateTest ? [F('rateLimiter.test.js', '0.5 KB', 'new')] : []),
+  ],
+})
+const pkg = F('package.json', '0.4 KB')
+const kiroSpec = (): FileNode => ({
+  name: '.kiro', type: 'folder', children: [{
+    name: 'specs', type: 'folder', children: [{
+      name: 'add-rate-limit', type: 'folder', children: [
+        F('requirements.md', '0.5 KB', 'new'), F('design.md', '0.6 KB', 'new'), F('tasks.md', '0.3 KB', 'new'),
+      ],
+    }],
+  }],
+})
 
 export const RealSessionSection: React.FC = () => {
   const c = useTranslation().modules.agenticcoding.realSession
 
-  const snapshots = useMemo<Record<number, WorkspaceSnapshot>>(() => ({
-    [-1]: { label: c.workspaceTitle, tree: BASE_TREE, info: c.snapshotInitial },
-    [0]: { label: c.workspaceTitle, tree: BASE_TREE, info: c.snapshotMiddlewareSeen },
-    [1]: { label: c.workspaceTitle, tree: [
-      { name: 'src', type: 'folder', children: [
-        { name: 'app.js', type: 'file', size: '1.1 KB' },
-        { name: 'middleware', type: 'folder', children: [
-          { name: 'rateLimiter.js', type: 'file', size: '0.7 KB', annotation: 'new' },
-        ] },
-        { name: 'routes', type: 'folder', children: [
-          { name: 'public.js', type: 'file', size: '0.8 KB' },
-        ] },
-      ] },
-      { name: 'test', type: 'folder', children: [
-        { name: 'public.test.js', type: 'file', size: '0.6 KB' },
-      ] },
-      { name: 'package.json', type: 'file', size: '0.4 KB' },
-    ], info: c.snapshotMiddlewareAdded },
-    [2]: { label: c.workspaceTitle, tree: [
-      { name: 'src', type: 'folder', children: [
-        { name: 'app.js', type: 'file', size: '1.1 KB' },
-        { name: 'middleware', type: 'folder', children: [
-          { name: 'rateLimiter.js', type: 'file', size: '0.7 KB' },
-        ] },
-        { name: 'routes', type: 'folder', children: [
-          { name: 'public.js', type: 'file', size: '0.9 KB', annotation: 'edited' },
-        ] },
-      ] },
-      { name: 'test', type: 'folder', children: [
-        { name: 'public.test.js', type: 'file', size: '0.6 KB' },
-      ] },
-      { name: 'package.json', type: 'file', size: '0.4 KB' },
-    ], info: c.snapshotEdited },
-    [3]: { label: c.workspaceTitle, tree: [
-      { name: 'src', type: 'folder', children: [
-        { name: 'app.js', type: 'file', size: '1.1 KB' },
-        { name: 'middleware', type: 'folder', children: [
-          { name: 'rateLimiter.js', type: 'file', size: '0.7 KB' },
-        ] },
-        { name: 'routes', type: 'folder', children: [
-          { name: 'public.js', type: 'file', size: '0.9 KB' },
-        ] },
-      ] },
-      { name: 'test', type: 'folder', children: [
-        { name: 'public.test.js', type: 'file', size: '0.6 KB' },
-        { name: 'rateLimiter.test.js', type: 'file', size: '0.5 KB', annotation: 'new' },
-      ] },
-      { name: 'package.json', type: 'file', size: '0.4 KB' },
-    ], info: c.snapshotTested },
+  const claudeSnapshots = useMemo<Record<number, WorkspaceSnapshot>>(() => ({
+    [-1]: { tree: [baseSrc(), testFolder(), pkg], info: c.snapshotInitial },
+    [0]: { tree: [baseSrc(), testFolder(), pkg], info: c.snapshotMiddlewareSeen },
+    [1]: { tree: [baseSrc('0.8 KB', undefined, 'new'), testFolder(), pkg], info: c.snapshotMiddlewareAdded },
+    [2]: { tree: [baseSrc('0.9 KB', 'edited', 'plain'), testFolder(), pkg], info: c.snapshotEdited },
+    [3]: { tree: [baseSrc('0.9 KB', undefined, 'plain'), testFolder(true), pkg], info: c.snapshotTested },
+  }), [c])
+
+  const kiroSnapshots = useMemo<Record<number, WorkspaceSnapshot>>(() => ({
+    [-1]: { tree: [baseSrc(), testFolder(), pkg], info: c.snapshotInitial },
+    [0]: { tree: [kiroSpec(), baseSrc(), testFolder(), pkg], info: c.snapshotKiroSpec },
+    [1]: { tree: [kiroSpec(), baseSrc('0.9 KB', 'edited', 'new'), testFolder(), pkg], info: c.snapshotMiddlewareAdded },
+    [2]: { tree: [kiroSpec(), baseSrc('0.9 KB', undefined, 'plain'), testFolder(true), pkg], info: c.snapshotTested },
   }), [c])
 
   return (
@@ -111,7 +115,14 @@ export const RealSessionSection: React.FC = () => {
       <h2 id="real-session" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-2 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
       <p className="mb-4 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">{c.stepNote}</p>
-      <Workspace title={c.workspaceTitle} terminalTitle={c.terminalTitle} steps={STEPS} snapshots={snapshots} />
+      <AgentSession
+        toggleLabel={c.cliToggleLabel}
+        fileTreeTitle="~/project"
+        variants={{
+          'claude-code': { turns: CLAUDE_TURNS, snapshots: claudeSnapshots },
+          kiro: { turns: KIRO_TURNS, snapshots: kiroSnapshots },
+        }}
+      />
       <p className="mt-4 max-w-2xl rounded-lg border border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 p-4 text-sm text-zinc-700 dark:text-zinc-300">{c.takeaway}</p>
       <div className="mt-8">
         <SelfExplain prompt={c.selfExplainPrompt} modelAnswer={c.selfExplainAnswer} />

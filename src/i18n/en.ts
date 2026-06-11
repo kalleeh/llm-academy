@@ -1601,8 +1601,9 @@ const modules = {
     agenticLoop: {
       title: '2. Anatomy of an Agentic Tool',
       intro:
-        'What actually happens when you hand a task to an agentic coding tool? Run the session below — it is a faithful simulation of a Claude Code run. Watch the loop: understand → plan → act → verify.',
-      stepNote: 'Each command is one turn of the agentic loop. Notice the agent checks its own work before reporting done.',
+        'What actually happens when you hand a task to an agentic coding tool? Below, the same bug fix runs in two real CLIs — toggle between Claude Code and Kiro to compare how each one works.',
+      stepNote: 'Step through each turn. Claude Code drives a direct tool loop — search, read, edit, test. Kiro works spec-first, generating requirements, design, and tasks before it changes code. Same fix, two styles.',
+      cliToggleLabel: 'Choose CLI: Claude Code or Kiro',
       takeaway:
         'This loop — plan, act, verify, repeat — is the signature of every agentic tool, whether it is editing code or a spreadsheet. The skill of using one well is mostly the skill of writing a clear task and reviewing at the right checkpoints.',
       bridgeBlurb: 'That think → act → verify loop has real machinery inside — function calling, MCP, agent design patterns. See how it works.',
@@ -2216,13 +2217,15 @@ const modules = {
     realSession: {
       title: '2. Drive a Real Session',
       intro:
-        'Here is a faithful simulation of a Claude Code session implementing a small feature. Run the commands and watch the repo change on the right. Notice the loop: explore → plan → edit → test → report.',
+        'Here is the same feature — add rate limiting to an API — implemented by two coding agents. Toggle between Claude Code and Kiro CLI, run the session, and watch the repo change on the right. Same outcome, two methodologies.',
       workspaceTitle: 'claude-code — add rate limiting',
       terminalTitle: 'claude-code',
       stepNote:
-        'Each command is one turn of the agentic loop. The agent reads the codebase before editing, writes a test for its own change, and runs the suite before declaring done.',
+        'Step through each turn. Claude Code drives a direct tool loop — read, edit, test, verify. Kiro works spec-first, writing requirements, design, and tasks into .kiro/specs/ before it touches code.',
+      cliToggleLabel: 'Choose CLI: Claude Code or Kiro',
       snapshotInitial: 'Starting point: a small Express API with no rate limiting.',
       snapshotMiddlewareSeen: 'The agent has read the structure and located where middleware is wired in.',
+      snapshotKiroSpec: 'Kiro wrote the spec first — requirements, design, and tasks under .kiro/specs/ before touching code.',
       snapshotMiddlewareAdded: 'New rateLimiter middleware file created — not yet wired into the routes.',
       snapshotEdited: 'The rateLimiter is now wired into the public router.',
       snapshotTested: 'A regression test was added and the suite passes.',
