@@ -1727,30 +1727,30 @@ const modules = {
       recommendLabel: 'Best fit:',
       scenarios: [
         {
-          situation: 'Your sales team spends every Friday afternoon assembling a pipeline summary from CRM exports and call notes.',
+          situation: 'A clinic\'s front desk spends every afternoon assembling the next day\'s appointment list from the booking system, cancellation emails, and handwritten notes.',
           pick: 'Agentic work app',
-          why: 'Recurring, multi-source, well-defined output — ideal delegation. The agent assembles the draft from the exports; a rep reviews it in minutes. A chat assistant would require pasting everything in manually each week.',
+          why: 'Recurring, multi-source, well-defined output — ideal delegation. The agent assembles the list from the sources; a staff member reviews it in minutes. A chat assistant would mean pasting everything in by hand each day.',
         },
         {
-          situation: 'Legal needs a first-pass review of incoming NDAs against your standard playbook.',
+          situation: 'A school office must check every incoming field-trip consent form against the district\'s policy before the trip is approved.',
           pick: 'Agentic work app — with mandatory human review',
-          why: 'The agent compares each NDA to the playbook and flags deviations with references. A lawyer makes every judgment call. High-stakes domains keep the human as the decision-maker; the agent kills the reading time.',
+          why: 'The agent compares each form to the policy and flags anything missing or non-compliant with a reference. A staff member makes the final call. High-stakes checks keep the human as decision-maker; the agent kills the reading time.',
         },
         {
-          situation: 'Marketing wants help punching up campaign copy and subject lines.',
+          situation: 'A restaurant owner wants help punching up the menu descriptions and a few social posts for the new seasonal dishes.',
           pick: 'Chat assistant',
           why: 'Creative iteration is conversation — generate options, react, refine. No files to operate on, no multi-step workflow. The simplest tool that works is the right tool.',
         },
         {
-          situation: 'Engineering says a legacy system rewrite will take three quarters.',
-          pick: 'Agentic coding tools for the dev team',
-          why: 'Modernization is where coding agents shine: large, repetitive, testable. Teams using them well report dramatic speedups on exactly this work. Your role: fund the tools, ask for before/after metrics.',
+          situation: 'A finance back office reconciles hundreds of supplier invoices against purchase orders every month and the work is swallowing the team.',
+          pick: 'Agentic work app (and, if it recurs, a commissioned tool)',
+          why: 'Repetitive, structured, checkable — ideal agent work, and a strong candidate to graduate into a small reusable tool. The agent matches invoices to orders and flags mismatches; a person reviews the exceptions.',
         },
       ],
       selfExplainPrompt:
         'Think of the most repetitive multi-step task your team does every week. Could you delegate it to an agentic tool? Write the one-paragraph brief you would give it.',
       selfExplainAnswer:
-        'Example: "Every Monday we compile a competitor-news digest. Brief: scan these 12 sources for news about competitors X, Y, Z from the past week; group by competitor; two-sentence summary per item with a link; flag anything about pricing or layoffs as urgent; output as one page." Clear sources, format, and escalation rule — that is a delegation-ready brief.',
+        'Example: "Every Monday our clinic compiles a no-show and follow-up list from the week\'s appointments. Brief: scan last week\'s booking export, list every missed appointment grouped by provider, note which need a follow-up call, two-line summary up top; flag anything marked urgent. Output as one page." Clear sources, format, and an escalation rule — that is a delegation-ready brief, and if it repeats every week it is also a tool waiting to be commissioned.',
     },
   },
   workingwithai: {
