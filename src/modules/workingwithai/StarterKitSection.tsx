@@ -4,7 +4,7 @@ import { useTranslation } from '../../i18n'
 
 // Template content stays English by convention (matches prompting-module examples).
 const CUSTOM_INSTRUCTIONS = `About me:
-- Role: [your role, e.g. "customer success lead at a 40-person B2B SaaS"]
+- Role: [your role, e.g. "office manager at a dental clinic" or "ops lead at a logistics firm"]
 - I mostly use AI for: [your top 3 tasks]
 - Audience I usually write for: [e.g. "customers and the exec team"]
 

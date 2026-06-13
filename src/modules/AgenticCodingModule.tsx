@@ -5,6 +5,7 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { CodingAgentDifferentSection } from './agenticcoding/CodingAgentDifferentSection'
 import { RealSessionSection } from './agenticcoding/RealSessionSection'
 import { WorkingEffectivelySection } from './agenticcoding/WorkingEffectivelySection'
+import { SpinUpToolsSection } from './agenticcoding/SpinUpToolsSection'
 import { StealThisSetupSection } from './agenticcoding/StealThisSetupSection'
 
 const QUESTIONS: Question[] = [
@@ -31,6 +32,20 @@ const QUESTIONS: Question[] = [
     explanation:
       'Good scoping + durable context + checkpoint review is the operating model. You delegate the work but keep the accountability, and the agent\'s own tests are what let you review outcomes instead of keystrokes.',
   },
+  {
+    id: 'agcode-3',
+    type: 'mc',
+    question: 'A non-technical colleague needs a small internal form they will own and tweak themselves. You could build it as a single-file app in your repo or point them at a no-code app builder. What is the better default, and why?',
+    options: [
+      'Always build it yourself in the repo — code you own is always better',
+      'A no-code builder, so they can change the fields without a PR or you in the loop — reserve code-you-maintain for what touches secrets or ships to users',
+      'Refuse — non-technical people should not own tools',
+      'Build it in your production framework so it is robust',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Match ceremony to lifespan and ownership. A form a colleague will own and edit is better as a no-code app they control than as code that routes every change through you. Keep code-you-maintain for tools that touch credentials, need your repo, or ship to real users. Knowing when to hand off to no-code is its own engineering judgment.',
+  },
 ]
 
 export const AgenticCodingModule: React.FC = () => {
@@ -41,6 +56,7 @@ export const AgenticCodingModule: React.FC = () => {
       <CodingAgentDifferentSection />
       <RealSessionSection />
       <WorkingEffectivelySection />
+      <SpinUpToolsSection />
       <StealThisSetupSection />
       <KnowledgeCheck moduleId="agenticcoding" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
