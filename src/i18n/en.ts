@@ -2338,6 +2338,44 @@ const modules = {
       bridgeBlurb:
         'You have driven a coding agent. Now look under the hood: how tool use, function calling, MCP, and agent design patterns actually work — the machinery beneath the session you just ran.',
     },
+    // 4. From Editing Code to Spinning Up Tools (technical — the "commission" rung)
+    spinUpTools: {
+      title: '4. From Editing Code to Spinning Up Tools',
+      intro:
+        'You have driven an agent through an existing repo. The same agent is just as good at zero-to-one — and that quietly changes your defaults. The cost of a small internal tool, script, or dashboard has collapsed, so the question shifts from "is this worth building?" to "what would I build if it were nearly free?" Click each shift.',
+      items: [
+        {
+          name: 'Zero-to-one, not just edits',
+          tagline: 'Greenfield is now cheap',
+          description:
+            'Agents scaffold a working app from one paragraph as readily as they refactor an old one. The internal tool you have lived without — the log triager, the on-call dashboard, the data-munging UI — is now an afternoon, not a quarter. Build the thing you would previously have skipped.',
+        },
+        {
+          name: 'Right-size the stack',
+          tagline: 'Match ceremony to lifespan',
+          description:
+            'A tool nobody outside the team will see does not need your production framework. A single-file app, a script, or a no-code/low-code builder often beats a full project. Reserve the heavy stack for what ships to users; let throwaway tools be throwaway.',
+        },
+        {
+          name: 'A small tool is a small spec',
+          tagline: 'Same scoping discipline',
+          description:
+            'Commissioning a tool from an agent uses the exact habits from the last section: a clear outcome, the constraints that matter, a definition of done. "Build a CLI that tails these logs, groups errors by stack signature, and prints the top 10" is a complete brief — scope it once, let it run, review the result.',
+        },
+        {
+          name: 'Know the no-code line',
+          tagline: 'Sometimes you are the wrong builder',
+          description:
+            'Not every internal tool should be code you maintain. For a form a non-technical colleague will own, or a one-off UI, an AI app builder hands them something they can change themselves — no pull request, no you in the loop. Knowing when to hand off to no-code is its own engineering judgment.',
+        },
+      ],
+      takeaway:
+        'The agent that edits your repo also collapses the cost of building from scratch. Lower your bar for what is worth making, right-size the stack to the tool\'s lifespan, and know when the better answer is a no-code builder your colleague owns instead of code you maintain.',
+      selfExplainPrompt:
+        'Name one small internal tool you have wanted but never built because it was not worth the time. What is the one-paragraph spec you would now hand an agent — and would you build it as code you own or as a no-code app a teammate owns?',
+      selfExplainAnswer:
+        'Example: "A dashboard that polls our CI and flags tests that flaked more than twice this week. Spec: read the last 200 runs from the CI API, group failures by test name, list any test with ≥2 non-deterministic failures, sorted by frequency, refreshed on load. I would build it as a single-file app I own, because it touches our CI token and I want it in our repo — but the triage notes form the QA lead wants attached to each flake, that I would hand off to a no-code builder so they can change the fields without me."',
+    },
     // 4. Steal This Setup
     stealThisSetup: {
       title: '4. Steal This Setup',
@@ -2488,6 +2526,78 @@ const modules = {
         'An agent allowed to refund up to $1,000 autonomously gets a clearly fraudulent $950 request — and pays it, because a spend ceiling is not a fraud check. The missing guardrail was not a lower cap; it was a human-in-the-loop rule for refunds above a risk threshold. Caps limit size; they do not supply judgment.',
       bridgeBlurb:
         'Guardrails on one agent are the start. The bigger question — roles, decision rights, and why ~40% of agent initiatives stall on non-technical issues — is organizational. Go there.',
+    },
+    // 4. When a Task Wants to Be a Tool (business — the "commission" rung)
+    taskToTool: {
+      title: '4. When a Task Wants to Be a Tool',
+      intro:
+        'Delegating hands an agent a job once. But when the same job comes back every week, you can now do something that used to need a developer and a budget: ask AI to build you a small tool — a form, a tracker, a calculator, a one-page app — that you and your team reuse. The skill is the same briefing you just learned; the deliverable is bigger. Click each idea.',
+      items: [
+        {
+          name: 'Delegating vs commissioning',
+          tagline: 'A job done once vs a tool you keep',
+          description:
+            'Delegation gets one task done: "reconcile this month\'s expenses." Commissioning gets you the thing that does it every month: "build me an expense-checker I can drop next month\'s sheet into." When a delegation keeps repeating, that is the signal it wants to become a tool.',
+        },
+        {
+          name: 'What "no-code" actually means now',
+          tagline: 'Describe it, don\'t build it',
+          description:
+            'You no longer need to write software or hire someone to get a small internal tool. You describe what you want in plain language — the fields, the rule, the output — and an AI app builder produces a working app you can click. It is the same move as briefing a task; the output just happens to be software.',
+        },
+        {
+          name: 'Spotting a tool-shaped task',
+          tagline: 'Recurring + manual + structured',
+          description:
+            'A task wants to be a tool when three things are true: you do it again and again, it is fiddly by hand, and it has structure — the same fields and steps every time. The intake form you re-key, the weekly sheet you rebuild, the checklist you copy and tweak — those are tools waiting to be asked for, in a clinic, a restaurant, a school office, or a finance back office alike.',
+        },
+        {
+          name: 'Your role does not change',
+          tagline: 'You still direct and review',
+          description:
+            'Commissioning a tool is the same discipline as delegating a task: a clear brief, a checkpoint where you try what it built, and you owning the result before anyone relies on it. You do not become a programmer — you become someone who can get software made. The fear that "this is for technical people" ends exactly here.',
+        },
+      ],
+      walkthroughTitle: 'From a daily grind to a tool you own',
+      stepLabel: 'Step',
+      steps: [
+        {
+          label: 'The recurring pain',
+          content:
+            'A clinic front desk re-keys every new patient\'s details from a paper form into three different screens, then writes a short summary by hand. Twenty minutes a patient, dozens of times a week — the same fields, every single time.',
+          note: 'This is not one task to delegate; it repeats forever. That is the tell.',
+        },
+        {
+          label: 'You recognize the shape',
+          content:
+            'Recurring, manual, and structured — the same nine fields and the same summary, over and over. That is a tool-shaped task. You stop thinking "who can I hand this to?" and start thinking "what could just do this?"',
+          note: 'The recognition is the skill. The building is now the easy part.',
+        },
+        {
+          label: 'You describe the tool',
+          content:
+            '"Build a simple intake form with these nine fields. Validate the phone number and the ID format. When I submit, show me a one-paragraph summary plus a clean row I can paste into our sheet. Keep everything on the page — no data leaves it." You are briefing, not coding.',
+          note: 'Same four-part brief as a delegation: context, what you want, the format, the constraints.',
+        },
+        {
+          label: 'You review what it built',
+          content:
+            'Minutes later there is a working form. You try it with one real (anonymized) case, fix a field label that read wrong, and ask for the summary to be two sentences shorter. It updates. You reviewed the output exactly the way you review a delegated draft.',
+          note: 'The checkpoint is unchanged — you just happen to be reviewing an app instead of a document.',
+        },
+        {
+          label: 'The team uses it',
+          content:
+            'The front desk now fills one form instead of re-keying three screens. Twenty minutes became two. You commissioned it in an afternoon, with no developer and no budget request — and you can change it tomorrow by asking.',
+          note: 'A restaurant owner could do the same for supplier orders; a school office for permission slips. The pattern travels.',
+        },
+      ],
+      takeaway:
+        'The ladder has four rungs: use AI well, save your best prompts, delegate whole tasks, and — when a task keeps coming back — commission a small tool that does it for you. Each rung is the same skill (a clear brief and a real review), pointed at a bigger deliverable.',
+      selfExplainPrompt:
+        'Think of one task you or your team redo by hand every week that has the same shape each time. Describe, in plain language, the small tool you would ask an AI to build for it — the inputs, the rule or steps, and the output you want back.',
+      selfExplainAnswer:
+        'Example: "Every Friday our restaurant tallies the week\'s supplier deliveries against the order sheet to catch shortfalls. Tool: a page where I paste the order list and the delivery notes; it matches them line by line, flags anything short or overcharged with the difference, and gives me a one-line summary plus a list to send the supplier. Nothing leaves the page." Inputs, a clear rule, a checkable output — that is a commission-ready brief, and it is the same brief you would write to delegate the task, just asking for the tool instead of the result.',
     },
     // 4. A Brief You Can Steal
     briefLibrary: {
