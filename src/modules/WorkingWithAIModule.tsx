@@ -55,7 +55,7 @@ const BUSINESS_QUESTIONS: Question[] = [
   {
     id: 'workai-biz-2',
     type: 'mc',
-    question: 'You find yourself typing "I run customer success at a SaaS company, keep it concise and friendly" at the start of every chat. What should you do?',
+    question: 'You find yourself typing "I manage the front office at a dental clinic, keep it concise and friendly" at the start of every chat. What should you do?',
     options: [
       'Keep typing it — repetition is unavoidable',
       'Put it in custom instructions so every chat starts pre-briefed',
