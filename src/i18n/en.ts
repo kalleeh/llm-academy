@@ -2156,7 +2156,7 @@ const modules = {
         {
           label: 'The weekly grind',
           content:
-            'Every Monday you rebuild the same pipeline report: open five spreadsheets, paste highlights into the chat, re-explain the format, fix the tone, reformat for the exec email. Ninety minutes, every week, from scratch.',
+            'Every Monday a school office rebuilds the same attendance-and-events digest for parents: open three spreadsheets, paste the highlights into the chat, re-explain the format, fix the tone, reformat for the newsletter. Ninety minutes, every week, from scratch.',
           note: 'You are re-paying the full setup cost every single time. That is the waste.',
         },
         {
@@ -2183,7 +2183,7 @@ const modules = {
       selfExplainPrompt:
         'Pick the recurring task that eats the most of your week. What is the brief you would save, and what would you put in a project to make it a five-minute job?',
       selfExplainAnswer:
-        'Example: "Monthly board update. Saved brief: context (who reads it, what they care about), the three-section format, the plain-numbers tone. Project contents: the metrics dashboard export, last month\'s update for continuity, the brand voice note. Then \'draft this month\'s board update\' starts from everything it needs."',
+        'Example: "Monthly family newsletter. Saved brief: context (who reads it, what they care about), the three-section format, the warm-but-brief tone. Project contents: the events calendar export, last month\'s newsletter for continuity, the school voice note. Then \'draft this month\'s newsletter\' starts from everything it needs." And if a step in it is the same every month, that step is a candidate to commission as a small tool.',
     },
     // Business: 3. Roll It Out to Your Team
     rollItOut: {
