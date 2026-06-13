@@ -32,6 +32,20 @@ const QUESTIONS: Question[] = [
     explanation:
       'Spend ceilings bound how much, never whether-it-should. Consequential or anomalous actions need a human checkpoint, not just a smaller number.',
   },
+  {
+    id: 'agwork-3',
+    type: 'mc',
+    question: 'You have delegated the same weekly inventory-reconciliation task to an agent four weeks running. What is the higher-leverage next move?',
+    options: [
+      'Keep delegating it each week — it works fine',
+      'Ask an AI app builder to make you a small reusable tool that does the reconciliation, then review and keep it',
+      'Hire a developer to build a custom system',
+      'Go back to doing it by hand to stay in control',
+    ],
+    correctIndex: 1,
+    explanation:
+      'A delegation that repeats every week with the same shape is the signal it wants to become a tool. No-code/low-code app builders let you commission a reusable tool by describing it — same brief, bigger deliverable. You still review what it builds and own the result; you do not need a developer or a budget request.',
+  },
 ]
 
 export const AgenticWorkModule: React.FC = () => {
