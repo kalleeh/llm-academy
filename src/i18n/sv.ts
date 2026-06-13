@@ -1328,8 +1328,46 @@ export const sv: DeepPartial<Translation> = {
           'Du har styrt en kodningsagent. Titta nu under huven: hur verktygsanvändning, funktionsanrop, MCP och designmönster för agenter faktiskt fungerar — maskineriet under sessionen du just körde.',
       },
       // MT
+      spinUpTools: {
+        title: '4. Från att redigera kod till att snabbt skapa verktyg',
+        intro:
+          'Du har styrt en agent genom ett befintligt repo. Samma agent är precis lika bra på noll-till-ett — och det ändrar tyst dina utgångslägen. Kostnaden för ett litet internt verktyg, skript eller en dashboard har kollapsat, så frågan skiftar från "är det här värt att bygga?" till "vad skulle jag bygga om det vore nästan gratis?" Klicka på varje skifte.',
+        items: [
+          {
+            name: 'Noll-till-ett, inte bara redigeringar',
+            tagline: 'Greenfield är nu billigt',
+            description:
+              'Agenter scaffoldar en fungerande app från ett stycke lika gärna som de refaktorerar en gammal. Det interna verktyget du levt utan — felsorteraren för loggar, jourdashboarden, datatuggar-UI:t — är nu en eftermiddag, inte ett kvartal. Bygg den sak du tidigare skulle ha hoppat över.',
+          },
+          {
+            name: 'Dimensionera stacken rätt',
+            tagline: 'Matcha ceremoni mot livslängd',
+            description:
+              'Ett verktyg som ingen utanför teamet kommer att se behöver inte ditt produktionsramverk. En enkelfilsapp, ett skript eller en no-code/low-code-byggare slår ofta ett fullt projekt. Reservera den tunga stacken för det som levereras till användare; låt slit-och-släng-verktyg vara just det.',
+          },
+          {
+            name: 'Ett litet verktyg är en liten spec',
+            tagline: 'Samma avgränsningsdisciplin',
+            description:
+              'Att beställa ett verktyg av en agent använder exakt vanorna från förra avsnittet: ett tydligt utfall, de begränsningar som spelar roll, en definition av klart. "Bygg en CLI som följer de här loggarna, grupperar fel efter stacksignatur och skriver ut topp 10" är en komplett brief — avgränsa den en gång, låt den köra, granska resultatet.',
+          },
+          {
+            name: 'Känn no-code-gränsen',
+            tagline: 'Ibland är du fel byggare',
+            description:
+              'Inte varje internt verktyg bör vara kod du underhåller. För ett formulär en icke-teknisk kollega kommer att äga, eller ett engångs-UI, ger en AI-appbyggare dem något de kan ändra själva — ingen pull request, ingen du i loopen. Att veta när man ska lämna över till no-code är ett eget tekniskt omdöme.',
+          },
+        ],
+        takeaway:
+          'Agenten som redigerar ditt repo kollapsar också kostnaden för att bygga från grunden. Sänk din ribba för vad som är värt att göra, dimensionera stacken efter verktygets livslängd, och vet när det bättre svaret är en no-code-byggare som din kollega äger i stället för kod du underhåller.',
+        selfExplainPrompt:
+          'Nämn ett litet internt verktyg du velat ha men aldrig byggt eftersom det inte var värt tiden. Vad är den enstyckes-spec du nu skulle lämna en agent — och skulle du bygga det som kod du äger eller som en no-code-app en kollega äger?',
+        selfExplainAnswer:
+          'Exempel: "En dashboard som pollar vår CI och flaggar tester som flaxat mer än två gånger den här veckan. Spec: läs de senaste 200 körningarna från CI-API:t, gruppera misslyckanden efter testnamn, lista alla tester med ≥2 icke-deterministiska misslyckanden, sorterat efter frekvens, uppdaterat vid laddning. Jag skulle bygga det som en enkelfilsapp jag äger, eftersom det rör vår CI-token och jag vill ha det i vårt repo — men triagenoterna som QA-ledaren vill ha fästa vid varje flax, dem skulle jag lämna över till en no-code-byggare så att de kan ändra fälten utan mig."',
+      },
+      // MT
       stealThisSetup: {
-        title: '4. Snor den här uppsättningen',
+        title: '5. Snor den här uppsättningen',
         intro:
           'Skillnaden mellan att slåss mot en kodningsagent och att leverera med den är sällan modellen — det är uppsättningen. Kopiera den här start-AGENTS.md till roten av ditt repo, fyll i parenteserna, och snor sedan vanorna nedan.',
         templateTitle: 'AGENTS.md-start — lägg i roten av repot',
@@ -1477,8 +1515,80 @@ export const sv: DeepPartial<Translation> = {
           'Skyddsräcken på en agent är början. Den större frågan — roller, beslutsrätt och varför ~40 % av agentinitiativen kör fast på icke-tekniska frågor — är organisatorisk. Gå dit.',
       },
       // MT
+      taskToTool: {
+        title: '4. När en uppgift vill bli ett verktyg',
+        intro:
+          'Att delegera ger en agent ett jobb en gång. Men när samma jobb återkommer varje vecka kan du nu göra något som förut krävde en utvecklare och en budget: be AI bygga dig ett litet verktyg — ett formulär, en spårare, en kalkylator, en enkelsidig app — som du och ditt team återanvänder. Färdigheten är samma briefing du just lärt dig; leveransen är bara större. Klicka på varje idé.',
+        items: [
+          {
+            name: 'Att delegera kontra att beställa',
+            tagline: 'Ett jobb gjort en gång kontra ett verktyg du behåller',
+            description:
+              'Delegering får en uppgift gjord: "stäm av den här månadens utlägg." Att beställa ger dig den sak som gör det varje månad: "bygg mig en utläggskontrollör jag kan släppa in nästa månads blad i." När en delegering fortsätter att upprepa sig är det signalen att den vill bli ett verktyg.',
+          },
+          {
+            name: 'Vad "no-code" faktiskt betyder nu',
+            tagline: 'Beskriv det, bygg det inte',
+            description:
+              'Du behöver inte längre skriva mjukvara eller anlita någon för att få ett litet internt verktyg. Du beskriver vad du vill ha i vanligt språk — fälten, regeln, utmatningen — och en AI-appbyggare producerar en fungerande app du kan klicka i. Det är samma drag som att briefa en uppgift; utmatningen råkar bara vara mjukvara.',
+          },
+          {
+            name: 'Att se en verktygsformad uppgift',
+            tagline: 'Återkommande + manuell + strukturerad',
+            description:
+              'En uppgift vill bli ett verktyg när tre saker stämmer: du gör den om och om igen, den är pillig för hand, och den har struktur — samma fält och steg varje gång. Intagsformuläret du knappar in på nytt, veckobladet du bygger om, checklistan du kopierar och justerar — de är verktyg som väntar på att bli efterfrågade, lika gärna på en klinik, en restaurang, ett skolkontor eller en ekonomiavdelning.',
+          },
+          {
+            name: 'Din roll ändras inte',
+            tagline: 'Du styr och granskar fortfarande',
+            description:
+              'Att beställa ett verktyg är samma disciplin som att delegera en uppgift: en tydlig brief, en kontrollpunkt där du provar det den byggt, och du som äger resultatet innan någon förlitar sig på det. Du blir inte programmerare — du blir någon som kan få mjukvara gjord. Rädslan att "det här är för tekniska personer" tar slut precis här.',
+          },
+        ],
+        walkthroughTitle: 'Från en daglig slit till ett verktyg du äger',
+        stepLabel: 'Steg',
+        steps: [
+          {
+            label: 'Den återkommande smärtan',
+            content:
+              'En klinikreception knappar in varje ny patients uppgifter från ett pappersformulär till tre olika skärmar och skriver sedan en kort sammanfattning för hand. Tjugo minuter per patient, dussintals gånger i veckan — samma fält, varje enda gång.',
+            note: 'Det här är inte en uppgift att delegera; den upprepar sig för evigt. Det är ledtråden.',
+          },
+          {
+            label: 'Du känner igen formen',
+            content:
+              'Återkommande, manuell och strukturerad — samma nio fält och samma sammanfattning, om och om igen. Det är en verktygsformad uppgift. Du slutar tänka "vem kan jag lämna det här till?" och börjar tänka "vad skulle bara kunna göra det här?"',
+            note: 'Igenkänningen är färdigheten. Byggandet är nu den enkla delen.',
+          },
+          {
+            label: 'Du beskriver verktyget',
+            content:
+              '"Bygg ett enkelt intagsformulär med de här nio fälten. Validera telefonnumret och ID-formatet. När jag skickar in, visa mig en sammanfattning på ett stycke plus en ren rad jag kan klistra in i vårt blad. Håll allt på sidan — ingen data lämnar den." Du briefar, du kodar inte.',
+            note: 'Samma fyrdelade brief som en delegering: kontext, vad du vill ha, formatet, begränsningarna.',
+          },
+          {
+            label: 'Du granskar det den byggt',
+            content:
+              'Minuter senare finns ett fungerande formulär. Du provar det med ett verkligt (anonymiserat) fall, fixar en fältetikett som löd fel, och ber om att sammanfattningen blir två meningar kortare. Det uppdateras. Du granskade utmatningen precis så som du granskar ett delegerat utkast.',
+            note: 'Kontrollpunkten är oförändrad — du råkar bara granska en app i stället för ett dokument.',
+          },
+          {
+            label: 'Teamet använder det',
+            content:
+              'Receptionen fyller nu i ett formulär i stället för att knappa in tre skärmar. Tjugo minuter blev två. Du beställde det på en eftermiddag, utan utvecklare och utan budgetbegäran — och du kan ändra det imorgon genom att be om det.',
+            note: 'En restaurangägare kunde göra detsamma för leverantörsbeställningar; ett skolkontor för medgivandelappar. Mönstret reser.',
+          },
+        ],
+        takeaway:
+          'Stegen har fyra pinnar: använd AI väl, spara dina bästa prompter, delegera hela uppgifter och — när en uppgift fortsätter att återkomma — beställ ett litet verktyg som gör den åt dig. Varje pinne är samma färdighet (en tydlig brief och en verklig granskning), riktad mot en större leverans.',
+        selfExplainPrompt:
+          'Tänk på en uppgift du eller ditt team gör om för hand varje vecka och som har samma form varje gång. Beskriv, i vanligt språk, det lilla verktyg du skulle be en AI bygga åt den — indata, regeln eller stegen, och utmatningen du vill ha tillbaka.',
+        selfExplainAnswer:
+          'Exempel: "Varje fredag stämmer vår restaurang av veckans leverantörsleveranser mot orderbladet för att fånga brister. Verktyg: en sida där jag klistrar in orderlistan och följesedlarna; den matchar dem rad för rad, flaggar allt som är kort eller överdebiterat med differensen, och ger mig en sammanfattning på en rad plus en lista att skicka leverantören. Inget lämnar sidan." Indata, en tydlig regel, en kontrollerbar utmatning — det är en beställningsfärdig brief, och det är samma brief du skulle skriva för att delegera uppgiften, du ber bara om verktyget i stället för resultatet.',
+      },
+      // MT
       briefLibrary: {
-        title: '4. En brief du kan snor',
+        title: '5. En brief du kan snor',
         intro:
           'Du behöver inte uppfinna delegering från grunden. Kopiera den här brief-mallen, fyll i parenteserna, och placera kontrollpunkten där ett misstag faktiskt skulle kosta dig.',
         templateTitle: 'Delegeringsbriefen — fyll i parenteserna',
