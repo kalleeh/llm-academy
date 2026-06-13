@@ -2378,7 +2378,7 @@ const modules = {
     },
     // 4. Steal This Setup
     stealThisSetup: {
-      title: '4. Steal This Setup',
+      title: '5. Steal This Setup',
       intro:
         'The difference between fighting a coding agent and shipping with it is rarely the model — it is the setup. Copy this starter AGENTS.md into your repo root, fill the brackets, then steal the habits below.',
       templateTitle: 'AGENTS.md starter — drop at the repo root',
@@ -2601,7 +2601,7 @@ const modules = {
     },
     // 4. A Brief You Can Steal
     briefLibrary: {
-      title: '4. A Brief You Can Steal',
+      title: '5. A Brief You Can Steal',
       intro:
         'You do not need to invent delegation from scratch. Copy this brief template, fill the brackets, and place the checkpoint where a mistake would actually cost you.',
       templateTitle: 'The delegation brief — fill in the brackets',
