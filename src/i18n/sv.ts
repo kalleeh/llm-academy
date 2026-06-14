@@ -1478,8 +1478,35 @@ export const sv: DeepPartial<Translation> = {
         selfExplainAnswer:
           'Exempel: "Uppgift: triagera den här veckans 80 inkommande supportärenden. Brief — indata: ärendeexporten; regel: tagga varje efter brådska (P1–P3) med våra SLA-definitioner och gruppera per produktområde; leverans: en sorterad tabell plus P1-listan överst. Kontrollpunkt: jag granskar P1-listan innan något auto-eskaleras, eftersom en felaktig P1 väcker någon klockan 02 på natten." Kontrollpunkten sitter exakt där ett fel skulle vara kostsamt eller svårt att vända.',
       },
+      delegateInExcel: {
+        title: '3. Se det i Excel',
+        intro:
+          'Du gick precis igenom en delegering i det abstrakta. Här är samma sorts uppgift i verktyget som miljoner människor redan lever i — ett kalkylblad. Se Claude för Excel stämma av en utläggsrapport mot en resepolicy: den arbetar i rutnätet, flaggar det som bryter mot reglerna och citerar de exakta cellerna. Klicka på vilken cell som helst för att inspektera den; tryck på Kör för att se Claude arbeta.',
+        workbookTitle: 'expenses-march.xlsx',
+        columns: ['Datum', 'Anställd', 'Kategori', 'Belopp'],
+        statusHeader: 'Status',
+        statusOk: 'OK',
+        statusOver: 'OVER',
+        flaggedLabel: 'Flaggade rader',
+        prompt:
+          'Stäm av den här utläggsrapporten mot vår resepolicy: måltider upp till $75, hotell upp till $300. Standardisera kolumnen Belopp till valuta, lägg till en Status-kolumn som markerar varje rad OK eller OVER, flagga raderna som bryter mot policyn och ge mig antalet.',
+        overwriteWarning: 'Claude kommer att skriva över de befintliga värdena i D2:D12.',
+        messages: [
+          'Jag stämmer av alla 11 rader mot policyn — måltider upp till $75, hotell upp till $300. Först lägger jag till en Status-kolumn [E1].',
+          'Standardiserar kolumnen Belopp till valutaformat. Detta skriver om värdena i kolumn D.',
+          'Markerar raderna som följer policyn som OK.',
+          'Fem rader överskrider gränserna — se [D4], [D6], [D8], [D11] och [D12]. Markerar dem OVER och flaggar raderna.',
+          'Lägger till antalet flaggade rader i [E13] med en formel, så att det förblir korrekt om data ändras.',
+        ],
+        takeaway:
+          'Lägg märke till vad som förblev ditt: policyn, beslutet att skicka, den slutliga granskningen. Claude gjorde läsningen och flaggningen tvärs över varje rad och visade sitt arbete cell för cell — du övervakade. Det är delegering, i verktyget du redan använder.',
+        selfExplainPrompt:
+          'Claude flaggade fem rader och citerade de exakta cellerna (D4, D6, D8, D11, D12). Varför spelar det större roll att citera de specifika cellerna än att bara rapportera "5 rader är över policyn"?',
+        selfExplainAnswer:
+          'Eftersom en citering förvandlar ett påstående du måste lita på till ett du kan kontrollera på några sekunder. "5 rader är över" ber dig ta Claude på orden; "se D4, D6, D8, D11, D12" låter dig klicka rakt till var och en, bekräfta beloppet mot regeln och fånga en felbedömning innan den når ekonomi. Spårbarhet är det som gör granskningen av utfallet snabb nog för att delegering faktiskt ska spara tid — utan den skulle du kontrollera alla 240 raderna igen själv, vilket är just det arbete du försökte delegera.',
+      },
       guardrails: {
-        title: '3. Sätt skyddsräcken',
+        title: '4. Sätt skyddsräcken',
         intro:
           'En agent som agerar behöver gränser, på samma sätt som du inte skulle ge en nyanställd företagets kreditkort dag ett. Fyra skyddsräcken håller delegeringen säker. Klicka på varje.',
         items: [
@@ -1516,7 +1543,7 @@ export const sv: DeepPartial<Translation> = {
       },
       // MT
       taskToTool: {
-        title: '4. När en uppgift vill bli ett verktyg',
+        title: '5. När en uppgift vill bli ett verktyg',
         intro:
           'Att delegera ger en agent ett jobb en gång. Men när samma jobb återkommer varje vecka kan du nu göra något som förut krävde en utvecklare och en budget: be AI bygga dig ett litet verktyg — ett formulär, en spårare, en kalkylator, en enkelsidig app — som du och ditt team återanvänder. Färdigheten är samma briefing du just lärt dig; leveransen är bara större. Klicka på varje idé.',
         items: [
@@ -1588,7 +1615,7 @@ export const sv: DeepPartial<Translation> = {
       },
       // MT
       briefLibrary: {
-        title: '5. En brief du kan snor',
+        title: '6. En brief du kan snor',
         intro:
           'Du behöver inte uppfinna delegering från grunden. Kopiera den här brief-mallen, fyll i parenteserna, och placera kontrollpunkten där ett misstag faktiskt skulle kosta dig.',
         templateTitle: 'Delegeringsbriefen — fyll i parenteserna',
