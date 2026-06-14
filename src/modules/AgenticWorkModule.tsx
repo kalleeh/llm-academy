@@ -4,6 +4,7 @@ import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatIsAgenticWorkSection } from './agenticwork/WhatIsAgenticWorkSection'
 import { DelegateSuperviseSection } from './agenticwork/DelegateSuperviseSection'
+import { DelegateInExcelSection } from './agenticwork/DelegateInExcelSection'
 import { GuardrailsSection } from './agenticwork/GuardrailsSection'
 import { TaskToToolSection } from './agenticwork/TaskToToolSection'
 import { BriefLibrarySection } from './agenticwork/BriefLibrarySection'
@@ -55,6 +56,7 @@ export const AgenticWorkModule: React.FC = () => {
     <ModuleLayout moduleId="agentic-work" title="Agentic Work" subtitle="AI assistants that do tasks for you — delegate multi-step work, supervise, and set guardrails.">
       <WhatIsAgenticWorkSection />
       <DelegateSuperviseSection />
+      <DelegateInExcelSection />
       <GuardrailsSection />
       <TaskToToolSection />
       <BriefLibrarySection />
