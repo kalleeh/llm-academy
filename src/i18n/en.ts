@@ -2490,9 +2490,37 @@ const modules = {
       selfExplainAnswer:
         'Example: "Task: triage this week\'s 80 inbound support tickets. Brief — inputs: the ticket export; rule: tag each by urgency (P1–P3) using our SLA definitions and group by product area; deliverable: a sorted table plus the P1 list up top. Checkpoint: I review the P1 list before anything is auto-escalated, because a wrong P1 wakes someone at 2am." The checkpoint sits exactly where an error would be costly or hard to reverse.',
     },
-    // 3. Set Guardrails
+    // 3. See It In Excel — Claude working a reconciliation in a real grid
+    delegateInExcel: {
+      title: '3. See It In Excel',
+      intro:
+        'You just stepped through a delegation in the abstract. Here is the same kind of task in the tool millions of people already live in — a spreadsheet. Watch Claude for Excel reconcile an expense sheet against a travel policy: it works in the grid, flags what breaks the rules, and cites the exact cells. Click any cell to inspect it; press Run to watch Claude work.',
+      workbookTitle: 'expenses-march.xlsx',
+      columns: ['Date', 'Employee', 'Category', 'Amount'],
+      statusHeader: 'Status',
+      statusOk: 'OK',
+      statusOver: 'OVER',
+      flaggedLabel: 'Flagged lines',
+      prompt:
+        'Reconcile this expense sheet against our travel policy: meals up to $75, hotels up to $300. Standardize the Amount column to currency, add a Status column marking each line OK or OVER, flag the lines that break policy, and give me the count.',
+      overwriteWarning: 'Claude will overwrite the existing values in D2:D12.',
+      messages: [
+        'I\'ll reconcile all 11 lines against the policy — meals up to $75, hotels up to $300. First, adding a [E1] Status column.',
+        'Standardizing the Amount column to currency format. This rewrites the values in column D.',
+        'Marking the lines that comply with policy as OK.',
+        'Five lines exceed the limits — see [D4], [D6], [D8], [D11], and [D12]. Marking them OVER and flagging the rows.',
+        'Adding the count of flagged lines in [E13] with a formula, so it stays correct if the data changes.',
+      ],
+      takeaway:
+        'Notice what stayed yours: the policy, the decision to send, the final review. Claude did the reading and the flagging across every row and showed its work cell by cell — you supervised. That is delegation, in the tool you already use.',
+      selfExplainPrompt:
+        'Claude flagged five lines and cited the exact cells (D4, D6, D8, D11, D12). Why does citing the specific cells matter more than just reporting "5 lines are over policy"?',
+      selfExplainAnswer:
+        'Because a citation turns a claim you have to trust into one you can check in seconds. "5 lines are over" asks you to take Claude\'s word; "see D4, D6, D8, D11, D12" lets you click straight to each one, confirm the amount against the rule, and catch a miscall before it reaches finance. Traceability is what makes reviewing the output fast enough that delegation actually saves time — without it you would re-check all 240 lines yourself, which is the work you were trying to delegate.',
+    },
+    // 4. Set Guardrails
     guardrails: {
-      title: '3. Set Guardrails',
+      title: '4. Set Guardrails',
       intro:
         'An agent that acts needs limits, the same way you would not give a new hire the company credit card on day one. Four guardrails keep delegation safe. Click each.',
       items: [
@@ -2529,7 +2557,7 @@ const modules = {
     },
     // 4. When a Task Wants to Be a Tool (business — the "commission" rung)
     taskToTool: {
-      title: '4. When a Task Wants to Be a Tool',
+      title: '5. When a Task Wants to Be a Tool',
       intro:
         'Delegating hands an agent a job once. But when the same job comes back every week, you can now do something that used to need a developer and a budget: ask AI to build you a small tool — a form, a tracker, a calculator, a one-page app — that you and your team reuse. The skill is the same briefing you just learned; the deliverable is bigger. Click each idea.',
       items: [
@@ -2601,7 +2629,7 @@ const modules = {
     },
     // 4. A Brief You Can Steal
     briefLibrary: {
-      title: '5. A Brief You Can Steal',
+      title: '6. A Brief You Can Steal',
       intro:
         'You do not need to invent delegation from scratch. Copy this brief template, fill the brackets, and place the checkpoint where a mistake would actually cost you.',
       templateTitle: 'The delegation brief — fill in the brackets',
