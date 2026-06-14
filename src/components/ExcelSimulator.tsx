@@ -104,6 +104,7 @@ export const ExcelSimulator: React.FC<ExcelSimulatorProps> = ({ title, columns, 
   const [flash, setFlash] = useState<Set<string>>(new Set())
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const panelRef = useRef<HTMLDivElement>(null)
+  const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const { grid, flagged } = useMemo(
     () => foldGrid(columns, rows, session, revealed),
@@ -134,9 +135,10 @@ export const ExcelSimulator: React.FC<ExcelSimulatorProps> = ({ title, columns, 
     for (const op of session[revealed - 1]?.ops ?? []) {
       if (op.kind === 'setCells') op.cells.forEach((c) => f.add(cellKey(c.row, c.col)))
     }
+    if (flashTimer.current) clearTimeout(flashTimer.current)
     setFlash(f)
-    const id = setTimeout(() => setFlash(new Set()), 1100)
-    return () => clearTimeout(id)
+    flashTimer.current = setTimeout(() => setFlash(new Set()), 1100)
+    return () => { if (flashTimer.current) clearTimeout(flashTimer.current) }
   }, [revealed, session])
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -154,7 +156,8 @@ export const ExcelSimulator: React.FC<ExcelSimulatorProps> = ({ title, columns, 
     if (!pos) return
     setSelected(pos)
     setFlash(new Set([cellKey(pos.row, pos.col)]))
-    setTimeout(() => setFlash(new Set()), 1100)
+    if (flashTimer.current) clearTimeout(flashTimer.current)
+    flashTimer.current = setTimeout(() => setFlash(new Set()), 1100)
   }, [])
 
   const hasMore = revealed < session.length
@@ -260,6 +263,8 @@ export const ExcelSimulator: React.FC<ExcelSimulatorProps> = ({ title, columns, 
             <div className="ml-6 rounded-lg rounded-tr-sm bg-[#ece9e3] px-3 py-2 text-[13px] leading-relaxed text-zinc-800">
               {prompt}
             </div>
+            {/* onCite reads flashTimer.current inside an event handler, not during render */}
+            {/* eslint-disable-next-line react-hooks/refs */}
             {session.slice(0, revealed).map((step, i) => {
               const isLast = i === revealed - 1
               const text = isLast ? step.message.slice(0, typedLen) : step.message
