@@ -6,6 +6,7 @@ import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatModelSeesSection } from './workingwithai/WhatModelSeesSection'
 import { IterationLoopSection } from './workingwithai/IterationLoopSection'
 import { PowerFeaturesSection } from './workingwithai/PowerFeaturesSection'
+import { AgentContextSection } from './workingwithai/AgentContextSection'
 import { StarterKitSection } from './workingwithai/StarterKitSection'
 import { BriefingBusiness } from './workingwithai/BriefingBusiness'
 import { VagueToValuableBusiness } from './workingwithai/VagueToValuableBusiness'
@@ -78,6 +79,7 @@ export const WorkingWithAIModule: React.FC = () => {
         <BriefingBusiness />
         <VagueToValuableBusiness />
         <MakeItStickBusiness />
+        <AgentContextSection />
         <StarterKitSection />
         <KnowledgeCheck moduleId="workingwithai-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
@@ -89,6 +91,7 @@ export const WorkingWithAIModule: React.FC = () => {
       <WhatModelSeesSection />
       <IterationLoopSection />
       <PowerFeaturesSection />
+      <AgentContextSection />
       <StarterKitSection />
       <KnowledgeCheck moduleId="workingwithai" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>

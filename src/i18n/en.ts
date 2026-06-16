@@ -1968,8 +1968,64 @@ const modules = {
         'Briefing well is a craft with named techniques behind it — examples, step-by-step reasoning, role prompts. See how prompting really works.',
     },
     // 4. Set It Once: Your Starter Kit (rendered in both personas)
+    agentContext: {
+      title: '4. Give It Your Context',
+      introBusiness:
+        'A general-purpose assistant knows everything in general and nothing about you. The single biggest upgrade is not a cleverer prompt — it is giving the model standing context about your company, the project, and your role, so it stops answering like a stranger. Below is the same request run two ways: a generic assistant, and one briefed on the context card above it. Switch the tabs and watch the difference.',
+      introTechnical:
+        'A fresh agent knows the language but nothing about your codebase. The single biggest upgrade is not a cleverer prompt — it is standing context (an AGENTS.md / CLAUDE.md / steering file) that tells the agent your company, the project, and the conventions it must follow. Below is the same task run two ways: a bare agent, and one that loaded the context card above it. Switch the tabs and watch the difference.',
+      cardTitle: 'The standing context (set once, loaded every session)',
+      company: {
+        label: 'Company',
+        body: 'Bright Smile Dental — a neighborhood clinic. Warm, plain language, no jargon. We always offer two concrete times and ask the patient to confirm.',
+      },
+      project: {
+        label: 'Project',
+        body: 'Cut no-shows this quarter. Goal: every reschedule reply offers two specific open slots and a one-tap way to confirm, instead of "let us know your availability."',
+      },
+      roleBusiness: {
+        label: 'You',
+        body: 'Front-desk lead. You answer to patients for tone and to the dentist for a full book. You want a short, send-ready reply — not a form letter you have to rewrite.',
+      },
+      roleTechnical: {
+        label: 'Conventions',
+        body: 'TypeScript + Fastify, not Express. Slots come from the live calendar — never hardcoded. Errors are wrapped, bad input 400s. Every endpoint ships with a table-driven test.',
+      },
+      taskLabel: 'The request (identical in both tabs):',
+      taskBusiness: '"Reply to Sara, who asked to move her Tuesday cleaning."',
+      taskTechnical: 'add an endpoint that returns the open appointment slots for a given day',
+      genericTab: 'Generic assistant',
+      briefedTab: 'Briefed on the context',
+      toggleLabel: 'Toggle between the generic and briefed assistant',
+      genericSteps: [
+        { label: 'You', content: 'Reply to Sara, who asked to move her Tuesday cleaning.' },
+        {
+          label: 'Assistant',
+          content:
+            'Here is a draft: "Dear Patient, thank you for contacting us regarding your appointment. We would be happy to accommodate your request. We do have availability. Please advise us of your preferred dates and times, and we will do our best to assist you. We look forward to hearing from you."',
+          note: 'No clinic, no calendar, no idea who is reading it. So it pads with filler, sounds like a form letter, and throws the work back to Sara — "tell us your availability" — instead of moving the booking forward.',
+        },
+      ],
+      briefedSteps: [
+        { label: 'You', content: 'Reply to Sara, who asked to move her Tuesday cleaning.' },
+        {
+          label: 'Claude',
+          content:
+            '"Hi Sara — happy to move your cleaning! We\'ve got Tuesday 9:40am or Thursday 2pm next week. Reply with whichever suits and I\'ll lock it in. — Bright Smile Dental front desk"',
+          note: 'Same model, same request. The context card told it the clinic, the warm plain tone, the offer-two-slots rule, and that you want a send-ready reply — so that is exactly what it produced, no rewrite needed.',
+        },
+      ],
+      bridgeBusiness:
+        'Nothing in the briefed run was a better prompt — it was better standing context. Company, project, and role facts that are true in every chat belong in your custom instructions, not retyped each time. That is exactly what the starter kit below sets up.',
+      bridgeTechnical:
+        'Nothing in the second run was a better prompt — it was the AGENTS.md the agent read first. Conventions that hold across every task belong in a context file the agent loads automatically, not in each prompt. That is exactly what the starter kit below sets up.',
+      selfExplainPrompt:
+        'Of the three context blocks — company, project, role/conventions — which one would change the answer most for the work you actually do, and why?',
+      selfExplainAnswer:
+        'There is no single right answer — the point is that each block removes a different kind of guesswork. Company/conventions context fixes how the output should look and sound (tone, stack, house rules) so you stop correcting the same things every time. Project context fixes what the work is for and what it must not violate (the goal, the constraint, who the stakeholders are), which is what stops a technically-correct answer that misses the actual point. Role context fixes who the output is for and in what shape, so you get something you can act on rather than reshape. Whichever you re-type most often is the one worth promoting into standing context first — that recurring sentence is the tell.',
+    },
     starterKit: {
-      title: '4. Set It Once: Your Starter Kit',
+      title: '5. Set It Once: Your Starter Kit',
       intro:
         'Everything this module teaches works without retyping it. Context goes in once — into settings, not into every prompt. Copy these two templates, fill in the brackets, and you are set up in five minutes.',
       templateTitleA: 'Paste into your assistant\'s custom instructions',

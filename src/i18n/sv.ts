@@ -1095,8 +1095,64 @@ export const sv: DeepPartial<Translation> = {
         bridgeBlurb: 'Att briefa väl är ett hantverk med namngivna tekniker bakom sig — exempel, steg-för-steg-resonemang, rollprompter. Se hur prompting verkligen fungerar.',
       },
       // MT
+      agentContext: {
+        title: '4. Ge den din kontext',
+        introBusiness:
+          'En allmän assistent vet allt i allmänhet och ingenting om dig. Den enskilt största förbättringen är inte en smartare prompt — det är att ge modellen stående kontext om ditt företag, projektet och din roll, så att den slutar svara som en främling. Nedan körs samma förfrågan på två sätt: en generisk assistent, och en som briefats på kontextkortet ovanför. Växla mellan flikarna och se skillnaden.',
+        introTechnical:
+          'En ny agent kan språket men ingenting om din kodbas. Den enskilt största förbättringen är inte en smartare prompt — det är stående kontext (en AGENTS.md / CLAUDE.md / styrfil) som talar om för agenten ditt företag, projektet och konventionerna den måste följa. Nedan körs samma uppgift på två sätt: en naken agent, och en som laddat kontextkortet ovanför. Växla mellan flikarna och se skillnaden.',
+        cardTitle: 'Den stående kontexten (sätts en gång, laddas varje session)',
+        company: {
+          label: 'Företag',
+          body: 'Bright Smile Dental — en lokal tandklinik. Varmt, enkelt språk, ingen jargong. Vi erbjuder alltid två konkreta tider och ber patienten bekräfta.',
+        },
+        project: {
+          label: 'Projekt',
+          body: 'Minska uteblivna besök detta kvartal. Mål: varje ombokningssvar erbjuder två specifika lediga tider och ett enkelt sätt att bekräfta, i stället för "hör av dig med din tillgänglighet".',
+        },
+        roleBusiness: {
+          label: 'Du',
+          body: 'Receptionsansvarig. Du svarar inför patienter för tonen och inför tandläkaren för en fullbokad kalender. Du vill ha ett kort, skickfärdigt svar — inte ett standardbrev du måste skriva om.',
+        },
+        roleTechnical: {
+          label: 'Konventioner',
+          body: 'TypeScript + Fastify, inte Express. Tider kommer från den live-kalendern — aldrig hårdkodade. Fel wrappas, felaktig indata ger 400. Varje endpoint levereras med ett tabelldrivet test.',
+        },
+        taskLabel: 'Förfrågan (identisk i båda flikarna):',
+        taskBusiness: '"Svara Sara, som bad att flytta sin tandrengöring på tisdag."',
+        taskTechnical: 'lägg till en endpoint som returnerar de lediga tiderna för en viss dag',
+        genericTab: 'Generisk assistent',
+        briefedTab: 'Briefad på kontexten',
+        toggleLabel: 'Växla mellan den generiska och den briefade assistenten',
+        genericSteps: [
+          { label: 'Du', content: 'Svara Sara, som bad att flytta sin tandrengöring på tisdag.' },
+          {
+            label: 'Assistent',
+            content:
+              'Här är ett utkast: "Bästa patient, tack för att du kontaktar oss angående din tid. Vi tillmötesgår gärna din begäran. Vi har lediga tider. Meddela oss gärna dina önskade datum och tider, så gör vi vårt bästa för att hjälpa dig. Vi ser fram emot att höra från dig."',
+            note: 'Inget klinik, ingen kalender, ingen aning om vem som läser. Så den fyller ut med floskler, låter som ett standardbrev, och kastar tillbaka arbetet på Sara — "berätta din tillgänglighet" — i stället för att föra bokningen framåt.',
+          },
+        ],
+        briefedSteps: [
+          { label: 'Du', content: 'Svara Sara, som bad att flytta sin tandrengöring på tisdag.' },
+          {
+            label: 'Claude',
+            content:
+              '"Hej Sara — vi flyttar gärna din tandrengöring! Vi har tisdag 09:40 eller torsdag 14:00 nästa vecka. Svara med den som passar så bokar jag in den. — Bright Smile Dental, receptionen"',
+            note: 'Samma modell, samma förfrågan. Kontextkortet gav den kliniken, den varma enkla tonen, regeln om att erbjuda två tider, och att du vill ha ett skickfärdigt svar — så det är precis vad den producerade, ingen omskrivning behövdes.',
+          },
+        ],
+        bridgeBusiness:
+          'Inget i den briefade körningen var en bättre prompt — det var bättre stående kontext. Fakta om företag, projekt och roll som är sanna i varje chatt hör hemma i dina anpassade instruktioner, inte omskrivna varje gång. Det är precis vad startkitet nedan ställer in.',
+        bridgeTechnical:
+          'Inget i den andra körningen var en bättre prompt — det var AGENTS.md som agenten läste först. Konventioner som gäller för varje uppgift hör hemma i en kontextfil som agenten laddar automatiskt, inte i varje prompt. Det är precis vad startkitet nedan ställer in.',
+        selfExplainPrompt:
+          'Av de tre kontextblocken — företag, projekt, roll/konventioner — vilket skulle ändra svaret mest för det arbete du faktiskt gör, och varför?',
+        selfExplainAnswer:
+          'Det finns inget enda rätt svar — poängen är att varje block tar bort en egen sorts gissande. Företags-/konventionskontext fixar hur resultatet ska se ut och låta (ton, teknikstack, husregler) så att du slutar rätta samma saker varje gång. Projektkontext fixar vad arbetet är till för och vad det inte får bryta mot (målet, villkoret, vilka intressenterna är), vilket är det som stoppar ett tekniskt korrekt svar som missar själva poängen. Rollkontext fixar vem resultatet är till för och i vilken form, så att du får något du kan agera på i stället för att forma om. Det du skriver om oftast är det som är värt att lyfta in i stående kontext först — den återkommande meningen är tecknet.',
+      },
       starterKit: {
-        title: '4. Ställ in det en gång: ditt startkit',
+        title: '5. Ställ in det en gång: ditt startkit',
         intro:
           'Allt den här modulen lär ut fungerar utan att du skriver om det. Kontexten läggs in en gång — i inställningarna, inte i varje prompt. Kopiera de här två mallarna, fyll i parenteserna, så är du redo på fem minuter.',
         templateTitleA: 'Klistra in i din assistents anpassade instruktioner',
