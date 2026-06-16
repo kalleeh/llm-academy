@@ -12,22 +12,57 @@ interface AgentTranscriptProps {
   onTurnExecuted?: (turnIndex: number) => void
 }
 
-const VARIANT_META: Record<CliVariant, { label: string; labelColor: string; glyph: string }> = {
-  'claude-code': { label: '✻ Claude Code', labelColor: 'text-amber-400', glyph: '>' },
-  kiro: { label: '◆ Kiro', labelColor: 'text-violet-400', glyph: '▶' },
+// Per-product terminal theme. Colors are sourced from the real products:
+// Claude Code — default dark truecolor theme (accent clay #D97757, tool dots
+// green #4EBA65, result lines dimmed). Kiro — brand violet #9046FF on the
+// purple-tinted "prey" dark background #19161D.
+interface CliTheme {
+  /** Terminal background. */
+  bg: string
+  /** Title-bar background (terminal-emulator chrome). */
+  barBg: string
+  /** Product label shown in the title bar + welcome banner. */
+  label: string
+  /** Accent (brand) color — banner mark, spinner, in-progress todos. */
+  accent: string
+  /** User-prompt glyph color. */
+  promptColor: string
+  /** Tool bullet glyph + its color. */
+  toolGlyph: string
+  toolColor: string
+  /** Welcome-banner lines (rendered in a rounded accent-bordered box). */
+  welcome: { mark: string; title: string; sub: string }
+  /** Bottom status-line text. */
+  status: string
 }
 
-// Per-line-kind prefix glyph + text color. `user` uses the variant glyph.
-function lineClass(kind: LineKind): string {
-  switch (kind) {
-    case 'assistant': return 'text-zinc-300'
-    case 'tool': return 'text-emerald-400'
-    case 'result': return 'text-zinc-500'
-    case 'ok': return 'text-emerald-400'
-    case 'diff-add': return 'text-green-400'
-    case 'diff-del': return 'text-red-400'
-    default: return 'text-zinc-100'
-  }
+const TEXT = '#e6e6e6'
+const DIM = '#8a8a8a'
+const GREEN = '#4eba65'
+
+const THEME: Record<CliVariant, CliTheme> = {
+  'claude-code': {
+    bg: '#1c1b1a',
+    barBg: '#2a2725',
+    label: '✻ Claude Code',
+    accent: '#d97757',
+    promptColor: GREEN,
+    toolGlyph: '⏺',
+    toolColor: GREEN,
+    welcome: { mark: '✻', title: 'Welcome to Claude Code', sub: '/help for help, /status for your current setup' },
+    status: '✻ Opus 4.8 · claude-opus-4-8',
+  },
+  kiro: {
+    bg: '#19161d',
+    barBg: '#28242e',
+    label: '◯ KIRO',
+    accent: '#9046ff',
+    promptColor: '#b080ff',
+    toolGlyph: '●',
+    toolColor: '#b080ff',
+    welcome: { mark: '◯', title: 'Kiro CLI', sub: 'spec-driven agentic coding · kiro_planner ready' },
+    status: '◆ Spec mode · claude-sonnet-4-6',
+  },
 }
 
 interface RenderedLine extends TranscriptLine { displayed: string; done: boolean }
@@ -37,7 +72,7 @@ export const AgentTranscript: React.FC<AgentTranscriptProps> = ({ variant, turns
   const [turnIndex, setTurnIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const meta = VARIANT_META[variant]
+  const t = THEME[variant]
 
   useEffect(() => {
     const el = scrollRef.current
@@ -81,52 +116,108 @@ export const AgentTranscript: React.FC<AgentTranscriptProps> = ({ variant, turns
 
   const hasMore = turnIndex < turns.length
 
+  // Render a single transcript line with product-faithful gutters + colors.
+  const renderLine = (line: RenderedLine, i: number) => {
+    const { kind, displayed, done } = line
+    const cursor = !done && <span className="animate-pulse" style={{ color: t.accent }}>▌</span>
+
+    if (kind === 'user') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: TEXT }}>
+          <span style={{ color: t.promptColor }}>{'> '}</span>{displayed}{cursor}
+        </pre>
+      )
+    }
+    if (kind === 'tool') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap font-semibold leading-relaxed" style={{ color: TEXT }}>
+          <span style={{ color: t.toolColor }}>{t.toolGlyph} </span>{displayed}{cursor}
+        </pre>
+      )
+    }
+    if (kind === 'result') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: DIM }}>
+          {'  ⎿  '}{displayed}{cursor}
+        </pre>
+      )
+    }
+    if (kind === 'ok') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: variant === 'kiro' ? t.accent : GREEN }}>
+          {'✓ '}{displayed}{cursor}
+        </pre>
+      )
+    }
+    if (kind === 'diff-add') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: '#a8f0b8', backgroundColor: 'rgba(34,92,43,0.55)' }}>
+          {displayed}{cursor}
+        </pre>
+      )
+    }
+    if (kind === 'diff-del') {
+      return (
+        <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: '#ffb3bf', backgroundColor: 'rgba(122,41,54,0.55)' }}>
+          {displayed}{cursor}
+        </pre>
+      )
+    }
+    // assistant
+    return (
+      <pre key={i} className="whitespace-pre-wrap leading-relaxed" style={{ color: TEXT }}>
+        {displayed}{cursor}
+      </pre>
+    )
+  }
+
   return (
-    <div className="flex h-80 flex-col overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
-      <div className="flex shrink-0 items-center gap-2 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
-        <span className="size-3 rounded-full bg-red-500" />
-        <span className="size-3 rounded-full bg-yellow-500" />
-        <span className="size-3 rounded-full bg-green-500" />
-        <span className={`ml-2 font-mono text-xs font-semibold ${meta.labelColor}`}>{meta.label}</span>
+    <div className="flex h-80 flex-col overflow-hidden rounded-lg border border-zinc-700 shadow-sm">
+      {/* Terminal-emulator title bar */}
+      <div className="flex shrink-0 items-center gap-2 px-4 py-2" style={{ backgroundColor: t.barBg }}>
+        <span className="size-3 rounded-full bg-[#ff5f57]" />
+        <span className="size-3 rounded-full bg-[#febc2e]" />
+        <span className="size-3 rounded-full bg-[#28c840]" />
+        <span className="ml-2 font-mono text-xs font-semibold" style={{ color: t.accent }}>{t.label}</span>
       </div>
-      <div ref={scrollRef} className="flex-1 overflow-y-auto bg-zinc-900 p-4 font-mono text-sm">
-        {rendered.map((line, i) => {
-          const colorClass = line.kind === 'tool' && variant === 'kiro'
-            ? 'text-violet-400'
-            : lineClass(line.kind)
-          return (
-            <pre key={i} className={`whitespace-pre-wrap leading-relaxed ${colorClass}`}>
-              {line.kind === 'user' && <span className="text-zinc-500">{meta.glyph} </span>}
-              {line.kind === 'tool' && <span>{variant === 'kiro' ? '▶ ' : '⏺ '}</span>}
-              {line.kind === 'result' && <span className="text-zinc-600">{'  ⎿ '}</span>}
-              {line.kind === 'ok' && <span>{'✓ '}</span>}
-              {line.displayed}
-              {!line.done && <span className="animate-pulse text-amber-400">▌</span>}
-            </pre>
-          )
-        })}
+      {/* Transcript body */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 font-mono text-sm" style={{ backgroundColor: t.bg }}>
+        {/* Welcome banner — rounded accent-bordered box, like the real CLIs on launch */}
+        <div className="mb-3 inline-block rounded-md border px-3 py-1.5" style={{ borderColor: t.accent }}>
+          <div style={{ color: TEXT }}>
+            <span style={{ color: t.accent }}>{t.welcome.mark} </span>
+            <span className="font-semibold">{t.welcome.title}</span>
+          </div>
+          <div className="mt-0.5 text-xs" style={{ color: DIM }}>{t.welcome.sub}</div>
+        </div>
+        {rendered.map((line, i) => renderLine(line, i))}
         {rendered.length === 0 && (
           <div className="flex items-center gap-1">
-            <span className="text-zinc-500">{meta.glyph}</span>
-            <span className="animate-pulse text-amber-400">▌</span>
+            <span style={{ color: t.promptColor }}>{'>'}</span>
+            <span className="animate-pulse" style={{ color: t.accent }}>▌</span>
           </div>
         )}
       </div>
-      <div className="flex shrink-0 items-center gap-2 border-t border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 px-4 py-2">
+      {/* Bottom status line */}
+      <div className="flex shrink-0 items-center gap-2 border-t px-4 py-2" style={{ backgroundColor: t.barBg, borderColor: 'rgba(255,255,255,0.08)' }}>
         {hasMore ? (
           <>
             <button
               onClick={() => runTurn(turnIndex)}
               disabled={isAnimating}
-              className="rounded bg-zinc-200 dark:bg-zinc-600 px-3 py-1 text-xs text-zinc-900 dark:text-zinc-100 transition-colors hover:bg-zinc-300 dark:hover:bg-zinc-500 disabled:opacity-50"
+              className="rounded px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              style={{ backgroundColor: t.accent }}
             >
               {turnIndex === 0 ? 'Run' : 'Next'}
             </button>
-            <span className="text-xs text-zinc-500">Turn {turnIndex + 1} of {turns.length}</span>
+            <span className="text-xs" style={{ color: DIM }}>Turn {turnIndex + 1} of {turns.length}</span>
           </>
         ) : (
-          <span className="text-xs text-zinc-500">{rendered.length > 0 ? '✓ Session complete' : `${turns.length} turns ready`}</span>
+          <span className="text-xs" style={{ color: rendered.length > 0 ? GREEN : DIM }}>
+            {rendered.length > 0 ? '✓ Session complete' : `${turns.length} turns ready`}
+          </span>
         )}
+        <span className="ml-auto truncate font-mono text-[11px]" style={{ color: DIM }}>{t.status}</span>
       </div>
     </div>
   )
