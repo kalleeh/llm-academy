@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Icon } from './Icon'
+import type { IconName } from './Icon'
 
 export type WorkAppVariant = 'quick-desktop' | 'cowork'
 export type WorkEventKind = 'brief' | 'plan' | 'working' | 'review' | 'done'
@@ -12,66 +13,12 @@ interface WorkAppWindowProps {
   kinds: WorkEventKind[]
 }
 
-const STAGES: { kind: WorkEventKind; label: string }[] = [
-  { kind: 'brief', label: 'Brief' }, { kind: 'plan', label: 'Plan' },
-  { kind: 'working', label: 'Work' }, { kind: 'review', label: 'Review' }, { kind: 'done', label: 'Done' },
-]
-
-// Product-faithful themes. Quick Suite: a light/white agentic workspace with an
-// indigo-purple primary (#6344F6) and the hexagon logo motif — deliberately NOT
-// Amazon orange/navy. Claude Cowork: lives in the Claude Desktop app on warm cream
-// (#FAF9F5 / #F0EEE6) with the clay accent (#D97757) and a Chat·Cowork·Code tab row.
-interface WorkTheme {
-  name: string
-  /** App background. */
-  bg: string
-  /** Header bar background + text. */
-  headerBg: string
-  headerText: string
-  /** Primary/accent color. */
-  accent: string
-  /** Soft accent fill for active chips / progress track fills. */
-  accentSoft: string
-  /** Body text + muted text. */
-  text: string
-  muted: string
-  /** Card surface + border. */
-  card: string
-  border: string
-}
-
-const THEME: Record<WorkAppVariant, WorkTheme> = {
-  'quick-desktop': {
-    name: 'Amazon Quick',
-    bg: '#ffffff',
-    headerBg: '#222222',
-    headerText: '#f5f5f5',
-    accent: '#6344f6',
-    accentSoft: '#ece8fd',
-    text: '#1f1f24',
-    muted: '#6b6b73',
-    card: '#faf9ff',
-    border: '#e6e3f5',
-  },
-  cowork: {
-    name: 'Claude',
-    bg: '#faf9f5',
-    headerBg: '#f0eee6',
-    headerText: '#3d3d3a',
-    accent: '#d97757',
-    accentSoft: '#f3e6df',
-    text: '#141413',
-    muted: '#87867f',
-    card: '#ffffff',
-    border: '#e8e6dc',
-  },
-}
-
-// The Quick hexagon logo + the Claude clay "spark" mark, inline as small SVGs.
+// ── shared logo marks ──────────────────────────────────────────────────────
+// Amazon Quick's hexagon logo; Claude's hand-drawn clay "spark".
 const QuickHex: React.FC<{ size?: number; color: string }> = ({ size = 16, color }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
     <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z" fill={color} />
-    <circle cx="12" cy="12" r="3" fill="#fff" />
+    <circle cx="12" cy="12" r="2.6" fill="#fff" />
   </svg>
 )
 const ClaudeSpark: React.FC<{ size?: number; color: string }> = ({ size = 16, color }) => (
@@ -83,162 +30,330 @@ const ClaudeSpark: React.FC<{ size?: number; color: string }> = ({ size = 16, co
   </svg>
 )
 
-export const WorkAppWindow: React.FC<WorkAppWindowProps> = ({ variant, steps, kinds }) => {
-  const [revealed, setRevealed] = useState(0) // count of steps shown
-  const t = THEME[variant]
-  const isQuick = variant === 'quick-desktop'
-  const bodyRef = useRef<HTMLDivElement>(null)
+// macOS window-control dots, shared chrome on both apps.
+const TrafficLights = () => (
+  <div className="flex items-center gap-1.5">
+    <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+    <span className="size-2.5 rounded-full bg-[#febc2e]" />
+    <span className="size-2.5 rounded-full bg-[#28c840]" />
+  </div>
+)
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => { setRevealed(0) }, [variant, steps])
-  useEffect(() => { if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight }, [revealed])
+// Step bookkeeping shared by both layouts.
+interface StepState { step: WorkStep; kind: WorkEventKind; gi: number; state: 'done' | 'current' | 'pending' }
+function useStepStates(steps: WorkStep[], kinds: WorkEventKind[], revealed: number): StepState[] {
+  const complete = revealed >= steps.length
+  return steps.map((step, gi) => ({
+    step,
+    kind: kinds[gi],
+    gi,
+    state: gi >= revealed ? 'pending' : complete ? 'done' : gi === revealed - 1 ? 'current' : 'done',
+  }))
+}
 
-  const next = useCallback(() => setRevealed((r) => Math.min(r + 1, steps.length)), [steps.length])
-  const hasMore = revealed < steps.length
-  const currentStageIdx = revealed > 0 ? STAGES.findIndex((s) => s.kind === kinds[revealed - 1]) : -1
+const STAGE_LABEL: Record<WorkEventKind, string> = {
+  brief: 'Task', plan: 'Plan', working: 'Work', review: 'Review', done: 'Done',
+}
 
-  const stageLabel = (kind: WorkEventKind) =>
-    kind === 'brief' ? 'Task' : STAGES.find((st) => st.kind === kind)?.label ?? kind
+// ── Amazon Quick Desktop layout ─────────────────────────────────────────────
+// Left icon+label rail · light/white chat workspace · top-right panel toggles ·
+// agent work shown as an inline task list · indigo #6344F6 accent.
+const QUICK = { accent: '#6344f6', soft: '#ece8fd', text: '#1f1f24', muted: '#6b6b73', border: '#e6e3f5', bg: '#ffffff', rail: '#faf9fe' }
+const QUICK_NAV: { icon: IconName; label: string }[] = [
+  { icon: 'edit', label: 'New chat' },
+  { icon: 'bolt', label: 'Activity feed' },
+  { icon: 'bar-chart', label: 'My stuff' },
+  { icon: 'people', label: 'More' },
+]
+const QUICK_PANELS = ['Feed', 'Agents', 'Tasks', 'All data & apps']
 
+const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void; total: number }> = ({ states, revealed, hasMore, next, total }) => {
+  const q = QUICK
+  const brief = states.find((s) => s.kind === 'brief')
+  const agent = states.filter((s) => s.kind !== 'brief')
+  const anyAgentRevealed = agent.some((s) => s.state !== 'pending')
   return (
-    <div className="flex h-96 flex-col overflow-hidden rounded-lg border shadow-sm" style={{ borderColor: t.border, backgroundColor: t.bg }}>
-      {/* Title bar — product chrome */}
-      <div className="flex shrink-0 items-center gap-2 border-b px-3 py-2" style={{ backgroundColor: t.headerBg, borderColor: t.border }}>
-        <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-        <span className="size-2.5 rounded-full bg-[#febc2e]" />
-        <span className="size-2.5 rounded-full bg-[#28c840]" />
-        <div className="ml-2 flex items-center gap-1.5">
-          {isQuick ? <QuickHex color={t.accent} /> : <ClaudeSpark color={t.accent} />}
-          <span className="text-xs font-semibold" style={{ color: t.headerText }}>{t.name}</span>
+    <div className="flex h-full" style={{ backgroundColor: q.bg }}>
+      {/* Left icon+label rail */}
+      <div className="hidden w-40 shrink-0 flex-col border-r px-2 py-3 sm:flex" style={{ backgroundColor: q.rail, borderColor: q.border }}>
+        <div className="mb-3 flex items-center gap-1.5 px-2">
+          <QuickHex size={15} color={q.accent} />
+          <span className="text-xs font-bold" style={{ color: q.text }}>Quick</span>
         </div>
-        {/* Claude Desktop's Chat · Cowork · Code tab row */}
-        {!isQuick && (
-          <div className="ml-3 flex items-center gap-1 text-[11px]">
-            {['Chat', 'Cowork', 'Code'].map((tab) => (
-              <span
-                key={tab}
-                className="rounded px-2 py-0.5 font-medium"
-                style={tab === 'Cowork'
-                  ? { backgroundColor: '#fff', color: t.text }
-                  : { color: t.muted }}
-              >
-                {tab}
-              </span>
-            ))}
+        {QUICK_NAV.map((n, i) => (
+          <div
+            key={n.label}
+            className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs"
+            style={i === 0 ? { backgroundColor: q.soft, color: q.accent, fontWeight: 600 } : { color: q.muted }}
+          >
+            <Icon name={n.icon} size={14} /> {n.label}
           </div>
-        )}
-        {/* Quick's right-side connection dot */}
-        {isQuick && <span className="ml-auto size-2 rounded-full bg-[#28c840]" title="Connected" />}
+        ))}
+        <div className="mt-2 px-2 text-[10px] font-semibold uppercase tracking-wide" style={{ color: q.muted }}>Recents</div>
+        <div className="truncate px-2 py-1 text-xs" style={{ color: q.muted }}>Customer themes…</div>
+        <div className="mt-auto flex items-center gap-2 px-2 py-1.5 text-xs" style={{ color: q.muted }}>
+          <Icon name="gear" size={14} /> Settings
+        </div>
       </div>
 
-      {/* Stage tracker — segmented pipeline */}
-      <div className="flex shrink-0 items-center gap-1.5 border-b px-3 py-2" style={{ borderColor: t.border, backgroundColor: t.bg }}>
-        {STAGES.map((s, i) => {
-          const active = i <= currentStageIdx
-          return (
-            <span
-              key={s.kind}
-              className="flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold"
-              style={active
-                ? { backgroundColor: t.accentSoft, color: t.accent }
-                : { color: t.muted, opacity: 0.6 }}
-            >
-              {active && i < currentStageIdx && <Icon name="check" size={9} />}
-              {s.label}
-            </span>
-          )
-        })}
-      </div>
+      {/* Main column */}
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* Top panel-toggle strip */}
+        <div className="flex shrink-0 items-center gap-1.5 border-b px-3 py-1.5" style={{ borderColor: q.border }}>
+          {QUICK_PANELS.map((p) => (
+            <span key={p} className="rounded-md px-2 py-0.5 text-[10px] font-medium" style={{ color: q.muted }}>{p}</span>
+          ))}
+          <span className="ml-auto flex items-center gap-1 text-[10px]" style={{ color: q.muted }}>
+            <span className="size-2 rounded-full bg-[#28c840]" /> Connected
+          </span>
+        </div>
 
-      {/* Activity body — the agent's conversation / run log */}
-      <div ref={bodyRef} className="flex-1 overflow-y-auto px-4 py-3" style={{ backgroundColor: t.bg }}>
-        <div className="space-y-2.5">
-          {steps.slice(0, revealed).map((s, i) => {
-            const kind = kinds[i]
-            const isBrief = kind === 'brief'
-            return (
-              <div key={i}>
-                {isBrief ? (
-                  /* The brief reads as the user's message — right-aligned bubble */
-                  <div className="flex justify-end">
-                    <div className="max-w-[85%] rounded-2xl rounded-tr-sm px-3.5 py-2 text-sm leading-relaxed" style={{ backgroundColor: t.accentSoft, color: t.text }}>
-                      {s.content}
-                    </div>
+        {/* Conversation */}
+        <div className="flex-1 overflow-y-auto px-4 py-3">
+          {revealed === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <QuickHex size={28} color={q.accent} />
+              <p className="mt-3 text-sm font-medium" style={{ color: q.text }}>Good morning</p>
+              <p className="mt-1 text-xs" style={{ color: q.muted }}>Ask a question or delegate a task to get started.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {/* User brief */}
+              {brief && (
+                <div className="flex justify-end">
+                  <div className="max-w-[80%] rounded-2xl rounded-tr-sm px-3.5 py-2 text-sm leading-relaxed" style={{ backgroundColor: q.soft, color: q.text }}>
+                    {brief.step.content}
                   </div>
-                ) : (
-                  /* Agent activity card */
-                  <div className="rounded-xl border p-3" style={{ backgroundColor: t.card, borderColor: t.border }}>
-                    <div className="mb-1.5 flex items-center gap-2">
-                      {isQuick ? <QuickHex size={13} color={t.accent} /> : <ClaudeSpark size={13} color={t.accent} />}
-                      <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide" style={{ backgroundColor: t.accentSoft, color: t.accent }}>
-                        {stageLabel(kind)}
-                      </span>
-                      <span className="text-xs font-medium" style={{ color: t.muted }}>{s.label}</span>
+                </div>
+              )}
+              {/* Agent response with an inline task list */}
+              {anyAgentRevealed && (
+                <div className="flex gap-2.5">
+                  <span className="mt-0.5 shrink-0"><QuickHex size={18} color={q.accent} /></span>
+                  <div className="min-w-0 flex-1">
+                    <div className="rounded-xl border p-3" style={{ borderColor: q.border, backgroundColor: q.rail }}>
+                      <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide" style={{ color: q.muted }}>
+                        {revealed >= total ? 'Completed' : 'Working…'}
+                      </p>
+                      <div className="space-y-2">
+                        {agent.filter((s) => s.state !== 'pending').map((s) => (
+                          <div key={s.gi}>
+                            <div className="flex items-center gap-2 text-sm" style={{ color: q.text }}>
+                              {s.state === 'current' ? (
+                                <span className="size-3.5 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: q.accent }} />
+                              ) : (
+                                <span className="grid size-3.5 shrink-0 place-items-center rounded-full text-white" style={{ backgroundColor: q.accent }}><Icon name="check" size={9} /></span>
+                              )}
+                              <span className="font-medium">{s.step.label}</span>
+                            </div>
+                            {s.state === 'current' && <p className="ml-5.5 mt-0.5 pl-0.5 text-sm leading-relaxed" style={{ color: q.muted }}>{s.step.content}</p>}
+                          </div>
+                        ))}
+                      </div>
+                      {revealed >= total && (
+                        <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium" style={{ backgroundColor: q.soft, color: q.accent }}>
+                          <Icon name="check" size={12} /> Deliverable ready in My stuff
+                        </div>
+                      )}
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color: t.text }}>{s.content}</p>
-                    {kind === 'working' && (
-                      <div className="mt-2 h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: t.accentSoft }}>
-                        <div className="h-full rounded-full transition-all" style={{ width: '70%', backgroundColor: t.accent }} />
-                      </div>
-                    )}
-                    {kind === 'done' && (
-                      <div className="mt-2 inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium" style={{ backgroundColor: t.accentSoft, color: t.accent }}>
-                        <Icon name="check" size={12} /> Deliverable ready
-                      </div>
-                    )}
-                    {s.note && (
-                      <p className="mt-2 text-xs italic" style={{ color: t.muted }}>
-                        <Icon name="lightbulb" size={12} className="mr-1 inline" />{s.note}
+                    {agent.find((s) => s.state === 'current')?.step.note && (
+                      <p className="mt-1.5 text-xs italic" style={{ color: q.muted }}>
+                        <Icon name="lightbulb" size={12} className="mr-1 inline" />{agent.find((s) => s.state === 'current')?.step.note}
                       </p>
                     )}
                   </div>
-                )}
-              </div>
-            )
-          })}
-          {revealed === 0 && (
-            <div className="flex h-64 items-center justify-center text-xs" style={{ color: t.muted }}>
-              Press Run to start the session
+                </div>
+              )}
             </div>
           )}
         </div>
+
+        {/* Composer */}
+        <div className="shrink-0 border-t px-3 py-2.5" style={{ borderColor: q.border }}>
+          <div className="flex items-center gap-2 rounded-xl border px-2.5 py-1.5" style={{ borderColor: q.border }}>
+            <span className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold" style={{ backgroundColor: q.soft, color: q.accent }}>Quick ▾</span>
+            <span className="flex-1 truncate text-xs" style={{ color: q.muted }}>Ask a question…</span>
+            <span className="rounded px-1 text-[10px]" style={{ color: q.muted }}>Auto ▾</span>
+            <Icon name="search" size={13} className="shrink-0" style={{ color: q.muted }} />
+            {hasMore ? (
+              <button onClick={next} className="grid size-6 shrink-0 place-items-center rounded-full text-white transition-opacity hover:opacity-90" style={{ backgroundColor: q.accent }}>
+                <Icon name="arrow-right" size={13} />
+              </button>
+            ) : (
+              <span className="px-1 text-xs font-medium" style={{ color: q.accent }}>✓</span>
+            )}
+          </div>
+          <p className="mt-1 text-center text-[10px]" style={{ color: q.muted }}>{hasMore ? `${revealed === 0 ? 'Press send to run' : 'Step ' + revealed + ' of ' + total} · click ▸ to advance` : 'Session complete'}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Claude Cowork layout ────────────────────────────────────────────────────
+// Claude Desktop chrome with Chat·Cowork·Code tabs · left chats/projects rail ·
+// center reading column · signature right-hand live Activity panel · cream bg.
+const CO = { accent: '#d97757', soft: '#f3e6df', text: '#141413', muted: '#87867f', border: '#e8e6dc', bg: '#faf9f5', rail: '#f0eee6', card: '#ffffff' }
+const CO_NAV: { icon: IconName; label: string }[] = [
+  { icon: 'edit', label: 'New chat' },
+  { icon: 'folder', label: 'Projects' },
+]
+
+const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void }> = ({ states, revealed, hasMore, next }) => {
+  const co = CO
+  const brief = states.find((s) => s.kind === 'brief')
+  const agent = states.filter((s) => s.kind !== 'brief')
+  const current = agent.find((s) => s.state === 'current')
+  const revealedAgent = agent.filter((s) => s.state !== 'pending')
+  const showArtifacts = agent.some((s) => (s.kind === 'review' || s.kind === 'done') && s.state !== 'pending')
+  return (
+    <div className="flex h-full flex-col" style={{ backgroundColor: co.bg }}>
+      {/* Claude Desktop tab bar */}
+      <div className="flex shrink-0 items-center gap-2 border-b px-3 py-1.5" style={{ backgroundColor: co.rail, borderColor: co.border }}>
+        <ClaudeSpark size={15} color={co.accent} />
+        <span className="text-xs font-semibold" style={{ color: co.text }}>Claude</span>
+        <div className="ml-3 flex items-center gap-0.5 rounded-lg p-0.5" style={{ backgroundColor: co.border }}>
+          {['Chat', 'Cowork', 'Code'].map((tab) => (
+            <span key={tab} className="rounded-md px-2.5 py-0.5 text-[11px] font-medium" style={tab === 'Cowork' ? { backgroundColor: co.card, color: co.text } : { color: co.muted }}>{tab}</span>
+          ))}
+        </div>
       </div>
 
-      {/* Composer / action bar */}
-      <div className="shrink-0 border-t px-3 py-2.5" style={{ borderColor: t.border, backgroundColor: t.bg }}>
-        {/* Cowork's signature "Work in a Folder" affordance */}
-        {!isQuick && (
-          <div className="mb-2 flex items-center gap-1.5 text-[11px]" style={{ color: t.muted }}>
-            <span className="grid size-3.5 place-items-center rounded border" style={{ borderColor: t.accent, backgroundColor: t.accent }}>
-              <Icon name="check" size={9} className="text-white" />
-            </span>
-            Work in a folder · ~/Documents
+      <div className="flex min-h-0 flex-1">
+        {/* Left chats/projects rail */}
+        <div className="hidden w-32 shrink-0 flex-col border-r px-2 py-3 sm:flex" style={{ backgroundColor: co.rail, borderColor: co.border }}>
+          {CO_NAV.map((n) => (
+            <div key={n.label} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs" style={{ color: co.muted }}>
+              <Icon name={n.icon} size={13} /> {n.label}
+            </div>
+          ))}
+          <div className="mt-3 px-2 text-[10px] font-semibold uppercase tracking-wide" style={{ color: co.muted }}>Recents</div>
+          <div className="truncate px-2 py-1 text-xs" style={{ color: co.muted }}>This session</div>
+          <div className="mt-auto flex items-center gap-1.5 px-2 text-xs" style={{ color: co.muted }}>
+            <span className="grid size-4 place-items-center rounded-full text-[9px] text-white" style={{ backgroundColor: co.accent }}>K</span> You
           </div>
-        )}
-        <div className="flex items-center gap-2">
-          <div className="flex flex-1 items-center gap-2 rounded-full border px-3 py-1.5" style={{ borderColor: t.border, backgroundColor: t.card }}>
-            <span className="flex-1 truncate text-xs" style={{ color: t.muted }}>
-              {isQuick ? 'Ask a question…' : 'Describe the outcome you want…'}
-            </span>
-            <span className="grid size-5 shrink-0 place-items-center rounded-full text-white" style={{ backgroundColor: t.accent }}>
-              <Icon name="arrow-right" size={12} />
-            </span>
-          </div>
-          {hasMore ? (
-            <button
-              onClick={next}
-              className="rounded-md px-3 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: t.accent }}
-            >
-              {revealed === 0 ? 'Run' : 'Next'}
-            </button>
-          ) : (
-            <span className="px-2 text-xs font-medium" style={{ color: t.accent }}>✓ Done</span>
-          )}
         </div>
-        <p className="mt-1 text-center text-[10px]" style={{ color: t.muted }}>
-          {hasMore ? `Step ${revealed + 1} of ${steps.length}` : 'Session complete'}
-        </p>
+
+        {/* Center reading column */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div className="flex-1 overflow-y-auto px-5 py-4">
+            {revealed === 0 ? (
+              <div className="flex h-full flex-col items-center justify-center text-center">
+                <ClaudeSpark size={26} color={co.accent} />
+                <p className="mt-3 text-sm" style={{ color: co.muted }}>Pick a task and Claude works it in your folder.</p>
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
+                  {['Organize files', 'Crunch data', 'Draft a summary'].map((s) => (
+                    <span key={s} className="rounded-lg border px-2.5 py-1 text-xs" style={{ borderColor: co.border, color: co.text }}>{s}</span>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="mx-auto max-w-xl space-y-4">
+                {brief && (
+                  <div className="rounded-xl px-3.5 py-2.5 text-sm leading-relaxed" style={{ backgroundColor: co.soft, color: co.text }}>
+                    {brief.step.content}
+                  </div>
+                )}
+                {revealedAgent.length > 0 && (
+                  <div className="text-sm leading-relaxed" style={{ color: co.text }}>
+                    <p className="mb-2">Here's my plan — I'll work through it in <span className="font-medium">~/Documents</span> and check in before anything destructive.</p>
+                    <div className="space-y-1.5">
+                      {agent.map((s) => (
+                        <div key={s.gi} className="flex items-start gap-2">
+                          <span className="mt-0.5 shrink-0">
+                            {s.state === 'done' ? (
+                              <span className="grid size-4 place-items-center rounded-[4px] text-white" style={{ backgroundColor: co.accent }}><Icon name="check" size={10} /></span>
+                            ) : s.state === 'current' ? (
+                              <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: co.accent }} />
+                            ) : (
+                              <span className="size-4 rounded-[4px] border" style={{ borderColor: co.border }} />
+                            )}
+                          </span>
+                          <span style={{ color: s.state === 'pending' ? co.muted : co.text, textDecoration: s.state === 'done' ? 'none' : 'none' }}>{s.step.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {current && <p className="mt-2.5" style={{ color: co.muted }}>{current.step.content}</p>}
+                    {current?.step.note && <p className="mt-1.5 text-xs italic" style={{ color: co.muted }}><Icon name="lightbulb" size={12} className="mr-1 inline" />{current.step.note}</p>}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Composer with the signature "Work in a folder" affordance */}
+          <div className="shrink-0 border-t px-4 py-2.5" style={{ borderColor: co.border }}>
+            <div className="mb-2 flex items-center gap-1.5 text-[11px]" style={{ color: co.muted }}>
+              <span className="grid size-3.5 place-items-center rounded border" style={{ borderColor: co.accent, backgroundColor: co.accent }}><Icon name="check" size={9} className="text-white" /></span>
+              Work in a folder · ~/Documents
+            </div>
+            <div className="flex items-center gap-2 rounded-xl border px-3 py-1.5" style={{ borderColor: co.border, backgroundColor: co.card }}>
+              <span className="flex-1 truncate text-xs" style={{ color: co.muted }}>Describe the outcome you want…</span>
+              {hasMore ? (
+                <button onClick={next} className="grid size-6 shrink-0 place-items-center rounded-md text-white transition-opacity hover:opacity-90" style={{ backgroundColor: co.accent }}>
+                  <Icon name="arrow-right" size={13} />
+                </button>
+              ) : (
+                <span className="px-1 text-xs font-medium" style={{ color: co.accent }}>✓</span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right live Activity panel — Cowork's signature surface */}
+        <div className="hidden w-40 shrink-0 flex-col border-l md:flex" style={{ backgroundColor: co.rail, borderColor: co.border }}>
+          <div className="border-b px-3 py-2 text-[11px] font-semibold" style={{ borderColor: co.border, color: co.text }}>Activity</div>
+          <div className="flex-1 overflow-y-auto px-2 py-2">
+            {revealed === 0 ? (
+              <p className="px-1 text-[11px] italic" style={{ color: co.muted }}>Steps appear here as Claude works.</p>
+            ) : (
+              <div className="space-y-1.5">
+                {agent.map((s) => (
+                  <div key={s.gi} className="flex items-center gap-1.5 text-[11px]" style={{ color: s.state === 'pending' ? co.muted : co.text, opacity: s.state === 'pending' ? 0.55 : 1 }}>
+                    {s.state === 'done' ? <span style={{ color: co.accent }}>✓</span> : s.state === 'current' ? <span className="size-2.5 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: co.accent }} /> : <span style={{ color: co.muted }}>○</span>}
+                    {STAGE_LABEL[s.kind]}
+                  </div>
+                ))}
+              </div>
+            )}
+            {showArtifacts && (
+              <div className="mt-3 border-t pt-2" style={{ borderColor: co.border }}>
+                <p className="mb-1 px-1 text-[10px] font-semibold uppercase tracking-wide" style={{ color: co.muted }}>Artifacts</p>
+                <div className="flex items-center gap-1.5 px-1 py-0.5 text-[11px]" style={{ color: co.text }}><Icon name="file" size={11} /> summary.md</div>
+                <div className="flex items-center gap-1.5 px-1 py-0.5 text-[11px]" style={{ color: co.text }}><Icon name="bar-chart" size={11} /> figures.png</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── orchestrator ────────────────────────────────────────────────────────────
+export const WorkAppWindow: React.FC<WorkAppWindowProps> = ({ variant, steps, kinds }) => {
+  const [revealed, setRevealed] = useState(0)
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setRevealed(0) }, [variant, steps])
+
+  const next = useCallback(() => setRevealed((r) => Math.min(r + 1, steps.length)), [steps.length])
+  const hasMore = revealed < steps.length
+  const states = useStepStates(steps, kinds, revealed)
+
+  return (
+    <div className="h-[30rem] overflow-hidden rounded-lg border shadow-sm" style={{ borderColor: variant === 'quick-desktop' ? QUICK.border : CO.border }}>
+      {/* Window chrome */}
+      <div className="flex h-8 items-center gap-2 border-b px-3" style={{ backgroundColor: variant === 'quick-desktop' ? QUICK.rail : CO.rail, borderColor: variant === 'quick-desktop' ? QUICK.border : CO.border }}>
+        <TrafficLights />
+        <span className="ml-1 text-[11px] font-medium" style={{ color: variant === 'quick-desktop' ? QUICK.muted : CO.muted }}>
+          {variant === 'quick-desktop' ? 'Amazon Quick' : 'Claude'}
+        </span>
+      </div>
+      <div className="h-[calc(30rem-2rem)]">
+        {variant === 'quick-desktop'
+          ? <QuickApp states={states} revealed={revealed} hasMore={hasMore} next={next} total={steps.length} />
+          : <CoworkApp states={states} revealed={revealed} hasMore={hasMore} next={next} />}
       </div>
     </div>
   )
