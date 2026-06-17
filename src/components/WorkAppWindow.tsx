@@ -3,8 +3,8 @@ import { Icon } from './Icon'
 import type { IconName } from './Icon'
 
 export type WorkAppVariant = 'quick-desktop' | 'cowork'
-export type WorkEventKind = 'brief' | 'plan' | 'working' | 'review' | 'done'
-export interface WorkStep { label: string; content: string; note?: string }
+export type WorkEventKind = 'brief' | 'plan' | 'working' | 'review' | 'done' | 'approval'
+export interface WorkStep { label?: string; content: string; note?: string }
 
 interface WorkAppWindowProps {
   variant: WorkAppVariant
@@ -52,8 +52,27 @@ function useStepStates(steps: WorkStep[], kinds: WorkEventKind[], revealed: numb
 }
 
 const STAGE_LABEL: Record<WorkEventKind, string> = {
-  brief: 'Task', plan: 'Plan', working: 'Work', review: 'Review', done: 'Done',
+  brief: 'Task', plan: 'Plan', working: 'Work', review: 'Review', done: 'Done', approval: 'Approval',
 }
+
+// Cowork/Quick pause before an irreversible action and ask permission. When the
+// frontier step is an `approval`, the composer's advance button is suppressed and
+// the only way forward is choosing in this dialog — making human-in-the-loop real.
+const ApprovalDialog: React.FC<{ step: WorkStep; accent: string; soft: string; text: string; muted: string; border: string; card: string; onChoose: () => void }> = ({ step, accent, soft, text, muted, border, card, onChoose }) => (
+  <div className="rounded-xl border p-3.5 shadow-sm" style={{ borderColor: accent, backgroundColor: card }}>
+    <div className="mb-1.5 flex items-center gap-2">
+      <Icon name="shield" size={15} style={{ color: accent }} />
+      <span className="text-sm font-semibold" style={{ color: text }}>{step.label}</span>
+    </div>
+    <p className="text-sm leading-relaxed" style={{ color: text }}>{step.content}</p>
+    {step.note && <p className="mt-1.5 text-xs italic" style={{ color: muted }}><Icon name="lightbulb" size={12} className="mr-1 inline" />{step.note}</p>}
+    <div className="mt-3 flex flex-wrap items-center gap-2">
+      <button onClick={onChoose} className="rounded-md px-3 py-1.5 text-xs font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: accent }}>Allow once</button>
+      <button onClick={onChoose} className="rounded-md border px-3 py-1.5 text-xs font-medium" style={{ borderColor: border, color: text, backgroundColor: soft }}>Always allow</button>
+      <button className="rounded-md px-3 py-1.5 text-xs font-medium" style={{ color: muted }}>Don't allow</button>
+    </div>
+  </div>
+)
 
 // ── Amazon Quick Desktop layout ─────────────────────────────────────────────
 // Left icon+label rail · light/white chat workspace · top-right panel toggles ·
@@ -67,7 +86,7 @@ const QUICK_NAV: { icon: IconName; label: string }[] = [
 ]
 const QUICK_PANELS = ['Feed', 'Agents', 'Tasks', 'All data & apps']
 
-const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void; total: number }> = ({ states, revealed, hasMore, next, total }) => {
+const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void; total: number; approvalStep?: WorkStep }> = ({ states, revealed, hasMore, next, total, approvalStep }) => {
   const q = QUICK
   const brief = states.find((s) => s.kind === 'brief')
   const agent = states.filter((s) => s.kind !== 'brief')
@@ -146,7 +165,7 @@ const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boole
                               )}
                               <span className="font-medium">{s.step.label}</span>
                             </div>
-                            {s.state === 'current' && <p className="ml-5.5 mt-0.5 pl-0.5 text-sm leading-relaxed" style={{ color: q.muted }}>{s.step.content}</p>}
+                            {s.state === 'current' && s.kind !== 'approval' && <p className="ml-5.5 mt-0.5 pl-0.5 text-sm leading-relaxed" style={{ color: q.muted }}>{s.step.content}</p>}
                           </div>
                         ))}
                       </div>
@@ -156,7 +175,13 @@ const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boole
                         </div>
                       )}
                     </div>
-                    {agent.find((s) => s.state === 'current')?.step.note && (
+                    {/* Permission pause before an irreversible action */}
+                    {approvalStep && (
+                      <div className="mt-2.5">
+                        <ApprovalDialog step={approvalStep} accent={q.accent} soft={q.soft} text={q.text} muted={q.muted} border={q.border} card={q.bg} onChoose={next} />
+                      </div>
+                    )}
+                    {!approvalStep && agent.find((s) => s.state === 'current')?.step.note && (
                       <p className="mt-1.5 text-xs italic" style={{ color: q.muted }}>
                         <Icon name="lightbulb" size={12} className="mr-1 inline" />{agent.find((s) => s.state === 'current')?.step.note}
                       </p>
@@ -176,14 +201,14 @@ const QuickApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boole
             <span className="rounded px-1 text-[10px]" style={{ color: q.muted }}>Auto ▾</span>
             <Icon name="search" size={13} className="shrink-0" style={{ color: q.muted }} />
             {hasMore ? (
-              <button onClick={next} className="grid size-6 shrink-0 place-items-center rounded-full text-white transition-opacity hover:opacity-90" style={{ backgroundColor: q.accent }}>
+              <button onClick={next} disabled={!!approvalStep} className="grid size-6 shrink-0 place-items-center rounded-full text-white transition-opacity hover:opacity-90 disabled:opacity-40" style={{ backgroundColor: q.accent }}>
                 <Icon name="arrow-right" size={13} />
               </button>
             ) : (
               <span className="px-1 text-xs font-medium" style={{ color: q.accent }}>✓</span>
             )}
           </div>
-          <p className="mt-1 text-center text-[10px]" style={{ color: q.muted }}>{hasMore ? `${revealed === 0 ? 'Press send to run' : 'Step ' + revealed + ' of ' + total} · click ▸ to advance` : 'Session complete'}</p>
+          <p className="mt-1 text-center text-[10px]" style={{ color: q.muted }}>{approvalStep ? 'Waiting for your approval above' : hasMore ? `${revealed === 0 ? 'Press send to run' : 'Step ' + revealed + ' of ' + total} · click ▸ to advance` : 'Session complete'}</p>
         </div>
       </div>
     </div>
@@ -199,7 +224,7 @@ const CO_NAV: { icon: IconName; label: string }[] = [
   { icon: 'folder', label: 'Projects' },
 ]
 
-const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void }> = ({ states, revealed, hasMore, next }) => {
+const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: boolean; next: () => void; approvalStep?: WorkStep }> = ({ states, revealed, hasMore, next, approvalStep }) => {
   const co = CO
   const brief = states.find((s) => s.kind === 'brief')
   const agent = states.filter((s) => s.kind !== 'brief')
@@ -273,8 +298,13 @@ const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: bool
                         </div>
                       ))}
                     </div>
-                    {current && <p className="mt-2.5" style={{ color: co.muted }}>{current.step.content}</p>}
-                    {current?.step.note && <p className="mt-1.5 text-xs italic" style={{ color: co.muted }}><Icon name="lightbulb" size={12} className="mr-1 inline" />{current.step.note}</p>}
+                    {current && !approvalStep && <p className="mt-2.5" style={{ color: co.muted }}>{current.step.content}</p>}
+                    {current && !approvalStep && current.step.note && <p className="mt-1.5 text-xs italic" style={{ color: co.muted }}><Icon name="lightbulb" size={12} className="mr-1 inline" />{current.step.note}</p>}
+                    {approvalStep && (
+                      <div className="mt-3">
+                        <ApprovalDialog step={approvalStep} accent={co.accent} soft={co.soft} text={co.text} muted={co.muted} border={co.border} card={co.card} onChoose={next} />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -288,9 +318,9 @@ const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: bool
               Work in a folder · ~/Documents
             </div>
             <div className="flex items-center gap-2 rounded-xl border px-3 py-1.5" style={{ borderColor: co.border, backgroundColor: co.card }}>
-              <span className="flex-1 truncate text-xs" style={{ color: co.muted }}>Describe the outcome you want…</span>
+              <span className="flex-1 truncate text-xs" style={{ color: co.muted }}>{approvalStep ? 'Waiting for your approval…' : 'Describe the outcome you want…'}</span>
               {hasMore ? (
-                <button onClick={next} className="grid size-6 shrink-0 place-items-center rounded-md text-white transition-opacity hover:opacity-90" style={{ backgroundColor: co.accent }}>
+                <button onClick={next} disabled={!!approvalStep} className="grid size-6 shrink-0 place-items-center rounded-md text-white transition-opacity hover:opacity-90 disabled:opacity-40" style={{ backgroundColor: co.accent }}>
                   <Icon name="arrow-right" size={13} />
                 </button>
               ) : (
@@ -310,7 +340,7 @@ const CoworkApp: React.FC<{ states: StepState[]; revealed: number; hasMore: bool
               <div className="space-y-1.5">
                 {agent.map((s) => (
                   <div key={s.gi} className="flex items-center gap-1.5 text-[11px]" style={{ color: s.state === 'pending' ? co.muted : co.text, opacity: s.state === 'pending' ? 0.55 : 1 }}>
-                    {s.state === 'done' ? <span style={{ color: co.accent }}>✓</span> : s.state === 'current' ? <span className="size-2.5 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: co.accent }} /> : <span style={{ color: co.muted }}>○</span>}
+                    {s.state === 'done' ? <span style={{ color: co.accent }}>✓</span> : s.state === 'current' ? (s.kind === 'approval' ? <span style={{ color: co.accent }}>⏸</span> : <span className="size-2.5 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: co.accent }} />) : <span style={{ color: co.muted }}>○</span>}
                     {STAGE_LABEL[s.kind]}
                   </div>
                 ))}
@@ -340,6 +370,9 @@ export const WorkAppWindow: React.FC<WorkAppWindowProps> = ({ variant, steps, ki
   const next = useCallback(() => setRevealed((r) => Math.min(r + 1, steps.length)), [steps.length])
   const hasMore = revealed < steps.length
   const states = useStepStates(steps, kinds, revealed)
+  // The frontier step is an approval pause → gate advancement through its dialog.
+  const awaitingApproval = revealed > 0 && revealed < steps.length && kinds[revealed - 1] === 'approval'
+  const approvalStep = awaitingApproval ? steps[revealed - 1] : undefined
 
   return (
     <div className="h-[30rem] overflow-hidden rounded-lg border shadow-sm" style={{ borderColor: variant === 'quick-desktop' ? QUICK.border : CO.border }}>
@@ -352,8 +385,8 @@ export const WorkAppWindow: React.FC<WorkAppWindowProps> = ({ variant, steps, ki
       </div>
       <div className="h-[calc(30rem-2rem)]">
         {variant === 'quick-desktop'
-          ? <QuickApp states={states} revealed={revealed} hasMore={hasMore} next={next} total={steps.length} />
-          : <CoworkApp states={states} revealed={revealed} hasMore={hasMore} next={next} />}
+          ? <QuickApp states={states} revealed={revealed} hasMore={hasMore} next={next} total={steps.length} approvalStep={approvalStep} />
+          : <CoworkApp states={states} revealed={revealed} hasMore={hasMore} next={next} approvalStep={approvalStep} />}
       </div>
     </div>
   )

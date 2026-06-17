@@ -2608,6 +2608,20 @@ const modules = {
       failureLabel: 'A guardrail gap, concretely:',
       failure:
         'An agent allowed to refund up to $1,000 autonomously gets a clearly fraudulent $950 request — and pays it, because a spend ceiling is not a fraud check. The missing guardrail was not a lower cap; it was a human-in-the-loop rule for refunds above a risk threshold. Caps limit size; they do not supply judgment.',
+      demoTitle: 'See human-in-the-loop in action',
+      demoIntro:
+        'Guardrails sound abstract until you watch one fire. Here Claude Cowork tidies a folder — and stops dead before the one irreversible step, deleting files, to ask your permission. Press send to run; you cannot advance past the pause without choosing.',
+      demoSteps: [
+        { content: 'Clean up the ~/Invoices folder: rename everything to the YYYY-MM-vendor format and remove the duplicate scans.' },
+        { label: 'Reads the folder', content: 'Found 48 files. 41 follow no consistent naming; 7 look like duplicate scans of invoices already present.' },
+        { label: 'Renames in place', content: 'Renamed 41 files to the YYYY-MM-vendor format. No data lost — renaming is reversible.' },
+        {
+          label: 'Asks before deleting',
+          content: 'Ready to delete 7 files I identified as duplicates. Deleting is irreversible, so I need your OK before I touch them.',
+          note: 'This is the human-in-the-loop guardrail: the agent prepared the irreversible action and queued it — a person presses the button.',
+        },
+        { label: 'Deletes only after approval', content: 'Approved — removed the 7 duplicates. Folder is now 41 cleanly-named files with no duplicates.' },
+      ],
       bridgeBlurb:
         'Guardrails on one agent are the start. The bigger question — roles, decision rights, and why ~40% of agent initiatives stall on non-technical issues — is organizational. Go there.',
     },
@@ -2616,6 +2630,13 @@ const modules = {
       title: '5. When a Task Wants to Be a Tool',
       intro:
         'Delegating hands an agent a job once. But when the same job comes back every week, you can now do something that used to need a developer and a budget: ask AI to build you a small tool — a form, a tracker, a calculator, a one-page app — that you and your team reuse. The skill is the same briefing you just learned; the deliverable is bigger. Click each idea.',
+      demoIntro:
+        'First, notice the signal. Here is the same delegation in Amazon Quick for the third week running — same brief, same steps, same shape. When you see this repeat on your calendar, that is the tell: the task is ready to become a tool.',
+      demoSteps: [
+        { content: 'Same as every Monday: take this week\'s booking export, build tomorrow\'s appointment list, and flag any double-bookings.' },
+        { label: 'Runs the familiar steps', content: 'Read the export, sorted by time, cross-checked against cancellations — the identical routine as the last two Mondays. 1 double-booking flagged.' },
+        { label: 'Delivers — again', content: 'Tomorrow\'s list is ready. Third week in a row for this exact job: ~10 minutes each time, same inputs, same output shape.' },
+      ],
       items: [
         {
           name: 'Delegating vs commissioning',

@@ -2,8 +2,14 @@ import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
 import { InteractiveDemo } from '../../components/InteractiveDemo'
+import { WorkAppWindow } from '../../components/WorkAppWindow'
+import type { WorkEventKind } from '../../components/WorkAppWindow'
 import { SelfExplain } from '../../components/SelfExplain'
 import { useTranslation } from '../../i18n'
+
+// The recurring-task signal: the same weekly job run in Quick, third week running.
+// Seeing it repeat is what motivates the delegate→commission pivot below.
+const RECUR_KINDS: WorkEventKind[] = ['brief', 'working', 'done']
 
 // Order matches `items` in useTranslation().modules.agenticwork.taskToTool.
 const ITEM_META: { icon: IconName; color: string }[] = [
@@ -30,6 +36,11 @@ export const TaskToToolSection: React.FC = () => {
     <section aria-labelledby="task-to-tool">
       <h2 id="task-to-tool" className="mb-4 font-mono text-xl font-bold text-zinc-900 dark:text-zinc-100">{c.title}</h2>
       <p className="mb-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">{c.intro}</p>
+
+      <div className="mb-8">
+        <p className="mb-3 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.demoIntro}</p>
+        <WorkAppWindow variant="quick-desktop" steps={[...c.demoSteps]} kinds={RECUR_KINDS} />
+      </div>
 
       <div className="space-y-2">
         {c.items.map((item, i) => (

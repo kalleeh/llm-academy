@@ -1594,6 +1594,20 @@ export const sv: DeepPartial<Translation> = {
         failureLabel: 'En lucka i skyddsräcket, konkret:',
         failure:
           'En agent som får återbetala upp till $1,000 självständigt får en uppenbart bedräglig begäran på $950 — och betalar den, eftersom ett spendertak inte är en bedrägerikontroll. Det saknade skyddsräcket var inte ett lägre tak; det var en regel om människa i loopen för återbetalningar över en riskgräns. Tak begränsar storlek; de tillhandahåller inte omdöme.',
+        demoTitle: 'Se människa i loopen i praktiken',
+        demoIntro:
+          'Skyddsräcken låter abstrakt tills du ser ett slå till. Här städar Claude Cowork en mapp — och stannar tvärt före det enda oåterkalleliga steget, att radera filer, för att be om ditt tillstånd. Tryck skicka för att köra; du kan inte gå förbi pausen utan att välja.',
+        demoSteps: [
+          { content: 'Städa upp i mappen ~/Invoices: döp om allt till formatet ÅÅÅÅ-MM-leverantör och ta bort dubblettskanningarna.' },
+          { label: 'Läser mappen', content: 'Hittade 48 filer. 41 följer ingen enhetlig namngivning; 7 ser ut som dubblettskanningar av fakturor som redan finns.' },
+          { label: 'Döper om på plats', content: 'Döpte om 41 filer till formatet ÅÅÅÅ-MM-leverantör. Inga data förlorade — omdöpning är reversibel.' },
+          {
+            label: 'Frågar innan radering',
+            content: 'Redo att radera 7 filer jag identifierat som dubbletter. Radering är oåterkallelig, så jag behöver ditt OK innan jag rör dem.',
+            note: 'Det här är skyddsräcket människa i loopen: agenten förberedde den oåterkalleliga åtgärden och köade den — en människa trycker på knappen.',
+          },
+          { label: 'Raderar först efter godkännande', content: 'Godkänt — tog bort de 7 dubbletterna. Mappen är nu 41 rent namngivna filer utan dubbletter.' },
+        ],
         bridgeBlurb:
           'Skyddsräcken på en agent är början. Den större frågan — roller, beslutsrätt och varför ~40 % av agentinitiativen kör fast på icke-tekniska frågor — är organisatorisk. Gå dit.',
       },
@@ -1602,6 +1616,13 @@ export const sv: DeepPartial<Translation> = {
         title: '5. När en uppgift vill bli ett verktyg',
         intro:
           'Att delegera ger en agent ett jobb en gång. Men när samma jobb återkommer varje vecka kan du nu göra något som förut krävde en utvecklare och en budget: be AI bygga dig ett litet verktyg — ett formulär, en spårare, en kalkylator, en enkelsidig app — som du och ditt team återanvänder. Färdigheten är samma briefing du just lärt dig; leveransen är bara större. Klicka på varje idé.',
+        demoIntro:
+          'Lägg först märke till signalen. Här är samma delegering i Amazon Quick för tredje veckan i rad — samma brief, samma steg, samma form. När du ser det upprepas i din kalender är det tecknet: uppgiften är redo att bli ett verktyg.',
+        demoSteps: [
+          { content: 'Som varje måndag: ta den här veckans bokningsexport, bygg morgondagens tidlista och flagga eventuella dubbelbokningar.' },
+          { label: 'Kör de bekanta stegen', content: 'Läste exporten, sorterade efter tid, stämde av mot avbokningar — exakt samma rutin som de två senaste måndagarna. 1 dubbelbokning flaggad.' },
+          { label: 'Levererar — igen', content: 'Morgondagens lista är klar. Tredje veckan i rad för exakt det här jobbet: ~10 minuter varje gång, samma indata, samma form på utmatningen.' },
+        ],
         items: [
           {
             name: 'Att delegera kontra att beställa',

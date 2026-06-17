@@ -1,8 +1,14 @@
 import { useState, useCallback } from 'react'
 import { Icon } from '../../components/Icon'
 import type { IconName } from '../../components/Icon'
+import { WorkAppWindow } from '../../components/WorkAppWindow'
+import type { WorkEventKind } from '../../components/WorkAppWindow'
 import { CourseBridge } from '../../components/CourseBridge'
 import { useTranslation } from '../../i18n'
+
+// The human-in-the-loop guardrail, made concrete: Claude pauses before deleting
+// files and asks permission. Advancement is gated on the approval choice.
+const APPROVAL_KINDS: WorkEventKind[] = ['brief', 'plan', 'working', 'approval', 'done']
 
 // Order matches `items` in useTranslation().modules.agenticwork.guardrails.
 const ITEM_META: { icon: IconName; color: string }[] = [
@@ -40,6 +46,12 @@ export const GuardrailsSection: React.FC = () => {
           </div>
         ))}
       </div>
+      <div className="mt-8">
+        <h3 className="mb-2 font-mono text-lg font-semibold text-zinc-900 dark:text-zinc-100">{c.demoTitle}</h3>
+        <p className="mb-4 max-w-2xl text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{c.demoIntro}</p>
+        <WorkAppWindow variant="cowork" steps={[...c.demoSteps]} kinds={APPROVAL_KINDS} />
+      </div>
+
       <p className="mt-4 max-w-2xl rounded-lg border border-amber-200 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/5 p-4 text-sm text-zinc-700 dark:text-zinc-300">
         <strong className="text-zinc-900 dark:text-zinc-100">{c.failureLabel}</strong> {c.failure}
       </p>
