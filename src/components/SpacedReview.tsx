@@ -2,6 +2,8 @@ import { useState, useCallback, useMemo } from 'react'
 import { Icon } from './Icon'
 import { t, useLanguage } from '../i18n'
 import type { Question } from './KnowledgeCheck'
+import { CHALLENGE_KEY_PREFIX } from '../challenges/storage'
+import type { StoredChallengeData } from '../challenges/types'
 
 interface SpacedReviewProps {
   onNavigateToModule: (moduleId: string) => void
@@ -79,6 +81,30 @@ function buildScheduleFromChecks(): ReviewSchedule {
             interval: intervals[0],
             correct: r.correct,
           }
+        }
+      }
+    } catch {
+      // skip malformed entries
+    }
+  }
+
+  // Interactive challenges store one record per key under a sibling prefix;
+  // fold their results into the same schedule so completed challenges are
+  // surfaced for review alongside knowledge checks.
+  const challengeKeys = Object.keys(localStorage).filter((k) => k.startsWith(CHALLENGE_KEY_PREFIX))
+  for (const key of challengeKeys) {
+    try {
+      const data = JSON.parse(localStorage.getItem(key)!) as StoredChallengeData
+      const r = data.result
+      if (!schedule[r.challengeId]) {
+        // Key shape: `${CHALLENGE_KEY_PREFIX}${moduleId}-${challengeId}`.
+        const moduleId = key.slice(CHALLENGE_KEY_PREFIX.length, key.length - r.challengeId.length - 1)
+        const intervals = r.correct ? CORRECT_INTERVALS : INCORRECT_INTERVALS
+        schedule[r.challengeId] = {
+          moduleId,
+          nextReview: r.answeredAt + intervals[0],
+          interval: intervals[0],
+          correct: r.correct,
         }
       }
     } catch {
