@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { SelfExplain } from '../components/SelfExplain'
 import { AlignmentProblemSection } from './alignment/AlignmentProblemSection'
@@ -104,6 +105,7 @@ export const AlignmentModule: React.FC = () => {
       <SafetyGuardrailsSection />
       <PostTrainingPipelineSection />
       <ProductionGovernanceSection />
+      <ModuleChallenges moduleId="alignment" />
       <KnowledgeCheck moduleId="alignment" questions={translateQuestions(questions, lang)} />
     </ModuleLayout>
   )

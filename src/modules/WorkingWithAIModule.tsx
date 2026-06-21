@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatModelSeesSection } from './workingwithai/WhatModelSeesSection'
@@ -81,6 +82,7 @@ export const WorkingWithAIModule: React.FC = () => {
         <MakeItStickBusiness />
         <AgentContextSection />
         <StarterKitSection />
+        <ModuleChallenges moduleId="workingwithai-business" />
         <KnowledgeCheck moduleId="workingwithai-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -93,6 +95,7 @@ export const WorkingWithAIModule: React.FC = () => {
       <PowerFeaturesSection />
       <AgentContextSection />
       <StarterKitSection />
+      <ModuleChallenges moduleId="workingwithai" />
       <KnowledgeCheck moduleId="workingwithai" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

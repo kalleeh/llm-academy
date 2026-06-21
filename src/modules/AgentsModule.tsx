@@ -14,6 +14,7 @@ import { AgentPatternsBusiness } from './agents/AgentPatternsBusiness'
 import { HowAgentsConnectBusiness } from './agents/HowAgentsConnectBusiness'
 import { ContextFilesBusiness } from './agents/ContextFilesBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -147,6 +148,7 @@ export const AgentsModule: React.FC = () => {
         <AgentPatternsBusiness />
         <HowAgentsConnectBusiness />
         <ContextFilesBusiness />
+        <ModuleChallenges moduleId="agents-business" />
         <KnowledgeCheck moduleId="agents-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -162,6 +164,7 @@ export const AgentsModule: React.FC = () => {
       <BuildingAgentsSection />
       <A2ASection />
       <SkillsHarnessSection />
+      <ModuleChallenges moduleId="agents" />
       <KnowledgeCheck moduleId="agents" questions={translateQuestions(TECHNICAL_QUESTIONS, lang)} />
     </ModuleLayout>
   )

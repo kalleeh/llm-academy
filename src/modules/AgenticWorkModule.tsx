@@ -1,5 +1,6 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { WhatIsAgenticWorkSection } from './agenticwork/WhatIsAgenticWorkSection'
@@ -60,6 +61,7 @@ export const AgenticWorkModule: React.FC = () => {
       <GuardrailsSection />
       <TaskToToolSection />
       <BriefLibrarySection />
+      <ModuleChallenges moduleId="agenticwork" />
       <KnowledgeCheck moduleId="agenticwork" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

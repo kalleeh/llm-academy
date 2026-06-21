@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { SelfExplain } from '../components/SelfExplain'
 import { AdaptationSpectrumSection } from './solution/AdaptationSpectrumSection'
@@ -94,6 +95,7 @@ export const SolutionModule: React.FC = () => {
       <BuildVsBuySection />
       <CostCalculatorSection />
       <CaseStudiesSection />
+      <ModuleChallenges moduleId="solution" />
       <KnowledgeCheck moduleId="solution" questions={translateQuestions(questions, lang)} />
     </ModuleLayout>
   )

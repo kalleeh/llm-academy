@@ -1,5 +1,6 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { CodingAgentDifferentSection } from './agenticcoding/CodingAgentDifferentSection'
@@ -58,6 +59,7 @@ export const AgenticCodingModule: React.FC = () => {
       <WorkingEffectivelySection />
       <SpinUpToolsSection />
       <StealThisSetupSection />
+      <ModuleChallenges moduleId="agenticcoding" />
       <KnowledgeCheck moduleId="agenticcoding" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

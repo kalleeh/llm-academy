@@ -9,6 +9,7 @@ import { SmartSearchBusiness } from './embeddings/SmartSearchBusiness'
 import { RAGBusiness } from './embeddings/RAGBusiness'
 import { WaysToFeedAIBusiness } from './embeddings/WaysToFeedAIBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -96,6 +97,7 @@ export const EmbeddingsModule: React.FC = () => {
       <VectorDatabasesSection />
       <ChunkingStrategiesSection />
       <RAGPipelineSection />
+      <ModuleChallenges moduleId="embeddings" />
       <KnowledgeCheck moduleId="embeddings" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

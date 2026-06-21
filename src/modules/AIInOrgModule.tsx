@@ -2,6 +2,7 @@ import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { BusinessImpactBusiness } from './agents/BusinessImpactBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -65,6 +66,7 @@ export const AIInOrgModule: React.FC = () => {
     <ModuleLayout moduleId="ai-in-org" title="AI in Your Organization" subtitle="The technology works. The harder question: is your organization ready? How autonomy changes
           roles, decisions, and risk — and why 40% of AI projects fail for non-technical reasons.">
       <BusinessImpactBusiness />
+      <ModuleChallenges moduleId="ai-in-org" />
       <KnowledgeCheck moduleId="ai-in-org" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
     </ModuleLayout>
   )

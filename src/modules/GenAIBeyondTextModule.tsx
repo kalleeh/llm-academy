@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { ModalitiesModelsSection } from './genaibeyondtext/ModalitiesModelsSection'
@@ -77,6 +78,7 @@ export const GenAIBeyondTextModule: React.FC = () => {
         <ModalityUsesBusiness />
         <PickTheToolBusiness />
         <UseResponsiblyBusiness />
+        <ModuleChallenges moduleId="genaibeyondtext-business" />
         <KnowledgeCheck moduleId="genaibeyondtext-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -87,6 +89,7 @@ export const GenAIBeyondTextModule: React.FC = () => {
       <ModalitiesModelsSection />
       <MultimodalAPISection />
       <ChoosingIntegratingSection />
+      <ModuleChallenges moduleId="genaibeyondtext" />
       <KnowledgeCheck moduleId="genaibeyondtext" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

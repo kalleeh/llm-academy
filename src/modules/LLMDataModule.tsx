@@ -5,6 +5,7 @@ import { DataMixSection } from './llmdata/DataMixSection'
 import { SyntheticDataSection } from './llmdata/SyntheticDataSection'
 import { DataFormatsSection } from './llmdata/DataFormatsSection'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -66,6 +67,7 @@ export const LLMDataModule: React.FC = () => {
     <DataMixSection />
     <SyntheticDataSection />
     <DataFormatsSection />
+    <ModuleChallenges moduleId="llmdata" />
     <KnowledgeCheck moduleId="llmdata" questions={translateQuestions(questions, lang)} />
   </ModuleLayout>
   )

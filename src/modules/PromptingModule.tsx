@@ -12,8 +12,7 @@ import { SystemPromptsBusiness } from './prompting/SystemPromptsBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
-import { Challenge } from '../components/Challenge'
-import type { PromptRubricChallenge } from '../challenges/types'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 
 const QUESTIONS: Question[] = [
   {
@@ -64,57 +63,6 @@ const QUESTIONS: Question[] = [
   },
 ]
 
-// Logic/test-data lives inline (like QUESTIONS); prose is overlaid for sv/ko
-// via translateChallenge inside <Challenge>.
-const CLASSIFY_CHALLENGE: PromptRubricChallenge = {
-  id: 'prompting-rubric-classify',
-  kind: 'prompt-rubric',
-  graded: true,
-  // Structure heuristics are fuzzy, so require 4 of the weighted criteria
-  // rather than all — the hard requirements (categories, anti-hedging) carry
-  // extra weight.
-  passThreshold: 0.7,
-  title: 'Write a classification prompt',
-  instructions:
-    'Write a system prompt that makes an LLM classify an incoming customer email into exactly one of: Billing, Technical support, or General inquiry. You have no labeled examples, so be explicit. A strong prompt gives the model a role, defines each category, specifies the output format, and handles ambiguous cases.',
-  placeholder: 'You are a…',
-  hints: [
-    'Start with a role: "You are a classifier that…"',
-    'Define each category by a criterion, not just its name.',
-    'State exactly what format the answer should take (e.g. the category name only).',
-    "Tell the model what to do when the email fits no category.",
-  ],
-  rubric: [
-    { type: 'structure', id: 'role', label: 'Gives the model a clear role', element: 'role', weight: 1 },
-    {
-      type: 'regex',
-      id: 'categories',
-      label: 'Names all three categories',
-      pattern: '(billing).*(technical|support).*(general|inquiry)|(technical|support).*(billing).*(general|inquiry)',
-      flags: 'is',
-      weight: 2,
-    },
-    { type: 'structure', id: 'output-format', label: 'Specifies an output format', element: 'outputFormat', weight: 1 },
-    {
-      type: 'regex',
-      id: 'ambiguity',
-      label: 'Handles ambiguous or unknown cases',
-      pattern: "\\b(if (unclear|ambiguous|none|unsure)|otherwise|unknown|cannot|can't|doesn't fit|none of)\\b",
-      flags: 'i',
-      weight: 1,
-    },
-    {
-      type: 'anti',
-      id: 'no-hedging',
-      label: 'Avoids vague, hedging instructions',
-      pattern: '\\b(maybe|try to|sort of|kind of|i think|probably)\\b',
-      flags: 'i',
-      weight: 1,
-    },
-    { type: 'length', id: 'length', label: 'Detailed enough', min: 30, unit: 'words', weight: 1 },
-  ],
-}
-
 const BUSINESS_QUESTIONS: Question[] = [
   { id: 'prompt-biz-1', type: 'mc', question: 'You ask AI "write me an email" and get a generic, useless result. What went wrong?', options: ['The AI model is too small', 'The prompt was too vague — you didn\'t specify who it\'s to, what it\'s about, the tone, or the length', 'AI can\'t write emails', 'You need a more expensive AI model'], correctIndex: 1, explanation: 'Like giving instructions to a new intern — "write something" gets vague results. "Draft a follow-up email to a client who hasn\'t responded in 2 weeks, professional but warm, under 100 words" gets exactly what you need.' },
   { id: 'prompt-biz-2', type: 'mc', question: 'Which prompting technique is most like training a new employee by showing them examples of good work?', options: ['Giving the AI a role', 'Asking for step-by-step thinking', 'Providing examples of what good output looks like', 'Specifying the output format'], correctIndex: 2, explanation: 'Showing examples (called "few-shot" in technical terms) is exactly like training by example. The AI picks up on patterns in tone, structure, and approach from the examples you provide.' },
@@ -131,6 +79,7 @@ export const PromptingModule: React.FC = () => {
         <TechniquesBusiness />
         <CookbookBusiness />
         <SystemPromptsBusiness />
+        <ModuleChallenges moduleId="prompting-business" />
         <KnowledgeCheck moduleId="prompting-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -143,7 +92,7 @@ export const PromptingModule: React.FC = () => {
       <SystemPromptsSection />
       <StructuredOutputSection />
       <AdvancedPatternsSection />
-      <Challenge moduleId="prompting" challenge={CLASSIFY_CHALLENGE} />
+      <ModuleChallenges moduleId="prompting" />
       <KnowledgeCheck moduleId="prompting" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

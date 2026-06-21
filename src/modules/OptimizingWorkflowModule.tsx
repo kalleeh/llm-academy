@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { WhereAIFitsSection } from './optimizingworkflow/WhereAIFitsSection'
@@ -79,6 +80,7 @@ export const OptimizingWorkflowModule: React.FC = () => {
         <OneOffToSystemBusiness />
         <RollItOutBusiness />
         <PromptLibrarySection />
+        <ModuleChallenges moduleId="optimizingworkflow-business" />
         <KnowledgeCheck moduleId="optimizingworkflow-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -89,6 +91,7 @@ export const OptimizingWorkflowModule: React.FC = () => {
       <WhereAIFitsSection />
       <ReusableSetupsSection />
       <TeamPatternsSection />
+      <ModuleChallenges moduleId="optimizingworkflow" />
       <KnowledgeCheck moduleId="optimizingworkflow" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

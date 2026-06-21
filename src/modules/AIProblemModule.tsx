@@ -9,6 +9,7 @@ import { LandscapeBusiness } from './aiproblem/LandscapeBusiness'
 import { LLMvsMLBusiness } from './aiproblem/LLMvsMLBusiness'
 import { DecisionBusiness } from './aiproblem/DecisionBusiness'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -100,6 +101,7 @@ export const AIProblemModule: React.FC = () => {
         <LandscapeBusiness />
         <DecisionBusiness />
         <LLMvsMLBusiness />
+        <ModuleChallenges moduleId="aiproblem-business" />
         <KnowledgeCheck moduleId="aiproblem-business" questions={translateQuestions(businessQuestions, lang)} />
       </ModuleLayout>
     )

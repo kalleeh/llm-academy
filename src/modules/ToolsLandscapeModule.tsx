@@ -1,6 +1,7 @@
 import { translateQuestions, useLanguage } from '../i18n'
 import { useDifficulty } from '../DifficultyContext'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 import { ToolCategoriesSection } from './toolslandscape/ToolCategoriesSection'
@@ -77,6 +78,7 @@ export const ToolsLandscapeModule: React.FC = () => {
         <ToolCategoriesBusiness />
         <DelegationDemoBusiness />
         <PickingToolsBusiness />
+        <ModuleChallenges moduleId="toolslandscape-business" />
         <KnowledgeCheck moduleId="toolslandscape-business" questions={translateQuestions(BUSINESS_QUESTIONS, lang)} />
       </ModuleLayout>
     )
@@ -87,6 +89,7 @@ export const ToolsLandscapeModule: React.FC = () => {
       <ToolCategoriesSection />
       <AgenticLoopSection />
       <ChoosingStackSection />
+      <ModuleChallenges moduleId="toolslandscape" />
       <KnowledgeCheck moduleId="toolslandscape" questions={translateQuestions(QUESTIONS, lang)} />
     </ModuleLayout>
   )

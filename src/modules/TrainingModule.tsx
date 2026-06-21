@@ -5,6 +5,7 @@ import { TrainingSection3 } from './training/TrainingSection3'
 import { TrainingSection4 } from './training/TrainingSection4'
 import { TrainingSection5 } from './training/TrainingSection5'
 import { KnowledgeCheck } from '../components/KnowledgeCheck'
+import { ModuleChallenges } from '../components/ModuleChallenges'
 import type { Question } from '../components/KnowledgeCheck'
 import { ModuleLayout } from '../components/ModuleLayout'
 
@@ -80,6 +81,7 @@ export const TrainingModule: React.FC = () => {
     <TrainingSection3 />
     <TrainingSection4 />
     <TrainingSection5 />
+    <ModuleChallenges moduleId="training" />
     <KnowledgeCheck moduleId="training" questions={translateQuestions(questions, lang)} />
   </ModuleLayout>
   )
