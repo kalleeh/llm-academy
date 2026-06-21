@@ -406,14 +406,16 @@ const evaluation: PromptRubricChallenge[] = [
         weight: 2,
       },
       {
+        // Central anti-skill for this challenge (writing vague "good" criteria),
+        // so a violation is weighted heavily enough to block a pass on its own.
         type: 'anti',
         id: 'not-vague',
-        label: 'Avoids vague "is it good"',
-        pattern: '\\b(is it good|seems good|looks fine|generally ok|just good)\\b',
+        label: 'Avoids vague "good" success criteria',
+        pattern: '\\b(is it good|seems good|looks fine|generally ok|just good|(is|are|be|it\'?s|response is|answer is) good|good overall)\\b',
         flags: 'i',
-        weight: 1,
+        weight: 3,
       },
-      { type: 'length', id: 'length', label: 'Detailed enough', min: 35, unit: 'words', weight: 1 },
+      { type: 'length', id: 'length', label: 'Detailed enough', min: 35, unit: 'words', weight: 2 },
     ],
   },
 ]
@@ -457,6 +459,16 @@ const solution: PromptRubricChallenge[] = [
         pattern: '\\b(data|sensitive|privacy|non[- ]?sensitive|compliance)\\b',
         flags: 'i',
         weight: 1,
+      },
+      {
+        // The whole point is to commit to one option, so straddling is weighted
+        // heavily enough that hedging alone blocks a pass.
+        type: 'anti',
+        id: 'no-straddle',
+        label: 'Commits to one option (no straddling)',
+        pattern: '\\b(could (buy|build).{0,40}(or|either).{0,20}(build|buy|self|api)|both (buy and build|build and buy)|either (buy or build|build or buy)|it depends)\\b',
+        flags: 'is',
+        weight: 3,
       },
       { type: 'length', id: 'length', label: 'Detailed enough', min: 30, unit: 'words', weight: 1 },
     ],

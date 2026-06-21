@@ -82,6 +82,13 @@ export function gradeRubric(challenge: PromptRubricChallenge, submission: string
   const total = criteria.reduce((sum, c) => sum + c.weight, 0) || 1
   const earned = criteria.reduce((sum, c) => sum + (c.passed ? c.weight : 0), 0)
   const score = earned / total
-  const passed = challenge.graded && score >= (challenge.passThreshold ?? 1)
+  // A `length` criterion acts as a gate: a substantive answer is a prerequisite
+  // for passing, so an unmet minimum length blocks a pass regardless of how many
+  // keyword-matching criteria are hit. This stops short keyword-stuffed answers
+  // from clearing the threshold on pattern matches alone.
+  const lengthGateFailed = challenge.rubric.some(
+    (c, i) => c.type === 'length' && c.min != null && !criteria[i].passed,
+  )
+  const passed = challenge.graded && !lengthGateFailed && score >= (challenge.passThreshold ?? 1)
   return { graded: challenge.graded, passed, score, criteria }
 }

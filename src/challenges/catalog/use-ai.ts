@@ -12,7 +12,7 @@ const ANTI_VAGUE = {
   type: 'anti' as const,
   id: 'not-vague',
   label: 'Avoids vague filler',
-  pattern: '\\b(something|anything|whatever|just do it|some kind|etc\\.? ?$)\\b',
+  pattern: '\\b(something|anything|whatever|just do it|some kind|or something|and stuff|as needed|and so on|etc\\.? ?$)\\b',
   flags: 'i',
   weight: 1,
 }
@@ -238,11 +238,62 @@ const optimizingWorkflow: PromptRubricChallenge[] = [
     ],
   },
 ]
-// Business track shares the same one-off-to-system skill.
+// Business track teaches the same one-off-to-system skill, but framed for a
+// non-technical professional — natural language, no template-markup syntax
+// required (the "what changes" marker accepts plain phrasing like "this week's
+// numbers", not just [brackets]).
 const optimizingWorkflowBusiness: PromptRubricChallenge[] = [
   {
-    ...optimizingWorkflow[0],
     id: 'optwf-biz-rubric-template',
+    kind: 'prompt-rubric',
+    graded: true,
+    passThreshold: 0.65,
+    title: 'Turn a one-off into a reusable system',
+    instructions:
+      'You rebuild the same weekly report in chat every Monday, spending 90 minutes. Write the brief you would save and reuse to make it a 5-minute job. Separate what stays the same every week (the sources, the format, the rules) from what changes (this week\'s data) — describe the deliverable in plain language, no technical syntax needed.',
+    placeholder: 'Every Monday, gather…',
+    hints: [
+      'Write the task so a colleague could run it without asking you anything.',
+      'List the sources (spreadsheets, emails, files) that stay the same every week.',
+      'Describe the output format so the result is always predictable.',
+      "Show where this week's new data or numbers go.",
+    ],
+    rubric: [
+      {
+        type: 'regex',
+        id: 'fixed',
+        label: 'Captures the standing context',
+        pattern: '\\b(every (week|monday|month)|each week|always|standing|recurring|same|fixed)\\b',
+        flags: 'i',
+        weight: 1,
+      },
+      {
+        type: 'regex',
+        id: 'variable',
+        label: 'Marks what changes each cycle',
+        pattern: "(\\[[^\\]]+\\]|\\{[^}]+\\}|<[^>]+>|this (week|month)|new (data|numbers|figures)|latest|paste|insert|each (week|time))",
+        flags: 'i',
+        weight: 2,
+      },
+      {
+        type: 'regex',
+        id: 'sources',
+        label: 'Names the sources',
+        pattern: '\\b(spreadsheet|sheet|file|email|folder|source|data|csv|excel|dashboard)\\b',
+        flags: 'i',
+        weight: 1,
+      },
+      {
+        type: 'regex',
+        id: 'format',
+        label: 'Describes the deliverable format',
+        pattern: '\\b(format|summary|bullet|section|report|one[- ]?page|table|digest)\\b',
+        flags: 'i',
+        weight: 1,
+      },
+      ANTI_VAGUE,
+      { type: 'length', id: 'length', label: 'Detailed enough', min: 35, unit: 'words', weight: 1 },
+    ],
   },
 ]
 
@@ -286,7 +337,14 @@ const agenticCoding: PromptRubricChallenge[] = [
         flags: 'i',
         weight: 1,
       },
-      { type: 'structure', id: 'structure', label: 'Organised into sections', element: 'examples', weight: 1 },
+      {
+        type: 'regex',
+        id: 'structure',
+        label: 'Organised into sections (## headings)',
+        pattern: '(^|\\n)\\s*#{1,4}\\s+\\S|(^|\\n)\\s*[-*]\\s+\\S.*(\\n\\s*[-*]\\s+\\S)',
+        flags: 'i',
+        weight: 1,
+      },
       { type: 'length', id: 'length', label: 'Detailed enough', min: 35, unit: 'words', weight: 1 },
     ],
   },
