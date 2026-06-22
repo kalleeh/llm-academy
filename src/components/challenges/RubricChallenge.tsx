@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { t, useLanguage } from '../../i18n'
 import { Icon } from '../Icon'
 import type { GradeOutcome, PromptRubricChallenge } from '../../challenges/types'
 import { CriteriaFeedback } from './CriteriaFeedback'
+import { WritingGuide } from './WritingGuide'
 
 interface RubricChallengeProps {
   challenge: PromptRubricChallenge
@@ -10,18 +11,30 @@ interface RubricChallengeProps {
   onSubmit: (submission: string) => void
 }
 
-/** Textarea + progressive hints + submit, for prompt-writing challenges. */
+/** Textarea + writing guide + progressive hints + submit, for prompt challenges. */
 export const RubricChallenge: React.FC<RubricChallengeProps> = ({ challenge, outcome, onSubmit }) => {
   const { lang } = useLanguage()
   const [text, setText] = useState('')
   const [hintsShown, setHintsShown] = useState(0)
+  const [guideOn, setGuideOn] = useState(true)
 
   const hints = challenge.hints ?? []
   const canSubmit = text.trim().length > 0
 
+  // Append a scaffold stub, separating it from existing text so it reads cleanly.
+  const handleInsert = useCallback((stub: string) => {
+    setText((prev) => {
+      if (!prev) return stub
+      const sep = /\s$/.test(prev) ? '' : prev.endsWith('\n') ? '' : ' '
+      return prev + sep + stub
+    })
+  }, [])
+
   return (
     <div className="space-y-4">
       <p className="text-sm text-zinc-700 dark:text-zinc-300">{challenge.instructions}</p>
+
+      {guideOn && <WritingGuide challenge={challenge} draft={text} onInsert={handleInsert} />}
 
       <textarea
         value={text}
@@ -38,6 +51,16 @@ export const RubricChallenge: React.FC<RubricChallengeProps> = ({ challenge, out
           className="rounded-lg bg-amber-600 px-4 py-2 text-sm text-zinc-100 transition-colors hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {outcome ? t(lang, 'challenge.tryAgain') : t(lang, 'challenge.check')}
+        </button>
+        <button
+          onClick={() => setGuideOn((on) => !on)}
+          className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-colors ${
+            guideOn
+              ? 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300'
+              : 'bg-zinc-200 text-zinc-800 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-600'
+          }`}
+        >
+          <Icon name="lightbulb" /> {t(lang, 'guide.title')}
         </button>
         {hintsShown < hints.length && (
           <button
