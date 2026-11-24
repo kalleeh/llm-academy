@@ -30,11 +30,7 @@ export function VisitorCounter() {
       alreadyCounted = true
     }
 
-    fetch('/api/visit', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ new: !alreadyCounted }),
-    })
+    fetch(alreadyCounted ? '/api/visit' : '/api/visit?new=1', { cache: 'no-store' })
       .then((res) => (res.ok ? (res.json() as Promise<Stats>) : Promise.reject(new Error(String(res.status)))))
       .then((data) => {
         if (cancelled) return
