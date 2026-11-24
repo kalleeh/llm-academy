@@ -6,6 +6,7 @@ import { LANGUAGE_META, MODULE_LABELS, t, type Language, useLanguage } from './i
 import { Icon } from './components/Icon'
 import { SpacedReview } from './components/SpacedReview'
 import { ThemeToggle } from './components/ThemeToggle'
+import { VisitorCounter } from './components/VisitorCounter'
 
 const AIProblemModule = lazy(() => import('./modules/AIProblemModule').then(m => ({ default: m.AIProblemModule })))
 const DataFoundationsModule = lazy(() => import('./modules/DataFoundationsModule').then(m => ({ default: m.DataFoundationsModule })))
@@ -473,6 +474,7 @@ function App() {
             </>
           )}
         </div>
+        <VisitorCounter />
         <p className="pb-6 text-center text-xs text-zinc-500">richic was here</p>
       </main>
     </div>
