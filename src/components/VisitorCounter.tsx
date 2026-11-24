@@ -6,7 +6,7 @@ interface Stats {
 }
 
 const STORAGE_KEY = 'llm-academy-visitor-counted'
-const TOP_COUNTRIES = 5
+const TOP_COUNTRIES = 3
 
 function countryName(code: string): string {
   if (code === 'XX') return 'Unknown'
@@ -61,15 +61,19 @@ export function VisitorCounter() {
   const top = stats.countries.slice(0, TOP_COUNTRIES)
 
   return (
-    <div className="pb-2 text-center text-xs text-zinc-500">
+    <aside
+      aria-label="Visitor statistics"
+      className="fixed right-4 bottom-4 z-20 max-w-[calc(100vw-2rem)] rounded-lg border border-zinc-200 bg-white/90 px-3 py-2 text-xs text-zinc-600 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-400"
+    >
       <p>
-        Unique visitors: <span className="font-medium text-zinc-600 dark:text-zinc-400">{stats.total.toLocaleString()}</span>
+        Unique visitors:{' '}
+        <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">{stats.total.toLocaleString()}</span>
       </p>
       {top.length > 0 && (
-        <p className="mt-1">
+        <p className="mt-0.5 text-zinc-500">
           {top.map((c) => `${countryName(c.code)} ${c.count.toLocaleString()}`).join(' · ')}
         </p>
       )}
-    </div>
+    </aside>
   )
 }
