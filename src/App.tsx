@@ -473,6 +473,7 @@ function App() {
             </>
           )}
         </div>
+        <p className="pb-6 text-center text-xs text-zinc-500">richic was here</p>
       </main>
     </div>
   )
